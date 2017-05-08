@@ -4,11 +4,11 @@ import QtQuick.Layouts 1.0
 
 ApplicationWindow {
     visible: true
-    width: 640
-    height: 480
+    width: 414
+    height: 736
     title: qsTr("Hello World")
 
-    SwipeView {
+   /* SwipeView {
         id: swipeView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
@@ -22,16 +22,21 @@ ApplicationWindow {
                 anchors.centerIn: parent
             }
         }
+    }*/
+
+    GreetingSlider{
+        id: greetingSlider
+        anchors.fill: parent
     }
 
-    footer: TabBar {
-        id: tabBar
-        currentIndex: swipeView.currentIndex
-        TabButton {
-            text: qsTr("First")
-        }
-        TabButton {
-            text: qsTr("Second")
-        }
-    }
+//    footer: TabBar {
+//        id: tabBar
+//        currentIndex: swipeView.currentIndex
+//        TabButton {
+//            text: qsTr("First")
+//        }
+//        TabButton {
+//            text: qsTr("Second")
+//        }
+//    }
 }
