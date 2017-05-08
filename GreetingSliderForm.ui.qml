@@ -1,9 +1,11 @@
 import QtQuick 2.4
+import QtQuick.Controls 2.1
 
 Item {
     id: item1
     width: 400
     height: 736
+    property alias pageIndicator: pageIndicator
     property alias image1: image1
     property alias image2: image2
     property alias swipeGestureArea: swipeGestureArea
@@ -31,5 +33,15 @@ Item {
     SwipeGestureArea {
         id: swipeGestureArea
         anchors.fill: parent
+
+        PageIndicator {
+            id: pageIndicator
+            x: 155
+            y: 26
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 20
+            anchors.horizontalCenter: parent.horizontalCenter
+            count: 6
+        }
     }
 }

@@ -25,7 +25,7 @@ GreetingSliderForm {
 
     swipeGestureArea.onSwipeEnded: function( diff ){
         swipeGestureArea.enabled = (stateIndex < 5)
-
+        pageIndicator.currentIndex = stateIndex;
         image1.source = image2.source
         image2.source = nextSlide()
         image2.x = slider.width

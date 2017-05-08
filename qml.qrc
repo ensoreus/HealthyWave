@@ -12,5 +12,6 @@
         <file>greeting2.png</file>
         <file>greeting1.png</file>
         <file>SwipeGestureArea.qml</file>
+        <file>PagerView.qml</file>
     </qresource>
 </RCC>
