@@ -10,8 +10,8 @@
         <file>greeting2.png</file>
         <file>greeting1.png</file>
         <file>SwipeGestureArea.qml</file>
-        <file>Controls/HWTextField.qml</file>
-        <file>Registration/RegistrationPagePhone.qml</file>
-        <file>Registration/RegistrationPagePhoneForm.ui.qml</file>
+        <file>RegistrationPagePhone.qml</file>
+        <file>RegistrationPagePhoneForm.ui.qml</file>
+        <file>HWTextField.qml</file>
     </qresource>
 </RCC>

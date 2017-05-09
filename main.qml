@@ -12,7 +12,7 @@ ApplicationWindow {
 //        id: greetingSlider
 //        anchors.fill: parent
 //    }
-    RegistrationPagePhone{
+    RegistrationPagePhone {
         anchors.fill:parent
     }
 }
