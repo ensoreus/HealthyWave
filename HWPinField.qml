@@ -23,36 +23,36 @@ Rectangle{
 
     }
 
-HWTextField {
-    id: pinDigit2
-    width: font.pointSize * 2
-    font.weight: Font.DemiBold
-    anchors.top: parent.top
-    anchors.topMargin: 0
-    anchors.left: pinDigit1.right
-    anchors.leftMargin: 10
-    font.pointSize: 20
-}
+    HWTextField {
+        id: pinDigit2
+        width: font.pointSize * 2
+        font.weight: Font.DemiBold
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.left: pinDigit1.right
+        anchors.leftMargin: 10
+        font.pointSize: 20
+    }
 
-HWTextField {
-    id: pinDigit3
-    width: font.pointSize * 2
-    font.weight: Font.DemiBold
-    font.pointSize: 20
-    anchors.left: pinDigit2.right
-    anchors.leftMargin: 10
-    anchors.top: parent.top
-    anchors.topMargin: 0
-}
+    HWTextField {
+        id: pinDigit3
+        width: font.pointSize * 2
+        font.weight: Font.DemiBold
+        font.pointSize: 20
+        anchors.left: pinDigit2.right
+        anchors.leftMargin: 10
+        anchors.top: parent.top
+        anchors.topMargin: 0
+    }
 
-HWTextField {
-    id: pinDigit4
-    width: font.pointSize * 2
-    font.weight: Font.DemiBold
-    anchors.left: pinDigit3.right
-    anchors.leftMargin: 10
-    anchors.top: parent.top
-    anchors.topMargin: 0
-    font.pointSize: 20
-}
+    HWTextField {
+        id: pinDigit4
+        width: font.pointSize * 2
+        font.weight: Font.DemiBold
+        anchors.left: pinDigit3.right
+        anchors.leftMargin: 10
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        font.pointSize: 20
+    }
 }

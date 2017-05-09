@@ -23,5 +23,11 @@ Item {
             width: 194
             height: 40
         }
+
+        HWPhoneField {
+            id: hWPhoneField
+            x: 50
+            y: 265
+        }
     }
 }
