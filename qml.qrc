@@ -16,5 +16,6 @@
         <file>HWPinField.qml</file>
         <file>HWPhoneField.qml</file>
         <file>flag-ua.png</file>
+        <file>logo-hw.png</file>
     </qresource>
 </RCC>
