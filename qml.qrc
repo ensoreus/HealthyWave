@@ -1,8 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Page1.qml</file>
-        <file>Page1Form.ui.qml</file>
         <file>GreetingSlider.qml</file>
         <file>GreetingSliderForm.ui.qml</file>
         <file>greeting5.png</file>
@@ -12,6 +10,8 @@
         <file>greeting2.png</file>
         <file>greeting1.png</file>
         <file>SwipeGestureArea.qml</file>
-        <file>PagerView.qml</file>
+        <file>Controls/HWTextField.qml</file>
+        <file>Registration/RegistrationPagePhone.qml</file>
+        <file>Registration/RegistrationPagePhoneForm.ui.qml</file>
     </qresource>
 </RCC>

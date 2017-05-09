@@ -2,9 +2,23 @@ import QtQuick 2.4
 
 GreetingSliderForm {
     id: slider
-    property int stateIndex: 1
+    property int stateIndex: 0
     property string state: "page1"
     property int maxPages: 6
+
+    pageIndicator.delegate: Rectangle{
+        color: "white"
+        implicitHeight: 7
+        implicitWidth: 7
+        radius: width
+        opacity: index === (stateIndex ) ? 0.95 : 0.45
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: 100
+            }
+        }
+    }
+
     function nextSlide(){
         if(stateIndex < 5) {
             stateIndex++;
@@ -24,8 +38,8 @@ GreetingSliderForm {
     }
 
     swipeGestureArea.onSwipeEnded: function( diff ){
-        swipeGestureArea.enabled = (stateIndex < 5)
-        pageIndicator.currentIndex = stateIndex;
+        swipeGestureArea.enabled = (stateIndex < 4)
+        pageIndicator.currentIndex = stateIndex ;
         image1.source = image2.source
         image2.source = nextSlide()
         image2.x = slider.width
