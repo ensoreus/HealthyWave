@@ -2,9 +2,9 @@ import QtQuick 2.0
 import QtQuick.Controls 2.1
 
 TextField{
+    height: 40
     background: Rectangle{
         color: "white"
-        height: 40
         Rectangle{
             border.width: 3
             height: 3

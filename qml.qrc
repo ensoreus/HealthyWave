@@ -13,5 +13,7 @@
         <file>RegistrationPagePhone.qml</file>
         <file>RegistrationPagePhoneForm.ui.qml</file>
         <file>HWTextField.qml</file>
+        <file>HWPinField.qml</file>
+        <file>HWPhoneField.qml</file>
     </qresource>
 </RCC>
