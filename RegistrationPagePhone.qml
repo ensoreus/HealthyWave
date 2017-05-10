@@ -18,8 +18,12 @@ RegistrationPagePhoneForm {
     }
 
     btnNext.onPressed: {
-        btnGlyph.opacity = 0.8
-        nextPage()
+        if (phoneField.acceptableInput){
+            btnGlyph.opacity = 0.8
+            nextPage()
+        }else{
+            console.log("wrong phone")
+        }
     }
 
     phoneField.onFocusChanged: {

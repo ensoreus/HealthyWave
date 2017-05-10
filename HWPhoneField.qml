@@ -6,6 +6,9 @@ HWTextField {
     width: 300
     height: 40
     leftPadding: image.width + 25
+    validator: RegExpValidator{
+        regExp: /^\+380\d{9}$/
+    }
 
     Image {
         id: image
