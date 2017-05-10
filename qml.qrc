@@ -1,21 +1,29 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>GreetingSlider.qml</file>
+    </qresource>
+    <qresource prefix="/greeting">
         <file>GreetingSliderForm.ui.qml</file>
-        <file>greeting5.png</file>
+        <file>GreetingSlider.qml</file>
         <file>greeting0.png</file>
-        <file>greeting4.png</file>
-        <file>greeting3.png</file>
-        <file>greeting2.png</file>
         <file>greeting1.png</file>
+        <file>greeting2.png</file>
+        <file>greeting3.png</file>
+        <file>greeting4.png</file>
+        <file>greeting5.png</file>
         <file>SwipeGestureArea.qml</file>
+    </qresource>
+    <qresource prefix="/registration">
         <file>RegistrationPagePhone.qml</file>
         <file>RegistrationPagePhoneForm.ui.qml</file>
+        <file>logo-hw.png</file>
+        <file>Registration.qml</file>
+        <file>btn-next.png</file>
+    </qresource>
+    <qresource prefix="/controls">
+        <file>HWPhoneField.qml</file>
         <file>HWTextField.qml</file>
         <file>HWPinField.qml</file>
-        <file>HWPhoneField.qml</file>
         <file>flag-ua.png</file>
-        <file>logo-hw.png</file>
     </qresource>
 </RCC>
