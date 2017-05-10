@@ -20,6 +20,7 @@ Item {
 
         Controls.HWPhoneField {
             id: phoneField
+            text: "+380"
             anchors.top: parent.top
             anchors.topMargin: 100
             anchors.right: parent.right
@@ -31,8 +32,8 @@ Item {
         Button {
             id: btnNext
             x: 299
-            width: 50
-            height: 50
+            width: 40
+            height: 40
             text: qsTr("")
             anchors.top: phoneField.bottom
             anchors.topMargin: 43
