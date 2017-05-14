@@ -37,8 +37,19 @@ Item {
             text: qsTr("")
             anchors.top: phoneField.bottom
             anchors.topMargin: 43
-            anchors.right: phoneField.right
-            anchors.rightMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 50
+        }
+
+        Text {
+            id: text1
+            x: 50
+            y: 61
+            width: 300
+            height: 15
+            color: "#808080"
+            text: qsTr("Введіть номер телефону")
+            font.pixelSize: 12
         }
     }
 }

@@ -9,6 +9,7 @@ Item {
     property alias logo: logo
     property alias logoBg: logoBg
     property alias bg: bg
+    property int currentPageIndex: 0
 
     Rectangle {
         id: bg
@@ -51,6 +52,7 @@ Item {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
             currentIndex: 0
+
             RegistrationPagePhone{
                 anchors.fill: parent
                 onStartEditData: {
@@ -59,7 +61,27 @@ Item {
                 onEndEditData: {
                     item1.state = "default"
                 }
+                onNextPage: {
+                    currentPageIndex++
+                    stackLayout.currentIndex = currentPageIndex
+                }
             }
+
+            RegistrationPagePin{
+                anchors.fill: stackLayout
+                onStartEditData: {
+                    item1.state = "interactive"
+                }
+                onEndEditData: {
+                    item1.state = "default"
+                }
+                onNextPage: {
+                    currentPageIndex++
+                    pinPageLoader.active = true
+                }
+            }
+
+
         }
     }
 
@@ -94,6 +116,6 @@ Item {
     ]
 
     transitions: Transition {
-            NumberAnimation { properties: "height"; duration: 500; easing.type: Easing.InOutQuad }
-        }
+        NumberAnimation { properties: "height"; duration: 500; easing.type: Easing.InOutQuad }
+    }
 }

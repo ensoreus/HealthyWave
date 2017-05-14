@@ -8,6 +8,8 @@ Rectangle{
     property alias pinDigit3: pinDigit3
     property alias pinDigit2: pinDigit2
     property alias pinDigit1: pinDigit1
+    property string pin: pinDigit1.text + pinDigit2.text + pinDigit3.text + pinDigit4.text
+
     width: pinDigit4.width + pinDigit4.x + 3
     HWTextField {
         id: pinDigit1
@@ -19,8 +21,6 @@ Rectangle{
         font.pointSize: 20
         anchors.left: parent.left
         anchors.leftMargin: 1
-
-
     }
 
     HWTextField {

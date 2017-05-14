@@ -19,6 +19,14 @@
         <file>logo-hw.png</file>
         <file>Registration.qml</file>
         <file>btn-next.png</file>
+        <file>RegistrationPagePin.qml</file>
+        <file>RegistrationPagePinForm.ui.qml</file>
+        <file>RegistrationPageEmail.qml</file>
+        <file>RegistrationPageEmailForm.ui.qml</file>
+        <file>RegistrationPageName.qml</file>
+        <file>RegistrationPageNameForm.ui.qml</file>
+        <file>RegistrationPagePasswd.qml</file>
+        <file>RegistrationPagePasswdForm.ui.qml</file>
     </qresource>
     <qresource prefix="/controls">
         <file>HWPhoneField.qml</file>
