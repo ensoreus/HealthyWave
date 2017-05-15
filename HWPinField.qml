@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.1
 
-Rectangle{
+FocusScope{
     id: rectangle
     height: 40
     property alias pinDigit4: pinDigit4
@@ -21,6 +21,17 @@ Rectangle{
         font.pointSize: 20
         anchors.left: parent.left
         anchors.leftMargin: 1
+        validator: RegExpValidator{
+            regExp: /\d[1]/
+        }
+        onFocusChanged:{
+            updateFocused()
+        }
+        onTextChanged: {
+            if (text.length > 0){
+                pinDigit2.forceActiveFocus()
+            }
+        }
     }
 
     HWTextField {
@@ -32,6 +43,17 @@ Rectangle{
         anchors.left: pinDigit1.right
         anchors.leftMargin: 10
         font.pointSize: 20
+        validator: RegExpValidator{
+            regExp: /\d/
+        }
+        onFocusChanged:{
+            updateFocused()
+        }
+        onTextChanged: {
+            if (text.length > 0){
+                pinDigit3.forceActiveFocus()
+            }
+        }
     }
 
     HWTextField {
@@ -43,6 +65,17 @@ Rectangle{
         anchors.leftMargin: 10
         anchors.top: parent.top
         anchors.topMargin: 0
+        validator: RegExpValidator{
+            regExp: /\d/
+        }
+        onFocusChanged:{
+            updateFocused()
+        }
+        onTextChanged: {
+            if (text.length > 0){
+                pinDigit4.forceActiveFocus()
+            }
+        }
     }
 
     HWTextField {
@@ -54,5 +87,20 @@ Rectangle{
         anchors.top: parent.top
         anchors.topMargin: 0
         font.pointSize: 20
+        validator: RegExpValidator{
+            regExp: /\d/
+        }
+        onFocusChanged:{
+            updateFocused()
+        }
+        onTextChanged: {
+            if (text.length > 0){
+               focus = false
+            }
+        }
+    }
+
+    function updateFocused(){
+        rectangle.focus = pinDigit1.focus || pinDigit2.focus || pinDigit3.focus || pinDigit4.focus
     }
 }

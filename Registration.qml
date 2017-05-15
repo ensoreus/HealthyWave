@@ -116,6 +116,6 @@ Item {
     ]
 
     transitions: Transition {
-        NumberAnimation { properties: "height"; duration: 500; easing.type: Easing.InOutQuad }
+        NumberAnimation { properties: "height"; duration: 200; easing.type: Easing.InQuad }
     }
 }
