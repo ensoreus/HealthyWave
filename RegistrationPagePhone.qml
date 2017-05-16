@@ -26,10 +26,14 @@ RegistrationPagePhoneForm {
         }
     }
 
-    phoneField.onFocusChanged: {
-        if (phoneField.focus){
+    phoneField.onWillStartAnimation: {
+        if (phoneField.aboutToFocus){
             phonePage.startEditData()
-        }else{
+            phoneField.forceActiveFocus()
+        }
+    }
+    phoneField.onFocusChanged: {
+        if(!phoneField.focus){
             phonePage.endEditData()
         }
     }

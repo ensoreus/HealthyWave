@@ -27,6 +27,8 @@ Item {
             anchors.rightMargin: 50
             anchors.left: parent.left
             anchors.leftMargin: 50
+
+
         }
 
         Button {

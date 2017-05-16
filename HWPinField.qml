@@ -17,6 +17,7 @@ FocusScope{
         height: 40
         font.weight: Font.DemiBold
         anchors.top: parent.top
+        inputMethodHints: Qt.ImhDigitsOnly
         anchors.topMargin: 0
         font.pointSize: 20
         anchors.left: parent.left
@@ -43,8 +44,9 @@ FocusScope{
         anchors.left: pinDigit1.right
         anchors.leftMargin: 10
         font.pointSize: 20
+        inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d/
+            regExp: /\d[1]/
         }
         onFocusChanged:{
             updateFocused()
@@ -65,8 +67,9 @@ FocusScope{
         anchors.leftMargin: 10
         anchors.top: parent.top
         anchors.topMargin: 0
+        inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d/
+            regExp: /\d[1]/
         }
         onFocusChanged:{
             updateFocused()
@@ -87,8 +90,9 @@ FocusScope{
         anchors.top: parent.top
         anchors.topMargin: 0
         font.pointSize: 20
+        inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d/
+            regExp: /\d[1]/
         }
         onFocusChanged:{
             updateFocused()
