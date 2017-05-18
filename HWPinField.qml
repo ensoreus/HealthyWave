@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.1
 
-FocusScope{
+Rectangle{
     id: rectangle
     height: 40
     property alias pinDigit4: pinDigit4
@@ -30,7 +30,8 @@ FocusScope{
         }
         onTextChanged: {
             if (text.length > 0){
-                pinDigit2.forceActiveFocus()
+                focus = false
+                pinDigit1.forceActiveFocus()
             }
         }
     }
@@ -67,6 +68,7 @@ FocusScope{
         anchors.leftMargin: 10
         anchors.top: parent.top
         anchors.topMargin: 0
+
         inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
             regExp: /\d[1]/
@@ -90,6 +92,7 @@ FocusScope{
         anchors.top: parent.top
         anchors.topMargin: 0
         font.pointSize: 20
+
         inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
             regExp: /\d[1]/

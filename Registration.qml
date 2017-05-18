@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.1
 
 Item {
     id: item1
@@ -53,8 +54,81 @@ Item {
             anchors.bottomMargin: 0
             currentIndex: 0
 
+            states: [
+                State{
+                    name: "phoneEditState"
+                    PropertyChanges {
+                        target: stackLayout
+                        currentIndex: 0
+                    }
+                },
+                State{
+                    name: "pinEditState"
+                    PropertyChanges {
+                        target: stackLayout
+                        currentIndex: 1
+                    }
+                    PropertyChanges {
+                        target: pinEditPage
+                        x:0
+                    }
+                },
+                State{
+                    name: "emailEditState"
+                    PropertyChanges {
+                        target: stackLayout
+                        currentIndex: 2
+                        x:0
+                    }
+                },
+                State{
+                    name: "passwdEditState"
+                    PropertyChanges {
+                        target: stackLayout
+                        currentIndex: 3
+                    }
+                },
+                State{
+                    name: "nameEditState"
+                    PropertyChanges {
+                        target: stackLayout
+                        currentIndex: 4
+                    }
+                }
+            ]
+
+            transitions: Transition {
+                from: "phoneEditState"
+                to: "pinEditState"
+
+                NumberAnimation {
+                    properties: "x"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            }
+
             RegistrationPagePhone{
+                id:phoneEditPage
                 anchors.fill: parent
+                onStartEditData: {
+                    item1.state = "interactive"
+                }
+                onEndEditData: {
+                    item1.state = "default"
+                }
+                onNextPage: {
+                    stackLayout.state = "pinEditState"
+                }
+            }
+
+            RegistrationPagePin{
+                id:pinEditPage
+                anchors.top:parent.top
+                anchors.bottom: parent.bottom
+                x: 300
+                width: 100
+
                 onStartEditData: {
                     item1.state = "interactive"
                 }
@@ -66,23 +140,9 @@ Item {
                     stackLayout.currentIndex = currentPageIndex
                 }
             }
-
-            RegistrationPagePin{
-                anchors.fill: stackLayout
-                onStartEditData: {
-                    item1.state = "interactive"
-                }
-                onEndEditData: {
-                    item1.state = "default"
-                }
-                onNextPage: {
-                    currentPageIndex++
-                    pinPageLoader.active = true
-                }
-            }
-
-
         }
+
+
     }
 
     states: [
@@ -116,6 +176,6 @@ Item {
     ]
 
     transitions: Transition {
-        NumberAnimation { properties: "height"; duration: 200; easing.type: Easing.InQuad }
+        NumberAnimation { properties: "height"; duration: 500; easing.type: Easing.InOutQuad }
     }
 }
