@@ -7,6 +7,7 @@ TextField{
     property bool aboutToFocus: false
     height: 40
     font.pointSize: 15
+
     background: Rectangle{
         color: "white"
         Rectangle{
@@ -18,6 +19,7 @@ TextField{
             color: "black"
         }
     }
+
     MouseArea {
         id: phoneAuxMouseArea
         x: 0

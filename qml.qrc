@@ -33,5 +33,6 @@
         <file>HWTextField.qml</file>
         <file>HWPinField.qml</file>
         <file>flag-ua.png</file>
+        <file>HWEmailField.qml</file>
     </qresource>
 </RCC>

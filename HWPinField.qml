@@ -9,8 +9,12 @@ Rectangle{
     property alias pinDigit2: pinDigit2
     property alias pinDigit1: pinDigit1
     property string pin: pinDigit1.text + pinDigit2.text + pinDigit3.text + pinDigit4.text
+    property bool aboutToFocus: false
+    signal willStartAnimation
 
     width: pinDigit4.width + pinDigit4.x + 3
+
+
     HWTextField {
         id: pinDigit1
         width: font.pointSize * 2
@@ -25,13 +29,11 @@ Rectangle{
         validator: RegExpValidator{
             regExp: /\d[1]/
         }
-        onFocusChanged:{
-            updateFocused()
-        }
+
         onTextChanged: {
             if (text.length > 0){
                 focus = false
-                pinDigit1.forceActiveFocus()
+                pinDigit2.focus = true
             }
         }
     }
@@ -49,12 +51,10 @@ Rectangle{
         validator: RegExpValidator{
             regExp: /\d[1]/
         }
-        onFocusChanged:{
-            updateFocused()
-        }
+
         onTextChanged: {
             if (text.length > 0){
-                pinDigit3.forceActiveFocus()
+                pinDigit3.focus = true
             }
         }
     }
@@ -73,12 +73,10 @@ Rectangle{
         validator: RegExpValidator{
             regExp: /\d[1]/
         }
-        onFocusChanged:{
-            updateFocused()
-        }
+
         onTextChanged: {
             if (text.length > 0){
-                pinDigit4.forceActiveFocus()
+                pinDigit4.focus = true
             }
         }
     }
@@ -97,14 +95,25 @@ Rectangle{
         validator: RegExpValidator{
             regExp: /\d[1]/
         }
-        onFocusChanged:{
-            updateFocused()
-        }
+
         onTextChanged: {
             if (text.length > 0){
                focus = false
             }
         }
+    }
+
+    MouseArea {
+        id: pinAuxMouseArea
+        anchors.fill: parent
+        onClicked: {
+            rectangle.aboutToFocus = true
+            willStartAnimation()
+        }
+    }
+
+    function setupFocus(){
+        pinDigit1.focus = true
     }
 
     function updateFocused(){

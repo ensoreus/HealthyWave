@@ -21,10 +21,14 @@ RegistrationPagePinForm {
         }
     }
 
-    pinField.onFocusChanged: {
-        if (pinField.focus){
+    pinField.onWillStartAnimation: {
+        if (pinField.aboutToFocus){
             pinPage.startEditData()
-        }else{
+            pinField.setupFocus()
+        }
+    }
+    pinField.onFocusChanged: {
+        if(!pinField.focus){
             pinPage.endEditData()
         }
     }

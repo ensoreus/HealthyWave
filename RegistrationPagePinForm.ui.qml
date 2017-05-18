@@ -5,6 +5,7 @@ import "qrc:/controls" as Controls
 Item {
     width: 400
     height: 400
+    property alias mouseArea: mouseArea
     property alias pinField: pinField
     property alias btnNext: btnNext
 
@@ -40,8 +41,28 @@ Item {
             width: 247
             height: 15
             color: "#808080"
-            text: qsTr("Введіть код активації")
-            font.pixelSize: 12
+            text: qsTr("Введите код подтверждения")
+            font.pixelSize: 15
+        }
+
+        Text {
+            id: text2
+            height: 20
+            color: "#808080"
+            text: qsTr("Отправить код повторно")
+            anchors.top: pinField.bottom
+            anchors.topMargin: 55
+            anchors.right: btnNext.left
+            anchors.rightMargin: 19
+            anchors.left: parent.left
+            anchors.leftMargin: 103
+            verticalAlignment: Text.AlignVCenter
+            font.pixelSize: 15
+
+            MouseArea {
+                id: mouseArea
+                anchors.fill: parent
+            }
         }
     }
 }

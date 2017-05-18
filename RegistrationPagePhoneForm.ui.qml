@@ -27,8 +27,6 @@ Item {
             anchors.rightMargin: 50
             anchors.left: parent.left
             anchors.leftMargin: 50
-
-
         }
 
         Button {
@@ -50,8 +48,8 @@ Item {
             width: 300
             height: 15
             color: "#808080"
-            text: qsTr("Введіть номер телефону")
-            font.pixelSize: 12
+            text: qsTr("Введите номер телефона")
+            font.pixelSize: 15
         }
     }
 }
