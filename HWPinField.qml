@@ -14,7 +14,6 @@ Rectangle{
 
     width: pinDigit4.width + pinDigit4.x + 3
 
-
     HWTextField {
         id: pinDigit1
         width: font.pointSize * 2
@@ -27,13 +26,13 @@ Rectangle{
         anchors.left: parent.left
         anchors.leftMargin: 1
         validator: RegExpValidator{
-            regExp: /\d[1]/
+            regExp: /\d{1}/
         }
 
         onTextChanged: {
             if (text.length > 0){
-                focus = false
-                pinDigit2.focus = true
+                //pinDigit1.focus = false
+                pinDigit2.forceActiveFocus()
             }
         }
     }
@@ -49,11 +48,12 @@ Rectangle{
         font.pointSize: 20
         inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d[1]/
+            regExp: /\d{1}/
         }
 
         onTextChanged: {
             if (text.length > 0){
+                pinDigit2.focus = false
                 pinDigit3.focus = true
             }
         }
@@ -71,11 +71,12 @@ Rectangle{
 
         inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d[1]/
+            regExp: /\d{1}/
         }
 
         onTextChanged: {
             if (text.length > 0){
+                pinDigit3.focus = false
                 pinDigit4.focus = true
             }
         }
@@ -93,7 +94,7 @@ Rectangle{
 
         inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d[1]/
+            regExp: /\d{1}/
         }
 
         onTextChanged: {

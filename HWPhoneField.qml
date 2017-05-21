@@ -28,4 +28,5 @@ HWTextField {
         anchors.topMargin: 9
         source: "flag-ua.png"
     }
+
 }

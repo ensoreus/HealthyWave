@@ -36,12 +36,13 @@ Item {
 
         Text {
             id: text1
-            x: 103
             y: 66
-            width: 247
+            width: 208
             height: 15
             color: "#808080"
             text: qsTr("Введите код подтверждения")
+            anchors.left: pinField.left
+            anchors.leftMargin: 0
             font.pixelSize: 15
         }
 
@@ -53,9 +54,7 @@ Item {
             anchors.top: pinField.bottom
             anchors.topMargin: 55
             anchors.right: btnNext.left
-            anchors.rightMargin: 19
-            anchors.left: parent.left
-            anchors.leftMargin: 103
+            anchors.rightMargin: 20
             verticalAlignment: Text.AlignVCenter
             font.pixelSize: 15
 

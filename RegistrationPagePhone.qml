@@ -6,6 +6,9 @@ RegistrationPagePhoneForm {
     signal nextPage
     signal startEditData
     signal endEditData
+    function presenterAnimationEnds(){
+        phoneField.forceActiveFocus()
+    }
 
     Component.onCompleted: {
         phoneField.inputMethodHints = Qt.ImhPreferNumbers
@@ -29,7 +32,7 @@ RegistrationPagePhoneForm {
     phoneField.onWillStartAnimation: {
         if (phoneField.aboutToFocus){
             phonePage.startEditData()
-            phoneField.forceActiveFocus()
+            phoneField.aboutToFocus = false
         }
     }
     phoneField.onFocusChanged: {

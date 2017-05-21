@@ -1,24 +1,27 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.1
+import QtQuick.Window 2.2
 
 Item {
     id: item1
-    width: 400
-    height: 800
     property alias stackLayout: stackLayout
     property alias logo: logo
     property alias logoBg: logoBg
     property alias bg: bg
     property int currentPageIndex: 0
+    width: 414
+    height: 736
 
     Rectangle {
         id: bg
+        width: 414
         color: "#ffffff"
         anchors.fill: parent
 
         Rectangle {
             id: logoBg
+            width: 414
             height: 283
             color: "#2bb0a4"
             anchors.right: parent.right
@@ -32,7 +35,7 @@ Item {
                 id: logo
                 x: 91
                 y: 122
-                width: 400
+                width:  400
                 height: 114
                 sourceSize.width: 0
                 anchors.verticalCenter: parent.verticalCenter
@@ -126,8 +129,8 @@ Item {
                 id:pinEditPage
                 anchors.top:parent.top
                 anchors.bottom: parent.bottom
-                x: 300
-                width: 100
+                x: 414
+                width: 414
 
                 onStartEditData: {
                     item1.state = "interactive"
@@ -140,8 +143,25 @@ Item {
                     stackLayout.currentIndex = currentPageIndex
                 }
             }
-        }
 
+            RegistrationPageEmail{
+                id: emailEditPage
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                x: 414
+                width: 414
+
+                onStartEditData: {
+                    item1.state = "interactive"
+                }
+                onEndEditData: {
+                    item1.state = "default"
+                }
+                onNextPage: {
+                    currentPageIndex++
+                }
+            }
+        }
     }
 
     states: [
@@ -149,21 +169,19 @@ Item {
             name: "default"
             PropertyChanges {
                 target: logoBg
-                height: 283
+                height:  283
             }
 
             PropertyChanges {
                 target: logo
-                width: 400
                 height: 114
             }
         },
         State {
             name: "interactive"
-
             PropertyChanges {
                 target: logoBg
-                height: 46
+                height: 60
             }
 
             PropertyChanges {
@@ -171,10 +189,21 @@ Item {
                 width: 400
                 height: 42
             }
+
         }
     ]
 
+
     transitions: Transition {
-        NumberAnimation { properties: "height"; duration: 500; easing.type: Easing.InOutQuad }
+        NumberAnimation{
+            properties: "height"
+            duration: 500
+            easing.type: Easing.InQuint
+        }
+        onRunningChanged: {
+            if(!running){
+                stackLayout.children[stackLayout.currentIndex].presenterAnimationEnds()
+            }
+        }
     }
 }

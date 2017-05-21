@@ -35,4 +35,7 @@
         <file>flag-ua.png</file>
         <file>HWEmailField.qml</file>
     </qresource>
+    <qresource prefix="/commons">
+        <file>Utils.qml</file>
+    </qresource>
 </RCC>

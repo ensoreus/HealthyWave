@@ -9,7 +9,7 @@ ApplicationWindow {
     visible: true
     width: 414
     height: 736
-    title: qsTr("Healthy Wave")
+    title: qsTr("Хвиля здоров'я")
 
 //    Greeting.GreetingSlider{
 //        id: greetingSlider
