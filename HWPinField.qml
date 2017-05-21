@@ -26,12 +26,11 @@ Rectangle{
         anchors.left: parent.left
         anchors.leftMargin: 1
         validator: RegExpValidator{
-            regExp: /\d{1}/
+            regExp: /\d+/
         }
 
         onTextChanged: {
             if (text.length > 0){
-                //pinDigit1.focus = false
                 pinDigit2.forceActiveFocus()
             }
         }
@@ -46,15 +45,15 @@ Rectangle{
         anchors.left: pinDigit1.right
         anchors.leftMargin: 10
         font.pointSize: 20
+
         inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d{1}/
+            regExp: /\d+/
         }
 
         onTextChanged: {
             if (text.length > 0){
-                pinDigit2.focus = false
-                pinDigit3.focus = true
+                pinDigit3.forceActiveFocus()
             }
         }
     }
@@ -71,13 +70,12 @@ Rectangle{
 
         inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d{1}/
+            regExp: /\d+/
         }
 
         onTextChanged: {
             if (text.length > 0){
-                pinDigit3.focus = false
-                pinDigit4.focus = true
+                pinDigit4.forceActiveFocus()
             }
         }
     }
@@ -94,7 +92,7 @@ Rectangle{
 
         inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d{1}/
+            regExp: /\d+/
         }
 
         onTextChanged: {
@@ -114,7 +112,7 @@ Rectangle{
     }
 
     function setupFocus(){
-        pinDigit1.focus = true
+        pinDigit1.forceActiveFocus()
     }
 
     function updateFocused(){
