@@ -7,9 +7,9 @@ RegistrationPageEmailForm {
     signal startEditData
     signal endEditData
 
-//    Component.onCompleted: {
-//        emailField.inputMethodHints = Qt.ImhEmailCharactersOnly
-//    }
+    function presenterAnimationEnds(){
+        emailField.forceActiveFocus()
+    }
 
     btnNext.background: Image {
         id: btnGlyph
@@ -29,7 +29,7 @@ RegistrationPageEmailForm {
     emailField.onWillStartAnimation: {
         if (emailField.aboutToFocus){
             emailPage.startEditData()
-            emailField.forceActiveFocus()
+            emailField.aboutToFocus = false
         }
     }
     emailField.onFocusChanged: {

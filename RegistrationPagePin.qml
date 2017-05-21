@@ -6,6 +6,10 @@ RegistrationPagePinForm {
     signal startEditData
     signal endEditData
 
+    function presenterAnimationEnds(){
+        pinField.setupFocus()
+    }
+
     btnNext.background: Image {
         id: btnGlyph
         source: "btn-next.png"
@@ -24,7 +28,7 @@ RegistrationPagePinForm {
     pinField.onWillStartAnimation: {
         if (pinField.aboutToFocus){
             pinPage.startEditData()
-            pinField.setupFocus()
+            pinField.aboutToFocus = false
         }
     }
     pinField.onFocusChanged: {

@@ -18,8 +18,8 @@ Item {
             id: pinField
             x: 103
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 100
+            anchors.top: text1.bottom
+            anchors.topMargin: 25
         }
 
         Button {
@@ -36,13 +36,12 @@ Item {
 
         Text {
             id: text1
-            y: 66
-            width: 208
+            y: 60
+            width: parent.width * 0.7
             height: 15
             color: "#808080"
             text: qsTr("Введите код подтверждения")
-            anchors.left: pinField.left
-            anchors.leftMargin: 0
+            anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 15
         }
 

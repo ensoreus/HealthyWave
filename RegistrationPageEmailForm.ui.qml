@@ -28,8 +28,8 @@ Item {
         Text {
             id: text1
             x: 52
-            y: 101
-            width: 287
+            y: 50
+            width: parent.width * 0.7
             height: 15
             color: "#808080"
             text: qsTr("Введите электронный адрес *")
@@ -39,9 +39,12 @@ Item {
 
         Controls.HWEmailField {
             id: emailField
-            x: 50
-            y: 156
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: text1.bottom
+            anchors.topMargin: 25
+            anchors.right: text1.right
+            anchors.rightMargin: 0
+            anchors.left: text1.left
+            anchors.leftMargin: 0
             clip: true
         }
     }

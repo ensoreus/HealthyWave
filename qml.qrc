@@ -27,6 +27,8 @@
         <file>RegistrationPageNameForm.ui.qml</file>
         <file>RegistrationPagePasswd.qml</file>
         <file>RegistrationPagePasswdForm.ui.qml</file>
+        <file>RegistrationPromoCodeForm.ui.qml</file>
+        <file>RegistrationPromoCode.qml</file>
     </qresource>
     <qresource prefix="/controls">
         <file>HWPhoneField.qml</file>
@@ -34,8 +36,9 @@
         <file>HWPinField.qml</file>
         <file>flag-ua.png</file>
         <file>HWEmailField.qml</file>
+        <file>HWPasswdField.qml</file>
+        <file>NextButton.qml</file>
+        <file>btn-next.png</file>
     </qresource>
-    <qresource prefix="/commons">
-        <file>Utils.qml</file>
-    </qresource>
+    <qresource prefix="/commons"/>
 </RCC>

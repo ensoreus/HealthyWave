@@ -97,13 +97,17 @@ Item {
                         target: stackLayout
                         currentIndex: 4
                     }
+                },
+                State{
+                    name: "promoCodeEditState"
+                    PropertyChanges {
+                        target: stackLayout
+                        currentIndex: 5
+                    }
                 }
             ]
 
             transitions: Transition {
-                from: "phoneEditState"
-                to: "pinEditState"
-
                 NumberAnimation {
                     properties: "x"
                     duration: 200
@@ -139,8 +143,7 @@ Item {
                     item1.state = "default"
                 }
                 onNextPage: {
-                    currentPageIndex++
-                    stackLayout.currentIndex = currentPageIndex
+                    stackLayout.state = "emailEditState"
                 }
             }
 
@@ -158,7 +161,37 @@ Item {
                     item1.state = "default"
                 }
                 onNextPage: {
-                    currentPageIndex++
+                    stackLayout.state = "passwdEditState"
+                }
+            }
+            RegistrationPageName{
+                id: nameEditPage
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                x: 414
+                onStartEditData: {
+                    item1.state = "interactive"
+                }
+                onEndEditData: {
+                    item1.state = "default"
+                }
+                onNextPage: {
+                    stackLayout.state = "promoCodeEditState"
+                }
+            }
+            RegistrationPagePin{
+                id: promoCodeEditPage
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                x: 414
+                onStartEditData: {
+                    item1.state = "interactive"
+                }
+                onEndEditData: {
+                    item1.state = "default"
+                }
+                onNextPage: {
+                    stackLayout.state = "finishedState"
                 }
             }
         }

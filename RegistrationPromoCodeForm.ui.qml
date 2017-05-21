@@ -1,12 +1,10 @@
 import QtQuick 2.4
-import QtQuick.Controls 2.1
-import "qrc:/controls" as Controls
 
 Item {
     width: 400
     height: 400
-    property alias nameField: nameField
     property alias btnNext: btnNext
+    property alias promoCodeField: promoCodeField
 
     Rectangle {
         id: rectangle
@@ -15,18 +13,17 @@ Item {
 
         Text {
             id: text1
-            x: 70
-            y: 50
+            x: 105
+            y: 65
             width: parent.width * 0.7
-            height: 15
             color: "#808080"
-            text: qsTr("Введите Ваше имя")
+            text: qsTr("Введите ваш промо-код*")
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 12
         }
 
-        Controls.HWTextField {
-            id: nameField
+        HWTextField {
+            id: promoCodeField
             anchors.top: text1.bottom
             anchors.topMargin: 25
             anchors.right: text1.right
@@ -35,12 +32,12 @@ Item {
             anchors.leftMargin: 0
         }
 
-        Controls.NextButton {
+        NextButton {
             id: btnNext
-            x: 60
-            anchors.top: nameField.bottom
+            x: 340
+            anchors.top: promoCodeField.bottom
             anchors.topMargin: 50
-            anchors.right: nameField.right
+            anchors.right: promoCodeField.right
             anchors.rightMargin: 0
         }
     }
