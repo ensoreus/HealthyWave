@@ -1,5 +1,5 @@
 import QtQuick 2.4
-
+import "qrc:/controls" as Controls
 Item {
     width: 400
     height: 400
@@ -22,7 +22,7 @@ Item {
             font.pixelSize: 12
         }
 
-        HWTextField {
+        Controls.HWTextField {
             id: promoCodeField
             anchors.top: text1.bottom
             anchors.topMargin: 25
@@ -32,7 +32,7 @@ Item {
             anchors.leftMargin: 0
         }
 
-        NextButton {
+        Controls.NextButton {
             id: btnNext
             x: 340
             anchors.top: promoCodeField.bottom

@@ -107,14 +107,6 @@ Item {
                 }
             ]
 
-            transitions: Transition {
-                NumberAnimation {
-                    properties: "x"
-                    duration: 200
-                    easing.type: Easing.InOutQuad
-                }
-            }
-
             RegistrationPagePhone{
                 id:phoneEditPage
                 anchors.fill: parent
@@ -122,10 +114,18 @@ Item {
                     item1.state = "interactive"
                 }
                 onEndEditData: {
-                    item1.state = "default"
+                    //item1.state = "default"
                 }
                 onNextPage: {
-                    stackLayout.state = "pinEditState"
+                    //stackLayout.state = "pinEditState"
+                    stackLayout.currentIndex = 1
+                    //pinEditPage.x = 0
+                }
+                Behavior on x {
+                    NumberAnimation {
+                        duration: 500
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
 
@@ -139,11 +139,15 @@ Item {
                 onStartEditData: {
                     item1.state = "interactive"
                 }
-                onEndEditData: {
-                    item1.state = "default"
-                }
+
                 onNextPage: {
-                    stackLayout.state = "emailEditState"
+                    //stackLayout.state = "emailEditState"
+                }
+                Behavior on x {
+                    NumberAnimation {
+                        duration: 500
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
 
@@ -163,9 +167,16 @@ Item {
                 onNextPage: {
                     stackLayout.state = "passwdEditState"
                 }
+                Behavior on x {
+                    NumberAnimation {
+                        duration: 200
+                        easing.type: Easing.InOutQuad
+                    }
+                }
             }
-            RegistrationPageName{
-                id: nameEditPage
+
+            RegistrationPagePasswd{
+                id: passwdEditPage
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 x: 414
@@ -176,14 +187,42 @@ Item {
                     item1.state = "default"
                 }
                 onNextPage: {
+                    stackLayout.state = "nameEditState"
+
+                }
+                Behavior on x {
+                    NumberAnimation {
+                        properties: "x"
+                        duration: 200
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+                width: 414
+            }
+
+            RegistrationPageName{
+                id: nameEditPage
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                x: 414
+                width: 414
+                onStartEditData: {
+                    item1.state = "interactive"
+                }
+                onEndEditData: {
+                    item1.state = "default"
+                }
+                onNextPage: {
                     stackLayout.state = "promoCodeEditState"
                 }
             }
-            RegistrationPagePin{
+
+            RegistrationPromoCode{
                 id: promoCodeEditPage
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 x: 414
+                width: 414
                 onStartEditData: {
                     item1.state = "interactive"
                 }
@@ -195,6 +234,7 @@ Item {
                 }
             }
         }
+
     }
 
     states: [
@@ -223,20 +263,23 @@ Item {
                 height: 42
             }
 
+
         }
     ]
 
 
-    transitions: Transition {
-        NumberAnimation{
-            properties: "height"
-            duration: 500
-            easing.type: Easing.InQuint
-        }
-        onRunningChanged: {
-            if(!running){
-                stackLayout.children[stackLayout.currentIndex].presenterAnimationEnds()
+    transitions:
+        Transition {
+            NumberAnimation{
+                properties: "height"
+                duration: 500
+                easing.type: Easing.InQuint
+            }
+            onRunningChanged: {
+                if(!running){
+                    stackLayout.children[stackLayout.currentIndex].presenterAnimationEnds()
+                }
             }
         }
-    }
+
 }
