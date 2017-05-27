@@ -11,6 +11,7 @@ Item {
 
     Rectangle {
         id: rectangle
+        width: 414
         color: "#ffffff"
         anchors.fill: parent
 
@@ -32,6 +33,11 @@ Item {
             anchors.rightMargin: 50
             anchors.top: pinField.bottom
             anchors.topMargin: 43
+            background: Image {
+                    id: btnGlyph
+                    source: "btn-next.png"
+                    anchors.fill: parent
+                }
         }
 
         Text {

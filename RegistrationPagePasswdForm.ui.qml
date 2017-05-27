@@ -62,7 +62,8 @@ Item {
             anchors.top: text2.bottom
             anchors.topMargin: 15
         }
-        Controls.NextButton {
+
+        Button {
             id: btnNext
             x: 312
             width: 41
@@ -71,6 +72,11 @@ Item {
             anchors.topMargin: 25
             anchors.right: text2.right
             anchors.rightMargin: 0
+            background: Image {
+                    id: btnGlyph
+                    source: "btn-next.png"
+                    anchors.fill: parent
+                }
         }
     }
 }

@@ -35,13 +35,18 @@ Item {
             anchors.leftMargin: 0
         }
 
-        Controls.NextButton {
+        Button {
             id: btnNext
             x: 60
             anchors.top: nameField.bottom
             anchors.topMargin: 50
             anchors.right: nameField.right
             anchors.rightMargin: 0
+            background: Image {
+                    id: btnGlyph
+                    source: "btn-next.png"
+                    anchors.fill: parent
+                }
         }
     }
 }

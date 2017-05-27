@@ -11,15 +11,9 @@ RegistrationPageEmailForm {
         emailField.forceActiveFocus()
     }
 
-    btnNext.background: Image {
-        id: btnGlyph
-        source: "btn-next.png"
-        anchors.fill: parent
-    }
-
     btnNext.onPressed: {
         if (emailField.acceptableInput){
-            btnGlyph.opacity = 0.8
+            btnNext.opacity = 0.8
             nextPage()
         }else{
             console.log("wrong email")

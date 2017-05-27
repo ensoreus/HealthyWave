@@ -12,10 +12,10 @@ RegistrationPagePasswdForm {
 
     btnNext.onPressed: {
         if (passwdField.acceptableInput){
-            btnGlyph.opacity = 0.8
+            btnNext.opacity = 0.8
             nextPage()
         }else{
-            console.log("wrong email")
+            console.log("wrong pass")
         }
     }
 

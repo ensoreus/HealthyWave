@@ -10,15 +10,9 @@ RegistrationPagePinForm {
         pinField.setupFocus()
     }
 
-    btnNext.background: Image {
-        id: btnGlyph
-        source: "btn-next.png"
-        anchors.fill: parent
-    }
-
     btnNext.onPressed: {
         if (pinField.pin.length == 4){
-            btnGlyph.opacity = 0.8
+            btnNext.opacity = 0.8
             nextPage()
         }else{
             console.log("wrong pin")

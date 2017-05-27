@@ -11,7 +11,7 @@ RegistrationPageNameForm {
 
     btnNext.onPressed: {
         if (nameField.acceptableInput){
-            btnGlyph.opacity = 0.8
+            btnNext.opacity = 0.8
             nextPage()
         }else{
             console.log("wrong email")

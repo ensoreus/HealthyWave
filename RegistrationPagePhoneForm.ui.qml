@@ -39,6 +39,11 @@ Item {
             anchors.topMargin: 50
             anchors.right: phoneField.right
             anchors.rightMargin: 0
+            background: Image {
+                    id: btnGlyph
+                    source: "btn-next.png"
+                    anchors.fill: parent
+                }
         }
 
         Text {

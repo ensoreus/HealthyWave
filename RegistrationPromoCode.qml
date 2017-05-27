@@ -16,7 +16,7 @@ RegistrationPromoCodeForm {
 
     btnNext.onPressed: {
         if (promoCodeField.acceptableInput){
-            btnGlyph.opacity = 0.8
+            btnNext.opacity = 0.8
             nextPage()
         }else{
             console.log("wrong promo")

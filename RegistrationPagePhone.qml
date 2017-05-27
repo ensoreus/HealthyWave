@@ -14,15 +14,9 @@ RegistrationPagePhoneForm {
         phoneField.inputMethodHints = Qt.ImhPreferNumbers
     }
 
-    btnNext.background: Image {
-        id: btnGlyph
-        source: "btn-next.png"
-        anchors.fill: parent
-    }
-
     btnNext.onPressed: {
         if (phoneField.acceptableInput){
-            btnGlyph.opacity = 0.8
+            btnNext.opacity = 0.8
             nextPage()
         }else{
             console.log("wrong phone")

@@ -10,12 +10,12 @@ Item {
     property alias logoBg: logoBg
     property alias bg: bg
     property int currentPageIndex: 0
+    signal registrationDone
     width: 414
     height: 736
 
     Rectangle {
         id: bg
-        width: 414
         color: "#ffffff"
         anchors.fill: parent
 
@@ -45,7 +45,8 @@ Item {
             }
         }
 
-        StackLayout {
+        Rectangle {
+            property var activePage : phoneEditPage
             id: stackLayout
             anchors.top: logoBg.bottom
             anchors.topMargin: 0
@@ -55,57 +56,6 @@ Item {
             anchors.leftMargin: 0
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
-            currentIndex: 0
-
-            states: [
-                State{
-                    name: "phoneEditState"
-                    PropertyChanges {
-                        target: stackLayout
-                        currentIndex: 0
-                    }
-                },
-                State{
-                    name: "pinEditState"
-                    PropertyChanges {
-                        target: stackLayout
-                        currentIndex: 1
-                    }
-                    PropertyChanges {
-                        target: pinEditPage
-                        x:0
-                    }
-                },
-                State{
-                    name: "emailEditState"
-                    PropertyChanges {
-                        target: stackLayout
-                        currentIndex: 2
-                        x:0
-                    }
-                },
-                State{
-                    name: "passwdEditState"
-                    PropertyChanges {
-                        target: stackLayout
-                        currentIndex: 3
-                    }
-                },
-                State{
-                    name: "nameEditState"
-                    PropertyChanges {
-                        target: stackLayout
-                        currentIndex: 4
-                    }
-                },
-                State{
-                    name: "promoCodeEditState"
-                    PropertyChanges {
-                        target: stackLayout
-                        currentIndex: 5
-                    }
-                }
-            ]
 
             RegistrationPagePhone{
                 id:phoneEditPage
@@ -113,17 +63,16 @@ Item {
                 onStartEditData: {
                     item1.state = "interactive"
                 }
-                onEndEditData: {
-                    //item1.state = "default"
-                }
+
                 onNextPage: {
-                    //stackLayout.state = "pinEditState"
-                    stackLayout.currentIndex = 1
-                    //pinEditPage.x = 0
+                    currentPageIndex = 1
+                    pinEditPage.x = 0
+                    stackLayout.activePage = pinEditPage
+                    //
                 }
                 Behavior on x {
                     NumberAnimation {
-                        duration: 500
+                        duration: 200
                         easing.type: Easing.InOutQuad
                     }
                 }
@@ -134,38 +83,38 @@ Item {
                 anchors.top:parent.top
                 anchors.bottom: parent.bottom
                 x: 414
-                width: 414
+                width: parent.width
 
                 onStartEditData: {
                     item1.state = "interactive"
+                    pinEditPage.presenterAnimationEnds()
                 }
 
                 onNextPage: {
-                    //stackLayout.state = "emailEditState"
+                    currentPageIndex = 2
+                    emailEditPage.x = 0
                 }
                 Behavior on x {
                     NumberAnimation {
-                        duration: 500
+                        duration: 200
                         easing.type: Easing.InOutQuad
                     }
                 }
             }
 
-            RegistrationPageEmail{
+           RegistrationPageEmail{
                 id: emailEditPage
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 x: 414
-                width: 414
+                width: parent.width
 
                 onStartEditData: {
                     item1.state = "interactive"
                 }
-                onEndEditData: {
-                    item1.state = "default"
-                }
                 onNextPage: {
-                    stackLayout.state = "passwdEditState"
+                    currentPageIndex = 3
+                    passwdEditPage.x = 0
                 }
                 Behavior on x {
                     NumberAnimation {
@@ -180,24 +129,20 @@ Item {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 x: 414
+                width: parent.width
                 onStartEditData: {
                     item1.state = "interactive"
                 }
-                onEndEditData: {
-                    item1.state = "default"
-                }
                 onNextPage: {
-                    stackLayout.state = "nameEditState"
-
+                    currentPageIndex = 4
+                    nameEditPage.x = 0
                 }
                 Behavior on x {
                     NumberAnimation {
-                        properties: "x"
                         duration: 200
                         easing.type: Easing.InOutQuad
                     }
                 }
-                width: 414
             }
 
             RegistrationPageName{
@@ -205,15 +150,19 @@ Item {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 x: 414
-                width: 414
+                width: parent.width
                 onStartEditData: {
                     item1.state = "interactive"
                 }
-                onEndEditData: {
-                    item1.state = "default"
-                }
                 onNextPage: {
-                    stackLayout.state = "promoCodeEditState"
+                    currentPageIndex = 5
+                    promoCodeEditPage.x = 0
+                }
+                Behavior on x {
+                    NumberAnimation {
+                        duration: 200
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
 
@@ -222,7 +171,7 @@ Item {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 x: 414
-                width: 414
+                width: parent.width
                 onStartEditData: {
                     item1.state = "interactive"
                 }
@@ -230,7 +179,7 @@ Item {
                     item1.state = "default"
                 }
                 onNextPage: {
-                    stackLayout.state = "finishedState"
+                    onRegistrationDone()
                 }
             }
         }
@@ -267,7 +216,6 @@ Item {
         }
     ]
 
-
     transitions:
         Transition {
             NumberAnimation{
@@ -277,7 +225,7 @@ Item {
             }
             onRunningChanged: {
                 if(!running){
-                    stackLayout.children[stackLayout.currentIndex].presenterAnimationEnds()
+                    stackLayout.activePage.presenterAnimationEnds()
                 }
             }
         }

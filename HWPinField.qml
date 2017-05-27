@@ -26,7 +26,7 @@ Rectangle{
         anchors.left: parent.left
         anchors.leftMargin: 1
         validator: RegExpValidator{
-            regExp: /\d+/
+            regExp: /\d?/
         }
 
         onTextChanged: {

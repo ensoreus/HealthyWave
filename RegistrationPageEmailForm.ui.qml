@@ -23,6 +23,11 @@ Item {
             anchors.rightMargin: 0
             anchors.top: emailField.bottom
             anchors.topMargin: 50
+            background: Image {
+                    id: btnGlyph
+                    source: "btn-next.png"
+                    anchors.fill: parent
+                }
         }
 
         Text {
