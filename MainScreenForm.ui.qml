@@ -8,6 +8,7 @@ Item {
     id: item1
     width: 400
     height: 400
+    property alias mainScreenHintPanel: mainScreenHintPanel
     property alias btnOrder: btnOrder
     property alias btnFreeWater: btnFreeWater
     property alias mainScreenContent: mainScreenContent
@@ -89,5 +90,15 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 8
         }
+    }
+
+    MainScreenHintPanel {
+        id: mainScreenHintPanel
+        anchors.top: mainScreenContent.bottom
+        anchors.topMargin: -100
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
     }
 }

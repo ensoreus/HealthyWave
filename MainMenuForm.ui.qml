@@ -5,6 +5,8 @@ Item {
     id: item1
     width: 400
     height: 400
+    property alias btnInfo: btnInfo
+    property alias btnSite: btnSite
     property alias avatar: avatar
     property alias userName: userName
     Rectangle {
@@ -148,6 +150,61 @@ Item {
             MouseArea {
                 id: menuItem4
                 anchors.fill: parent
+            }
+        }
+
+        Item {
+            id: footer
+            x: 84
+            y: 156
+            width: 250
+            height: 30
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 15
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Text {
+                id: text1
+                y: 0
+                width: 97
+                height: 15
+                text: qsTr("Офіційний сайт:")
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                font.pixelSize: 12
+            }
+
+            Text {
+                id: text6
+                y: 0
+                height: 15
+                text: qsTr("www.hvilya-zd.com.ua")
+                font.underline: true
+                anchors.right: parent.right
+                anchors.rightMargin: 0
+                anchors.left: text1.right
+                anchors.leftMargin: 2
+                font.pixelSize: 12
+
+                MouseArea {
+                    id: btnSite
+                    anchors.fill: parent
+                }
+            }
+
+            Text {
+                id: text7
+                text: qsTr("ЮРИДИЧНА ІНФОРМАЦІЯ")
+                font.underline: true
+                anchors.top: text6.bottom
+                anchors.topMargin: 1
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pixelSize: 12
+
+                MouseArea {
+                    id: btnInfo
+                    anchors.fill: parent
+                }
             }
         }
     }

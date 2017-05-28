@@ -6,6 +6,7 @@ MainScreenForm {
     property int menuShift: parent.width * 0.88
     Component.onCompleted: {
         state = "slideIn"
+
     }
     menuButton.onClicked: {
         menuShowHide()
@@ -15,12 +16,14 @@ MainScreenForm {
             state = "slideOut"
         }
     }
+
     Rectangle{
         id: shadowOverlay
         anchors.fill: parent
         color: "#b36f6f6f"
         visible: false
     }
+
 
     states:[
         State {

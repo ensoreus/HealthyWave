@@ -52,6 +52,7 @@
         <file>MainMenu.qml</file>
         <file>MainMenuForm.ui.qml</file>
         <file>MainMenuSlider.qml</file>
+        <file>MainScreenHintPanel.qml</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>Fonts/FontAwesome.otf</file>
