@@ -41,6 +41,7 @@
         <file>btn-next.png</file>
         <file>HWRoundButton.qml</file>
         <file>HWGreenRoundButton.qml</file>
+        <file>HWAvatar.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>

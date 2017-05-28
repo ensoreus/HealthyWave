@@ -1,5 +1,5 @@
 import QtQuick 2.4
-import QtGraphicalEffects 1.0
+import "qrc:/controls"
 
 Item {
     id: item1
@@ -21,7 +21,7 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 0
 
-        Image {
+        HWAvatar {
             id: avatar
             x: 0
             y: 0
@@ -32,22 +32,6 @@ Item {
             visible: true
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
-            clip: true
-            fillMode: Image.PreserveAspectCrop
-            source: "qrc:/commons/avatar_qap.jpg"
-            layer.enabled: true
-            layer.effect: OpacityMask {
-                maskSource: Item {
-                    width: avatar.width
-                    height: avatar.height
-                    Rectangle {
-                        anchors.centerIn: parent
-                        width: avatar.width
-                        height: avatar.height
-                        radius: Math.min(width, height)
-                    }
-                }
-            }
         }
 
         Text {
