@@ -9,10 +9,12 @@ Item {
         id: mainMenu
         anchors.fill: parent
         MainScreen{
+            id:mainScreen
             anchors.top: mainMenu.top
             anchors.bottom: mainMenu.bottom
             x: 0
             width: parent.width
+
         }
     }
 }

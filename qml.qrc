@@ -43,8 +43,8 @@
         <file>HWGreenRoundButton.qml</file>
     </qresource>
     <qresource prefix="/commons">
-        <file>Utils.qml</file>
         <file>avatar_qap.jpg</file>
+        <file>btn-menu.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>

@@ -8,26 +8,30 @@ Item {
     id: item1
     width: 400
     height: 400
+    property alias btnOrder: btnOrder
+    property alias btnFreeWater: btnFreeWater
+    property alias mainScreenContent: mainScreenContent
+    property alias menuButton: menuButton
 
     Rectangle {
-        id: rectangle
+        id: mainScreenContent
         color: "#ffffff"
         anchors.fill: parent
 
         Controls.HWRoundButton {
-            id: hWRoundButton
+            id: btnOrder
             height: 60
             anchors.rightMargin: parent.width * 0.1
             anchors.leftMargin: parent.width * 0.1
             labelText: "ЗАМОВИТИ"
             anchors.right: parent.right
             anchors.left: parent.left
-            anchors.top: hWGreenRoundButton.bottom
+            anchors.top: btnFreeWater.bottom
             anchors.topMargin: 70
         }
 
         Controls.HWGreenRoundButton {
-            id: hWGreenRoundButton
+            id: btnFreeWater
             height: 60
             anchors.rightMargin: parent.width * 0.1
             anchors.leftMargin: parent.width * 0.1
@@ -60,6 +64,30 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             fillMode: Image.PreserveAspectFit
             source: "qrc:/registration/logo-hw.png"
+        }
+
+        Image {
+            id: image
+            width: 30
+            fillMode: Image.PreserveAspectFit
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 18
+            anchors.top: parent.top
+            anchors.topMargin: 18
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            source: "qrc:/commons/btn-menu.png"
+        }
+
+        MouseArea {
+            id: menuButton
+            width: 44
+            anchors.top: parent.top
+            anchors.topMargin: 8
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 8
+            anchors.left: parent.left
+            anchors.leftMargin: 8
         }
     }
 }

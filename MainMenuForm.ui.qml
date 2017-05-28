@@ -6,7 +6,7 @@ Item {
     width: 400
     height: 400
     property alias avatar: avatar
-
+    property alias userName: userName
     Rectangle {
         id: userInfoHeader
         height: 200
@@ -25,7 +25,7 @@ Item {
             y: 0
             width: 100
             height: 100
-            anchors.horizontalCenterOffset: -50
+            anchors.horizontalCenterOffset: -(parent.width * 0.1)
             anchors.verticalCenterOffset: -19
             visible: true
             anchors.verticalCenter: parent.verticalCenter
@@ -53,7 +53,7 @@ Item {
             width: 200
             color: "#ffffff"
             text: qsTr("Льорем Іпсум")
-            anchors.horizontalCenterOffset: -50
+            anchors.horizontalCenterOffset: -(parent.width * 0.1)
             fontSizeMode: Text.Fit
             anchors.top: avatar.bottom
             anchors.topMargin: 30
