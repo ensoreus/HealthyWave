@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.0
 
 import "greeting" as Greeting
 import "registration" as Registration
+import "mainScreen" as Main
 
 ApplicationWindow {
     visible: true
@@ -16,7 +17,7 @@ ApplicationWindow {
 //        anchors.fill: parent
 //    }
 
-    Registration.Registration {
+    Main.MainScreen {
         anchors.fill:parent
     }
 }

@@ -39,6 +39,12 @@
         <file>HWPasswdField.qml</file>
         <file>NextButton.qml</file>
         <file>btn-next.png</file>
+        <file>HWRoundButton.qml</file>
+        <file>HWGreenRoundButton.qml</file>
     </qresource>
     <qresource prefix="/commons"/>
+    <qresource prefix="/mainScreen">
+        <file>MainScreen.qml</file>
+        <file>MainScreenForm.ui.qml</file>
+    </qresource>
 </RCC>
