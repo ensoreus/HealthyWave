@@ -17,7 +17,7 @@ ApplicationWindow {
 //        anchors.fill: parent
 //    }
 
-    Main.MainMenu {
+    Main.MainMenuSlider {
         anchors.fill:parent
     }
 }

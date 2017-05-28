@@ -51,5 +51,33 @@
         <file>MainScreenForm.ui.qml</file>
         <file>MainMenu.qml</file>
         <file>MainMenuForm.ui.qml</file>
+        <file>MainMenuSlider.qml</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>Fonts/FontAwesome.otf</file>
+        <file>Fonts/ionicons.ttf</file>
+        <file>Fonts/material.ttf</file>
+        <file>Fonts/Simple-Line-Icons.ttf</file>
+        <file>Fonts/SF-UI-Display-Black.otf</file>
+        <file>Fonts/SF-UI-Display-Bold.otf</file>
+        <file>Fonts/SF-UI-Display-Heavy.otf</file>
+        <file>Fonts/SF-UI-Display-Light.otf</file>
+        <file>Fonts/SF-UI-Display-Medium.otf</file>
+        <file>Fonts/SF-UI-Display-Regular.otf</file>
+        <file>Fonts/SF-UI-Display-Semibold.otf</file>
+        <file>Fonts/SF-UI-Display-Thin.otf</file>
+        <file>Fonts/SF-UI-Display-Ultralight.otf</file>
+        <file>Fonts/SF-UI-Text-Bold.otf</file>
+        <file>Fonts/SF-UI-Text-BoldItalic.otf</file>
+        <file>Fonts/SF-UI-Text-Heavy.otf</file>
+        <file>Fonts/SF-UI-Text-HeavyItalic.otf</file>
+        <file>Fonts/SF-UI-Text-Italic.otf</file>
+        <file>Fonts/SF-UI-Text-Light.otf</file>
+        <file>Fonts/SF-UI-Text-LightItalic.otf</file>
+        <file>Fonts/SF-UI-Text-Medium.otf</file>
+        <file>Fonts/SF-UI-Text-MediumItalic.otf</file>
+        <file>Fonts/SF-UI-Text-Regular.otf</file>
+        <file>Fonts/SF-UI-Text-Semibold.otf</file>
+        <file>Fonts/SF-UI-Text-SemiboldItalic.otf</file>
     </qresource>
 </RCC>
