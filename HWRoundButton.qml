@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "qrc:/commons"
 
 Rectangle {
     id: btnRoot
@@ -10,7 +11,7 @@ Rectangle {
     width: 200
     height: 50
     Rectangle{
-        id: rectangle
+        id: contents
         anchors.fill: parent
         anchors.leftMargin: 2
         anchors.rightMargin: 2

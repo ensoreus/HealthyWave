@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.1
 import QtQuick.Window 2.2
+import "qrc:/commons"
 
 Item {
     id: item1
@@ -16,14 +17,14 @@ Item {
 
     Rectangle {
         id: bg
-        color: "#ffffff"
+        color: "white"
         anchors.fill: parent
 
         Rectangle {
             id: logoBg
             width: 414
             height: 283
-            color: "#2bb0a4"
+            color: "#1EB2A4"
             anchors.right: parent.right
             anchors.rightMargin: 0
             anchors.left: parent.left

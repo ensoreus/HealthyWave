@@ -16,13 +16,26 @@ Item {
 
         Controls.HWRoundButton {
             id: hWRoundButton
-            height: 50
+            height: 60
+            anchors.rightMargin: parent.width * 0.1
+            anchors.leftMargin: parent.width * 0.1
+            labelText: "ЗАМОВИТИ"
             anchors.right: parent.right
-            anchors.rightMargin: 67
             anchors.left: parent.left
-            anchors.leftMargin: 67
+            anchors.top: hWGreenRoundButton.bottom
+            anchors.topMargin: 70
+        }
+
+        Controls.HWGreenRoundButton {
+            id: hWGreenRoundButton
+            height: 60
+            anchors.rightMargin: parent.width * 0.1
+            anchors.leftMargin: parent.width * 0.1
+            labelText: "БЕЗКОШТОВНА ВОДА"
+            anchors.right: parent.right
+            anchors.left: parent.left
             anchors.top: parent.top
-            anchors.topMargin: 160
+            anchors.topMargin: 218
         }
     }
 
