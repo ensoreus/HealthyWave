@@ -44,6 +44,7 @@
     </qresource>
     <qresource prefix="/commons">
         <file>Utils.qml</file>
+        <file>avatar_qap.jpg</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>

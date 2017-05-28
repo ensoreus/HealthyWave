@@ -17,7 +17,7 @@ ApplicationWindow {
 //        anchors.fill: parent
 //    }
 
-    Main.MainScreen {
+    Main.MainMenu {
         anchors.fill:parent
     }
 }
