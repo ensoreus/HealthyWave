@@ -40,6 +40,9 @@ Rectangle {
                 buttonClick()
                 label.color = btnRoot.labelColor
             }
+            onPressedChanged: {
+                contents.color = (clickable.pressed) ? "#50E3C2" : "#1EB2A4"
+            }
         }
     }
 }
