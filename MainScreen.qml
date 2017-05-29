@@ -3,10 +3,8 @@ import QtQuick 2.4
 MainScreenForm {
     id: mainScreen
     signal menuShowHide
-    property int menuShift: parent.width * 0.88
     Component.onCompleted: {
         state = "slideIn"
-
     }
     menuButton.onClicked: {
         menuShowHide()
@@ -15,6 +13,26 @@ MainScreenForm {
         }else{
             state = "slideOut"
         }
+    }
+
+    FreeWaterHelpScreen{
+        anchors.right: parent.right
+        anchors.left: parent.left
+        y: parent.height
+        height: parent.height
+        id: freeWaterHelpScreen
+        Behavior on y {
+            NumberAnimation {
+                target: freeWaterHelpScreen
+                property: "y"
+                duration: 300
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
+
+    mainScreenHintPanel.onShowHideHintPanel: {
+        freeWaterHelpScreen.y = logoBg.height
     }
 
     Rectangle{
@@ -30,7 +48,7 @@ MainScreenForm {
             name: "slideOut"
             PropertyChanges {
                 target: mainScreen
-                x: menuShift
+                x: parent.width * 0.88
             }
             PropertyChanges {
                 target: shadowOverlay

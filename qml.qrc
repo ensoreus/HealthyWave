@@ -46,6 +46,7 @@
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>
         <file>btn-menu.png</file>
+        <file>img-socium.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
@@ -54,6 +55,8 @@
         <file>MainMenuForm.ui.qml</file>
         <file>MainMenuSlider.qml</file>
         <file>MainScreenHintPanel.qml</file>
+        <file>FreeWaterHelpScreen.qml</file>
+        <file>FreeWaterHelpScreenForm.ui.qml</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>Fonts/FontAwesome.otf</file>

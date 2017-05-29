@@ -1,5 +1,4 @@
 import QtQuick 2.4
-
 import QtQuick.Controls 2.1
 import "qrc:/controls" as Controls
 import "qrc:/registration"
@@ -8,6 +7,7 @@ Item {
     id: item1
     width: 400
     height: 400
+    property alias logoBg: logoBg
     property alias mainScreenHintPanel: mainScreenHintPanel
     property alias btnOrder: btnOrder
     property alias btnFreeWater: btnFreeWater
