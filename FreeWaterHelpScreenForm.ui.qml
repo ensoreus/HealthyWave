@@ -4,6 +4,7 @@ import "qrc:/controls" as Controls
 Item {
     width: 400
     height: 400
+    property alias btnCopyCodeLabel: btnCopyCodeLabel
     property alias btnInvite: btnInvite
     property alias btnCopyCode: btnCopyCode
     property alias promoCodeText: promoCodeText
@@ -79,7 +80,7 @@ Item {
             anchors.leftMargin: 0
 
             Text {
-                id: text3
+                id: btnCopyCodeLabel
                 width: 60
                 text: qsTr("копіювати")
                 anchors.right: parent.right
