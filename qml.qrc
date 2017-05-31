@@ -47,6 +47,7 @@
         <file>avatar_qap.jpg</file>
         <file>btn-menu.png</file>
         <file>img-socium.png</file>
+        <file>img-back-arrow.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>

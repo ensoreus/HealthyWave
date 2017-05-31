@@ -90,7 +90,7 @@ Item {
                 width: 60
                 text: qsTr("копіювати")
                 anchors.right: parent.right
-                anchors.rightMargin: -5
+                anchors.rightMargin: 5
                 anchors.verticalCenter: parent.verticalCenter
                 font.weight: Font.DemiBold
                 font.family: "SF UI Text"
@@ -154,6 +154,7 @@ Item {
             anchors.top: mainText.bottom
             anchors.topMargin: 100
             anchors.horizontalCenter: parent.horizontalCenter
+            showGlyph: true
         }
     }
     states: [

@@ -7,6 +7,7 @@ Rectangle {
     property string labelColor: "black"
     property string labelHighlightColor: "blue"
     property alias labelText: label.text
+    property alias showGlyph: glyph.visible
 
     width: 200
     height: 50
@@ -30,6 +31,17 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
         }
+
+        Image{
+            id: glyph
+            anchors.right: label.left
+            anchors.verticalCenter: parent.verticalCenter
+            width: 25
+            height: 30
+            visible: false
+            source:"qrc:/commons/img-back-arrow.png"
+        }
+
         MouseArea{
             anchors.fill: parent
             id: clickable
