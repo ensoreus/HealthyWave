@@ -42,7 +42,6 @@ MainScreenForm {
         visible: false
     }
 
-
     states:[
         State {
             name: "slideOut"
@@ -67,6 +66,7 @@ MainScreenForm {
             }
         }
     ]
+
     transitions: [
         Transition {
         from: "slideOut"

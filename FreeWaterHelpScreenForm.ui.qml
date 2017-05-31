@@ -4,6 +4,11 @@ import "qrc:/controls" as Controls
 Item {
     width: 400
     height: 400
+    property alias mainLabel: mainLabel
+    property alias mainText: mainText
+    property alias image: image
+    property alias btnBack: btnBack
+    property alias btnHowItWorks: btnHowItWorks
     property alias btnCopyCodeLabel: btnCopyCodeLabel
     property alias btnInvite: btnInvite
     property alias btnCopyCode: btnCopyCode
@@ -16,7 +21,7 @@ Item {
         anchors.fill: parent
 
         Text {
-            id: text1
+            id: mainLabel
             x: 187
             text: qsTr("Отримуй воду безкоштовно")
             font.weight: Font.Light
@@ -30,11 +35,11 @@ Item {
         Image {
             id: image
             x: 150
-            width: 200
-            height: 184
+            width: parent.width * 0.5
+            height: parent.width * 0.5
             fillMode: Image.PreserveAspectFit
-            anchors.top: text1.bottom
-            anchors.topMargin: 45
+            anchors.top: mainLabel.bottom
+            anchors.topMargin: 40
             anchors.horizontalCenter: parent.horizontalCenter
             source: "qrc:/commons/img-socium.png"
         }
@@ -43,23 +48,24 @@ Item {
             id: promoCodeLabel
             color: "#9b9b9b"
             text: qsTr("Ваш промокод")
-            anchors.top: text2.bottom
+            anchors.top: mainText.bottom
             anchors.topMargin: 20
-            anchors.left: text2.left
-            anchors.leftMargin: 0
+            anchors.left: parent.left
+            anchors.leftMargin: 30
             font.weight: Font.Light
             font.family: "ST UI Text"
             font.pixelSize: 14
         }
 
         Text {
-            id: text2
-            y: 310
+            id: mainText
             width: 264
             height: 65
             text: qsTr("Відправ промо код свому другу і отримай безкоштовно 2 бутля води")
-            anchors.left: text1.left
-            anchors.leftMargin: 0
+            anchors.top: image.bottom
+            anchors.topMargin: 20
+            anchors.left: parent.left
+            anchors.leftMargin: 36
             anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
             font.weight: Font.Light
@@ -71,20 +77,20 @@ Item {
         Controls.HWTextField {
             id: promoCodeText
             x: 35.8
-            anchors.right: text2.right
-            anchors.rightMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 36
             readOnly: true
             anchors.top: promoCodeLabel.bottom
-            anchors.topMargin: 10
-            anchors.left: promoCodeLabel.left
-            anchors.leftMargin: 0
+            anchors.topMargin: 7
+            anchors.left: parent.left
+            anchors.leftMargin: 36
 
             Text {
                 id: btnCopyCodeLabel
                 width: 60
                 text: qsTr("копіювати")
                 anchors.right: parent.right
-                anchors.rightMargin: 0
+                anchors.rightMargin: -5
                 anchors.verticalCenter: parent.verticalCenter
                 font.weight: Font.DemiBold
                 font.family: "SF UI Text"
@@ -99,28 +105,26 @@ Item {
                     y: 0
                     width: 100
                     height: 100
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.right: parent.right
-                    anchors.rightMargin: 0
+                    anchors.fill: parent
                 }
             }
         }
 
         Text {
-            id: text4
+            id: lbHowItWorks
             color: "#9012fe"
             text: qsTr("Як це працює?")
             anchors.top: promoCodeText.bottom
-            anchors.topMargin: 10
+            anchors.topMargin: 15
             font.weight: Font.Light
             font.underline: true
             font.family: "SF UI Text"
-            anchors.left: promoCodeText.left
+            anchors.left: mainText.left
             anchors.leftMargin: 0
             font.pixelSize: 14
 
             MouseArea {
-                id: mouseArea
+                id: btnHowItWorks
                 anchors.fill: parent
             }
         }
@@ -133,9 +137,107 @@ Item {
             labelHighlightColor: "#00AD9A"
             labelColor: "#000000"
             labelText: "ЗАПРОСИТИ"
-            anchors.top: text4.bottom
+            anchors.top: lbHowItWorks.bottom
             anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
         }
+
+        Controls.HWRoundButton {
+            id: btnBack
+            x: 32
+            visible: false
+            width: parent.width * 0.7
+            height: btnInvite.height
+            labelHighlightColor: "#00AD9A"
+            labelColor: "#000000"
+            labelText: "МІЙ ПРОМОКОД"
+            anchors.top: mainText.bottom
+            anchors.topMargin: 100
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
     }
+    states: [
+        State {
+            name: "promoCodeGen"
+            PropertyChanges {
+                target: mainLabel
+                text: qsTr("Отримуй воду безкоштовно")
+            }
+            PropertyChanges {
+                target: promoCodeLabel
+                visible: true
+            }
+
+            PropertyChanges {
+                target: promoCodeText
+                visible: true
+            }
+
+            PropertyChanges {
+                target: lbHowItWorks
+                visible: true
+            }
+            PropertyChanges {
+                target: image
+                width: parent.width * 0.5
+                height: parent.width * 0.5
+            }
+
+            PropertyChanges {
+                target: btnInvite
+                visible: true
+            }
+
+            PropertyChanges {
+                target: btnBack
+                visible: false
+            }
+        },
+        State {
+            name: "howItWorks"
+
+            PropertyChanges {
+                target: mainLabel
+                text: qsTr("Як це працює?")
+            }
+
+            PropertyChanges {
+                target: image
+                width: parent.width * 0.2
+                height: parent.width * 0.2
+            }
+
+            PropertyChanges {
+                target: promoCodeLabel
+                visible: false
+            }
+
+            PropertyChanges {
+                target: promoCodeText
+                visible: false
+            }
+
+            PropertyChanges {
+                target: lbHowItWorks
+                visible: false
+            }
+
+            PropertyChanges {
+                target: mainText
+                height: parent.height * 0.35
+                text: "Відправте своєму другу даний промокод і, після того як він зробить перше замовлення, Вам буде начислено 2 бутля води безкоштовно, які ви зможете використати у будь-який момент.<br> Коли Ваш друг робитиме перше замовлення, йому треба буде ввести цей промокод і він також отримає в подарунок 1 бутль води безкоштовно."
+                textFormat: Text.RichText
+                horizontalAlignment: Text.AlignLeft
+            }
+
+            PropertyChanges {
+                target: btnInvite
+                visible: false
+            }
+            PropertyChanges {
+                target: btnBack
+                visible: true
+            }
+        }
+    ]
 }
