@@ -5,6 +5,16 @@ Item {
     id: item1
     width: 400
     height: 400
+    property alias lbInfo: lbInfo
+    property alias lbLink: lbLink
+    property alias lbContacts: lbContacts
+    property alias lbAddress: lbAddress
+    property alias lbPayment: lbPayment
+    property alias lbMyOrders: lbMyOrders
+    property alias btnContacts: btnContacts
+    property alias btnAddresses: btnAddresses
+    property alias btnMyOrders: btnMyOrders
+    property alias btnPayments: btnPayments
     property alias btnInfo: btnInfo
     property alias btnSite: btnSite
     property alias avatar: avatar
@@ -65,7 +75,7 @@ Item {
         anchors.bottomMargin: 0
 
         Text {
-            id: text2
+            id: lbMyOrders
             width: 347
             height: 20
             text: qsTr("Мої замовлення")
@@ -78,61 +88,61 @@ Item {
             font.pixelSize: 14
 
             MouseArea {
-                id: menuItem1
+                id: btnMyOrders
                 anchors.fill: parent
             }
         }
         Text {
-            id: text3
+            id: lbPayment
             width: 347
             height: 20
             text: qsTr("Оплата")
             anchors.horizontalCenterOffset: -50
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: text2.bottom
+            anchors.top: lbMyOrders.bottom
             anchors.topMargin: 20
             anchors.left: parent.left
             anchors.leftMargin: 25
             font.pixelSize: 14
 
             MouseArea {
-                id: menuItem2
+                id: btnPayments
                 anchors.fill: parent
             }
         }
         Text {
-            id: text4
+            id: lbAddress
             width: 347
             height: 20
             text: qsTr("Адреса достави")
             anchors.horizontalCenterOffset: -50
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: text3.bottom
+            anchors.top: lbPayment.bottom
             anchors.topMargin: 20
             anchors.left: parent.left
             anchors.leftMargin: 25
             font.pixelSize: 14
 
             MouseArea {
-                id: menuItem3
+                id: btnAddresses
                 anchors.fill: parent
             }
         }
         Text {
-            id: text5
+            id: lbContacts
             width: 347
             height: 20
             text: qsTr("Контакти")
             anchors.horizontalCenterOffset: -50
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: text4.bottom
+            anchors.top: lbAddress.bottom
             anchors.topMargin: 20
             anchors.left: parent.left
             anchors.leftMargin: 25
             font.pixelSize: 14
 
             MouseArea {
-                id: menuItem4
+                id: btnContacts
                 anchors.fill: parent
             }
         }
@@ -148,7 +158,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
 
             Text {
-                id: text1
+                id: lbSiteText
                 y: 0
                 width: 97
                 height: 15
@@ -159,14 +169,14 @@ Item {
             }
 
             Text {
-                id: text6
+                id: lbLink
                 y: 0
                 height: 15
                 text: qsTr("www.hvilya-zd.com.ua")
                 font.underline: true
                 anchors.right: parent.right
                 anchors.rightMargin: 0
-                anchors.left: text1.right
+                anchors.left: lbSiteText.right
                 anchors.leftMargin: 2
                 font.pixelSize: 12
 
@@ -177,10 +187,10 @@ Item {
             }
 
             Text {
-                id: text7
+                id: lbInfo
                 text: qsTr("ЮРИДИЧНА ІНФОРМАЦІЯ")
                 font.underline: true
-                anchors.top: text6.bottom
+                anchors.top: lbLink.bottom
                 anchors.topMargin: 1
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: 12
