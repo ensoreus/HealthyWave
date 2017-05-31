@@ -8,21 +8,6 @@ Rectangle {
     property alias shoveUpBtn: shoveUpBtn
     signal showHideHintPanel
 
-    Text {
-        id: text1
-        x: 194
-        width: 20
-        height: 20
-        text: ""
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-        font.family: "simple-line-icons"
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.horizontalCenter: parent.horizontalCenter
-        font.pixelSize: 17
-    }
-
     Rectangle {
         id: rectangle1
         color: "#ffffff"
@@ -63,12 +48,25 @@ Rectangle {
     MouseArea {
         id: shoveUpBtn
         x: 187
-        y: 0
         width: 43
         height: 34
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 0
         onClicked: {
-             showHideHintPanel()
+            showHideHintPanel()
         }
+    }
+
+    Image {
+        id: arrowUp
+        width: 25
+        height: 25
+        fillMode: Image.PreserveAspectFit
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.horizontalCenter: parent.horizontalCenter
+        source: "qrc:/commons/btn-arrow-up.png"
     }
 
 }

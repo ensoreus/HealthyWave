@@ -48,6 +48,7 @@
         <file>btn-menu.png</file>
         <file>img-socium.png</file>
         <file>img-back-arrow.png</file>
+        <file>btn-arrow-up.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>

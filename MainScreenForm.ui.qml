@@ -22,25 +22,25 @@ Item {
         Controls.HWRoundButton {
             id: btnOrder
             height: 60
+            anchors.topMargin: parent.height * 0.1
             anchors.rightMargin: parent.width * 0.1
             anchors.leftMargin: parent.width * 0.1
             labelText: "ЗАМОВИТИ"
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.top: btnFreeWater.bottom
-            anchors.topMargin: 70
         }
 
         Controls.HWGreenRoundButton {
             id: btnFreeWater
             height: 60
+            anchors.topMargin: parent.height * 0.3
             anchors.rightMargin: parent.width * 0.1
             anchors.leftMargin: parent.width * 0.1
             labelText: "БЕЗКОШТОВНА ВОДА"
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.top: parent.top
-            anchors.topMargin: 218
         }
     }
 

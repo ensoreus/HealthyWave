@@ -27,9 +27,9 @@ Item {
             font.weight: Font.Light
             font.family: "SF UI Text"
             anchors.top: parent.top
-            anchors.topMargin: 30
+            anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 24
+            font.pixelSize: 22
         }
 
         Image {
@@ -39,7 +39,7 @@ Item {
             height: parent.width * 0.5
             fillMode: Image.PreserveAspectFit
             anchors.top: mainLabel.bottom
-            anchors.topMargin: 40
+            anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
             source: "qrc:/commons/img-socium.png"
         }
@@ -49,7 +49,7 @@ Item {
             color: "#9b9b9b"
             text: qsTr("Ваш промокод")
             anchors.top: mainText.bottom
-            anchors.topMargin: 20
+            anchors.topMargin: 15
             anchors.left: parent.left
             anchors.leftMargin: 30
             font.weight: Font.Light
@@ -63,7 +63,7 @@ Item {
             height: 65
             text: qsTr("Відправ промо код свому другу і отримай безкоштовно 2 бутля води")
             anchors.top: image.bottom
-            anchors.topMargin: 20
+            anchors.topMargin: 15
             anchors.left: parent.left
             anchors.leftMargin: 36
             anchors.horizontalCenter: parent.horizontalCenter
@@ -71,7 +71,7 @@ Item {
             font.weight: Font.Light
             font.family: "SF UI Text"
             horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 18
+            font.pixelSize: 16
         }
 
         Controls.HWTextField {
@@ -133,12 +133,12 @@ Item {
             id: btnInvite
             x: 21
             width: parent.width * 0.7
-            height: 60
+            height: 50
             labelHighlightColor: "#00AD9A"
             labelColor: "#000000"
             labelText: "ЗАПРОСИТИ"
             anchors.top: lbHowItWorks.bottom
-            anchors.topMargin: 20
+            anchors.topMargin: 15
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
@@ -152,7 +152,7 @@ Item {
             labelColor: "#000000"
             labelText: "МІЙ ПРОМОКОД"
             anchors.top: mainText.bottom
-            anchors.topMargin: 100
+            anchors.topMargin: 95
             anchors.horizontalCenter: parent.horizontalCenter
             showGlyph: true
         }
@@ -235,6 +235,7 @@ Item {
                 target: btnInvite
                 visible: false
             }
+
             PropertyChanges {
                 target: btnBack
                 visible: true
