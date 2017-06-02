@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.0
 import "greeting" as Greeting
 import "registration" as Registration
 import "mainScreen" as Main
+import "orders" as Orders
 
 ApplicationWindow {
     visible: true
@@ -17,7 +18,11 @@ ApplicationWindow {
 //        anchors.fill: parent
 //    }
 
-    Main.MainMenuSlider {
-        anchors.fill:parent
+//    Main.MainMenuSlider {
+//        anchors.fill:parent
+//    }
+
+    Orders.MyOrders{
+        anchors.fill: parent
     }
 }

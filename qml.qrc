@@ -42,6 +42,7 @@
         <file>HWRoundButton.qml</file>
         <file>HWGreenRoundButton.qml</file>
         <file>HWAvatar.qml</file>
+        <file>HWNavigationBar.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>
@@ -49,6 +50,7 @@
         <file>img-socium.png</file>
         <file>img-back-arrow.png</file>
         <file>btn-arrow-up.png</file>
+        <file>btn-arrow-back.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
@@ -86,5 +88,10 @@
         <file>Fonts/SF-UI-Text-Regular.otf</file>
         <file>Fonts/SF-UI-Text-Semibold.otf</file>
         <file>Fonts/SF-UI-Text-SemiboldItalic.otf</file>
+    </qresource>
+    <qresource prefix="/orders">
+        <file>MyOrders.qml</file>
+        <file>MyOrdersForm.ui.qml</file>
+        <file>img-orderdetails-bg.png</file>
     </qresource>
 </RCC>

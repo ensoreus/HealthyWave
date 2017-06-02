@@ -8,9 +8,7 @@ Image {
     width: 100
     height: 100
     anchors.horizontalCenterOffset: -(parent.width * 0.1)
-    anchors.verticalCenterOffset: -19
     visible: true
-    anchors.verticalCenter: parent.verticalCenter
     anchors.horizontalCenter: parent.horizontalCenter
     clip: true
     fillMode: Image.PreserveAspectCrop
