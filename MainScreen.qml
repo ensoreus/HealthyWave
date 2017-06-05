@@ -35,6 +35,10 @@ MainScreenForm {
         freeWaterHelpScreen.y = logoBg.height
     }
 
+    btnCall.onPressedChanged: {
+        imgCall.opacity = (btnCall.pressed) ? 0.7 : 1.0
+    }
+
     Rectangle{
         id: shadowOverlay
         anchors.fill: parent

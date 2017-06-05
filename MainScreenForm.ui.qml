@@ -7,6 +7,8 @@ Item {
     id: item1
     width: 400
     height: 400
+    property alias btnCall: btnCall
+    property alias imgCall: imgCall
     property alias logoBg: logoBg
     property alias mainScreenHintPanel: mainScreenHintPanel
     property alias btnOrder: btnOrder
@@ -41,6 +43,14 @@ Item {
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.top: parent.top
+        }
+
+        TextEdit {
+            id: textEdit
+            width: 80
+            height: 20
+            text: qsTr("Text Edit")
+            font.pixelSize: 12
         }
     }
 
@@ -100,5 +110,45 @@ Item {
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
+    }
+
+    Rectangle {
+        id: callContainer
+        width: 120
+        height: 120
+        color: "#ffffff"
+        anchors.bottom: mainScreenHintPanel.top
+        anchors.bottomMargin: 50
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        Image {
+            id: imgCall
+            x: 155
+            width: 90
+            height: 90
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            fillMode: Image.PreserveAspectFit
+            anchors.horizontalCenter: parent.horizontalCenter
+            source: "btn-call.png"
+        }
+
+        Text {
+            id: lbCall
+            x: 43
+            y: 243
+            color: "#b9b9b9"
+            text: qsTr("Зателефонувати")
+            font.family: "SF UI Text"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            font.pixelSize: 14
+        }
+
+        MouseArea {
+            id: btnCall
+            anchors.fill: parent
+        }
     }
 }

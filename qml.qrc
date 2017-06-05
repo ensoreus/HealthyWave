@@ -61,6 +61,7 @@
         <file>MainScreenHintPanel.qml</file>
         <file>FreeWaterHelpScreen.qml</file>
         <file>FreeWaterHelpScreenForm.ui.qml</file>
+        <file>btn-call.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>Fonts/FontAwesome.otf</file>

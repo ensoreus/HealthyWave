@@ -18,11 +18,11 @@ ApplicationWindow {
 //        anchors.fill: parent
 //    }
 
-//    Main.MainMenuSlider {
-//        anchors.fill:parent
-//    }
-
-    Orders.MyOrders{
-        anchors.fill: parent
+    Main.MainMenuSlider {
+        anchors.fill:parent
     }
+
+//    Orders.MyOrders{
+//        anchors.fill: parent
+//    }
 }
