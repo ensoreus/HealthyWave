@@ -29,6 +29,8 @@
         <file>RegistrationPagePasswdForm.ui.qml</file>
         <file>RegistrationPromoCodeForm.ui.qml</file>
         <file>RegistrationPromoCode.qml</file>
+        <file>RegistrationCongratsWithFreeWater.qml</file>
+        <file>RegistrationCongratsWithFreeWaterForm.ui.qml</file>
     </qresource>
     <qresource prefix="/controls">
         <file>HWPhoneField.qml</file>
@@ -43,6 +45,9 @@
         <file>HWGreenRoundButton.qml</file>
         <file>HWAvatar.qml</file>
         <file>HWNavigationBar.qml</file>
+        <file>img-star-on.png</file>
+        <file>img-star-off.png</file>
+        <file>HWStarsRate.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>
@@ -62,6 +67,7 @@
         <file>FreeWaterHelpScreen.qml</file>
         <file>FreeWaterHelpScreenForm.ui.qml</file>
         <file>btn-call.png</file>
+        <file>RatePanel.qml</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>Fonts/FontAwesome.otf</file>
