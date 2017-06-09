@@ -48,6 +48,7 @@
         <file>img-star-on.png</file>
         <file>img-star-off.png</file>
         <file>HWStarsRate.qml</file>
+        <file>Star.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>

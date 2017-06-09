@@ -54,6 +54,15 @@ Item {
             text: qsTr("Text Edit")
             font.pixelSize: 12
         }
+
+        Controls.HWStarsRate {
+            id: hWStarsRate
+            width: 300
+            height: 40
+            anchors.top: parent.top
+            anchors.topMargin: 60
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
     }
 
     Rectangle {
