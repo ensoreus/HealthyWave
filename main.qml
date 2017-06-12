@@ -2,10 +2,10 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
-import "greeting" as Greeting
-import "registration" as Registration
-import "mainScreen" as Main
-import "orders" as Orders
+import "qrc:/greeting" as Greeting
+import "qrc:/registration" as Registration
+import "qrc:/mainScreen" as Main
+import "qrc:/orders" as Orders
 
 ApplicationWindow {
     visible: true
@@ -13,19 +13,28 @@ ApplicationWindow {
     height: 736
     title: qsTr("Хвиля здоров'я")
 
-//    Greeting.GreetingSlider{
-//        id: greetingSlider
-//        anchors.fill: parent
-//    }
-
     Main.MainMenuSlider {
         anchors.fill:parent
     }
 
-//    Orders.MyOrders{
-//        anchors.fill: parent
-//    }
-//    Registration.RegistrationCongratsWithFreeWater{
-//        anchors.fill:parent
-//    }
+    Greeting.GreetingSlider{
+        id: greeting
+        anchors.fill: parent
+        onClose:{
+            opacity = 0
+        }
+        Behavior on opacity{
+            SequentialAnimation{
+                OpacityAnimator {
+                    id: closingFadeOut
+                    duration: 400
+                }
+
+                PropertyAction {
+                    target: greeting; property: "visible"
+                    value: false
+                }
+            }
+        }
+    }
 }

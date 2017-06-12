@@ -2,6 +2,8 @@ import QtQuick 2.4
 
 GreetingSliderForm {
     id: slider
+    signal close
+
     property int stateIndex: 0
     property string state: "page1"
     property int maxPages: 6
@@ -23,7 +25,7 @@ GreetingSliderForm {
         if(stateIndex < 5) {
             stateIndex++;
         }
-        var pageName = "greeting"+stateIndex+".png";
+        var pageName = "greeting" + stateIndex + ".png";
         console.log("nextPage:" + pageName);
         return pageName
     }
@@ -43,6 +45,10 @@ GreetingSliderForm {
         image1.source = image2.source
         image2.source = nextSlide()
         image2.x = slider.width
+    }
+
+    btnClose.onClicked: {
+        close()
     }
 }
 

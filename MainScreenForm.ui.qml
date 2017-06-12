@@ -54,15 +54,6 @@ Item {
             text: qsTr("Text Edit")
             font.pixelSize: 12
         }
-
-        Controls.HWStarsRate {
-            id: hWStarsRate
-            width: 300
-            height: 40
-            anchors.top: parent.top
-            anchors.topMargin: 60
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
     }
 
     Rectangle {
@@ -175,5 +166,12 @@ Item {
                 source: "btn-call.png"
             }
         }
+    }
+
+    RatePanel {
+        id: ratePanel
+        y: parent.height
+        width: parent.width
+        height: parent.height * 0.2
     }
 }

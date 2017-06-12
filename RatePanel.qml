@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "qrc:/controls"
 
 Item {
     height: 200
@@ -54,6 +55,14 @@ Item {
             anchors.rightMargin: 0
             anchors.left: txAddress.left
             anchors.leftMargin: 0
+        }
+
+        HWStarsRate{
+            width: 350
+            height: 60
+            anchors.top : lbRateDelivery.bottom
+            anchors.topMargin: 15
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 

@@ -39,6 +39,12 @@ MainScreenForm {
         imgCall.opacity = (btnCall.pressed) ? 0.7 : 1.0
     }
 
+    btnOrder.onButtonClick: {
+        state = "ratePanelShow"
+    }
+    btnFreeWater.onButtonClick: {
+
+    }
 
     Rectangle{
         id: shadowOverlay
@@ -69,31 +75,67 @@ MainScreenForm {
                 target: shadowOverlay
                 visible: false
             }
+        },
+        State {
+            name: "ratePanelShow"
+            PropertyChanges {
+                target: ratePanel
+                y: parent.height - parent.height * 0.2
+            }
+        },
+        State {
+            name: "ratePanelHidden"
+            PropertyChanges {
+                target: ratePanel
+                y: parent.height
+            }
         }
     ]
 
     transitions: [
         Transition {
-        from: "slideOut"
-        to: "slideIn"
+            from: "slideOut"
+            to: "slideIn"
 
-        NumberAnimation {
-            target: mainScreen
-            property: "x"
-            duration: 300
-            easing.type: Easing.InOutQuad
-        }
-    },
+            NumberAnimation {
+                target: mainScreen
+                property: "x"
+                duration: 300
+                easing.type: Easing.InOutQuad
+            }
+        },
         Transition {
-        from: "slideIn"
-        to: "slideOut"
+            from: "slideIn"
+            to: "slideOut"
 
-        NumberAnimation {
-            target: mainScreen
-            property: "x"
-            duration: 300
-            easing.type: Easing.InOutQuad
+            NumberAnimation {
+                target: mainScreen
+                property: "x"
+                duration: 300
+                easing.type: Easing.InOutQuad
+            }
+        },
+        Transition {
+            from: "ratePanelShow"
+            to: "ratePanelHide"
+
+            NumberAnimation {
+                target: ratePanel
+                property: "y"
+                duration: 200
+                easing.type: Easing.InOutQuad
+            }
+        },
+        Transition {
+            from: "ratePanelHide"
+            to: "ratePanelShow"
+
+            NumberAnimation {
+                target: ratePanel
+                property: "y"
+                duration: 200
+                easing.type: Easing.InOutQuad
+            }
         }
-    }
     ]
 }
