@@ -8,13 +8,17 @@ Item {
     MainMenu{
         id: mainMenu
         anchors.fill: parent
-        MainScreen{
-            id:mainScreen
+        onMyOrdersItem: {
+            mainScreenContainer.source = "qrc:/orders/MyOrders.qml"
+        }
+
+        Loader{
             anchors.top: mainMenu.top
             anchors.bottom: mainMenu.bottom
-            x: 0
+            x:0
             width: parent.width
-
+            id: mainScreenContainer
+            source: "MainScreen.qml"
         }
     }
 }

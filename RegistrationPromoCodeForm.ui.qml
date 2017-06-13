@@ -2,6 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 2.1
 
 import "qrc:/controls" as Controls
+
 Item {
     width: 400
     height: 400
@@ -37,15 +38,17 @@ Item {
         Button {
             id: btnNext
             x: 340
+            width: 41
+            height: 41
             anchors.top: promoCodeField.bottom
             anchors.topMargin: 50
             anchors.right: promoCodeField.right
             anchors.rightMargin: 0
             background: Image {
-                    id: btnGlyph
-                    source: "btn-next.png"
-                    anchors.fill: parent
-                }
+                id: btnGlyph
+                source: "btn-next.png"
+                anchors.fill: parent
+            }
         }
     }
 }

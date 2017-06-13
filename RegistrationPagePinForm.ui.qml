@@ -26,27 +26,28 @@ Item {
         Button {
             id: btnNext
             x: 253
-            width: 44
-            height: 44
+            width: 41
+            height: 41
             text: ""
             anchors.right: parent.right
             anchors.rightMargin: 50
             anchors.top: pinField.bottom
             anchors.topMargin: 43
             background: Image {
-                    id: btnGlyph
-                    source: "btn-next.png"
-                    anchors.fill: parent
-                }
+                id: btnGlyph
+                source: "btn-next.png"
+                anchors.fill: parent
+            }
         }
 
         Text {
             id: text1
             y: 60
-            width: parent.width * 0.7
+            width: 276
             height: 15
             color: "#808080"
             text: qsTr("Введите код подтверждения")
+            horizontalAlignment: Text.AlignHCenter
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 15
         }

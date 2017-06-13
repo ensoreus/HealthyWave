@@ -17,6 +17,25 @@ ApplicationWindow {
         anchors.fill:parent
     }
 
+    Registration.Registration{
+        anchors.fill: parent
+        onRegistrationDone: {
+            opacity = 0
+        }
+        Behavior on opacity{
+            SequentialAnimation{
+                OpacityAnimator {
+                    duration: 400
+                }
+
+                PropertyAction {
+                    target: greeting; property: "visible"
+                    value: false
+                }
+            }
+        }
+    }
+
     Greeting.GreetingSlider{
         id: greeting
         anchors.fill: parent

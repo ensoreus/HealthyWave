@@ -9,6 +9,7 @@ Item {
     id: item1
     width: 400
     height: 400
+    property alias ratePanel: ratePanel
     property alias btnCall: btnCall
     property alias imgCall: imgCall
     property alias logoBg: logoBg
@@ -120,7 +121,7 @@ Item {
         height: parent.width * 0.30
         color: "#ffffff"
         anchors.bottom: mainScreenHintPanel.top
-        anchors.bottomMargin: parent.width * 0.1
+        anchors.bottomMargin: parent.width * 0.15
         anchors.horizontalCenter: parent.horizontalCenter
 
         Text {

@@ -38,15 +38,17 @@ Item {
         Button {
             id: btnNext
             x: 60
+            width: 41
+            height: 41
             anchors.top: nameField.bottom
             anchors.topMargin: 50
             anchors.right: nameField.right
             anchors.rightMargin: 0
             background: Image {
-                    id: btnGlyph
-                    source: "btn-next.png"
-                    anchors.fill: parent
-                }
+                id: btnGlyph
+                source: "btn-next.png"
+                anchors.fill: parent
+            }
         }
     }
 }

@@ -180,7 +180,7 @@ Item {
                     item1.state = "default"
                 }
                 onNextPage: {
-                    onRegistrationDone()
+                    item1.registrationDone()
                 }
             }
         }
