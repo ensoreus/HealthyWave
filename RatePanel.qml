@@ -13,7 +13,7 @@ Item {
             id: lbDeliveryArrived
             x: 252
             width: parent.width * 0.8
-            height: parent.height * 0.15
+            height: parent.height * 0.12
             color: "#ffffff"
             text: qsTr("ВАШЕ ЗАМОВЛЕННЯ ДОСТАВЛЕНО")
             font.bold: true
@@ -29,10 +29,11 @@ Item {
 
         Text {
             id: txAddress
+            height: parent.height * 0.08
             color: "#d4d4d4"
             text: qsTr("вул. Хохлових 46 кв. 6")
+            anchors.topMargin: parent.height * 0.03
             anchors.top: lbDeliveryArrived.bottom
-            anchors.topMargin: 15
             anchors.right: lbDeliveryArrived.right
             anchors.rightMargin: 0
             anchors.left: lbDeliveryArrived.left
@@ -44,9 +45,10 @@ Item {
 
         Text {
             id: lbRateDelivery
+            height: parent.height * 0.08
             color: "#ffffff"
             text: qsTr("ОЦІНИТИ ДОСТАВКУ:")
-            anchors.topMargin: 15
+            anchors.topMargin: parent.height * 0.08
             font.pointSize: 15
             font.family: "SF UI Text"
             verticalAlignment: Text.AlignVCenter
@@ -60,9 +62,9 @@ Item {
 
         HWStarsRate{
             width: 300
-            height: 40
+            height: parent.height * 0.3
+            anchors.topMargin: parent.height * 0.05
             anchors.top : lbRateDelivery.bottom
-            anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }

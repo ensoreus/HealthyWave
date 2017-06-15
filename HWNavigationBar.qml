@@ -64,8 +64,8 @@ Rectangle {
         }
         Image {
             id: menuImage
-            anchors.bottomMargin: 15
-            anchors.topMargin: 15
+            anchors.bottomMargin: parent.height * 0.3
+            anchors.topMargin: parent.height * 0.3
             anchors.fill: parent
             fillMode: Image.PreserveAspectFit
             source: "qrc:/commons/btn-menu.png"

@@ -24,10 +24,10 @@ Item {
             id: mainLabel
             x: 187
             text: qsTr("Отримуй воду безкоштовно")
+            anchors.topMargin: parent.height * 0.05
             font.weight: Font.Light
             font.family: "SF UI Text"
             anchors.top: parent.top
-            anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 22
         }

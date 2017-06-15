@@ -16,7 +16,14 @@ Item {
         onMyOrdersItem: {
             mainScreenLoader.source = "qrc:/orders/MyOrders.qml"
             mainScreenContainer.state = "slideIn"
+            navigationBar.showBack = true
+            navigationBar.showMenu = false
+            navigationBar.showLogo = false
+            navigationBar.label = "Замовлення"
+            //navigationBar.backClick = Qt.binding(function(){console.log("back")})
         }
+
+
 
         Rectangle {
             id: mainScreenContainer
@@ -25,6 +32,7 @@ Item {
             x: 0
             width: parent.width
             color: "white"
+
 
             HWNavigationBar{
                 id: navigationBar
@@ -43,6 +51,12 @@ Item {
                     }else{
                         mainScreenContainer.state = "slideOut"
                     }
+                }
+                onBackClick: {
+                    mainScreenLoader.source = "qrc:/mainScreen/MainScreen.qml"
+                    navigationBar.showBack = false
+                    navigationBar.showMenu = true
+                    navigationBar.showLogo = true
                 }
             }
 

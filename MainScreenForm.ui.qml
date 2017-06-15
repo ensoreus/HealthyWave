@@ -1,6 +1,5 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.1
-import QtGraphicalEffects 1.0
 
 import "qrc:/controls" as Controls
 import "qrc:/registration"
@@ -12,12 +11,10 @@ Item {
     property alias ratePanel: ratePanel
     property alias btnCall: btnCall
     property alias imgCall: imgCall
-   // property alias logoBg: logoBg
     property alias mainScreenHintPanel: mainScreenHintPanel
     property alias btnOrder: btnOrder
     property alias btnFreeWater: btnFreeWater
     property alias mainScreenContent: mainScreenContent
-    //property alias menuButton: menuButton
 
     Rectangle {
         id: mainScreenContent
@@ -27,7 +24,7 @@ Item {
         Controls.HWRoundButton {
             id: btnOrder
             height: 60
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.04
             anchors.rightMargin: parent.width * 0.1
             anchors.leftMargin: parent.width * 0.1
             labelText: "ЗАМОВИТИ"
@@ -39,7 +36,7 @@ Item {
         Controls.HWGreenRoundButton {
             id: btnFreeWater
             height: 60
-            anchors.topMargin: parent.height * 0.3
+            anchors.topMargin: parent.height * 0.2
             anchors.rightMargin: parent.width * 0.1
             anchors.leftMargin: parent.width * 0.1
             labelText: "БЕЗКОШТОВНА ВОДА"
@@ -65,7 +62,7 @@ Item {
         height: parent.width * 0.30
         color: "#ffffff"
         anchors.bottom: mainScreenHintPanel.top
-        anchors.bottomMargin: parent.width * 0.15
+        anchors.bottomMargin: parent.height * 0.1
         anchors.horizontalCenter: parent.horizontalCenter
 
         Text {
@@ -85,31 +82,17 @@ Item {
             id: btnCall
             anchors.fill: parent
         }
-
-        DropShadow {
-            id: dropShadow
-            x: 15
+        Image {
             width: parent.width * 0.8
             height: parent.width * 0.8
-            color: "#b9b9b9"
-            radius: 8.2
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 4
-            samples: 14
-            spread: 0.1
-            source: imgCall
-
-            Image {
-                id: imgCall
-                anchors.rightMargin: 0
-                anchors.leftMargin: 0
-                anchors.bottomMargin: 0
-                anchors.topMargin: 0
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectFit
-                source: "btn-call.png"
-            }
+            anchors.bottomMargin: parent.height * 0.2
+            anchors.topMargin: parent.height * 0.2
+            id: imgCall
+            anchors.rightMargin: 0
+            anchors.leftMargin: 0
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
+            source: "btn-call.png"
         }
     }
 

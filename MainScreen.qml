@@ -21,7 +21,7 @@ MainScreenForm {
     }
 
     mainScreenHintPanel.onShowHideHintPanel: {
-        freeWaterHelpScreen.y = parent.height * 0.08
+        freeWaterHelpScreen.y = 0
     }
 
     btnCall.onPressedChanged: {
@@ -35,8 +35,6 @@ MainScreenForm {
     btnFreeWater.onButtonClick: {
 
     }
-
-
 
     states:[
         State {
