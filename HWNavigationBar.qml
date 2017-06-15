@@ -3,8 +3,9 @@ import QtQuick 2.0
 
 Rectangle {
     property alias showLogo : logo.visible
+    property alias showBack: backButton.visible
     property alias label: label.text
-    property alias showMenu: menuImage.visible
+    property alias showMenu: menuButton.visible
 
     signal menuClick
     signal backClick
@@ -48,32 +49,6 @@ Rectangle {
         visible: !logo.visible
     }
 
-    Image {
-        id: menuImage
-        width: 30
-        fillMode: Image.PreserveAspectFit
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 18
-        anchors.top: parent.top
-        anchors.topMargin: 18
-        anchors.left: parent.left
-        anchors.leftMargin: 10
-        source: "qrc:/commons/btn-menu.png"
-    }
-
-    Image {
-        id: backImage
-        width: 30
-        fillMode: Image.PreserveAspectFit
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 15
-        anchors.top: parent.top
-        anchors.topMargin: 15
-        anchors.left: parent.left
-        anchors.leftMargin: 10
-        source: "qrc:/commons/btn-arrow-back.png"
-    }
-
     MouseArea {
         id: menuButton
         width: 44
@@ -83,9 +58,17 @@ Rectangle {
         anchors.bottomMargin: 8
         anchors.left: parent.left
         anchors.leftMargin: 8
-        enabled: showMenu
+        enabled: visible
         onClicked: {
             menuClick()
+        }
+        Image {
+            id: menuImage
+            anchors.bottomMargin: 15
+            anchors.topMargin: 15
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/commons/btn-menu.png"
         }
     }
 
@@ -98,9 +81,21 @@ Rectangle {
         anchors.bottomMargin: 8
         anchors.left: parent.left
         anchors.leftMargin: 8
-        enabled: !showMenu
+        enabled: visible
         onClicked: {
             backClick()
+        }
+        Image {
+            id: backImage
+            width: 30
+            fillMode: Image.PreserveAspectFit
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 8
+            anchors.top: parent.top
+            anchors.topMargin: 8
+            anchors.left: parent.left
+            anchors.leftMargin: 8
+            source: "qrc:/commons/btn-arrow-back.png"
         }
     }
 }

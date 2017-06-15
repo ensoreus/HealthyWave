@@ -3,17 +3,6 @@ import QtQuick 2.4
 MainScreenForm {
     id: mainScreen
     signal menuShowHide
-    Component.onCompleted: {
-        state = "slideIn"
-    }
-    menuButton.onClicked: {
-        menuShowHide()
-        if (state == "slideOut"){
-            state = "slideIn"
-        }else{
-            state = "slideOut"
-        }
-    }
 
     FreeWaterHelpScreen{
         anchors.right: parent.right
@@ -32,7 +21,7 @@ MainScreenForm {
     }
 
     mainScreenHintPanel.onShowHideHintPanel: {
-        freeWaterHelpScreen.y = logoBg.height
+        freeWaterHelpScreen.y = parent.height * 0.08
     }
 
     btnCall.onPressedChanged: {
@@ -42,40 +31,14 @@ MainScreenForm {
     btnOrder.onButtonClick: {
         state = "ratePanelShow"
     }
+
     btnFreeWater.onButtonClick: {
 
     }
 
-    Rectangle{
-        id: shadowOverlay
-        anchors.fill: parent
-        color: "#b36f6f6f"
-        visible: false
-    }
+
 
     states:[
-        State {
-            name: "slideOut"
-            PropertyChanges {
-                target: mainScreen
-                x: parent.width * 0.88
-            }
-            PropertyChanges {
-                target: shadowOverlay
-                visible: true
-            }
-        },
-        State {
-            name: "slideIn"
-            PropertyChanges {
-                target: mainScreen
-                x: 0
-            }
-            PropertyChanges {
-                target: shadowOverlay
-                visible: false
-            }
-        },
         State {
             name: "ratePanelShow"
             PropertyChanges {
@@ -93,28 +56,7 @@ MainScreenForm {
     ]
 
     transitions: [
-        Transition {
-            from: "slideOut"
-            to: "slideIn"
 
-            NumberAnimation {
-                target: mainScreen
-                property: "x"
-                duration: 300
-                easing.type: Easing.InOutQuad
-            }
-        },
-        Transition {
-            from: "slideIn"
-            to: "slideOut"
-
-            NumberAnimation {
-                target: mainScreen
-                property: "x"
-                duration: 300
-                easing.type: Easing.InOutQuad
-            }
-        },
         Transition {
             from: "ratePanelShow"
             to: "ratePanelHide"

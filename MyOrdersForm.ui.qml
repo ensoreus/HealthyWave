@@ -17,75 +17,20 @@ Item {
     Rectangle {
         id: content
         color: "#ffffff"
-        anchors.top: hWNavigationBar.bottom
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.topMargin: 0
-
-        Rectangle {
-            id: caption
-            height: 32
-            color: "#ffffff"
-            anchors.top: hWAvatar.bottom
-            anchors.topMargin: 20
-            anchors.right: parent.right
-            anchors.rightMargin: 8
-            anchors.left: parent.left
-            anchors.leftMargin: 8
-
-            Rectangle {
-                id: leftLine
-                y: 8
-                height: 1
-                color: "#dfdfdf"
-                border.color: "#dfdfdf"
-                anchors.right: detailsTitle.left
-                anchors.rightMargin: 10
-                anchors.left: parent.left
-                anchors.leftMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            Text {
-                id: detailsTitle
-                x: 135
-                y: 17
-                width: 129
-                height: 15
-                text: qsTr("Деталі замовлення")
-                anchors.verticalCenter: parent.verticalCenter
-                font.family: "SF UI Text"
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 14
-            }
-
-            Rectangle {
-                id: rightLine
-                x: 4
-                y: 2
-                height: 1
-                color: "#dfdfdf"
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
-                border.color: "#dfdfdf"
-                anchors.leftMargin: 10
-                anchors.left: detailsTitle.right
-                anchors.rightMargin: 8
-            }
-        }
+        anchors.fill: parent
 
         HWAvatar {
             id: hWAvatar
             width: 80
             height: 80
             anchors.top: parent.top
-            anchors.topMargin: 30
+            anchors.topMargin: parent.height * 0.05
             anchors.horizontalCenterOffset: 0
         }
 
         BorderImage {
             id: borderImage
+            anchors.topMargin: parent.height * 0.05
             border.bottom: 0
             border.top: 10
             border.right: 10
@@ -95,9 +40,8 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 8
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 50
-            anchors.top: caption.bottom
-            anchors.topMargin: 0
+            anchors.bottomMargin: parent.height * 0.1
+            anchors.top: hWAvatar.bottom
             source: "img-orderdetails-bg.png"
 
             Text {
@@ -105,15 +49,15 @@ Item {
                 y: 26
                 height: 16
                 text: qsTr("Вода:")
-                font.pointSize: 14
+                font.pointSize: 13
                 anchors.left: parent.left
                 anchors.leftMargin: 45
                 anchors.right: parent.horizontalCenter
-                anchors.rightMargin: 5
+                anchors.rightMargin: -8
                 font.weight: Font.Thin
                 font.family: "SF UI Text"
                 anchors.top: borderImage.top
-                anchors.topMargin: 55
+                anchors.topMargin: parent.height * 0.2
             }
 
             Text {
@@ -124,7 +68,7 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 34
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 0
+                anchors.leftMargin: 12
                 font.bold: true
                 font.family: ".SF UI Text"
                 font.pixelSize: 14
@@ -135,15 +79,15 @@ Item {
                 id: lbEmptyBottles
                 height: 15
                 text: qsTr("Порожніх бутлів:")
+                anchors.topMargin: 5
                 anchors.right: parent.horizontalCenter
-                anchors.rightMargin: 6
+                anchors.rightMargin: -8
                 anchors.left: lbWater.left
                 anchors.leftMargin: 0
                 anchors.top: lbWater.bottom
-                anchors.topMargin: 7
                 font.weight: Font.Thin
                 font.family: "SF UI Text"
-                font.pixelSize: 14
+                font.pixelSize: 13
             }
 
             Text {
@@ -154,9 +98,9 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 34
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 0
-                anchors.top: tfWater.bottom
-                anchors.topMargin: 7
+                anchors.leftMargin: 12
+                anchors.top: lbEmptyBottles.top
+                anchors.topMargin: 0
                 font.bold: true
                 font.pixelSize: 14
             }
@@ -166,14 +110,14 @@ Item {
                 height: 15
                 text: qsTr("Застава за бутлі:")
                 anchors.right: parent.horizontalCenter
-                anchors.rightMargin: 6
+                anchors.rightMargin: -8
                 anchors.top: lbEmptyBottles.bottom
-                anchors.topMargin: 7
+                anchors.topMargin: parent.height * 0.02
                 anchors.left: lbEmptyBottles.left
                 anchors.leftMargin: 0
                 font.weight: Font.Thin
                 font.family: "SF UI Text"
-                font.pixelSize: 14
+                font.pixelSize: 13
             }
 
             Text {
@@ -184,9 +128,9 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 34
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 0
-                anchors.top: tfEmptyBottles.bottom
-                anchors.topMargin: 7
+                anchors.leftMargin: 12
+                anchors.top: lbRentedButtles.top
+                anchors.topMargin: 0
                 font.pixelSize: 14
             }
 
@@ -194,15 +138,16 @@ Item {
                 id: lbSum
                 height: 15
                 text: qsTr("Сума замовлення:")
+                font.family: "SF UI Text"
                 font.weight: Font.Thin
                 wrapMode: Text.WrapAnywhere
                 anchors.right: parent.horizontalCenter
-                anchors.rightMargin: 6
+                anchors.rightMargin: -8
                 anchors.top: lbRentedButtles.bottom
-                anchors.topMargin: 25
+                anchors.topMargin: parent.height * 0.02
                 anchors.left: lbEmptyBottles.left
                 anchors.leftMargin: 0
-                font.pixelSize: 14
+                font.pixelSize: 13
             }
 
             Text {
@@ -212,7 +157,7 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 34
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 0
+                anchors.leftMargin: 12
                 anchors.top: lbSum.top
                 anchors.topMargin: 0
                 font.bold: true
@@ -224,7 +169,7 @@ Item {
                 height: 1
                 color: "#ababab"
                 anchors.top: lbSum.bottom
-                anchors.topMargin: 25
+                anchors.topMargin: parent.height * 0.05
                 anchors.right: tfRentedBottles.right
                 anchors.rightMargin: 0
                 anchors.left: lbRentedButtles.left
@@ -237,12 +182,12 @@ Item {
                 text: qsTr("Дата замовлення:")
                 font.bold: true
                 anchors.top: bevel.bottom
-                anchors.topMargin: 23
-                font.weight: Font.Normal
+                anchors.topMargin: parent.height * 0.05
+                font.weight: Font.DemiBold
                 font.family: "SF UI Text"
                 anchors.left: lbSum.left
                 anchors.leftMargin: 0
-                font.pixelSize: 14
+                font.pixelSize: 13
             }
 
             Text {
@@ -265,12 +210,12 @@ Item {
                 width: 55
                 text: qsTr("Адреса:")
                 anchors.top: lbDate.bottom
-                anchors.topMargin: 16
+                anchors.topMargin: parent.height * 0.02
                 anchors.left: lbDate.left
                 anchors.leftMargin: 0
                 font.bold: true
-                font.weight: Font.Normal
-                font.pixelSize: 14
+                font.weight: Font.DemiBold
+                font.pixelSize: 13
             }
 
             Text {
@@ -291,12 +236,14 @@ Item {
                 id: lbDeliveryTime
                 width: 90
                 text: qsTr("Час достави:")
+                font.weight: Font.DemiBold
+                font.family: "SF UI Text"
                 anchors.top: lbAddress.bottom
-                anchors.topMargin: 16
+                anchors.topMargin: parent.height * 0.02
                 anchors.left: lbAddress.left
                 anchors.leftMargin: 0
                 font.bold: true
-                font.pixelSize: 14
+                font.pixelSize: 13
             }
 
             Text {
@@ -317,26 +264,28 @@ Item {
                 id: lbComments
                 width: 83
                 text: qsTr("Коментарії:")
+                font.weight: Font.DemiBold
                 anchors.top: lbDeliveryTime.bottom
-                anchors.topMargin: 16
+                anchors.topMargin: parent.height * 0.02
                 font.family: "SF UI Text"
                 font.bold: true
                 anchors.left: lbDeliveryTime.left
                 anchors.leftMargin: 0
-                font.pixelSize: 14
+                font.pixelSize: 13
             }
 
             Text {
                 id: lbPaymentType
                 width: 105
                 text: qsTr("Спосіб оплати: ")
+                font.weight: Font.DemiBold
                 anchors.top: lbComments.bottom
-                anchors.topMargin: 16
-                font.family: ".SF UI Text"
+                anchors.topMargin: parent.height * 0.02
+                font.family: "SF UI Text"
                 font.bold: true
                 anchors.left: lbComments.left
                 anchors.leftMargin: 0
-                font.pixelSize: 14
+                font.pixelSize: 13
             }
 
             Text {
@@ -364,14 +313,5 @@ Item {
                 font.pixelSize: 14
             }
         }
-    }
-
-    HWNavigationBar {
-        id: hWNavigationBar
-        x: 391
-        y: 61
-        label: "Мої замовлення"
-        showLogo: false
-        showMenu: false
     }
 }

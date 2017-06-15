@@ -12,12 +12,12 @@ Item {
     property alias ratePanel: ratePanel
     property alias btnCall: btnCall
     property alias imgCall: imgCall
-    property alias logoBg: logoBg
+   // property alias logoBg: logoBg
     property alias mainScreenHintPanel: mainScreenHintPanel
     property alias btnOrder: btnOrder
     property alias btnFreeWater: btnFreeWater
     property alias mainScreenContent: mainScreenContent
-    property alias menuButton: menuButton
+    //property alias menuButton: menuButton
 
     Rectangle {
         id: mainScreenContent
@@ -46,62 +46,6 @@ Item {
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.top: parent.top
-        }
-
-        TextEdit {
-            id: textEdit
-            width: 80
-            height: 20
-            text: qsTr("Text Edit")
-            font.pixelSize: 12
-        }
-    }
-
-    Rectangle {
-        id: logoBg
-        height: 60
-        color: "#2bb0a4"
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.top: parent.top
-        anchors.topMargin: 0
-
-        Image {
-            id: logo
-            x: 150
-            y: 8
-            width: 100
-            height: 44
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
-            fillMode: Image.PreserveAspectFit
-            source: "qrc:/registration/logo-hw.png"
-        }
-
-        Image {
-            id: image
-            width: 30
-            fillMode: Image.PreserveAspectFit
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 18
-            anchors.top: parent.top
-            anchors.topMargin: 18
-            anchors.left: parent.left
-            anchors.leftMargin: 10
-            source: "qrc:/commons/btn-menu.png"
-        }
-
-        MouseArea {
-            id: menuButton
-            width: 44
-            anchors.top: parent.top
-            anchors.topMargin: 8
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 8
-            anchors.left: parent.left
-            anchors.leftMargin: 8
         }
     }
 
