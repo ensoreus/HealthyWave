@@ -2,7 +2,9 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.1
 import QtQuick.Window 2.2
+
 import "qrc:/commons"
+import SecurityCore 1.0
 
 Item {
     id: item1
@@ -14,6 +16,10 @@ Item {
     signal registrationDone
     width: 414
     height: 736
+
+    Component.onCompleted: {
+        console.log(SecurityCore.generateSecKey())
+    }
 
     Rectangle {
         id: bg
@@ -69,8 +75,8 @@ Item {
                     currentPageIndex = 1
                     pinEditPage.x = 0
                     stackLayout.activePage = pinEditPage
-                    //
                 }
+
                 Behavior on x {
                     NumberAnimation {
                         duration: 200
