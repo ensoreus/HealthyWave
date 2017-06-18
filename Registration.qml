@@ -19,7 +19,7 @@ Item {
 
     Component.onCompleted: {
         console.log(SecurityCore.generateSecKey())
-        console.log(SecurityCore.storeSecKey() ? "stored" : "failed to store")
+        console.log(SecurityCore.secKey)
     }
 
     Rectangle {

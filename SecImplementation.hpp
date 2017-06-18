@@ -6,7 +6,7 @@ class SecImplementation
 {
 protected:
   SecImplementation();
-  QString generateSecKey() const;
+  QString generateSecKey();
   bool storeSecKey();
   bool retriveSecKey();
   QString secKey() const;

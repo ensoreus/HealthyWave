@@ -6,7 +6,7 @@ SecurityCore::SecurityCore(QObject *parent) : QObject(parent)
   _impl = new SecImplementation();
 }
 
-QString SecurityCore::generateSecKey() const{
+QString SecurityCore::generateSecKey(){
   return _impl->generateSecKey();
 }
 

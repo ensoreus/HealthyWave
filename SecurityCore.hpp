@@ -12,9 +12,9 @@ class SecurityCore : public QObject
 
 public:
   explicit SecurityCore(QObject *parent = 0);
-  Q_INVOKABLE QString generateSecKey() const;
+  Q_INVOKABLE QString generateSecKey();
   Q_INVOKABLE bool storeSecKey();
-  Q_INVOKABLE QString secKey() const;
+  QString secKey() const;
   Q_INVOKABLE bool retriveSecKey();
 
 signals:

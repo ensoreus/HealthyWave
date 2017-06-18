@@ -1,25 +1,26 @@
 #include "SecImplementation.hpp"
 #include <security/Security.h>
-#include <stdlib.h>
-#include <CoreFoundation/CoreFoundation.h>
+#include <random>
+#include <iostream>
 
 SecImplementation::SecImplementation()
 {
   qDebug()<<"ios security";
 }
 
-QString SecImplementation::generateSecKey() const{
+QString SecImplementation::generateSecKey(){
   uint8_t *aesKey = (uint8_t *)calloc(128, sizeof(uint8_t));
   int res = SecRandomCopyBytes(kSecRandomDefault, 128, aesKey);
   if (res == 0){
       QByteArray ba = QByteArray::fromRawData((const char*)aesKey, 128);
+      _secKey = ba.toHex();
       return ba.toHex();
     }
   return "";
 }
 
 bool SecImplementation::storeSecKey(){
-  CFMutableDictionaryRef attributes = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+ /* CFMutableDictionaryRef attributes = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
   CFMutableDataRef keyData = CFDataCreateMutable(kCFAllocatorDefault, 128);
   CFDataAppendBytes(keyData, (UInt8*)_secKey.toStdString().c_str(), 128);
   int16_t sint = 128;
@@ -52,12 +53,20 @@ bool SecImplementation::storeSecKey(){
   auto res = SecItemAdd(attributes, nil);
   CFRelease(attributes);
   CFRelease(keyData);
-  CFRelease(len);
-  return  res == errSecSuccess;
+  CFRelease(len);*/
+  return  true;//res == errSecSuccess;
 }
 
 QString SecImplementation::secKey() const{
-  return _secKey;
+  std::random_device rd;  //Will be used to obtain a seed for the random number engine
+  std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+  std::uniform_int_distribution<> dis(0, 15);
+  QByteArray ba;
+  for (int n = 0; n < 128; n++){
+      char digit = dis(gen);
+      ba.append(digit);
+    }
+  return  ba.toHex();
 }
 
 bool SecImplementation::retriveSecKey(){
