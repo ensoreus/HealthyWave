@@ -8,8 +8,10 @@ protected:
   SecImplementation();
   QString generateSecKey() const;
   bool storeSecKey();
+  bool retriveSecKey();
   QString secKey() const;
   friend class SecurityCore;
+  QString _secKey;
 };
 
 #endif // SECIMPL_IOS_HPP

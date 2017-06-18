@@ -15,6 +15,7 @@ public:
   Q_INVOKABLE QString generateSecKey() const;
   Q_INVOKABLE bool storeSecKey();
   Q_INVOKABLE QString secKey() const;
+  Q_INVOKABLE bool retriveSecKey();
 
 signals:
   void secKeyChanged();

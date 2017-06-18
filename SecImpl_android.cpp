@@ -16,3 +16,7 @@ bool SecImplementation::storeSecKey(){
 QString SecImplementation::secKey() const{
 
 }
+
+bool SecImplementation::retriveSeckey(){
+
+}
