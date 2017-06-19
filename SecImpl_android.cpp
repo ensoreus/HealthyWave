@@ -6,7 +6,7 @@ SecImplementation::SecImplementation()
   qDebug()<<"android";
 }
 
-QString SecImplementation::generateSecKey() const{
+QString SecImplementation::generateSecKey(){
   std::random_device rd;  //Will be used to obtain a seed for the random number engine
   std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
   std::uniform_int_distribution<> dis(0, 15);
@@ -15,18 +15,18 @@ QString SecImplementation::generateSecKey() const{
       char digit = dis(gen);
       ba.append(digit);
     }
-  std::cout << ba.toHex() << '\n';
+  //qDebug() << ba.toHex() << '\n';
   return ba.toHex();
 }
 
 bool SecImplementation::storeSecKey(){
-
+  return true;
 }
 
 QString SecImplementation::secKey() const{
   return _secKey;
 }
 
-bool SecImplementation::retriveSeckey(){
-
+bool SecImplementation::retriveSecKey(){
+  return true;
 }

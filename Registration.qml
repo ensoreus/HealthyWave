@@ -138,27 +138,6 @@ Item {
                 }
             }
 
-//            RegistrationPagePasswd{
-//                id: passwdEditPage
-//                anchors.top: parent.top
-//                anchors.bottom: parent.bottom
-//                x: 414
-//                width: parent.width
-//                onStartEditData: {
-//                    item1.state = "interactive"
-//                }
-//                onNextPage: {
-//                    currentPageIndex = 4
-//                    nameEditPage.x = 0
-//                }
-//                Behavior on x {
-//                    NumberAnimation {
-//                        duration: 200
-//                        easing.type: Easing.InOutQuad
-//                    }
-//                }
-//            }
-
             RegistrationPageName{
                 id: nameEditPage
                 anchors.top: parent.top
