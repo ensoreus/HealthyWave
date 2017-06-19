@@ -4,6 +4,7 @@ import QtQuick.Controls 2.1
 import QtQuick.Window 2.2
 
 import "qrc:/commons"
+import "qrc:/"
 import SecurityCore 1.0
 
 Item {
@@ -18,8 +19,13 @@ Item {
     height: 736
 
     Component.onCompleted: {
-        console.log(SecurityCore.generateSecKey())
-        console.log(SecurityCore.secKey)
+        SecurityCore.generateSecKey()
+        storage.storeSecKey(SecurityCore.secKey)
+        console.log(storage.getSecKey())
+    }
+
+    Storage{
+        id:storage
     }
 
     Rectangle {
@@ -122,27 +128,6 @@ Item {
                 }
                 onNextPage: {
                     currentPageIndex = 3
-                    passwdEditPage.x = 0
-                }
-                Behavior on x {
-                    NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
-
-            RegistrationPagePasswd{
-                id: passwdEditPage
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                x: 414
-                width: parent.width
-                onStartEditData: {
-                    item1.state = "interactive"
-                }
-                onNextPage: {
-                    currentPageIndex = 4
                     nameEditPage.x = 0
                 }
                 Behavior on x {
@@ -152,6 +137,27 @@ Item {
                     }
                 }
             }
+
+//            RegistrationPagePasswd{
+//                id: passwdEditPage
+//                anchors.top: parent.top
+//                anchors.bottom: parent.bottom
+//                x: 414
+//                width: parent.width
+//                onStartEditData: {
+//                    item1.state = "interactive"
+//                }
+//                onNextPage: {
+//                    currentPageIndex = 4
+//                    nameEditPage.x = 0
+//                }
+//                Behavior on x {
+//                    NumberAnimation {
+//                        duration: 200
+//                        easing.type: Easing.InOutQuad
+//                    }
+//                }
+//            }
 
             RegistrationPageName{
                 id: nameEditPage

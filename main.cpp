@@ -18,6 +18,7 @@ static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJS
 
     Q_UNUSED(scriptEngine)
     auto score = new SecurityCore();
+    qDebug()<<engine->offlineStoragePath();
     engine->setObjectOwnership(score, QQmlEngine::CppOwnership);
     return score;
 }
@@ -25,7 +26,7 @@ static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJS
 int main(int argc, char *argv[])
 {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-  qmlRegisterSingletonType<NetworkCore>("NetCore", 1, 0, "NetCore", netcore_qjsvalue_singletontype_provider);
+  //qmlRegisterSingletonType<NetworkCore>("NetCore", 1, 0, "NetCore", netcore_qjsvalue_singletontype_provider);
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
   QGuiApplication app(argc, argv);
 

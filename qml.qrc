@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Api.js</file>
-        <file>Storage.js</file>
+        <file>Storage.qml</file>
     </qresource>
     <qresource prefix="/greeting">
         <file>GreetingSliderForm.ui.qml</file>
