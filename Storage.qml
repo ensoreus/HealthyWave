@@ -2,23 +2,14 @@ import QtQuick 2.0
 import QtQuick.LocalStorage 2.0
 
 Item {
-    //property var db
     id:storage
-    Component.onCompleted: {
-        //db = openStorage()
-    }
-
-    function openStorage(){
-        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
-        return db;
-    }
 
     function getSecKey(){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         var key = ""
         db.transaction( function(tx) {
                     var result = tx.executeSql('select key from secKey');
-                    key = result.rows.item(result.rows.length-1).key
+                    key = result.rows.item(result.rows.length - 1).key
                     console.log(key)
                     }
                 );
