@@ -10,7 +10,6 @@ Item {
         db.transaction( function(tx) {
                     var result = tx.executeSql('select key from secKey');
                     key = result.rows.item(result.rows.length - 1).key
-                    console.log(key)
                     }
                 );
         return key;

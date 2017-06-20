@@ -30,6 +30,7 @@ Item {
 
     Rectangle {
         id: bg
+        width: parent.width
         color: "white"
         anchors.fill: parent
 
@@ -61,6 +62,7 @@ Item {
 
         Rectangle {
             property var activePage : phoneEditPage
+            width: parent.width
             id: stackLayout
             anchors.top: logoBg.bottom
             anchors.topMargin: 0
@@ -96,7 +98,7 @@ Item {
                 id:pinEditPage
                 anchors.top:parent.top
                 anchors.bottom: parent.bottom
-                x: 414
+                x: parent.width
                 width: parent.width
 
                 onStartEditData: {
@@ -120,7 +122,7 @@ Item {
                 id: emailEditPage
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                x: 414
+                x: parent.width
                 width: parent.width
 
                 onStartEditData: {
@@ -142,7 +144,7 @@ Item {
                 id: nameEditPage
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                x: 414
+                x: parent.width
                 width: parent.width
                 onStartEditData: {
                     item1.state = "interactive"
@@ -163,7 +165,7 @@ Item {
                 id: promoCodeEditPage
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                x: 414
+                x: parent.width
                 width: parent.width
                 onStartEditData: {
                     item1.state = "interactive"
