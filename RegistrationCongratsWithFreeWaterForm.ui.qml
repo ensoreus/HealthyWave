@@ -11,39 +11,14 @@ Item {
         color: "#ffffff"
         anchors.fill: parent
 
-        Rectangle {
-            id: header
-            color: "#1eb2a4"
-            anchors.bottom: parent.verticalCenter
-            anchors.bottomMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            anchors.left: parent.left
-            anchors.leftMargin: 0
-            anchors.top: parent.top
-            anchors.topMargin: 0
-
-            Image {
-                id: image
-                x: 150
-                y: 50
-                width: parent.width * 0.8
-                height: parent.height * 0.8
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                fillMode: Image.PreserveAspectFit
-                source: "logo-hw.png"
-            }
-        }
-
         Text {
             id: txRegistered
             x: 187
             width: 241
             height: 15
             text: qsTr("Вітаємо, Вас зареєстровано!")
-            anchors.topMargin: parent.height * 0.15
-            anchors.top: header.bottom
+            anchors.topMargin: parent.height * 0.2
+            anchors.top: parent.top
             font.weight: Font.Light
             font.family: "SF UI Text"
             horizontalAlignment: Text.AlignHCenter
