@@ -6,11 +6,13 @@ RegistrationPagePhoneForm {
     signal nextPage
     signal startEditData
     signal endEditData
+
     function presenterAnimationEnds(){
         phoneField.forceActiveFocus()
     }
 
     Component.onCompleted: {
+        btnNext.opacity = 0.5
         phoneField.inputMethodHints = Qt.ImhPreferNumbers
     }
 
@@ -33,5 +35,9 @@ RegistrationPagePhoneForm {
         if(!phoneField.focus){
             phonePage.endEditData()
         }
+    }
+    phoneField.onTextChanged: {
+        btnNext.opacity = (phoneField.acceptableInput) ? 1.0 : 0.5
+        btnNext.enabled = phoneField.acceptableInput
     }
 }

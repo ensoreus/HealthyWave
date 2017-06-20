@@ -174,6 +174,19 @@ Item {
                     item1.state = "default"
                 }
                 onNextPage: {
+                    currentPageIndex = 4
+                    congratsPage.x = 0
+                }
+            }
+
+            RegistrationCongratsWithFreeWater{
+                id: congratsPage
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                x: parent.width
+                width: parent.width
+
+                onButtonContinue: {
                     item1.registrationDone()
                 }
             }

@@ -6,6 +6,9 @@ RegistrationPageEmailForm {
     signal nextPage
     signal startEditData
     signal endEditData
+    Component.onCompleted: {
+        btnNext.opacity = 0.5
+    }
 
     function presenterAnimationEnds(){
         emailField.forceActiveFocus()
@@ -15,8 +18,6 @@ RegistrationPageEmailForm {
         if (emailField.acceptableInput){
             btnNext.opacity = 0.8
             nextPage()
-        }else{
-            console.log("wrong email")
         }
     }
 
@@ -30,5 +31,9 @@ RegistrationPageEmailForm {
         if(!emailField.focus){
             emailPage.endEditData()
         }
+    }
+    emailField.onTextChanged: {
+        btnNext.opacity = (emailField.acceptableInput) ? 1.0 : 0.5
+        btnNext.enabled = emailField.acceptableInput
     }
 }

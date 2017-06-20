@@ -6,6 +6,11 @@ RegistrationPagePinForm {
     signal startEditData
     signal endEditData
 
+    Component.onCompleted:{
+        btnNext.opacity = 0.5
+    }
+
+
     function presenterAnimationEnds(){
         pinField.setupFocus()
     }
@@ -29,5 +34,8 @@ RegistrationPagePinForm {
         if(!pinField.focus){
             pinPage.endEditData()
         }
+    }
+    pinField.onLastDigitEdit: {
+        btnNext.opacity =  1.0
     }
 }

@@ -4,6 +4,7 @@ import "qrc:/controls"
 Item {
     width: 400
     height: 400
+    property alias btnContinue: btnContinue
 
     Rectangle {
         id: contents
@@ -80,7 +81,7 @@ Item {
         }
 
         HWRoundButton {
-            id: hWRoundButton
+            id: btnContinue
             x: 186
             y: 365
             width: parent.width * 0.7

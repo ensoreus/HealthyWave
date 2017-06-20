@@ -11,6 +11,7 @@ Rectangle{
     property string pin: pinDigit1.text + pinDigit2.text + pinDigit3.text + pinDigit4.text
     property bool aboutToFocus: false
     signal willStartAnimation
+    signal lastDigitEdit
 
     width: pinDigit4.width + pinDigit4.x + 3
 
@@ -98,6 +99,7 @@ Rectangle{
         onTextChanged: {
             if (text.length > 0){
                focus = false
+                lastDigitEdit()
             }
         }
     }

@@ -42,3 +42,7 @@ function findStreet(street, seckey){
         xhr.open("GET", baseUrl + "getcity?city=" + city + "&key=" + seckey);
         xhr.send();
 }
+
+function confirmPinCode(pin){
+
+}
