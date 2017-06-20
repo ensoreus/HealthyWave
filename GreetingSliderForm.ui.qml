@@ -22,8 +22,8 @@ Item {
 
     Image {
         id: image2
-        x: 400
-        width: 400
+        x: parent.width
+        width: parent.width
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
         anchors.top: parent.top
@@ -32,10 +32,9 @@ Item {
         source: "greeting1.png"
     }
 
-
-
     SwipeGestureArea {
         id: swipeGestureArea
+        width: parent.width
         anchors.fill: parent
 
         PageIndicator {
