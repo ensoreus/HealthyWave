@@ -203,6 +203,7 @@ Item {
                 width: parent.width
 
                 onButtonContinue: {
+                    storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text)
                     item1.registrationDone()
                 }
             }

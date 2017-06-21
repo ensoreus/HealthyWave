@@ -27,13 +27,15 @@ Item {
 
         Text {
             id: txGifted
-            x: 61
-            width: 293
             height: 15
             text: qsTr("Ми даруємо Вам 1 бутиль води безкоштовно ")
+            anchors.rightMargin: parent.width * 0.1
+            anchors.right: parent.right
+            anchors.leftMargin: parent.width * 0.1
+            anchors.left: parent.left
+            font.pointSize: 11
             font.underline: true
             font.bold: true
-            anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: txRegistered.bottom
             anchors.topMargin: 10
             font.family: "SF UI Text"
@@ -46,6 +48,7 @@ Item {
             width: 326
             height: 41
             text: qsTr("Зараз Ви можете користуватися найкращим сервісом достави води в Києві.")
+            font.pointSize: 11
             anchors.top: txGifted.bottom
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
