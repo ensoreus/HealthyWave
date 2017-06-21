@@ -1,4 +1,5 @@
 import QtQuick 2.4
+import "qrc:/Api.js" as Api
 
 RegistrationPagePinForm {
     id: pinPage
@@ -8,8 +9,8 @@ RegistrationPagePinForm {
 
     Component.onCompleted:{
         btnNext.opacity = 0.5
-    }
 
+    }
 
     function presenterAnimationEnds(){
         pinField.setupFocus()
@@ -35,7 +36,9 @@ RegistrationPagePinForm {
             pinPage.endEditData()
         }
     }
+
     pinField.onLastDigitEdit: {
         btnNext.opacity =  1.0
     }
+
 }

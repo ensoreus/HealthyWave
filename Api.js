@@ -43,7 +43,24 @@ function findStreet(city, street, seckey){
         xhr.send();
 }
 
-function confirmPinCode(pin){
+function getPinCode(phone, secKey){
+    var xhr = new XMLHttpRequest();
+    var isSent= "Error"
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
+                print('HEADERS_RECEIVED');
+            } else if(xhr.readyState === XMLHttpRequest.DONE) {
+                var object = JSON.parse(xhr.responseText.toString());
+                print(JSON.stringify(object, null, 2));
+                isSent = object.valueOf("result")
+            }
+        }
+        xhr.open("GET", baseUrl + "getpincode?phone=" + phone + "&secKey=" + secKey);
+        xhr.send();
+    return isSent
+}
+
+function confirmPinCode(pin, phone, callback){
     var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
@@ -51,8 +68,10 @@ function confirmPinCode(pin){
             } else if(xhr.readyState === XMLHttpRequest.DONE) {
                 var object = JSON.parse(xhr.responseText.toString());
                 print(JSON.stringify(object, null, 2));
+                var isConfirmed = object.valueOf("result")
+                callback(isConfirmed)
             }
         }
-        xhr.open("GET", baseUrl + "confirmpincode?city=" + city + "&key=" + seckey);
+        xhr.open("GET", baseUrl + "confirmpincode?pincode=" + pin);
         xhr.send();
 }

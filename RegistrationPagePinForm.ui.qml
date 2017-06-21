@@ -5,7 +5,8 @@ import "qrc:/controls" as Controls
 Item {
     width: 400
     height: 400
-    property alias mouseArea: mouseArea
+    property alias txtError: txtError
+    property alias btnSendAgain: btnSendAgain
     property alias pinField: pinField
     property alias btnNext: btnNext
 
@@ -65,9 +66,23 @@ Item {
             font.pixelSize: 15
 
             MouseArea {
-                id: mouseArea
+                id: btnSendAgain
                 anchors.fill: parent
             }
+        }
+
+        Text {
+            id: txtError
+            y: 348
+            color: "#720000"
+            text: qsTr("")
+            font.pointSize: 13
+            font.family: "SF UI Text"
+            horizontalAlignment: Text.AlignHCenter
+            anchors.rightMargin: parent.width * 0.2
+            anchors.right: parent.right
+            anchors.leftMargin: parent.width * 0.2
+            anchors.left: parent.left
         }
     }
 }

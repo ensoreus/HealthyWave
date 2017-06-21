@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.1
 import QtQuick.Window 2.2
-
+import "qrc:/Api.js" as Api
 import "qrc:/commons"
 import "qrc:/"
 import SecurityCore 1.0
@@ -84,6 +84,8 @@ Item {
                     currentPageIndex = 1
                     pinEditPage.x = 0
                     stackLayout.activePage = pinEditPage
+                    var result = Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
+                    console.log(result)
                 }
 
                 Behavior on x {
@@ -107,8 +109,15 @@ Item {
                 }
 
                 onNextPage: {
-                    currentPageIndex = 2
-                    emailEditPage.x = 0
+                    var result = Api.confirmPinCode(pinEditPage.pinField.pin, phoneEditPage.phoneField.text, function(isSuccess){
+                        if(isSuccess){
+                            currentPageIndex = 2
+                            emailEditPage.x = 0
+                        }else{
+                            txtError.text = "Невірний PIN-код";
+                        }
+                    })
+
                 }
                 Behavior on x {
                     NumberAnimation {
