@@ -109,16 +109,23 @@ Item {
                 }
 
                 onNextPage: {
-                    var result = Api.confirmPinCode(pinEditPage.pinField.pin, phoneEditPage.phoneField.text, function(isSuccess){
-                        if(isSuccess){
+                    Api.confirmPinCode(pinEditPage.pinField.pin, phoneEditPage.phoneField.text, function(response){
+                        if(response.result === true){
                             currentPageIndex = 2
                             emailEditPage.x = 0
                         }else{
                             txtError.text = "Невірний PIN-код";
+                            pinField.clear()
                         }
                     })
 
                 }
+                btnSendAgain.onClicked: {
+                    txtError.text = ""
+                    pinField.clear()
+                    Api.getPinCode(honeEditPage.phoneField.text, storage.getSecKey())
+                }
+
                 Behavior on x {
                     NumberAnimation {
                         duration: 200

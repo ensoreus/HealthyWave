@@ -1,7 +1,7 @@
 
 var baseUrl = "http://hz.vsde.biz:50080/debug/hs/GetData/"
 
-function registerUser(customer, seckey, city) {
+function registerUser(customer, seckey, city, callback) {
     var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
@@ -9,13 +9,14 @@ function registerUser(customer, seckey, city) {
             } else if(xhr.readyState === XMLHttpRequest.DONE) {
                 var object = JSON.parse(xhr.responseText.toString());
                 print(JSON.stringify(object, null, 2));
+                callback(object)
             }
         }
         xhr.open("GET", baseUrl + "getcity?city=" + city + "&key="+secKey);
         xhr.send();
 }
 
-function findCity(city, seckey){
+function findCity(city, seckey, callback){
     var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
@@ -23,19 +24,21 @@ function findCity(city, seckey){
             } else if(xhr.readyState === XMLHttpRequest.DONE) {
                 var object = JSON.parse(xhr.responseText.toString());
                 print(JSON.stringify(object, null, 2));
+                callback(object)
             }
         }
         xhr.open("GET", baseUrl + "getcity?city=" + city + "&key=" + seckey);
         xhr.send();
 }
 
-function findStreet(city, street, seckey){
+function findStreet(city, street, seckey, callback){
     var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
                 print('HEADERS_RECEIVED');
             } else if(xhr.readyState === XMLHttpRequest.DONE) {
                 var object = JSON.parse(xhr.responseText.toString());
+                callback(object)
                 print(JSON.stringify(object, null, 2));
             }
         }
@@ -68,8 +71,8 @@ function confirmPinCode(pin, phone, callback){
             } else if(xhr.readyState === XMLHttpRequest.DONE) {
                 var object = JSON.parse(xhr.responseText.toString());
                 print(JSON.stringify(object, null, 2));
-                var isConfirmed = object.valueOf("result")
-                callback(isConfirmed)
+                //var isConfirmed = object.valueOf("result")
+                callback(object)
             }
         }
         xhr.open("GET", baseUrl + "confirmpincode?pincode=" + pin);

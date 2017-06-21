@@ -12,7 +12,12 @@ Rectangle{
     property bool aboutToFocus: false
     signal willStartAnimation
     signal lastDigitEdit
-
+    function clear(){
+        pinDigit1.clear()
+        pinDigit2.clear()
+        pinDigit3.clear()
+        pinDigit4.clear()
+    }
     width: pinDigit4.width + pinDigit4.x + 3
 
     HWTextField {
