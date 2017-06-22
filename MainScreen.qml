@@ -3,6 +3,9 @@ import QtQuick 2.4
 MainScreenForm {
     id: mainScreen
     signal menuShowHide
+    Component.onCompleted: {
+        state = "ratePanelHidden"
+    }
 
     FreeWaterHelpScreen{
         anchors.right: parent.right

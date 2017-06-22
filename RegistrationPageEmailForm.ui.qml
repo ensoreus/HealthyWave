@@ -24,10 +24,10 @@ Item {
             anchors.top: emailField.bottom
             anchors.topMargin: 50
             background: Image {
-                    id: btnGlyph
-                    source: "btn-next.png"
-                    anchors.fill: parent
-                }
+                id: btnGlyph
+                source: "btn-next.png"
+                anchors.fill: parent
+            }
         }
 
         Text {
@@ -37,13 +37,14 @@ Item {
             width: parent.width * 0.7
             height: 15
             color: "#808080"
-            text: qsTr("Введите электронный адрес *")
+            text: qsTr("Уведіть электрону адресу *")
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 15
         }
 
         Controls.HWEmailField {
             id: emailField
+            height: parent.height * 0.1
             anchors.top: text1.bottom
             anchors.topMargin: 25
             anchors.right: text1.right
@@ -51,6 +52,22 @@ Item {
             anchors.left: text1.left
             anchors.leftMargin: 0
             clip: true
+        }
+
+        Text {
+            id: text2
+            height: 79
+            text: qsTr("*для получения информации об акциях и выгодных предложениях ")
+            anchors.topMargin: parent.height * 0.1
+            anchors.top: btnNext.bottom
+            anchors.right: emailField.right
+            anchors.rightMargin: 0
+            anchors.left: emailField.left
+            anchors.leftMargin: 0
+            wrapMode: Text.WordWrap
+            font.weight: Font.Thin
+            font.pointSize: 10
+            font.family: "SF UI Text"
         }
     }
 }

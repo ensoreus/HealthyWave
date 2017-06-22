@@ -3,7 +3,7 @@ import QtQuick.Controls 2.1
 
 HWTextField {
     validator: RegExpValidator{
-        regExp: /^\S*@\S*.\d*$/
+        regExp: /^\S+@(\S+.)+\w+$/
     }
     width: 300
     height: 44

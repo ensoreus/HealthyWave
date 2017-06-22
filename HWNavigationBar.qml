@@ -88,13 +88,13 @@ Rectangle {
         Image {
             id: backImage
             width: 30
+            anchors.leftMargin: parent.width * 0.2
+            anchors.bottomMargin: parent.width * 0.1
+            anchors.topMargin: parent.height * 0.1
             fillMode: Image.PreserveAspectFit
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 8
             anchors.top: parent.top
-            anchors.topMargin: 8
             anchors.left: parent.left
-            anchors.leftMargin: 8
             source: "qrc:/commons/btn-arrow-back.png"
         }
     }

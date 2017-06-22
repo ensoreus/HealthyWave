@@ -33,7 +33,7 @@ Item {
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.1
             anchors.left: parent.left
-            font.pointSize: 11
+            font.pointSize: 13
             font.underline: true
             font.bold: true
             anchors.top: txRegistered.bottom
@@ -48,11 +48,11 @@ Item {
             width: 326
             height: 41
             text: qsTr("Зараз Ви можете користуватися найкращим сервісом достави води в Києві.")
-            font.pointSize: 11
+            font.pointSize: 13
             anchors.top: txGifted.bottom
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
-            font.family: "SF NS Text"
+            font.family: "SF UI Text"
             font.weight: Font.Light
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap

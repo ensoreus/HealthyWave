@@ -14,6 +14,7 @@ Item {
     property alias logoBg: logoBg
     property alias bg: bg
     property int currentPageIndex: 0
+    property var  token: ""
     signal registrationDone
     width: 414
     height: 736
@@ -111,6 +112,7 @@ Item {
                 onNextPage: {
                     Api.confirmPinCode(pinEditPage.pinField.pin, phoneEditPage.phoneField.text, function(response){
                         if(response.result === true){
+                            Api.auth(phoneEditPage.phoneField.text, storage.getSecKey())
                             currentPageIndex = 2
                             emailEditPage.x = 0
                         }else{
@@ -123,7 +125,7 @@ Item {
                 btnSendAgain.onClicked: {
                     txtError.text = ""
                     pinField.clear()
-                    Api.getPinCode(honeEditPage.phoneField.text, storage.getSecKey())
+                    Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
                 }
 
                 Behavior on x {
@@ -166,8 +168,17 @@ Item {
                     item1.state = "interactive"
                 }
                 onNextPage: {
-                    currentPageIndex = 5
-                    promoCodeEditPage.x = 0
+
+                    Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token){
+                        Api.registerUser(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, token, function(response){
+                            //if(response.error === ""){
+                                storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text)
+                                currentPageIndex = 5
+                                promoCodeEditPage.x = 0
+                            //}
+                        })
+                    })
+
                 }
                 Behavior on x {
                     NumberAnimation {
@@ -190,7 +201,8 @@ Item {
                     item1.state = "default"
                 }
                 onNextPage: {
-                    currentPageIndex = 4
+                    //item1.state = "default"
+                    currentPageIndex = 6
                     congratsPage.x = 0
                 }
             }
@@ -203,7 +215,6 @@ Item {
                 width: parent.width
 
                 onButtonContinue: {
-                    storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text)
                     item1.registrationDone()
                 }
             }

@@ -47,7 +47,7 @@ Item {
             width: 276
             height: 15
             color: "#808080"
-            text: qsTr("Введите код подтверждения")
+            text: qsTr("Уведіть код підтвердження")
             horizontalAlignment: Text.AlignHCenter
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 15
@@ -57,7 +57,7 @@ Item {
             id: text2
             height: 20
             color: "#808080"
-            text: qsTr("Отправить код повторно")
+            text: qsTr("Відправити код ще раз")
             anchors.top: pinField.bottom
             anchors.topMargin: 55
             anchors.right: btnNext.left

@@ -4,6 +4,7 @@ import QtQuick.Controls 2.1
 import "qrc:/controls" as Controls
 
 Item {
+    id: item1
     width: 400
     height: 400
     property alias btnNext: btnNext
@@ -20,13 +21,14 @@ Item {
             y: 65
             width: parent.width * 0.7
             color: "#808080"
-            text: qsTr("Введите ваш промо-код*")
+            text: qsTr("Уведіть ваш промо-код*")
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 12
         }
 
         Controls.HWTextField {
             id: promoCodeField
+            height: parent.height * 0.1
             anchors.top: text1.bottom
             anchors.topMargin: 25
             anchors.right: text1.right
@@ -50,5 +52,23 @@ Item {
                 anchors.fill: parent
             }
         }
+        Text {
+            id: text2
+            x: 60
+            y: 276
+            height: 71
+            color: "#545454"
+            text: qsTr("*Уведіть бонусний промо-код, якщо Ви отримали його від ваших знайомих. Якщо промо-коду у Вас нема - рухайтесь далі, на Вас чекає сюрприз!")
+            anchors.topMargin: parent.height * 0.1
+            anchors.top: btnNext.bottom
+            anchors.right: promoCodeField.right
+            anchors.rightMargin: 0
+            anchors.left: promoCodeField.left
+            anchors.leftMargin: 0
+            wrapMode: Text.WordWrap
+            font.pixelSize: 12
+        }
     }
+
+
 }

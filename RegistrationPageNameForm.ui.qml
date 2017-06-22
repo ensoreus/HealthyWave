@@ -20,13 +20,13 @@ Item {
             width: parent.width * 0.7
             height: 15
             color: "#808080"
-            text: qsTr("Введите Ваше имя")
+            text: qsTr("Уведіть Ваше і'мя")
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 12
         }
 
         Controls.HWTextField {
             id: nameField
+            height: parent.height * 0.1
             anchors.top: text1.bottom
             anchors.topMargin: 25
             anchors.right: text1.right
@@ -49,6 +49,24 @@ Item {
                 source: "btn-next.png"
                 anchors.fill: parent
             }
+        }
+
+        Text {
+            id: text2
+            height: 65
+            color: "#505050"
+            text: qsTr("*Продолжая, Вы подтверждаете, что прочитали и
+принимаете Условия предоставления услуг
+и Политику конфиденциальности. ")
+            font.weight: Font.Thin
+            font.pointSize: 10
+            font.family: "SF UI Text"
+            anchors.topMargin: parent.height * 0.1
+            anchors.top: btnNext.bottom
+            anchors.right: nameField.right
+            anchors.rightMargin: 0
+            anchors.left: nameField.left
+            anchors.leftMargin: 0
         }
     }
 }

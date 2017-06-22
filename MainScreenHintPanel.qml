@@ -48,8 +48,8 @@ Rectangle {
     MouseArea {
         id: shoveUpBtn
         x: 187
-        width: 43
-        height: 34
+        width: parent.width * 0.1
+        height: parent.height * 0.2
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 0
@@ -60,8 +60,8 @@ Rectangle {
 
     Image {
         id: arrowUp
-        width: 25
-        height: 25
+        width: parent.width * 0.07
+        height: parent.height * 0.1
         fillMode: Image.PreserveAspectFit
         anchors.top: parent.top
         anchors.topMargin: 0
