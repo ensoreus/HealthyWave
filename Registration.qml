@@ -171,11 +171,13 @@ Item {
 
                     Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token){
                         Api.registerUser(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, token, function(response){
-                            //if(response.error === ""){
+                            if(!response.error){
                                 storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text)
                                 currentPageIndex = 5
                                 promoCodeEditPage.x = 0
-                            //}
+                            }else{
+
+                            }
                         })
                     })
 
@@ -201,7 +203,7 @@ Item {
                     item1.state = "default"
                 }
                 onNextPage: {
-                    //item1.state = "default"
+                   // item1.state = "default"
                     currentPageIndex = 6
                     congratsPage.x = 0
                 }
