@@ -112,7 +112,6 @@ Item {
                 onNextPage: {
                     Api.confirmPinCode(pinEditPage.pinField.pin, phoneEditPage.phoneField.text, function(response){
                         if(response.result === true){
-                            Api.auth(phoneEditPage.phoneField.text, storage.getSecKey())
                             currentPageIndex = 2
                             emailEditPage.x = 0
                         }else{
@@ -203,7 +202,9 @@ Item {
                     item1.state = "default"
                 }
                 onNextPage: {
-                   // item1.state = "default"
+                    //item1.state = "default"
+                    logoBg.height = 283
+                    logo.height = 114
                     currentPageIndex = 6
                     congratsPage.x = 0
                 }
@@ -249,8 +250,6 @@ Item {
                 width: 400
                 height: 42
             }
-
-
         }
     ]
 

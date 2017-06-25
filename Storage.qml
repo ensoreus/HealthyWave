@@ -18,6 +18,7 @@ Item {
     function storeSecKey(secKey){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
+            tx.executeSql('drop table if exists secKey');
             tx.executeSql('CREATE TABLE IF NOT EXISTS secKey(key TEXT)')
             var sqlstr = "insert into secKey ( key ) values ('" +secKey + "')";
             var result = tx.executeSql(sqlstr);
@@ -27,9 +28,31 @@ Item {
     function saveInitialUserData(phone, name, email){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
+            tx.executeSql('drop table if exists userData');
             tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT)')
             var sqlstr = "insert into userData ( phone, name, email ) values ('" + phone + "', '"+name+"', '"+email+"')";
             var result = tx.executeSql(sqlstr);
+        });
+    }
+
+    function saveToken(token){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            tx.executeSql('drop table if exists tokens');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS tokens(token TEXT)')
+            var sqlstr = "insert into tokens ( token ) values ('" +token + "')";
+            var result = tx.executeSql(sqlstr);
+        });
+    }
+
+
+    function getToken(callback){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            var sqlstr = "select token from tokens";
+            var result = tx.executeSql(sqlstr);
+            var retrivedToken = result.rows.item(result.rows.length - 1).token
+            callback(retrivedToken)
         });
     }
 

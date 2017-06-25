@@ -29,6 +29,7 @@ Item {
             id: txGifted
             height: 15
             text: qsTr("Ми даруємо Вам 1 бутиль води безкоштовно ")
+            wrapMode: Text.WordWrap
             anchors.rightMargin: parent.width * 0.1
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.1
@@ -48,6 +49,7 @@ Item {
             width: 326
             height: 41
             text: qsTr("Зараз Ви можете користуватися найкращим сервісом достави води в Києві.")
+            fontSizeMode: Text.Fit
             font.pointSize: 13
             anchors.top: txGifted.bottom
             anchors.topMargin: 10
