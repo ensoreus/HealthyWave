@@ -105,4 +105,9 @@
         <file>MyOrdersForm.ui.qml</file>
         <file>img-orderdetails-bg.png</file>
     </qresource>
+    <qresource prefix="/address">
+        <file>Addresses.qml</file>
+        <file>AddressesForm.ui.qml</file>
+        <file>GroupCopy.png</file>
+    </qresource>
 </RCC>

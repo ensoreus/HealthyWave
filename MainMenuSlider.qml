@@ -23,7 +23,14 @@ Item {
             //navigationBar.backClick = Qt.binding(function(){console.log("back")})
         }
 
-
+        onAddressesItem: {
+            mainScreenLoader.source = "qrc:/address/Addresses.qml"
+            mainScreenContainer.state = "slideIn"
+            navigationBar.showBack = true
+            navigationBar.showMenu = false
+            navigationBar.showLogo = false
+            navigationBar.label = "Мої адреси"
+        }
 
         Rectangle {
             id: mainScreenContainer
