@@ -4,6 +4,17 @@ import QtQuick.LocalStorage 2.0
 Item {
     id:storage
 
+    function isRegistered(){
+        var isReg= false
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction( function(tx) {
+                    var result = tx.executeSql('select phone from userData');
+                    isReg = result.rows.item(result.rows.length - 1).phone.length > 0
+                    }
+                );
+        return isReg;
+    }
+
     function getSecKey(){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         var key = ""

@@ -14,7 +14,7 @@ Item {
     property alias logoBg: logoBg
     property alias bg: bg
     property int currentPageIndex: 0
-    property var  token: ""
+    property var token: ""
     signal registrationDone
     width: 414
     height: 736
@@ -174,8 +174,6 @@ Item {
                                 storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text)
                                 currentPageIndex = 5
                                 promoCodeEditPage.x = 0
-                            }else{
-
                             }
                         })
                     })
@@ -218,11 +216,10 @@ Item {
                 width: parent.width
 
                 onButtonContinue: {
-                    item1.registrationDone()
+                    item1.opacity = 0
                 }
             }
         }
-
     }
 
     states: [

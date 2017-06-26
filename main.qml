@@ -6,28 +6,40 @@ import "qrc:/greeting" as Greeting
 import "qrc:/registration" as Registration
 import "qrc:/mainScreen" as Main
 import "qrc:/orders" as Orders
+import "qrc:/"
+
 
 ApplicationWindow {
     visible: true
     width: 414
     height: 736
     title: qsTr("Хвиля здоров'я")
+    Storage{
+        id:storage
+    }
 
     Main.MainMenuSlider {
         anchors.fill:parent
     }
 
-    Registration.Registration{
-        anchors.fill: parent
-        onRegistrationDone: {
-            opacity = 0
+    Component.onCompleted: {
+        if(!storage.isRegistered()){
+            registration.visible = true
+            greeting.visible = true
+        }else{
+            registration.visible = false
+            greeting.visible = false
         }
+    }
+
+    Registration.Registration{
+        id:registration
+        anchors.fill: parent
         Behavior on opacity{
             SequentialAnimation{
                 OpacityAnimator {
                     duration: 400
                 }
-
                 PropertyAction {
                     target: greeting; property: "visible"
                     value: false

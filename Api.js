@@ -1,20 +1,16 @@
 
 var baseUrl = "http://hz.vsde.biz:50080/debug/hs/GetData/"
-var gtoken = ""
-var gphone = ""
 
 
 function auth(phone, secKey, callback){
     var xhr = new XMLHttpRequest();
-    gphone = phone
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
             print('HEADERS_RECEIVED');
         } else if(xhr.readyState === XMLHttpRequest.DONE) {
             var object = JSON.parse(xhr.responseText.toString());
             print(JSON.stringify(object, null, 2));
-            gtoken = object.key
-            callback(gtoken)
+            callback(object.key)
         }
     }
 
@@ -49,13 +45,9 @@ function findCity(city, token, callback){
         if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
             print('HEADERS_RECEIVED');
         } else if(xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status == 200){
                 var object = JSON.parse(xhr.responseText.toString());
                 print(JSON.stringify(object, null, 2));
                 callback(object)
-            }else{
-
-            }
         }
     }
 
