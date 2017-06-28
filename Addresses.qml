@@ -22,7 +22,23 @@ AddressesForm {
         });
     }
 
-    btnAddNew.onButtonClick: {
+    NewAddress{
+        id: newAddressPanel
+        x: parent.width
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: parent.width
+        Behavior on x {
+            NumberAnimation {
+                target: newAddressPanel
+                property: "x"
+                duration: 300
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
 
+    btnAddNew.onButtonClick: {
+        newAddressPanel.x = 0
     }
 }

@@ -1,5 +1,6 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.1
+import "qrc:/controls"
 
 Item {
     id: root
@@ -31,6 +32,7 @@ Item {
             id: tfCity
             placeholderText: "Місто"
             height: parent.height * 0.08
+            aboutToFocus: true
             anchors.topMargin: parent.height * 0.07
             anchors.top: parent.top
             font.pointSize: 13
