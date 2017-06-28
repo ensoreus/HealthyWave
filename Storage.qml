@@ -8,10 +8,10 @@ Item {
         var isReg= false
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction( function(tx) {
-                    var result = tx.executeSql('select phone from userData');
-                    isReg = result.rows.item(result.rows.length - 1).phone.length > 0
-                    }
-                );
+            var result = tx.executeSql('select phone from userData');
+            isReg = result.rows.item(result.rows.length - 1).phone.length > 0
+        }
+        );
         return isReg;
     }
 
@@ -19,10 +19,10 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         var key = ""
         db.transaction( function(tx) {
-                    var result = tx.executeSql('select key from secKey');
-                    key = result.rows.item(result.rows.length - 1).key
-                    }
-                );
+            var result = tx.executeSql('select key from secKey');
+            key = result.rows.item(result.rows.length - 1).key
+        }
+        );
         return key;
     }
 
@@ -101,5 +101,38 @@ Item {
             var result = tx.executeSql(sqlstr);
             callback(result.rows.item(0).city)
         });
+    }
+
+    function writeAddress(city, street, house, floor, apt, entrance, entranceCode){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS addresses (city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT)')
+            var sqlstr = "insert into addresses ( city, street, house, floor, apt, entrance, entranceDoor ) values ('" + city + "', '"+ street +"', '"+house+"', '"+ floor +"', '"+apt+"', '"+ entrance+"', '"+ entranceCode+"')";
+            tx.executeSql(sqlstr);
+        });
+    }
+
+    function haveAddresses(){
+        var result = false;
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        var sqlstr = "SELECT name FROM sqlite_master WHERE type='table' AND name='addresses'"
+        db.transaction(function(tx){
+            var result = tx.executeSql(sqlstr)
+
+        })
+        return result
+    }
+
+    function getAddresses(callback){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        if(!haveAddresses()){
+            callback(0)
+        }else{
+            db.transaction(function(tx){
+                var sqlstr = "select city, street, house, floor, entrance, entranceCode  from addresses";
+                var result = tx.executeSql(sqlstr);
+                callback(result.rows)
+            });
+        }
     }
 }

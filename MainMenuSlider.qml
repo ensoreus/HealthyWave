@@ -20,7 +20,6 @@ Item {
             navigationBar.showMenu = false
             navigationBar.showLogo = false
             navigationBar.label = "Замовлення"
-            //navigationBar.backClick = Qt.binding(function(){console.log("back")})
         }
 
         onAddressesItem: {
