@@ -41,4 +41,5 @@ AddressesForm {
     btnAddNew.onButtonClick: {
         newAddressPanel.x = 0
     }
+
 }

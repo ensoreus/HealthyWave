@@ -20,8 +20,10 @@ Item {
     height: 736
 
     Component.onCompleted: {
-        SecurityCore.generateSecKey()
-        storage.storeSecKey(SecurityCore.secKey)
+        if(!storage.isRegistered()){
+            SecurityCore.generateSecKey()
+            storage.storeSecKey(SecurityCore.secKey)
+        }
         console.log(storage.getSecKey())
     }
 
@@ -119,8 +121,8 @@ Item {
                             pinField.clear()
                         }
                     })
-
                 }
+
                 btnSendAgain.onClicked: {
                     txtError.text = ""
                     pinField.clear()
@@ -143,7 +145,8 @@ Item {
                 width: parent.width
 
                 onStartEditData: {
-                    item1.state = "interactive"
+                    //item1.state = "interactive"
+                    emailEditPage.presenterAnimationEnds()
                 }
                 onNextPage: {
                     currentPageIndex = 3
@@ -164,11 +167,12 @@ Item {
                 x: parent.width
                 width: parent.width
                 onStartEditData: {
-                    item1.state = "interactive"
+                    nameEditPage.presenterAnimationEnds()
                 }
                 onNextPage: {
 
                     Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token){
+                        storage.saveToken(token)
                         Api.registerUser(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, token, function(response){
                             if(!response.error){
                                 storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text)
@@ -194,7 +198,8 @@ Item {
                 x: parent.width
                 width: parent.width
                 onStartEditData: {
-                    item1.state = "interactive"
+                    //item1.state = "interactive"
+                    promoCodeEditPage.presenterAnimationEnds()
                 }
                 onEndEditData: {
                     item1.state = "default"

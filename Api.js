@@ -74,7 +74,7 @@ function findStreet(city, street, token, callback){
      return xhr.status
 }
 
-function getPinCode(phone, token){
+function getPinCode(phone, secKey){
     var xhr = new XMLHttpRequest();
     var isSent= "Error"
     xhr.onreadystatechange = function() {
@@ -86,7 +86,8 @@ function getPinCode(phone, token){
             isSent = object.valueOf("result")
         }
     }
-    xhr.open("GET", baseUrl + "getpincode?phone=" + phone + "&key=" + token);
+    console.log( baseUrl + "getpincode?phone=" + phone + "&key=" + secKey)
+    xhr.open("GET", baseUrl + "getpincode?phone=" + phone + "&key=" + secKey);
     xhr.send();
     return isSent
 }

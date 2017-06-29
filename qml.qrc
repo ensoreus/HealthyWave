@@ -52,6 +52,7 @@
         <file>img-star-off.png</file>
         <file>HWStarsRate.qml</file>
         <file>Star.qml</file>
+        <file>HWGreyTextField.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>

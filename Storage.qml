@@ -57,13 +57,18 @@ Item {
     }
 
 
-    function getToken(callback){
+    function getToken(callback, failCallback){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS tokens(token TEXT)')
             var sqlstr = "select token from tokens";
             var result = tx.executeSql(sqlstr);
-            var retrivedToken = result.rows.item(result.rows.length - 1).token
-            callback(retrivedToken)
+            if(result.rows.length > 0){
+                var retrivedToken = result.rows.item(result.rows.length - 1).token
+                callback(retrivedToken)
+            }else{
+                failCallback(getPhone(), getSecKey());
+            }
         });
     }
 
@@ -78,11 +83,18 @@ Item {
 
     function getPhone(callback){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        var phone = ""
         db.transaction(function(tx){
             var sqlstr = "select phone from userData";
             var result = tx.executeSql(sqlstr);
-            callback(result.rows.item(0).phone)
+            phone = result.rows.item(0).phone
+            if(typeof callback != 'undefined'){
+                callback(phone)
+            }else{
+                return phone;
+            }
         });
+        return phone;
     }
 
     function getEmail(callback){

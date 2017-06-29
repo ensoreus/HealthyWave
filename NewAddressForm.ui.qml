@@ -14,36 +14,12 @@ Item {
     property alias tfStreet: tfStreet
     property alias tfCity: tfCity
 
-    //    Component.onCompleted: {
-    //        tfCity.placeholderText = "Місто"
-    //        tfStreet.
-    //        tfApt.placeholderText = "Квартира/Офіс"
-    //        tfHouse.placeholderText = "Будинок"
-    //        tfEntrance.placeholderText = "Під'їзд"
-    //        tfDoorCode.placeholderText = "Код дверей"
-    //        tfFloor.placeholderText = "Поверх"
-    //    }
     Rectangle {
         id: container
         color: "#ffffff"
         anchors.fill: parent
 
-        HWTextField {
-            id: tfCity
-            placeholderText: "Місто"
-            height: parent.height * 0.08
-            aboutToFocus: true
-            anchors.topMargin: parent.height * 0.07
-            anchors.top: parent.top
-            font.pointSize: 13
-            font.family: "SF UI Text"
-            anchors.rightMargin: parent.width * 0.05
-            anchors.right: parent.right
-            anchors.leftMargin: parent.width * 0.05
-            anchors.left: parent.left
-            lineColor: "#c8c7cc"
-        }
-        HWTextField {
+        HWGreyTextField {
             id: tfStreet
             placeholderText: "Вулиця"
             height: parent.height * 0.08
@@ -55,9 +31,8 @@ Item {
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
-            lineColor: "#c8c7cc"
         }
-        HWTextField {
+        HWGreyTextField {
             id: tfHouse
             placeholderText: "Будинок"
             height: parent.height * 0.08
@@ -69,9 +44,8 @@ Item {
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
-            lineColor: "#c8c7cc"
         }
-        HWTextField {
+        HWGreyTextField {
             id: tfApt
             placeholderText: "Квартира/Офіс"
             height: parent.height * 0.08
@@ -83,9 +57,8 @@ Item {
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
-            lineColor: "#c8c7cc"
         }
-        HWTextField {
+        HWGreyTextField {
             id: tfEntrance
             placeholderText: "Під'їзд"
             height: parent.height * 0.08
@@ -97,9 +70,8 @@ Item {
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
-            lineColor: "#c8c7cc"
         }
-        HWTextField {
+        HWGreyTextField {
             id: tfDoorCode
             placeholderText: "Код дверей"
             height: parent.height * 0.08
@@ -111,9 +83,8 @@ Item {
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
-            lineColor: "#c8c7cc"
         }
-        HWTextField {
+        HWGreyTextField {
             id: tfFloor
             placeholderText: "Поверх"
             height: parent.height * 0.08
@@ -125,7 +96,6 @@ Item {
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
-            lineColor: "#c8c7cc"
         }
 
         Rectangle {
@@ -151,6 +121,20 @@ Item {
                 font.family: "SF UI Text"
                 placeholderText: "Ваш коментар..."
             }
+        }
+        HWGreyTextField {
+            id: tfCity
+            placeholderText: "Місто"
+            height: parent.height * 0.08
+            aboutToFocus: false
+            anchors.topMargin: parent.height * 0.07
+            anchors.top: parent.top
+            font.pointSize: 13
+            font.family: "SF UI Text"
+            anchors.rightMargin: parent.width * 0.05
+            anchors.right: parent.right
+            anchors.leftMargin: parent.width * 0.05
+            anchors.left: parent.left
         }
     }
 }
