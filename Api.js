@@ -52,10 +52,10 @@ function findCity(city, token, callback){
                 callback(object)
         }
     }
-
+    console.log(baseUrl + "getcity?city=" + city + "&key=" + token)
     xhr.open("GET", baseUrl + "getcity?city=" + city + "&key=" + token);
     xhr.send();
-     return xhr.status
+    return xhr.status
 }
 
 function findStreet(city, street, token, callback){

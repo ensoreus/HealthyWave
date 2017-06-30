@@ -53,6 +53,7 @@
         <file>HWStarsRate.qml</file>
         <file>Star.qml</file>
         <file>HWGreyTextField.qml</file>
+        <file>HWEditableComboBox.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>

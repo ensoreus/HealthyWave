@@ -19,7 +19,7 @@ Item {
         color: "#ffffff"
         anchors.fill: parent
 
-        HWGreyTextField {
+        HWEditableComboBox {
             id: tfStreet
             placeholderText: "Вулиця"
             height: parent.height * 0.08
@@ -122,11 +122,10 @@ Item {
                 placeholderText: "Ваш коментар..."
             }
         }
-        HWGreyTextField {
+        HWEditableComboBox {
             id: tfCity
-            placeholderText: "Місто"
             height: parent.height * 0.08
-            aboutToFocus: false
+            placeholderText: "Місто"
             anchors.topMargin: parent.height * 0.07
             anchors.top: parent.top
             font.pointSize: 13
