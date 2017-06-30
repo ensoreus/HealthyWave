@@ -18,33 +18,21 @@ ComboBox {
         busyIndicator.running = false
     }
 
-//    delegate: ItemDelegate {
+//    background: Rectangle{
+//        color: "red"
+//        border.color: "red"
+//        border.width: 0
+
+//        Rectangle{
+//            id: background
+//            border.width: 0
+//            height: 2
+//            x: 0
+//            y: root.height - 2
 //            width: root.width
-//            contentItem: Text {
-//                text: modelData
-//                color: "#21be2b"
-//                font: root.font
-//                elide: Text.ElideRight
-//                verticalAlignment: Text.AlignVCenter
-//            }
-//            highlighted: root.highlightedIndex === index
+//            color: "#c8c7cc"
 //        }
-
-    background: Rectangle{
-        color: "red"
-        border.color: "red"
-        border.width: 0
-
-        Rectangle{
-            id: background
-            border.width: 0
-            height: 2
-            x: 0
-            y: root.height - 2
-            width: root.width
-            color: "#c8c7cc"
-        }
-    }
+//    }
 
     indicator: Item{}
 

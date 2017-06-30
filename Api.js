@@ -18,7 +18,6 @@ function auth(phone, secKey, callback){
     console.log(url)
     xhr.open("GET", url);
     xhr.send();
-    return xhr.status
 }
 
 function registerUser(phone, name, email, token, callback) {
@@ -69,7 +68,7 @@ function findStreet(city, street, token, callback){
             print(JSON.stringify(object, null, 2));
         }
     }
-    xhr.open("GET", baseUrl + "getstreet?city=" + city + "&street" + street + "&key=" + token);
+    xhr.open("GET", baseUrl + "getstreet?city=" + city + "&street=" + street + "&key=" + token);
     xhr.send();
      return xhr.status
 }

@@ -8,32 +8,41 @@ NewAddressForm {
     }
 
     tfCity.onTextSearchChanged: {
+        tfCity.startWheelAnumation()
         var gotToken = function(token){
             storage.saveToken(token)
             Api.findCity(tfCity.text, token, function(response){
-                if(response.error){
-                    console.log(response.error)
+                if(typeof(response.error) !='undefined' && response.error != "Неверный формат параметра [city]" && response.error != "Не заполнен параметр [city]"){
                     Api.auth(storage.getPhone(), storage.getSecKey(), gotToken);
                 }else{
                     tfCity.model = response.result
+                    tfCity.popup.open()
                 }
+                tfCity.stopWheelAnimation()
             })
         }
         storage.getToken(gotToken, function(phone, secKey){
             Api.auth(phone, secKey, gotToken);
         })
 
+    }
+
+    tfCity.onActivated:{
+        tfCity.text = tfCity.currentText
     }
 
     tfStreet.onTextSearchChanged: {
+        tfStreet.startWheelAnumation()
         var gotToken = function(token){
             storage.saveToken(token)
             Api.findStreet(tfCity.text, tfStreet.text, token, function(response){
-                if(response.error){
-                    console.log(response.error)
+                if(typeof(response.error) !='undefined' && response.error != "Неверный формат параметра [street]" && response.error != "Не заполнен параметр [street]"){
+                    Api.auth(storage.getPhone(), storage.getSecKey(), gotToken);
                 }else{
                     tfStreet.model = response.result
+                    tfStreet.popup.open()
                 }
+                tfStreet.stopWheelAnimation()
             })
         }
         storage.getToken(gotToken, function(phone, secKey){
@@ -41,6 +50,9 @@ NewAddressForm {
         })
     }
 
+    tfStreet.onActivated: {
+        tfStreet.text = tfStreet.currentText
+    }
 
     tfHouse.onWillStartAnimation: {
         tfHouse.forceActiveFocus()
