@@ -38,8 +38,6 @@ function registerUser(phone, name, email, token, callback) {
     return xhr.status
 }
 
-
-
 function findCity(city, token, callback){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
