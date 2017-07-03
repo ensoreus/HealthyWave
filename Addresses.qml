@@ -1,20 +1,24 @@
 import QtQuick 2.4
 import "qrc:/Api.js" as Api
 import "qrc:/"
+
 AddressesForm {
 
     Storage{
         id:storage
     }
-
     Component.onCompleted: {
         storage.getAddresses(function(result){
-            if(result != 0 && result.items.length > 0){
+            for(var i = 0; i < result.rows.length; i++) {
+                     console.log( result.rows[i].city );
+            }
+
+            if(typeof(result) != 'undefined' && typeof(result.rows[0]) !='undefined'){
                 lstAddresses.visible = true
                 emptyList.visible = false
-                result.forEach( function(item){
-                    console.log(item.city)
-                });
+                lstAddresses.model = result.rows.length
+                addressesPresent = result
+                lstAddresses.update()
             }else{
                 lstAddresses.visible = false
                 emptyList.visible = true
@@ -36,6 +40,13 @@ AddressesForm {
                 easing.type: Easing.InOutQuad
             }
         }
+        onAddedNewAddress:{
+             storage.getAddresses(function(result){
+                 lstAddresses.model = result.rows.length
+                 addressesPresent = result
+                 lstAddresses.update()
+             })
+         }
     }
 
     btnAddNew.onButtonClick: {
@@ -45,4 +56,7 @@ AddressesForm {
     btnAddNewAddress.onClicked: {
         newAddressPanel.x = 0
     }
+
+
+
 }

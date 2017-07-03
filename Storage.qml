@@ -137,14 +137,11 @@ Item {
 
     function getAddresses(callback){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
-        if(!haveAddresses()){
-            callback(0)
-        }else{
             db.transaction(function(tx){
-                var sqlstr = "select city, street, house, floor, entrance, entranceCode  from addresses";
+                tx.executeSql('CREATE TABLE IF NOT EXISTS addresses (city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT)')
+                var sqlstr = "select city, street, house, floor, apt, entrance, entranceDoor from addresses";
                 var result = tx.executeSql(sqlstr);
-                callback(result.rows)
+                callback(result)
             });
-        }
     }
 }

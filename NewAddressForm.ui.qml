@@ -6,6 +6,7 @@ Item {
     id: root
     width: 400
     height: 400
+    property alias btnSave: btnSave
     property alias tfFloor: tfFloor
     property alias tfDoorCode: tfDoorCode
     property alias tfEntrance: tfEntrance
@@ -125,15 +126,49 @@ Item {
         HWEditableComboBox {
             id: tfCity
             height: parent.height * 0.08
+            anchors.topMargin: parent.height * 0.05
             placeholderText: "Місто"
-            anchors.topMargin: parent.height * 0.07
-            anchors.top: parent.top
+            anchors.top: navigationBar.bottom
             font.pointSize: 13
             font.family: "SF UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
+        }
+
+        HWNavigationBar {
+            id: navigationBar
+            x: 168
+            y: 16
+            label: "Нова адреса"
+            showMenu: false
+            showLogo: false
+            showBack: true
+
+            Text {
+                id: txtConfirm
+                x: 287
+                y: 186
+                width: 73
+                height: 27
+                color: "#ffffff"
+                text: qsTr("Зберігти")
+                anchors.rightMargin: parent.height * 0.1
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                verticalAlignment: Text.AlignVCenter
+                font.capitalization: Font.MixedCase
+                font.bold: true
+                font.pointSize: 14
+                font.family: "SF UI Text"
+                horizontalAlignment: Text.AlignHCenter
+
+                MouseArea {
+                    id: btnSave
+                    anchors.fill: parent
+                }
+            }
         }
     }
 }

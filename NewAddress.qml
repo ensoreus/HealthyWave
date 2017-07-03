@@ -3,6 +3,9 @@ import "qrc:/Api.js" as Api
 import "qrc:/"
 
 NewAddressForm {
+
+    signal addedNewAddress
+
     Storage{
         id:storage
     }
@@ -24,7 +27,6 @@ NewAddressForm {
         storage.getToken(gotToken, function(phone, secKey){
             Api.auth(phone, secKey, gotToken);
         })
-
     }
 
     tfCity.onActivated:{
@@ -70,4 +72,9 @@ NewAddressForm {
         tfFloor.forceActiveFocus()
     }
 
+    btnSave.onClicked: {
+        storage.writeAddress(tfCity.text, tfStreet.text, tfHouse.text, tfFloor.text, tfApt.text, tfEntrance.text, tfDoorCode.text)
+        x = width
+        addedNewAddress()
+    }
 }

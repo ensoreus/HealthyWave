@@ -9,7 +9,7 @@ Item {
     property alias emptyList: emptyList
     property alias lstAddresses: lstAddresses
     property alias btnAddNew: btnAddNew
-
+    property var addressesPresent
     Rectangle {
         id: content
         color: "#ffffff"
@@ -24,8 +24,8 @@ Item {
             anchors.topMargin: 0
             visible: true
             delegate: AddressCell {
-                lbStreet.text: street
-                lbCity.text: city
+                lbStreet.text: addressesPresent.rows[index].street
+                lbCity.text: addressesPresent.rows[index].city
             }
 
             model: ListModel {
