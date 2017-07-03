@@ -5,6 +5,7 @@ Item {
     id: root
     width: 400
     height: 400
+    property alias btnAddNewAddress: btnAddNewAddress
     property alias emptyList: emptyList
     property alias lstAddresses: lstAddresses
     property alias btnAddNew: btnAddNew
@@ -16,7 +17,11 @@ Item {
 
         ListView {
             id: lstAddresses
-            anchors.fill: parent
+            anchors.top: navigationBar.bottom
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.topMargin: 0
             visible: true
             delegate: AddressCell {
                 lbStreet.text: street
@@ -44,8 +49,12 @@ Item {
         Rectangle {
             id: emptyList
             color: "#ffffff"
+            anchors.top: navigationBar.bottom
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.topMargin: 0
             visible: false
-            anchors.fill: parent
 
             Text {
                 id: lbNoAddresses
@@ -89,6 +98,35 @@ Item {
                 anchors.top: lbNoAddresses.bottom
                 anchors.topMargin: 52
                 anchors.horizontalCenter: parent.horizontalCenter
+            }
+        }
+
+        HWNavigationBar {
+            id: navigationBar
+            x: 406
+            y: 137
+            showMenu: false
+            showLogo: false
+            showBack: true
+            label: "Мої адреси"
+
+            Image {
+                id: plus
+                x: 345
+                y: 8
+                width: parent.height * 0.7
+                height: parent.height * 0.7
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.rightMargin: parent.height * 0.1
+                anchors.right: parent.right
+                source: "qrc:/commons/btn-plus.png"
+            }
+
+            MouseArea {
+                id: btnAddNewAddress
+                x: 352
+                y: 9
+                anchors.fill: parent
             }
         }
     }

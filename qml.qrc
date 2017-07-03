@@ -64,6 +64,7 @@
         <file>btn-arrow-back.png</file>
         <file>btn-cross.png</file>
         <file>img-disclosure-arrow.png</file>
+        <file>btn-plus.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>

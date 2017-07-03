@@ -24,11 +24,13 @@ Item {
 
         onAddressesItem: {
             mainScreenLoader.source = "qrc:/address/Addresses.qml"
+            mainScreenLoader.anchors.top = mainScreenContainer.top
             mainScreenContainer.state = "slideIn"
-            navigationBar.showBack = true
-            navigationBar.showMenu = false
-            navigationBar.showLogo = false
-            navigationBar.label = "Мої адреси"
+//            navigationBar.showBack = true
+//            navigationBar.showMenu = false
+//            navigationBar.showLogo = false
+//            navigationBar.label = "Мої адреси"
+
         }
 
         Rectangle {
