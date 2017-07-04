@@ -8,8 +8,10 @@ Item {
         var isReg= false
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction( function(tx) {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT)')
             var result = tx.executeSql('select phone from userData');
-            isReg = result.rows.item(result.rows.length - 1).phone.length > 0
+
+            isReg = result.rows.length > 0
         }
         );
         return isReg;
@@ -19,6 +21,7 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         var key = ""
         db.transaction( function(tx) {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS secKey(key TEXT)')
             var result = tx.executeSql('select key from secKey');
             key = result.rows.item(result.rows.length - 1).key
         }

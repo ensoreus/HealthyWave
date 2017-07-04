@@ -77,4 +77,8 @@ NewAddressForm {
         x = width
         addedNewAddress()
     }
+
+    navigationBar.onBackClick: {
+        x = width
+    }
 }

@@ -3,16 +3,13 @@ import "qrc:/Api.js" as Api
 import "qrc:/"
 
 AddressesForm {
+    signal back
 
     Storage{
         id:storage
     }
     Component.onCompleted: {
         storage.getAddresses(function(result){
-            for(var i = 0; i < result.rows.length; i++) {
-                     console.log( result.rows[i].city );
-            }
-
             if(typeof(result) != 'undefined' && typeof(result.rows[0]) !='undefined'){
                 lstAddresses.visible = true
                 emptyList.visible = false
@@ -57,6 +54,9 @@ AddressesForm {
         newAddressPanel.x = 0
     }
 
+    navigationBar.onBackClick:{
+        back()
+    }
 
 
 }

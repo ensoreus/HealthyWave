@@ -26,11 +26,6 @@ Item {
             mainScreenLoader.source = "qrc:/address/Addresses.qml"
             mainScreenLoader.anchors.top = mainScreenContainer.top
             mainScreenContainer.state = "slideIn"
-//            navigationBar.showBack = true
-//            navigationBar.showMenu = false
-//            navigationBar.showLogo = false
-//            navigationBar.label = "Мої адреси"
-
         }
 
         Rectangle {
@@ -40,7 +35,6 @@ Item {
             x: 0
             width: parent.width
             color: "white"
-
 
             HWNavigationBar{
                 id: navigationBar

@@ -5,6 +5,7 @@ Item {
     id: root
     width: 400
     height: 400
+    property alias navigationBar: navigationBar
     property alias btnAddNewAddress: btnAddNewAddress
     property alias emptyList: emptyList
     property alias lstAddresses: lstAddresses
@@ -114,10 +115,11 @@ Item {
                 id: plus
                 x: 345
                 y: 8
-                width: parent.height * 0.7
-                height: parent.height * 0.7
+                width: parent.height * 0.6
+                height: parent.height * 0.6
+                anchors.rightMargin: 6
+                fillMode: Image.PreserveAspectFit
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.rightMargin: parent.height * 0.1
                 anchors.right: parent.right
                 source: "qrc:/commons/btn-plus.png"
             }

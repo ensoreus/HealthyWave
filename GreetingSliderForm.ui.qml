@@ -44,7 +44,7 @@ Item {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
-            count: 6
+            count: 7
         }
     }
 

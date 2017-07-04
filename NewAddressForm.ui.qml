@@ -6,6 +6,7 @@ Item {
     id: root
     width: 400
     height: 400
+    property alias navigationBar: navigationBar
     property alias btnSave: btnSave
     property alias tfFloor: tfFloor
     property alias tfDoorCode: tfDoorCode

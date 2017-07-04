@@ -4,7 +4,7 @@ GreetingSliderForm {
     id: slider
     signal close
 
-    property int stateIndex: 0
+    property int stateIndex: 1
     property string state: "page1"
     property int maxPages: 6
 
@@ -22,7 +22,7 @@ GreetingSliderForm {
     }
 
     function nextSlide(){
-        if(stateIndex < 5) {
+        if(stateIndex < 6) {
             stateIndex++;
         }
         var pageName = "greeting" + stateIndex + ".png";
@@ -40,7 +40,7 @@ GreetingSliderForm {
     }
 
     swipeGestureArea.onSwipeEnded: function( diff ){
-        swipeGestureArea.enabled = (stateIndex < 4)
+        swipeGestureArea.enabled = (stateIndex < 5)
         pageIndicator.currentIndex = stateIndex ;
         image1.source = image2.source
         image2.source = nextSlide()
