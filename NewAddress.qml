@@ -1,4 +1,5 @@
 import QtQuick 2.4
+import QuickIOS 0.1
 import "qrc:/Api.js" as Api
 import "qrc:/"
 
@@ -52,6 +53,19 @@ NewAddressForm {
         })
     }
 
+    property var navigationItem : NavigationItem {
+        rightBarButtonItems: VisualItemModel {
+            BarButtonItem {
+                title: "Зберегти"
+                tintColor: "white"
+                onClicked: {
+                    storage.writeAddress(tfCity.text, tfStreet.text, tfHouse.text, tfFloor.text, tfApt.text, tfEntrance.text, tfDoorCode.text)
+                    addedNewAddress()
+                }
+            }
+        }
+    }
+
     tfStreet.onActivated: {
         tfStreet.text = tfStreet.currentText
     }
@@ -59,26 +73,21 @@ NewAddressForm {
     tfHouse.onWillStartAnimation: {
         tfHouse.forceActiveFocus()
     }
+
     tfEntrance.onWillStartAnimation: {
         tfEntrance.forceActiveFocus()
     }
+
     tfDoorCode.onWillStartAnimation: {
         tfDoorCode.forceActiveFocus()
     }
+
     tfApt.onWillStartAnimation: {
         tfApt.forceActiveFocus()
     }
+
     tfFloor.onWillStartAnimation: {
         tfFloor.forceActiveFocus()
     }
 
-    btnSave.onClicked: {
-        storage.writeAddress(tfCity.text, tfStreet.text, tfHouse.text, tfFloor.text, tfApt.text, tfEntrance.text, tfDoorCode.text)
-        x = width
-        addedNewAddress()
-    }
-
-    navigationBar.onBackClick: {
-        x = width
-    }
 }

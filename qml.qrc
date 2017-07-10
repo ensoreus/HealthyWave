@@ -65,6 +65,7 @@
         <file>btn-cross.png</file>
         <file>img-disclosure-arrow.png</file>
         <file>btn-plus.png</file>
+        <file>logo-hw.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>

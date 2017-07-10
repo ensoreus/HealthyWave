@@ -1,13 +1,13 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.1
+import QuickIOS 0.1
+
 import "qrc:/controls"
 
-Item {
+ViewController {
     id: root
     width: 400
     height: 400
-    property alias navigationBar: navigationBar
-    property alias btnSave: btnSave
     property alias tfFloor: tfFloor
     property alias tfDoorCode: tfDoorCode
     property alias tfEntrance: tfEntrance
@@ -138,38 +138,39 @@ Item {
             anchors.left: parent.left
         }
 
-        HWNavigationBar {
-            id: navigationBar
-            x: 168
-            y: 16
-            label: "Нова адреса"
-            showMenu: false
-            showLogo: false
-            showBack: true
 
-            Text {
-                id: txtConfirm
-                x: 287
-                y: 186
-                width: 73
-                height: 27
-                color: "#ffffff"
-                text: qsTr("Зберігти")
-                anchors.rightMargin: parent.height * 0.1
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                verticalAlignment: Text.AlignVCenter
-                font.capitalization: Font.MixedCase
-                font.bold: true
-                font.pointSize: 14
-                font.family: "SF UI Text"
-                horizontalAlignment: Text.AlignHCenter
+//        HWNavigationBar {
+//            id: navigationBar
+//            x: 168
+//            y: 16
+//            label: "Нова адреса"
+//            showMenu: false
+//            showLogo: false
+//            showBack: true
 
-                MouseArea {
-                    id: btnSave
-                    anchors.fill: parent
-                }
-            }
-        }
+//            Text {
+//                id: txtConfirm
+//                x: 287
+//                y: 186
+//                width: 73
+//                height: 27
+//                color: "#ffffff"
+//                text: qsTr("Зберігти")
+//                anchors.rightMargin: parent.height * 0.1
+//                anchors.right: parent.right
+//                anchors.verticalCenter: parent.verticalCenter
+//                verticalAlignment: Text.AlignVCenter
+//                font.capitalization: Font.MixedCase
+//                font.bold: true
+//                font.pointSize: 14
+//                font.family: "SF UI Text"
+//                horizontalAlignment: Text.AlignHCenter
+
+//                MouseArea {
+//                    id: btnSave
+//                    anchors.fill: parent
+//                }
+//            }
+//        }
     }
 }

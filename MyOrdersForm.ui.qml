@@ -1,7 +1,8 @@
 import QtQuick 2.4
+import QuickIOS 0.1
 import "qrc:/controls"
 
-Item {
+ViewController {
     width: 400
     height: 400
     property alias tfRentedBottles: tfRentedBottles

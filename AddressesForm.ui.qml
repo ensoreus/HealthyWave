@@ -1,12 +1,12 @@
 import QtQuick 2.4
+import QuickIOS 0.1
+
 import "qrc:/controls"
 
-Item {
+ViewController {
     id: root
     width: 400
     height: 400
-    property alias navigationBar: navigationBar
-    property alias btnAddNewAddress: btnAddNewAddress
     property alias emptyList: emptyList
     property alias lstAddresses: lstAddresses
     property alias btnAddNew: btnAddNew
@@ -18,7 +18,7 @@ Item {
 
         ListView {
             id: lstAddresses
-            anchors.top: navigationBar.bottom
+            anchors.top: parent.top
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.left: parent.left
@@ -29,28 +29,14 @@ Item {
                 lbCity.text: addressesPresent.rows[index].city
             }
 
-            model: ListModel {
-                ListElement {
-                    street: "Вул. Мілютенка 47, кв 14"
-                    city: "Київ"
-                }
+            model: []
 
-                ListElement {
-                    street: "Вул. Хрещатик 1, пов. 8, кв 14"
-                    city: "Київ"
-                }
-
-                ListElement {
-                    street: "Вул. Героїв УПА 14, кв. 88"
-                    city: "Київ"
-                }
-            }
         }
 
         Rectangle {
             id: emptyList
             color: "#ffffff"
-            anchors.top: navigationBar.bottom
+            anchors.top: parent.top
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.left: parent.left
@@ -99,36 +85,6 @@ Item {
                 anchors.top: lbNoAddresses.bottom
                 anchors.topMargin: 52
                 anchors.horizontalCenter: parent.horizontalCenter
-            }
-        }
-
-        HWNavigationBar {
-            id: navigationBar
-            x: 406
-            y: 137
-            showMenu: false
-            showLogo: false
-            showBack: true
-            label: "Мої адреси"
-
-            Image {
-                id: plus
-                x: 345
-                y: 8
-                width: parent.height * 0.6
-                height: parent.height * 0.6
-                anchors.rightMargin: 6
-                fillMode: Image.PreserveAspectFit
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
-                source: "qrc:/commons/btn-plus.png"
-            }
-
-            MouseArea {
-                id: btnAddNewAddress
-                x: 352
-                y: 9
-                anchors.fill: parent
             }
         }
     }

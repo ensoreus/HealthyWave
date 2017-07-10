@@ -1,8 +1,10 @@
 import QtQuick 2.4
+import QuickIOS 0.1
 import "qrc:/Api.js" as Api
 import "qrc:/"
 
 AddressesForm {
+    id: addressListView
     signal back
 
     Storage{
@@ -10,6 +12,7 @@ AddressesForm {
     }
     Component.onCompleted: {
         storage.getAddresses(function(result){
+
             if(typeof(result) != 'undefined' && typeof(result.rows[0]) !='undefined'){
                 lstAddresses.visible = true
                 emptyList.visible = false
@@ -23,40 +26,47 @@ AddressesForm {
         });
     }
 
-    NewAddress{
-        id: newAddressPanel
-        x: parent.width
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        width: parent.width
-        Behavior on x {
-            NumberAnimation {
-                target: newAddressPanel
-                property: "x"
-                duration: 300
-                easing.type: Easing.InOutQuad
+    property var navigationItem: NavigationItem{
+        rightBarButtonItems: VisualItemModel{
+            BarButtonItem{
+                image:"qrc:/commons/btn-plus.png"
+                imageSourceSize.width:35
+                imageSourceSize.height:35
+                onClicked:{
+                    navigationController.push("qrc:/address/NewAddress.qml")
+                }
             }
         }
-        onAddedNewAddress:{
-             storage.getAddresses(function(result){
-                 lstAddresses.model = result.rows.length
-                 addressesPresent = result
-                 lstAddresses.update()
-             })
-         }
     }
 
-    btnAddNew.onButtonClick: {
-        newAddressPanel.x = 0
-    }
 
-    btnAddNewAddress.onClicked: {
-        newAddressPanel.x = 0
-    }
 
-    navigationBar.onBackClick:{
-        back()
-    }
+//    NewAddress{
+//        id: newAddressPanel
+//        x: parent.width
+//        anchors.top: parent.top
+//        anchors.bottom: parent.bottom
+//        width: parent.width
+//        Behavior on x {
+//            NumberAnimation {
+//                target: newAddressPanel
+//                property: "x"
+//                duration: 300
+//                easing.type: Easing.InOutQuad
+//            }
+//        }
+//        onAddedNewAddress:{
+//             storage.getAddresses(function(result){
+//                 lstAddresses.model = result.rows.length
+//                 addressesPresent = result
+//                 lstAddresses.update()
+//             })
+//         }
+//    }
 
+
+//    btnAddNewAddress.onClicked: {
+//        newAddressPanel.x = 0
+//    }
 
 }

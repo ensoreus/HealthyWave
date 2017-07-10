@@ -1,5 +1,11 @@
 import QtQuick 2.0
+
+import QtQuick.Window 2.2
+import QtQuick.Controls 1.2
+import QuickIOS 0.1
+
 import "qrc:/controls"
+
 Item {
     x:0
     y:0
@@ -13,40 +19,48 @@ Item {
             state = "slideIn"
         }
 
+        property var menuModel: [
+            {"file":"qrc:/address/MyOrders.qml", "title":"Замовлення", "present": true},
+            {"file":"qrc:/address/Addresses.qml", "title":"Мої адреси", "present": false}
+        ]
+
         onMyOrdersItem: {
-            mainScreenLoader.source = "qrc:/orders/MyOrders.qml"
-            mainScreenContainer.state = "slideIn"
-            navigationBar.showBack = true
-            navigationBar.showMenu = false
-            navigationBar.showLogo = false
-            navigationBar.label = "Замовлення"
+//            mainScreenLoader.source = "qrc:/orders/MyOrders.qml"
+//            mainScreenContainer.state = "slideIn"
+//            navigationBar.showBack = true
+//            navigationBar.showMenu = false
+//            navigationBar.showLogo = false
+//            navigationBar.label = "Замовлення"
+
         }
 
         onAddressesItem: {
-            mainScreenLoader.source = "qrc:/address/Addresses.qml"
-            mainScreenLoader.anchors.top = mainScreenContainer.top
             mainScreenContainer.state = "slideIn"
+            var item = menuModel[1]
+            if (item["present"]) {
+                mainScreen.present(Qt.resolvedUrl(item["file"]));
+            } else {
+                mainScreen.navigationController.push(Qt.resolvedUrl(item["file"]));
+            }
         }
 
-        Rectangle {
+
+        NavigationController {
             id: mainScreenContainer
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             x: 0
             width: parent.width
-            color: "white"
+            prefersStatusBarHidden: true
+            color: "#2bb0a4"
+            navigationBar.color:"#2bb0a4"
+            navigationBar.titleAttributes: NavigationBarTitleAttributes{
+                textColor: "white"
+                imageSource: "qrc:/commons/logo-hw.png"
+            }
 
-            HWNavigationBar{
-                id: navigationBar
-                x: 0
-                y: 0
-                anchors.top: parent.top
-                anchors.right: parent.right
-                anchors.left: parent.left
-                width: parent.width
-                height: parent.height * 0.08
-                showMenu: true
-                showBack: false
+            initialViewController: MainScreen{
+                id:mainScreen
                 onMenuClick: {
                     if (mainScreenContainer.state == "slideOut"){
                         mainScreenContainer.state = "slideIn"
@@ -54,22 +68,8 @@ Item {
                         mainScreenContainer.state = "slideOut"
                     }
                 }
-                onBackClick: {
-                    mainScreenLoader.source = "qrc:/mainScreen/MainScreen.qml"
-                    navigationBar.showBack = false
-                    navigationBar.showMenu = true
-                    navigationBar.showLogo = true
-                }
             }
 
-            Loader{
-                anchors.top: navigationBar.bottom
-                anchors.bottom: mainScreenContainer.bottom
-                anchors.left: mainScreenContainer.left
-                anchors.right: mainScreenContainer.right
-                id: mainScreenLoader
-                source: "MainScreen.qml"
-            }
             Rectangle{
                 id: shadowOverlay
                 anchors.fill: parent
