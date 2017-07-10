@@ -105,3 +105,66 @@ function confirmPinCode(pin, phone, callback){
     xhr.send();
     return xhr.status
 }
+
+function getCustomerAddresses(token, authdata, callback){
+    var xhr = new XMLHttpRequest();
+    var resultFunc = function(response){
+
+    }
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
+            print('HEADERS_RECEIVED');
+        } else if(xhr.readyState === XMLHttpRequest.DONE) {
+            var object = JSON.parse(xhr.responseText.toString());
+            print(JSON.stringify(object, null, 2));
+            if(typeof(object.error) == 'undefined'){
+                callback(object, token)
+            }else{
+                //auth(authdata.phone, authdata.secKey )
+            }
+
+
+        }
+    }
+    xhr.open("GET", baseUrl + "getaddresses?key=" + token);
+    xhr.send();
+}
+
+function call(routine, params, authData, onSuccess, onFailure){
+    var xhr = new XMLHttpRequest();
+    var url = baseUrl + routine + serializeParams(params)
+
+    var sendRequest = function(token){
+        xhr.open("GET", url + "key=" + token);
+        xhr.send();
+    }
+
+    var onAuthError = function(authData, onReady){
+        auth(authData.phone, authData.secKey, function(token){
+            sendRequest(token)
+        })
+    }
+
+    var onReady = function(){
+        var object = JSON.parse(xhr.responseText.toString());
+        if(typeof(object.error) != 'undefined'){
+            if (object.error.match(/^Ключ доступа не найден или просрочен:\.*/)){
+                onAuthError(authData, onReady)
+            }
+        }else{
+            onSuccess(object, authData.token)
+        }
+    }
+
+    xhr.onreadystatechange = onReady
+    sendRequest()
+}
+
+function serializeParams(params){
+    var line = "?"
+    for (var key in params.keys()) {
+      line += key + "=" + params[key] + "&"
+    }
+    return line
+}
