@@ -147,4 +147,16 @@ Item {
                 callback(result)
             });
     }
+
+    function getAuthData(callback){
+        var authData = new Object;
+          getPhone(function(phoneRes){
+            getToken(function(tokenRes){
+                var json = "{\"secKey\":\"" + getSecKey() + "\", \"phone\":\"" + phoneRes +"\", \"token\":\""+ tokenRes+"\"}"
+                print (json)
+                authData = JSON.parse(json)
+                callback(authData)
+            })
+          })
+    }
 }

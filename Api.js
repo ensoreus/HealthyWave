@@ -136,6 +136,7 @@ function call(routine, params, authData, onSuccess, onFailure){
     var url = baseUrl + routine + serializeParams(params)
 
     var sendRequest = function(token){
+        print(url + "key=" + token)
         xhr.open("GET", url + "key=" + token);
         xhr.send();
     }
@@ -158,12 +159,12 @@ function call(routine, params, authData, onSuccess, onFailure){
     }
 
     xhr.onreadystatechange = onReady
-    sendRequest()
+    sendRequest(authData.token)
 }
 
 function serializeParams(params){
     var line = "?"
-    for (var key in params.keys()) {
+    for (var key in params) {
       line += key + "=" + params[key] + "&"
     }
     return line
