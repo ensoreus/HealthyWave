@@ -44,9 +44,9 @@ function findCity(city, token, callback){
         if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
             print('HEADERS_RECEIVED');
         } else if(xhr.readyState === XMLHttpRequest.DONE) {
-                var object = JSON.parse(xhr.responseText.toString());
-                print(JSON.stringify(object, null, 2));
-                callback(object)
+            var object = JSON.parse(xhr.responseText.toString());
+            print(JSON.stringify(object, null, 2));
+            callback(object)
         }
     }
     console.log(baseUrl + "getcity?city=" + city + "&key=" + token)
@@ -68,7 +68,7 @@ function findStreet(city, street, token, callback){
     }
     xhr.open("GET", baseUrl + "getstreet?city=" + city + "&street=" + street + "&key=" + token);
     xhr.send();
-     return xhr.status
+    return xhr.status
 }
 
 function getPinCode(phone, secKey){
@@ -141,20 +141,30 @@ function call(routine, params, authData, onSuccess, onFailure){
         xhr.send();
     }
 
-    var onAuthError = function(authData, onReady){
+    var onAuthError = function(authData, onTokenUpdated){
         auth(authData.phone, authData.secKey, function(token){
+            onTokenUpdated(token)
             sendRequest(token)
         })
     }
 
+    var onTokenUpdated = function(token){
+        authData.token = token
+    }
+
     var onReady = function(){
-        var object = JSON.parse(xhr.responseText.toString());
-        if(typeof(object.error) != 'undefined'){
-            if (object.error.match(/^Ключ доступа не найден или просрочен:\.*/)){
-                onAuthError(authData, onReady)
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            print(xhr.responseText.toString())
+            var object = JSON.parse(xhr.responseText.toString());
+            if(typeof(object.error) != 'undefined'){
+                if (object.error.match(/^Ключ доступа не найден или просрочен:\.*/)){
+                    onAuthError(authData, onTokenUpdated)
+                }
+            }else if(typeof(object.error) != 'undefined'){
+                onFailure(object.error, authData.token)
+            }else{
+                onSuccess(object, authData.token)
             }
-        }else{
-            onSuccess(object, authData.token)
         }
     }
 
@@ -165,7 +175,7 @@ function call(routine, params, authData, onSuccess, onFailure){
 function serializeParams(params){
     var line = "?"
     for (var key in params) {
-      line += key + "=" + params[key] + "&"
+        line += key + "=" + params[key] + "&"
     }
     return line
 }

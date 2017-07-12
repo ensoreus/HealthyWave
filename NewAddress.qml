@@ -14,28 +14,16 @@ NewAddressForm {
     tfCity.onTextSearchChanged: {
         tfCity.startWheelAnumation()
         storage.getAuthData(function(authData){
-            Api.call("findcity", {"city":tfCity.text}, authData, function(result){
-                console.log("call:"+result)
-            },function(error){
-                console.error("call:" + error)
+            Api.call("getcity", {"city":tfCity.text}, authData, function(result, token){
+                tfCity.model = result.result
+                tfCity.popup.open()
+                storage.saveToken(token)
+                tfCity.stopWheelAnimation()
+            },function(error, token){
+                console.error("call:" + error.error)
+                tfCity.stopWheelAnimation()
             })
         })
-
-//        var gotToken = function(token){
-//            storage.saveToken(token)
-//            Api.findCity(tfCity.text, token, function(response){
-//                if(typeof(response.error) !='undefined' && response.error != "Неверный формат параметра [city]" && response.error != "Не заполнен параметр [city]"){
-//                    Api.auth(storage.getPhone(), storage.getSecKey(), gotToken);
-//                }else{
-//                    tfCity.model = response.result
-//                    tfCity.popup.open()
-//                }
-//                tfCity.stopWheelAnimation()
-//            })
- //       }
-//        storage.getToken(gotToken, function(phone, secKey){
-//            Api.auth(phone, secKey, gotToken);
-//        })
     }
 
     tfCity.onActivated:{
@@ -44,21 +32,21 @@ NewAddressForm {
 
     tfStreet.onTextSearchChanged: {
         tfStreet.startWheelAnumation()
-        var gotToken = function(token){
-            storage.saveToken(token)
-            Api.findStreet(tfCity.text, tfStreet.text, token, function(response){
-                if(typeof(response.error) !='undefined' && response.error != "Неверный формат параметра [street]" && response.error != "Не заполнен параметр [street]"){
-                    Api.auth(storage.getPhone(), storage.getSecKey(), gotToken);
-                }else{
-                    tfStreet.model = response.result
-                    tfStreet.popup.open()
-                }
+        storage.getAuthData(function(authData){
+            Api.call("getstreet", {"street":tfStreet.text, "city":tfCity.text}, authData, function(result, token){
+                tfStreet.model = result.result
+                tfStreet.popup.open()
+                storage.saveToken(token)
+                tfStreet.stopWheelAnimation()
+            },function(error, token){
+                console.error("call:" + error.error)
                 tfStreet.stopWheelAnimation()
             })
-        }
-        storage.getToken(gotToken, function(phone, secKey){
-            Api.auth(phone, secKey, gotToken);
         })
+    }
+
+    tfStreet.onActivated:{
+        tfStreet.text = tfStreet.currentText
     }
 
     property var navigationItem : NavigationItem {
@@ -74,9 +62,6 @@ NewAddressForm {
         }
     }
 
-    tfStreet.onActivated: {
-        tfStreet.text = tfStreet.currentText
-    }
 
     tfHouse.onWillStartAnimation: {
         tfHouse.forceActiveFocus()
