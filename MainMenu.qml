@@ -1,5 +1,6 @@
 import QtQuick 2.4
 import QtGraphicalEffects 1.0
+import "qrc:/"
 
 MainMenuForm {
     signal myOrdersItem
@@ -8,6 +9,16 @@ MainMenuForm {
     signal contactsItem
     signal infoLink
     signal siteLink
+
+    Storage{
+        id:storage
+    }
+
+    Component.onCompleted: {
+        storage.getName(function(name){
+            userName.text = name
+        })
+    }
 
     btnMyOrders.onClicked: {
         myOrdersItem()
