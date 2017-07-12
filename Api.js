@@ -38,39 +38,6 @@ function registerUser(phone, name, email, token, callback) {
     return xhr.status
 }
 
-function findCity(city, token, callback){
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
-            print('HEADERS_RECEIVED');
-        } else if(xhr.readyState === XMLHttpRequest.DONE) {
-            var object = JSON.parse(xhr.responseText.toString());
-            print(JSON.stringify(object, null, 2));
-            callback(object)
-        }
-    }
-    console.log(baseUrl + "getcity?city=" + city + "&key=" + token)
-    xhr.open("GET", baseUrl + "getcity?city=" + city + "&key=" + token);
-    xhr.send();
-    return xhr.status
-}
-
-function findStreet(city, street, token, callback){
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
-            print('HEADERS_RECEIVED');
-        } else if(xhr.readyState === XMLHttpRequest.DONE) {
-            var object = JSON.parse(xhr.responseText.toString());
-            callback(object)
-            print(JSON.stringify(object, null, 2));
-        }
-    }
-    xhr.open("GET", baseUrl + "getstreet?city=" + city + "&street=" + street + "&key=" + token);
-    xhr.send();
-    return xhr.status
-}
-
 function getPinCode(phone, secKey){
     var xhr = new XMLHttpRequest();
     var isSent= "Error"
