@@ -1,4 +1,5 @@
 import QtQuick 2.4
+import QtQuick.Controls 2.1
 import QuickIOS 0.1
 
 import "qrc:/controls"
@@ -10,7 +11,7 @@ ViewController {
     property alias emptyList: emptyList
     property alias lstAddresses: lstAddresses
     property alias btnAddNew: btnAddNew
-    property var addressesPresent
+    property alias busyIndicator: busyIndicator
     Rectangle {
         id: content
         color: "#ffffff"
@@ -24,10 +25,7 @@ ViewController {
             anchors.left: parent.left
             anchors.topMargin: 0
             visible: true
-            delegate: AddressCell {
-                lbStreet.text: addressesPresent.rows[index].street
-                lbCity.text: addressesPresent.rows[index].city
-            }
+
 
             model: []
 
@@ -87,5 +85,13 @@ ViewController {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }
+    }
+    BusyIndicator {
+        id: busyIndicator
+        width: 80
+        height: 80
+        running: true
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 }

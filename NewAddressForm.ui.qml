@@ -15,6 +15,7 @@ ViewController {
     property alias tfApt: tfApt
     property alias tfStreet: tfStreet
     property alias tfCity: tfCity
+    property alias textArea: textArea
 
     Rectangle {
         id: container
@@ -124,6 +125,7 @@ ViewController {
                 placeholderText: "Ваш коментар..."
             }
         }
+
         HWEditableComboBox {
             id: tfCity
             height: parent.height * 0.08
@@ -137,5 +139,6 @@ ViewController {
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
         }
+
     }
 }

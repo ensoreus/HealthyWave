@@ -10,20 +10,24 @@ AddressesForm {
     Storage{
         id:storage
     }
-    Component.onCompleted: {
-        storage.getAddresses(function(result){
 
-            if(typeof(result) != 'undefined' && typeof(result.rows[0]) !='undefined'){
+    Component.onCompleted: {
+        busyIndicator.running = true
+        storage.getAuthData(function(authData){
+            Api.getCustomerAddresses(authData, function(result, newToken){
+                storage.saveToken(newToken)
                 lstAddresses.visible = true
                 emptyList.visible = false
-                lstAddresses.model = result.rows.length
-                addressesPresent = result
+                lstAddresses.model = result.result
                 lstAddresses.update()
-            }else{
+                busyIndicator.running = false
+            },function(error, newToken){
+                storage.saveToken(newToken)
                 lstAddresses.visible = false
                 emptyList.visible = true
-            }
-        });
+                busyIndicator.running = false
+            })
+        })
     }
 
     property var navigationItem: NavigationItem{
@@ -39,11 +43,8 @@ AddressesForm {
         }
     }
 
-
-//             storage.getAddresses(function(result){
-//                 lstAddresses.model = result.rows.length
-//                 addressesPresent = result
-//                 lstAddresses.update()
-
-
+    lstAddresses.delegate: AddressCell {
+        lbStreet.text: street
+        lbCity.text: city
+    }
 }

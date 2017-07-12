@@ -73,29 +73,20 @@ function confirmPinCode(pin, phone, callback){
     return xhr.status
 }
 
-function getCustomerAddresses(token, authdata, callback){
-    var xhr = new XMLHttpRequest();
-    var resultFunc = function(response){
+function getCustomerAddresses(authdata, onSuccess, onFailure){
+    call("getaddresses", {"phone":authdata.phone}, authdata, onSuccess, onFailure);
+}
 
-    }
-
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
-            print('HEADERS_RECEIVED');
-        } else if(xhr.readyState === XMLHttpRequest.DONE) {
-            var object = JSON.parse(xhr.responseText.toString());
-            print(JSON.stringify(object, null, 2));
-            if(typeof(object.error) == 'undefined'){
-                callback(object, token)
-            }else{
-                //auth(authdata.phone, authdata.secKey )
-            }
-
-
-        }
-    }
-    xhr.open("GET", baseUrl + "getaddresses?key=" + token);
-    xhr.send();
+function sendNewAddress(city, street, house, entrance, entranceCode, apartment, floor, comment, authdata, onSuccess, onFailure){
+    call("addaddresscustomer", {"city":city,
+                                "street":street,
+                                "house":house,
+                                "apartment":apartment,
+                                "entrance":entrance,
+                                "floor":floor,
+                                "comment":comment,
+                                "entrancecode":entranceCode,
+                                "phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
 function call(routine, params, authData, onSuccess, onFailure){
@@ -126,9 +117,9 @@ function call(routine, params, authData, onSuccess, onFailure){
             if(typeof(object.error) != 'undefined'){
                 if (object.error.match(/^Ключ доступа не найден или просрочен:\.*/)){
                     onAuthError(authData, onTokenUpdated)
+                }else{
+                    onFailure(object, authData.token)
                 }
-            }else if(typeof(object.error) != 'undefined'){
-                onFailure(object.error, authData.token)
             }else{
                 onSuccess(object, authData.token)
             }
@@ -140,6 +131,9 @@ function call(routine, params, authData, onSuccess, onFailure){
 }
 
 function serializeParams(params){
+    if(params ==""){
+        return "?"
+    }
     var line = "?"
     for (var key in params) {
         line += key + "=" + params[key] + "&"

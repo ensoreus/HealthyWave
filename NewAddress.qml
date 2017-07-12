@@ -4,7 +4,7 @@ import "qrc:/Api.js" as Api
 import "qrc:/"
 
 NewAddressForm {
-
+    id: newAddressView
     signal addedNewAddress
 
     Storage{
@@ -55,8 +55,17 @@ NewAddressForm {
                 title: "Зберегти"
                 tintColor: "white"
                 onClicked: {
-                    storage.writeAddress(tfCity.text, tfStreet.text, tfHouse.text, tfFloor.text, tfApt.text, tfEntrance.text, tfDoorCode.text)
+                    storage.getAuthData(function(authdata){
+                        Api.sendNewAddress(tfCity.text, tfStreet.text, tfHouse.text, tfEntrance.text, tfDoorCode.text, tfApt.text, tfFloor.text, textArea.text, authdata, function(result, token){
+                            storage.saveToken(authdata.token)
+
+                        }, function(error, authdata){
+
+                        })
+                    })
+
                     addedNewAddress()
+                    newAddressView.navigationController.pop()
                 }
             }
         }
