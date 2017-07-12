@@ -16,15 +16,15 @@ AddressesForm {
         storage.getAuthData(function(authData){
             Api.getCustomerAddresses(authData, function(result, newToken){
                 storage.saveToken(newToken)
-                lstAddresses.visible = true
-                emptyList.visible = false
-                lstAddresses.model = result.result
-                lstAddresses.update()
+                if(result.result.count > 0 ){
+                    showAddressesList(result.result)
+                }else{
+                    hideAddressesList()
+                }
                 busyIndicator.running = false
             },function(error, newToken){
                 storage.saveToken(newToken)
-                lstAddresses.visible = false
-                emptyList.visible = true
+                hideAddressesList()
                 busyIndicator.running = false
             })
         })
@@ -41,6 +41,18 @@ AddressesForm {
                 }
             }
         }
+    }
+
+    function showAddressesList(addresses){
+        lstAddresses.visible = true
+        emptyList.visible = false
+        lstAddresses.model = addresses
+        lstAddresses.update()
+    }
+
+    function hideAddressesList(){
+        lstAddresses.visible = false
+        emptyList.visible = true
     }
 
     lstAddresses.delegate: AddressCell {
