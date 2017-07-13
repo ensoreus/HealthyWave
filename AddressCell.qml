@@ -1,12 +1,55 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.1
 
-Item {
+SwipeDelegate {
     id: root
     height: 100
     property alias lbCity: lbCity
     property alias lbStreet: lbStreet
+
+
     width: 414
+
+
+    /*Rectangle {
+        id: backContainer
+        width: 414
+        height: 100
+        color: "#e35454"
+
+        Text {
+            id: txDelete
+            x: 324
+            y: 43
+            width: 73
+            height: 21
+            color: "#ffffff"
+            text: qsTr("Вилучити")
+            anchors.right: parent.right
+            anchors.rightMargin: 2
+            font.weight: Font.DemiBold
+            anchors.verticalCenter: parent.verticalCenter
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pointSize: 12
+            font.family: "SF UI Text"
+        }
+
+//        MouseArea {
+//            id: btnDelete
+//            x: 333
+//            width: parent.width * 0.2
+//            anchors.top: parent.top
+//            anchors.topMargin: 0
+//            anchors.bottom: parent.bottom
+//            anchors.bottomMargin: 0
+//            anchors.right: parent.right
+//            anchors.rightMargin: 0
+//            onClicked: {
+//                deleteItem()
+//            }
+//        }
+    }*/
 
     Rectangle {
         id: container
@@ -71,6 +114,9 @@ Item {
             anchors.leftMargin: 0
             border.color: "#444444"
         }
+
+
     }
+
 
 }

@@ -3,6 +3,7 @@ import QtGraphicalEffects 1.0
 import "qrc:/"
 
 MainMenuForm {
+
     signal myOrdersItem
     signal paymentsItem
     signal addressesItem
