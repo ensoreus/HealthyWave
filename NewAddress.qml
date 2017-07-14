@@ -59,12 +59,13 @@ NewAddressForm {
                         console.log("!!!"+authdata)
                         Api.sendNewAddress(tfCity.text, tfStreet.text, tfHouse.text, tfApt.text, tfEntrance.text, tfFloor.text, authdata, function(result, token){
                             storage.saveToken(authdata.token)
+                            newAddressView.navigationController.pop()
+                            addedNewAddress()
                         }, function(error, authdata){
                         })
                     })
 
-                    addedNewAddress()
-                    newAddressView.navigationController.pop()
+
                 }
             }
         }

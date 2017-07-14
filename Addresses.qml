@@ -1,6 +1,6 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.1
-
+import QtQml.Models 2.2
 import QuickIOS 0.1
 import "qrc:/Api.js" as Api
 import "qrc:/"
@@ -34,11 +34,12 @@ AddressesForm {
         navigationController.push("qrc:/address/NewAddress.qml")
     }
 
+
+
     function showAddressesList(addresses){
         lstAddresses.visible = true
         emptyList.visible = false
-        lstAddresses.model = addresses
-        lstAddresses.update()
+        addressesModel.importData(addresses)
     }
 
     function hideAddressesList(){
@@ -63,6 +64,16 @@ AddressesForm {
                 busyIndicator.running = false
             })
         })
+    }
+    lstAddresses.model:  ListModel{
+        id: addressesModel
+        function importData(data){
+            for(var index in data){
+                var item = data[index]
+                var modelItem = {city:item.city, street:item.street, house:item.house, apartment:item.apartment}
+                    addressesModel.append(modelItem)
+            }
+        }
     }
 
     lstAddresses.delegate: SwipeDelegate {
@@ -104,14 +115,14 @@ AddressesForm {
                 anchors.bottomMargin: 0
                 anchors.leftMargin: parent.width * 0.062
                 anchors.left: parent.left
-                text: lstAddresses.model[index].street
+                text: "Вул." + street + " " + house + ", кв." + apartment
             }
 
             Text {
                 id: lbCity
                 height: parent.height * 0.2
                 color: "#777777"
-                text: lstAddresses.model[index].city
+                text: city
                 font.family: "SF UI Text"
                 font.weight: Font.Thin
                 font.pointSize: 14
@@ -148,20 +159,19 @@ AddressesForm {
             anchors.right: parent.right
 
             SwipeDelegate.onClicked: {
-
                 storage.getAuthData(function(authData){
-                    Api.deleteAddress(lstAddresses.model[index].city,
-                                      lstAddresses.model[index].street,
-                                      lstAddresses.model[index].house,
-                                      lstAddresses.model[index].entrance,
-                                      lstAddresses.model[index].floor,
-                                      lstAddresses.model[index].apartment, authData, function(result, authToken){
-                        lstAddresses.model.splice(index,1)
+                    Api.deleteAddress(lstAddresses.model.get(index).city,
+                                      lstAddresses.model.get(index).street,
+                                      lstAddresses.model.get(index).house,
+                                      lstAddresses.model.get(index).entrance,
+                                      lstAddresses.model.get(index).floor,
+                                      lstAddresses.model.get(index).apartment, authData, function(result, authToken){
+                                          storage.saveToken(authToken)
+                                      }, function(error, authToken){
 
-                    }, function(error, authToken){
-
-                    })
+                                      })
                 })
+                lstAddresses.model.remove(index)
             }
 
             background: Rectangle {
