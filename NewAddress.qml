@@ -56,11 +56,10 @@ NewAddressForm {
                 tintColor: "white"
                 onClicked: {
                     storage.getAuthData(function(authdata){
-                        Api.sendNewAddress(tfCity.text, tfStreet.text, tfHouse.text, tfEntrance.text, tfDoorCode.text, tfApt.text, tfFloor.text, textArea.text, authdata, function(result, token){
+                        console.log("!!!"+authdata)
+                        Api.sendNewAddress(tfCity.text, tfStreet.text, tfHouse.text, tfApt.text, tfEntrance.text, tfFloor.text, authdata, function(result, token){
                             storage.saveToken(authdata.token)
-
                         }, function(error, authdata){
-
                         })
                     })
 

@@ -77,22 +77,29 @@ function getCustomerAddresses(authdata, onSuccess, onFailure){
     call("getaddresses", {"phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
-function sendNewAddress(city, street, house, entrance, entranceCode, apartment, floor, comment, authdata, onSuccess, onFailure){
+function deleteAddress(city, street, house, entrance, floor, apartment, authdata, onSuccess, onFailure){
+    call("deleteaddresscustomer", {"city":city,
+                                "street":street,
+                                "house":house,
+                                "entrance":entrance,
+                                "apartment":apartment,
+                                "floor":floor,
+                                "phone":authdata.phone}, authdata, onSuccess, onFailure);
+}
+
+function sendNewAddress(city, street, house, entrance, apartment, floor, authdata, onSuccess, onFailure){
     call("addaddresscustomer", {"city":city,
                                 "street":street,
                                 "house":house,
                                 "apartment":apartment,
                                 "entrance":entrance,
                                 "floor":floor,
-                                "comment":comment,
-                                "entrancecode":entranceCode,
                                 "phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
 function call(routine, params, authData, onSuccess, onFailure){
     var xhr = new XMLHttpRequest();
     var url = baseUrl + routine + serializeParams(params)
-
     var sendRequest = function(token){
         print(url + "key=" + token)
         xhr.open("GET", url + "key=" + token);
