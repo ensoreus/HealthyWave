@@ -13,8 +13,40 @@ AddressesForm {
         id:storage
     }
 
-    Component.onCompleted: {
-        //busyIndicator.running = false
+    onViewWillAppear:{
+        fetchAddresses()
+    }
+
+    property var navigationItem: NavigationItem{
+        rightBarButtonItems: VisualItemModel{
+            BarButtonItem{
+                image:"qrc:/commons/btn-plus.png"
+                imageSourceSize.width:35
+                imageSourceSize.height:35
+                onClicked:{
+                    navigationController.push("qrc:/address/NewAddress.qml")
+                }
+            }
+        }
+    }
+
+    btnAddNew.onButtonClick: {
+        navigationController.push("qrc:/address/NewAddress.qml")
+    }
+
+    function showAddressesList(addresses){
+        lstAddresses.visible = true
+        emptyList.visible = false
+        lstAddresses.model = addresses
+        lstAddresses.update()
+    }
+
+    function hideAddressesList(){
+        lstAddresses.visible = false
+        emptyList.visible = true
+    }
+
+    function fetchAddresses(){
         busyIndicator.running = true
         storage.getAuthData(function(authData){
             Api.getCustomerAddresses(authData, function(result, newToken){
@@ -31,38 +63,6 @@ AddressesForm {
                 busyIndicator.running = false
             })
         })
-    }
-
-//    lstAddresses.model: ListModel {
-//        ListElement { city: "Bob Bobbleton"; street: "How are you going?" }
-//        ListElement { city: "Rug Emporium"; street: "SALE! All rugs MUST go!" }
-//        ListElement { city: "Electric Co."; street: "Electricity bill 15/07/2016 overdue" }
-//        ListElement { city: "Tips"; street: "Five ways this tip will save your life" }
-//    }
-
-    property var navigationItem: NavigationItem{
-        rightBarButtonItems: VisualItemModel{
-            BarButtonItem{
-                image:"qrc:/commons/btn-plus.png"
-                imageSourceSize.width:35
-                imageSourceSize.height:35
-                onClicked:{
-                    navigationController.push("qrc:/address/NewAddress.qml")
-                }
-            }
-        }
-    }
-
-    function showAddressesList(addresses){
-        lstAddresses.visible = true
-        emptyList.visible = false
-        lstAddresses.model = addresses
-        lstAddresses.update()
-    }
-
-    function hideAddressesList(){
-        lstAddresses.visible = false
-        emptyList.visible = true
     }
 
     lstAddresses.delegate: SwipeDelegate {
@@ -157,6 +157,7 @@ AddressesForm {
                                       lstAddresses.model[index].floor,
                                       lstAddresses.model[index].apartment, authData, function(result, authToken){
                         lstAddresses.model.splice(index,1)
+
                     }, function(error, authToken){
 
                     })
