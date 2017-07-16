@@ -111,6 +111,8 @@
         <file>MyOrdersForm.ui.qml</file>
         <file>img-orderdetails-bg.png</file>
         <file>NoOrders.qml</file>
+        <file>NewOrder.qml</file>
+        <file>img-bottle.png</file>
     </qresource>
     <qresource prefix="/address">
         <file>Addresses.qml</file>
