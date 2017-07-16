@@ -30,7 +30,7 @@ Item {
             title.text: "Сума замовлення"
         }
 
-        HWCheckBocx {
+        HWCheckBox {
             id: cbFirst
             y: 52
             height: 21
@@ -42,7 +42,7 @@ Item {
             checked: true
         }
 
-        HWCheckBocx {
+        HWCheckBox {
             id: cbPump
             x: 5
             height: 21
@@ -58,7 +58,7 @@ Item {
 
         BorderImage {
             id: borderImage
-            anchors.bottomMargin: parent.height * 0.2
+            anchors.bottomMargin: parent.height * 0.3
             anchors.bottom: parent.bottom
             anchors.rightMargin: parent.width * 0.01
             anchors.topMargin: parent.height * 0.02
@@ -79,7 +79,7 @@ Item {
                 font.weight: Font.Thin
                 font.pointSize: 14
                 font.family: "SF UI Text"
-                anchors.leftMargin: parent.width * 0.01
+                anchors.leftMargin: parent.width * 0.1
                 anchors.left: parent.left
                 anchors.topMargin: parent.height * 0.1
                 anchors.top: parent.top

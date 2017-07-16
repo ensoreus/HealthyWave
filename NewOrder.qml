@@ -241,6 +241,9 @@ ViewController {
             anchors.top: lbHint.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             labelText: "ДАЛІ"
+            onButtonClick: {
+                navigationController.push(Qt.resolvedUrl("qrc:/orders/OrderSummary.qml"))
+            }
         }
 
     }
