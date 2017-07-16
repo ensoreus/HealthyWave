@@ -54,6 +54,7 @@
         <file>Star.qml</file>
         <file>HWGreyTextField.qml</file>
         <file>HWEditableComboBox.qml</file>
+        <file>HWStepControl.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>
@@ -113,6 +114,7 @@
         <file>NoOrders.qml</file>
         <file>NewOrder.qml</file>
         <file>img-bottle.png</file>
+        <file>OrderSummary.qml</file>
     </qresource>
     <qresource prefix="/address">
         <file>Addresses.qml</file>

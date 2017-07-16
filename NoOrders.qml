@@ -5,9 +5,8 @@ import "qrc:/controls"
 ViewController{
     id: item1
 
-    property var navigationBarItem: NavigationItem{
+    property var navigationItem: NavigationItem{
         centerBarTitle:"Замовлення"
-        centerBarImage:""
     }
 
     property alias btnAddOrder: btnAddOrder
@@ -40,6 +39,9 @@ ViewController{
             labelColor: ""
             anchors.top: txtNoOrders.bottom
             anchors.horizontalCenter: parent.horizontalCenter
+            onButtonClick: {
+                navigationController.push(Qt.resolvedUrl("qrc:/orders/NewOrder.qml"));
+            }
         }
 
         Text {

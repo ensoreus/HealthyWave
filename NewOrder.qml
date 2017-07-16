@@ -1,9 +1,20 @@
 import QtQuick 2.0
+import QuickIOS 0.1
+import "qrc:/controls"
 
-Item {
-    property alias text1: text1
-    property alias text5: text5
-    property alias text6: text6
+ViewController {
+    property alias lbOneBottle: lbOneBottle
+    property alias lbTwoBottle: lbTwoBottle
+    property alias lbFiveBottle: lbFiveBottle
+    property alias lbFeeForBottle: lbFeeForBottle
+    property alias stFullBottles: stFullBottles
+    property alias btnNext: btnNext
+    property alias stEmptyBottles: stEmptyBottles
+
+        property var navigationItem: NavigationItem{
+            centerBarTitle:"Нове замовлення"
+        }
+
     Rectangle {
         id: rectangle
         color: "#ffffff"
@@ -116,7 +127,7 @@ Item {
             }
 
             Text {
-                id: text1
+                id: lbOneBottle
                 x: 202
                 color: "#ffffff"
                 text: qsTr("Text")
@@ -128,7 +139,7 @@ Item {
             }
 
             Text {
-                id: text5
+                id: lbTwoBottle
                 x: 202
                 color: "#ffffff"
                 text: qsTr("Text")
@@ -140,7 +151,7 @@ Item {
             }
 
             Text {
-                id: text6
+                id: lbFiveBottle
                 x: 202
                 color: "#ffffff"
                 text: qsTr("Text")
@@ -163,6 +174,73 @@ Item {
             font.family: ".SF UI Text"
             font.pointSize: 18
             anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        HWStepControl {
+            id: stFullBottles
+            x: 250
+            width: parent.width * 0.7
+            height: parent.height * 0.05
+            from: 1
+            value: 1
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: parent.height * 0.05
+            anchors.top: txBottlesTotal.bottom
+            font.pointSize: 30
+        }
+
+        Text {
+            id: txBottlesEmpty
+            x: 317
+            text: qsTr("К-ть бутлів в замовленні")
+            anchors.topMargin: parent.height * 0.01
+            font.family: ".SF UI Text"
+            font.weight: Font.Thin
+            font.pointSize: 18
+            anchors.top: stFullBottles.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.underline: false
+        }
+
+        HWStepControl {
+            id: stEmptyBottles
+            x: 96
+            y: -363
+            width: parent.width * 0.7
+            height: parent.height * 0.05
+            anchors.topMargin: parent.height * 0.01
+            font.pointSize: 30
+            anchors.top: txBottlesEmpty.bottom
+            from: 1
+            value: 1
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Text {
+            id: lbHint
+            x: 48
+            width: parent.width * 0.8
+            height: parent.height * 0.08
+            text: qsTr("*Якщо у Вас немає порожніх бутлів на обмін, \nВам необхідно внести заставу за бутель")
+            font.pointSize: 11
+            font.weight: Font.ExtraLight
+            font.family: "SF UI Text"
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.WordWrap
+            anchors.topMargin: parent.height * 0.01
+            anchors.top: stEmptyBottles.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        HWRoundButton {
+            id: btnNext
+            x: 75
+            width: parent.width * 0.7
+            height: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.02
+            anchors.top: lbHint.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            labelText: "ДАЛІ"
         }
 
     }
