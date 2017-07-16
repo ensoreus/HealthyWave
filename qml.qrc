@@ -110,6 +110,7 @@
         <file>MyOrders.qml</file>
         <file>MyOrdersForm.ui.qml</file>
         <file>img-orderdetails-bg.png</file>
+        <file>NoOrders.qml</file>
     </qresource>
     <qresource prefix="/address">
         <file>Addresses.qml</file>

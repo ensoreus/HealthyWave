@@ -19,9 +19,8 @@ Item {
         id: leftBarButtonItemModel
     }
 
-    property var centerBarTitle: Item{
-        id: centerBarTitleItem
-    }
+    property string centerBarTitle
+    property string centerBarImage
 
     // Same as rightBar
     property alias rightBarButtonItem : rightBarButtonItemModel.children

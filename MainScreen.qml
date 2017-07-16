@@ -13,7 +13,8 @@ ViewController {
         property alias btnOrder: btnOrder
         signal menuClick
         navigationItem: NavigationItem {
-
+            centerBarImage: "qrc:/commons/logo-hw.png"
+            centerBarTitle: ""
             leftBarButtonItems : VisualItemModel {
                BarButtonItem {
                    onTintColorChanged: {

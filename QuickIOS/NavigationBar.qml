@@ -30,6 +30,9 @@ Rectangle {
   // The current title
   property string currentTitle : stack.topBarItem.title
 
+  //The current header Image
+  property string currentHeaderImageSource: stack.topBarItem.titleImage
+
   // The current title item
   property var currentTitleItem : stack.topBarItem.titleView
 
@@ -121,13 +124,13 @@ Rectangle {
           Component {
               id: creator
               NavigationBarItem {
-                  title: item.title
+                  title: navigationItem.centerBarTitle
                   backStage: index > 0
                   leftBarButtonItems: navigationItem.leftBarButtonItems
                   rightBarButtonItems: navigationItem.rightBarButtonItems
                   barTintColor : navigationBar.barTintColor
                   titleView.color: titleAttributes.textColor
-                  titleImage:titleAttributes.imageSource
+                  titleImage: navigationItem.centerBarImage
               }
           }
 

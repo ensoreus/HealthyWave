@@ -18,6 +18,8 @@ AddressesForm {
     }
 
     property var navigationItem: NavigationItem{
+        centerBarTitle:"Мої адреси"
+        centerBarImage:""
         rightBarButtonItems: VisualItemModel{
             BarButtonItem{
                 image:"qrc:/commons/btn-plus.png"

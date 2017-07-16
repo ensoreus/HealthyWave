@@ -20,23 +20,21 @@ Item {
         }
 
         property var menuModel: [
-            {"file":"qrc:/address/MyOrders.qml", "title":"Замовлення", "present": true},
+            {"file":"qrc:/orders/NoOrders.qml", "title":"Замовлення", "present": false},
             {"file":"qrc:/address/Addresses.qml", "title":"Мої адреси", "present": false}
         ]
 
         onMyOrdersItem: {
-//            mainScreenLoader.source = "qrc:/orders/MyOrders.qml"
-//            mainScreenContainer.state = "slideIn"
-//            navigationBar.showBack = true
-//            navigationBar.showMenu = false
-//            navigationBar.showLogo = false
-//            navigationBar.label = "Замовлення"
-
+            pushViewController(0)
         }
 
         onAddressesItem: {
+            pushViewController(1)
+        }
+
+        function pushViewController(index){
             mainScreenContainer.state = "slideIn"
-            var item = menuModel[1]
+            var item = menuModel[index]
             if (item["present"]) {
                 mainScreen.present(Qt.resolvedUrl(item["file"]));
             } else {
@@ -44,14 +42,13 @@ Item {
             }
         }
 
-
         NavigationController {
             id: mainScreenContainer
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             x: 0
             width: parent.width
-            prefersStatusBarHidden: true
+            prefersStatusBarHidden: false
             color: "#2bb0a4"
             navigationBar.color:"#2bb0a4"
             navigationBar.titleAttributes: NavigationBarTitleAttributes{
