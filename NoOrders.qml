@@ -11,10 +11,6 @@ ViewController{
 
     property alias btnAddOrder: btnAddOrder
 
-    btnAddOrder.onButtonClick: {
-
-    }
-
     Rectangle {
         id: content
         color: "#ffffff"
