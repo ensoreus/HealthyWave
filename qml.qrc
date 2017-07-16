@@ -57,6 +57,7 @@
         <file>HWStepControl.qml</file>
         <file>HWHeader.qml</file>
         <file>HWCheckBox.qml</file>
+        <file>HWRadioButton.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>
