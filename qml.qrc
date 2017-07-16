@@ -55,6 +55,7 @@
         <file>HWGreyTextField.qml</file>
         <file>HWEditableComboBox.qml</file>
         <file>HWStepControl.qml</file>
+        <file>HWHeader.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>
