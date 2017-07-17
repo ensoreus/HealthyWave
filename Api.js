@@ -50,8 +50,8 @@ function getPinCode(phone, secKey){
             isSent = object.valueOf("result")
         }
     }
-    console.log( baseUrl + "getpincode?phone=" + phone + "&key=" + secKey)
-    xhr.open("GET", baseUrl + "getpincode?phone=" + phone + "&key=" + secKey);
+    console.log( baseUrl + "getpincode?phone=" + phone + "&securitykey=" + secKey)
+    xhr.open("GET", baseUrl + "getpincode?phone=" + phone + "&securitykey=" + secKey);
     xhr.send();
     return isSent
 }

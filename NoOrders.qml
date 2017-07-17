@@ -55,6 +55,10 @@ ViewController{
             horizontalAlignment: Text.AlignHCenter
             font.family: "SF UI Text"
             font.pointSize: 18
+            wrapMode: Text.WordWrap
+            height: parent.height * 0.2
+            width: parent.width * 0.8
+
         }
     }
 

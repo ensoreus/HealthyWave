@@ -7,8 +7,8 @@ CheckBox {
        checked: true
 
        indicator: Rectangle {
-           implicitWidth: 26
-           implicitHeight: 26
+           implicitWidth: 20
+           implicitHeight: 20
            x: control.leftPadding
            y: parent.height / 2 - height / 2
            radius: 3
@@ -24,7 +24,7 @@ CheckBox {
             anchors.topMargin: 1
             text:"✓"
             verticalAlignment: Text.AlignVCenter
-            font.pointSize: 30
+            font.pointSize: 25
             color: "white"
             visible: control.checked
            }
@@ -35,7 +35,7 @@ CheckBox {
            font: control.font
            opacity: enabled ? 1.0 : 0.3
            color:  "black"
-           horizontalAlignment: Text.AlignHCenter
+           horizontalAlignment: Text.AlignRight
            verticalAlignment: Text.AlignVCenter
        }
 }

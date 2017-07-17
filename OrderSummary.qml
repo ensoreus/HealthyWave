@@ -1,8 +1,15 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.1
+import QuickIOS 0.1
 import "qrc:/controls"
 
-Item {
+ViewController {
+    property alias rbCashPayment: rbCashPayment
+    property alias rbCardPayment: rbCardPayment
+    property alias btnNext: btnNext
+    property var navigationItem: NavigationItem{
+        centerBarTitle:"Замовлення"
+    }
     Rectangle {
         id: content
         color: "#ffffff"
@@ -58,7 +65,7 @@ Item {
 
         BorderImage {
             id: borderImage
-            anchors.bottomMargin: parent.height * 0.3
+            anchors.bottomMargin: parent.height * 0.4
             anchors.bottom: parent.bottom
             anchors.rightMargin: parent.width * 0.01
             anchors.topMargin: parent.height * 0.02
@@ -257,7 +264,40 @@ Item {
             anchors.leftMargin: 0
             anchors.right: parent.right
             anchors.left: parent.left
-            title.text: "Додатково"
+            title.text: "Спосіб оплати"
+        }
+
+        HWRadioButton {
+            id: rbCashPayment
+            text: "Готівковий розрахунок"
+            anchors.right: borderImage.right
+            anchors.rightMargin: 0
+            anchors.topMargin: parent.height * 0.02
+            anchors.top: hPaymentType.bottom
+            anchors.left: cbPump.left
+            anchors.leftMargin: 0
+        }
+
+        HWRadioButton {
+            id: rbCardPayment
+            text: "Платіжна картка"
+            checked: false
+            anchors.topMargin: parent.height * 0.01
+            anchors.top: rbCashPayment.bottom
+            anchors.right: rbCashPayment.right
+            anchors.rightMargin: 0
+            anchors.left: rbCashPayment.left
+            anchors.leftMargin: 0
+        }
+
+        HWRoundButton {
+            id: btnNext
+            width: parent.width * 0.7
+            height: parent.height * 0.1
+            labelText: "ДАЛІ"
+            anchors.topMargin: parent.height * 0.01
+            anchors.top: rbCardPayment.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 

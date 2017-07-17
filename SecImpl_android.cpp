@@ -15,8 +15,9 @@ QString SecImplementation::generateSecKey(){
       char digit = dis(gen);
       ba.append(digit);
     }
-  //qDebug() << ba.toHex() << '\n';
-  return ba.toHex();
+  qDebug() << ba.toHex() << '\n';
+  _secKey = ba.toHex();
+  return _secKey;
 }
 
 bool SecImplementation::storeSecKey(){

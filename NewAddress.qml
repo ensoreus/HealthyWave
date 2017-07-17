@@ -51,7 +51,6 @@ NewAddressForm {
 
     property var navigationItem : NavigationItem {
         centerBarTitle:"Нова адреса"
-        centerbarImage:""
         rightBarButtonItems: VisualItemModel {
             BarButtonItem {
                 title: "Зберегти"

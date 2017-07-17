@@ -70,6 +70,7 @@ AddressesForm {
     lstAddresses.model:  ListModel{
         id: addressesModel
         function importData(data){
+            addressesModel.clear()
             for(var index in data){
                 var item = data[index]
                 var modelItem = {city:item.city, street:item.street, house:item.house, apartment:item.apartment}
