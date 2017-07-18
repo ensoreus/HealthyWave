@@ -118,6 +118,7 @@
         <file>NewOrder.qml</file>
         <file>img-bottle.png</file>
         <file>OrderSummary.qml</file>
+        <file>OrdersAddress.qml</file>
     </qresource>
     <qresource prefix="/address">
         <file>Addresses.qml</file>
