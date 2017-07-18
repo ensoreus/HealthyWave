@@ -58,6 +58,7 @@
         <file>HWHeader.qml</file>
         <file>HWCheckBox.qml</file>
         <file>HWRadioButton.qml</file>
+        <file>HWGreenButton.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>
@@ -70,6 +71,7 @@
         <file>img-disclosure-arrow.png</file>
         <file>btn-plus.png</file>
         <file>logo-hw.png</file>
+        <file>btn-searchTime.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
@@ -119,6 +121,7 @@
         <file>img-bottle.png</file>
         <file>OrderSummary.qml</file>
         <file>OrdersAddress.qml</file>
+        <file>OrderTime.qml</file>
     </qresource>
     <qresource prefix="/address">
         <file>Addresses.qml</file>
