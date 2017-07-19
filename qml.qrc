@@ -59,6 +59,7 @@
         <file>HWCheckBox.qml</file>
         <file>HWRadioButton.qml</file>
         <file>HWGreenButton.qml</file>
+        <file>SearchTimeWaiter.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>
@@ -72,6 +73,7 @@
         <file>btn-plus.png</file>
         <file>logo-hw.png</file>
         <file>btn-searchTime.png</file>
+        <file>img-searchTimeWaiter.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
