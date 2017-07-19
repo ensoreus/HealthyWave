@@ -3,7 +3,7 @@ import QtQuick.Controls 2.1
 
 import "qrc:/controls" as Controls
 
-Item {
+Page {
     id: item1
     width: 400
     height: 400
@@ -22,6 +22,8 @@ Item {
             width: parent.width * 0.7
             color: "#808080"
             text: qsTr("Уведіть ваш промо-код*")
+            anchors.topMargin: parent.height * 0.05
+            anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 12
         }
@@ -29,8 +31,8 @@ Item {
         Controls.HWTextField {
             id: promoCodeField
             height: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.05
             anchors.top: text1.bottom
-            anchors.topMargin: 25
             anchors.right: text1.right
             anchors.rightMargin: 0
             anchors.left: text1.left
@@ -40,10 +42,10 @@ Item {
         Button {
             id: btnNext
             x: 340
-            width: 41
-            height: 41
+            width: parent.width * 0.1
+            height: parent.width * 0.1
+            anchors.topMargin: parent.height * 0.1
             anchors.top: promoCodeField.bottom
-            anchors.topMargin: 50
             anchors.right: promoCodeField.right
             anchors.rightMargin: 0
             background: Image {
@@ -69,6 +71,4 @@ Item {
             font.pixelSize: 12
         }
     }
-
-
 }

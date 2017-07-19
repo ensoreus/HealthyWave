@@ -2,7 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 2.1
 import "qrc:/controls" as Controls
 
-Item {
+Page {
     width: 400
     height: 400
     property alias txtError: txtError
@@ -19,21 +19,21 @@ Item {
         Controls.HWPinField {
             id: pinField
             x: 103
+            anchors.topMargin: parent.height * 0.05
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: text1.bottom
-            anchors.topMargin: 25
         }
 
         Button {
             id: btnNext
             x: 253
-            width: 41
-            height: 41
+            width: parent.width * 0.1
+            height: parent.width * 0.1
             text: ""
-            anchors.right: parent.right
-            anchors.rightMargin: 50
+            anchors.topMargin: parent.height * 0.1
+            anchors.right: text1.right
+            anchors.rightMargin: 0
             anchors.top: pinField.bottom
-            anchors.topMargin: 43
             background: Image {
                 id: btnGlyph
                 source: "btn-next.png"
@@ -43,11 +43,12 @@ Item {
 
         Text {
             id: text1
-            y: 60
             width: 276
             height: 15
             color: "#808080"
             text: qsTr("Уведіть код підтвердження")
+            anchors.topMargin: parent.height * 0.05
+            anchors.top: parent.top
             horizontalAlignment: Text.AlignHCenter
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 15
@@ -58,8 +59,8 @@ Item {
             height: 20
             color: "#808080"
             text: qsTr("Відправити код ще раз")
-            anchors.top: pinField.bottom
-            anchors.topMargin: 55
+            anchors.topMargin: 0
+            anchors.top: btnNext.top
             anchors.right: btnNext.left
             anchors.rightMargin: 20
             verticalAlignment: Text.AlignVCenter

@@ -11,9 +11,7 @@ import "qrc:/"
 
 ApplicationWindow {
     visible: true
-    //width: 414
-    //height: 736
-   height: 667
+    height: 667
     width: 375
     title: qsTr("Хвиля здоров'я")
     Storage{

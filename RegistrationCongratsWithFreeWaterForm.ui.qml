@@ -1,7 +1,8 @@
 import QtQuick 2.4
+import QtQuick.Controls 2.1
 import "qrc:/controls"
 
-Item {
+Page {
     width: 400
     height: 400
     property alias btnContinue: btnContinue
@@ -14,7 +15,7 @@ Item {
         Text {
             id: txRegistered
             x: 187
-            width: 241
+            width: parent.width * 0.7
             height: 15
             text: qsTr("Вітаємо, Вас зареєстровано!")
             anchors.topMargin: parent.height * 0.2
@@ -27,18 +28,16 @@ Item {
 
         Text {
             id: txGifted
+            width: parent.width * 0.9
             height: parent.height * 0.1
             text: qsTr("Ми даруємо Вам 1 бутиль води безкоштовно ")
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: parent.height * 0.02
             wrapMode: Text.WordWrap
-            anchors.rightMargin: parent.width * 0.1
-            anchors.right: parent.right
-            anchors.leftMargin: parent.width * 0.1
-            anchors.left: parent.left
             font.pointSize: 13
             font.underline: true
             font.bold: true
             anchors.top: txRegistered.bottom
-            anchors.topMargin: 10
             font.family: "SF UI Text"
             horizontalAlignment: Text.AlignHCenter
         }
@@ -46,13 +45,13 @@ Item {
         Text {
             id: txProceed
             x: 37
-            width: 326
+            width: parent.width * 0.9
             height: parent.height * 0.1
             text: qsTr("Зараз Ви можете користуватися найкращим сервісом достави води в Києві.")
+            anchors.topMargin: parent.height * 0.02
             fontSizeMode: Text.Fit
             font.pointSize: 13
             anchors.top: txGifted.bottom
-            anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
             font.family: "SF UI Text"
             font.weight: Font.Light

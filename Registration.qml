@@ -14,7 +14,7 @@ Item {
     property alias logoBg: logoBg
     property alias bg: bg
     property int currentPageIndex: 0
-    property var token: ""
+    property string token: ""
     signal registrationDone
     width: 414
     height: 736
@@ -36,6 +36,133 @@ Item {
         width: parent.width
         color: "white"
         anchors.fill: parent
+
+        RegistrationPagePin{
+            id:pinEditPage
+            anchors.top:parent.top
+            anchors.bottom: parent.bottom
+            x: 0
+            width: parent.width
+
+            onStartEditData: {
+                item1.state = "interactive"
+                pinEditPage.presenterAnimationEnds()
+            }
+
+            onNextPage: {
+                Api.confirmPinCode(pinEditPage.pinField.pin, phoneEditPage.phoneField.text, function(response){
+                    if(response.result === true){
+                        stackLayout.push(emailEditPage)
+                    }else{
+                        txtError.text = "Невірний PIN-код";
+                        pinField.clear()
+                    }
+                })
+            }
+
+            btnSendAgain.onClicked: {
+                txtError.text = ""
+                pinField.clear()
+                Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
+            }
+
+            Behavior on x {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+
+
+        RegistrationPageEmail{
+            id: emailEditPage
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            x: 0
+            width: parent.width
+
+            onStartEditData: {
+                //item1.state = "interactive"
+                emailEditPage.presenterAnimationEnds()
+            }
+            onNextPage: {
+                stackLayout.push(nameEditPage)
+            }
+            Behavior on x {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+
+
+        RegistrationPageName{
+            id: nameEditPage
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            x:0
+            width: parent.width
+            onStartEditData: {
+                nameEditPage.presenterAnimationEnds()
+            }
+            onNextPage: {
+
+                Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token){
+                    storage.saveToken(token)
+                    Api.registerUser(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, token, function(response){
+                        if(!response.error){
+                            storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text)
+                            stackLayout.push(promoCodeEditPage)
+
+                        }
+                    })
+                })
+
+            }
+            Behavior on x {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+
+
+        RegistrationPromoCode{
+            id: promoCodeEditPage
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            x: 0
+            width: parent.width
+            onStartEditData: {
+                //item1.state = "interactive"
+                promoCodeEditPage.presenterAnimationEnds()
+            }
+            onEndEditData: {
+                item1.state = "default"
+            }
+            onNextPage: {
+                //item1.state = "default"
+                logoBg.height = 283
+                logo.height = 114
+                stackLayout.push(congratsPage)
+            }
+        }
+
+
+        RegistrationCongratsWithFreeWater{
+            id: congratsPage
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            x: parent.width
+            width: parent.width
+
+            onButtonContinue: {
+                item1.opacity = 0
+            }
+        }
 
         Rectangle {
             id: logoBg
@@ -63,20 +190,14 @@ Item {
             }
         }
 
-        Rectangle {
-            property var activePage : phoneEditPage
-            width: parent.width
+        StackView{
             id: stackLayout
             anchors.top: logoBg.bottom
-            anchors.topMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
             anchors.left: parent.left
-            anchors.leftMargin: 0
+            anchors.right: parent.right
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 0
 
-            RegistrationPagePhone{
+            initialItem: RegistrationPagePhone{
                 id:phoneEditPage
                 anchors.fill: parent
                 onStartEditData: {
@@ -84,146 +205,13 @@ Item {
                 }
 
                 onNextPage: {
-                    currentPageIndex = 1
-                    pinEditPage.x = 0
-                    stackLayout.activePage = pinEditPage
+                    stackLayout.push(pinEditPage)
                     var result = Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
                     console.log(result)
                 }
 
-                Behavior on x {
-                    NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.InOutQuad
-                    }
-                }
             }
 
-            RegistrationPagePin{
-                id:pinEditPage
-                anchors.top:parent.top
-                anchors.bottom: parent.bottom
-                x: parent.width
-                width: parent.width
-
-                onStartEditData: {
-                    item1.state = "interactive"
-                    pinEditPage.presenterAnimationEnds()
-                }
-
-                onNextPage: {
-                    Api.confirmPinCode(pinEditPage.pinField.pin, phoneEditPage.phoneField.text, function(response){
-                        if(response.result === true){
-                            currentPageIndex = 2
-                            emailEditPage.x = 0
-                        }else{
-                            txtError.text = "Невірний PIN-код";
-                            pinField.clear()
-                        }
-                    })
-                }
-
-                btnSendAgain.onClicked: {
-                    txtError.text = ""
-                    pinField.clear()
-                    Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
-                }
-
-                Behavior on x {
-                    NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
-
-           RegistrationPageEmail{
-                id: emailEditPage
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                x: parent.width
-                width: parent.width
-
-                onStartEditData: {
-                    //item1.state = "interactive"
-                    emailEditPage.presenterAnimationEnds()
-                }
-                onNextPage: {
-                    currentPageIndex = 3
-                    nameEditPage.x = 0
-                }
-                Behavior on x {
-                    NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
-
-            RegistrationPageName{
-                id: nameEditPage
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                x: parent.width
-                width: parent.width
-                onStartEditData: {
-                    nameEditPage.presenterAnimationEnds()
-                }
-                onNextPage: {
-
-                    Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token){
-                        storage.saveToken(token)
-                        Api.registerUser(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, token, function(response){
-                            if(!response.error){
-                                storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text)
-                                currentPageIndex = 5
-                                promoCodeEditPage.x = 0
-                            }
-                        })
-                    })
-
-                }
-                Behavior on x {
-                    NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
-
-            RegistrationPromoCode{
-                id: promoCodeEditPage
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                x: parent.width
-                width: parent.width
-                onStartEditData: {
-                    //item1.state = "interactive"
-                    promoCodeEditPage.presenterAnimationEnds()
-                }
-                onEndEditData: {
-                    item1.state = "default"
-                }
-                onNextPage: {
-                    //item1.state = "default"
-                    logoBg.height = 283
-                    logo.height = 114
-                    currentPageIndex = 6
-                    congratsPage.x = 0
-                }
-            }
-
-            RegistrationCongratsWithFreeWater{
-                id: congratsPage
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                x: parent.width
-                width: parent.width
-
-                onButtonContinue: {
-                    item1.opacity = 0
-                }
-            }
         }
     }
 
@@ -257,16 +245,17 @@ Item {
 
     transitions:
         Transition {
-            NumberAnimation{
-                properties: "height"
-                duration: 500
-                easing.type: Easing.InQuint
-            }
-            onRunningChanged: {
-                if(!running){
-                    stackLayout.activePage.presenterAnimationEnds()
-                }
+        NumberAnimation{
+            properties: "height"
+            duration: 500
+            easing.type: Easing.InQuint
+        }
+        onRunningChanged: {
+            if(!running){
+                stackLayout.currentItem.presenterAnimationEnds()
             }
         }
+    }
+
 
 }

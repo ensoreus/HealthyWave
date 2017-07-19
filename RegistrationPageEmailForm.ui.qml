@@ -3,7 +3,7 @@ import QtQuick.Controls 2.1
 
 import "qrc:/controls" as Controls
 
-Item {
+Page {
     width: 400
     height: 400
     property alias emailField: emailField
@@ -16,13 +16,13 @@ Item {
         Button {
             id: btnNext
             x: 253
-            width: 44
-            height: 44
+            width: parent.width * 0.1
+            height: parent.width * 0.1
             text: ""
+            anchors.topMargin: parent.height * 0.1
             anchors.right: emailField.right
             anchors.rightMargin: 0
             anchors.top: emailField.bottom
-            anchors.topMargin: 50
             background: Image {
                 id: btnGlyph
                 source: "btn-next.png"
@@ -33,11 +33,12 @@ Item {
         Text {
             id: text1
             x: 52
-            y: 50
             width: parent.width * 0.7
-            height: 15
+            height: parent.height * 0.05
             color: "#808080"
             text: qsTr("Уведіть электрону адресу *")
+            anchors.topMargin: parent.height * 0.05
+            anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 15
         }
@@ -45,8 +46,8 @@ Item {
         Controls.HWEmailField {
             id: emailField
             height: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.05
             anchors.top: text1.bottom
-            anchors.topMargin: 25
             anchors.right: text1.right
             anchors.rightMargin: 0
             anchors.left: text1.left

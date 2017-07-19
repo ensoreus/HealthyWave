@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 
 import "qrc:/controls" as Controls
 
-Item {
+Page {
     id: item1
     width: 400
     height: 800
@@ -20,6 +20,8 @@ Item {
 
         Controls.HWPhoneField {
             id: phoneField
+            width: parent.width * 0.8
+            height: parent.width * 0.1
             text: "+380"
             anchors.top: text1.bottom
             anchors.topMargin: 25
@@ -32,18 +34,18 @@ Item {
         Button {
             id: btnNext
             x: 299
-            width: 40
-            height: 40
+            width: parent.width * 0.1
+            height: parent.width * 0.1
             text: qsTr("")
             anchors.top: phoneField.bottom
             anchors.topMargin: 50
             anchors.right: phoneField.right
             anchors.rightMargin: 0
             background: Image {
-                    id: btnGlyph
-                    source: "btn-next.png"
-                    anchors.fill: parent
-                }
+                id: btnGlyph
+                source: "btn-next.png"
+                anchors.fill: parent
+            }
         }
 
         Text {
@@ -51,10 +53,12 @@ Item {
             x: 50
             y: 60
             width: parent.width * 0.7
-            height: 15
+            height: parent.height * 0.02
             color: "#808080"
             text: qsTr("Введите номер телефона")
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: parent.height * 0.05
             font.pixelSize: 15
         }
     }
