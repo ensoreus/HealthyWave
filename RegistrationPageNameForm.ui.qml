@@ -20,6 +20,7 @@ Page {
             height: 15
             color: "#808080"
             text: qsTr("Уведіть Ваше і'мя")
+            font.pointSize: 14
             anchors.topMargin: parent.height * 0.05
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
@@ -60,8 +61,9 @@ Page {
             text: qsTr("*Продолжая, Вы подтверждаете, что прочитали и
 принимаете Условия предоставления услуг
 и Политику конфиденциальности. ")
+            wrapMode: Text.WordWrap
             font.weight: Font.Thin
-            font.pointSize: 10
+            font.pointSize: 12
             font.family: "SF UI Text"
             anchors.topMargin: parent.height * 0.1
             anchors.top: btnNext.bottom

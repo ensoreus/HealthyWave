@@ -167,7 +167,7 @@ Item {
         Rectangle {
             id: logoBg
             width: 414
-            height: 283
+            height: parent.height * 0.5
             color: "#1EB2A4"
             anchors.right: parent.right
             anchors.rightMargin: 0
@@ -181,7 +181,7 @@ Item {
                 x: 91
                 y: 122
                 width:  400
-                height: 114
+                height: parent.height * 0.4
                 sourceSize.width: 0
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -232,13 +232,13 @@ Item {
             name: "interactive"
             PropertyChanges {
                 target: logoBg
-                height: 60
+                height: item1.height * 0.1
             }
 
             PropertyChanges {
                 target: logo
                 width: 400
-                height: 42
+                height: item1.height * 0.1
             }
         }
     ]

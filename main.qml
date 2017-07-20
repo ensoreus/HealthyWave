@@ -11,8 +11,10 @@ import "qrc:/"
 
 ApplicationWindow {
     visible: true
-    height: 667
-    width: 375
+//    height: 1920
+//    width: 1080
+    height: 736
+    width: 414
     title: qsTr("Хвиля здоров'я")
     Storage{
         id:storage
@@ -23,7 +25,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        if(!storage.isRegistered()){
+        if(storage.isRegistered()){
             registration.visible = true
             greeting.visible = true
         }else{

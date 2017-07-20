@@ -19,6 +19,9 @@ Page {
         Controls.HWPinField {
             id: pinField
             x: 103
+            width: parent.width * 0.5
+            height: parent.height * 0.1
+            border.width: 0
             anchors.topMargin: parent.height * 0.05
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: text1.bottom
@@ -43,15 +46,14 @@ Page {
 
         Text {
             id: text1
-            width: 276
-            height: 15
+            width: parent.width * 0.7
+            height: parent.height * 0.05
             color: "#808080"
             text: qsTr("Уведіть код підтвердження")
             anchors.topMargin: parent.height * 0.05
             anchors.top: parent.top
             horizontalAlignment: Text.AlignHCenter
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 15
         }
 
         Text {
@@ -59,15 +61,17 @@ Page {
             height: 20
             color: "#808080"
             text: qsTr("Відправити код ще раз")
+            font.family: "SF UI Text"
             anchors.topMargin: 0
             anchors.top: btnNext.top
             anchors.right: btnNext.left
             anchors.rightMargin: 20
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 15
 
             MouseArea {
                 id: btnSendAgain
+                width: parent.weight * 0.4
+                height: parent.height * 0.05
                 anchors.fill: parent
             }
         }
