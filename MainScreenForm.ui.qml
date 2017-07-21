@@ -23,7 +23,7 @@ Item {
 
         Controls.HWRoundButton {
             id: btnOrder
-            height: 60
+            height: 60 * ratio
             anchors.topMargin: parent.height * 0.04
             anchors.rightMargin: parent.width * 0.1
             anchors.leftMargin: parent.width * 0.1
@@ -35,7 +35,7 @@ Item {
 
         Controls.HWGreenRoundButton {
             id: btnFreeWater
-            height: 60
+            height: 60 * ratio
             anchors.topMargin: parent.height * 0.2
             anchors.rightMargin: parent.width * 0.1
             anchors.leftMargin: parent.width * 0.1
@@ -49,7 +49,7 @@ Item {
     MainScreenHintPanel {
         id: mainScreenHintPanel
         anchors.top: mainScreenContent.bottom
-        anchors.topMargin: -100
+        anchors.topMargin: -100 * ratio
         anchors.right: parent.right
         anchors.rightMargin: 0
         anchors.left: parent.left
