@@ -32,8 +32,8 @@ MouseArea {
         anchors.verticalCenter: parent.verticalCenter
 
         Item {
-            width: imageItem.width
-            height: imageItem.height
+            width: imageItem.width * ratio
+            height: imageItem.height * ratio
             anchors.horizontalCenter: parent.horizontalCenter
 
             Image {
@@ -55,7 +55,7 @@ MouseArea {
           anchors.horizontalCenter: parent.horizontalCenter
           font.family: "Helvetica Neue"
           renderType: Text.NativeRendering
-          font.pixelSize: 16
+          font.pointSize: 16
           color: "white"
           verticalAlignment: Text.AlignVCenter
           horizontalAlignment: Text.AlignHCenter

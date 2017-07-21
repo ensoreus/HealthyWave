@@ -43,6 +43,7 @@ qreal refWidth = 414.;
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("ratio", QVariant::fromValue(m_ratio));
+  engine.rootContext()->setContextProperty("fontRatio", QVariant::fromValue(m_ratioFont));
   engine.addImportPath("qrc:///");
   QuickIOS::registerTypes();
   engine.load(QUrl(QLatin1String("qrc:/main.qml")));

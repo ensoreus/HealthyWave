@@ -44,7 +44,7 @@ Rectangle {
     anchors.horizontalCenter: parent.horizontalCenter
 
     color: "#000000"
-    font.pixelSize: 16
+    font.pointSize: 16
     scale: paintedWidth > width ? (width / paintedWidth) : 1
   }
 
