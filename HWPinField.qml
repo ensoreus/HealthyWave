@@ -12,18 +12,18 @@ Rectangle{
     property bool aboutToFocus: false
     signal willStartAnimation
     signal lastDigitEdit
+    width: 200
     function clear(){
         pinDigit1.clear()
         pinDigit2.clear()
         pinDigit3.clear()
         pinDigit4.clear()
     }
-    width: pinDigit4.width + pinDigit4.x + 3
 
     HWTextField {
         id: pinDigit1
-        width: font.pointSize * 2
-        height: 40
+        width: parent.width * 0.23
+        height: parent.height
         font.weight: Font.DemiBold
         anchors.top: parent.top
         inputMethodHints: Qt.ImhDigitsOnly
@@ -44,7 +44,8 @@ Rectangle{
 
     HWTextField {
         id: pinDigit2
-        width: font.pointSize * 2
+        width: parent.width * 0.23
+        height: parent.height
         font.weight: Font.DemiBold
         anchors.top: parent.top
         anchors.topMargin: 0
@@ -66,7 +67,8 @@ Rectangle{
 
     HWTextField {
         id: pinDigit3
-        width: font.pointSize * 2
+        width: parent.width * 0.23
+        height: parent.height
         font.weight: Font.DemiBold
         font.pointSize: 20
         anchors.left: pinDigit2.right
@@ -88,7 +90,8 @@ Rectangle{
 
     HWTextField {
         id: pinDigit4
-        width: font.pointSize * 2
+        width: parent.width * 0.23
+        height: parent.height
         font.weight: Font.DemiBold
         anchors.left: pinDigit3.right
         anchors.leftMargin: 10

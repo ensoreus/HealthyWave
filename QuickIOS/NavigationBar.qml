@@ -4,6 +4,7 @@ import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.1
 import QtQml.Models 2.1
 import QuickIOS 0.1
+import QtQuick.Window 2.2
 import "./priv"
 import "./def"
 
@@ -43,7 +44,7 @@ Rectangle {
   property var currentRightButtonItems : navigationItem.rightBarButtonItems
 
   width: parent.width
-  height: QIDevice.screenFillStatusBar ? 44 + 20 : 44
+  height: QIDevice.screenFillStatusBar ? ( 44 + 20 ) * ratio : 44 * ratio
 
   color : "#f8f8f8"
 
@@ -75,7 +76,7 @@ Rectangle {
       anchors.left: parent.left
       anchors.right: parent.right
       anchors.bottom: parent.bottom
-      height : 44
+      height : 44 * ratio
       delegate: NavigationBarTransition {}
 
       property NavigationBarItem topBarItem : dummyNavigationBarItem
@@ -96,8 +97,8 @@ Rectangle {
       anchors.left: parent.left
       anchors.bottom: parent.bottom
 
-      width: 22 + 16;
-      height: 44
+      width: (22 + 16) * ratio;
+      height: 44 * ratio
 
       NavigationBackButton {
           id: backButton

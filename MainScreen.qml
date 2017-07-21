@@ -18,12 +18,12 @@ ViewController {
             leftBarButtonItems : VisualItemModel {
                BarButtonItem {
                    onTintColorChanged: {
-                    tintColor = "white"
+                        tintColor = "white"
                    }
                    image: "qrc:/commons/btn-menu.png"
                    onClicked: {
-                       console.log(tintColor)
-                       menuClick();
+                        console.log("HJHJHJrrrrrrr")
+                        menuClick();
                    }
              }
             }

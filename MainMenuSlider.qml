@@ -50,7 +50,7 @@ Item {
             width: parent.width
             prefersStatusBarHidden: false
             color: "#2bb0a4"
-            navigationBar.color:"#2bb0a4"
+            navigationBar.color: "#2bb0a4"
             navigationBar.titleAttributes: NavigationBarTitleAttributes{
                 textColor: "white"
                 imageSource: "qrc:/commons/logo-hw.png"
@@ -73,6 +73,7 @@ Item {
                 color: "#b36f6f6f"
                 visible: false
             }
+
             states:[
                 State {
                     name: "slideOut"

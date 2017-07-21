@@ -1,20 +1,12 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
-#include "NetworkCore.hpp"
 #include "SecurityCore.hpp"
 #include "qisystemdispatcher.h"
 #include "quickios.h"
 #include "qidevice.h"
+#include <QScreen>
 
-static QObject * netcore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-
-    Q_UNUSED(scriptEngine)
-    auto ncore = new NetworkCore();
-    engine->setObjectOwnership(ncore, QQmlEngine::CppOwnership);
-    return ncore;
-}
 
 static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -28,18 +20,29 @@ static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJS
 
 int main(int argc, char *argv[])
 {
+    QGuiApplication app(argc, argv);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#ifdef Q_OS_DARWIN
+  qreal m_ratio = 1;
+  qreal m_ratioFont = 1;
+#else
+  qreal refDpi = 160.;
+  //  qreal refHeight = 1776.;
+  //  qreal refWidth = 1080.;
+qreal refHeight = 736.;
+qreal refWidth = 414.;
+  QRect rect = QGuiApplication::primaryScreen()->geometry();
+  qreal height = qMax(rect.width(), rect.height());
+  qreal width = qMin(rect.width(), rect.height());
+  qreal dpi = QGuiApplication::primaryScreen()->logicalDotsPerInch();
+  qreal m_ratio = qMin(height/refHeight, width/refWidth);
+  qreal m_ratioFont = qMin(height*refDpi/(dpi*refHeight), width*refDpi/(dpi*refWidth));
+#endif
 
-//#ifdef Q_OS_IOS
-//    QGuiApplication app(argc, argv);
-//#else
-//    QApplication app(argc,argv);
-//#endif
-QGuiApplication app(argc, argv);
-  QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-  //qmlRegisterSingletonType<NetworkCore>("NetCore", 1, 0, "NetCore", netcore_qjsvalue_singletontype_provider);
+
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
-
   QQmlApplicationEngine engine;
+  engine.rootContext()->setContextProperty("ratio", QVariant::fromValue(m_ratio));
   engine.addImportPath("qrc:///");
   QuickIOS::registerTypes();
   engine.load(QUrl(QLatin1String("qrc:/main.qml")));

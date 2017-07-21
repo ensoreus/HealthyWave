@@ -52,7 +52,7 @@ Rectangle {
       // The area reserved for right bar.
       id : leftBarArea
       anchors.left: parent.left
-      anchors.leftMargin: backStage ? 22 + 16 : 0
+      anchors.leftMargin: backStage ? (22 + 16) * ratio : 0
       anchors.top: parent.top
       anchors.bottom: parent.bottom
 
@@ -73,7 +73,7 @@ Rectangle {
       anchors.bottomMargin: 2
       anchors.horizontalCenter: parent.horizontalCenter
       width: parent.width * 0.3
-      height: 30
+      height: 30 * ratio
   }
 
   Item {

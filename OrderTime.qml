@@ -2,8 +2,9 @@ import QtQuick 2.0
 
 Item {
     property alias btnSearch: btnSearch
-    property alias hWTextField: hWTextField
     property alias btnChooseAnother: btnChooseAnother
+    property alias tfComment: tfComment
+    property alias searchTimeWaiter: searchTimeWaiter
     Rectangle {
         id: content
         color: "#ffffff"
@@ -57,7 +58,7 @@ Item {
         }
 
         HWTextField {
-            id: hWTextField
+            id: tfComment
             x: 170
             width: parent.width * 0.9
             anchors.topMargin: parent.height * 0.01
@@ -69,13 +70,23 @@ Item {
             id: txComment
             color: "#9b9b9b"
             text: qsTr("Коментар")
-            anchors.right: hWTextField.right
+            anchors.right: tfComment.right
             anchors.rightMargin: 0
             font.weight: Font.Thin
             anchors.topMargin: parent.height * 0.1
             anchors.top: txtChooseAnother.bottom
-            anchors.left: hWTextField.left
+            anchors.left: tfComment.left
             anchors.leftMargin: 0
+        }
+
+        SearchTimeWaiter {
+            id: searchTimeWaiter
+            x: 213
+            y: 112
+            width: parent.width * 0.5
+            height: parent.width * 0.5
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
     }
