@@ -5,21 +5,22 @@ import "qrc:/controls"
 Page {
     width: 400
     height: 400
+    property alias debugConsole: debugConsole
     property alias waiterPanel: waiterPanel
     property alias btnNext: btnNext
     property alias nameField: nameField
 
-//    Component.onCompleted: {
-//        waiterPanel.visible = false
-//    }
 
+        Component.onCompleted: {
+            waiterPanel.visible = false
+        }
     Rectangle {
         id: rectangle
         color: "#ffffff"
         anchors.fill: parent
 
         Text {
-            id: text1
+            id: label
             x: 70
             width: parent.width * 0.7
             height: 15
@@ -36,10 +37,10 @@ Page {
             width: parent.width * 0.1
             height: parent.width * 0.1
             anchors.topMargin: parent.height * 0.02
-            anchors.top: text1.bottom
-            anchors.right: text1.right
+            anchors.top: label.bottom
+            anchors.right: label.right
             anchors.rightMargin: 0
-            anchors.left: text1.left
+            anchors.left: label.left
             anchors.leftMargin: 0
         }
 
@@ -77,6 +78,19 @@ Page {
                 source: "btn-next.png"
                 anchors.fill: parent
             }
+        }
+
+        TextEdit {
+            id: debugConsole
+            height: parent.height * 0.4
+            text: qsTr("")
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.top: btnNext.bottom
+            anchors.topMargin: 100
+            font.pixelSize: 12
         }
     }
 

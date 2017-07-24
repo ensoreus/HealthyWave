@@ -112,6 +112,7 @@ Item {
                 Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token){
                     storage.saveToken(token)
                     Api.registerUser(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, token, function(response){
+                        nameEditPage.debugConsole.text = response.toString()
                         if(!response.error){
                             storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text)
                             stackLayout.push(promoCodeEditPage)

@@ -5,6 +5,7 @@ RegistrationPageNameForm {
     signal nextPage
     signal startEditData
     signal endEditData
+    //property alias debugConsole: debugConsole
     function presenterAnimationEnds(){
         nameField.forceActiveFocus()
     }
