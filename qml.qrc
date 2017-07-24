@@ -28,8 +28,6 @@
         <file>RegistrationPageEmailForm.ui.qml</file>
         <file>RegistrationPageName.qml</file>
         <file>RegistrationPageNameForm.ui.qml</file>
-        <file>RegistrationPagePasswd.qml</file>
-        <file>RegistrationPagePasswdForm.ui.qml</file>
         <file>RegistrationPromoCodeForm.ui.qml</file>
         <file>RegistrationPromoCode.qml</file>
         <file>RegistrationCongratsWithFreeWater.qml</file>

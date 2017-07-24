@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QuickIOS 0.1
 import "qrc:/controls"
 
-ViewController {
+Item {
     property alias lbOneBottle: lbOneBottle
     property alias lbTwoBottle: lbTwoBottle
     property alias lbFiveBottle: lbFiveBottle
@@ -22,8 +22,8 @@ ViewController {
 
         Image {
             id: image
-            width: 195
-            height: 247
+            width: parent.width * 0.3
+            height: parent.height * 0.4
             anchors.topMargin: parent.height * 0.01
             anchors.top: parent.top
             anchors.left: parent.left
@@ -191,7 +191,7 @@ ViewController {
         Text {
             id: txBottlesEmpty
             x: 317
-            text: qsTr("К-ть бутлів в замовленні")
+            text: qsTr("К-ть порожних бутлів в замовленні")
             anchors.topMargin: parent.height * 0.01
             font.family: ".SF UI Text"
             font.weight: Font.Thin

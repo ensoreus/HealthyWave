@@ -9,6 +9,14 @@ RegistrationPageNameForm {
         nameField.forceActiveFocus()
     }
 
+    function startProcessIndicator(){
+        waiterPanel.visible = true
+    }
+
+    function stopPropcessIndicator(){
+        waiterPanel.visible = false
+    }
+
     btnNext.onPressed: {
         if (nameField.acceptableInput){
             btnNext.opacity = 0.8

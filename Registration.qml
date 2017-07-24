@@ -108,14 +108,16 @@ Item {
                 nameEditPage.presenterAnimationEnds()
             }
             onNextPage: {
-
+                startProcessIndicator()
                 Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token){
                     storage.saveToken(token)
                     Api.registerUser(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, token, function(response){
                         if(!response.error){
                             storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text)
                             stackLayout.push(promoCodeEditPage)
-
+                            stopPropcessIndicator()
+                        }else{
+                            stopPropcessIndicator()
                         }
                     })
                 })

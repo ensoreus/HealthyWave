@@ -45,7 +45,7 @@ Rectangle {
         MouseArea{
             anchors.fill: parent
             id: clickable
-            onClicked: {
+            onPressed: {
                 label.color = btnRoot.labelHighlightColor
                 buttonClick()
                 label.color = btnRoot.labelColor
