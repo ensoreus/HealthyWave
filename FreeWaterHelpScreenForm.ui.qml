@@ -16,30 +16,30 @@ Item {
 
     Rectangle {
         id: rectangle
-        height: parent.height - 60
+        height: parent.height - 60 * ratio
         color: "#ffffff"
         anchors.fill: parent
 
         Text {
             id: mainLabel
-            x: 187
+            x: 187 * ratio
             text: qsTr("Отримуй воду безкоштовно")
             anchors.topMargin: parent.height * 0.05
             font.weight: Font.Light
             font.family: "SF UI Text"
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 22
+            font.pointSize: 22
         }
 
         Image {
             id: image
-            x: 150
+            x: 150 * ratio
             width: parent.width * 0.5
             height: parent.width * 0.5
             fillMode: Image.PreserveAspectFit
             anchors.top: mainLabel.bottom
-            anchors.topMargin: 20
+            anchors.topMargin: 20 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             source: "qrc:/commons/img-socium.png"
         }
@@ -49,62 +49,62 @@ Item {
             color: "#9b9b9b"
             text: qsTr("Ваш промокод")
             anchors.top: mainText.bottom
-            anchors.topMargin: 15
+            anchors.topMargin: 15 * ratio
             anchors.left: parent.left
-            anchors.leftMargin: 30
+            anchors.leftMargin: 30 * ratio
             font.weight: Font.Light
             font.family: "ST UI Text"
-            font.pixelSize: 14
+            font.pointSize: 14
         }
 
         Text {
             id: mainText
-            width: 264
-            height: 65
+            width: 264 * ratio
+            height: 65 * ratio
             text: qsTr("Відправ промо код свому другу і отримай безкоштовно 2 бутля води")
             anchors.top: image.bottom
-            anchors.topMargin: 15
+            anchors.topMargin: 15 * ratio
             anchors.left: parent.left
-            anchors.leftMargin: 36
+            anchors.leftMargin: 36 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
             font.weight: Font.Light
             font.family: "SF UI Text"
             horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 16
+            font.pointSize: 16
         }
 
         Controls.HWTextField {
             id: promoCodeText
-            x: 35.8
+            x: 35.8 * ratio
             anchors.right: parent.right
-            anchors.rightMargin: 36
+            anchors.rightMargin: 36 * ratio
             readOnly: true
             anchors.top: promoCodeLabel.bottom
             anchors.topMargin: 7
             anchors.left: parent.left
-            anchors.leftMargin: 36
+            anchors.leftMargin: 36 * ratio
 
             Text {
                 id: btnCopyCodeLabel
-                width: 60
+                width: 60 * ratio
                 text: qsTr("копіювати")
                 anchors.right: parent.right
-                anchors.rightMargin: 5
+                anchors.rightMargin: 5 * ratio
                 anchors.verticalCenter: parent.verticalCenter
                 font.weight: Font.DemiBold
                 font.family: "SF UI Text"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                font.wordSpacing: -2
-                font.pixelSize: 14
+                font.wordSpacing: -2 * ratio
+                font.pointSize: 14
 
                 MouseArea {
                     id: btnCopyCode
                     x: 0
                     y: 0
-                    width: 100
-                    height: 100
+                    width: 100 * ratio
+                    height: 100 * ratio
                     anchors.fill: parent
                 }
             }
@@ -115,13 +115,13 @@ Item {
             color: "#9012fe"
             text: qsTr("Як це працює?")
             anchors.top: promoCodeText.bottom
-            anchors.topMargin: 15
+            anchors.topMargin: 15 * ratio
             font.weight: Font.Light
             font.underline: true
             font.family: "SF UI Text"
             anchors.left: mainText.left
             anchors.leftMargin: 0
-            font.pixelSize: 14
+            font.pointSize: 14
 
             MouseArea {
                 id: btnHowItWorks
@@ -131,20 +131,20 @@ Item {
 
         Controls.HWRoundButton {
             id: btnInvite
-            x: 21
+            x: 21 * ratio
             width: parent.width * 0.7
-            height: 50
+            height: 50 * ratio
             labelHighlightColor: "#00AD9A"
             labelColor: "#000000"
             labelText: "ЗАПРОСИТИ"
             anchors.top: lbHowItWorks.bottom
-            anchors.topMargin: 15
+            anchors.topMargin: 15 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
         Controls.HWRoundButton {
             id: btnBack
-            x: 32
+            x: 32 * ratio
             visible: false
             width: parent.width * 0.7
             height: btnInvite.height
@@ -152,7 +152,7 @@ Item {
             labelColor: "#000000"
             labelText: "МІЙ ПРОМОКОД"
             anchors.top: mainText.bottom
-            anchors.topMargin: 95
+            anchors.topMargin: 95 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             showGlyph: true
         }
@@ -194,6 +194,7 @@ Item {
                 visible: false
             }
         },
+
         State {
             name: "howItWorks"
 

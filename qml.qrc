@@ -74,6 +74,7 @@
         <file>logo-hw.png</file>
         <file>btn-searchTime.png</file>
         <file>img-searchTimeWaiter.png</file>
+        <file>img-TimeSearchStatus.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>

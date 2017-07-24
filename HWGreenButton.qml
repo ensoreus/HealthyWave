@@ -10,7 +10,7 @@ Item {
         width: 250
         fillMode: Image.PreserveAspectFit
         anchors.fill: parent
-        source: "btn-searchTime.png"
+        source: "qrc:/commons/btn-searchTime.png"
     }
 
     MouseArea {
@@ -20,7 +20,7 @@ Item {
             buttonClick()
         }
         onPressedChanged: {
-            image.opacity = pressed() ? 0.5 : 1.0
+            image.opacity = pressed ? 0.5 : 1.0
         }
     }
 

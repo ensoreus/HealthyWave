@@ -25,7 +25,6 @@ Page {
             anchors.topMargin: parent.height * 0.05
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 12
         }
 
         Controls.HWTextField {
@@ -68,7 +67,6 @@ Page {
             anchors.left: promoCodeField.left
             anchors.leftMargin: 0
             wrapMode: Text.WordWrap
-            font.pixelSize: 12
         }
     }
 }

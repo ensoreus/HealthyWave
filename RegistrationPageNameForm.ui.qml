@@ -1,12 +1,12 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.1
-import "qrc:/controls" as Controls
+import "qrc:/controls"
 
 Page {
     width: 400
     height: 400
-    property alias nameField: nameField
     property alias btnNext: btnNext
+    property alias nameField: nameField
 
     Rectangle {
         id: rectangle
@@ -21,12 +21,12 @@ Page {
             color: "#808080"
             text: qsTr("Уведіть Ваше і'мя")
             font.pointSize: 14
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: parent.height * 0.1
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
-        Controls.HWTextField {
+        HWTextField {
             id: nameField
             width: parent.width * 0.1
             height: parent.width * 0.1
@@ -36,22 +36,6 @@ Page {
             anchors.rightMargin: 0
             anchors.left: text1.left
             anchors.leftMargin: 0
-        }
-
-        Button {
-            id: btnNext
-            x: 60
-            width: parent.width * 0.1
-            height: parent.width * 0.1
-            anchors.topMargin: parent.height * 0.1
-            anchors.top: nameField.bottom
-            anchors.right: nameField.right
-            anchors.rightMargin: 0
-            background: Image {
-                id: btnGlyph
-                source: "btn-next.png"
-                anchors.fill: parent
-            }
         }
 
         Text {
@@ -71,6 +55,23 @@ Page {
             anchors.rightMargin: 0
             anchors.left: nameField.left
             anchors.leftMargin: 0
+        }
+
+        Button {
+            id: btnNext
+            x: 299
+            width: parent.width * 0.1
+            height: parent.width * 0.1
+            text: qsTr("")
+            anchors.topMargin: 50 * ratio
+            anchors.top: nameField.bottom
+            anchors.right: nameField.right
+            anchors.rightMargin: 0
+            background: Image {
+                id: btnGlyph
+                source: "btn-next.png"
+                anchors.fill: parent
+            }
         }
     }
 }

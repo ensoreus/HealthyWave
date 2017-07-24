@@ -9,22 +9,22 @@ Rectangle {
     property alias labelText: label.text
     property alias showGlyph: glyph.visible
 
-    width: 200
-    height: 50
+    width: 200 * ratio
+    height: 50 * ratio
     Rectangle{
         id: contents
         anchors.fill: parent
-        anchors.leftMargin: 2
-        anchors.rightMargin: 2
-        anchors.topMargin: 2
-        anchors.bottomMargin: 2
-        radius: 30
+        anchors.leftMargin: 2 * ratio
+        anchors.rightMargin: 2 * ratio
+        anchors.topMargin: 2 * ratio
+        anchors.bottomMargin: 2 * ratio
+        radius: 30 * ratio
         border.color: "#1EB2A4"
-        border.width: 2
+        border.width: 2 * ratio
         Text{
             id:label
-            x: 82
-            y: 15
+            x: 82 * ratio
+            y: 15 * ratio
             font.pointSize: 18
             color: btnRoot.labelColor
             text:"TEXT"
@@ -36,8 +36,8 @@ Rectangle {
             id: glyph
             anchors.right: label.left
             anchors.verticalCenter: parent.verticalCenter
-            width: 25
-            height: 30
+            width: 25 * ratio
+            height: 30 * ratio
             visible: false
             source:"qrc:/commons/img-back-arrow.png"
         }

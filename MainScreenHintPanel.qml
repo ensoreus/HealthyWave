@@ -2,8 +2,8 @@ import QtQuick 2.0
 
 Rectangle {
     id: rectangle
-    width: 414
-    height: 200
+    width: 414 * ratio
+    height: 200 * ratio
     color: "#00000000"
     property alias shoveUpBtn: shoveUpBtn
     signal showHideHintPanel
@@ -23,31 +23,31 @@ Rectangle {
 
         Text {
             id: text2
-            x: 8
-            y: 8
-            width: 398
-            height: 15
+            x: 8 * ratio
+            y: 8 * ratio
+            width: 398 * ratio
+            height: 15 * ratio
             text: qsTr("Як отримати безкоштовну воду?")
             font.bold: true
-            font.pixelSize: 15
+            font.pointSize: 15
         }
 
         Text {
             id: text3
-            x: 8
-            y: 29
-            width: 398
-            height: 45
+            x: 8 * ratio
+            y: 29 * ratio
+            width: 398 * ratio
+            height: 45 * ratio
             color: "#8c8c8c"
             text: qsTr("Відправте своєму другу цей промо-код  і коли він зробить перше замовлення")
             wrapMode: Text.WordWrap
-            font.pixelSize: 13
+            font.pointSize: 13
         }
     }
 
     MouseArea {
         id: shoveUpBtn
-        x: 187
+        x: 187 * ratio
         width: parent.width * 0.1
         height: parent.height * 0.2
         anchors.horizontalCenter: parent.horizontalCenter

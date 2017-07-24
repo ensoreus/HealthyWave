@@ -298,6 +298,9 @@ ViewController {
             anchors.topMargin: parent.height * 0.01
             anchors.top: rbCardPayment.bottom
             anchors.horizontalCenter: parent.horizontalCenter
+            onButtonClick: {
+                navigationController.push("qrc:/orders/OrderTime.qml")
+            }
         }
     }
 

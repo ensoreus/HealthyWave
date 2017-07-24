@@ -11,8 +11,6 @@ import "qrc:/"
 
 ApplicationWindow {
     visible: true
-//    height: 1920
-//    width: 1080
     height: 736
     width: 414
     title: qsTr("Хвиля здоров'я")
@@ -62,7 +60,6 @@ ApplicationWindow {
                     id: closingFadeOut
                     duration: 400
                 }
-
                 PropertyAction {
                     target: greeting; property: "visible"
                     value: false

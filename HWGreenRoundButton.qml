@@ -14,18 +14,18 @@ Rectangle {
         id: contents
         color: labelHighlightColor
         anchors.fill: parent
-        anchors.leftMargin: 2
-        anchors.rightMargin: 2
-        anchors.topMargin: 2
-        anchors.bottomMargin: 2
-        radius: 30
+        anchors.leftMargin: 2 * ratio
+        anchors.rightMargin: 2 * ratio
+        anchors.topMargin: 2 * ratio
+        anchors.bottomMargin: 2 * ratio
+        radius: 30 * ratio
         border.color: labelHighlightColor
 
         border.width: 2
         Text{
             id:label
-            x: 82
-            y: 15
+            x: 82 * ratio
+            y: 15 * ratio
             font.pointSize: 18
             color: btnRoot.labelColor
             text:"TEXT"

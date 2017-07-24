@@ -1,4 +1,6 @@
 import QtQuick 2.0
+import QuickIOS 0.1
+import "qrc:/controls"
 
 Item {
     property alias btnSearch: btnSearch
@@ -24,15 +26,16 @@ Item {
             id: btnSearch
             x: 205
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.15
             anchors.top: txHint.bottom
         }
 
         Text {
             id: txHint
             x: 307
-            width: parent.width * 0.6
+            width: parent.width * 0.7
             text: qsTr("Запросити найближчий час доставки за Вашою адресою")
+            wrapMode: Text.WordWrap
             font.weight: Font.DemiBold
             horizontalAlignment: Text.AlignHCenter
             anchors.topMargin: parent.height * 0.1
@@ -44,8 +47,11 @@ Item {
             id: txtChooseAnother
             x: 307
             width: parent.width * 0.6
+            color: "#9013fe"
             text: qsTr("Вибрати інший час")
-            font.weight: Font.Light
+            font.underline: true
+            font.pointSize: 15
+            font.weight: Font.Normal
             horizontalAlignment: Text.AlignHCenter
             anchors.topMargin: parent.height * 0.1
             anchors.top: btnSearch.bottom

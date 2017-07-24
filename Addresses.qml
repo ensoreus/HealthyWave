@@ -86,7 +86,7 @@ AddressesForm {
         rightPadding: 0
         leftPadding: 0
         bottomPadding: 0
-        height: 100
+        height: 100 * ratio
         width: lstAddresses.width
 
         contentItem: Rectangle{
@@ -105,7 +105,7 @@ AddressesForm {
 
             Text {
                 id: lbStreet
-                y: 15
+                y: 15 * ratio
                 height: parent.height * 0.35
                 color: "#444444"
                 font.pointSize: 20
@@ -132,14 +132,14 @@ AddressesForm {
                 anchors.right: image.left
                 anchors.rightMargin: 0
                 anchors.top: parent.top
-                anchors.topMargin: 54
+                anchors.topMargin: 54 * ratio
                 anchors.leftMargin: parent.width * 0.062
                 anchors.left: parent.left
             }
 
             Rectangle {
                 id: separatorLine
-                y: 94
+                y: 94 * ratio
                 height: 1
                 color: "#C8C7CC"
                 anchors.bottom: parent.bottom
