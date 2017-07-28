@@ -47,12 +47,11 @@ Rectangle {
 
     MouseArea {
         id: shoveUpBtn
-        x: 187 * ratio
-        width: parent.width * 0.1
+        width: parent.width * 0.2
         height: parent.height * 0.2
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: 0
+        anchors.top: arrowUp.top
+        anchors.topMargin: - parent.height * 0.1
         onClicked: {
             showHideHintPanel()
         }

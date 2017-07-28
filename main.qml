@@ -23,15 +23,15 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        registration.visible = true
-        greeting.visible = true
-//        if(!storage.isRegistered()){
-//            registration.visible = true
-//            greeting.visible = true
-//        }else{
-//            registration.visible = false
-//            greeting.visible = false
-//        }
+//        registration.visible = true
+//        greeting.visible = true
+        if(!storage.isRegistered()){
+            registration.visible = true
+            greeting.visible = true
+        }else{
+            registration.visible = false
+            greeting.visible = false
+        }
     }
 
     Registration.Registration{
@@ -43,7 +43,7 @@ ApplicationWindow {
                     duration: 400
                 }
                 PropertyAction {
-                    target: greeting; property: "visible"
+                    target: registration; property: "visible"
                     value: false
                 }
             }

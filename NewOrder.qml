@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QuickIOS 0.1
 import "qrc:/controls"
 
-Item {
+ViewController {
     property alias lbOneBottle: lbOneBottle
     property alias lbTwoBottle: lbTwoBottle
     property alias lbFiveBottle: lbFiveBottle
@@ -22,7 +22,7 @@ Item {
 
         Image {
             id: image
-            width: parent.width * 0.3
+            width: parent.width * 0.4
             height: parent.height * 0.4
             anchors.topMargin: parent.height * 0.01
             anchors.top: parent.top
@@ -50,7 +50,7 @@ Item {
 
         Rectangle {
             id: rPricesPanel
-            height: 200
+            height: parent.height * 0.35
             color: "#2bb0a4"
             radius: 15
             anchors.topMargin: 5
@@ -114,7 +114,7 @@ Item {
                 width: 54
                 height: 23
                 color: "#ffffff"
-                text: qsTr("Text")
+                text: qsTr("130 грн")
                 anchors.topMargin: parent.height * 0.03
                 anchors.top: txtFee.bottom
                 font.weight: Font.DemiBold
@@ -129,7 +129,7 @@ Item {
                 id: lbOneBottle
                 x: 202
                 color: "#ffffff"
-                text: qsTr("Text")
+                text: qsTr("60 грн")
                 anchors.top: txtOneBottle.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.05
@@ -141,7 +141,7 @@ Item {
                 id: lbTwoBottle
                 x: 202
                 color: "#ffffff"
-                text: qsTr("Text")
+                text: qsTr("45 грн")
                 anchors.top: txtTwoBottles.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.05
@@ -153,7 +153,7 @@ Item {
                 id: lbFiveBottle
                 x: 202
                 color: "#ffffff"
-                text: qsTr("Text")
+                text: qsTr("43 грн")
                 anchors.top: txtFiveBottles.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.05

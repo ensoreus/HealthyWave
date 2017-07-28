@@ -10,11 +10,11 @@ function auth(phone, secKey, callback){
         } else if(xhr.readyState === XMLHttpRequest.DONE) {
             var object = JSON.parse(xhr.responseText.toString());
             print(JSON.stringify(object, null, 2));
-            callback(object.key)
+            callback(object.key, url)
         }
     }
 
-    var url = baseUrl + "authorization?phone=" + phone + "&key=" + secKey
+    var url = baseUrl + "authorization?phone=" + phone + "&securitykey=" + secKey
     console.log(url)
     xhr.open("GET", url);
     xhr.send();
@@ -28,14 +28,13 @@ function registerUser(phone, name, email, token, callback) {
         } else if(xhr.readyState === XMLHttpRequest.DONE) {
             var object = JSON.parse(xhr.responseText.toString());
             print(JSON.stringify(object, null, 2));
-            callback(object)
+            callback(object, url)
         }
     }
     var url = baseUrl + "createcustomer?phone=" + escape(phone) + "&name='"+name+"'&email=" + email + "&key=" + token
     console.log(url)
     xhr.open("GET", url);
     xhr.send();
-    return xhr.status
 }
 
 function getPinCode(phone, secKey){

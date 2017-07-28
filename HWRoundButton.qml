@@ -1,7 +1,9 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.1
+
 import "qrc:/commons"
 
-Rectangle {
+Item {
     id: btnRoot
     signal buttonClick
     property string labelColor: "black"
@@ -39,13 +41,25 @@ Rectangle {
             width: 25 * ratio
             height: 30 * ratio
             visible: false
-            source:"qrc:/commons/img-back-arrow.png"
+            source:Qt.resolvedUrl("qrc:/commons/img-back-arrow.png")
         }
+
 
         MouseArea{
             anchors.fill: parent
             id: clickable
-            onPressed: {
+//            onPressed: {
+//                contents.color = "grey"
+//                label.color = btnRoot.labelHighlightColor
+//            }
+
+//            onReleased: {
+//                 buttonClick()
+//                label.color = btnRoot.labelColor
+//                contents.color = "white"
+//            }
+
+            onClicked: {
                 label.color = btnRoot.labelHighlightColor
                 buttonClick()
                 label.color = btnRoot.labelColor
@@ -54,7 +68,7 @@ Rectangle {
                 contents.color = (clickable.pressed) ? "grey" : "white"
             }
         }
-    }
 
+    }
 
 }

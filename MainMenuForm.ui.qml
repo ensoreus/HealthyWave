@@ -1,5 +1,6 @@
 import QtQuick 2.4
 import "qrc:/controls"
+import QtQuick.Controls 2.1
 
 Item {
     id: item1
@@ -19,11 +20,12 @@ Item {
     property alias btnSite: btnSite
     property alias avatar: avatar
     property alias userName: userName
+
     Rectangle {
         id: userInfoHeader
         height: 200 * ratio
         color: "#00ad9a"
-        anchors.verticalCenterOffset: -19
+        anchors.verticalCenterOffset: -19 * ratio
         anchors.right: parent.right
         anchors.rightMargin: 0
         anchors.left: parent.left
@@ -46,7 +48,7 @@ Item {
 
         Text {
             id: userName
-            width: 200* ratio
+            width: 200 * ratio
             color: "#ffffff"
             text: qsTr("Льорем Іпсум")
             anchors.horizontalCenterOffset: -(parent.width * 0.1) * ratio
@@ -76,8 +78,8 @@ Item {
 
         Text {
             id: lbMyOrders
-            width: 347* ratio
-            height: 20* ratio
+            width: 347 * ratio
+            height: parent.height * 0.05
             text: qsTr("Мої замовлення")
             anchors.horizontalCenterOffset: -50 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
@@ -92,10 +94,11 @@ Item {
                 anchors.fill: parent
             }
         }
+
         Text {
             id: lbPayment
-            width: 347* ratio
-            height: 20* ratio
+            width: 347 * ratio
+            height: parent.height * 0.05
             text: qsTr("Оплата")
             anchors.horizontalCenterOffset: -50 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
@@ -108,14 +111,15 @@ Item {
             MouseArea {
                 id: btnPayments
                 anchors.fill: parent
+                acceptedButtons: Qt.AllButtons
             }
         }
         Text {
             id: lbAddress
-            width: 347* ratio
-            height: 20* ratio
+            width: 347 * ratio
+            height: parent.height * 0.05
             text: qsTr("Адреса достави")
-            anchors.horizontalCenterOffset: -50* ratio
+            anchors.horizontalCenterOffset: -50 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lbPayment.bottom
             anchors.topMargin: 20 * ratio
@@ -126,42 +130,44 @@ Item {
             MouseArea {
                 id: btnAddresses
                 anchors.fill: parent
+                acceptedButtons: Qt.AllButtons
             }
         }
         Text {
             id: lbContacts
-            width: 347* ratio
-            height: 20* ratio
+            width: 347 * ratio
+            height: parent.height * 0.05
             text: qsTr("Контакти")
-            anchors.horizontalCenterOffset: -50* ratio
+            anchors.horizontalCenterOffset: -50 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lbAddress.bottom
-            anchors.topMargin: 20* ratio
+            anchors.topMargin: 20 * ratio
             anchors.left: parent.left
-            anchors.leftMargin: 25* ratio
+            anchors.leftMargin: 25 * ratio
             font.pointSize: 14
 
             MouseArea {
                 id: btnContacts
                 anchors.fill: parent
+                acceptedButtons: Qt.AllButtons
             }
         }
 
         Item {
             id: footer
-            x: 84* ratio
-            y: 156* ratio
-            width: 250* ratio
-            height: 30* ratio
+            x: 84 * ratio
+            y: 156 * ratio
+            width: 250 * ratio
+            height: 30 * ratio
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 15* ratio
+            anchors.bottomMargin: 15 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
 
             Text {
                 id: lbSiteText
                 y: 0
-                width: 97* ratio
-                height: 15* ratio
+                width: 97 * ratio
+                height: 15 * ratio
                 text: qsTr("Офіційний сайт:")
                 anchors.left: parent.left
                 anchors.leftMargin: 0
@@ -171,18 +177,19 @@ Item {
             Text {
                 id: lbLink
                 y: 0
-                height: 15* ratio
+                height: 15 * ratio
                 text: qsTr("www.hvilya-zd.com.ua")
                 font.underline: true
                 anchors.right: parent.right
                 anchors.rightMargin: 0
                 anchors.left: lbSiteText.right
-                anchors.leftMargin: 2* ratio
+                anchors.leftMargin: 2 * ratio
                 font.pointSize: 12
 
                 MouseArea {
                     id: btnSite
                     anchors.fill: parent
+                    acceptedButtons: Qt.AllButtons
                 }
             }
 
@@ -191,13 +198,14 @@ Item {
                 text: qsTr("ЮРИДИЧНА ІНФОРМАЦІЯ")
                 font.underline: true
                 anchors.top: lbLink.bottom
-                anchors.topMargin: 1* ratio
+                anchors.topMargin: 1 * ratio
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 12
 
                 MouseArea {
                     id: btnInfo
                     anchors.fill: parent
+                    acceptedButtons: Qt.AllButtons
                 }
             }
         }

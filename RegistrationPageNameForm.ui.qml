@@ -84,13 +84,14 @@ Page {
             id: debugConsole
             height: parent.height * 0.4
             text: qsTr("")
+            wrapMode: Text.WordWrap
             anchors.right: parent.right
             anchors.rightMargin: 0
             anchors.left: parent.left
             anchors.leftMargin: 0
             anchors.top: btnNext.bottom
             anchors.topMargin: 100
-            font.pixelSize: 12
+            font.pointSize: 12
         }
     }
 

@@ -6,7 +6,7 @@
 #include "quickios.h"
 #include "qidevice.h"
 #include <QScreen>
-
+#include <QQuickView>
 
 static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -20,8 +20,9 @@ static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJS
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication app(argc, argv);
+
 #ifdef Q_OS_DARWIN
   qreal m_ratio = 1;
   qreal m_ratioFont = 1;
@@ -39,13 +40,16 @@ qreal refWidth = 414.;
   qreal m_ratioFont = qMin(height*refDpi/(dpi*refHeight), width*refDpi/(dpi*refWidth));
 #endif
 
+  app.setOrganizationName("SEOTM");
+  app.setOrganizationDomain("seotm.com");
+  app.setApplicationName("HealthyWave");
 
+  QuickIOS::registerTypes();
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("ratio", QVariant::fromValue(m_ratio));
   engine.rootContext()->setContextProperty("fontRatio", QVariant::fromValue(m_ratioFont));
   engine.addImportPath("qrc:///");
-  QuickIOS::registerTypes();
   engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
   return app.exec();

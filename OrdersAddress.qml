@@ -3,7 +3,7 @@ import "qrc:/controls"
 import "qrc:/Api.js" as Api
 import "qrc:/"
 
-Item {
+ViewController {
     property alias btnNext: btnNext
     property alias lstAddresses: lstAddresses
     Storage{

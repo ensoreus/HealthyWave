@@ -7,8 +7,8 @@ CheckBox {
        checked: true
 
        indicator: Rectangle {
-           implicitWidth: 20 * ratio
-           implicitHeight: 20 * ratio
+           implicitWidth: 25 * ratio
+           implicitHeight: 25 * ratio
            x: control.leftPadding
            y: parent.height / 2 - height / 2
            radius: 3 * ratio
@@ -32,9 +32,9 @@ CheckBox {
 
        contentItem: Text {
            text: control.text
-           font: control.font
+           font.pointSize: 11
            opacity: enabled ? 1.0 : 0.3
-           color:  "black"
+           color:  "#222222"
            horizontalAlignment: Text.AlignRight
            verticalAlignment: Text.AlignVCenter
        }

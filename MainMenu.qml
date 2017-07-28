@@ -23,7 +23,7 @@ MainMenuForm {
         })
     }
 
-    btnMyOrders.onPressed: {
+    btnMyOrders.onClicked: {
         myOrdersItem()
     }
 
@@ -39,7 +39,7 @@ MainMenuForm {
         lbPayment.font.bold = btnPayments.pressed
     }
 
-    btnContacts.onPressed: {
+    btnContacts.onClicked: {
         contactsItem()
     }
 
@@ -47,7 +47,7 @@ MainMenuForm {
         lbContacts.font.bold = btnContacts.pressed
     }
 
-    btnAddresses.onPressed: {
+    btnAddresses.onClicked: {
         addressesItem()
     }
 

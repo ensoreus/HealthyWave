@@ -24,9 +24,11 @@ static QJSValue deviceProvider(QQmlEngine* engine , QJSEngine *scriptEngine) {
     QIDevice* device = QIDevice::instance();
 
     QScreen *src = QGuiApplication::screens().at(0); // @TODO: Dynamic update
-    device->setScreenWidth(src->availableGeometry().width());
-    device->setScreenHeight(src->availableGeometry().height());
-
+    auto fw = src->availableGeometry().width();
+    auto fh = src->availableGeometry().height();
+    device->setScreenWidth(414);
+    device->setScreenHeight(736);
+    qDebug()<< "fw:" << fw << " fh:" << fh;
     QJSValue value = scriptEngine->newQObject(device);
     return value;
 }

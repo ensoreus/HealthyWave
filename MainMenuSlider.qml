@@ -6,7 +6,7 @@ import QuickIOS 0.1
 
 import "qrc:/controls"
 
-Item {
+Rectangle {
     x:0
     y:0
     width: 414

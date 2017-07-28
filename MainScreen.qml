@@ -9,7 +9,7 @@ ViewController {
         height: 400
         //property alias btnCall: btnCall
         //property alias imgCall: imgCall
-        property alias mainScreenHintPanel: mainScreenHintPanel
+       // property alias mainScreenHintPanel: mainScreenHintPanel
         property alias btnOrder: btnOrder
         signal menuClick
 
@@ -44,6 +44,9 @@ ViewController {
                 anchors.right: parent.right
                 anchors.left: parent.left
                 anchors.top: btnFreeWater.bottom
+                onButtonClick: {
+                    navigationController.push(Qt.resolvedUrl("qrc:/orders/NewOrder.qml"))
+                }
             }
 
             Controls.HWGreenRoundButton {
@@ -56,6 +59,7 @@ ViewController {
                 anchors.right: parent.right
                 anchors.left: parent.left
                 anchors.top: parent.top
+
             }
         }
 
@@ -73,6 +77,7 @@ ViewController {
         }
 
             FreeWaterHelpScreen{
+                 //visible: false
                 anchors.right: parent.right
                 anchors.left: parent.left
                 y: parent.height
@@ -89,86 +94,3 @@ ViewController {
             }
     }
 
-
-//MainScreenForm {
-//    id: mainScreen
-//    signal menuShowHide
-//    Component.onCompleted: {
-//        state = "ratePanelHidden"
-//    }
-
-//    FreeWaterHelpScreen{
-//        anchors.right: parent.right
-//        anchors.left: parent.left
-//        y: parent.height
-//        height: parent.height
-//        id: freeWaterHelpScreen
-//        Behavior on y {
-//            NumberAnimation {
-//                target: freeWaterHelpScreen
-//                property: "y"
-//                duration: 300
-//                easing.type: Easing.InOutQuad
-//            }
-//        }
-//    }
-
-//    mainScreenHintPanel.onShowHideHintPanel: {
-//        freeWaterHelpScreen.y = 0
-//    }
-
-//    btnCall.onPressedChanged: {
-//        imgCall.opacity = (btnCall.pressed) ? 0.7 : 1.0
-//    }
-
-//    btnOrder.onButtonClick: {
-//        state = "ratePanelShow"
-//    }
-
-//    btnFreeWater.onButtonClick: {
-
-//    }
-
-//    states:[
-//        State {
-//            name: "ratePanelShow"
-//            PropertyChanges {
-//                target: ratePanel
-//                y: parent.height - parent.height * 0.2
-//            }
-//        },
-//        State {
-//            name: "ratePanelHidden"
-//            PropertyChanges {
-//                target: ratePanel
-//                y: parent.height
-//            }
-//        }
-//    ]
-
-//    transitions: [
-
-//        Transition {
-//            from: "ratePanelShow"
-//            to: "ratePanelHide"
-
-//            NumberAnimation {
-//                target: ratePanel
-//                property: "y"
-//                duration: 200
-//                easing.type: Easing.InOutQuad
-//            }
-//        },
-//        Transition {
-//            from: "ratePanelHide"
-//            to: "ratePanelShow"
-
-//            NumberAnimation {
-//                target: ratePanel
-//                property: "y"
-//                duration: 200
-//                easing.type: Easing.InOutQuad
-//            }
-//        }
-//    ]
-//}

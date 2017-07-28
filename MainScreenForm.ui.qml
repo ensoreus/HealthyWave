@@ -8,10 +8,10 @@ Item {
     id: item1
     width: 400
     height: 400
-    property alias ratePanel: ratePanel
-    property alias btnCall: btnCall
-    property alias imgCall: imgCall
-    property alias mainScreenHintPanel: mainScreenHintPanel
+    //property alias ratePanel: ratePanel
+    //property alias btnCall: btnCall
+    //property alias imgCall: imgCall
+    //property alias mainScreenHintPanel: mainScreenHintPanel
     property alias btnOrder: btnOrder
     property alias btnFreeWater: btnFreeWater
     property alias mainScreenContent: mainScreenContent
@@ -46,7 +46,7 @@ Item {
         }
     }
 
-    MainScreenHintPanel {
+    /*MainScreenHintPanel {
         id: mainScreenHintPanel
         anchors.top: mainScreenContent.bottom
         anchors.topMargin: -100 * ratio
@@ -54,9 +54,9 @@ Item {
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
-    }
+    }*/
 
-    Rectangle {
+    /*Rectangle {
         id: callContainer
         width: parent.width * 0.24
         height: parent.width * 0.30
@@ -101,5 +101,5 @@ Item {
         y: parent.height
         width: parent.width
         height: parent.height * 0.2
-    }
+    }*/
 }
