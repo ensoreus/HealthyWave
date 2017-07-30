@@ -136,7 +136,7 @@ Rectangle {
           Layout.fillWidth: true
           Layout.maximumHeight: height
           Layout.minimumHeight: height
-          height: toolBar.content.length > 0 ? 44 :0
+          height: toolBar.content.length > 0 ? 44 : 0
 
           onContentChanged: {
               if (content.length <= 0)

@@ -45,7 +45,8 @@ SpinBox {
 
         Text {
             text: "+"
-            font.pixelSize: control.font.pixelSize * 4
+            anchors.bottomMargin: 3 * ratio
+            font.pointSize: 25
             color: "white"
             anchors.fill: parent
             fontSizeMode: Text.Fit
@@ -55,6 +56,7 @@ SpinBox {
     }
 
     down.indicator: Rectangle {
+        id: rectangle
         x: control.mirrored ? parent.width - width : 0
         height: parent.height
         implicitWidth: parent.height
@@ -65,12 +67,20 @@ SpinBox {
         radius: parent.height / 2
         Text {
             text: "-"
-            font.pixelSize: control.font.pixelSize * 4
+            anchors.bottomMargin: 3 * ratio
+            anchors.bottom: parent.bottom
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            font.pointSize: 25
+            font.wordSpacing: 0
             color: "white"
-            anchors.fill: parent
             fontSizeMode: Text.Fit
             horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
+            //verticalAlignment: Text.AlignVCenter
         }
     }
 

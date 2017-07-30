@@ -9,7 +9,7 @@ ViewController {
         height: 400
         //property alias btnCall: btnCall
         //property alias imgCall: imgCall
-       // property alias mainScreenHintPanel: mainScreenHintPanel
+        //property alias mainScreenHintPanel: mainScreenHintPanel
         property alias btnOrder: btnOrder
         signal menuClick
 
@@ -72,11 +72,11 @@ ViewController {
             anchors.left: parent.left
             anchors.leftMargin: 0
             onShowHideHintPanel:{
-                freeWaterHelpScreen.y = 0
+                mainScreen.present("qrc:/mainScreen/FreeWaterHelpScreen.qml", {}, true)
             }
         }
-
-            FreeWaterHelpScreen{
+/*
+         FreeWaterHelpScreen{
                  //visible: false
                 anchors.right: parent.right
                 anchors.left: parent.left
@@ -91,6 +91,6 @@ ViewController {
                         easing.type: Easing.InOutQuad
                     }
                 }
-            }
+            }*/
     }
 

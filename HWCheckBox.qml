@@ -30,12 +30,12 @@ CheckBox {
            }
        }
 
-       contentItem: Text {
-           text: control.text
-           font.pointSize: 11
-           opacity: enabled ? 1.0 : 0.3
-           color:  "#222222"
-           horizontalAlignment: Text.AlignRight
-           verticalAlignment: Text.AlignVCenter
-       }
+//       contentItem: Text {
+//           text: control.text
+//           font.pointSize: 11
+//           opacity: enabled ? 1.0 : 0.3
+//           color:  "#222222"
+//           horizontalAlignment: Text.AlignRight
+//           verticalAlignment: Text.AlignVCenter
+//       }
 }
