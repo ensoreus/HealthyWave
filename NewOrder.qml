@@ -11,9 +11,13 @@ ViewController {
     property alias btnNext: btnNext
     property alias stEmptyBottles: stEmptyBottles
 
-        property var navigationItem: NavigationItem{
-            centerBarTitle:"Нове замовлення"
-        }
+    property var navigationItem: NavigationItem{
+        centerBarTitle:"Нове замовлення"
+    }
+
+    function calc(){
+        stFullBottles.value.toFixed()
+    }
 
     Rectangle {
         id: rectangle
@@ -241,7 +245,9 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             labelText: "ДАЛІ"
             onButtonClick: {
-                navigationController.push(Qt.resolvedUrl("qrc:/orders/OrderSummary.qml"))
+                navigationController.push(Qt.resolvedUrl("qrc:/orders/OrderSummary.qml"), {"fullb":stFullBottles.value.toFixed(),
+                                                                                           "emptyb":stEmptyBottles.value.toFixed()
+                                                                                           })
             }
         }
 

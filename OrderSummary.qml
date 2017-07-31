@@ -7,9 +7,78 @@ ViewController {
     property alias rbCashPayment: rbCashPayment
     property alias rbCardPayment: rbCardPayment
     property alias btnNext: btnNext
+    property int fullb: 0
+    property int emptyb: 0
     property var navigationItem: NavigationItem{
         centerBarTitle:"Замовлення"
     }
+
+    onViewDidAppear:{
+        updateSummary()
+    }
+
+    function updateSummary(){
+        txWater.text = fullBottlesLine()
+        txEmptyBottles.text = totalEmptyBottlesLine()
+        txFreeWater.text = freeBottleLine()
+        txBottlesFee.text = feeForBottlesLine()
+        txPump.text = isPumpLine()
+        txSummaryOfOrder.text = totalLine()
+    }
+
+    function fullBottlesLine(){
+        var price = calcFullBottles()
+        return fullb + " бут.  x " + price + " грн."
+    }
+
+    function calcFullBottles(){
+        var price = 0
+        if (fullb < 2){
+            price = 60
+        }else if (fullb >= 2 && fullb < 5){
+            price = 45
+        }else{
+            price = 43
+        }
+        return price
+    }
+
+    function freeBottleLine(){
+        return "1 бут.  x 0 грн."
+    }
+
+    function calcEmptyBottlesFee(){
+        var price = (fullb - emptyb) * 130
+        return price
+    }
+
+    function totalBottlesLine(){
+        var total  = emptyb + fullb + " бут."
+        return total
+    }
+
+    function totalEmptyBottlesLine(){
+        return emptyb + " бут."
+    }
+
+    function feeForBottlesLine(){
+        return emptyb + " бут.  x 130 грн."
+    }
+
+    function isPumpLine(){
+        return cbPump.checked ? "0 грн."  : "100 грн."
+    }
+
+    function calcTotal(){
+        var total = calcFullBottles() + calcEmptyBottlesFee() + (cbPump.checked ? 100 : 0) - (cbFirst.checked ? 2 : 0)
+        return total
+    }
+
+    function totalLine(){
+        return calcTotal() + " грн."
+    }
+
+
     Rectangle {
         id: content
         color: "#ffffff"
@@ -47,6 +116,9 @@ ViewController {
             anchors.leftMargin: parent.width * 0.02
             anchors.left: parent.left
             checked: true
+            onCheckStateChanged: {
+                updateSummary()
+            }
         }
 
         HWCheckBox {
@@ -61,6 +133,9 @@ ViewController {
             checked: true
             anchors.right: parent.right
             anchors.left: parent.left
+            onCheckStateChanged: {
+                updateSummary()
+            }
         }
 
         BorderImage {
@@ -295,8 +370,8 @@ ViewController {
             width: parent.width * 0.7
             height: parent.height * 0.1
             labelText: "ДАЛІ"
-            anchors.topMargin: parent.height * 0.01
-            anchors.top: rbCardPayment.bottom
+            anchors.bottomMargin: parent.height * 0.05
+            anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {
                 navigationController.push("qrc:/orders/OrderTime.qml")
