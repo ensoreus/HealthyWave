@@ -7,6 +7,11 @@ ViewController {
     property alias btnChooseAnother: btnChooseAnother
     property alias tfComment: tfComment
     property alias searchTimeWaiter: searchTimeWaiter
+    property var orderData
+
+    navigationItem:NavigationItem{
+        centerBarTitle:"Замовлення"
+    }
     Rectangle {
         id: content
         color: "#ffffff"
@@ -28,6 +33,14 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: parent.height * 0.15
             anchors.top: txHint.bottom
+            onButtonClick: {
+                searchTimeWaiter.label.text = "Чекайте!
+ Перевіряємо
+інформацію про
+найближчий
+час"
+                searchTimeWaiter.startAnimation()
+            }
         }
 
         Text {
@@ -86,13 +99,9 @@ ViewController {
         }
 
         SearchTimeWaiter {
+            visible: false
             id: searchTimeWaiter
-            x: 213
-            y: 112
-            width: parent.width * 0.5
-            height: parent.width * 0.5
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.fill: parent
         }
 
     }

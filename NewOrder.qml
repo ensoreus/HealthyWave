@@ -185,6 +185,7 @@ ViewController {
             width: parent.width * 0.7
             height: parent.height * 0.05
             from: 1
+            to: 1000
             value: 1
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: parent.height * 0.05
@@ -214,7 +215,8 @@ ViewController {
             anchors.topMargin: parent.height * 0.01
             font.pointSize: 30
             anchors.top: txBottlesEmpty.bottom
-            from: 1
+            from: 0
+            to: 1000
             value: 1
             anchors.horizontalCenter: parent.horizontalCenter
         }

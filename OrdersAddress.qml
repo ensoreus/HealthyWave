@@ -1,26 +1,36 @@
 import QtQuick 2.0
+import QuickIOS 0.1
 import "qrc:/controls"
 import "qrc:/Api.js" as Api
 import "qrc:/"
+import QtQuick.Controls 2.1
 
 ViewController {
     property alias btnNext: btnNext
     property alias lstAddresses: lstAddresses
+    property alias busyIndicator: busyIndicator
+
+    navigationItem:NavigationItem{
+        centerBarTitle:"Замовлення"
+    }
+
     Storage{
         id:storage
     }
     
-    Component.onComplete:{
+   onViewWillAppear:{
+       busyIndicator.running = true
         storage.getAuthData(function(authData){
             Api.getCustomerAddresses(authData, function(addresses){
                 addressesModel.importData(addresses)
+                busyIndicator.running = false
             }, function(error){
                 console.log(error)
+                busyIndicator.running = false
             })
         })
-
-        
     }
+
     Rectangle {
         id: rectangle
         color: "#ffffff"
@@ -51,28 +61,44 @@ ViewController {
                 id: addressesModel
                 function importData(data){
                     addressesModel.clear()
-                    for(var index in data){
-                        var item = data[index]
-                        var modelItem = {city:item.city, street:item.street, house:item.house, apartment:item.apartment}
+                    for(var index in data.addresses){
+                        var item = data.addresses[index]
+                        var modelItem = {city:item.city, street:item.street, house:item.house, apartment:item.apartment, primary: item.primary}
                         addressesModel.append(modelItem)
                     }
                 }
             }
-            delegate: HWRadioButton {
-                x: 5
-                width: 80
-                height: 40
-                text: "м."+city+", вул."+street+", "+house+", оф."+apartment
+            delegate:
+                HWRadioButton {
+                x: 5 * ratio
+                checked: primary == '1'
+                width: 80 * ratio
+                height: 40 * ratio
+                text: "м."+ city + ", вул."+street+", "+house+", оф." + apartment
             }
         }
 
         HWRoundButton {
             id: btnNext
+            labelText:"ДАЛІ"
             x: 23
             width: parent.width * 0.7
             height: parent.height * 0.1
             anchors.topMargin: parent.height * 0.05
             anchors.top: lstAddresses.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            onButtonClick: {
+                navigationController.push("qrc:/orders/OrderTime.qml")
+            }
+        }
+
+        BusyIndicator {
+            id: busyIndicator
+            x: 290
+            y: 30
+            width: 60 * ratio
+            height: 60 * ratio
+            anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }

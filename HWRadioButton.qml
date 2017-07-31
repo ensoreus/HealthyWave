@@ -23,13 +23,16 @@ RadioButton {
                 visible: control.checked
             }
         }
-
-        contentItem: Text {
+        contentItem: Item{}
+        Text {
+            id: text
             text: control.text
             font: control.font
             opacity: enabled ? 1.0 : 0.3
             color: "#4A4A4A"
-            horizontalAlignment: Text.AlignHCenter
+            anchors.verticalCenter: parent.verticalCenter
+            x: 40 * ratio
             verticalAlignment: Text.AlignVCenter
+
         }
 }

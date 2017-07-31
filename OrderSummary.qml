@@ -241,7 +241,7 @@ ViewController {
             Text {
                 id: txWater
                 color: "#4a4a4a"
-                text: qsTr("Text")
+                text: qsTr("")
                 anchors.left: parent.horizontalCenter
                 anchors.leftMargin: 0
                 anchors.top: lbWater.top
@@ -254,7 +254,7 @@ ViewController {
             Text {
                 id: txFreeWater
                 color: "#4a4a4a"
-                text: qsTr("Text")
+                text: qsTr("")
                 anchors.left: parent.horizontalCenter
                 anchors.leftMargin: 0
                 anchors.top: lbFreeWater.top
@@ -267,7 +267,7 @@ ViewController {
             Text {
                 id: txTotalBottles
                 color: "#4a4a4a"
-                text: qsTr("Text")
+                text: qsTr("")
                 anchors.top: lbTotalBottles.top
                 anchors.topMargin: 0
                 anchors.left: parent.horizontalCenter
@@ -280,7 +280,7 @@ ViewController {
             Text {
                 id: txBottlesFee
                 color: "#4a4a4a"
-                text: qsTr("Text")
+                text: qsTr("")
                 anchors.left: parent.horizontalCenter
                 anchors.leftMargin: 0
                 anchors.top: lbBottlesFee.top
@@ -293,7 +293,7 @@ ViewController {
             Text {
                 id: txEmptyBottles
                 color: "#4a4a4a"
-                text: qsTr("Text")
+                text: qsTr("")
                 anchors.left: parent.horizontalCenter
                 anchors.leftMargin: 0
                 anchors.top: lbEmptyBottles.top
@@ -306,7 +306,7 @@ ViewController {
             Text {
                 id: txPump
                 color: "#4a4a4a"
-                text: qsTr("Text")
+                text: qsTr("")
                 anchors.left: parent.horizontalCenter
                 anchors.leftMargin: 0
                 anchors.top: lbPump.top
@@ -319,7 +319,7 @@ ViewController {
             Text {
                 id: txSummaryOfOrder
                 color: "#4a4a4a"
-                text: qsTr("Text")
+                text: qsTr("")
                 anchors.left: parent.horizontalCenter
                 anchors.leftMargin: 0
                 anchors.top: lbSummaryOfOrder.top
@@ -374,7 +374,7 @@ ViewController {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {
-                navigationController.push("qrc:/orders/OrderTime.qml")
+                navigationController.push("qrc:/orders/OrdersAddress.qml")
             }
         }
     }
