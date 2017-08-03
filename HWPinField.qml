@@ -60,6 +60,7 @@ Rectangle{
 
         onTextChanged: {
             if (text.length > 0){
+                pinDigit2.deselect()
                 pinDigit3.forceActiveFocus()
             }
         }
@@ -114,7 +115,11 @@ Rectangle{
 
     MouseArea {
         id: pinAuxMouseArea
-        anchors.fill: parent
+        anchors.right: pinDigit4.right
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.rightMargin: 0
         onClicked: {
             rectangle.aboutToFocus = true
             willStartAnimation()

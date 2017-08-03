@@ -44,8 +44,8 @@ ViewController {
             font.weight: Font.Thin
             anchors.horizontalCenterOffset: rPricesPanel.x / 2
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 13
+            anchors.top: image.top
+            anchors.topMargin: 13 * ratio
             font.pointSize: 18
             font.family: "SF UI text"
             font.underline: true
@@ -54,11 +54,11 @@ ViewController {
 
         Rectangle {
             id: rPricesPanel
-            height: parent.height * 0.35
+            height: parent.height * 0.30
             color: "#2bb0a4"
-            radius: 15
-            anchors.topMargin: 5
-            anchors.rightMargin: 26
+            radius: 15 * ratio
+            anchors.topMargin: 5 * ratio
+            anchors.rightMargin: 26 * ratio
             anchors.top: lbOurPrices.bottom
             anchors.right: parent.right
             anchors.left: image.right
@@ -170,8 +170,8 @@ ViewController {
             id: txBottlesTotal
             x: 314
             text: qsTr("К-ть бутлів в замовленні")
-            anchors.topMargin: parent.height * 0.1
-            anchors.top: rPricesPanel.bottom
+            anchors.topMargin: parent.height * 0.03
+            anchors.top: image.bottom
             font.weight: Font.Thin
             font.underline: false
             font.family: "SF UI Text"
@@ -188,7 +188,7 @@ ViewController {
             to: 1000
             value: 1
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: parent.height * 0.03
             anchors.top: txBottlesTotal.bottom
             font.pointSize: 30
         }
@@ -197,7 +197,7 @@ ViewController {
             id: txBottlesEmpty
             x: 317
             text: qsTr("К-ть порожних бутлів в замовленні")
-            anchors.topMargin: parent.height * 0.01
+            anchors.topMargin: parent.height * 0.03
             font.family: ".SF UI Text"
             font.weight: Font.Thin
             font.pointSize: 16
@@ -232,7 +232,7 @@ ViewController {
             font.family: "SF UI Text"
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
-            anchors.topMargin: parent.height * 0.01
+            anchors.topMargin: parent.height * 0.03
             anchors.top: stEmptyBottles.bottom
             anchors.horizontalCenter: parent.horizontalCenter
         }
