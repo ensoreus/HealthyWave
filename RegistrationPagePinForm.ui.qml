@@ -30,8 +30,8 @@ Page {
         Button {
             id: btnNext
             x: 253
-            width: parent.width * 0.1
-            height: parent.width * 0.1
+            width: parent.width * 0.15
+            height: parent.width * 0.15
             text: ""
             anchors.topMargin: parent.height * 0.1
             anchors.right: text1.right
@@ -50,6 +50,7 @@ Page {
             height: parent.height * 0.05
             color: "#808080"
             text: qsTr("Уведіть код підтвердження")
+            font.pointSize: 15
             anchors.topMargin: parent.height * 0.05
             anchors.top: parent.top
             horizontalAlignment: Text.AlignHCenter

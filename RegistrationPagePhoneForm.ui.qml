@@ -34,8 +34,8 @@ Page {
         Button {
             id: btnNext
             x: 299
-            width: parent.width * 0.1
-            height: parent.width * 0.1
+            width: parent.width * 0.15
+            height: parent.width * 0.15
             text: qsTr("")
             anchors.top: phoneField.bottom
             anchors.topMargin: 50
@@ -50,16 +50,16 @@ Page {
 
         Text {
             id: text1
-            x: 50
-            y: 60
+            x: 289
+            y: 174
             width: parent.width * 0.7
             height: parent.height * 0.02
             color: "#808080"
-            text: qsTr("Введите номер телефона")
+            text: qsTr("Уведіть номер телефона")
+            font.pointSize: 15
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: parent.height * 0.05
-            font.pixelSize: 15
         }
     }
 }

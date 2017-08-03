@@ -16,8 +16,8 @@ Page {
         Button {
             id: btnNext
             x: 253
-            width: parent.width * 0.1
-            height: parent.width * 0.1
+            width: parent.width * 0.15
+            height: parent.width * 0.15
             text: ""
             anchors.topMargin: parent.height * 0.1
             anchors.right: emailField.right
@@ -38,6 +38,7 @@ Page {
             color: "#808080"
             text: qsTr("Уведіть электрону адресу *")
             font.family: "SF UI Text"
+            font.pointSize: 15
             anchors.topMargin: parent.height * 0.05
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter

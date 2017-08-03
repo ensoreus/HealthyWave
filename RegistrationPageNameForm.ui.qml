@@ -26,7 +26,7 @@ Page {
             height: 15
             color: "#808080"
             text: qsTr("Уведіть Ваше і'мя")
-            font.pointSize: 14
+            font.pointSize: 15
             anchors.topMargin: parent.height * 0.1
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
@@ -34,8 +34,8 @@ Page {
 
         HWTextField {
             id: nameField
-            width: parent.width * 0.1
-            height: parent.width * 0.1
+            width: parent.width * 0.15
+            height: parent.width * 0.15
             anchors.topMargin: parent.height * 0.02
             anchors.top: label.bottom
             anchors.right: label.right
@@ -53,7 +53,7 @@ Page {
 и Политику конфиденциальности. ")
             wrapMode: Text.WordWrap
             font.weight: Font.Thin
-            font.pointSize: 11
+            font.pointSize: 13
             font.family: "SF UI Text"
             anchors.topMargin: parent.height * 0.1
             anchors.top: btnNext.bottom
