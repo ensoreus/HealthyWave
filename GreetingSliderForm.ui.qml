@@ -6,46 +6,56 @@ Item {
     id: item1
     width: 400
     height: 736
+    property alias skimmer: skimmer
     property alias btnClose: btnClose
     property alias pageIndicator: pageIndicator
-    property alias image1: image1
-    property alias image2: image2
-    property alias swipeGestureArea: swipeGestureArea
-    property alias item1: item1
 
-    Image {
-        id: image1
+    SwipeView{
+        id: skimmer
         anchors.fill: parent
-        fillMode: Image.PreserveAspectCrop
-        source: "greeting0.png"
-    }
-
-    Image {
-        id: image2
-        x: parent.width
-        width: parent.width
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        fillMode: Image.PreserveAspectCrop
-        source: "greeting1.png"
-    }
-
-    SwipeGestureArea {
-        id: swipeGestureArea
-        width: parent.width
-        anchors.fill: parent
-
-        PageIndicator {
-            id: pageIndicator
-            x: 155
-            y: 26
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 20
-            anchors.horizontalCenter: parent.horizontalCenter
-            count: 7
+        currentIndex: 0
+        Image {
+            id: image0
+            source: "greeting0.png"
         }
+
+        Image {
+            id: image1
+            source: "greeting1.png"
+        }
+
+        Image {
+            id: image2
+            source: "greeting2.png"
+        }
+
+        Image {
+            id: image3
+            source: "greeting3.png"
+        }
+
+
+        Image{
+            id:image4
+            source: "greeting4.png"
+        }
+
+        Image{
+            id: image5
+            source:"greeting5.png"
+        }
+    }
+
+    PageIndicator {
+        id: pageIndicator
+        x: 155
+        y: 26
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 20
+        anchors.horizontalCenter: parent.horizontalCenter
+        count: skimmer.count
+        currentIndex: 0
+
     }
 
     MouseArea {
