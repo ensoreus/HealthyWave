@@ -5,6 +5,7 @@ import "qrc:/controls" as Controls
 Page {
     width: 400
     height: 400
+    property alias lbSendAgain: lbSendAgain
     property alias txtError: txtError
     property alias btnSendAgain: btnSendAgain
     property alias pinField: pinField
@@ -22,7 +23,7 @@ Page {
             width: parent.width * 0.5
             height: parent.height * 0.1
             border.width: 0
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: parent.height * 0.01
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: text1.bottom
         }
@@ -47,10 +48,10 @@ Page {
         Text {
             id: text1
             width: parent.width * 0.7
-            height: parent.height * 0.05
+            height: parent.height * 0.02
             color: "#808080"
             text: qsTr("Уведіть код підтвердження")
-            font.pointSize: 15
+            font.pointSize: 17
             anchors.topMargin: parent.height * 0.05
             anchors.top: parent.top
             horizontalAlignment: Text.AlignHCenter
@@ -58,15 +59,16 @@ Page {
         }
 
         Text {
-            id: text2
+            id: lbSendAgain
             height: 20
             color: "#808080"
             text: qsTr("Відправити код ще раз")
+            font.pointSize: 15
+            anchors.leftMargin: parent.width * 0.1
+            anchors.left: parent.left
             font.family: "SF UI Text"
             anchors.topMargin: 0
             anchors.top: btnNext.top
-            anchors.right: btnNext.left
-            anchors.rightMargin: 20
             verticalAlignment: Text.AlignVCenter
 
             MouseArea {
@@ -82,7 +84,7 @@ Page {
             y: 348
             color: "#720000"
             text: qsTr("")
-            font.pointSize: 13
+            font.pointSize: 15
             font.family: "SF UI Text"
             horizontalAlignment: Text.AlignHCenter
             anchors.rightMargin: parent.width * 0.2

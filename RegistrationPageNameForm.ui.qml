@@ -11,9 +11,10 @@ Page {
     property alias nameField: nameField
 
 
-        Component.onCompleted: {
-            waiterPanel.visible = false
-        }
+    Component.onCompleted: {
+        waiterPanel.visible = false
+    }
+
     Rectangle {
         id: rectangle
         color: "#ffffff"
@@ -23,11 +24,11 @@ Page {
             id: label
             x: 70
             width: parent.width * 0.7
-            height: 15
+            height: parent.height * 0.02
             color: "#808080"
             text: qsTr("Уведіть Ваше і'мя")
             font.pointSize: 15
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.05
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -36,7 +37,7 @@ Page {
             id: nameField
             width: parent.width * 0.15
             height: parent.width * 0.15
-            anchors.topMargin: parent.height * 0.02
+            anchors.topMargin: parent.height * 0.01
             anchors.top: label.bottom
             anchors.right: label.right
             anchors.rightMargin: 0
@@ -48,12 +49,10 @@ Page {
             id: text2
             height: parent.height * 0.25
             color: "#505050"
-            text: qsTr("*Продолжая, Вы подтверждаете, что прочитали и
-принимаете Условия предоставления услуг
-и Политику конфиденциальности. ")
+            text: qsTr("*Продолжая, Вы подтверждаете, что прочитали и принимаете Условия предоставления услуг и Политику конфиденциальности. ")
             wrapMode: Text.WordWrap
             font.weight: Font.Thin
-            font.pointSize: 13
+            font.pointSize: 15
             font.family: "SF UI Text"
             anchors.topMargin: parent.height * 0.1
             anchors.top: btnNext.bottom
@@ -66,8 +65,8 @@ Page {
         Button {
             id: btnNext
             x: 299
-            width: parent.width * 0.1
-            height: parent.width * 0.1
+            width: parent.width * 0.15
+            height: parent.width * 0.15
             text: qsTr("")
             anchors.topMargin: 50 * ratio
             anchors.top: nameField.bottom
@@ -91,7 +90,7 @@ Page {
             anchors.leftMargin: 0
             anchors.top: btnNext.bottom
             anchors.topMargin: 100
-            font.pointSize: 12
+            font.pointSize: 15
         }
     }
 

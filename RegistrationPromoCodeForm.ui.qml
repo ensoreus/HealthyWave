@@ -20,9 +20,10 @@ Page {
             x: 105
             y: 65
             width: parent.width * 0.7
+            height: parent.height * 0.02
             color: "#808080"
             text: qsTr("Уведіть ваш промо-код*")
-            font.pointSize: 15
+            font.pointSize: 17
             anchors.topMargin: parent.height * 0.05
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
@@ -62,6 +63,7 @@ Page {
             color: "#545454"
             text: qsTr("*Уведіть бонусний промо-код, якщо Ви отримали його від ваших знайомих. Якщо промо-коду у Вас нема - рухайтесь далі, на Вас чекає сюрприз!")
             font.weight: Font.Thin
+            font.pointSize: 15
             anchors.topMargin: parent.height * 0.1
             anchors.top: btnNext.bottom
             anchors.right: promoCodeField.right

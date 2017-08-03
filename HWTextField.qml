@@ -8,8 +8,8 @@ TextField{
     property string lineColor: "black"
 
     width: 300
-    height: 40
-    font.pointSize: 15
+    height: parent.width * 0.1
+    font.pointSize: 17
 
     background: Rectangle{
         color: "white"

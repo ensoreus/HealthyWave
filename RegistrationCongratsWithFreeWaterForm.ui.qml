@@ -18,6 +18,7 @@ Page {
             width: parent.width * 0.7
             height: 15
             text: qsTr("Вітаємо, Вас зареєстровано!")
+            font.pointSize: 15
             anchors.topMargin: parent.height * 0.2
             anchors.top: parent.top
             font.weight: Font.Light
@@ -34,7 +35,7 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: parent.height * 0.02
             wrapMode: Text.WordWrap
-            font.pointSize: 13
+            font.pointSize: 15
             font.underline: true
             font.bold: true
             anchors.top: txRegistered.bottom
@@ -45,12 +46,13 @@ Page {
         Text {
             id: txProceed
             x: 37
-            width: parent.width * 0.9
-            height: parent.height * 0.1
+            width: parent.width * 0.7
             text: qsTr("Зараз Ви можете користуватися найкращим сервісом достави води в Києві.")
+            anchors.bottomMargin: parent.height * 0.1
+            anchors.bottom: btnContinue.top
             anchors.topMargin: parent.height * 0.02
             fontSizeMode: Text.Fit
-            font.pointSize: 13
+            font.pointSize: 15
             anchors.top: txGifted.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             font.family: "SF UI Text"

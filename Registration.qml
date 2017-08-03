@@ -229,12 +229,12 @@ Item {
             name: "default"
             PropertyChanges {
                 target: logoBg
-                height:  283
+                height: item1.height * 0.5
             }
 
             PropertyChanges {
                 target: logo
-                height: 114
+                height: logoBg.height * 0.8
             }
         },
         State {

@@ -25,6 +25,10 @@ RegistrationPagePinForm {
         }
     }
 
+    btnSendAgain.onPressedChanged: {
+        lbSendAgain.color = (btnSendAgain.pressed) ? "#9013FE" : "#808080"
+    }
+
     pinField.onWillStartAnimation: {
         if (pinField.aboutToFocus){
             pinPage.startEditData()
