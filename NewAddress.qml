@@ -12,40 +12,50 @@ NewAddressForm {
     }
 
     tfCity.onTextSearchChanged: {
-        tfCity.startWheelAnumation()
-        storage.getAuthData(function(authData){
-            Api.call("getcity", {"city":tfCity.text}, authData, function(result, token){
-                tfCity.model = result.result
-                tfCity.popup.open()
-                storage.saveToken(token)
-                tfCity.stopWheelAnimation()
-            },function(error, token){
-                console.error("call:" + error.error)
-                tfCity.stopWheelAnimation()
+        if(!tfCity.selectedFromList){
+            tfCity.startWheelAnumation()
+            storage.getAuthData(function(authData){
+                Api.call("getcity", {"city":tfCity.text}, authData, function(result, token){
+                    tfCity.model = result.result
+                    tfCity.popup.open()
+                    storage.saveToken(token)
+                    tfCity.stopWheelAnimation()
+                },function(error, token){
+                    console.error("call:" + error.error)
+                    tfCity.stopWheelAnimation()
+                })
             })
-        })
+        }else{
+            tfCity.selectedFromList = false
+        }
     }
 
     tfCity.onActivated:{
+        tfCity.selectedFromList = true
         tfCity.text = tfCity.currentText
     }
 
     tfStreet.onTextSearchChanged: {
-        tfStreet.startWheelAnumation()
-        storage.getAuthData(function(authData){
-            Api.call("getstreet", {"street":tfStreet.text, "city":tfCity.text}, authData, function(result, token){
-                tfStreet.model = result.result
-                tfStreet.popup.open()
-                storage.saveToken(token)
-                tfStreet.stopWheelAnimation()
-            },function(error, token){
-                console.error("call:" + error.error)
-                tfStreet.stopWheelAnimation()
+        if(!tfStreet.selectedFromList){
+            tfStreet.startWheelAnumation()
+            storage.getAuthData(function(authData){
+                Api.call("getstreet", {"street":tfStreet.text, "city":tfCity.text}, authData, function(result, token){
+                    tfStreet.model = result.result
+                    tfStreet.popup.open()
+                    storage.saveToken(token)
+                    tfStreet.stopWheelAnimation()
+                },function(error, token){
+                    console.error("call:" + error.error)
+                    tfStreet.stopWheelAnimation()
+                })
             })
-        })
+        }else{
+            tfStreet.selectedFromList = false
+        }
     }
 
     tfStreet.onActivated:{
+        tfStreet.selectedFromList = false
         tfStreet.text = tfStreet.currentText
     }
 

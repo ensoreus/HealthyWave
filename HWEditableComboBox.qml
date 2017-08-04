@@ -5,6 +5,7 @@ ComboBox {
     width: 300
     height: 40
     property alias busyIndicator: busyIndicator
+    property bool selectedFromList: false
     id:root
 
     property alias placeholderText: textEdit.placeholderText
@@ -17,22 +18,6 @@ ComboBox {
     function stopWheelAnimation(){
         busyIndicator.running = false
     }
-
-//    background: Rectangle{
-//        color: "red"
-//        border.color: "red"
-//        border.width: 0
-
-//        Rectangle{
-//            id: background
-//            border.width: 0
-//            height: 2
-//            x: 0
-//            y: root.height - 2
-//            width: root.width
-//            color: "#c8c7cc"
-//        }
-//    }
 
     indicator: Item{}
 
@@ -58,7 +43,6 @@ ComboBox {
             }
         }
     }
-
 
     BusyIndicator {
         id: busyIndicator
