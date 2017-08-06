@@ -7,6 +7,7 @@
 #include "qidevice.h"
 #include <QScreen>
 #include <QQuickView>
+#include "StatusBarSetup.h"
 
 static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -51,6 +52,12 @@ qreal refWidth = 414.;
   engine.rootContext()->setContextProperty("fontRatio", QVariant::fromValue(m_ratioFont));
   engine.addImportPath("qrc:///");
   engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+  QQuickWindow *window = qobject_cast<QQuickWindow *>(engine.rootObjects().first());
+  QuickIOS::setupWindow(window);
+  QuickIOS::setStatusBarStyle(QuickIOS::StatusBarStyleLightContent);
+#ifdef Q_OS_IOS
+  setupStatusBar();
+#endif
 
   return app.exec();
 }

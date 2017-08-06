@@ -18,7 +18,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 ios:{
-     SOURCES += SecImpl_ios.cpp
+     SOURCES += SecImpl_ios.cpp StatusBarSetup.mm
      LIBS+= -framework Security -framework CoreFoundation
 }
 

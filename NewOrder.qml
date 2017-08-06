@@ -175,7 +175,7 @@ ViewController {
             font.weight: Font.Thin
             font.underline: false
             font.family: "SF UI Text"
-            font.pointSize: 16
+            font.pointSize: 15
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
@@ -197,10 +197,10 @@ ViewController {
             id: txBottlesEmpty
             x: 317
             text: qsTr("К-ть порожних бутлів в замовленні")
-            anchors.topMargin: parent.height * 0.03
+            anchors.topMargin: parent.height * 0.05
             font.family: ".SF UI Text"
             font.weight: Font.Thin
-            font.pointSize: 16
+            font.pointSize: 15
             anchors.top: stFullBottles.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             font.underline: false
@@ -212,7 +212,7 @@ ViewController {
             y: -363
             width: parent.width * 0.7
             height: parent.height * 0.05
-            anchors.topMargin: parent.height * 0.01
+            anchors.topMargin: parent.height * 0.03
             font.pointSize: 30
             anchors.top: txBottlesEmpty.bottom
             from: 0

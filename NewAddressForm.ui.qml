@@ -120,9 +120,12 @@ ViewController {
                 y: 8
                 width: 272
                 height: 60
-                font.pointSize: 12
+                font.pointSize: 15
                 font.family: "SF UI Text"
                 placeholderText: "Ваш коментар..."
+                Keys.onReturnPressed: {
+                    Qt.inputMethod.hide()
+                }
             }
         }
 

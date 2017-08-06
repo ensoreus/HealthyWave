@@ -13,6 +13,7 @@ ApplicationWindow {
     visible: true
     height: 736
     width: 414
+    color: "#1EB2A4"
     title: qsTr("Хвиля здоров'я")
     Storage{
         id:storage
