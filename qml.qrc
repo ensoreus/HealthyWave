@@ -125,6 +125,7 @@
         <file>OrdersAddress.qml</file>
         <file>OrderTime.qml</file>
         <file>PaymentCards.qml</file>
+        <file>PickOrderDeliveryTime.qml</file>
     </qresource>
     <qresource prefix="/address">
         <file>Addresses.qml</file>
