@@ -72,6 +72,8 @@
         <file>btn-searchTime.png</file>
         <file>img-searchTimeWaiter.png</file>
         <file>img-TimeSearchStatus.png</file>
+        <file>img-mastercard.png</file>
+        <file>img-visa.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
@@ -122,6 +124,7 @@
         <file>OrderSummary.qml</file>
         <file>OrdersAddress.qml</file>
         <file>OrderTime.qml</file>
+        <file>PaymentCards.qml</file>
     </qresource>
     <qresource prefix="/address">
         <file>Addresses.qml</file>

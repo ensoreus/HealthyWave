@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.1
 RadioButton {
     id: control
-        text: qsTr("RadioButton")
+        text: text.text
         checked: true
 
         indicator: Rectangle {
@@ -24,6 +24,7 @@ RadioButton {
             }
         }
         contentItem: Item{}
+
         Text {
             id: text
             text: control.text

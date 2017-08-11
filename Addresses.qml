@@ -36,8 +36,6 @@ AddressesForm {
         navigationController.push("qrc:/address/NewAddress.qml")
     }
 
-
-
     function showAddressesList(addresses){
         lstAddresses.visible = true
         emptyList.visible = false
@@ -67,6 +65,7 @@ AddressesForm {
             })
         })
     }
+
     lstAddresses.model:  ListModel{
         id: addressesModel
         function importData(data){

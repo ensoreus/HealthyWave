@@ -88,8 +88,8 @@ ViewController {
     }
     BusyIndicator {
         id: busyIndicator
-        width: 80
-        height: 80
+        width: 80 * ratio
+        height: 80 * ratio
         running: true
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter

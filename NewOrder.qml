@@ -247,9 +247,9 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             labelText: "ДАЛІ"
             onButtonClick: {
-                navigationController.push(Qt.resolvedUrl("qrc:/orders/OrderSummary.qml"), {"fullb":stFullBottles.value.toFixed(),
+                navigationController.push(Qt.resolvedUrl("qrc:/orders/OrderSummary.qml"), {"context":{"fullb":stFullBottles.value.toFixed(),
                                                                                            "emptyb":stEmptyBottles.value.toFixed()
-                                                                                           })
+                                                                                           }})
             }
         }
 

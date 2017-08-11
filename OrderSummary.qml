@@ -9,11 +9,14 @@ ViewController {
     property alias btnNext: btnNext
     property int fullb: 0
     property int emptyb: 0
+    property var context
     property var navigationItem: NavigationItem{
         centerBarTitle:"Замовлення"
     }
 
     onViewDidAppear:{
+        fullb = context.fullb
+        emptyb = context.emptyb
         updateSummary()
     }
 
@@ -374,7 +377,14 @@ ViewController {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {
-                navigationController.push("qrc:/orders/OrdersAddress.qml")
+                context.card = rbCardPayment.checked
+                context.pump = cbPump.checked
+                context.firstOrder = cbFirst.checked
+                if(rbCardPayment.checked){
+                    navigationController.push("qrc:/orders/PaymentCards.qml", context)
+                }else{
+                    navigationController.push("qrc:/orders/OrdersAddress.qml", context)
+                }
             }
         }
     }
