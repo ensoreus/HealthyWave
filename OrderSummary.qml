@@ -109,7 +109,7 @@ ViewController {
         HWCheckBox {
             id: cbFirst
             y: 52
-            height: 21
+            height: 15 * ratio
             text: "Перше замовлення онлайн - 2 бутля безкоштовно"
             anchors.rightMargin: parent.width * 0.02
             anchors.right: parent.right
@@ -124,7 +124,7 @@ ViewController {
         HWCheckBox {
             id: cbPump
             x: 5
-            height: 21
+            height: 15 * ratio
             text: "Механічна помпа - 100 грн."
             anchors.topMargin: parent.height * 0.05
             anchors.top: cbFirst.bottom
