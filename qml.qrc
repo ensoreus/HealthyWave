@@ -57,6 +57,7 @@
         <file>HWRadioButton.qml</file>
         <file>HWGreenButton.qml</file>
         <file>SearchTimeWaiter.qml</file>
+        <file>DatePicker.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>
@@ -74,6 +75,7 @@
         <file>img-TimeSearchStatus.png</file>
         <file>img-mastercard.png</file>
         <file>img-visa.png</file>
+        <file>avatar.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>

@@ -9,6 +9,7 @@ ViewController {
     property alias btnNext: btnNext
     property alias lstAddresses: lstAddresses
     property alias busyIndicator: busyIndicator
+    property var context
 
     navigationItem:NavigationItem{
         centerBarTitle:"Замовлення"
@@ -76,6 +77,7 @@ ViewController {
                 height: 40 * ratio
                 text: "м."+ city + ", вул."+street+", "+house+", оф." + apartment
             }
+
         }
 
         HWRoundButton {
@@ -88,7 +90,8 @@ ViewController {
             anchors.top: lstAddresses.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {
-                navigationController.push("qrc:/orders/OrderTime.qml")
+
+                navigationController.push("qrc:/orders/OrderTime.qml", context)
             }
         }
 

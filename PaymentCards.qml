@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QuickIOS 0.1
 import QtQuick.Controls 2.1
 import "qrc:/controls"
+import "qrc:/Api.js" as Api
 
 ViewController {
     id: root

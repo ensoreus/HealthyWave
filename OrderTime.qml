@@ -7,7 +7,7 @@ ViewController {
     property alias btnChooseAnother: btnChooseAnother
     property alias tfComment: tfComment
     property alias searchTimeWaiter: searchTimeWaiter
-    property var orderData
+    property var context
 
     navigationItem:NavigationItem{
         centerBarTitle:"Замовлення"
@@ -73,6 +73,9 @@ ViewController {
             MouseArea {
                 id: btnChooseAnother
                 anchors.fill: parent
+                onClicked: {
+                    navigationController.push("qrc:/orders/PickOrderDeliveryTime.qml", context)
+                }
             }
         }
 
