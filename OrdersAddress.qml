@@ -3,13 +3,14 @@ import QuickIOS 0.1
 import "qrc:/controls"
 import "qrc:/Api.js" as Api
 import "qrc:/"
+import "qrc:/commons"
 import QtQuick.Controls 2.1
 
 ViewController {
     property alias btnNext: btnNext
     property alias lstAddresses: lstAddresses
     property alias busyIndicator: busyIndicator
-    property var context
+    property OrderContext context
 
     navigationItem:NavigationItem{
         centerBarTitle:"Замовлення"
@@ -64,7 +65,16 @@ ViewController {
                     addressesModel.clear()
                     for(var index in data.addresses){
                         var item = data.addresses[index]
-                        var modelItem = {city:item.city, street:item.street, house:item.house, apartment:item.apartment, primary: item.primary}
+                        var modelItem = {
+                            city:item.city,
+                            street:item.street,
+                            house:item.house,
+                            apartment:item.apartment,
+                            floor:item.floor,
+                            doorCode:item.doorCode,
+                            entrance:item.entrance,
+                            primary: item.primary
+                        }
                         addressesModel.append(modelItem)
                     }
                 }
@@ -76,6 +86,16 @@ ViewController {
                 width: 80 * ratio
                 height: 40 * ratio
                 text: "м."+ city + ", вул."+street+", "+house+", оф." + apartment
+                onCheckedChanged: {
+                    context.address.street = street
+                    context.address.city = city
+                    context.address.floor = floor
+                    context.address.doorCode = doorCode
+                    context.address.house = house
+                    context.address.apartment = apartment
+                    context.address.isPrimary = primary
+                    context.address.entrance = entrance
+                }
             }
 
         }
@@ -90,7 +110,6 @@ ViewController {
             anchors.top: lstAddresses.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {
-
                 navigationController.push("qrc:/orders/OrderTime.qml", context)
             }
         }

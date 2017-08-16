@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.1
 import QuickIOS 0.1
 import "qrc:/controls"
+import "qrc:/commons"
 
 ViewController {
     property alias rbCashPayment: rbCashPayment
@@ -9,7 +10,7 @@ ViewController {
     property alias btnNext: btnNext
     property int fullb: 0
     property int emptyb: 0
-    property var context
+    property OrderContext context
     property var navigationItem: NavigationItem{
         centerBarTitle:"Замовлення"
     }
@@ -377,10 +378,13 @@ ViewController {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {
+
                 context.card = rbCardPayment.checked
                 context.pump = cbPump.checked
                 context.firstOrder = cbFirst.checked
-                if(rbCardPayment.checked){
+
+                if (rbCardPayment.checked)
+                {
                     navigationController.push("qrc:/orders/PaymentCards.qml", context)
                 }else{
                     navigationController.push("qrc:/orders/OrdersAddress.qml", context)

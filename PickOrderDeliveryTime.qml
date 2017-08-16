@@ -1,12 +1,18 @@
 import QtQuick 2.0
 import QuickIOS 0.1
 import "qrc:/controls"
+import "qrc:/commons"
 import QtQuick.Controls 2.1
 
 ViewController {
     property alias datePicker: datePicker
     property alias txtComment: txtComment
     property var context
+
+    property var navigationItem: NavigationItem{
+        centerBarTitle:"Замовлення"
+    }
+
     Rectangle {
         id: content
         color: "#ffffff"
@@ -67,7 +73,28 @@ ViewController {
             anchors.left: text2.left
             anchors.leftMargin: 0
             width: 300
-            height: parent.height * 0.1
+            height: parent.height * 0.08
+            onWillStartAnimation: {
+                    if (txtComment.aboutToFocus){
+                        txtComment.forceActiveFocus()
+                    }
+                }
+        }
+
+        function getTime(){
+            var dayIndex = datePicker.getColumn(0).currentIndex;
+            var fromIndex = datePicker.getColumn(1).currentIndex;
+            var toIndex = datePicker.getColumn(2).currentIndex;
+            var date = Date()
+
+            date.day = date.day + dayIndex
+            var fromHour = fromIndex + 7
+            var toHour = toIndex + 8
+            console.log(date.toString())
+            context.deliveryday = date.toString()
+            context.fromTime = fromHour
+            context.toTime = toHour
+
         }
 
         HWRoundButton {
@@ -80,7 +107,7 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: txtComment.bottom
             onButtonClick: {
-                context.time = datePicker
+                content.getTime()
                 if(rbCardPayment.checked){
                     navigationController.push("qrc:/orders/PaymentCards.qml", context)
                 }else{

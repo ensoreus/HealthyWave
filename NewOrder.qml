@@ -1,8 +1,10 @@
 import QtQuick 2.0
 import QuickIOS 0.1
 import "qrc:/controls"
+import "qrc:/commons"
 
 ViewController {
+    id: newOrderViewController
     property alias lbOneBottle: lbOneBottle
     property alias lbTwoBottle: lbTwoBottle
     property alias lbFiveBottle: lbFiveBottle
@@ -10,6 +12,8 @@ ViewController {
     property alias stFullBottles: stFullBottles
     property alias btnNext: btnNext
     property alias stEmptyBottles: stEmptyBottles
+    property var context
+    property var component
 
     property var navigationItem: NavigationItem{
         centerBarTitle:"Нове замовлення"
@@ -17,6 +21,38 @@ ViewController {
 
     function calc(){
         stFullBottles.value.toFixed()
+    }
+
+    onViewDidAppear:{
+        createContextObjects()
+    }
+
+    function createContextObjects() {
+        component = Qt.createComponent("qrc:/commons/OrderContext.qml");
+        if (component.status == Component.Ready)
+            finishCreation();
+        else
+            component.statusChanged.connect(finishCreation);
+    }
+
+    function finishCreation() {
+        if (component.status == Component.Ready) {
+            newOrderViewController.context = component.createObject(newOrderViewController, {
+                                                                        "fullb":0,
+                                                                        "emptyb":0,
+                                                                        "firstorder":0,
+                                                                        "card": 0,
+                                                                        "pump": 0,
+                                                                        "cardToPay":""
+                                                                    })
+            if (newOrderViewController.context == null) {
+                // Error Handling
+                console.log("Error creating object");
+            }
+        } else if (component.status == Component.Error) {
+            // Error Handling
+            console.log("Error loading component:", component.errorString());
+        }
     }
 
     Rectangle {
@@ -247,9 +283,11 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             labelText: "ДАЛІ"
             onButtonClick: {
-                navigationController.push(Qt.resolvedUrl("qrc:/orders/OrderSummary.qml"), {"context":{"fullb":stFullBottles.value.toFixed(),
-                                                                                           "emptyb":stEmptyBottles.value.toFixed()
-                                                                                           }})
+                console.log(JSON.stringify(newOrderViewController.context))
+                context.fullb = stFullBottles.value.toFixed()
+                context.emptyb = stEmptyBottles.value.toFixed()
+
+                navigationController.push(Qt.resolvedUrl("qrc:/orders/OrderSummary.qml"), context)
             }
         }
 

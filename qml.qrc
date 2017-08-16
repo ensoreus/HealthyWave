@@ -4,6 +4,7 @@
         <file>Api.js</file>
         <file>Storage.qml</file>
         <file>AddressCell.qml</file>
+        <file>Types.js</file>
     </qresource>
     <qresource prefix="/greeting">
         <file>GreetingSliderForm.ui.qml</file>
@@ -76,6 +77,8 @@
         <file>img-mastercard.png</file>
         <file>img-visa.png</file>
         <file>avatar.png</file>
+        <file>OrderContext.qml</file>
+        <file>AddressEntity.qml</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
