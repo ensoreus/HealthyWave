@@ -131,12 +131,6 @@ ViewController {
             anchors.leftMargin: 0
         }
 
-        SearchTimeWaiter {
-            visible: false
-            id: searchTimeWaiter
-            anchors.fill: parent
-        }
-
         HWRoundButton{
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
@@ -145,9 +139,23 @@ ViewController {
             height: parent.height * 0.08
             labelText: "ЗАМОВИТИ"
             onButtonClick: {
-
+                orderAccepted.visible = true
             }
         }
+
+        SearchTimeWaiter {
+            visible: false
+            id: searchTimeWaiter
+            anchors.fill: parent
+        }
+
+        OrderAccepted{
+            visible: false
+            id: orderAccepted
+            anchors.fill: parent
+        }
+
+
 
     }
 

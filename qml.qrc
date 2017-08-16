@@ -59,6 +59,7 @@
         <file>HWGreenButton.qml</file>
         <file>SearchTimeWaiter.qml</file>
         <file>DatePicker.qml</file>
+        <file>HWFramedRoundButton.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>
@@ -131,6 +132,8 @@
         <file>OrderTime.qml</file>
         <file>PaymentCards.qml</file>
         <file>PickOrderDeliveryTime.qml</file>
+        <file>OrderAccepted.qml</file>
+        <file>img-alert.png</file>
     </qresource>
     <qresource prefix="/address">
         <file>Addresses.qml</file>
