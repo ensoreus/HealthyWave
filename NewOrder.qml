@@ -29,30 +29,14 @@ ViewController {
 
     function createContextObjects() {
         component = Qt.createComponent("qrc:/commons/OrderContext.qml");
-        if (component.status == Component.Ready)
-            finishCreation();
-        else
-            component.statusChanged.connect(finishCreation);
-    }
-
-    function finishCreation() {
-        if (component.status == Component.Ready) {
-            newOrderViewController.context = component.createObject(newOrderViewController, {
-                                                                        "fullb":0,
-                                                                        "emptyb":0,
-                                                                        "firstorder":0,
-                                                                        "card": 0,
-                                                                        "pump": 0,
-                                                                        "cardToPay":""
-                                                                    })
-            if (newOrderViewController.context == null) {
-                // Error Handling
-                console.log("Error creating object");
-            }
-        } else if (component.status == Component.Error) {
-            // Error Handling
-            console.log("Error loading component:", component.errorString());
-        }
+        newOrderViewController.context = component.createObject(newOrderViewController, {
+                                                                    "fullb":0,
+                                                                    "emptyb":0,
+                                                                    "firstorder":0,
+                                                                    "card": 0,
+                                                                    "pump": 0,
+                                                                    "cardToPay":""
+                                                                })
     }
 
     Rectangle {
@@ -283,11 +267,11 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             labelText: "ДАЛІ"
             onButtonClick: {
-                console.log(JSON.stringify(newOrderViewController.context))
+
                 context.fullb = stFullBottles.value.toFixed()
                 context.emptyb = stEmptyBottles.value.toFixed()
 
-                navigationController.push(Qt.resolvedUrl("qrc:/orders/OrderSummary.qml"), context)
+                navigationController.push(Qt.resolvedUrl("qrc:/orders/OrderSummary.qml"), {"context":context})
             }
         }
 

@@ -71,7 +71,7 @@ ViewController {
                             house:item.house,
                             apartment:item.apartment,
                             floor:item.floor,
-                            doorCode:item.doorCode,
+                            //doorCode:item.doorCode,
                             entrance:item.entrance,
                             primary: item.primary
                         }
@@ -90,7 +90,7 @@ ViewController {
                     context.address.street = street
                     context.address.city = city
                     context.address.floor = floor
-                    context.address.doorCode = doorCode
+                    //context.address.doorCode = doorCode
                     context.address.house = house
                     context.address.apartment = apartment
                     context.address.isPrimary = primary

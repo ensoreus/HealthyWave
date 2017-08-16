@@ -96,6 +96,16 @@ function sendNewAddress(city, street, house, entrance, apartment, floor, authdat
                                 "phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
+function searchNearestTime(address, authData, onSuccess, onFailure){
+    call("timedelivery", {"city":address.city,
+             "street":address.street,
+             "house":address.house,
+             "entrance":address.entrance,
+             "apartment":address.apartment,
+             "floor":address.floor,
+             "phone":authdata.phone}, authData, onSuccess, onFailure)
+}
+
 function call(routine, params, authData, onSuccess, onFailure){
     var xhr = new XMLHttpRequest();
     var url = baseUrl + routine + serializeParams(params)
@@ -135,6 +145,8 @@ function call(routine, params, authData, onSuccess, onFailure){
     xhr.onreadystatechange = onReady
     sendRequest(authData.token)
 }
+
+
 
 function serializeParams(params){
     if(params ==""){

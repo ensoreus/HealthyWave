@@ -385,9 +385,9 @@ ViewController {
 
                 if (rbCardPayment.checked)
                 {
-                    navigationController.push("qrc:/orders/PaymentCards.qml", context)
+                    navigationController.push("qrc:/orders/PaymentCards.qml", {"context":context})
                 }else{
-                    navigationController.push("qrc:/orders/OrdersAddress.qml", context)
+                    navigationController.push("qrc:/orders/OrdersAddress.qml", {"context":context})
                 }
             }
         }

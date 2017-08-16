@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QuickIOS 0.1
 import "qrc:/controls"
+import "qrc:/"
+import "qrc:/Api.js" as Api
 
 ViewController {
     property alias btnSearch: btnSearch
@@ -9,6 +11,10 @@ ViewController {
     property alias searchTimeWaiter: searchTimeWaiter
     property var context
 
+    Storage{
+        id:storage
+    }
+
     navigationItem:NavigationItem{
         centerBarTitle:"Замовлення"
     }
@@ -16,6 +22,20 @@ ViewController {
         id: content
         color: "#ffffff"
         anchors.fill: parent
+
+        function startSearchAnimation(){
+            searchTimeWaiter.label.text = "Чекайте!
+Перевіряємо
+інформацію про
+найближчий
+час"
+            searchTimeWaiter.startAnimation()
+        }
+
+        function stopSearchAnimation(){
+            searchTimeWaiter.label.text = ""
+            searchTimeWaiter.stopAnimation()
+        }
 
         HWHeader {
             id: hWHeader
@@ -34,12 +54,14 @@ ViewController {
             anchors.topMargin: parent.height * 0.15
             anchors.top: txHint.bottom
             onButtonClick: {
-                searchTimeWaiter.label.text = "Чекайте!
- Перевіряємо
-інформацію про
-найближчий
-час"
-                searchTimeWaiter.startAnimation()
+                content.startSearchAnimation()
+                storage.getAuthData(function(authData){
+                    Api.searchNearestTime(context.address, authData, function(result){
+                        console.log(result)
+                    }, function(error){
+                        console.log(error)
+                    })
+                })
             }
         }
 
@@ -86,6 +108,14 @@ ViewController {
             anchors.topMargin: parent.height * 0.01
             anchors.top: txComment.bottom
             anchors.horizontalCenter: parent.horizontalCenter
+            onWillStartAnimation: {
+                    if (tfComment.aboutToFocus){
+                        tfComment.forceActiveFocus()
+                    }
+                }
+            onTextChanged: {
+                context.comment = text
+            }
         }
 
         Text {
@@ -105,6 +135,18 @@ ViewController {
             visible: false
             id: searchTimeWaiter
             anchors.fill: parent
+        }
+
+        HWRoundButton{
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: parent.height * 0.1
+            width: parent.width * 0.8
+            height: parent.height * 0.08
+            labelText: "ЗАМОВИТИ"
+            onButtonClick: {
+
+            }
         }
 
     }
