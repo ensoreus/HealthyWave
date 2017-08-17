@@ -7,7 +7,7 @@ import QtQuick.Controls 2.1
 ViewController {
     property alias datePicker: datePicker
     property alias txtComment: txtComment
-    property var context
+    property OrderContext context
 
     property var navigationItem: NavigationItem{
         centerBarTitle:"Замовлення"
@@ -91,9 +91,9 @@ ViewController {
             var fromHour = fromIndex + 7
             var toHour = toIndex + 8
             console.log(date.toString())
-            context.deliveryday = date.toString()
-            context.fromTime = fromHour
-            context.toTime = toHour
+            //context.deliveryTime.day = date.toLocaleTimeString(Qt.locale("ua_UA"))
+            context.deliveryTime.fromHour = fromHour
+            context.deliveryTime.toHour = toHour
 
         }
 
@@ -109,9 +109,9 @@ ViewController {
             onButtonClick: {
                 content.getTime()
                 if(rbCardPayment.checked){
-                    navigationController.push("qrc:/orders/PaymentCards.qml", context)
+                    navigationController.push("qrc:/orders/PaymentCards.qml", {"context":context})
                 }else{
-                    navigationController.push("qrc:/orders/OrdersAddress.qml", context)
+                    navigationController.push("qrc:/orders/OrdersAddress.qml", {"context":context})
                 }
             }
         }

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QuickIOS 0.1
 import "qrc:/controls"
+import "qrc:/commons"
 import "qrc:/"
 import "qrc:/Api.js" as Api
 
@@ -9,7 +10,8 @@ ViewController {
     property alias btnChooseAnother: btnChooseAnother
     property alias tfComment: tfComment
     property alias searchTimeWaiter: searchTimeWaiter
-    property var context
+    property OrderContext context
+    id: orderTimeViewController
 
     Storage{
         id:storage
@@ -37,6 +39,11 @@ ViewController {
             searchTimeWaiter.stopAnimation()
         }
 
+        function hideSearchCircle(){
+            searchTimeWaiter.label.text = ""
+            searchTimeWaiter.hide()
+        }
+
         HWHeader {
             id: hWHeader
             x: 212
@@ -58,8 +65,14 @@ ViewController {
                 storage.getAuthData(function(authData){
                     Api.searchNearestTime(context.address, authData, function(result){
                         console.log(result)
+                        searchTimeWaiter.timeLabel = result.result
+                        content.stopSearchAnimation()
+                        context.deliveryTime.day = "today"
+                        context.deliveryTime.toHour = result.result
                     }, function(error){
+                        searchTimeWaiter.timeLabel = error.error
                         console.log(error)
+                        content.stopSearchAnimation()
                     })
                 })
             }
@@ -96,7 +109,7 @@ ViewController {
                 id: btnChooseAnother
                 anchors.fill: parent
                 onClicked: {
-                    navigationController.push("qrc:/orders/PickOrderDeliveryTime.qml", context)
+                    navigationController.push("qrc:/orders/PickOrderDeliveryTime.qml", {"context":context})
                 }
             }
         }
@@ -147,6 +160,10 @@ ViewController {
             visible: false
             id: searchTimeWaiter
             anchors.fill: parent
+            onClose: {
+                visible = false
+            }
+
         }
 
         OrderAccepted{
@@ -162,7 +179,6 @@ ViewController {
             onOrderDone: {
                 visible = false
             }
-
         }
 
 

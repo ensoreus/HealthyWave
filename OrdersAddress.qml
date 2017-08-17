@@ -24,11 +24,11 @@ ViewController {
     onViewWillAppear:{
         busyIndicator.running = true
         storage.getAuthData(function(authData){
-            Api.getCustomerAddresses(authData, function(addresses){
+            Api.getCustomerAddresses(authData, function(addresses) {
                 orderAddressViewController.initializing = true
                 addressesModel.importData(addresses)
                 busyIndicator.running = false
-            }, function(error){
+            }, function(error) {
                 console.log(error)
                 busyIndicator.running = false
             })

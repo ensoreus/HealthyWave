@@ -74,7 +74,7 @@ ViewController {
     }
 
     function calcTotal(){
-        var total = calcFullBottles() + calcEmptyBottlesFee() + (cbPump.checked ? 100 : 0) - (cbFirst.checked ? 2 : 0)
+        var total = calcFullBottles() + calcEmptyBottlesFee() + (cbPump.checked ? 0 : 100) - (cbFirst.checked ? 2 : 0)
         return total
     }
 

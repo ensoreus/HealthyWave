@@ -7,6 +7,12 @@ QtObject {
     property int card
     property int pump
     property string cardToPay
+    property string comment
+    property TimeEntity deliveryTime: TimeEntity{
+        day:""
+        fromHour: ""
+        toHour: ""
+    }
     property AddressEntity address: AddressEntity{
          city:""
          street:""

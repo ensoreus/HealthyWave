@@ -4,10 +4,14 @@ import QtGraphicalEffects 1.0
 Item{
     id: content
     property alias label: label
+    property alias timeLabel: timeLabel.text
+    signal close
+
     width: 215
     height: 215
     Component.onCompleted: {
-        visible: false
+        visible = false
+        timeLabel.visible = false
     }
 
     function startAnimation(){
@@ -17,14 +21,32 @@ Item{
     }
 
     function stopAnimation(){
-        visible = false
+        state = "enableOverlay"
         timer.stop()
+        overlay.visible = false
     }
 
+    function hide(){
+        timeHeaderlabel.visible = false
+        timeLabel.visible = false
+        visible = false
+    }
+
+
     Rectangle{
+        id: overlay
         anchors.fill: parent
         color: "white"
         opacity: 0.5
+    }
+
+    MouseArea{
+        enabled: false
+        id:overlayTap
+        anchors.fill: parent
+        onClicked: {
+            close()
+        }
     }
 
     Image {
@@ -46,7 +68,46 @@ Item{
         anchors.horizontalCenter: image.horizontalCenter
         anchors.verticalCenter: image.verticalCenter
         text: "TETETET"
+    }
 
+    Text{
+        id: timeHeaderlabel
+        font.pointSize: 18
+        color: "white"
+        height: 20 * ratio
+        horizontalAlignment: Text.AlignHCenter
+        anchors.horizontalCenter: image.horizontalCenter
+        anchors.top: image.top
+        anchors.topMargin: image.width * 0.2
+        visible: false
+        text:"до"
+    }
+
+    Text{
+        id: timeLabel
+        font.pointSize: 40
+        color: "white"
+        horizontalAlignment: Text.AlignHCenter
+        anchors.horizontalCenter: image.horizontalCenter
+        anchors.verticalCenter: content.verticalCenter
+        text: ""
+        onTextChanged: {
+            timeHeaderlabel.visible = true
+            timeLabel.visible = true
+        }
+    }
+
+    Text{
+        id: errorLabel
+        font.pointSize: 15
+        color: "white"
+        horizontalAlignment: Text.AlignHCenter
+        anchors.horizontalCenter: image.horizontalCenter
+        anchors.verticalCenter: image.verticalCenter
+        text: ""
+        onTextChanged: {
+            errorLabel.visible = true
+        }
     }
 
     DropShadow {
@@ -57,6 +118,16 @@ Item{
         samples: 17
         color: "#80000000"
         source: label
+    }
+
+    DropShadow {
+        anchors.fill: timeLabel
+        horizontalOffset: 3
+        verticalOffset: 3
+        radius: 8.0
+        samples: 17
+        color: "#80000000"
+        source: timeLabel
     }
 
     Timer{
@@ -86,7 +157,35 @@ Item{
                 target: image
                 scale: 1.0
             }
+        },
+        State{
+            name: "enableOverlay"
+            PropertyChanges {
+                target: overlay
+                opacity: 0
+            }
+            PropertyChanges {
+                target: overlayTap
+                enabled: true
+            }
+            PropertyChanges {
+                target: image
+                scale: 1.0
+            }
+        },
+        State{
+            name: "disableOverlay"
+            PropertyChanges {
+                target: overlayTap
+                enabled: false
+            }
+            PropertyChanges {
+                target: overlay
+                opacity: 0.5
+            }
+
         }
+
     ]
 
     transitions:[

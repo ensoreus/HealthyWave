@@ -80,6 +80,7 @@
         <file>avatar.png</file>
         <file>OrderContext.qml</file>
         <file>AddressEntity.qml</file>
+        <file>TimeEntity.qml</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
