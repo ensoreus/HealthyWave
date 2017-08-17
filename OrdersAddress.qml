@@ -11,7 +11,8 @@ ViewController {
     property alias lstAddresses: lstAddresses
     property alias busyIndicator: busyIndicator
     property OrderContext context
-
+    property bool initializing: false
+    id: orderAddressViewController
     navigationItem:NavigationItem{
         centerBarTitle:"Замовлення"
     }
@@ -20,10 +21,11 @@ ViewController {
         id:storage
     }
     
-   onViewWillAppear:{
-       busyIndicator.running = true
+    onViewWillAppear:{
+        busyIndicator.running = true
         storage.getAuthData(function(authData){
             Api.getCustomerAddresses(authData, function(addresses){
+                orderAddressViewController.initializing = true
                 addressesModel.importData(addresses)
                 busyIndicator.running = false
             }, function(error){
@@ -31,6 +33,10 @@ ViewController {
                 busyIndicator.running = false
             })
         })
+    }
+
+    onViewDidAppear:{
+        orderAddressViewController.initializing = false
     }
 
     Rectangle {
@@ -65,6 +71,16 @@ ViewController {
                     addressesModel.clear()
                     for(var index in data.addresses){
                         var item = data.addresses[index]
+                        if(item.primary){
+                            context.address.street = item.street
+                            context.address.city = item.city
+                            context.address.floor = item.floor
+                            //context.address.doorCode = item.doorCode
+                            context.address.house = item.house
+                            context.address.apartment = item.apartment
+                            context.address.isPrimary = item.primary
+                            context.address.entrance = item.entrance
+                        }
                         var modelItem = {
                             city:item.city,
                             street:item.street,
@@ -87,14 +103,16 @@ ViewController {
                 height: 40 * ratio
                 text: "м."+ city + ", вул."+street+", "+house+", оф." + apartment
                 onCheckedChanged: {
-                    context.address.street = street
-                    context.address.city = city
-                    context.address.floor = floor
-                    //context.address.doorCode = doorCode
-                    context.address.house = house
-                    context.address.apartment = apartment
-                    context.address.isPrimary = primary
-                    context.address.entrance = entrance
+                    if (!orderAddressViewController.initializing){
+                        context.address.street = street
+                        context.address.city = city
+                        context.address.floor = floor
+                        //context.address.doorCode = doorCode
+                        context.address.house = house
+                        context.address.apartment = apartment
+                        context.address.isPrimary = primary
+                        context.address.entrance = entrance
+                    }
                 }
             }
 
@@ -110,7 +128,7 @@ ViewController {
             anchors.top: lstAddresses.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {
-                navigationController.push("qrc:/orders/OrderTime.qml", context)
+                navigationController.push("qrc:/orders/OrderTime.qml", {"context":context})
             }
         }
 

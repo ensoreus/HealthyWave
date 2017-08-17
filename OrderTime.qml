@@ -153,6 +153,16 @@ ViewController {
             visible: false
             id: orderAccepted
             anchors.fill: parent
+            onAgree: {
+
+            }
+            onNotAgree: {
+
+            }
+            onOrderDone: {
+                visible = false
+            }
+
         }
 
 

@@ -8,5 +8,5 @@ QtObject {
     property int apartment
     property int house
     property int doorCode
-    property bool isPrimary: false
+    property int isPrimary
 }

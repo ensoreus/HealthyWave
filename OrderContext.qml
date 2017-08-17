@@ -7,5 +7,14 @@ QtObject {
     property int card
     property int pump
     property string cardToPay
-    property AddressEntity address: AddressEntity{}
+    property AddressEntity address: AddressEntity{
+         city:""
+         street:""
+         floor:0
+         entrance: 0
+         apartment: 0
+         doorCode: 0
+         house: 0
+         isPrimary: 0
+    }
 }
