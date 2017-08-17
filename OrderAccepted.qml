@@ -33,121 +33,187 @@ Item {
             anchors.rightMargin: parent.width * 0.04
             anchors.bottomMargin: parent.width * 0.07
             initialItem: shouldWeCallPage
-        }
 
-        Page{
-            Rectangle{
-                color: "#1EB2A4"
-                id: shouldWeCallPage
-
-                Text{
-                    id:mainHeader
-                    anchors.top: parent.top
-                    anchors.topMargin: parent.height * 0.1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: parent.width * 0.9
-                    height: parent.height * 0.08
-                    text: "ВАШЕ ЗАМОВЛЕННЯ ПРИЙНЯТЕ!"
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    color: "white"
-                    font.pointSize:16
-                    font.bold: true
+            pushEnter: Transition {
+                PropertyAnimation{
+                    property: "x"
+                    from: stackContainer.width
+                    to: 0
+                    duration: 100
                 }
-
-                Text{
-                    id:weAreOn
-                    anchors.top: mainHeader.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: parent.width * 0.9
-                    height: parent.height * 0.08
-                    text: "Ми вже їдемо до Вас."
-                    font.weight: Font.Thin
-                    anchors.topMargin: 0
-                    horizontalAlignment: Text.AlignHCenter
-                    color: "white"
-                    font.pointSize:16
-                    font.bold: true
+                PropertyAnimation{
+                    property: "opacity"
+                    from: 0
+                    to: 1
+                    duration: 100
                 }
+            }
 
-                Text {
-                    id: txShouldCallQuestion
-                    x: 220
-                    width: parent.width * 0.8
-                    color: "#ffffff"
-                    text: qsTr("Бажаєте, щоб наш спеціаліст передзвонив \nВам для підтвердження замовлення?")
-                    horizontalAlignment: Text.AlignHCenter
-                    anchors.topMargin: parent.height * 0.2
-                    anchors.top: weAreOn.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
+            pushExit: Transition{
+                PropertyAnimation{
+                    property: "x"
+                    from: 0
+                    to: -stackContainer.width
+                    duration: 100
                 }
+                PropertyAnimation{
+                    property: "opacity"
+                    from: 1
+                    to: 0
+                    duration: 100
+                }
+            }
 
-                HWFramedRoundButton{
-                    id: btnAgree
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    height: parent.height * 0.15
-                    width: parent.width * 0.9
-                    anchors.top: txShouldCallQuestion.bottom
-                    anchors.topMargin: parent.height * 0.05
-                    labelText:"ТАК, ХОЧУ ЩОБ ПЕРЕДЗВОНИЛИ!"
-                    onButtonClick: {
-                        agree()
-                        stackContainer.push(orderAcceptedWithAgreePage)
+            Page{
+                Rectangle{
+                    color: "#1EB2A4"
+                    id: shouldWeCallPage
+
+                    Text{
+                        id:mainHeader
+                        anchors.top: parent.top
+                        anchors.topMargin: parent.height * 0.1
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: parent.width * 0.9
+                        height: parent.height * 0.08
+                        text: "ВАШЕ ЗАМОВЛЕННЯ ПРИЙНЯТЕ!"
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                        color: "white"
+                        font.pointSize:16
+                        font.bold: true
                     }
-                }
 
-                HWFramedRoundButton{
-                    id: btnDisagree
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    height: parent.height * 0.15
-                    width: parent.width * 0.9
-                    anchors.top: btnAgree.bottom
-                    anchors.topMargin: parent.height * 0.03
-                    labelText:"НІ, ЧЕКАЮ ЗАМОВЛЕННЯ БЕЗ ДЗВІНКА"
-                    onButtonClick: {
-                        disAgree()
-                        stackContainer.push(orderAcceptedWithAgreePage)
+                    Text{
+                        id:weAreOn
+                        anchors.top: mainHeader.bottom
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: parent.width * 0.9
+                        height: parent.height * 0.08
+                        text: "Ми вже їдемо до Вас."
+                        font.weight: Font.Thin
+                        anchors.topMargin: 0
+                        horizontalAlignment: Text.AlignHCenter
+                        color: "white"
+                        font.pointSize:16
+                        font.bold: true
+                    }
+
+                    Text {
+                        id: txShouldCallQuestion
+                        x: 220
+                        width: parent.width * 0.8
+                        color: "#ffffff"
+                        text: qsTr("Бажаєте, щоб наш спеціаліст передзвонив \nВам для підтвердження замовлення?")
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.topMargin: parent.height * 0.2
+                        anchors.top: weAreOn.bottom
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+
+                    HWFramedRoundButton{
+                        id: btnAgree
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        height: parent.height * 0.15
+                        width: parent.width * 0.9
+                        anchors.top: txShouldCallQuestion.bottom
+                        anchors.topMargin: parent.height * 0.05
+                        labelText:"ТАК, ХОЧУ ЩОБ ПЕРЕДЗВОНИЛИ!"
+                        onButtonClick: {
+                            agree()
+                            orderAcceptedWithAgreePage.visible = true
+                            stackContainer.push(orderAcceptedWithAgreePage)
+                        }
+                    }
+
+                    HWFramedRoundButton{
+                        id: btnDisagree
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        height: parent.height * 0.15
+                        width: parent.width * 0.9
+                        anchors.top: btnAgree.bottom
+                        anchors.topMargin: parent.height * 0.03
+                        labelText:"НІ, ЧЕКАЮ ЗАМОВЛЕННЯ БЕЗ ДЗВІНКА"
+                        onButtonClick: {
+                            notAgree()
+                            orderAcceptedWithDisagreePage.visible = true
+                            stackContainer.push(orderAcceptedWithDisagreePage)
+                        }
                     }
                 }
             }
-        }
-        Page{
-            id: orderAcceptedWithAgreePage
-            Rectangle{
-                color: "#1EB2A4"
-                anchors.fill: parent
-                Text {
-                    id: txtOrderAccepted
-                    text: "ДЯКУЄМО ЗА ЗАМОВЛЕННЯ!"
-                    anchors.top: parent.top
-                    anchors.topMargin: parent.width * 0.1
-                    width: parent.width * 0.9
-                    height: parent.width * 0.1
-                    horizontalAlignment: Text.AlignHCenter
-                    color: "white"
-                }
+            Page{
+                id: orderAcceptedWithAgreePage
+                visible: false
+                Rectangle{
+                    color: "#1EB2A4"
+                    anchors.fill: parent
+                    Text {
+                        id: txtOrderAccepted
+                        text: "ДЯКУЄМО ЗА ЗАМОВЛЕННЯ!"
+                        anchors.top: parent.top
+                        anchors.topMargin: parent.width * 0.1
+                        width: parent.width * 0.9
+                        height: parent.width * 0.1
+                        horizontalAlignment: Text.AlignHCenter
+                        color: "white"
+                    }
 
-                Text{
-                    id: txtWaitForCall
-                    text: "Очікуйте на дзвінок нашого спеціаліста."
-                    horizontalAlignment: Text.AlignHCenter
-                    anchors.top: txtOrderAccepted.bottom
-                    anchors.topMargin: parent.width * 0.1
-                    width: parent.width * 0.9
-                    height: parent.width * 0.1
-                    color: "white"
-                }
+                    Text{
+                        id: txtWaitForCall
+                        text: "Очікуйте на дзвінок нашого спеціаліста."
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.top: txtOrderAccepted.bottom
+                        anchors.topMargin: parent.width * 0.1
+                        width: parent.width * 0.9
+                        height: parent.width * 0.1
+                        color: "white"
+                    }
 
-                HWFramedRoundButton{
-                    id: btnDone
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    height: parent.height * 0.15
-                    width: parent.width * 0.9
-                    anchors.top: txtWaitForCall.bottom
-                    anchors.topMargin: parent.height * 0.1
-                    labelText:"OK"
-                    onButtonClick: {
-                        orderDone()
+                    HWFramedRoundButton{
+                        id: btnDone
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        height: parent.height * 0.15
+                        width: parent.width * 0.9
+                        anchors.top: txtWaitForCall.bottom
+                        anchors.topMargin: parent.height * 0.1
+                        labelText:"OK"
+                        onButtonClick: {
+                            orderDone()
+                        }
+                    }
+                }
+            }
+
+            Page{
+                id: orderAcceptedWithDisagreePage
+                visible: false
+                Rectangle{
+                    color: "#1EB2A4"
+                    anchors.fill: parent
+                    Text {
+                        id: txtThanks
+                        text: "ДЯКУЄМО ЗА ЗАМОВЛЕННЯ!"
+                        visible: true
+                        anchors.top: parent.top
+                        anchors.topMargin: parent.width * 0.3
+                        width: parent.width * 0.9
+                        height: parent.width * 0.1
+                        horizontalAlignment: Text.AlignHCenter
+                        color: "white"
+                    }
+
+                    HWFramedRoundButton{
+                        id: btnOk
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        height: parent.height * 0.15
+                        width: parent.width * 0.9
+                        anchors.top: txtThanks.bottom
+                        anchors.topMargin: parent.height * 0.1
+                        labelText:"OK"
+                        onButtonClick: {
+                            orderDone()
+                        }
                     }
                 }
             }
