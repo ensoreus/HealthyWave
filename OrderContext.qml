@@ -8,6 +8,7 @@ QtObject {
     property int pump
     property string cardToPay
     property string comment
+    property bool confirmed:false
     property TimeEntity deliveryTime: TimeEntity{
         day:""
         fromHour: ""

@@ -142,6 +142,7 @@ ViewController {
             anchors.top: txtChooseAnother.bottom
             anchors.left: tfComment.left
             anchors.leftMargin: 0
+
         }
 
         HWRoundButton{
@@ -151,8 +152,10 @@ ViewController {
             width: parent.width * 0.8
             height: parent.height * 0.08
             labelText: "ЗАМОВИТИ"
+            enabled: context.deliveryTime.toHour != ""
             onButtonClick: {
-                orderAccepted.visible = true
+                //orderAccepted.visible = true
+                navigationController.push("qrc:/orders/OrderReceipt.qml" , {"context":context})
             }
         }
 
@@ -163,26 +166,7 @@ ViewController {
             onClose: {
                 visible = false
             }
-
         }
-
-        OrderAccepted{
-            visible: false
-            id: orderAccepted
-            anchors.fill: parent
-            onAgree: {
-
-            }
-            onNotAgree: {
-
-            }
-            onOrderDone: {
-                visible = false
-            }
-        }
-
-
-
     }
 
 }

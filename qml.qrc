@@ -135,6 +135,7 @@
         <file>PickOrderDeliveryTime.qml</file>
         <file>OrderAccepted.qml</file>
         <file>img-alert.png</file>
+        <file>OrderReceipt.qml</file>
     </qresource>
     <qresource prefix="/address">
         <file>Addresses.qml</file>

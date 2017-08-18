@@ -42,6 +42,10 @@ ViewController {
         stack.pop();
     }
 
+    function popToInitial(){
+        stack.popToInitial()
+    }
+
     NavigationBar {
         id : navBar
         views: stack.views

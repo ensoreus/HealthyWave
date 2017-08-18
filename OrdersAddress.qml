@@ -28,9 +28,11 @@ ViewController {
                 orderAddressViewController.initializing = true
                 addressesModel.importData(addresses)
                 busyIndicator.running = false
+                orderAddressViewController.initializing = false
             }, function(error) {
                 console.log(error)
                 busyIndicator.running = false
+                orderAddressViewController.initializing = false
             })
         })
     }

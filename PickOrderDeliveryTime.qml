@@ -108,11 +108,12 @@ ViewController {
             anchors.top: txtComment.bottom
             onButtonClick: {
                 content.getTime()
-                if(rbCardPayment.checked){
-                    navigationController.push("qrc:/orders/PaymentCards.qml", {"context":context})
-                }else{
-                    navigationController.push("qrc:/orders/OrdersAddress.qml", {"context":context})
-                }
+                navigationController.push("qrc:/orders/OrderReceipt.qml", {"context":context})
+//                if(rbCardPayment.checked){
+//                    navigationController.push("qrc:/orders/PaymentCards.qml", {"context":context})
+//                }else{
+//                    navigationController.push("qrc:/orders/OrdersAddress.qml", {"context":context})
+//                }
             }
         }
 

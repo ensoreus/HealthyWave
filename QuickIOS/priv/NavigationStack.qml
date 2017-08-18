@@ -63,6 +63,10 @@ Item {
         return view;
     }
 
+    function popToInitial(){
+        stack.pop(null)
+    }
+
     width: 100
     height: 62
 
