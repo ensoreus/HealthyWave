@@ -12,6 +12,7 @@ ViewController {
     property alias busyIndicator: busyIndicator
     property OrderContext context
     property bool initializing: false
+
     id: orderAddressViewController
     navigationItem:NavigationItem{
         centerBarTitle:"Замовлення"
@@ -29,6 +30,7 @@ ViewController {
                 addressesModel.importData(addresses)
                 busyIndicator.running = false
                 orderAddressViewController.initializing = false
+                rbAddNewAddress.checked = false
             }, function(error) {
                 console.log(error)
                 busyIndicator.running = false
@@ -117,7 +119,19 @@ ViewController {
                     }
                 }
             }
+        }
 
+        HWRadioButton{
+            id:rbAddNewAddress
+            x: 5 * ratio
+            checked: true
+            width: 80 * ratio
+            height: 40 * ratio
+            anchors.top: lstAddresses.top
+            anchors.topMargin: 40 * ratio * addressesModel.rowCount() + 10 * ratio
+            anchors.left: lstAddresses.left
+            anchors.right: lstAddresses.right
+            text: "Додати нову адресу"
         }
 
         HWRoundButton {
@@ -130,7 +144,11 @@ ViewController {
             anchors.top: lstAddresses.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {
-                navigationController.push("qrc:/orders/OrderTime.qml", {"context":context})
+                if(rbAddNewAddress.checked){
+                     navigationController.push("qrc:/address/NewAddress.qml", {"context":context})
+                }else{
+                    navigationController.push("qrc:/orders/OrderTime.qml", {"context":context})
+                }
             }
         }
 

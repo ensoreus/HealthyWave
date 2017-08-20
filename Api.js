@@ -1,7 +1,6 @@
 
 var baseUrl = " https://94.130.18.75/debug/hs/GetData/"
 
-
 function auth(phone, secKey, callback){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -106,6 +105,25 @@ function searchNearestTime(address, authData, onSuccess, onFailure){
              "phone":authData.phone}, authData, onSuccess, onFailure)
 }
 
+function createOrder(orderContext, authData, onSuccess, onFailure){
+    call("createorder", {
+             "city":orderContext.address.city,
+             "street":orderContext.address.street,
+             "house":orderContext.address.house,
+             "entrance":orderContext.address.entrance,
+             "apartment":orderContext.address.apartment,
+             "floor":orderContext.address.floor,
+             "comment":orderContext.comment,
+             "bottle":orderContext.fullb,
+             "emptybottle":orderContext.emptyb,
+             "pump":orderContext.pump,
+             "promocode":"",
+             "from":orderContext.deliveryTime.fromHour,
+             "to":orderContext.deliveryTime.toHour,
+             "phone":authData.phone
+         }, authData, onSuccess, onFailure)
+}
+
 function call(routine, params, authData, onSuccess, onFailure){
     var xhr = new XMLHttpRequest();
     var url = baseUrl + routine + serializeParams(params)
@@ -129,6 +147,10 @@ function call(routine, params, authData, onSuccess, onFailure){
     var onReady = function(){
         if(xhr.readyState === XMLHttpRequest.DONE){
             print(xhr.responseText.toString())
+            if(xhr.responseText.toString() == ""){
+                onFailure({"error":"no addresses"})
+                return;
+            }
             var object = JSON.parse(xhr.responseText.toString());
             if(typeof(object.error) != 'undefined'){
                 if (object.error.match(/^Ключ доступа не найден или просрочен:\.*/)){

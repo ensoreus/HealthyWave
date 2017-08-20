@@ -70,7 +70,7 @@ ViewController {
                         context.deliveryTime.day = "today"
                         context.deliveryTime.toHour = result.result
                     }, function(error){
-                        searchTimeWaiter.timeLabel = error.error
+                        searchTimeWaiter.errorLabel = error.error
                         console.log(error)
                         content.stopSearchAnimation()
                     })

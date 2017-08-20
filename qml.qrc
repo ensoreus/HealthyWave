@@ -145,4 +145,9 @@
         <file>NewAddressForm.ui.qml</file>
         <file>AddressCell.qml</file>
     </qresource>
+    <qresource prefix="/cards">
+        <file>CardsList.qml</file>
+        <file>img-cards-ico.png</file>
+        <file>AddNewCard.qml</file>
+    </qresource>
 </RCC>

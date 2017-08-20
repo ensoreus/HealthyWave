@@ -21,7 +21,8 @@ Rectangle {
 
         property var menuModel: [
             {"file":"qrc:/orders/NoOrders.qml", "title":"Замовлення", "present": false},
-            {"file":"qrc:/address/Addresses.qml", "title":"Мої адреси", "present": false}
+            {"file":"qrc:/address/Addresses.qml", "title":"Мої адреси", "present": false},
+            {"file":"qrc:/cards/CardsList.qml", "title":"Оплата", "present":false}
         ]
 
         onMyOrdersItem: {
@@ -30,6 +31,10 @@ Rectangle {
 
         onAddressesItem: {
             pushViewController(1)
+        }
+
+        onPaymentsItem: {
+            pushViewController(2)
         }
 
         function pushViewController(index){
