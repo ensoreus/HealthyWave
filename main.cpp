@@ -52,11 +52,6 @@ qreal refWidth = 414.;
   engine.rootContext()->setContextProperty("fontRatio", QVariant::fromValue(m_ratioFont));
   engine.addImportPath("qrc:///");
 
-   QNetworkRequest request;
-   request.setUrl(QUrl("https://secure.wayforpay.com/pay"));
-   request.setRawHeader("Accept-Charset", "UTF-8,*;q=0.5");
-
-
   engine.load(QUrl(QLatin1String("qrc:/main.qml")));
   QQuickWindow *window = qobject_cast<QQuickWindow *>(engine.rootObjects().first());
   QuickIOS::setupWindow(window);
