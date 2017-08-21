@@ -1,5 +1,6 @@
 
-var baseUrl = " https://94.130.18.75/debug/hs/GetData/"
+//var baseUrl = " https://94.130.18.75/debug/hs/GetData/"
+var baseUrl = "http://hz.vsde.biz:50080/debug/hs/GetData/"
 
 function auth(phone, secKey, callback){
     var xhr = new XMLHttpRequest();
@@ -153,7 +154,7 @@ function call(routine, params, authData, onSuccess, onFailure){
             }
             var object = JSON.parse(xhr.responseText.toString());
             if(typeof(object.error) != 'undefined'){
-                if (object.error.match(/^Ключ доступа не найден или просрочен:\.*/)){
+                if (object.error.match(/^Ключ доступа не найден или просрочен:\.*/) || object.error.match(/Invalid parameter value \(parameter number '1'\)$/)){
                     onAuthError(authData, onTokenUpdated)
                 }else{
                     onFailure(object, authData.token)

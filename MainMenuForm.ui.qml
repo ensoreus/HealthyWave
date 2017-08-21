@@ -6,6 +6,7 @@ Item {
     id: item1
     width: 400
     height: 400
+    property alias btnProfile: btnProfile
     property alias lbInfo: lbInfo
     property alias lbLink: lbLink
     property alias lbContacts: lbContacts
@@ -16,6 +17,7 @@ Item {
     property alias btnAddresses: btnAddresses
     property alias btnMyOrders: btnMyOrders
     property alias btnPayments: btnPayments
+    property alias lbProfile: lbProfile
     property alias btnInfo: btnInfo
     property alias btnSite: btnSite
     property alias avatar: avatar
@@ -39,6 +41,7 @@ Item {
             y: 0
             width: 100 * ratio
             height: 100 * ratio
+            source: "qrc:/commons/avatar.png"
             anchors.horizontalCenterOffset: -(parent.width * 0.1 * ratio)
             anchors.verticalCenterOffset: (-19) * ratio
             visible: true
@@ -148,6 +151,26 @@ Item {
 
             MouseArea {
                 id: btnContacts
+                anchors.fill: parent
+                acceptedButtons: Qt.AllButtons
+            }
+        }
+
+        Text {
+            id: lbProfile
+            width: 347 * ratio
+            height: parent.height * 0.05
+            text: qsTr("Профіль")
+            anchors.horizontalCenterOffset: -50 * ratio
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: lbContacts.bottom
+            anchors.topMargin: 20 * ratio
+            anchors.left: parent.left
+            anchors.leftMargin: 25 * ratio
+            font.pointSize: 14
+
+            MouseArea {
+                id: btnProfile
                 anchors.fill: parent
                 acceptedButtons: Qt.AllButtons
             }

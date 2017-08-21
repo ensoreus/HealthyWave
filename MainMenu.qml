@@ -10,6 +10,7 @@ MainMenuForm {
     signal paymentsItem
     signal addressesItem
     signal contactsItem
+    signal profileItem
     signal infoLink
     signal siteLink
 
@@ -53,6 +54,14 @@ MainMenuForm {
 
     btnAddresses.onPressedChanged: {
         lbAddress.font.bold = btnAddresses.pressed
+    }
+
+    btnProfile.onPressedChanged: {
+        lbProfile.font.bold = btnProfile.pressed
+    }
+
+    btnProfile.onClicked:{
+        profileItem()
     }
 
     btnInfo.onPressedChanged: {

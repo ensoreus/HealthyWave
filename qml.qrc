@@ -81,6 +81,7 @@
         <file>OrderContext.qml</file>
         <file>AddressEntity.qml</file>
         <file>TimeEntity.qml</file>
+        <file>img-share.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
@@ -149,5 +150,8 @@
         <file>CardsList.qml</file>
         <file>img-cards-ico.png</file>
         <file>AddNewCard.qml</file>
+    </qresource>
+    <qresource prefix="/profile">
+        <file>Profile.qml</file>
     </qresource>
 </RCC>

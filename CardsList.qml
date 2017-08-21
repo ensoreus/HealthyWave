@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QuickIOS 0.1
-
+import QtQml.Models 2.2
+import QtQuick.Controls 2.1
 import "qrc:/controls"
 
 ViewController {
@@ -8,6 +9,22 @@ ViewController {
     property var navigationItem: NavigationItem{
         centerBarTitle:"Оплата"
     }
+
+    function showAddressList(){
+        lstCards.visible = true
+        rNoCards.visible = false
+
+    }
+
+    function hideAddressList(){
+        lstCards.visible = false
+        rNoCards.visible = true
+    }
+
+    onViewDidAppear:{
+        showAddressList()
+    }
+
     Rectangle {
         id: content
         color: "#ffffff"
@@ -40,7 +57,6 @@ ViewController {
                 labelText: "ДОДАТИ"
                 onButtonClick: {
                     navigationController.push("qrc:/cards/AddNewCard.qml")
-
                 }
             }
 
@@ -57,50 +73,114 @@ ViewController {
         }
 
         ListView {
-            id: listCards
+            id: lstCards
             visible: false
             anchors.fill: parent
-            delegate: Item {
-                x: 5
-                width: 80
-                height: 40
-                Row {
-                    id: row1
-                    Rectangle {
-                        width: 40
-                        height: 40
-                        color: colorCode
-                    }
 
-                    Text {
-                        text: name
-                        font.bold: true
-                        anchors.verticalCenter: parent.verticalCenter
-                    }
-                    spacing: 10
-                }
-            }
             model: ListModel {
-                ListElement {
-                    name: "Grey"
-                    colorCode: "grey"
+                id: cardsModel
+                function importData(data){
+                    cardsModel.clear()
+                    for(var index in data){
+                        var item = data[index]
+                        var modelItem = {cardNum:item.cardNum, street:item.cardType}
+                            cardsModel.append(modelItem)
+                    }
+                }
+                ListElement{
+                    cardNum: "2345"
+                    cardType: "visa"
+                }
+                ListElement{
+                    cardNum:"4567"
+                    cardType:"mastercard"
                 }
 
-                ListElement {
-                    name: "Red"
-                    colorCode: "red"
-                }
 
-                ListElement {
-                    name: "Blue"
-                    colorCode: "blue"
-                }
-
-                ListElement {
-                    name: "Green"
-                    colorCode: "green"
-                }
             }
+            delegate: SwipeDelegate{
+                id: swipeDelegate
+                topPadding: 0
+                rightPadding: 0
+                leftPadding: 0
+                bottomPadding: 0
+                height: 100 * ratio
+                width: lstCards.width
+
+                contentItem: Rectangle{
+                    id: background
+                    color: "#ffffff"
+                    Text {
+                        id: lbCardNum
+                        y: 15 * ratio
+                        height:background.height * 0.35
+                        color: "#444444"
+                        font.pointSize: 20
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: "SF UI Text"
+                        anchors.right: image.left
+                        anchors.verticalCenter: background.verticalCenter
+                        anchors.leftMargin: background.width * 0.062
+                        anchors.left: background.left
+                        text: "**** **** **** " + cardNum
+                    }
+
+                    Image {
+                        id: lbCardType
+                        anchors.right: background.right
+                        anchors.rightMargin: 10 * ratio
+                        anchors.verticalCenter: lbCardNum.verticalCenter
+                        source: (cardType == "visa") ? "qrc:/commons/img-visa.png" : "qrc:/commons/img-mastercard.png"
+                    }
+
+                    Rectangle {
+                        id: separatorLine
+                        y: 94 * ratio
+                        height: 1
+                        color: "#C8C7CC"
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 1
+                        anchors.right: parent.right
+                        anchors.rightMargin: 0
+                        anchors.left: parent.left
+                        anchors.leftMargin: 0
+                        border.color: "#444444"
+                    }
+                }
+
+               /* swipe.right:Label {
+                    id: deleteLabel
+                    text: qsTr("Видалити")
+                    color: "white"
+                    verticalAlignment: Label.AlignVCenter
+                    padding: 12
+                    height: parent.height
+                    anchors.right: parent.right
+                }
+
+                background: Rectangle {
+                    color: deleteLabel.SwipeDelegate.pressed ? Qt.darker( "tomato", 1.1) : "tomato"
+                }
+                ListView.onRemove: SequentialAnimation {
+                    PropertyAction {
+                        target: swipeDelegate
+                        property: "ListView.delayRemove"
+                        value: true
+                    }
+                    NumberAnimation {
+                        target: swipeDelegate
+                        property: "height"
+                        to: 0
+                        easing.type: Easing.InOutQuad
+                    }
+                    PropertyAction {
+                        target: swipeDelegate;
+                        property: "ListView.delayRemove";
+                        value: false
+                    }
+                }*/
+            }
+
         }
     }
 
