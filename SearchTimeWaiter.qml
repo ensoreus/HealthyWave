@@ -5,6 +5,7 @@ Item{
     id: content
     property alias label: label
     property alias timeLabel: timeLabel.text
+    property alias errorLabel: errorLabel.text
     signal close
 
     width: 215
@@ -12,11 +13,14 @@ Item{
     Component.onCompleted: {
         visible = false
         timeLabel.visible = false
+        errorLabel.visible = false
     }
 
     function startAnimation(){
         state = "wiggleOut"
         visible = true
+        errorLabel.text = ""
+        errorLabel.visible = false
         timer.start()
     }
 
@@ -128,6 +132,16 @@ Item{
         samples: 17
         color: "#80000000"
         source: timeLabel
+    }
+
+    DropShadow {
+        anchors.fill: errorLabel
+        horizontalOffset: 3
+        verticalOffset: 3
+        radius: 8.0
+        samples: 17
+        color: "#80000000"
+        source: errorLabel
     }
 
     Timer{

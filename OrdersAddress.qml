@@ -123,13 +123,13 @@ ViewController {
 
         HWRadioButton{
             id:rbAddNewAddress
-            x: 5 * ratio
             checked: true
             width: 80 * ratio
             height: 40 * ratio
             anchors.top: lstAddresses.top
-            anchors.topMargin: 40 * ratio * addressesModel.rowCount() + 10 * ratio
+            anchors.topMargin: 40 * ratio * (addressesModel.rowCount() + 2)  + 10 * ratio
             anchors.left: lstAddresses.left
+            anchors.leftMargin: 5 * ratio
             anchors.right: lstAddresses.right
             text: "Додати нову адресу"
         }
