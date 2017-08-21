@@ -22,7 +22,7 @@ ViewController {
     }
 
     onViewDidAppear:{
-        showAddressList()
+        hideAddressList()
     }
 
     Rectangle {

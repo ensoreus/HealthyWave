@@ -21,3 +21,9 @@ QString SecurityCore::secKey() const{
 bool SecurityCore::retriveSecKey(){
   return _impl->retriveSecKey();
 }
+
+QString SecurityCore::hmacMd5(const QString& line){
+  QCryptographicHash hashMaker(QCryptographicHash::Md5);
+  hashMaker.addData(line.toStdString().c_str());
+  return hashMaker.result().toBase64();
+}

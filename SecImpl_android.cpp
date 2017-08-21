@@ -31,3 +31,4 @@ QString SecImplementation::secKey() const{
 bool SecImplementation::retriveSecKey(){
   return true;
 }
+
