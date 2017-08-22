@@ -7,7 +7,7 @@ import SecurityCore 1.0
 import "qrc:/"
 
 ViewController {
-
+    id: newCardViewController
     property var navigationItem: NavigationItem{
         centerBarTitle:"Додати картку"
     }
@@ -19,16 +19,12 @@ ViewController {
     onViewWillAppear:{
         var xhr = new XMLHttpRequest();
 
-
-
-       // xhr.setRequestHeader("Accept", "*/*")
-       // xhr.setRequestHeader("Accept-Encoding","gzip, deflate")
-
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     console.log(xhr.responseText);
-                    webView.loadHtml(xhr.responseText)
+                    webView.loadHtml(xhr.responseText, "https://secure.wayforpay.com")
+                    //webView.l
                     busyIndicator.running = false
                 } else {
                     console.log("HTTP request failed", xhr.status)
@@ -58,45 +54,28 @@ ViewController {
         ///var testStrToHash = "test_merchant;www.market.ua;DH783023;1415379863;1547.36;UAH;Процессор Intel Core i5-4670 3.4GHz;Память Kingston DDR3-1600 4096MB PC3-12800;1;1;1000;547.36"//
         var strToHash = merchantName+";"+domain+";"+orderReference+";"+Math.round(orderTime)+";1.00;UAH;"+productname+";1;1.00"
         var signature = SecurityCore.hmacMd5( strToHash, merchantSignature )
-        var formData = " <form name=\"request\" method=\"post\">"
-        formData += "<input name=\"amount\" value=1.00>"
-        formData += "<input name=\"merchantTransactionType\" value=\"AUTH\">"
-        formData += "<input name=\"merchantAccount\" value="+merchantName+">"
-        formData += "<input name=\"merchantAuthType\" value=\"SimpleSignature\">"
-        formData += "<input name=\"merchantDomainName\" value="+domain+">"
-        formData += "<input name=\"merchantSignature\" value="+signature+">"
-        formData += "<input name=\"merchantSecretKey\" value="+merchantSignature+">"
-        formData += "<input name=\"orderReference\" value="+orderReference+">"
-        formData += "<input name=\"orderDate\" value="+Math.round(orderTime)+">"
-        formData += "<input name=\"currency\" value=\"UAH\">"
-        formData += "<input name=\"orderTimeout\" value=49000>"
-        formData += "<input name=\"productName\" value="+productname+">"
-        formData += "<input name=\"productPrice\" value=1>"
-        formData += "<input name=\"productCount\" value=1>"
-        formData += "<input name=\"clientFirstName\" value=\"Sherlock\">"
-        formData += "<input name=\"clientLastName\" value=\"Holmes\">"
-        formData += "<input name=\"clientAddress\" value="+lstreet+">"
-        formData += "<input name=\"city\" value="+lcity+">"
-        formData += "<input name=\"clientEmail\" value="+lemail+">"
-        formData += "<input name=\"defaultPaymentSystem\" value=\"card\">"
-        formData += "</form>"
-        
-        
 
-        console.log(formData)
         xhr.open("POST", "https://secure.wayforpay.com/pay?behavior=frame", true)
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        var url = "amount=1.00&merchantTransactionType=AUTH&merchantAccount="+merchantName+"&merchantAuthType=SimpleSignature&merchantDomainName="+domain+"&merchantSignature="+signature+"&merchantSecretKey="+merchantSignature+"&orderReference="+orderReference+"&orderDate="+Math.round(orderTime)+"&currency=UAH&orderTimeout=49000&productName="+ escape(productname) +"&productPrice=1.00&productCount=1&clientFirstName="+escape("Sherlock")+"&clientLastName="+escape("Holmes")+"&clientAddress=" + escape(lstreet) + "&city=" + escape(lcity)+ "&clientEmail="+escape(lemail)+"&defaultPaymentSystem=card"
+        var url = "amount=1.00&merchantTransactionType=AUTH&merchantAccount="+merchantName+"&merchantAuthType=SimpleSignature&merchantDomainName="+domain+"&merchantSignature="+signature+"&merchantSecretKey="+merchantSignature+"&orderReference="+orderReference+"&orderDate="+Math.round(orderTime)+"&currency=UAH&orderTimeout=49000&productName="+ escape(productname) +"&productPrice=1.00&productCount=1&clientFirstName="+escape("Sherlock")+"&clientLastName="+escape("Holmes")+"&clientAddress=" + escape(lstreet) + "&city=" + escape(lcity)+ "&clientEmail="+escape(lemail)+"&defaultPaymentSystem=card&serviceUrl="
         //xhr.send("{form:'"+formData+"'}")
         xhr.send(url)
         console.log(strToHash)
-        console.log(formData)
     }
 
     WebView{
         id: webView
         anchors.fill: parent
         //url: "https://secure.wayforpay.com/pay?amount=1.00&merchantTransactionType=AUTH&merchantAccount=test_merch_n1&merchantSecretKey='flk3409refn54t54t*FNJRET'"
+        onLoadingChanged: {
+            console.log(loadRequest.url)
+            var  sUrl = loadRequest.url.toString()
+            if (sUrl.search("^https://secure.wayforpay.com/closing") > 0){
+                console.log(sUrl)
+                navigationController.pop()
+            }
+
+        }
         BusyIndicator{
             id: busyIndicator
             anchors.verticalCenter: parent.verticalCenter
