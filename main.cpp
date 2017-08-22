@@ -8,6 +8,7 @@
 #include <QScreen>
 #include <QQuickView>
 #include "StatusBarSetup.h"
+#include "source/cpp/misc/pushnotification.h"
 
 static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -47,6 +48,8 @@ qreal refWidth = 414.;
 
   QuickIOS::registerTypes();
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
+  qmlRegisterSingletonType<PushNotificationRegistrationTokenHandler>("com.example.example", 1, 0, "PushNotificationRegistrationTokenHandler",
+                                                                          PushNotificationRegistrationTokenHandler::pushNotificationRegistrationTokenProvider);
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("ratio", QVariant::fromValue(m_ratio));
   engine.rootContext()->setContextProperty("fontRatio", QVariant::fromValue(m_ratioFont));
