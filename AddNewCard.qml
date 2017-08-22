@@ -34,12 +34,9 @@ ViewController {
             }
         }
         var lcity = "Киев";
-        var lstreet;
+        var lstreet = "Майдан Незалежності";
         var lemail;
         var lname;
-        storage.getAddresses(function(address){
-            lstreet = address
-        })
         storage.getEmail(function(email){
             lemail = email
         })
@@ -52,17 +49,16 @@ ViewController {
         var domain = "hvilya-zd.com.ua"
         var productname = "Добавление карты"
         var merchantSignature = "flk3409refn54t54t*FNJRET"
-        var orderReference = "DH783023"
-        var dste = new Date()
+        var orderReference = SecurityCore.createUid();
         var orderTime = date.getTime()/1000
 
         xhr.open("POST", "https://secure.wayforpay.com/pay")
+        ///var testStrToHash = "test_merchant;www.market.ua;DH783023;1415379863;1547.36;UAH;Процессор Intel Core i5-4670 3.4GHz;Память Kingston DDR3-1600 4096MB PC3-12800;1;1;1000;547.36"//
         var strToHash = merchantName+";"+domain+";"+orderReference+";"+Math.round(orderTime)+";1.00;UAH;"+productname+";1;1.00"
-        var signature = SecurityCore.hmacMd5(strToHash)
-        var url = "amount=1.00&merchantTransactionType=AUTH&merchantAccount="+merchantName+"&merchantAccountType=SimpleSignature&merchantDomainName="+domain+"&merchantSignature="+signature+"&merchantSecretKey="+merchantSignature+"&orderReference="+orderReference+"&orderDate="+orderTime+"&currency=UAH&orderTimeout=49000&productName="+ productname +"&productPrice=1.00&productCount=1&clientFirstName='ааа'&clientLastName=Кас&clientAddress=" + lstreet + "&city=" + lcity+ "&clientEmail="+lemail+"&defaultPaymentSystem=card"
-//test_merchant;www.market.ua;DH783023;1415379863;1547.36;UAH;Процессор Intel Core i5-4670 3.4GHz;Память Kingston DDR3-1600 4096MB PC3-12800;1;1;1000;547.36
+        var signature = SecurityCore.hmacMd5( strToHash, merchantSignature )
+        var url = "amount=1.00&merchantTransactionType=AUTH&merchantAccount="+merchantName+"&merchantAuthType=SimpleSignature&merchantDomainName="+domain+"&merchantSignature="+signature+"&merchantSecretKey="+merchantSignature+"&orderReference="+orderReference+"&orderDate="+Math.round(orderTime)+"&currency=UAH&orderTimeout=49000&productName="+ productname +"&productPrice=1.00&productCount=1&clientFirstName=ааа&clientLastName=Кас&clientAddress=" + lstreet + "&city=" + lcity+ "&clientEmail="+lemail+"&defaultPaymentSystem=card"
         xhr.send(url)
-        console.log(strToHash)
+        console.log(signature)
         console.log(url)
     }
 

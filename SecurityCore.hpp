@@ -16,7 +16,8 @@ public:
   Q_INVOKABLE bool storeSecKey();
   QString secKey() const;
   Q_INVOKABLE bool retriveSecKey();
-  Q_INVOKABLE QString hmacMd5(const QString& line);
+  Q_INVOKABLE QString hmacMd5(const QString& line, const QString& key);
+  Q_INVOKABLE QString createUid() const;
 
 signals:
   void secKeyChanged();
