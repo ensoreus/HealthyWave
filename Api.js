@@ -1,6 +1,6 @@
 
-//var baseUrl = " https://94.130.18.75/debug/hs/GetData/"
-var baseUrl = "http://hz.vsde.biz:50080/debug/hs/GetData/"
+var baseUrl = "http://94.130.18.75/debug/hs/GetData/"
+//var baseUrl = "http://hz.vsde.biz:50080/debug/hs/GetData/"
 
 function auth(phone, secKey, callback){
     var xhr = new XMLHttpRequest();
@@ -38,19 +38,23 @@ function registerUser(phone, name, email, token, callback) {
 }
 
 function getPinCode(phone, secKey){
-    var xhr = new XMLHttpRequest();
-    var isSent= "Error"
+    var xhr = new XMLHttpRequest()
+    var isSent = "Error"
+
     xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
-            print('HEADERS_RECEIVED');
-        } else if(xhr.readyState === XMLHttpRequest.DONE) {
+
+        if(xhr.readyState === XMLHttpRequest.DONE) {
+            console.log(xhr.status)
+            console.log("ret:" + xhr.responseText.toString())
             var object = JSON.parse(xhr.responseText.toString());
-            print(JSON.stringify(object, null, 2));
+            //print(JSON.stringify(object, null, 2));
             isSent = object.valueOf("result")
         }
     }
-    console.log( baseUrl + "getpincode?phone=" + phone + "&securitykey=" + secKey)
-    xhr.open("GET", baseUrl + "getpincode?phone=" + phone + "&securitykey=" + secKey);
+
+    var url = baseUrl + "getpincode?phone=" + phone + "&securitykey=" + secKey
+    console.log( url)
+    xhr.open("GET", url, true);
     xhr.send();
     return isSent
 }

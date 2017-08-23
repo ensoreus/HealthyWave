@@ -70,7 +70,7 @@ ViewController {
                         context.deliveryTime.day = "today"
                         context.deliveryTime.toHour = result.result
                     }, function(error){
-                        searchTimeWaiter.errorLabel = error.error
+                        searchTimeWaiter.showError = true
                         console.log(error)
                         content.stopSearchAnimation()
                     })
@@ -101,7 +101,7 @@ ViewController {
             font.pointSize: 15
             font.weight: Font.Normal
             horizontalAlignment: Text.AlignHCenter
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.05
             anchors.top: btnSearch.bottom
             anchors.horizontalCenter: parent.horizontalCenter
 
@@ -138,7 +138,7 @@ ViewController {
             anchors.right: tfComment.right
             anchors.rightMargin: 0
             font.weight: Font.Thin
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.05
             anchors.top: txtChooseAnother.bottom
             anchors.left: tfComment.left
             anchors.leftMargin: 0
@@ -148,13 +148,12 @@ ViewController {
         HWRoundButton{
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: parent.height * 0.1
+            anchors.bottomMargin: parent.height * 0.05
             width: parent.width * 0.8
             height: parent.height * 0.08
             labelText: "ЗАМОВИТИ"
             enabled: context.deliveryTime.toHour != ""
             onButtonClick: {
-                //orderAccepted.visible = true
                 navigationController.push("qrc:/orders/OrderReceipt.qml" , {"context":context})
             }
         }

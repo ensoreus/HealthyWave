@@ -33,7 +33,7 @@ ViewController {
             id: text1
             x: 307
             width: parent.width * 0.7
-            height: parent.height * 0.2
+            height: parent.height * 0.1
             text: qsTr("Виберіть інший час доставки  за Вашою адресою")
             wrapMode: Text.WordWrap
             font.weight: Font.DemiBold
@@ -51,6 +51,7 @@ ViewController {
             width: parent.width * 0.9
             height: parent.height * 0.35
             anchors.top: text1.bottom
+            anchors.topMargin: parent.height * 0.05
         }
 
         Text {
@@ -70,8 +71,10 @@ ViewController {
             id: txtComment
             anchors.topMargin: parent.height * 0.01
             anchors.top: text2.bottom
-            anchors.left: text2.left
-            anchors.leftMargin: 0
+            anchors.left: parent.left
+            anchors.leftMargin: 0.05
+            anchors.right: parent.right
+            anchors.rightMargin: 0.05
             width: 300
             height: parent.height * 0.08
             onWillStartAnimation: {

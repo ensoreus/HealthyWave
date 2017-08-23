@@ -10,7 +10,6 @@ Item {
         db.transaction( function(tx) {
             tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT)')
             var result = tx.executeSql('select phone from userData');
-
             isReg = result.rows.length > 0
         }
         );

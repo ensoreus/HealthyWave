@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QuickIOS 0.1
 import "qrc:/commons"
 import "qrc:/controls"
+import "qrc:/Api.js" as Api
+import "qrc:/"
 
 ViewController {
 
@@ -23,6 +25,9 @@ ViewController {
         txPaymentType.text = context.card == 1 ? "карткою" : "готівкою"
     }
 
+    Storage{
+        id: storage
+    }
     Rectangle {
         id: content
         color: "#ffffff"
@@ -55,7 +60,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("Вода:")
                 font.weight: Font.Thin
-                anchors.topMargin: parent.height * 0.12
+                anchors.topMargin: parent.height * 0.05
                 anchors.top: parent.top
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: 0
@@ -144,73 +149,73 @@ ViewController {
             Text {
                 id: txWater
                 text: qsTr("Text")
+                verticalAlignment: Text.AlignVCenter
                 anchors.top: lbWater.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 6
-                font.pixelSize: 12
+                anchors.left: lbWater.right
+                anchors.leftMargin: 10
             }
 
             Text {
                 id: txEmpty
                 text: qsTr("Text")
+                verticalAlignment: Text.AlignVCenter
                 anchors.top: lbEmptyBottle.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 6
-                font.pixelSize: 12
+                anchors.left: lbEmptyBottle.right
+                anchors.leftMargin: 10
             }
 
             Text {
                 id: txFee
                 text: qsTr("Text")
+                verticalAlignment: Text.AlignVCenter
                 anchors.top: lbFee.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 6
-                font.pixelSize: 12
+                anchors.left: lbFee.right
+                anchors.leftMargin: 10
             }
 
             Text {
                 id: txNoDiscount
                 text: qsTr("Text")
+                verticalAlignment: Text.AlignVCenter
                 anchors.top: lbNoDiscount.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 6
-                font.pixelSize: 12
+                anchors.left: lbNoDiscount.right
+                anchors.leftMargin: 10
             }
 
             Text {
                 id: txWithDiscount
                 text: qsTr("Text")
+                verticalAlignment: Text.AlignVCenter
                 anchors.top: lbWithDiscount.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 6
-                font.pixelSize: 12
+                anchors.left: lbWithDiscount.right
+                anchors.leftMargin: 10
             }
 
             Text {
                 id: txTotal
                 text: qsTr("Text")
+                anchors.rightMargin: 51
+                verticalAlignment: Text.AlignVCenter
                 anchors.top: lbTotal.top
                 anchors.topMargin: 0
-                anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 6
-                font.pixelSize: 12
+                anchors.left: lbTotal.right
+                anchors.leftMargin: 10
             }
 
             Text {
@@ -223,7 +228,7 @@ ViewController {
                 anchors.rightMargin: 0
                 anchors.left: lbTotal.left
                 anchors.leftMargin: 0
-                anchors.topMargin: parent.height * 0.08
+                anchors.topMargin: parent.height * 0.04
                 anchors.top: rectangle1.bottom
             }
 
@@ -337,6 +342,14 @@ ViewController {
             onButtonClick: {
                 context.confirmed = true
                 orderAccepted.visible = true
+                storage.getAuthData(function(authdata){
+                    Api.createOrder(context, authdata, function(result){
+                        console.log(result.result)
+                    }, function(error){
+                        console.log(error.error)
+                    })
+                })
+
             }
         }
 
@@ -352,7 +365,12 @@ ViewController {
             }
             onOrderDone: {
                 visible = false
-                navigationController.popToInitial()
+                navigationController.pop()
+                navigationController.pop()
+                navigationController.pop()
+                navigationController.pop()
+                navigationController.pop()
+                navigationController.pop()
             }
         }
     }

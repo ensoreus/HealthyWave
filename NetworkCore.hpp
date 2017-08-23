@@ -11,13 +11,14 @@ class NetworkCore : public QObject
 public:
   explicit NetworkCore(QObject *parent = 0);
   Q_INVOKABLE void registrate(const QString& email, const QString& name, const QString& phone);
-  Q_INVOKABLE void authorize();
+  Q_INVOKABLE void getPinCode();
 
 signals:
   void authorized();
   void registered();
 
 public slots:
+  void gotPinCode(QNetworkReply *reply);
 
 protected:
   void connectToHost();

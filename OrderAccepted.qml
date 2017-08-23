@@ -80,7 +80,7 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
                         color: "white"
-                        font.pointSize:16
+                        font.pointSize:14
                         font.bold: true
                     }
 
@@ -95,7 +95,7 @@ Item {
                         anchors.topMargin: 0
                         horizontalAlignment: Text.AlignHCenter
                         color: "white"
-                        font.pointSize:16
+                        font.pointSize:15
                         font.bold: true
                     }
 
@@ -103,10 +103,13 @@ Item {
                         id: txShouldCallQuestion
                         x: 220
                         width: parent.width * 0.8
+                        height: 15 * ratio
                         color: "#ffffff"
                         text: qsTr("Бажаєте, щоб наш спеціаліст передзвонив \nВам для підтвердження замовлення?")
+                        fontSizeMode: Text.HorizontalFit
+                        wrapMode: Text.WordWrap
                         horizontalAlignment: Text.AlignHCenter
-                        anchors.topMargin: parent.height * 0.2
+                        anchors.topMargin: parent.height * 0.1
                         anchors.top: weAreOn.bottom
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
@@ -117,7 +120,7 @@ Item {
                         height: parent.height * 0.15
                         width: parent.width * 0.9
                         anchors.top: txShouldCallQuestion.bottom
-                        anchors.topMargin: parent.height * 0.05
+                        anchors.topMargin: parent.height * 0.09
                         labelText:"ТАК, ХОЧУ ЩОБ ПЕРЕДЗВОНИЛИ!"
                         onButtonClick: {
                             agree()

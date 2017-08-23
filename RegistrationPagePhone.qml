@@ -31,11 +31,13 @@ RegistrationPagePhoneForm {
             phoneField.aboutToFocus = false
         }
     }
+
     phoneField.onFocusChanged: {
         if(!phoneField.focus){
             phonePage.endEditData()
         }
     }
+
     phoneField.onTextChanged: {
         btnNext.opacity = (phoneField.acceptableInput) ? 1.0 : 0.5
         btnNext.enabled = phoneField.acceptableInput

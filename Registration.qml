@@ -111,7 +111,6 @@ Item {
                 startProcessIndicator()
                 Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
                     storage.saveToken(token)
-
 //                    nameEditPage.debugConsole.append(url)
 //                    nameEditPage.debugConsole.append("\n"+phoneEditPage.phoneField.text)
 //                    nameEditPage.debugConsole.append("\n"+token)

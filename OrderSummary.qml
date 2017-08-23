@@ -144,7 +144,7 @@ ViewController {
 
         BorderImage {
             id: borderImage
-            anchors.bottomMargin: parent.height * 0.4
+            anchors.bottomMargin: parent.height * 0.3
             anchors.bottom: parent.bottom
             anchors.rightMargin: parent.width * 0.01
             anchors.topMargin: parent.height * 0.02
@@ -236,7 +236,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("Сума замовлення:")
                 anchors.left: lbPump.left
-                anchors.leftMargin: 0
+                anchors.leftMargin: 5 * ratio
                 anchors.topMargin: parent.height * 0.05
                 anchors.top: lbPump.bottom
                 font.pointSize: 14
@@ -247,7 +247,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("")
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 0
+                anchors.leftMargin: 5 * ratio
                 anchors.top: lbWater.top
                 anchors.topMargin: 0
                 font.weight: Font.DemiBold
@@ -260,7 +260,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("")
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 0
+                anchors.leftMargin: 5 * ratio
                 anchors.top: lbFreeWater.top
                 anchors.topMargin: 0
                 font.family: "SF UI Text"
@@ -275,7 +275,7 @@ ViewController {
                 anchors.top: lbTotalBottles.top
                 anchors.topMargin: 0
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 0
+                anchors.leftMargin: 5 * ratio
                 font.family: "SF UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 14
@@ -286,7 +286,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("")
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 0
+                anchors.leftMargin: 5 * ratio
                 anchors.top: lbBottlesFee.top
                 anchors.topMargin: 0
                 font.family: "SF UI Text"
@@ -299,7 +299,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("")
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 0
+                anchors.leftMargin: 5 * ratio
                 anchors.top: lbEmptyBottles.top
                 anchors.topMargin: 0
                 font.family: "SF UI Text"
@@ -325,7 +325,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("")
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 0
+                anchors.leftMargin: 5 * ratio
                 anchors.top: lbSummaryOfOrder.top
                 anchors.topMargin: 0
                 font.family: "SF UI Text"
@@ -351,7 +351,7 @@ ViewController {
             text: "Готівковий розрахунок"
             anchors.right: borderImage.right
             anchors.rightMargin: 0
-            anchors.topMargin: parent.height * 0.02
+            anchors.topMargin: parent.height * 0.01
             anchors.top: hPaymentType.bottom
             anchors.left: cbPump.left
             anchors.leftMargin: 0
@@ -374,7 +374,7 @@ ViewController {
             width: parent.width * 0.7
             height: parent.height * 0.1
             labelText: "ДАЛІ"
-            anchors.bottomMargin: parent.height * 0.05
+            anchors.bottomMargin: parent.height * 0.01
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {

@@ -21,7 +21,7 @@ ios:{
      SOURCES += SecImpl_ios.cpp StatusBarSetup.mm
      LIBS+= -framework Security -framework CoreFoundation
     ######## adapt the following value to match your TeamID ########
-    MY_DEVELOPMENT_TEAM.value = Philipp Maluta
+    MY_DEVELOPMENT_TEAM.value = "Philipp Maluta"
     ################################################################
 
     MY_DEVELOPMENT_TEAM.name = DEVELOPMENT_TEAM
@@ -36,7 +36,7 @@ ios:{
     # Note for devices: 1=iPhone, 2=iPad, 1,2=Universal.
     QMAKE_IOS_TARGETED_DEVICE_FAMILY = 1
 
-    QMAKE_INFO_PLIST = $$PWD/ios/Info.plist
+    #QMAKE_INFO_PLIST = $$PWD/ios/Info.plist
 
     OBJECTIVE_SOURCES += \
                     $$PWD/source/cpp/misc/ios/pushnotification.mm
@@ -66,6 +66,7 @@ android: {
 HEADERS += \
     NetworkCore.hpp \
     SecurityCore.hpp \
+    NetworkCore.hpp \
     SecImplementation.hpp \
     source/cpp/misc/pushnotification.h
 

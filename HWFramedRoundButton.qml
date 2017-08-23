@@ -29,7 +29,7 @@ Item {
             id:label
             x: 82 * ratio
             y: 15 * ratio
-            font.pointSize: 13
+            font.pointSize: 10
             color: btnRoot.labelColor
             text:"TEXT"
             anchors.verticalCenter: parent.verticalCenter

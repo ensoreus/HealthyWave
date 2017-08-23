@@ -5,7 +5,7 @@ Item{
     id: content
     property alias label: label
     property alias timeLabel: timeLabel.text
-    property alias errorLabel: errorLabel.text
+    property alias showError: errorLabel.visible
     signal close
 
     width: 215
@@ -19,7 +19,6 @@ Item{
     function startAnimation(){
         state = "wiggleOut"
         visible = true
-        errorLabel.text = ""
         errorLabel.visible = false
         timer.start()
     }
@@ -101,6 +100,7 @@ Item{
         }
     }
 
+
     Text{
         id: errorLabel
         font.pointSize: 15
@@ -108,10 +108,11 @@ Item{
         horizontalAlignment: Text.AlignHCenter
         anchors.horizontalCenter: image.horizontalCenter
         anchors.verticalCenter: image.verticalCenter
-        text: ""
-        onTextChanged: {
-            errorLabel.visible = true
-        }
+        visible: false
+        text: "Неможливо
+доставити
+сьогодні"
+
     }
 
     DropShadow {

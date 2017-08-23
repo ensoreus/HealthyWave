@@ -9,6 +9,7 @@
 #include <QQuickView>
 #include "StatusBarSetup.h"
 #include "source/cpp/misc/pushnotification.h"
+#include "NetworkCore.hpp"
 
 static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -18,6 +19,14 @@ static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJS
     qDebug()<<engine->offlineStoragePath();
     engine->setObjectOwnership(score, QQmlEngine::CppOwnership);
     return score;
+}
+
+static QObject * netcore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine){
+  Q_UNUSED(scriptEngine)
+  auto net = new NetworkCore();
+  qDebug()<<engine->offlineStoragePath();
+  engine->setObjectOwnership(net, QQmlEngine::CppOwnership);
+  return net;
 }
 
 int main(int argc, char *argv[])
@@ -47,8 +56,9 @@ qreal refWidth = 414.;
   app.setApplicationName("HealthyWave");
 
   QuickIOS::registerTypes();
+  //qmlRegisterSingletonType<SecurityCore>("NetworkCore", 1, 0, "NetworkCore", netcore_qjsvalue_singletontype_provider);
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
-  qmlRegisterSingletonType<PushNotificationRegistrationTokenHandler>("com.example.example", 1, 0, "PushNotificationRegistrationTokenHandler",
+  qmlRegisterSingletonType<PushNotificationRegistrationTokenHandler>("com.hw.pushnotification", 1, 0, "PushNotificationRegistrationTokenHandler",
                                                                           PushNotificationRegistrationTokenHandler::pushNotificationRegistrationTokenProvider);
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("ratio", QVariant::fromValue(m_ratio));
@@ -59,6 +69,8 @@ qreal refWidth = 414.;
   QQuickWindow *window = qobject_cast<QQuickWindow *>(engine.rootObjects().first());
   QuickIOS::setupWindow(window);
   QuickIOS::setStatusBarStyle(QuickIOS::StatusBarStyleLightContent);
+
+  //qDebug()<<  engine.offlineStoragePath();
 #ifdef Q_OS_IOS
   setupStatusBar();
 #endif
