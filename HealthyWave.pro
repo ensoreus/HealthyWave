@@ -50,7 +50,7 @@ mac: {
 }
 
 android: {
-
+    QT += androidextras
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
     ################# adapt that accordingly #######################
