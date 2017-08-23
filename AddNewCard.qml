@@ -49,16 +49,13 @@ ViewController {
         var merchantSignature = "flk3409refn54t54t*FNJRET"
         var orderReference = SecurityCore.createUid();
         var orderTime = date.getTime()/1000
-
-
-        ///var testStrToHash = "test_merchant;www.market.ua;DH783023;1415379863;1547.36;UAH;Процессор Intel Core i5-4670 3.4GHz;Память Kingston DDR3-1600 4096MB PC3-12800;1;1;1000;547.36"//
+        var serviceUrl = "http://94.130.18.75/debug/hs/GetData/confirmnewcard"
         var strToHash = merchantName+";"+domain+";"+orderReference+";"+Math.round(orderTime)+";1.00;UAH;"+productname+";1;1.00"
         var signature = SecurityCore.hmacMd5( strToHash, merchantSignature )
 
         xhr.open("POST", "https://secure.wayforpay.com/pay?behavior=frame", true)
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        var url = "amount=1.00&merchantTransactionType=AUTH&merchantAccount="+merchantName+"&merchantAuthType=SimpleSignature&merchantDomainName="+domain+"&merchantSignature="+signature+"&merchantSecretKey="+merchantSignature+"&orderReference="+orderReference+"&orderDate="+Math.round(orderTime)+"&currency=UAH&orderTimeout=49000&productName="+ escape(productname) +"&productPrice=1.00&productCount=1&clientFirstName="+escape("Sherlock")+"&clientLastName="+escape("Holmes")+"&clientAddress=" + escape(lstreet) + "&city=" + escape(lcity)+ "&clientEmail="+escape(lemail)+"&defaultPaymentSystem=card&serviceUrl="
-        //xhr.send("{form:'"+formData+"'}")
+        var url = "amount=1.00&merchantTransactionType=AUTH&merchantAccount="+merchantName+"&merchantAuthType=SimpleSignature&merchantDomainName="+domain+"&merchantSignature="+signature+"&merchantSecretKey="+merchantSignature+"&orderReference="+orderReference+"&orderDate="+Math.round(orderTime)+"&currency=UAH&orderTimeout=49000&productName="+ escape(productname) +"&productPrice=1.00&productCount=1&clientFirstName="+escape("Sherlock")+"&clientLastName="+escape("Holmes")+"&clientAddress=" + escape(lstreet) + "&city=" + escape(lcity)+ "&clientEmail="+escape(lemail)+"&defaultPaymentSystem=card&serviceUrl=" + serviceUrl
         xhr.send(url)
         console.log(strToHash)
     }
