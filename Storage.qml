@@ -38,7 +38,7 @@ Item {
         });
     }
 
-    function saveInitialUserData(phone, name, email){
+    function saveInitialUserData(phone, name, email, promocode){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('drop table if exists userData');
@@ -80,6 +80,21 @@ Item {
             var sqlstr = "select name from userData";
             var result = tx.executeSql(sqlstr);
             callback(result.rows.item(0).name)
+        });
+    }
+
+    function getPromoCode(type, callback){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        var promocode = ""
+        db.transaction(function(tx){
+            var sqlstr = "select promocode from userData";
+            var result = tx.executeSql(sqlstr);
+            promocode = result.rows.item(0).phone
+            if(typeof callback != 'undefined'){
+                callback(promocode)
+            }else{
+                return promocode;
+            }
         });
     }
 

@@ -28,6 +28,9 @@ ViewController {
         storage.getName(function(name){
             lbName.text = name
         })
+        storage.getPromoCode("initial", function(promo){
+            txPromoCode.text = promo
+        })
     }
 
     Rectangle {
@@ -197,7 +200,7 @@ ViewController {
             id: txPromoCode
             height: parent.height * 0.05
             color: "#1eb2a4"
-            text: qsTr("Text")
+            text: ""
             verticalAlignment: Text.AlignVCenter
             anchors.rightMargin: parent.width * 0.1
             anchors.right: parent.right
@@ -215,8 +218,6 @@ ViewController {
             width: txPromoCode.height * 0.5
             height: width
             fillMode: Image.PreserveAspectFit
-//            anchors.top: txPromoCode.top
-//            anchors.topMargin: 0
             anchors.leftMargin: 10 * ratio
             anchors.left: txPromoCode.right
             anchors.verticalCenter: txPromoCode.verticalCenter

@@ -3,7 +3,6 @@
         <file>main.qml</file>
         <file>Api.js</file>
         <file>Storage.qml</file>
-        <file>Types.js</file>
     </qresource>
     <qresource prefix="/greeting">
         <file>GreetingSliderForm.ui.qml</file>
@@ -143,7 +142,6 @@
         <file>GroupCopy.png</file>
         <file>NewAddress.qml</file>
         <file>NewAddressForm.ui.qml</file>
-        <file>AddressCell.qml</file>
     </qresource>
     <qresource prefix="/cards">
         <file>CardsList.qml</file>
@@ -152,6 +150,7 @@
     </qresource>
     <qresource prefix="/profile">
         <file>Profile.qml</file>
+        <file>EditProfile.qml</file>
     </qresource>
     <qresource prefix="/feedback">
         <file>AddFeedback.qml</file>

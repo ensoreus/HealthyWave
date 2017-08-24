@@ -109,24 +109,7 @@ Item {
             }
             onNextPage: {
                 startProcessIndicator()
-                Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
-                    storage.saveToken(token)
-//                    nameEditPage.debugConsole.append(url)
-//                    nameEditPage.debugConsole.append("\n"+phoneEditPage.phoneField.text)
-//                    nameEditPage.debugConsole.append("\n"+token)
-                    Api.registerUser(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, token, function(response, url){
-//                        nameEditPage.debugConsole.append("\n" + url)
-//                        nameEditPage.debugConsole.append("\n"+response.result)
-//                        nameEditPage.debugConsole.append("\n"+response.error)
-                        if(!response.error){
-                            storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text)
-                            stackLayout.push(promoCodeEditPage)
-                            stopPropcessIndicator()
-                        }else{
-                            stopPropcessIndicator()
-                        }
-                    })
-                })
+
 
             }
             Behavior on x {
@@ -152,9 +135,20 @@ Item {
                 item1.state = "default"
             }
             onNextPage: {
-                //item1.state = "default"
                 logoBg.height = 283
                 logo.height = 114
+                Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
+                    storage.saveToken(token)
+                    Api.registerUser(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, token, function(response, url){
+                        if(!response.error){
+                            storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, promoCodeEditPage.text)
+                            stackLayout.push(promoCodeEditPage)
+                            stopPropcessIndicator()
+                        }else{
+                            stopPropcessIndicator()
+                        }
+                    })
+                })
                 stackLayout.push(congratsPage)
             }
         }

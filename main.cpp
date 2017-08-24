@@ -58,7 +58,7 @@ qreal refWidth = 414.;
   QuickIOS::registerTypes();
   //qmlRegisterSingletonType<SecurityCore>("NetworkCore", 1, 0, "NetworkCore", netcore_qjsvalue_singletontype_provider);
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
-  qmlRegisterSingletonType<PushNotificationRegistrationTokenHandler>("com.hw.pushnotification", 1, 0, "PushNotificationRegistrationTokenHandler",
+  qmlRegisterSingletonType<PushNotificationRegistrationTokenHandler>("PushNotificationRegistrationTokenHandler", 1, 0, "PushNotificationRegistrationTokenHandler",
                                                                           PushNotificationRegistrationTokenHandler::pushNotificationRegistrationTokenProvider);
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("ratio", QVariant::fromValue(m_ratio));

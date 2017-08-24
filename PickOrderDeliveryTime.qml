@@ -72,10 +72,10 @@ ViewController {
             anchors.topMargin: parent.height * 0.01
             anchors.top: text2.bottom
             anchors.left: parent.left
-            anchors.leftMargin: 0.05
+            anchors.leftMargin: 0.1
             anchors.right: parent.right
-            anchors.rightMargin: 0.05
-            width: 300
+            anchors.rightMargin: 0.1
+            width: 100
             height: parent.height * 0.08
             onWillStartAnimation: {
                     if (txtComment.aboutToFocus){
@@ -112,11 +112,6 @@ ViewController {
             onButtonClick: {
                 content.getTime()
                 navigationController.push("qrc:/orders/OrderReceipt.qml", {"context":context})
-//                if(rbCardPayment.checked){
-//                    navigationController.push("qrc:/orders/PaymentCards.qml", {"context":context})
-//                }else{
-//                    navigationController.push("qrc:/orders/OrdersAddress.qml", {"context":context})
-//                }
             }
         }
 

@@ -119,6 +119,8 @@ ViewController {
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.02
             anchors.left: parent.left
+            anchors.top: hAdditionaly.bottom
+            anchors.topMargin: 0.02
             checked: true
             onCheckStateChanged: {
                 updateSummary()
@@ -130,7 +132,7 @@ ViewController {
             x: 5
             height: 15 * ratio
             text: "Механічна помпа - 100 грн."
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: parent.height * 0.02
             anchors.top: cbFirst.bottom
             anchors.leftMargin: parent.width * 0.02
             anchors.rightMargin: parent.width * 0.02
