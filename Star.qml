@@ -3,6 +3,9 @@ import QtQuick 2.0
 Item {
     id: theStar
     signal rated
+    function rate(){
+        rated()
+    }
 
     Image {
         id: image

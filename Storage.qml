@@ -206,9 +206,11 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, address INTEGER, time TEXT, rated INTEGER)')
-            var sqlstr = "select orderid from where rated = 0";
+            var sqlstr = "select orderid from orders where rated = 0";
             var result = tx.executeSql(sqlstr);
-            callback(result.rows)
+            if(result.rows.length > 0){
+                callback(result.rows.item(0))
+            }
         });
     }
 

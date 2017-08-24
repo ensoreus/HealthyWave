@@ -3,9 +3,29 @@ import QtQuick 2.0
 
 Item {
     id: ratePanel
-    signal rated(int rate)
+    signal rated(var rate)
     property int rate: 0
+    property alias backgroundColor: content.color
     height: 100
+    onRateChanged: {
+        switch(rate){
+        case 1:
+            star1.rate()
+            break
+        case 2:
+            star2.rate()
+            break;
+        case 3:
+            star3.rate()
+            break;
+        case 4:
+            star4.rate()
+            break
+        case 5:
+            star5.rate()
+            break
+        }
+    }
 
     Rectangle {
         id: content

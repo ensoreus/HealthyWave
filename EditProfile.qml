@@ -14,6 +14,7 @@ ViewController {
     Storage{
         id: storage
     }
+
     Rectangle {
         id: rectangle
         color: "#ffffff"

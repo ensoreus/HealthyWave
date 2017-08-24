@@ -4,6 +4,8 @@ import "qrc:/controls"
 Item {
     height: 200
     property alias txAddress: txAddress
+    signal rateClick(var rate)
+
     Rectangle {
         id: content
         color: "#00ad9a"
@@ -66,6 +68,9 @@ Item {
             anchors.topMargin: parent.height * 0.05
             anchors.top : lbRateDelivery.bottom
             anchors.horizontalCenter: parent.horizontalCenter
+            onRated: {
+                rateClick(rate)
+            }
         }
     }
 
