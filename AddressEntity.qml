@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 QtObject {
+    property int id
     property string city
     property string street
     property int floor

@@ -129,6 +129,30 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
          }, authData, onSuccess, onFailure)
 }
 
+function updateProfile(newphone, authdata, onSuccess, onFailure){
+    call("updateprofile", {
+            "oldphone":authdata.phone,
+            "phone":newphone,
+         }, authdata, onSuccess, onFailure)
+}
+
+function registerPushToken(token, ostype, authdata, onSuccess, onFailure){
+    call("registerPushToken", {
+            "ostype":ostype,
+             "token":token,
+            "phone":authdata.phone,
+         }, authdata, onSuccess, onFailure)
+}
+
+function sendFeedback(rate, comment, orderid, authdata, onSuccess, onFailure){
+    call("makefeedback", {
+            "rate":rate,
+             "comment":comment,
+             "phone":phone,
+             "orderId":orderid
+         }, authdata, onSuccess, onFailure)
+}
+
 function call(routine, params, authData, onSuccess, onFailure){
     var xhr = new XMLHttpRequest();
     var url = baseUrl + routine + serializeParams(params)

@@ -66,7 +66,7 @@ ViewController {
                 id: lbName
                 y: 41
                 height: parent.height * 0.2
-                text: qsTr("Text")
+                text: qsTr("")
                 font.pointSize: 18
                 font.bold: true
                 verticalAlignment: Text.AlignVCenter
@@ -108,6 +108,7 @@ ViewController {
                 anchors.fill: parent
                 onPressedChanged: {
                     lbEdit.font.bold = !btnEdit.pressed
+                    navigationController.push("qrc:/profile/EditProfile.qml")
                 }
             }
         }
@@ -129,7 +130,7 @@ ViewController {
             id: txPhone
             height: parent.height * 0.05
             color: "#1eb2a4"
-            text: qsTr("Text")
+            text: qsTr("")
             font.weight: Font.DemiBold
             font.pointSize: 15
             horizontalAlignment: Text.AlignRight

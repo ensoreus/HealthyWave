@@ -149,6 +149,8 @@ ViewController {
             Text {
                 id: txWater
                 text: qsTr("Text")
+                font.weight: Font.DemiBold
+                font.pointSize: 14
                 verticalAlignment: Text.AlignVCenter
                 anchors.top: lbWater.top
                 anchors.topMargin: 0
@@ -161,6 +163,8 @@ ViewController {
             Text {
                 id: txEmpty
                 text: qsTr("Text")
+                font.weight: Font.DemiBold
+                font.pointSize: 14
                 verticalAlignment: Text.AlignVCenter
                 anchors.top: lbEmptyBottle.top
                 anchors.topMargin: 0
@@ -173,6 +177,8 @@ ViewController {
             Text {
                 id: txFee
                 text: qsTr("Text")
+                font.weight: Font.DemiBold
+                font.pointSize: 14
                 verticalAlignment: Text.AlignVCenter
                 anchors.top: lbFee.top
                 anchors.topMargin: 0
@@ -185,6 +191,8 @@ ViewController {
             Text {
                 id: txNoDiscount
                 text: qsTr("Text")
+                font.weight: Font.DemiBold
+                font.pointSize: 14
                 verticalAlignment: Text.AlignVCenter
                 anchors.top: lbNoDiscount.top
                 anchors.topMargin: 0
@@ -197,18 +205,22 @@ ViewController {
             Text {
                 id: txWithDiscount
                 text: qsTr("Text")
+                anchors.leftMargin: 10
+                font.weight: Font.DemiBold
+                font.pointSize: 14
                 verticalAlignment: Text.AlignVCenter
                 anchors.top: lbWithDiscount.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
                 anchors.left: lbWithDiscount.right
-                anchors.leftMargin: 10
             }
 
             Text {
                 id: txTotal
                 text: qsTr("Text")
+                font.weight: Font.DemiBold
+                font.pointSize: 14
                 anchors.rightMargin: 51
                 verticalAlignment: Text.AlignVCenter
                 anchors.top: lbTotal.top
@@ -345,6 +357,7 @@ ViewController {
                 storage.getAuthData(function(authdata){
                     Api.createOrder(context, authdata, function(result){
                         console.log(result.result)
+                        storage.addOrder(context)
                     }, function(error){
                         console.log(error.error)
                     })

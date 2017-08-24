@@ -155,7 +155,7 @@ Item {
     function getAddresses(callback){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
             db.transaction(function(tx){
-                tx.executeSql('CREATE TABLE IF NOT EXISTS addresses (city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT)')
+                tx.executeSql('CREATE TABLE IF NOT EXISTS addresses (city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, rated INTEGER)')
                 var sqlstr = "select city, street, house, floor, apt, entrance, entranceDoor from addresses";
                 var result = tx.executeSql(sqlstr);
                 callback(result)
@@ -172,5 +172,53 @@ Item {
                 callback(authData)
             })
           })
+    }
+
+    function addOrder(context){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, time TEXT, rated INTEGER )')
+            var sqlstr = "insert into orders ( orderid, city, street, house, floor, apt, entrance, entranceDoor, time, rated ) values ('"+ context.orderid +"', '" + city + "', '"+ street +"', '"+house+"', '"+ floor +"', '"+apt+"', '"+ entrance+"', '"+ entranceCode+"', '"+context.deliveryTime.day+":"+context.deliveryTime.toHour+"', 0)";
+            tx.executeSql(sqlstr);
+        });
+    }
+
+    function getOrders(){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, address INTEGER, time TEXT, rated INTEGER)')
+            var sqlstr = "select city, street, house, floor, apt, entrance, entranceDoor, time, rated from where 1";
+            var result = tx.executeSql(sqlstr);
+            callback(result.rows)
+        });
+    }
+
+    function markRatedOrder(orderid){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, address INTEGER, time TEXT, rated INTEGER)')
+            var sqlstr = "update orders set rated = 1 where orderid = '"+ orderid +"'";
+            tx.executeSql(sqlstr);
+        });
+    }
+
+    function getUnratedOrders(callback){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, address INTEGER, time TEXT, rated INTEGER)')
+            var sqlstr = "select orderid from where rated = 0";
+            var result = tx.executeSql(sqlstr);
+            callback(result.rows)
+        });
+    }
+
+    function getOrderById(orderid, callback){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, address INTEGER, time TEXT, rated INTEGER)')
+            var sqlstr = "select city, street, house, floor, apt, entrance, entranceDoor, time, rated from where orderid = " + orderid;
+            var result = tx.executeSql(sqlstr);
+            callback(result.rows.item(0))
+        });
     }
 }

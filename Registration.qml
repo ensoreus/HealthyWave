@@ -137,18 +137,11 @@ Item {
             onNextPage: {
                 logoBg.height = 283
                 logo.height = 114
-                Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
-                    storage.saveToken(token)
-                    Api.registerUser(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, token, function(response, url){
-                        if(!response.error){
-                            storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, promoCodeEditPage.text)
-                            stackLayout.push(promoCodeEditPage)
-                            stopPropcessIndicator()
-                        }else{
-                            stopPropcessIndicator()
-                        }
-                    })
-                })
+//                Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
+//                    storage.saveToken(token)
+//                    Api.
+//                })
+
                 stackLayout.push(congratsPage)
             }
         }
@@ -227,7 +220,7 @@ Item {
 
             PropertyChanges {
                 target: logo
-                height: logoBg.height * 0.8
+                height: logoBg.height * 0.6
             }
         },
         State {

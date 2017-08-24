@@ -6,19 +6,19 @@ RadioButton {
         checked: true
 
         indicator: Rectangle {
-            implicitWidth: 26
-            implicitHeight: 26
+            implicitWidth: 20 * ratio
+            implicitHeight: 20 * ratio
             x: control.leftPadding
             y: parent.height / 2 - height / 2
-            radius: 13
+            radius: 13 * ratio
             border.color: control.down ? "#00AD9A" : "#00AD9F"
 
             Rectangle {
-                width: 10
-                height: 10
-                x: 8
-                y: 8
-                radius: 7
+                width: 8 * ratio
+                height: 8 * ratio
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                radius: 6 * ratio
                 color: control.down ? "#00AD9A" : "#00AD9F"
                 visible: control.checked
             }
