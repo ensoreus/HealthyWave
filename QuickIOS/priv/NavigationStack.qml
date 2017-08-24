@@ -64,7 +64,7 @@ Item {
     }
 
     function popToInitial(){
-        stack.pop(null)
+            popToInitial()
     }
 
     width: 100

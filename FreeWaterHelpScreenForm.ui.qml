@@ -5,21 +5,28 @@ import "qrc:/controls" as Controls
 ViewController {
     width: 400
     height: 400
+    property alias btnCopyCode: btnCopyCode
+    property alias btnHowItWorks: btnHowItWorks
+    property alias btnBack: btnBack
+    property alias btnInvite: btnInvite
     property alias mainLabel: mainLabel
     property alias mainText: mainText
     property alias image: image
-    property alias btnBack: btnBack
-    property alias btnHowItWorks: btnHowItWorks
     property alias btnCopyCodeLabel: btnCopyCodeLabel
-    property alias btnInvite: btnInvite
-    property alias btnCopyCode: btnCopyCode
     property alias promoCodeText: promoCodeText
+
+    property var navigationItem: NavigationItem{
+        centerBarImage: "qrc:/commons/logo-hw.png"
+        rightBarButtonItem: BarButtonItem{
+            image:"qrc:/commons/btn-cross.png"
+        }
+    }
 
     Rectangle {
         id: rectangle
         height: parent.height - 60 * ratio
         color: "#ffffff"
-        anchors.fill: parent
+        anchors.fill:parent
 
         Text {
             id: mainLabel
@@ -158,6 +165,7 @@ ViewController {
             showGlyph: true
         }
     }
+
     states: [
         State {
             name: "promoCodeGen"
@@ -244,4 +252,6 @@ ViewController {
             }
         }
     ]
+
+
 }

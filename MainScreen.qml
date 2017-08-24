@@ -75,22 +75,5 @@ ViewController {
                 mainScreen.present("qrc:/mainScreen/FreeWaterHelpScreen.qml", {}, true)
             }
         }
-/*
-         FreeWaterHelpScreen{
-                 //visible: false
-                anchors.right: parent.right
-                anchors.left: parent.left
-                y: parent.height
-                height: parent.height
-                id: freeWaterHelpScreen
-                Behavior on y {
-                    NumberAnimation {
-                        target: freeWaterHelpScreen
-                        property: "y"
-                        duration: 300
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }*/
     }
 
