@@ -82,6 +82,7 @@
         <file>img-share.png</file>
         <file>img-phone.png</file>
         <file>img-messaging.png</file>
+        <file>img-copy.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
@@ -159,5 +160,9 @@
     </qresource>
     <qresource prefix="/contacts">
         <file>Contacts.qml</file>
+    </qresource>
+    <qresource prefix="/bonus">
+        <file>BonusList.qml</file>
+        <file>BonusCell.qml</file>
     </qresource>
 </RCC>

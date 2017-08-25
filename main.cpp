@@ -10,6 +10,7 @@
 #include "StatusBarSetup.h"
 #include "source/cpp/misc/pushnotification.h"
 #include "NetworkCore.hpp"
+#include <QClipboard>
 
 static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -27,6 +28,13 @@ static QObject * netcore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJS
   qDebug()<<engine->offlineStoragePath();
   engine->setObjectOwnership(net, QQmlEngine::CppOwnership);
   return net;
+}
+
+static QObject* clipboard_provider(QQmlEngine* engine, QJSEngine* scriptEngine){
+  Q_UNUSED(scriptEngine)
+  auto clipboard = QGuiApplication::clipboard();
+  engine->setObjectOwnership(clipboard, QQmlEngine::CppOwnership);
+  return clipboard;
 }
 
 int main(int argc, char *argv[])
@@ -60,6 +68,7 @@ qreal refWidth = 414.;
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
   qmlRegisterSingletonType<PushNotificationRegistrationTokenHandler>("PushNotificationRegistrationTokenHandler", 1, 0, "PushNotificationRegistrationTokenHandler",
                                                                           PushNotificationRegistrationTokenHandler::pushNotificationRegistrationTokenProvider);
+  qmlRegisterSingletonType<QClipboard>("Clipboard", 1, 0, "Clipboard", clipboard_provider);
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("ratio", QVariant::fromValue(m_ratio));
   engine.rootContext()->setContextProperty("fontRatio", QVariant::fromValue(m_ratioFont));

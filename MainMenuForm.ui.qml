@@ -22,6 +22,8 @@ Item {
     property alias btnSite: btnSite
     property alias avatar: avatar
     property alias userName: userName
+    property alias btnBonuses: btnBonuses
+    property alias lbBonuses: lbBonuses
 
     Rectangle {
         id: userInfoHeader
@@ -174,6 +176,25 @@ Item {
                 anchors.fill: parent
                 acceptedButtons: Qt.AllButtons
             }
+        }
+
+        Text {
+            id: lbBonuses
+            width: 347 * ratio
+            height: parent.height * 0.05
+            text: qsTr("Бонуси")
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.leftMargin: 25 * ratio
+            MouseArea {
+                id: btnBonuses
+                anchors.fill: parent
+                acceptedButtons: Qt.AllButtons
+            }
+            anchors.horizontalCenterOffset: -50 * ratio
+            anchors.top: lbProfile.bottom
+            font.pointSize: 14
+            anchors.left: parent.left
+            anchors.topMargin: 20 * ratio
         }
 
         Item {

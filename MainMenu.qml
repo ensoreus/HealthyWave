@@ -11,6 +11,7 @@ MainMenuForm {
     signal addressesItem
     signal contactsItem
     signal profileItem
+    signal bonusesItem
     signal infoLink
     signal siteLink
 
@@ -62,6 +63,14 @@ MainMenuForm {
 
     btnProfile.onClicked:{
         profileItem()
+    }
+
+    btnBonuses.onPressedChanged: {
+        lbBonuses.font.bold = btnBonuses.pressed
+    }
+
+    btnBonuses.onClicked: {
+        bonusesItem()
     }
 
     btnInfo.onPressedChanged: {

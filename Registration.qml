@@ -109,8 +109,6 @@ Item {
             }
             onNextPage: {
                 startProcessIndicator()
-
-
             }
             Behavior on x {
                 NumberAnimation {

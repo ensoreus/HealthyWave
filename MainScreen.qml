@@ -75,7 +75,9 @@ ViewController {
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.top: parent.top
-
+            onButtonClick: {
+                navigationController.push("qrc:/bonus/BonusList.qml")
+            }
         }
     }
 

@@ -24,7 +24,8 @@ Rectangle {
             {"file":"qrc:/address/Addresses.qml", "title":"Мої адреси", "present": false},
             {"file":"qrc:/cards/CardsList.qml", "title":"Оплата", "present":false},
             {"file":"qrc:/profile/Profile.qml", "title":"Профіль", "present":false},
-            {"file":"qrc:/contacts/Contacts.qml", "title":"Контакти", "present":false}
+            {"file":"qrc:/contacts/Contacts.qml", "title":"Контакти", "present":false},
+            {"file":"qrc:/bonuses/BonusList.qml", "title":"Бонуси", "present":false}
         ]
 
         onMyOrdersItem: {
@@ -45,6 +46,10 @@ Rectangle {
 
         onContactsItem: {
             pushViewController(4)
+        }
+
+        onBonusesItem: {
+            pushViewController(5)
         }
 
         function pushViewController(index){
