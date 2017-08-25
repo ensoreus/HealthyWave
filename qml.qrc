@@ -80,6 +80,8 @@
         <file>AddressEntity.qml</file>
         <file>TimeEntity.qml</file>
         <file>img-share.png</file>
+        <file>img-phone.png</file>
+        <file>img-messaging.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
@@ -154,5 +156,8 @@
     </qresource>
     <qresource prefix="/feedback">
         <file>AddFeedback.qml</file>
+    </qresource>
+    <qresource prefix="/contacts">
+        <file>Contacts.qml</file>
     </qresource>
 </RCC>

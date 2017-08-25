@@ -23,7 +23,8 @@ Rectangle {
             {"file":"qrc:/orders/NoOrders.qml", "title":"Замовлення", "present": false},
             {"file":"qrc:/address/Addresses.qml", "title":"Мої адреси", "present": false},
             {"file":"qrc:/cards/CardsList.qml", "title":"Оплата", "present":false},
-            {"file":"qrc:/profile/Profile.qml", "title":"Профіль", "present":false}
+            {"file":"qrc:/profile/Profile.qml", "title":"Профіль", "present":false},
+            {"file":"qrc:/contacts/Contacts.qml", "title":"Контакти", "present":false}
         ]
 
         onMyOrdersItem: {
@@ -40,6 +41,10 @@ Rectangle {
 
         onProfileItem: {
             pushViewController(3)
+        }
+
+        onContactsItem: {
+            pushViewController(4)
         }
 
         function pushViewController(index){
@@ -66,6 +71,7 @@ Rectangle {
                 textColor: "white"
                 imageSource: "qrc:/commons/logo-hw.png"
             }
+
 
             initialViewController: MainScreen{
                 id:mainScreen
