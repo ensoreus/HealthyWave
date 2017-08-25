@@ -316,7 +316,6 @@ ViewController {
                     duration: 300
                 }
             }
-
         }
 
         HWGreenRoundButton {
