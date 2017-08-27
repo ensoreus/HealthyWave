@@ -21,7 +21,7 @@ Page {
         Controls.HWPhoneField {
             id: phoneField
             width: parent.width * 0.8
-            height: parent.width * 0.1
+            height: item1.width * 0.1
             text: "+380"
             anchors.top: text1.bottom
             anchors.topMargin: parent.height * 0.01
@@ -38,7 +38,7 @@ Page {
             height: parent.width * 0.15
             text: qsTr("")
             anchors.top: phoneField.bottom
-            anchors.topMargin: 50
+            anchors.topMargin: 50 * ratio
             anchors.right: phoneField.right
             anchors.rightMargin: 0
             background: Image {
@@ -53,13 +53,13 @@ Page {
             x: 289
             y: 174
             width: parent.width * 0.7
-            height: parent.height * 0.02
+            height: item1.height * 0.02
             color: "#808080"
             text: qsTr("Уведіть номер телефона")
             font.pointSize: 15
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: item1.height * 0.05
         }
     }
 }

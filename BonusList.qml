@@ -1,11 +1,17 @@
 import QtQuick 2.0
 import QuickIOS 0.1
+import com.ensoreus.Clipboard 1.0
+
 import "qrc:/"
 import "qrc:/controls"
 
 ViewController {
     property var navigationItem: NavigationItem{
         centerBarTitle: "Безкоштовна вода"
+    }
+
+    Clipboard{
+        id: clipboard
     }
 
     Rectangle {
@@ -17,7 +23,9 @@ ViewController {
             id: lstBonuses
             anchors.top: parent.top
             anchors.left: parent.left
+            anchors.leftMargin: -1
             anchors.right: parent.right
+            anchors.rightMargin: -1
             height: parent.height * 0.45
 
             delegate: BonusCell{
@@ -109,6 +117,9 @@ ViewController {
                 MouseArea{
                     id:btnPastePromo
                     anchors.fill: parent
+                    onClicked: {
+                        txAddPromo.text = clipboard.text()
+                    }
                 }
             }
         }

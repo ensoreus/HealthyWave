@@ -5,7 +5,8 @@ CONFIG += c++11
 SOURCES += main.cpp \
     NetworkCore.cpp \
     SecurityCore.cpp \
-    source/cpp/misc/pushnotification.cpp
+    source/cpp/misc/pushnotification.cpp \
+    ClipboardManager.cpp
 
 
 RESOURCES += qml.qrc
@@ -68,7 +69,8 @@ HEADERS += \
     SecurityCore.hpp \
     NetworkCore.hpp \
     SecImplementation.hpp \
-    source/cpp/misc/pushnotification.h
+    source/cpp/misc/pushnotification.h \
+    ClipboardManager.hpp
 
 DISTFILES += \
     android/AndroidManifest.xml \

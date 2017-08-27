@@ -10,7 +10,7 @@
 #include "StatusBarSetup.h"
 #include "source/cpp/misc/pushnotification.h"
 #include "NetworkCore.hpp"
-#include <QClipboard>
+#include <ClipboardManager.hpp>
 
 static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -32,8 +32,8 @@ static QObject * netcore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJS
 
 static QObject* clipboard_provider(QQmlEngine* engine, QJSEngine* scriptEngine){
   Q_UNUSED(scriptEngine)
+  Q_UNUSED(engine)
   auto clipboard = QGuiApplication::clipboard();
-  engine->setObjectOwnership(clipboard, QQmlEngine::CppOwnership);
   return clipboard;
 }
 
@@ -64,11 +64,11 @@ qreal refWidth = 414.;
   app.setApplicationName("HealthyWave");
 
   QuickIOS::registerTypes();
-  //qmlRegisterSingletonType<SecurityCore>("NetworkCore", 1, 0, "NetworkCore", netcore_qjsvalue_singletontype_provider);
+  //qmlRegisterSingletonType<SecurityCore>("com.ensoreus.NetworkCore", 1, 0, "NetworkCore", netcore_qjsvalue_singletontype_provider);
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
   qmlRegisterSingletonType<PushNotificationRegistrationTokenHandler>("PushNotificationRegistrationTokenHandler", 1, 0, "PushNotificationRegistrationTokenHandler",
                                                                           PushNotificationRegistrationTokenHandler::pushNotificationRegistrationTokenProvider);
-  qmlRegisterSingletonType<QClipboard>("Clipboard", 1, 0, "Clipboard", clipboard_provider);
+  qmlRegisterType<ClipboardManager>("com.ensoreus.Clipboard", 1, 0, "Clipboard");
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("ratio", QVariant::fromValue(m_ratio));
   engine.rootContext()->setContextProperty("fontRatio", QVariant::fromValue(m_ratioFont));
@@ -79,7 +79,6 @@ qreal refWidth = 414.;
   QuickIOS::setupWindow(window);
   QuickIOS::setStatusBarStyle(QuickIOS::StatusBarStyleLightContent);
 
-  //qDebug()<<  engine.offlineStoragePath();
 #ifdef Q_OS_IOS
   setupStatusBar();
 #endif

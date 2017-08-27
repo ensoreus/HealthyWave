@@ -1,8 +1,9 @@
 import QtQuick 2.4
 import QuickIOS 0.1
-
+import com.ensoreus.Clipboard 1.0
 
 NavigationController {
+
     id: helpScreenContainer
     x: 0
     width: parent.width
@@ -14,6 +15,10 @@ NavigationController {
     navigationBar.titleAttributes: NavigationBarTitleAttributes{
         textColor: "white"
         imageSource: "qrc:/commons/logo-hw.png"
+    }
+
+    Clipboard{
+        id: clipboard
     }
 
     FreeWaterHelpScreenForm {
@@ -32,9 +37,11 @@ NavigationController {
                 }
             }
         }
-
+        promoCodeText.onWillStartAnimation: {
+                 promoCodeText.forceActiveFocus()
+        }
         btnCopyCode.onClicked: {
-            console.log("pressed")
+             clipboard.setText(promoCodeText.text)
         }
         btnCopyCode.onPressedChanged: {
             btnCopyCodeLabel.font.bold = !btnCopyCode.pressed
@@ -49,7 +56,6 @@ NavigationController {
         btnBack.onButtonClick:{
             state = "promoCodeGen"
         }
-
 
         transitions: [
             Transition {

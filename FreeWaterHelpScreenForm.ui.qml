@@ -65,26 +65,10 @@ ViewController {
             font.pointSize: 14
         }
 
-        Text {
-            id: mainText
-            width: 264 * ratio
-            height: 65 * ratio
-            text: qsTr("Відправ промо код свому другу і отримай безкоштовно 2 бутля води")
-            anchors.top: image.bottom
-            anchors.topMargin: 15 * ratio
-            anchors.left: parent.left
-            anchors.leftMargin: 36 * ratio
-            anchors.horizontalCenter: parent.horizontalCenter
-            wrapMode: Text.WordWrap
-            font.weight: Font.Light
-            font.family: "SF UI Text"
-            horizontalAlignment: Text.AlignHCenter
-            font.pointSize: 16
-        }
-
         Controls.HWTextField {
             id: promoCodeText
             x: 35.8 * ratio
+            bottomPadding: 5.6
             anchors.right: parent.right
             anchors.rightMargin: 36 * ratio
             readOnly: true
@@ -92,6 +76,7 @@ ViewController {
             anchors.topMargin: 7
             anchors.left: parent.left
             anchors.leftMargin: 36 * ratio
+
 
             Text {
                 id: btnCopyCodeLabel
@@ -117,6 +102,24 @@ ViewController {
                 }
             }
         }
+
+        Text {
+            id: mainText
+            width: 264 * ratio
+            height: 65 * ratio
+            text: qsTr("Відправ промо код свому другу і отримай безкоштовно 2 бутля води")
+            anchors.top: image.bottom
+            anchors.topMargin: 15 * ratio
+            anchors.left: parent.left
+            anchors.leftMargin: 36 * ratio
+            anchors.horizontalCenter: parent.horizontalCenter
+            wrapMode: Text.WordWrap
+            font.weight: Font.Light
+            font.family: "SF UI Text"
+            horizontalAlignment: Text.AlignHCenter
+            font.pointSize: 16
+        }
+
 
         Text {
             id: lbHowItWorks
