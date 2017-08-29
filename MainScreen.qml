@@ -95,7 +95,7 @@ ViewController {
     }
 
     RatePanel{
-        visible: false
+        visible: true
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom

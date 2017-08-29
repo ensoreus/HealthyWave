@@ -9,12 +9,63 @@ ViewController {
     property var navigationItem: NavigationItem{
         centerBarTitle: "Оцінка замовлення"
     }
-    property  var orderId
+    property var orderId
+    property var commentCodes
     property alias rate: ratePanel.rate
 
     Storage{
         id:storage
     }
+
+    onViewDidAppear: {
+        console.log(rate)
+        storage.getAuthData(function(authdata){
+            Api.getFeedbackCodes(ratePanel.rate,authdata, function(response){
+                console.log(response.result)
+                commentCodes = response.result
+                setupCodes(commentCodes)
+            }, function(failure){
+                console.log(failure.error)
+            })
+        })
+
+    }
+
+    function setupCodes(items){
+        if(typeof(items[0]) != 'undefined'){
+            lbLook.visible = true
+            cbLook.visible = true
+            lbLook.text =   "1."+items[0].Name
+        }else{
+            lbLook.visible = false
+            cbLook.visible = false
+        }
+        if(typeof(items[1]) != 'undefined'){
+            lbSpeech.visible = true
+            cbSpeech.visible = true
+            lbSpeech.text = "2."+items[1].Name
+        }else{
+            lbSpeech.visible = false
+            cbSpeech.visible = false
+        }
+        if(typeof(items[2]) != 'undefined'){
+            lbLate.visible = true
+            cbLate.visible = true
+            lbLate.text = "3."+items[2].Name
+        }else{
+            lbLate.visible = false
+            cbLate.visible = false
+        }
+        if(typeof(items[3]) != 'undefined'){
+            lbOther.visible = true
+            cbOther.visible = true
+            lbOther.text =  "4."+items[3].Name
+        }else{
+            lbOther.visible = false
+            cbOther.visible = false
+        }
+    }
+
     Rectangle {
         id: content
         height: 73
@@ -180,13 +231,14 @@ ViewController {
             state: ""
             anchors.topMargin: parent.height * 0.02
             anchors.top: lbIssues.bottom
-            anchors.leftMargin: parent.width * 0.2
+            anchors.leftMargin: parent.width * 0.1
             anchors.left: parent.left
+            visible: false
         }
 
         Text {
             id: lbLook
-            text: qsTr("1. Зовнішній вигляд")
+            text: qsTr("")
             font.pointSize: 15
             verticalAlignment: Text.AlignVCenter
             anchors.rightMargin: parent.width * 0.2
@@ -197,6 +249,7 @@ ViewController {
             anchors.top: cbLook.top
             anchors.topMargin: 0
             anchors.left: cbLook.right
+            visible: false
         }
 
 
@@ -208,13 +261,14 @@ ViewController {
             text:""
             anchors.topMargin: parent.height * 0.02
             anchors.top: lbLook.bottom
-            anchors.leftMargin: parent.width * 0.2
+            anchors.leftMargin: parent.width * 0.1
             anchors.left: parent.left
+            visible: false
         }
 
         Text {
             id: lbSpeech
-            text: qsTr("2. Манера спілкування")
+            text: qsTr("")
             font.pointSize: 15
             verticalAlignment: Text.AlignVCenter
             anchors.rightMargin: parent.width * 0.2
@@ -225,6 +279,7 @@ ViewController {
             anchors.top: cbSpeech.top
             anchors.topMargin: 0
             anchors.left: cbSpeech.right
+            visible: false
         }
 
         HWCheckBox {
@@ -235,13 +290,14 @@ ViewController {
             state: ""
             anchors.topMargin: parent.height * 0.02
             anchors.top: lbSpeech.bottom
-            anchors.leftMargin: parent.width * 0.2
+            anchors.leftMargin: parent.width * 0.1
             anchors.left: parent.left
+            visible: false
         }
 
         Text {
             id: lbLate
-            text: qsTr("3. Невчасно доставили")
+            text: qsTr("")
             font.pointSize: 15
             verticalAlignment: Text.AlignVCenter
             anchors.rightMargin: parent.width * 0.2
@@ -252,6 +308,7 @@ ViewController {
             anchors.top: cbLate.top
             anchors.topMargin: 0
             anchors.left: cbLate.right
+            visible: false
         }
 
         HWCheckBox {
@@ -262,13 +319,14 @@ ViewController {
             state: ""
             anchors.topMargin: parent.height * 0.02
             anchors.top: cbLate.bottom
-            anchors.leftMargin: parent.width * 0.2
+            anchors.leftMargin: parent.width * 0.1
             anchors.left: parent.left
+            visible: false
         }
 
         Text {
             id: lbOther
-            text: qsTr("4. Інше (залишити коментар)")
+            text: qsTr("")
             font.pointSize: 15
             verticalAlignment: Text.AlignVCenter
             anchors.rightMargin: parent.width * 0.2
@@ -279,6 +337,7 @@ ViewController {
             anchors.top: cbOther.top
             anchors.topMargin: 0
             anchors.left: cbOther.right
+            visible: false
         }
 
         Rectangle {
@@ -328,7 +387,12 @@ ViewController {
             labelText: "Завершити"
             onButtonClick: {
                 storage.getAuthData(function(authdata){
-                    Api.sendFeedback(ratePanel.rate, taComment.text, orderId, authdata, function(response){
+                    var code1 = cbLook.checked   ? commentCodes[0].Code : ""
+                    var code2 = cbSpeech.checked ? commentCodes[1].Code : ""
+                    var code3 = cbLate.checked   ? commentCodes[2].Code : ""
+                    var code4 = cbOther.checked  ? commentCodes[3].Code : ""
+
+                    Api.sendFeedback(ratePanel.rate, taComment.text, orderId, code1, code2, code3, code4, authdata, function(response){
                         storage.markRatedOrder(orderId)
                     }, function(response){
                         console.log(response.error)

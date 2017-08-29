@@ -144,15 +144,49 @@ function registerPushToken(token, ostype, authdata, onSuccess, onFailure){
          }, authdata, onSuccess, onFailure)
 }
 
-function sendFeedback(rate, comment, orderid, authdata, onSuccess, onFailure){
-    call("makefeedback", {
-            "rate":rate,
-             "comment":comment,
-             "phone":phone,
-             "orderId":orderid
+/*
+Метод: getlistfeedback -  Получает список вопросов к выбранной оценке (максимум 5). На тестовой базе создал несколько вариантов для оценки 3 и 4.
+
+Параметры:
+key : ключ полученный при авторизации
+phone: Телефон клиента
+rating: Выбранная клиентом оценка
+*/
+
+function getFeedbackCodes(rate, authdata, onSuccess, onFailure){
+    call("getlistfeedback", {
+            "phone":authdata.phone,
+             "rating":rate
          }, authdata, onSuccess, onFailure)
 }
 
+/*
+Метод: createfeedback -  Создает в центральной базе результат оценки клиентом доставки.
+
+Параметры:
+key : ключ полученный при авторизации
+phone: Телефон клиента
+rating: Выбранная клиентом оценка
+ordernumber: Номер заказа клиента полученный при создании заказа в ответе
+criterioncode1: Код выбранного критерия (коды получаются вместе с названиями)
+criterioncode2: Код выбранного критерия
+criterioncode3: Код выбранного критерия
+criterioncode4: Код выбранного критерия
+criterioncode5: Код выбранного критерия
+comment: комментарий клиента*/
+
+function sendFeedback(rate, comment, orderid, code1, code2, code3, code4, authdata, onSuccess, onFailure){
+    call("makefeedback", {
+            "rating":rate,
+             "comment":comment,
+             "phone":phone,
+             "ordernumber":orderid,
+             "criterioncode1":code1,
+             "criterioncode2":code2,
+             "criterioncode3":code3,
+             "criterioncode4":code4
+         }, authdata, onSuccess, onFailure)
+}
 
 function getBonus(authdata, onSuccess, onFailure){
     call("getbonus", {"phone":authdata.phone,}, authdata, onSuccess, onFailure)
