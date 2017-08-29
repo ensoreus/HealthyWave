@@ -72,9 +72,9 @@ ViewController {
             anchors.topMargin: parent.height * 0.01
             anchors.top: text2.bottom
             anchors.left: parent.left
-            anchors.leftMargin: 0.1
+            anchors.leftMargin: parent.width * 0.1
             anchors.right: parent.right
-            anchors.rightMargin: 0.1
+            anchors.rightMargin: parent.width * 0.1
             width: 100
             height: parent.height * 0.08
             onWillStartAnimation: {
@@ -88,16 +88,26 @@ ViewController {
             var dayIndex = datePicker.getColumn(0).currentIndex;
             var fromIndex = datePicker.getColumn(1).currentIndex;
             var toIndex = datePicker.getColumn(2).currentIndex;
-            var date = Date()
+            var today = new Date();
+            var dd = today.getDate() + dayIndex;
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
 
-            date.day = date.day + dayIndex
+            if(dd<10) {
+                dd = '0'+dd
+            }
+
+            if(mm<10) {
+                mm = '0'+mm
+            }
+
             var fromHour = fromIndex + 7
             var toHour = toIndex + 8
-            console.log(date.toString())
-            //context.deliveryTime.day = date.toLocaleTimeString(Qt.locale("ua_UA"))
+            context.deliveryTime.day = dd+mm+yyyy
+
+            console.log(context.deliveryTime.day)
             context.deliveryTime.fromHour = fromHour
             context.deliveryTime.toHour = toHour
-
         }
 
         HWRoundButton {

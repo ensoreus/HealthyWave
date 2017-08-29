@@ -10,6 +10,8 @@ QtObject {
     property string comment
     property bool confirmed:false
     property bool addinNewAddress: false
+    property string orderId
+    property bool needToCall: false
     property TimeEntity deliveryTime: TimeEntity{
         day:""
         fromHour: ""

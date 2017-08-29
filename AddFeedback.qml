@@ -340,7 +340,7 @@ ViewController {
             visible: false
         }
 
-        Rectangle {
+        /*Rectangle {
             id: txComment
             height: cbOther.checked ? parent.height * 0.1 : 0
             color: "#ffffff"
@@ -375,7 +375,7 @@ ViewController {
                     duration: 300
                 }
             }
-        }
+        }*/
 
         HWGreenRoundButton {
             id: hWGreenButton

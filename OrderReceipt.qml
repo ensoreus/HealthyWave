@@ -357,6 +357,7 @@ ViewController {
                 storage.getAuthData(function(authdata){
                     Api.createOrder(context, authdata, function(result){
                         console.log(result.result)
+                        context.orderId = result.result
                         storage.addOrder(context)
                     }, function(error){
                         console.log(error.error)
