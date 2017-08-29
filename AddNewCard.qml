@@ -35,11 +35,16 @@ ViewController {
         var lstreet = "Майдан Незалежності";
         var lemail;
         var lname;
+        var phone;
         storage.getEmail(function(email){
             lemail = email
         })
         storage.getName(function(name){
             lname = name
+        })
+
+        storage.getAuthData(function(authdata){
+            phone = authdata.phone
         })
 
         var merchantName = "test_merch_n1"

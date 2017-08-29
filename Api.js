@@ -153,6 +153,11 @@ function sendFeedback(rate, comment, orderid, authdata, onSuccess, onFailure){
          }, authdata, onSuccess, onFailure)
 }
 
+
+function getBonus(authdata, onSuccess, onFailure){
+    call("getbonus", {"phone":authdata.phone,}, authdata, onSuccess, onFailure)
+}
+
 function call(routine, params, authData, onSuccess, onFailure){
     var xhr = new XMLHttpRequest();
     var url = baseUrl + routine + serializeParams(params)

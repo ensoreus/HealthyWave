@@ -46,7 +46,8 @@ ViewController {
             anchors.left: parent.left
             anchors.topMargin: parent.height * 0.03
             anchors.top: lbMainAddress.bottom
-            font.pixelSize: 12
+            font.pointSize: 12
+            font.weight: Font.Thin
         }
         
         Rectangle {
@@ -230,7 +231,7 @@ ViewController {
         Text{
             id: lbMessangers
             text: "Пошта та месенджери"
-            font.pointSize: 15
+            font.pointSize: 12
             font.weight: Font.Thin
             anchors.top: cPhone3.bottom
             anchors.topMargin: parent.height * 0.02

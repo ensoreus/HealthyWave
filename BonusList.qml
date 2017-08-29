@@ -14,6 +14,10 @@ ViewController {
         id: clipboard
     }
 
+    onViewWillAppear: {
+
+    }
+
     Rectangle {
         id: content
         color: "#ffffff"
@@ -37,6 +41,7 @@ ViewController {
             }
 
             model: ListModel {
+                id: bonusModel
                 ListElement {
                     title: "Перше замовлення онлайн"
                     comment: "(тільки для старих замовників)"
@@ -69,7 +74,14 @@ ViewController {
                     comment: "(як для нового клієнта)"
                     activeTill: "дійсний до 13-06-2017"
                 }
-
+                function addItems(data){
+                    bonusModel.clear()
+                    for(var index in data){
+                        var item = data[index]
+                        var modelItem = {title:item.BonusName, activeTill:item.ValidityPeriod, PromoCode:item.PromoCode}
+                            bonusModel.append(modelItem)
+                    }
+                }
             }
         }
 

@@ -83,6 +83,7 @@
         <file>img-phone.png</file>
         <file>img-messaging.png</file>
         <file>img-copy.png</file>
+        <file>img-alert.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
@@ -157,6 +158,7 @@
     </qresource>
     <qresource prefix="/feedback">
         <file>AddFeedback.qml</file>
+        <file>FeedbackPrompt.qml</file>
     </qresource>
     <qresource prefix="/contacts">
         <file>Contacts.qml</file>
