@@ -120,7 +120,7 @@ Item {
                         height: parent.height * 0.15
                         width: parent.width * 0.9
                         anchors.top: txShouldCallQuestion.bottom
-                        anchors.topMargin: parent.height * 0.09
+                        anchors.topMargin: parent.height * 0.1
                         labelText:"ТАК, ХОЧУ ЩОБ ПЕРЕДЗВОНИЛИ!"
                         onButtonClick: {
                             agree()

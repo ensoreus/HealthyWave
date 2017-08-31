@@ -41,11 +41,13 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
-
+    quint8 ostype = -1;
 #ifdef Q_OS_DARWIN
   qreal m_ratio = 1;
   qreal m_ratioFont = 1;
+  ostype = 2;
 #else
+  ostype = 1;
   qreal refDpi = 160.;
   //  qreal refHeight = 1776.;
   //  qreal refWidth = 1080.;
@@ -66,12 +68,12 @@ qreal refWidth = 414.;
   QuickIOS::registerTypes();
   //qmlRegisterSingletonType<SecurityCore>("com.ensoreus.NetworkCore", 1, 0, "NetworkCore", netcore_qjsvalue_singletontype_provider);
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
-  qmlRegisterSingletonType<PushNotificationRegistrationTokenHandler>("PushNotificationRegistrationTokenHandler", 1, 0, "PushNotificationRegistrationTokenHandler",
-                                                                          PushNotificationRegistrationTokenHandler::pushNotificationRegistrationTokenProvider);
+  qmlRegisterSingletonType<PushNotificationRegistrationTokenHandler>("PushNotificationRegistrationTokenHandler", 1, 0, "PushNotificationRegistrationTokenHandler", PushNotificationRegistrationTokenHandler::pushNotificationRegistrationTokenProvider);
   qmlRegisterType<ClipboardManager>("com.ensoreus.Clipboard", 1, 0, "Clipboard");
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("ratio", QVariant::fromValue(m_ratio));
   engine.rootContext()->setContextProperty("fontRatio", QVariant::fromValue(m_ratioFont));
+  engine.rootContext()->setContextProperty("ostype", QVariant::fromValue(ostype));
   engine.addImportPath("qrc:///");
 
   engine.load(QUrl(QLatin1String("qrc:/main.qml")));

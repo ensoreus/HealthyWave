@@ -19,7 +19,7 @@ Item{
     function startAnimation(){
         state = "wiggleOut"
         visible = true
-        errorLabel.visible = false
+        //errorLabel.visible = false
         timer.start()
     }
 
@@ -109,6 +109,7 @@ Item{
         anchors.horizontalCenter: image.horizontalCenter
         anchors.verticalCenter: image.verticalCenter
         visible: false
+
         text: "Неможливо
 доставити
 сьогодні"
@@ -135,7 +136,7 @@ Item{
         source: timeLabel
     }
 
-    DropShadow {
+    /*DropShadow {
         anchors.fill: errorLabel
         horizontalOffset: 3
         verticalOffset: 3
@@ -143,7 +144,7 @@ Item{
         samples: 17
         color: "#80000000"
         source: errorLabel
-    }
+    }*/
 
     Timer{
         id:timer

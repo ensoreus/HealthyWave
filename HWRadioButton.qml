@@ -23,8 +23,7 @@ RadioButton {
                 visible: control.checked
             }
         }
-        contentItem: Item{}
-
+        contentItem:Item{}
         Text {
             id: text
             text: control.text

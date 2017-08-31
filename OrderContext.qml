@@ -11,7 +11,8 @@ QtObject {
     property bool confirmed:false
     property bool addinNewAddress: false
     property string orderId
-    property bool needToCall: false
+    property string promocode
+    property int needToCall: 0
     property TimeEntity deliveryTime: TimeEntity{
         day:""
         fromHour: ""

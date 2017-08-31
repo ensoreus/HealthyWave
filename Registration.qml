@@ -6,6 +6,7 @@ import "qrc:/Api.js" as Api
 import "qrc:/commons"
 import "qrc:/"
 import SecurityCore 1.0
+import PushNotificationRegistrationTokenHandler 1.0
 
 Item {
     id: item1
@@ -14,6 +15,7 @@ Item {
     property alias logoBg: logoBg
     property alias bg: bg
     property int currentPageIndex: 0
+    property string pushNotificationToken: ""
     property string token: ""
     signal registrationDone
     width: 414
@@ -26,6 +28,11 @@ Item {
         }
         console.log(storage.getSecKey())
     }
+
+//    PushNotificationRegistrationTokenHandler.onApnsRegistrationTokenChanged: {
+//        pushNotificationToken = (ostype === 1) ? PushNotificationRegistrationTokenHandler.gcmRegistrationToken : PushNotificationRegistrationTokenHandler.apnsRegistrationToken
+//        console.log("QML token:" + pushNotificationToken)
+//    }
 
     Storage{
         id:storage
@@ -109,6 +116,22 @@ Item {
             }
             onNextPage: {
                 startProcessIndicator()
+                var nameEndPos = nameEditPage.nameField.text.lastIndexOf(" ");
+                var name = nameEditPage.nameField.text.slice(0, nameEndPos)
+                var lastname = nameEditPage.nameField.text.slice(nameEndPos +1, nameEditPage.nameField.text.length)
+                var pushtoken = PushNotificationRegistrationTokenHandler.apnsRegistrationToken
+                Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
+                    storage.saveToken(token)
+                    Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, function(response, url){
+                        if(!response.error){
+                            storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, promoCodeEditPage.text)
+                            stackLayout.push(promoCodeEditPage)
+                            stopPropcessIndicator()
+                        }else{
+                            stopPropcessIndicator()
+                        }
+                    })
+                })
             }
             Behavior on x {
                 NumberAnimation {
@@ -117,7 +140,6 @@ Item {
                 }
             }
         }
-
 
         RegistrationPromoCode{
             id: promoCodeEditPage
@@ -139,7 +161,6 @@ Item {
 //                    storage.saveToken(token)
 //                    Api.
 //                })
-
                 stackLayout.push(congratsPage)
             }
         }
@@ -202,9 +223,7 @@ Item {
                     var result = Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
                     console.log(result)
                 }
-
             }
-
         }
     }
 
@@ -249,6 +268,4 @@ Item {
             }
         }
     }
-
-
 }

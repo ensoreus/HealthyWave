@@ -24,7 +24,7 @@ Page {
             height: item1.width * 0.1
             text: "+380"
             anchors.top: text1.bottom
-            anchors.topMargin: parent.height * 0.01
+            anchors.topMargin: 15 * ratio
             anchors.right: text1.right
             anchors.rightMargin: 0
             anchors.left: text1.left

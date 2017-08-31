@@ -3,6 +3,8 @@ import QuickIOS 0.1
 import QtQml.Models 2.2
 import QtQuick.Controls 2.1
 import "qrc:/controls"
+import "qrc:/"
+import "qrc:/Api.js" as Api
 
 ViewController {
     property alias btnAddNew: btnAddNew
@@ -21,8 +23,21 @@ ViewController {
         rNoCards.visible = true
     }
 
+    Storage{
+        id:storage
+    }
+
     onViewDidAppear:{
+
         hideAddressList()
+        storage.getAuthData(function(authdata){
+            Api.getCards(authdata, function(response){
+                showAddressList()
+                cardsModel.importData(response.result)
+            }, function(failure){
+                hideAddressList()
+            })
+        })
     }
 
     Rectangle {
@@ -83,19 +98,10 @@ ViewController {
                     cardsModel.clear()
                     for(var index in data){
                         var item = data[index]
-                        var modelItem = {cardNum:item.cardNum, street:item.cardType}
+                        var modelItem = {cardPan:item.cardPan, cardType:item.CardType, token:item.CardToken}
                             cardsModel.append(modelItem)
                     }
                 }
-                ListElement{
-                    cardNum: "2345"
-                    cardType: "visa"
-                }
-                ListElement{
-                    cardNum:"4567"
-                    cardType:"mastercard"
-                }
-
 
             }
             delegate: SwipeDelegate{
@@ -113,7 +119,7 @@ ViewController {
                     Text {
                         id: lbCardNum
                         y: 15 * ratio
-                        height:background.height * 0.35
+                        height: 80 * ratio
                         color: "#444444"
                         font.pointSize: 20
                         verticalAlignment: Text.AlignVCenter
@@ -122,7 +128,7 @@ ViewController {
                         anchors.verticalCenter: background.verticalCenter
                         anchors.leftMargin: background.width * 0.062
                         anchors.left: background.left
-                        text: "**** **** **** " + cardNum
+                        text: cardPan
                     }
 
                     Image {
@@ -130,7 +136,7 @@ ViewController {
                         anchors.right: background.right
                         anchors.rightMargin: 10 * ratio
                         anchors.verticalCenter: lbCardNum.verticalCenter
-                        source: (cardType == "visa") ? "qrc:/commons/img-visa.png" : "qrc:/commons/img-mastercard.png"
+                        source: (cardType == "Visa") ? "qrc:/commons/img-visa.png" : "qrc:/commons/img-mastercard.png"
                     }
 
                     Rectangle {

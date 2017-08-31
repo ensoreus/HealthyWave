@@ -104,8 +104,6 @@ ViewController {
             var fromHour = fromIndex + 7
             var toHour = toIndex + 8
             context.deliveryTime.day = dd+mm+yyyy
-
-            console.log(context.deliveryTime.day)
             context.deliveryTime.fromHour = fromHour
             context.deliveryTime.toHour = toHour
         }

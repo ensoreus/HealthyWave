@@ -20,18 +20,19 @@ function auth(phone, secKey, callback){
     xhr.send();
 }
 
-function registerUser(phone, name, email, token, callback) {
+function registerUser(phone, email, token, name, surname, pushToken, ostype, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
             print('HEADERS_RECEIVED');
         } else if(xhr.readyState === XMLHttpRequest.DONE) {
+            console.log(xhr.responseText.toString())
             var object = JSON.parse(xhr.responseText.toString());
-            print(JSON.stringify(object, null, 2));
+            //print(JSON.stringify(object, null, 2));
             callback(object, url)
         }
     }
-    var url = baseUrl + "createcustomer?phone=" + escape(phone) + "&name='"+name+"'&email=" + email + "&key=" + token
+    var url = baseUrl + "createcustomer?phone=" + phone + "'&email=" + email + "&key=" + token + "&token="+ pushToken + "&ostype="+ostype + "&name="+name+"&surname="+surname
     console.log(url)
     xhr.open("GET", url);
     xhr.send();
@@ -74,6 +75,14 @@ function confirmPinCode(pin, phone, callback){
     xhr.open("GET", baseUrl + "confirmpincode?pincode=" + pin);
     xhr.send();
     return xhr.status
+}
+
+function getCards(authdata, onSuccess, onFailure){
+    call("getcards", {"phone":authdata.phone}, authdata, onSuccess, onFailure)
+}
+
+function deleteCard(cardToken, authdata, onSuccess, onFailure){
+    call("deletecard", {"cardtoken":cardToken,"phone":authdata.phone}, authdata, onSuccess, onFailure)
 }
 
 function getCustomerAddresses(authdata, onSuccess, onFailure){
@@ -122,11 +131,19 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
              "bottle":orderContext.fullb,
              "emptybottle":orderContext.emptyb,
              "pump":orderContext.pump,
-             "promocode":"",
+             "promocode":typeof(orderContext.promocode) == 'undefined' ? "" : orderContext.promocode,
              "from":orderContext.deliveryTime.fromHour,
              "to":orderContext.deliveryTime.toHour,
+             "deliverydate":orderContext.deliveryTime.day,
+             "callrequires":orderContext.needToCall,
              "phone":authData.phone
          }, authData, onSuccess, onFailure)
+}
+
+function getOrders(authdata, onSuccess, onFailure){
+    call("getorders", {
+            "phone":authdata.phone
+         }, authdata, onSuccess, onFailure)
 }
 
 function updateProfile(newphone, authdata, onSuccess, onFailure){

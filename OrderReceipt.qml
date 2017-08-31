@@ -358,7 +358,7 @@ ViewController {
                     Api.createOrder(context, authdata, function(result){
                         console.log(result.result)
                         context.orderId = result.result
-                        storage.addOrder(context)
+                        //storage.addOrder(context)
                     }, function(error){
                         console.log(error.error)
                     })
@@ -372,10 +372,10 @@ ViewController {
             id: orderAccepted
             anchors.fill: parent
             onAgree: {
-
+                context.needToCall = 1
             }
             onNotAgree: {
-
+                context.needToCall = 0
             }
             onOrderDone: {
                 visible = false

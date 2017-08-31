@@ -66,8 +66,9 @@ ViewController {
                     Api.searchNearestTime(context.address, authData, function(result){
                         console.log(result)
                         searchTimeWaiter.timeLabel = result.result
+                        searchTimeWaiter.showError = false
                         content.stopSearchAnimation()
-                        context.deliveryTime.day = "today"
+                        context.deliveryTime.fromHour = rightNow()
                         context.deliveryTime.toHour = result.result
                     }, function(error){
                         searchTimeWaiter.showError = true
@@ -75,6 +76,20 @@ ViewController {
                         content.stopSearchAnimation()
                     })
                 })
+            }
+            function rightNow(){
+                var today = new Date();
+                var hh = today.getHours()
+                var mm = today.getMinutes();
+
+                if(hh<10) {
+                    hh = '0'+hh
+                }
+
+                if(mm<10) {
+                    mm = '0'+mm
+                }
+                return hh+":"+mm
             }
         }
 
