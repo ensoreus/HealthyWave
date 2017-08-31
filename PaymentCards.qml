@@ -6,9 +6,13 @@ import "qrc:/"
 import "qrc:/Api.js" as Api
 
 ViewController {
-    id: root
+    id: orderCardViewController
     property var context
     property var isAddNew: false
+    property var radioBtnComponent
+    property var imageComponent
+    property var dynamicElements
+    property var lastTopAnchor: pCards.top
     property var navigationItem : NavigationItem{
         centerBarTitle:"Замовлення"
     }
@@ -17,9 +21,15 @@ ViewController {
         id: storage
     }
 
+    Component.onCompleted: {
+        radioBtnComponent = Qt.createComponent("qrc:/controls/HWRadioButton.qml")
+        imageComponent = Qt.createQmlComponent("import QtQuick 2.0   Image{ }")
+    }
+
     function showPaymentCardsList(cards){
-        lstCards.visible = true
-        paymentCardsModel.importData(cards)
+        pCards.visible = true
+        pCards.clear()
+        pCards.importData(cards)
     }
 
     function fetchCards(){
@@ -47,7 +57,6 @@ ViewController {
 
         HWHeader {
             id: hWHeader
-            //anchors.topMargin: parent.height * 0.05
             anchors.top: parent.top
             anchors.right: parent.right
             anchors.rightMargin: 0
@@ -55,64 +64,146 @@ ViewController {
             anchors.leftMargin: 0
             title.text: "Вибір картки"
         }
-
-        ListView {
-            id: lstCards
-            anchors.top: hWHeader.bottom
-            anchors.right: parent.right
+        
+        Rectangle{
+            id: pCards
+            anchors.topMargin: parent.height * 0.1
+            anchors.bottomMargin: parent.height * 0.2
             anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.topMargin: 0
-            visible: true
-            delegate:
-                HWRadioButton{
-                height: 80 * ratio
-                    id:rbtn
-                    text: label
-                    font.pointSize: 15
-                    anchors.left: parent.left
-                    anchors.leftMargin: content.width * 0.2
-                    anchors.verticalCenter: parent.verticalCenter
-                    checked: (typeof(token) === 'undefined' && paymentCardsModel.count === 1)
-                    onCheckedChanged: {
-                        if(typeof(token) === 'undefined'){
-                            isAddNew = checked
-                        }else{
-                            context.cardToPay = (checked) ? token : ""
-                        }
-                    }
-                    Image{
-                        anchors.left: rbtn.right
-                        anchors.leftMargin:lstCards.width * 0.5
-                        anchors.verticalCenter: parent.verticalCenter
-                        source: cardService
+            anchors.top: hWHeader.bottom
+            anchors.right: hWHeader.right
+            anchors.rightMargin: 0
+            anchors.left: hWHeader.left
+            anchors.leftMargin: 0
+
+            function importData(data){
+                dynamicElements = new Array(1)
+                for(var index in data){
+                    var item = data[index]
+                    var modelItem = {label:item.cardPan, cardService:(item.CardType === "Visa" ? "qrc:/commons/img-visa.png" : "qrc:/commons/img-mastercard.png"), token:item.CardToken}
+                    append(modelItem)
+                }
+                addNewOption()
+            }
+
+            function clear(){
+                if(typeof(dynamicElements) != "undefined"){
+                    dynamicElements.forEach(function(element){
+                        element.destroy()
+                    })
+                }
+                lastTopAnchor = pCards.top
+            }
+
+            function append(item){
+                var checkChanged = function(){
+                    if (!orderCardViewController.initializing){
+                        context.cardToPay = (checked) ? token : ""
                     }
                 }
+                var rbCard = createRadioButton(checkChanged)
+                var iCardImage = createImage(rbCard, item.cardService)
+                rbCard.text = item.label
+            }
 
+            function createRadioButton(onCheckChanged){
+                var rbCard =  radioBtnComponent.createObject(pCards, {
+                    "anchors.right":pCards.right,
+                    "anchors.rightMargin":100 * ratio,
+                    "anchors.left":pCards.left,
+                    "anchors.leftMargin":50 * ratio,
+                    "anchors.top":lastTopAnchor,
+                    "anchors.topMargin":10 * ratio,
+                    "height":25 * ratio,
+                    "fontPointSize": 17
 
-            model:  ListModel{
-                id: paymentCardsModel
-                function importData(data){
-                    paymentCardsModel.clear()
-                    for(var index in data){
-                        var item = data[index]
-                        var modelItem = {label:item.cardPan, cardService:(item.CardType === "Visa" ? "qrc:/commons/img-visa.png" : "qrc:/commons/img-mastercard.png"), token:item.CardToken}
-                           paymentCardsModel.append(modelItem)
-                    }
-                    //paymentCardsModel.append({label:"Додати іншу картку", cardService:""})
+                })
+                lastTopAnchor = rbCard.bottom
+                dynamicElements.push(rbCard)
+                rbCard.onCheckedChanged.connect(onCheckChanged)
+                return rbCard
+            }
+
+            function createImage(rbParent, source){
+                var qml = "import QtQuick 2.0; Image{ fillMode: Image.PreserveAspectFit; source:\""+ source +"\"}"
+                console.log(qml)
+                var iCardType = Qt.createQmlObject(qml, rbParent, "commons")
+                iCardType.anchors.right = rbParent.right
+                iCardType.anchors.verticalCenter = rbParent.verticatCenter
+                iCardType.height = rbParent.height
+                //iCardType.anchors.right:pCards.right;anchors.verticalCenter: pCards.verticalCenter; source:"+source+"
+                return iCardType
+            }
+
+            function addNewOption(){
+                var onCheckedChanged = function(){
+                    isAddNew = rbAddNew.checked
+                    console.log("add new checked")
                 }
+                var rbAddNew = createRadioButton(onCheckedChanged)
+                rbAddNew.checked = false
+                rbAddNew.fontPointSize = 15
+                rbAddNew.text = "Додати нову картку"
             }
         }
-        HWRadioButton{
-            id:btnNewCard
-            anchors.top: lstCards.top
-            anchors.topMargin: paymentCardsModel.count * 80 + 10 * ratio
-            anchors.left: lstCards.left
-            anchors.leftMargin: content.width * 0.2
-            text: "Додати іншу картку"
-            checked: paymentCardsModel.count === 0
-        }
+        
+        /*        ListView {
+                  id: lstCards
+                  anchors.top: hWHeader.bottom
+                  anchors.right: parent.right
+                  n          anchors.bottom: parent.bottom
+                  anchors.left: parent.left
+                  anchors.topMargin: 0
+                  visible: true
+                  delegate:
+                  HWRadioButton{
+                  height: 80 * ratio
+                  id:rbtn
+                  text: label
+                  font.pointSize: 15
+                  anchors.left: parent.left
+                  anchors.leftMargin: content.width * 0.2
+                  anchors.verticalCenter: parent.verticalCenter
+                  checked: (typeof(token) === 'undefined' && paymentCardsModel.count === 1)
+                  onCheckedChanged: {
+                  if(typeof(token) === 'undefined'){
+                  isAddNew = checked
+                  }else{
+                  context.cardToPay = (checked) ? token : ""
+                  }
+                  }
+                  Image{
+                  anchors.left: rbtn.right
+                  anchors.leftMargin:lstCards.width * 0.5
+                  anchors.verticalCenter: parent.verticalCenter
+                  source: cardService
+                  }
+                  }
 
+
+                  model:  ListModel{
+                  id: paymentCardsModel
+                  function importData(data){
+                  paymentCardsModel.clear()
+                  for(var index in data){
+                  var item = data[index]
+                  var modelItem = {label:item.cardPan, cardService:(item.CardType === "Visa" ? "qrc:/commons/img-visa.png" : "qrc:/commons/img-mastercard.png"), token:item.CardToken}
+                  paymentCardsModel.append(modelItem)
+                  }
+                  //paymentCardsModel.append({label:"Додати іншу картку", cardService:""})
+                  }
+                  }
+                  }
+                  HWRadioButton{
+                  id:btnNewCard
+                  anchors.top: lstCards.top
+                  anchors.topMargin: paymentCardsModel.count * 80 + 10 * ratio
+                  anchors.left: lstCards.left
+                  anchors.leftMargin: content.width * 0.2
+                  text: "Додати іншу картку"
+                  checked: paymentCardsModel.count === 0
+                  }
+        */
         BusyIndicator {
             id: busyIndicator
             width: 80 * ratio
@@ -132,11 +223,11 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             labelText: "ДАЛІ"
             onButtonClick: {
-                 if(isAddNew){
-                     navigationController.push("qrc:/cards/AddNewCard.qml")
-                 }else{
+                if(isAddNew){
+                    navigationController.push("qrc:/cards/AddNewCard.qml")
+                }else{
                     navigationController.push("qrc:/orders/OrdersAddress.qml",{"context":context})
-                 }
+                }
             }
         }
     }
