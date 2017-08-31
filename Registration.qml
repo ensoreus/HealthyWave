@@ -27,12 +27,17 @@ Item {
             storage.storeSecKey(SecurityCore.secKey)
         }
         console.log(storage.getSecKey())
+        if (ostype === 1){
+            var token = PushNotificationRegistrationTokenHandler.gcmRegistrationToken
+        }
     }
 
-//    PushNotificationRegistrationTokenHandler.onApnsRegistrationTokenChanged: {
-//        pushNotificationToken = (ostype === 1) ? PushNotificationRegistrationTokenHandler.gcmRegistrationToken : PushNotificationRegistrationTokenHandler.apnsRegistrationToken
-//        console.log("QML token:" + pushNotificationToken)
-//    }
+    Connections {
+        target: PushNotificationRegistrationTokenHandler
+        onGcmRegistrationTokenChanged: {
+            console.log("Value changed")
+        }
+    }
 
     Storage{
         id:storage
@@ -114,11 +119,15 @@ Item {
             onStartEditData: {
                 nameEditPage.presenterAnimationEnds()
             }
+
             onNextPage: {
                 startProcessIndicator()
+
                 var nameEndPos = nameEditPage.nameField.text.lastIndexOf(" ");
                 var name = nameEditPage.nameField.text.slice(0, nameEndPos)
-                var lastname = nameEditPage.nameField.text.slice(nameEndPos +1, nameEditPage.nameField.text.length)
+                var lastname = nameEditPage.nameField.text.slice(nameEndPos + 1, nameEditPage.nameField.text.length)
+
+                console.log(PushNotificationRegistrationTokenHandler.gcmRegistrationToke)
                 var pushtoken = (ostype === 1) ? PushNotificationRegistrationTokenHandler.gcmRegistrationToken : PushNotificationRegistrationTokenHandler.apnsRegistrationToken
                 Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
                     storage.saveToken(token)

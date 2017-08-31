@@ -13,6 +13,7 @@ ViewController {
     property bool initializing: false
     property var radioBtnComponent
     property var isAddNew: false
+    property var dynamicElements
     property var lastTopAnchor: pAddresses.top
     id: orderAddressViewController
     navigationItem:NavigationItem{
@@ -31,11 +32,11 @@ ViewController {
         busyIndicator.running = true
         storage.getAuthData(function(authData){
             Api.getCustomerAddresses(authData, function(addresses) {
+                pAddresses.clear()
                 orderAddressViewController.initializing = true
                 pAddresses.importData(addresses)
                 busyIndicator.running = false
                 orderAddressViewController.initializing = false
-                //rbAddNewAddress.checked = false
                 pAddresses.addNewOption()
             }, function(error) {
                 console.log(error)
@@ -77,6 +78,7 @@ ViewController {
 
             function importData(data){
                 //                addressesModel.clear()
+                dynamicElements = new Array(1)
                 for(var index in data.addresses){
                     var item = data.addresses[index]
                     if(item.primary){
@@ -103,6 +105,15 @@ ViewController {
                 }
             }
 
+            function clear(){
+                if(typeof(dynamicElements) != "undefined"){
+                    dynamicElements.forEach(function(element){
+                        element.destroy()
+                    })
+                }
+                lastTopAnchor = pAddresses.top
+            }
+
             function append(item){
                 var checkChanged = function(){
                     console.log("checked!")
@@ -117,24 +128,24 @@ ViewController {
                         context.address.entrance = item.entrance
                     }
                 }
-                    var rbAddress = createRadioButton(checkChanged)
-                    rbAddress.checked = item.primary
-
-                    rbAddress.text = "м."+ item.city + ", вул."+item.street+", "+item.house+", оф." + item.apartment
+                var rbAddress = createRadioButton(checkChanged)
+                rbAddress.checked = item.primary
+                rbAddress.text = "м."+ item.city + ", вул."+item.street+", "+item.house+", оф." + item.apartment
             }
 
             function createRadioButton(onCheckChanged){
                 var rbAddress =  radioBtnComponent.createObject(pAddresses, {
-                                                                "anchors.right":pAddresses.right,
-                                                                "anchors.rightMargin":50 * ratio,
-                                                                "anchors.left":pAddresses.left,
-                                                                "anchors.leftMargin":50 * ratio,
-                                                                "anchors.top":lastTopAnchor,
-                                                                "anchors.topMargin":10 * ratio,
-                                                                "height":40 * ratio,
-                                                                "onCheckedChanged":onCheckChanged
+                                                                    "anchors.right":pAddresses.right,
+                                                                    "anchors.rightMargin":50 * ratio,
+                                                                    "anchors.left":pAddresses.left,
+                                                                    "anchors.leftMargin":50 * ratio,
+                                                                    "anchors.top":lastTopAnchor,
+                                                                    "anchors.topMargin":10 * ratio,
+                                                                    "height":40 * ratio
                                                                 })
                 lastTopAnchor = rbAddress.bottom
+                dynamicElements.push(rbAddress)
+                rbAddress.onCheckedChanged.connect(onCheckChanged)
                 return rbAddress
             }
 

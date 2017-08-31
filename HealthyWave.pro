@@ -55,7 +55,7 @@ android: {
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
     ################# adapt that accordingly #######################
-    ANDROID_JAVA_SOURCES.path = /src/com/example/example
+    ANDROID_JAVA_SOURCES.path = /src/com/ensoreus/hw
     ################################################################
 
     ANDROID_JAVA_SOURCES.files = $$files($$PWD/source/java/*.java)
