@@ -47,11 +47,11 @@ ViewController {
             phone = authdata.phone
         })
 
-        var merchantName = "test_merch_n1"
+        var merchantName = "hvilya_zd_com_ua"
         var date = new Date();
         var domain = "hvilya-zd.com.ua"
         var productname = "%D0%94%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%BA%D0%B0%D1%80%D1%82%D1%8B"//"Добавление карты"
-        var merchantSignature = "flk3409refn54t54t*FNJRET"
+        var merchantSignature = "5f81264a35752d6760a729272d4b6bea169f9574"
         var orderReference = SecurityCore.createUid();
         var orderTime = date.getTime()/1000
         var serviceUrl = "http://94.130.18.75/debug/hs/GetData/confirmnewcard"

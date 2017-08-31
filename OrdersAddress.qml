@@ -8,11 +8,12 @@ import QtQuick.Controls 2.1
 
 ViewController {
     property alias btnNext: btnNext
-    property alias lstAddresses: lstAddresses
     property alias busyIndicator: busyIndicator
     property OrderContext context
     property bool initializing: false
-
+    property var radioBtnComponent
+    property var isAddNew: false
+    property var lastTopAnchor: pAddresses.top
     id: orderAddressViewController
     navigationItem:NavigationItem{
         centerBarTitle:"Замовлення"
@@ -22,15 +23,20 @@ ViewController {
         id:storage
     }
     
+    Component.onCompleted: {
+        radioBtnComponent = Qt.createComponent("qrc:/controls/HWRadioButton.qml")
+    }
+
     onViewWillAppear:{
         busyIndicator.running = true
         storage.getAuthData(function(authData){
             Api.getCustomerAddresses(authData, function(addresses) {
                 orderAddressViewController.initializing = true
-                addressesModel.importData(addresses)
+                pAddresses.importData(addresses)
                 busyIndicator.running = false
                 orderAddressViewController.initializing = false
-                rbAddNewAddress.checked = false
+                //rbAddNewAddress.checked = false
+                pAddresses.addNewOption()
             }, function(error) {
                 console.log(error)
                 busyIndicator.running = false
@@ -58,9 +64,8 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             title.text:"Вибір адреси"
         }
-
-        ListView {
-            id: lstAddresses
+        Rectangle{
+            id: pAddresses
             anchors.topMargin: parent.height * 0.1
             anchors.bottomMargin: parent.height * 0.2
             anchors.bottom: parent.bottom
@@ -69,69 +74,79 @@ ViewController {
             anchors.rightMargin: 0
             anchors.left: hWHeader.left
             anchors.leftMargin: 0
-            model: ListModel {
-                id: addressesModel
-                function importData(data){
-                    addressesModel.clear()
-                    for(var index in data.addresses){
-                        var item = data.addresses[index]
-                        if(item.primary){
-                            context.address.street = item.street
-                            context.address.city = item.city
-                            context.address.floor = item.floor
-                            //context.address.doorCode = item.doorCode
-                            context.address.house = item.house
-                            context.address.apartment = item.apartment
-                            context.address.isPrimary = item.primary
-                            context.address.entrance = item.entrance
-                        }
-                        var modelItem = {
-                            city:item.city,
-                            street:item.street,
-                            house:item.house,
-                            apartment:item.apartment,
-                            floor:item.floor,
-                            //doorCode:item.doorCode,
-                            entrance:item.entrance,
-                            primary: item.primary
-                        }
-                        addressesModel.append(modelItem)
-                    }
-                }
-            }
-            delegate:
-                HWRadioButton {
-                x: 5 * ratio
-                checked: primary == '1'
-                width: 80 * ratio
-                height: 40 * ratio
-                text: "м."+ city + ", вул."+street+", "+house+", оф." + apartment
-                onCheckedChanged: {
-                    if (!orderAddressViewController.initializing){
-                        context.address.street = street
-                        context.address.city = city
-                        context.address.floor = floor
-                        //context.address.doorCode = doorCode
-                        context.address.house = house
-                        context.address.apartment = apartment
-                        context.address.isPrimary = primary
-                        context.address.entrance = entrance
-                    }
-                }
-            }
-        }
 
-        HWRadioButton{
-            id:rbAddNewAddress
-            checked: true
-            width: 80 * ratio
-            height: 40 * ratio
-            anchors.top: lstAddresses.top
-            anchors.topMargin: 40 * ratio * (addressesModel.rowCount() + 2)  + 10 * ratio
-            anchors.left: lstAddresses.left
-            anchors.leftMargin: 5 * ratio
-            anchors.right: lstAddresses.right
-            text: "Додати нову адресу"
+            function importData(data){
+                //                addressesModel.clear()
+                for(var index in data.addresses){
+                    var item = data.addresses[index]
+                    if(item.primary){
+                        context.address.street = item.street
+                        context.address.city = item.city
+                        context.address.floor = item.floor
+                        //context.address.doorCode = item.doorCode
+                        context.address.house = item.house
+                        context.address.apartment = item.apartment
+                        context.address.isPrimary = item.primary
+                        context.address.entrance = item.entrance
+                    }
+                    var modelItem = {
+                        city:item.city,
+                        street:item.street,
+                        house:item.house,
+                        apartment:item.apartment,
+                        floor:item.floor,
+                        //doorCode:item.doorCode,
+                        entrance:item.entrance,
+                        primary: item.primary
+                    }
+                    append(modelItem)
+                }
+            }
+
+            function append(item){
+                var checkChanged = function(){
+                    console.log("checked!")
+                    if (!orderAddressViewController.initializing){
+                        context.address.street = item.street
+                        context.address.city = item.city
+                        context.address.floor = item.floor
+                        //context.address.doorCode = doorCode
+                        context.address.house = item.house
+                        context.address.apartment = item.apartment
+                        context.address.isPrimary = item.primary
+                        context.address.entrance = item.entrance
+                    }
+                }
+                    var rbAddress = createRadioButton(checkChanged)
+                    rbAddress.checked = item.primary
+
+                    rbAddress.text = "м."+ item.city + ", вул."+item.street+", "+item.house+", оф." + item.apartment
+            }
+
+            function createRadioButton(onCheckChanged){
+                var rbAddress =  radioBtnComponent.createObject(pAddresses, {
+                                                                "anchors.right":pAddresses.right,
+                                                                "anchors.rightMargin":50 * ratio,
+                                                                "anchors.left":pAddresses.left,
+                                                                "anchors.leftMargin":50 * ratio,
+                                                                "anchors.top":lastTopAnchor,
+                                                                "anchors.topMargin":10 * ratio,
+                                                                "height":40 * ratio,
+                                                                "onCheckedChanged":onCheckChanged
+                                                                })
+                lastTopAnchor = rbAddress.bottom
+                return rbAddress
+            }
+
+            function addNewOption(){
+                var onCheckedChanged = Qt.binding(function(){
+                    isAddNew = rbAddNew.checked
+                    console.log("add new checked")
+                })
+                var rbAddNew = createRadioButton(onCheckedChanged)
+                rbAddNew.checked = false
+                rbAddNew.text = "Додати нову адресу"
+            }
         }
 
         HWRoundButton {
@@ -141,11 +156,11 @@ ViewController {
             width: parent.width * 0.7
             height: parent.height * 0.1
             anchors.topMargin: parent.height * 0.05
-            anchors.top: lstAddresses.bottom
+            anchors.top: pAddresses.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {
-                if(rbAddNewAddress.checked){
-                     navigationController.push("qrc:/address/NewAddress.qml", {"context":context})
+                if(isAddNew){
+                    navigationController.push("qrc:/address/NewAddress.qml", {"context":context})
                 }else{
                     navigationController.push("qrc:/orders/OrderTime.qml", {"context":context})
                 }

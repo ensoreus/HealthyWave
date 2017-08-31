@@ -119,7 +119,7 @@ Item {
                 var nameEndPos = nameEditPage.nameField.text.lastIndexOf(" ");
                 var name = nameEditPage.nameField.text.slice(0, nameEndPos)
                 var lastname = nameEditPage.nameField.text.slice(nameEndPos +1, nameEditPage.nameField.text.length)
-                var pushtoken = PushNotificationRegistrationTokenHandler.apnsRegistrationToken
+                var pushtoken = (ostype === 1) ? PushNotificationRegistrationTokenHandler.gcmRegistrationToken : PushNotificationRegistrationTokenHandler.apnsRegistrationToken
                 Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
                     storage.saveToken(token)
                     Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, ostype, function(response, url){
