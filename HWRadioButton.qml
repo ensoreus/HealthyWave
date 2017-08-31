@@ -28,7 +28,8 @@ RadioButton {
         Text {
             id: text
             text: control.text
-            font: control.font
+            height: control.height
+            wrapMode: Text.WordWrap
             opacity: enabled ? 1.0 : 0.3
             color: "#4A4A4A"
             anchors.verticalCenter: parent.verticalCenter

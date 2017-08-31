@@ -60,6 +60,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("Вода:")
                 font.weight: Font.Thin
+                font.pointSize: 13
                 anchors.topMargin: parent.height * 0.05
                 anchors.top: parent.top
                 anchors.right: parent.horizontalCenter
@@ -73,6 +74,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("Порожніх бутлів:")
                 font.weight: Font.Thin
+                font.pointSize: 13
                 anchors.topMargin: parent.width * 0.01
                 anchors.top: lbWater.bottom
                 anchors.right: parent.horizontalCenter
@@ -86,6 +88,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("Застава за бутлі:")
                 font.weight: Font.Light
+                font.pointSize: 13
                 anchors.topMargin: parent.height * 0.01
                 anchors.top: lbEmptyBottle.bottom
                 anchors.right: parent.horizontalCenter
@@ -99,6 +102,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("Сума без знижки:")
                 font.weight: Font.Thin
+                font.pointSize: 13
                 anchors.topMargin: parent.height * 0.01
                 anchors.top: lbFee.bottom
                 anchors.right: parent.horizontalCenter
@@ -112,6 +116,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("Сума зі знижкою 20%:")
                 font.weight: Font.Thin
+                font.pointSize: 13
                 anchors.topMargin: parent.height * 0.01
                 anchors.top: lbNoDiscount.bottom
                 anchors.right: parent.horizontalCenter
@@ -125,6 +130,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("Сума замовлення:")
                 font.weight: Font.Thin
+                font.pointSize: 13
                 anchors.topMargin: parent.height * 0.05
                 anchors.top: lbWithDiscount.bottom
                 anchors.right: parent.horizontalCenter
@@ -157,7 +163,7 @@ ViewController {
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
                 anchors.left: lbWater.right
-                anchors.leftMargin: 10
+                anchors.leftMargin: 20 * ratio
             }
 
             Text {
@@ -171,7 +177,7 @@ ViewController {
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
                 anchors.left: lbEmptyBottle.right
-                anchors.leftMargin: 10
+                anchors.leftMargin: 20* ratio
             }
 
             Text {
@@ -185,7 +191,7 @@ ViewController {
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
                 anchors.left: lbFee.right
-                anchors.leftMargin: 10
+                anchors.leftMargin: 20 * ratio
             }
 
             Text {
@@ -199,21 +205,22 @@ ViewController {
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
                 anchors.left: lbNoDiscount.right
-                anchors.leftMargin: 10
+                anchors.leftMargin: 20* ratio
             }
 
             Text {
                 id: txWithDiscount
                 text: qsTr("Text")
-                anchors.leftMargin: 10
                 font.weight: Font.DemiBold
                 font.pointSize: 14
                 verticalAlignment: Text.AlignVCenter
                 anchors.top: lbWithDiscount.top
                 anchors.topMargin: 0
+                anchors.left: lbWithDiscount.right
+                anchors.leftMargin: 20* ratio
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right
-                anchors.left: lbWithDiscount.right
+
             }
 
             Text {
@@ -227,7 +234,7 @@ ViewController {
                 anchors.topMargin: 0
                 anchors.right: parent.right
                 anchors.left: lbTotal.right
-                anchors.leftMargin: 10
+                anchors.leftMargin: 20* ratio
             }
 
             Text {

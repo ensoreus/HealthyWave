@@ -131,7 +131,6 @@ ViewController {
                 iCardType.anchors.right = rbParent.right
                 iCardType.anchors.verticalCenter = rbParent.verticatCenter
                 iCardType.height = rbParent.height
-                //iCardType.anchors.right:pCards.right;anchors.verticalCenter: pCards.verticalCenter; source:"+source+"
                 return iCardType
             }
 
@@ -147,64 +146,7 @@ ViewController {
             }
         }
         
-        /*        ListView {
-                  id: lstCards
-                  anchors.top: hWHeader.bottom
-                  anchors.right: parent.right
-                  n          anchors.bottom: parent.bottom
-                  anchors.left: parent.left
-                  anchors.topMargin: 0
-                  visible: true
-                  delegate:
-                  HWRadioButton{
-                  height: 80 * ratio
-                  id:rbtn
-                  text: label
-                  font.pointSize: 15
-                  anchors.left: parent.left
-                  anchors.leftMargin: content.width * 0.2
-                  anchors.verticalCenter: parent.verticalCenter
-                  checked: (typeof(token) === 'undefined' && paymentCardsModel.count === 1)
-                  onCheckedChanged: {
-                  if(typeof(token) === 'undefined'){
-                  isAddNew = checked
-                  }else{
-                  context.cardToPay = (checked) ? token : ""
-                  }
-                  }
-                  Image{
-                  anchors.left: rbtn.right
-                  anchors.leftMargin:lstCards.width * 0.5
-                  anchors.verticalCenter: parent.verticalCenter
-                  source: cardService
-                  }
-                  }
-
-
-                  model:  ListModel{
-                  id: paymentCardsModel
-                  function importData(data){
-                  paymentCardsModel.clear()
-                  for(var index in data){
-                  var item = data[index]
-                  var modelItem = {label:item.cardPan, cardService:(item.CardType === "Visa" ? "qrc:/commons/img-visa.png" : "qrc:/commons/img-mastercard.png"), token:item.CardToken}
-                  paymentCardsModel.append(modelItem)
-                  }
-                  //paymentCardsModel.append({label:"Додати іншу картку", cardService:""})
-                  }
-                  }
-                  }
-                  HWRadioButton{
-                  id:btnNewCard
-                  anchors.top: lstCards.top
-                  anchors.topMargin: paymentCardsModel.count * 80 + 10 * ratio
-                  anchors.left: lstCards.left
-                  anchors.leftMargin: content.width * 0.2
-                  text: "Додати іншу картку"
-                  checked: paymentCardsModel.count === 0
-                  }
-        */
-        BusyIndicator {
+         BusyIndicator {
             id: busyIndicator
             width: 80 * ratio
             height: 80 * ratio

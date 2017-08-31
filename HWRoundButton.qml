@@ -30,6 +30,7 @@ Item {
             font.pointSize: 18
             color: btnRoot.labelColor
             text:"TEXT"
+            wrapMode: Text.WordWrap
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
         }

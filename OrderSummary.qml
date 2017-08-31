@@ -249,7 +249,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("")
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 5 * ratio
+                anchors.leftMargin: 15 * ratio
                 anchors.top: lbWater.top
                 anchors.topMargin: 0
                 font.weight: Font.DemiBold
@@ -262,7 +262,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("")
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 5 * ratio
+                anchors.leftMargin: 15 * ratio
                 anchors.top: lbFreeWater.top
                 anchors.topMargin: 0
                 font.family: "SF UI Text"
@@ -277,7 +277,7 @@ ViewController {
                 anchors.top: lbTotalBottles.top
                 anchors.topMargin: 0
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 5 * ratio
+                anchors.leftMargin: 15 * ratio
                 font.family: "SF UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 14
@@ -288,7 +288,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("")
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 5 * ratio
+                anchors.leftMargin: 15 * ratio
                 anchors.top: lbBottlesFee.top
                 anchors.topMargin: 0
                 font.family: "SF UI Text"
@@ -301,7 +301,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("")
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 5 * ratio
+                anchors.leftMargin: 15 * ratio
                 anchors.top: lbEmptyBottles.top
                 anchors.topMargin: 0
                 font.family: "SF UI Text"
@@ -314,7 +314,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("")
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 0
+                anchors.leftMargin: 15 * ratio
                 anchors.top: lbPump.top
                 anchors.topMargin: 0
                 font.family: "SF UI Text"
@@ -327,7 +327,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("")
                 anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 5 * ratio
+                anchors.leftMargin: 15 * ratio
                 anchors.top: lbSummaryOfOrder.top
                 anchors.topMargin: 0
                 font.family: "SF UI Text"

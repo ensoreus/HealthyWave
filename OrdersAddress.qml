@@ -130,18 +130,19 @@ ViewController {
                 }
                 var rbAddress = createRadioButton(checkChanged)
                 rbAddress.checked = item.primary
-                rbAddress.text = "м."+ item.city + ", вул."+item.street+", "+item.house+", оф." + item.apartment
+                rbAddress.text = "м."+ item.city + ",\n вул."+item.street+", "+item.house+", оф." + item.apartment
             }
 
             function createRadioButton(onCheckChanged){
                 var rbAddress =  radioBtnComponent.createObject(pAddresses, {
                                                                     "anchors.right":pAddresses.right,
-                                                                    "anchors.rightMargin":50 * ratio,
+                                                                    "anchors.rightMargin":30 * ratio,
                                                                     "anchors.left":pAddresses.left,
-                                                                    "anchors.leftMargin":50 * ratio,
+                                                                    "anchors.leftMargin":30 * ratio,
                                                                     "anchors.top":lastTopAnchor,
                                                                     "anchors.topMargin":10 * ratio,
-                                                                    "height":40 * ratio
+                                                                    "height":50 * ratio,
+                                                                    "fontPointSize": 13
                                                                 })
                 lastTopAnchor = rbAddress.bottom
                 dynamicElements.push(rbAddress)
