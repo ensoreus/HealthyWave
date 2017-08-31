@@ -122,7 +122,7 @@ Item {
                 var pushtoken = PushNotificationRegistrationTokenHandler.apnsRegistrationToken
                 Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
                     storage.saveToken(token)
-                    Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, function(response, url){
+                    Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, ostype, function(response, url){
                         if(!response.error){
                             storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, promoCodeEditPage.text)
                             stackLayout.push(promoCodeEditPage)
