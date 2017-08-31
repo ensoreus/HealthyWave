@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "723840751225",
+    "firebase_url": "https://healthy-way-c297a.firebaseio.com",
+    "project_id": "healthy-way-c297a",
+    "storage_bucket": "healthy-way-c297a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723840751225:android:6ebb92e05da154cd",
+        "android_client_info": {
+          "package_name": "com.ensoreus.hw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723840751225-to5tcjaqol646tji2nrtej6vqln6cd63.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCStR86VUEu33_bHXgTPp30VhfgD6UWAmM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
