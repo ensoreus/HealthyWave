@@ -2,6 +2,6 @@
 <resources>
 
 <!--Google GCM -->
-<string name="gcm_defaultSenderId">xxxxxxx</string>
+<!--<string name="gcm_defaultSenderId">c297a</string> -->
 
 </resources>

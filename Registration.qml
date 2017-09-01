@@ -230,7 +230,7 @@ Item {
                 onNextPage: {
                     stackLayout.push(pinEditPage)
                     var result = Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
-                    console.log(result)
+                    //console.log(result)
                 }
             }
         }

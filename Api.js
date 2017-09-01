@@ -28,7 +28,6 @@ function registerUser(phone, email, token, name, surname, pushToken, ostype, cal
         } else if(xhr.readyState === XMLHttpRequest.DONE) {
             console.log(xhr.responseText.toString())
             var object = JSON.parse(xhr.responseText.toString());
-            //print(JSON.stringify(object, null, 2));
             callback(object, url)
         }
     }
@@ -54,7 +53,7 @@ function getPinCode(phone, secKey){
     }
 
     var url = baseUrl + "getpincode?phone=" + phone + "&securitykey=" + secKey
-    console.log( url)
+    console.log(url)
     xhr.open("GET", url, true);
     xhr.send();
     return isSent
