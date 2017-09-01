@@ -246,7 +246,7 @@ Item {
 
             PropertyChanges {
                 target: logo
-                height: logoBg.height * 0.6
+                height: logoBg.height * 0.4
             }
         },
         State {

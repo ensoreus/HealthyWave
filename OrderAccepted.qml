@@ -18,7 +18,7 @@ Item {
         id: image
         x: 208
         y: 171
-        width: parent.width * 0.78
+        width: parent.width * 0.84
         height: parent.width * 0.78
         fillMode: Image.PreserveAspectFit
         anchors.verticalCenter: parent.verticalCenter
@@ -72,11 +72,11 @@ Item {
                     Text{
                         id:mainHeader
                         anchors.top: parent.top
-                        anchors.topMargin: parent.height * 0.1
                         anchors.horizontalCenter: parent.horizontalCenter
                         width: parent.width * 0.9
                         height: parent.height * 0.08
                         text: "ВАШЕ ЗАМОВЛЕННЯ ПРИЙНЯТЕ!"
+                        anchors.topMargin: parent.height * 0.05
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
                         color: "white"
@@ -103,13 +103,13 @@ Item {
                         id: txShouldCallQuestion
                         x: 220
                         width: parent.width * 0.8
-                        height: 15 * ratio
+                        height: parent.height * 0.25
                         color: "#ffffff"
                         text: qsTr("Бажаєте, щоб наш спеціаліст передзвонив \nВам для підтвердження замовлення?")
                         fontSizeMode: Text.HorizontalFit
                         wrapMode: Text.WordWrap
                         horizontalAlignment: Text.AlignHCenter
-                        anchors.topMargin: parent.height * 0.1
+                        anchors.topMargin: parent.height * 0.05
                         anchors.top: weAreOn.bottom
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
@@ -149,11 +149,14 @@ Item {
                 id: orderAcceptedWithAgreePage
                 visible: false
                 Rectangle{
+                    id: rectangle
                     color: "#1EB2A4"
                     anchors.fill: parent
                     Text {
                         id: txtOrderAccepted
                         text: "ДЯКУЄМО ЗА ЗАМОВЛЕННЯ!"
+                        font.pointSize: 12
+                        anchors.horizontalCenter: parent.horizontalCenter
                         anchors.top: parent.top
                         anchors.topMargin: parent.width * 0.1
                         width: parent.width * 0.9
@@ -165,6 +168,8 @@ Item {
                     Text{
                         id: txtWaitForCall
                         text: "Очікуйте на дзвінок нашого спеціаліста."
+                        font.pointSize: 12
+                        anchors.horizontalCenter: parent.horizontalCenter
                         horizontalAlignment: Text.AlignHCenter
                         anchors.top: txtOrderAccepted.bottom
                         anchors.topMargin: parent.width * 0.1
@@ -192,15 +197,18 @@ Item {
                 id: orderAcceptedWithDisagreePage
                 visible: false
                 Rectangle{
+                    id: rectangle1
                     color: "#1EB2A4"
                     anchors.fill: parent
                     Text {
                         id: txtThanks
                         text: "ДЯКУЄМО ЗА ЗАМОВЛЕННЯ!"
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.pointSize: 12
                         visible: true
                         anchors.top: parent.top
                         anchors.topMargin: parent.width * 0.3
-                        width: parent.width * 0.9
+                        width: parent.width * 0.8
                         height: parent.width * 0.1
                         horizontalAlignment: Text.AlignHCenter
                         color: "white"

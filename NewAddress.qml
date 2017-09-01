@@ -55,7 +55,7 @@ NewAddressForm {
     }
 
     tfStreet.onActivated:{
-        tfStreet.selectedFromList = false
+        tfStreet.selectedFromList = true
         tfStreet.text = tfStreet.currentText
     }
 
@@ -67,7 +67,6 @@ NewAddressForm {
                 tintColor: "white"
                 onClicked: {
                     storage.getAuthData(function(authdata){
-                        console.log("!!!"+authdata)
                         Api.sendNewAddress(tfCity.text, tfStreet.text, tfHouse.text, tfApt.text, tfEntrance.text, tfFloor.text, authdata, function(result, token){
                             storage.saveToken(authdata.token)
                             newAddressView.navigationController.pop()
@@ -75,8 +74,6 @@ NewAddressForm {
                         }, function(error, authdata){
                         })
                     })
-
-
                 }
             }
         }

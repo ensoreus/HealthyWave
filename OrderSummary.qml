@@ -27,6 +27,7 @@ ViewController {
         txFreeWater.text = freeBottleLine()
         txBottlesFee.text = feeForBottlesLine()
         txPump.text = isPumpLine()
+        txTotalBottles.text =context.fullb + 1 + " бут."
         txSummaryOfOrder.text = totalLine()
     }
 
@@ -48,7 +49,7 @@ ViewController {
     }
 
     function freeBottleLine(){
-        return "1 бут.  x 0 грн."
+        return "1 бут. x 0 грн."
     }
 
     function calcEmptyBottlesFee(){
@@ -113,8 +114,8 @@ ViewController {
         HWCheckBox {
             id: cbFirst
             y: 52
-            height: 15 * ratio
-            text: "Перше замовлення онлайн - 2 бутля безкоштовно"
+            height: 13 * ratio
+            text: "Перше замовлення онлайн - \n 2 бутля безкоштовно"
             anchors.rightMargin: parent.width * 0.02
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.02
@@ -130,7 +131,7 @@ ViewController {
         HWCheckBox {
             id: cbPump
             x: 5
-            height: 15 * ratio
+            height: 13 * ratio
             text: "Механічна помпа - 100 грн."
             anchors.topMargin: parent.height * 0.02
             anchors.top: cbFirst.bottom
@@ -149,7 +150,7 @@ ViewController {
             anchors.bottomMargin: parent.height * 0.3
             anchors.bottom: parent.bottom
             anchors.rightMargin: parent.width * 0.01
-            anchors.topMargin: parent.height * 0.02
+            //anchors.topMargin: parent.height * 0.02
             anchors.top: hSum.bottom
             anchors.right: parent.right
             anchors.left: parent.left
@@ -238,8 +239,7 @@ ViewController {
                 color: "#4a4a4a"
                 text: qsTr("Сума замовлення:")
                 anchors.left: lbPump.left
-                anchors.leftMargin: 5 * ratio
-                anchors.topMargin: parent.height * 0.05
+                anchors.topMargin: parent.height * 0.01
                 anchors.top: lbPump.bottom
                 font.pointSize: 14
             }
@@ -340,7 +340,7 @@ ViewController {
             id: hPaymentType
             x: -7
             y: 9
-            anchors.topMargin: parent.height * 0.01
+            //anchors.topMargin: parent.height * 0.01
             anchors.top: borderImage.bottom
             anchors.leftMargin: 0
             anchors.right: parent.right
@@ -353,7 +353,7 @@ ViewController {
             text: "Готівковий розрахунок"
             anchors.right: borderImage.right
             anchors.rightMargin: 0
-            anchors.topMargin: parent.height * 0.01
+            //anchors.topMargin: parent.height * 0.01
             anchors.top: hPaymentType.bottom
             anchors.left: cbPump.left
             anchors.leftMargin: 0
@@ -363,7 +363,7 @@ ViewController {
             id: rbCardPayment
             text: "Платіжна картка"
             checked: false
-            anchors.topMargin: parent.height * 0.01
+            //anchors.topMargin: parent.height * 0.01
             anchors.top: rbCashPayment.bottom
             anchors.right: rbCashPayment.right
             anchors.rightMargin: 0

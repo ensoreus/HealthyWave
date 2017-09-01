@@ -42,6 +42,7 @@ ViewController {
                 console.log(error)
                 busyIndicator.running = false
                 orderAddressViewController.initializing = false
+                pAddresses.addNewOption()
             })
         })
     }
@@ -77,7 +78,7 @@ ViewController {
             anchors.leftMargin: 0
 
             function importData(data){
-                //                addressesModel.clear()
+                //                addressesModel.clear()  0662624467
                 dynamicElements = new Array(1)
                 for(var index in data.addresses){
                     var item = data.addresses[index]
@@ -145,6 +146,9 @@ ViewController {
                                                                     "fontPointSize": 13
                                                                 })
                 lastTopAnchor = rbAddress.bottom
+                if(typeof(dynamicElements) === 'undefined'){
+                    dynamicElements = new Array(1)
+                }
                 dynamicElements.push(rbAddress)
                 rbAddress.onCheckedChanged.connect(onCheckChanged)
                 return rbAddress
@@ -158,6 +162,7 @@ ViewController {
                 var rbAddNew = createRadioButton(onCheckedChanged)
                 rbAddNew.checked = false
                 rbAddNew.text = "Додати нову адресу"
+
             }
         }
 

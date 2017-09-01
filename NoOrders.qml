@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.1
 import QuickIOS 0.1
 import "qrc:/controls"
 import "qrc:/"
@@ -17,12 +18,26 @@ ViewController{
         id: storage
     }
 
-    onViewDidAppear: {
+    function showOrdersList(orders){
+        lstOrders.visible = true
+        noOrdersView.visible = false
+        ordersModel.importData(orders)
+    }
 
+    function hideOrdersList(){
+        lstOrders.visible = false
+        noOrdersView.visible = true
+    }
+
+    onViewDidAppear: {
+        busyIndicatior.running = true
         storage.getAuthData(function(authdata){
             Api.getOrders(authdata, function(response){
+                busyIndicatior.running = false
+                showOrdersList(response.result)
                 console.log(response)
             }, function(failure){
+                busyIndicatior.running = false
                 console.log(failure)
             })
         })
@@ -35,6 +50,7 @@ ViewController{
         Rectangle{
             id:noOrdersView
             anchors.fill: parent
+            visible: false
             Image {
                 id: image
                 x: 222
@@ -83,40 +99,49 @@ ViewController{
 
         ListView{
             id: lstOrders
+            anchors.fill: parent
 
             delegate: OrderCell{
+                height: 100
+                width: lstOrders.width
                 txPrice: cost
                 txAddress: address
                 txDay: deliveryDay
             }
 
             model:ListModel{
-                ListElement{
-                    deliveryDay: "Сьогодні"
-                    address:"вул. Сім’ї Хохлових, буд. 15, оф. 82"
-                    cost: "202"
+                id: ordersModel
+
+                function importData(data){
+                    ordersModel.clear()
+                    for(var index in data){
+                        var ritem = data[index]
+                        var date = dateFormat(ritem.OrderDate)
+                        var item = {
+                            "deliveryDay":date,
+                            "address" : ritem.Address,
+                            "cost": ritem.OrderPrice
+                        }
+                        ordersModel.append(item)
+                    }
                 }
-                ListElement{
-                    deliveryDay: "27.12.2017"
-                    address:"вул. Сім’ї Хохлових, буд. 15, оф. 82"
-                    cost: "302"
-                }
-                ListElement{
-                    deliveryDay: "26.12.2017"
-                    address:"вул. Сім’ї Хохлових, буд. 15, оф. 82"
-                    cost: "340"
-                }
-                ListElement{
-                    deliveryDay: "27.12.2017"
-                    address:"вул. Сім’ї Хохлових, буд. 15, оф. 82"
-                    cost: "10"
-                }
-                ListElement{
-                    deliveryDay: "24.12.2017"
-                    address:"вул. Сім’ї Хохлових, буд. 15, оф. 82"
-                    cost: "90"
+
+                function dateFormat(date){
+                    var yyyy = date.slice(0,4)
+                    var mm = date.slice(4, 6)
+                    var dd = date.slice(6, 8)
+                    var fdate = dd + "." + mm + "." + yyyy
+                    return fdate
                 }
             }
+        }
+
+        BusyIndicator{
+            id: busyIndicatior
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width * 0.3
+            height: width
         }
     }
 

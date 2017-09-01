@@ -14,6 +14,7 @@ AddressesForm {
     }
 
     onViewWillAppear:{
+        addressesModel.clear()
         fetchAddresses()
     }
 
@@ -73,7 +74,7 @@ AddressesForm {
             for(var index in data){
                 var item = data[index]
                 var modelItem = {city:item.city, street:item.street, house:item.house, apartment:item.apartment}
-                    addressesModel.append(modelItem)
+                addressesModel.append(modelItem)
             }
         }
     }

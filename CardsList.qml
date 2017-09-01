@@ -154,7 +154,7 @@ ViewController {
                     }
                 }
 
-               /* swipe.right:Label {
+                swipe.right: Label {
                     id: deleteLabel
                     text: qsTr("Видалити")
                     color: "white"
@@ -184,7 +184,7 @@ ViewController {
                         property: "ListView.delayRemove";
                         value: false
                     }
-                }*/
+                }
             }
 
         }

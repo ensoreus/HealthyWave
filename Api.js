@@ -32,7 +32,7 @@ function registerUser(phone, email, token, name, surname, pushToken, ostype, cal
             callback(object, url)
         }
     }
-    var url = baseUrl + "createcustomer?phone=" + phone + "'&email=" + email + "&key=" + token + "&token="+ pushToken + "&ostype="+ostype + "&name="+name+"&surname="+surname
+    var url = baseUrl + "createcustomer?phone=" + phone + "&email=" + email + "&key=" + token + "&token="+ pushToken + "&ostype="+ostype + "&name="+name+"&surname="+surname
     console.log(url)
     xhr.open("GET", url);
     xhr.send();
@@ -211,7 +211,7 @@ function getBonus(authdata, onSuccess, onFailure){
 
 function call(routine, params, authData, onSuccess, onFailure){
     var xhr = new XMLHttpRequest();
-    var url = baseUrl + routine + serializeParams(params)
+    var url = baseUrl + routine + serializeParams(removeUndefinedFields(params))
     var sendRequest = function(token){
         print(url + "key=" + token)
         xhr.open("GET", url + "key=" + token);
@@ -253,10 +253,18 @@ function call(routine, params, authData, onSuccess, onFailure){
     sendRequest(authData.token)
 }
 
+function removeUndefinedFields(params){
+    for(var key in params){
+        if(typeof(params[key]) === 'undefined'){
+            params[key] = ""
+        }
+    }
+    return params
+}
 
 
 function serializeParams(params){
-    if(params ==""){
+    if(params ===""){
         return "?"
     }
     var line = "?"
