@@ -96,6 +96,7 @@
         <file>FreeWaterHelpScreenForm.ui.qml</file>
         <file>btn-call.png</file>
         <file>RatePanel.qml</file>
+        <file>BonusPanelSummary.qml</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>Fonts/FontAwesome.otf</file>
