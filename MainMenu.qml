@@ -15,6 +15,28 @@ MainMenuForm {
     signal infoLink
     signal siteLink
 
+    function disableMenu(){
+        btnMyOrders.enabled = false
+        btnPayments.enabled = false
+        btnContacts.enabled = false
+        btnAddresses.enabled = false
+        btnProfile.enabled = false
+        btnBonuses.enabled = false
+        btnInfo.enabled = false
+        btnSite.enabled = false
+    }
+
+    function enableMenu(){
+        btnMyOrders.enabled = true
+        btnPayments.enabled = true
+        btnContacts.enabled = true
+        btnAddresses.enabled = true
+        btnProfile.enabled = true
+        btnBonuses.enabled = true
+        btnInfo.enabled = true
+        btnSite.enabled = true
+    }
+
     Storage{
         id:storage
     }

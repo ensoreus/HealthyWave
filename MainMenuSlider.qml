@@ -11,6 +11,10 @@ Rectangle {
     y:0
     width: 414
     height: 715
+    Component.onCompleted: {
+        mainMenu.disableMenu()
+    }
+
     MainMenu{
         id: mainMenu
         anchors.fill: parent
@@ -107,6 +111,9 @@ Rectangle {
                         target: shadowOverlay
                         visible: true
                     }
+                    StateChangeScript {
+                        script: { mainMenu.enableMenu()}
+                    }
                 },
                 State {
                     name: "slideIn"
@@ -117,6 +124,9 @@ Rectangle {
                     PropertyChanges {
                         target: shadowOverlay
                         visible: false
+                    }
+                    StateChangeScript {
+                        script: { mainMenu.disableMenu()}
                     }
                 }
             ]

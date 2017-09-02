@@ -22,13 +22,13 @@ static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJS
     return score;
 }
 
-static QObject * netcore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine){
-  Q_UNUSED(scriptEngine)
-  auto net = new NetworkCore();
-  qDebug()<<engine->offlineStoragePath();
-  engine->setObjectOwnership(net, QQmlEngine::CppOwnership);
-  return net;
-}
+//static QObject * netcore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine){
+//  Q_UNUSED(scriptEngine)
+//  auto net = new NetworkCore();
+//  qDebug()<<engine->offlineStoragePath();
+//  engine->setObjectOwnership(net, QQmlEngine::CppOwnership);
+//  return net;
+//}
 
 static QObject* clipboard_provider(QQmlEngine* engine, QJSEngine* scriptEngine){
   Q_UNUSED(scriptEngine)
