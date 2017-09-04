@@ -174,7 +174,7 @@ Item {
           })
     }
 
-    function addOrder(context, orderId){
+    function addUnratedOrder(context, orderId){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, time TEXT, rated INTEGER )')
@@ -183,7 +183,8 @@ Item {
         });
     }
 
-    function orderDelivered(orderId){
+
+    function orderRated(orderId){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, time TEXT, rated INTEGER )')
@@ -192,15 +193,15 @@ Item {
         });
     }
 
-    function getOrders(){
-        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
-        db.transaction(function(tx){
-            tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, address INTEGER, time TEXT, rated INTEGER)')
-            var sqlstr = "select city, street, house, floor, apt, entrance, entranceDoor, time, rated from where 1";
-            var result = tx.executeSql(sqlstr);
-            callback(result.rows)
-        });
-    }
+//    function getOrders(){
+//        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+//        db.transaction(function(tx){
+//            tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, address INTEGER, time TEXT, rated INTEGER)')
+//            var sqlstr = "select city, street, house, floor, apt, entrance, entranceDoor, time, rated from where 1";
+//            var result = tx.executeSql(sqlstr);
+//            callback(result.rows)
+//        });
+//    }
 
     function markRatedOrder(orderid){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);

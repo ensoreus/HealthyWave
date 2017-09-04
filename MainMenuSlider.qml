@@ -1,18 +1,44 @@
-import QtQuick 2.0
+import QtQuick 2.7
 
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 import QuickIOS 0.1
 
 import "qrc:/controls"
+import "qrc:/feedback"
 
 Rectangle {
+    id:mainSlider
     x:0
     y:0
     width: 414
     height: 715
     Component.onCompleted: {
         mainMenu.disableMenu()
+        state = "hideAlert"
+        alertTimer.start()
+    }
+
+    function orderDelivered(orde){
+        var order = {
+            "address":{
+                "city":"Киев",
+                "street":"Багговутівська",
+                "house":"13",
+                "apartment":"2"
+            }
+        }
+        feedbackAlertPrompt.order = order
+        state = "showAlert"
+    }
+
+    Timer{
+        id: alertTimer
+        repeat: false
+        interval: 2000
+        onTriggered: {
+            orderDelivered({})
+        }
     }
 
     MainMenu{
@@ -29,7 +55,7 @@ Rectangle {
             {"file":"qrc:/cards/CardsList.qml", "title":"Оплата", "present":false},
             {"file":"qrc:/profile/Profile.qml", "title":"Профіль", "present":false},
             {"file":"qrc:/contacts/Contacts.qml", "title":"Контакти", "present":false},
-            {"file":"qrc:/bonuses/BonusList.qml", "title":"Бонуси", "present":false}
+            {"file":"qrc:/feedback/AddFeedback.qml", "title":"Бонуси", "present":false}
         ]
 
         onMyOrdersItem: {
@@ -107,6 +133,7 @@ Rectangle {
                         target: mainScreenContainer
                         x: mainMenu.width * 0.88
                     }
+
                     PropertyChanges {
                         target: shadowOverlay
                         visible: true
@@ -133,28 +160,112 @@ Rectangle {
 
             transitions:[
                 Transition {
-                from: "slideOut"
-                to: "slideIn"
+                    from: "slideOut"
+                    to: "slideIn"
 
-                NumberAnimation {
-                    target: mainScreenContainer
-                    property: "x"
-                    duration: 300
-                    easing.type: Easing.InOutQuad
-                }
-            },
-            Transition {
-                from: "slideIn"
-                to: "slideOut"
+                    NumberAnimation {
+                        target: mainScreenContainer
+                        property: "x"
+                        duration: 300
+                        easing.type: Easing.InOutQuad
+                    }
+                },
+                Transition {
+                    from: "slideIn"
+                    to: "slideOut"
 
-                NumberAnimation {
-                    target: mainScreenContainer
-                    property: "x"
-                    duration: 300
-                    easing.type: Easing.InOutQuad
+                    NumberAnimation {
+                        target: mainScreenContainer
+                        property: "x"
+                        duration: 300
+                        easing.type: Easing.InOutQuad
+                    }
                 }
-            }
             ]
         }
+
+
     }
+    Rectangle{
+        anchors.fill: parent
+        id: overlay
+        opacity: 0.5
+        color: "#4a4a4a"
+    }
+
+    FeedbackPrompt{
+        id:feedbackAlertPrompt
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: parent.width * 0.7
+        height: width
+        onClose: {
+            mainSlider.state = "hideAlert"
+        }
+    }
+    states:[
+        State{
+            name: "showAlert"
+            PropertyChanges {
+                target: overlay
+                visible: true
+            }
+            PropertyChanges {
+                target: feedbackAlertPrompt
+                visible:true
+            }
+        },
+        State{
+            name: "hideAlert"
+            PropertyChanges {
+                target: overlay
+                visible: false
+            }
+            PropertyChanges {
+                target: feedbackAlertPrompt
+                visible:false
+            }
+        }
+    ]
+    transitions: [
+        Transition {
+            from: "hideAlert"
+            to: "showAlert"
+            ParallelAnimation{
+                OpacityAnimator{
+                    target: overlay
+                    from: 0.0
+                    to : 0.5
+                    duration: 200
+                }
+                ScaleAnimator{
+                    target: feedbackAlertPrompt
+                    from: 1.5
+                    to: 1.0
+                    duration: 200
+                    easing.type: Easing.OutElastic
+                    easing.amplitude: 2.0
+                    easing.period: 2.0
+                }
+            }
+        },
+        Transition {
+            from: "showAlert"
+            to: "hideAlert"
+            ParallelAnimation{
+                OpacityAnimator{
+                    target: overlay
+                    from: 0.5
+                    to: 0.0
+                    duration: 300
+                }
+                OpacityAnimator{
+                    target: feedbackAlertPrompt
+                    from: 1
+                    to: 0
+                    duration: 300
+                }
+            }
+        }
+    ]
 }

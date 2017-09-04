@@ -18,6 +18,7 @@ ViewController {
     }
 
     onViewDidAppear: {
+        rate = 3
         console.log(rate)
         storage.getAuthData(function(authdata){
             Api.getFeedbackCodes(ratePanel.rate,authdata, function(response){
@@ -103,10 +104,9 @@ ViewController {
 
         HWStarsRate {
             id: ratePanel
-            x: 144
             backgroundColor: "white"
-            width: parent.width * 0.7
-            height: parent.height * 0.06
+            width: 300 * ratio
+            height: 40 * ratio
             anchors.topMargin: parent.height * 0.05
             anchors.top: lbRate.bottom
             anchors.horizontalCenter: parent.horizontalCenter
@@ -383,7 +383,7 @@ ViewController {
             width: parent.width * 0.7
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: parent.height * 0.02
-            anchors.top:  txComment.bottom
+            anchors.top:  lbOther.bottom
             labelText: "Завершити"
             onButtonClick: {
                 storage.getAuthData(function(authdata){

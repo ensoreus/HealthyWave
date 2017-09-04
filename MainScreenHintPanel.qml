@@ -39,7 +39,7 @@ Rectangle {
             width: 398 * ratio
             height: 45 * ratio
             color: "#8c8c8c"
-            text: qsTr("Відправте своєму другу цей промо-код  і коли він зробить перше замовлення")
+            text: qsTr("Відправте своєму другу цей промо-код і коли він зробить перше замовлення")
             wrapMode: Text.WordWrap
             font.pointSize: 13
         }

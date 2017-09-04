@@ -4,9 +4,14 @@ import QtQuick 2.0
 Item {
     id: ratePanel
     signal rated(var rate)
+
     property int rate: 0
     property alias backgroundColor: content.color
     height: 100
+    function rearrangeStars(){
+        content.rearrangeStars()
+    }
+
     onRateChanged: {
         switch(rate){
         case 1:
@@ -27,11 +32,22 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        rearrangeStars()
+    }
+
     Rectangle {
         id: content
         height: 100
         color: "#00ad9a"
         anchors.fill: parent
+        function rearrangeStars(){
+            star1.x = content.positionForStar(0, content)
+            star2.x = content.positionForStar(1, content)
+            star3.x = content.positionForStar(2, content)
+            star4.x = content.positionForStar(3, content)
+            star5.x = content.positionForStar(4, content)
+        }
 
         Star {
             id: star1
@@ -44,9 +60,6 @@ Item {
                 content.resetRate()
                 star1.state = "StarOn";
                 ratePanel.rated(1)
-            }
-            Component.onCompleted: {
-                x = content.positionForStar(0, parent)
             }
         }
 
@@ -62,9 +75,7 @@ Item {
                 star2.state = "StarOn"
                 ratePanel.rated(2)
             }
-            Component.onCompleted: {
-                x = content.positionForStar(1, parent)
-            }
+
 
         }
 
@@ -82,9 +93,7 @@ Item {
                 star3.state = "StarOn"
                 ratePanel.rated(3)
             }
-            Component.onCompleted: {
-                x = content.positionForStar(2, parent)
-            }
+
         }
 
         Star {
@@ -102,9 +111,7 @@ Item {
                 star4.state = "StarOn"
                 ratePanel.rated(4)
             }
-            Component.onCompleted: {
-                x = content.positionForStar(3, parent)
-            }
+
         }
 
         Star {
@@ -124,9 +131,7 @@ Item {
                 star5.state = "StarOn"
                 ratePanel.rated(5)
             }
-            Component.onCompleted: {
-                x = parent.positionForStar(4, parent)
-            }
+
         }
 
         function resetRate(){
