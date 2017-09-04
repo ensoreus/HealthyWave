@@ -289,14 +289,21 @@ ViewController {
                 anchors.rightMargin: parent.width * 0.03
                 anchors.right: parent.right
                 source: "qrc:/commons/img-messaging.png"
-                MouseArea{
-                    anchors.fill: imgViber
-                    onPressedChanged: {
-                        imgViber.opacity = pressed ? 0.5 : 1
-                    }
-                    onClicked: {
-                        Qt.openUrlExternally("viber://chat?number=+380987654321") ;
-                    }
+            }
+            MouseArea{
+                anchors.top: imgViber.top
+                anchors.topMargin: -5 * ratio
+                anchors.bottom: imgViber.bottom
+                anchors.bottomMargin: -5 * ratio
+                anchors.left: imgViber.left
+                anchors.leftMargin: -5 * ratio
+                anchors.right: imgViber.right
+                anchors.rightMargin: -5 * ratio
+                onPressedChanged: {
+                    imgViber.opacity = pressed ? 0.5 : 1
+                }
+                onClicked: {
+                    Qt.openUrlExternally("viber:chat?number=+380987654321") ;
                 }
             }
         }
@@ -348,14 +355,22 @@ ViewController {
                 anchors.rightMargin: parent.width * 0.03
                 anchors.right: parent.right
                 source: "qrc:/commons/img-messaging.png"
-                MouseArea{
-                    anchors.fill: imgEmail
-                    onPressedChanged: {
-                        imgEmail.opacity = pressed ? 0.5 : 1
-                    }
-                    onClicked: {
-                        Qt.openUrlExternally("mail://help@hv_zd.ua") ;
-                    }
+
+            }
+            MouseArea{
+                anchors.top: imgEmail.top
+                anchors.topMargin: -5 * ratio
+                anchors.bottom: imgEmail.bottom
+                anchors.bottomMargin: -5 * ratio
+                anchors.left: imgEmail.left
+                anchors.leftMargin: -5 * ratio
+                anchors.right: imgEmail.right
+                anchors.rightMargin: -5 * ratio
+                onPressedChanged: {
+                    imgEmail.opacity = pressed ? 0.5 : 1
+                }
+                onClicked: {
+                    Qt.openUrlExternally("mailto:help@hv_zd.ua") ;
                 }
             }
         }
@@ -407,14 +422,23 @@ ViewController {
                 anchors.rightMargin: parent.width * 0.03
                 anchors.right: parent.right
                 source: "qrc:/commons/img-messaging.png"
-                MouseArea{
-                    anchors.fill: imgTelegram
-                    onPressedChanged: {
-                        imgTelegram.opacity = pressed ? 0.5 : 1
-                    }
-                    onClicked: {
-                        Qt.openUrlExternally("tg://resolve?number=+380676181101") ;
-                    }
+
+            }
+            MouseArea{
+                anchors.top: imgTelegram.top
+                anchors.topMargin: -5 * ratio
+                anchors.bottom: imgTelegram.bottom
+                anchors.bottomMargin: -5 * ratio
+                anchors.left: imgTelegram.left
+                anchors.leftMargin: -5 * ratio
+                anchors.right: imgTelegram.right
+                anchors.rightMargin: -5 * ratio
+
+                onPressedChanged: {
+                    imgTelegram.opacity = pressed ? 0.5 : 1
+                }
+                onClicked: {
+                    Qt.openUrlExternally("tg:resolve?number=+380676181101") ;
                 }
             }
         }

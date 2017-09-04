@@ -17,7 +17,6 @@ Rectangle {
     Component.onCompleted: {
         mainMenu.disableMenu()
         state = "hideAlert"
-        alertTimer.start()
     }
 
     function orderDelivered(order){
