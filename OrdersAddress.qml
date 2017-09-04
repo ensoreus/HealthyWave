@@ -162,7 +162,6 @@ ViewController {
                 var rbAddNew = createRadioButton(onCheckedChanged)
                 rbAddNew.checked = false
                 rbAddNew.text = "Додати нову адресу"
-
             }
         }
 

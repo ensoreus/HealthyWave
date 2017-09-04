@@ -82,6 +82,9 @@ ViewController {
                         txtComment.forceActiveFocus()
                     }
                 }
+            onTextChanged: {
+                context.comment = text
+            }
         }
 
         function getTime(){
