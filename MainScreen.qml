@@ -26,7 +26,7 @@ ViewController {
 
     Timer{
         id: checkUnratedOrders
-        interval: 100//(60000 * 5)
+        interval: (60000 * 5)
         repeat: true
         onTriggered: {
             storage.getUnratedOrders(function(sorder){

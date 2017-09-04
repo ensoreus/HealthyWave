@@ -9,7 +9,6 @@ Flickable {
     Rectangle{
         id: content
         color: "white"
-
     }
 
     function addBonus(bonus, onCheck, onUncheck){

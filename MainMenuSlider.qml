@@ -58,7 +58,7 @@ Rectangle {
             {"file":"qrc:/cards/CardsList.qml", "title":"Оплата", "present":false},
             {"file":"qrc:/profile/Profile.qml", "title":"Профіль", "present":false},
             {"file":"qrc:/contacts/Contacts.qml", "title":"Контакти", "present":false},
-            {"file":"qrc:/feedback/AddFeedback.qml", "title":"Бонуси", "present":false}
+            {"file":"qrc:/bonus/BonusList.qml", "title":"Бонуси", "present":false}
         ]
 
         onMyOrdersItem: {
