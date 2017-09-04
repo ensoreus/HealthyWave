@@ -13,21 +13,14 @@ Rectangle {
     y:0
     width: 414
     height: 715
+
     Component.onCompleted: {
         mainMenu.disableMenu()
         state = "hideAlert"
         alertTimer.start()
     }
 
-    function orderDelivered(orde){
-        var order = {
-            "address":{
-                "city":"Киев",
-                "street":"Багговутівська",
-                "house":"13",
-                "apartment":"2"
-            }
-        }
+    function orderDelivered(order){
         feedbackAlertPrompt.order = order
         state = "showAlert"
     }
@@ -37,7 +30,18 @@ Rectangle {
         repeat: false
         interval: 2000
         onTriggered: {
-            orderDelivered({})
+            orderDelivered({
+                               "address":{
+                                   "city":"Киев",
+                                   "street":"Багговутівська",
+                                   "house":"13",
+                                   "apartment":"2"
+                               },
+                               "courierName":"Фомальгаут Антон",
+                               "deliveryDate":"15/09/2017",
+                               "deliveryTime":"14:03",
+                               "orderId":"234"
+                           })
         }
     }
 
@@ -201,8 +205,14 @@ Rectangle {
         height: width
         onClose: {
             mainSlider.state = "hideAlert"
+            storage.addUnratedOrder(order)
+        }
+        onMakeFeedback: {
+            mainSlider.state = "hideAlert"
+            mainScreenContainer.push("qrc:/feedback/AddFeedback.qml", {"order":order, "rate":rate})
         }
     }
+
     states:[
         State{
             name: "showAlert"

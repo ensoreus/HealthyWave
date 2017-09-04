@@ -41,7 +41,7 @@ import "qrc:/controls"
             id: txAddress
             height: parent.height * 0.08
             color: "#d4d4d4"
-            text: ""//"м."+order.address.city+" вул."+order.address.street+" "+order.address.house+" оф." + order.address.apartment
+            text:"м."+order.address.city+" вул."+order.address.street+" "+order.address.house+" оф." + order.address.apartment
             anchors.topMargin: parent.height * 0.03
             anchors.top: lbDeliveryArrived.bottom
             anchors.right: lbDeliveryArrived.right
@@ -91,7 +91,7 @@ import "qrc:/controls"
             anchors.topMargin: 10 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {
-                close()
+                close(order)
             }
         }
     }

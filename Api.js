@@ -195,7 +195,7 @@ function sendFeedback(rate, comment, orderid, code1, code2, code3, code4, authda
     call("makefeedback", {
             "rating":rate,
              "comment":comment,
-             "phone":phone,
+             "phone":authdata.phone,
              "ordernumber":orderid,
              "criterioncode1":code1,
              "criterioncode2":code2,

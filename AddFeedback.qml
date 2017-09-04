@@ -9,7 +9,7 @@ ViewController {
     property var navigationItem: NavigationItem{
         centerBarTitle: "Оцінка замовлення"
     }
-    property var orderId
+    property var order
     property var commentCodes
     property alias rate: ratePanel.rate
 
@@ -17,9 +17,15 @@ ViewController {
         id:storage
     }
 
+    onViewWillAppear: {
+        txRate.text = ratingByWord(rate)
+        txAddress.text = "м."+order.address.city+" вул."+order.address.street+" "+order.address.house+" оф." + order.address.apartment
+        txDate.text = order.deliveryDate
+        txCourierName.text = order.courierName
+    }
+
     onViewDidAppear: {
-        rate = 3
-        console.log(rate)
+
         storage.getAuthData(function(authdata){
             Api.getFeedbackCodes(ratePanel.rate,authdata, function(response){
                 console.log(response.result)
@@ -30,6 +36,21 @@ ViewController {
             })
         })
 
+    }
+
+    function ratingByWord(rate){
+        switch(rate){
+        case 1:
+            return "ДУЖЕ ПОГАНО"
+        case 2:
+            return "ПОГАНО"
+        case 3:
+            return "ЗАДОВІЛЬНО"
+        case 4:
+            return "ДОБРЕ"
+        case 5:
+            return "БЕЗДОГАННО"
+        }
     }
 
     function setupCodes(items){
@@ -111,40 +132,43 @@ ViewController {
             anchors.top: lbRate.bottom
             anchors.horizontalCenter: parent.horizontalCenter
         }
-
-        Text {
-            id: lbCourierName
-            x: 243
-            height: 20 * ratio
-            text: qsTr("Ваш доставник:")
+        Rectangle{
+            id:courierPart
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width * 0.7
             anchors.topMargin: parent.height * 0.04
             anchors.top: ratePanel.bottom
-            anchors.right: parent.horizontalCenter
-            anchors.rightMargin: 0
-            font.weight: Font.Thin
-            font.pointSize: 13
-        }
+            Text {
+                id: lbCourierName
+                x: 243
+                height: 20 * ratio
+                text: qsTr("Ваш доставник:")
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                font.weight: Font.Thin
+                font.pointSize: 13
+            }
 
-        Text {
-            id: txCourierName
-            width: 55
-            height: 20 * ratio
-            text: qsTr("Text")
-            anchors.leftMargin: 5
-            font.pointSize: 15
-            font.weight: Font.DemiBold
-            anchors.left: lbCourierName.right
-            anchors.top: lbCourierName.top
-            anchors.topMargin: 0
+            Text {
+                id: txCourierName
+                width: 55
+                height: 20 * ratio
+                text: qsTr("Text")
+                anchors.leftMargin: 5
+                font.pointSize: 15
+                font.weight: Font.DemiBold
+                anchors.left: lbCourierName.right
+                anchors.top: lbCourierName.top
+                anchors.topMargin: 0
+            }
         }
-
         Rectangle {
             id: rDetailsArea
             width: parent.width * 0.7
             height: 71
             color: "#ffffff"
             anchors.topMargin: parent.height * 0.04
-            anchors.top: lbCourierName.bottom
+            anchors.top: courierPart.bottom
             anchors.horizontalCenter: parent.horizontalCenter
 
             Text {
@@ -392,7 +416,7 @@ ViewController {
                     var code3 = cbLate.checked   ? commentCodes[2].Code : ""
                     var code4 = cbOther.checked  ? commentCodes[3].Code : ""
 
-                    Api.sendFeedback(ratePanel.rate, taComment.text, orderId, code1, code2, code3, code4, authdata, function(response){
+                    Api.sendFeedback(ratePanel.rate, "", order.orderId, code1, code2, code3, code4, authdata, function(response){
                         storage.markRatedOrder(orderId)
                     }, function(response){
                         console.log(response.error)

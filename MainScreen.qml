@@ -12,7 +12,7 @@ ViewController {
     //property alias imgCall: imgCall
     //property alias mainScreenHintPanel: mainScreenHintPanel
     property alias btnOrder: btnOrder
-    property var orderid
+    property var order
 
     signal menuClick
 
@@ -20,13 +20,38 @@ ViewController {
         id:storage
     }
 
-    onViewDidAppear:{
-        storage.getUnratedOrders(function(order){
-            var combineAaddress = "м. " + order.city + " вул." + order.street + " "+ order.house+" оф."+order.apartment
-            var combinedOrderTime =  order.time
-            var dividePos = combinedOrderTime.search(":")
-            var orderday = combinedOrderTime.slice(0, dividePos);
-        })
+    Component.onCompleted: {
+        checkUnratedOrders.start()
+    }
+
+    Timer{
+        id: checkUnratedOrders
+        interval: 100//(60000 * 5)
+        repeat: true
+        onTriggered: {
+            storage.getUnratedOrders(function(sorder){
+                if(typeof(sorder) != "undefined"){
+                    var combineAaddress = "м. " + sorder.city + " вул." + sorder.street + " "+ sorder.house+" оф."+sorder.apartment
+                    var combinedOrderTime = sorder.time
+                    var dividePos = combinedOrderTime.search(":")
+                    var orderday = combinedOrderTime.slice(0, dividePos);
+                    bottomRatePanel.visible = true
+                    order = {
+                        "orderId":sorder.orderId,
+                        "address":{
+                            "city":sorder.city,
+                            "street":sorder.street,
+                            "house":sorder.house,
+                            "apartment":sorder.apt
+                        },
+                        "deliveryDate":orderday,
+                        "courierName":sorder.courier
+                    }
+                }else{
+                    bottomRatePanel.visible = false
+                }
+            })
+        }
     }
 
     navigationItem: NavigationItem {
@@ -95,14 +120,26 @@ ViewController {
     }
 
     RatePanel{
+        id:bottomRatePanel
         visible: false
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: parent.height * 0.2
         onRateClick: {
-            navigationController.push("qrc:/feedback/AddFeedback.qml", {"rate":rate})
+            navigationController.push("qrc:/feedback/AddFeedback.qml", {"rate":rate, "order":order})
+        }
+
+        Behavior on visible {
+            PropertyAnimation{
+                target: bottomRatePanel
+                property: "y"
+                duration: 300
+                from: (visible) ? height : 0
+                to: (visible) ? 0 : height
+            }
         }
     }
+
 }
 
