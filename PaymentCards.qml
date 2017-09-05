@@ -23,7 +23,7 @@ ViewController {
 
     Component.onCompleted: {
         radioBtnComponent = Qt.createComponent("qrc:/controls/HWRadioButton.qml")
-        imageComponent = Qt.createQmlComponent("import QtQuick 2.0   Image{ }")
+        imageComponent = Qt.createQmlComponent("import QtQuick 2.0 Image{ }")
     }
 
     function showPaymentCardsList(cards){

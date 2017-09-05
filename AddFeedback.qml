@@ -417,7 +417,7 @@ ViewController {
                     var code4 = cbOther.checked  ? commentCodes[3].Code : ""
 
                     Api.sendFeedback(ratePanel.rate, "", order.orderId, code1, code2, code3, code4, authdata, function(response){
-                        storage.markRatedOrder(orderId)
+                        storage.orderRated(order.orderId)
                     }, function(response){
                         console.log(response.error)
                     })
