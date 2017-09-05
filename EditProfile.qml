@@ -91,7 +91,11 @@ ViewController {
             onNextPage: {
                 startProcessIndicator()
                 storage.getAuthData(function(authdata){
+                    Api.updateName(nameEditPage.nameField.text, authdata, function(result){
+                        //storage.saveInitialUserData(authdata.phone, nameEditPage.nameField.text, emailEditPage.emailField.text, )
+                    }, function(failure){
 
+                    })
                 })
             }
             Behavior on x {
@@ -102,23 +106,32 @@ ViewController {
             }
         }
 
+        RegistrationPagePhone{
+                        id:phoneEditPage
+                        anchors.fill: parent
+                        onStartEditData: {
+                            phoneEditPage.presenterAnimationEnds()
+                        }
+                        onNextPage: {
+                            stackLayout.push(pinEditPage)
+                            var result = Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
+                            console.log(result)
+                        }
+
+                    }
+
+        RegistrationPageAvatar{
+            id: avatarEditPage
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            x:0
+            width: parent.width
+        }
+
         StackView{
             id: stackLayout
             anchors.fill:parent
-
-            initialItem: RegistrationPagePhone{
-                id:phoneEditPage
-                anchors.fill: parent
-                onStartEditData: {
-                    phoneEditPage.presenterAnimationEnds()
-                }
-                onNextPage: {
-                    stackLayout.push(pinEditPage)
-                    var result = Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
-                    console.log(result)
-                }
-
-            }
+            initialItem: avatarEditPage
 
         }
     }

@@ -30,6 +30,7 @@
         <file>RegistrationPromoCode.qml</file>
         <file>RegistrationCongratsWithFreeWater.qml</file>
         <file>RegistrationCongratsWithFreeWaterForm.ui.qml</file>
+        <file>RegistrationPageAvatar.qml</file>
     </qresource>
     <qresource prefix="/controls">
         <file>HWPhoneField.qml</file>

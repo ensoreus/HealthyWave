@@ -76,6 +76,10 @@ function confirmPinCode(pin, phone, callback){
     return xhr.status
 }
 
+function updateName(name, authdata, onSuccess, onFailure){
+    call("updatename", {"phone": authdata.phone}, authdata, onSuccess, onFailure)
+}
+
 function getCards(authdata, onSuccess, onFailure){
     call("getcards", {"phone":authdata.phone}, authdata, onSuccess, onFailure)
 }

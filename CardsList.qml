@@ -10,6 +10,16 @@ ViewController {
     property alias btnAddNew: btnAddNew
     property var navigationItem: NavigationItem{
         centerBarTitle:"Оплата"
+        rightBarButtonItems: VisualItemModel{
+            BarButtonItem{
+                image:"qrc:/commons/btn-plus.png"
+                imageSourceSize.width:35
+                imageSourceSize.height:35
+                onClicked:{
+                    navigationController.push("qrc:/cards/AddNewCard.qml")
+                }
+            }
+        }
     }
 
     function showAddressList(){
@@ -32,8 +42,12 @@ ViewController {
         hideAddressList()
         storage.getAuthData(function(authdata){
             Api.getCards(authdata, function(response){
-                showAddressList()
-                cardsModel.importData(response.result)
+                if(response.result.length > 0){
+                    showAddressList()
+                    cardsModel.importData(response.result)
+                }else{
+                    hideAddressList()
+                }
             }, function(failure){
                 hideAddressList()
             })

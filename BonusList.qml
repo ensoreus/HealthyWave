@@ -4,7 +4,7 @@ import com.ensoreus.Clipboard 1.0
 
 import "qrc:/"
 import "qrc:/controls"
-
+import "qrc:/Api.js" as Api
 ViewController {
     property var navigationItem: NavigationItem{
         centerBarTitle: "Безкоштовна вода"
@@ -12,6 +12,20 @@ ViewController {
 
     Clipboard{
         id: clipboard
+    }
+
+    Storage{
+        id:storage
+    }
+
+    Component.onCompleted: {
+        storage.getAuthData(function(authdata){
+            Api.getBonus(authdata, function(response){
+                console.log(response)
+            }, function(failure){
+                console.log(failure)
+            })
+        })
     }
 
     onViewWillAppear: {

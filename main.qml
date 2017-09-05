@@ -22,8 +22,6 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-//        registration.visible = true
-//        greeting.visible = true
         if(!storage.isRegistered()){
             registration.visible = true
             greeting.visible = true

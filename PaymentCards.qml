@@ -34,11 +34,15 @@ ViewController {
 
     function fetchCards(){
         busyIndicator.running = true
+        pCards.clear()
         storage.getAuthData(function(authData){
             Api.getCards(authData, function(result){
                 if(result.result.length > 0 ){
                     showPaymentCardsList(result.result)
+                }else{
+                    pCards.addNewOption()
                 }
+
                 busyIndicator.running = false
             },function(error, newToken){
                 busyIndicator.running = false
@@ -97,9 +101,8 @@ ViewController {
 
             function append(item){
                 var checkChanged = function(){
-                    if (!orderCardViewController.initializing){
-                        context.cardToPay = (checked) ? token : ""
-                    }
+                    btnNext.enabled = true
+                    context.cardToPay = (checked) ? token : ""
                 }
                 var rbCard = createRadioButton(checkChanged)
                 var iCardImage = createImage(rbCard, item.cardService)
@@ -116,7 +119,6 @@ ViewController {
                     "anchors.topMargin":10 * ratio,
                     "height":25 * ratio,
                     "fontPointSize": 17
-
                 })
                 lastTopAnchor = rbCard.bottom
                 dynamicElements.push(rbCard)
@@ -135,14 +137,19 @@ ViewController {
             }
 
             function addNewOption(){
+                if(typeof(dynamicElements) == 'undefined'){
+                    dynamicElements = new Array(1)
+                }
+
                 var onCheckedChanged = function(){
                     isAddNew = rbAddNew.checked
-                    console.log("add new checked")
+                    btnNext.enabled = true
                 }
                 var rbAddNew = createRadioButton(onCheckedChanged)
                 rbAddNew.checked = false
                 rbAddNew.fontPointSize = 15
                 rbAddNew.text = "Додати нову картку"
+                dynamicElements.push(rbAddNew)
             }
         }
         
@@ -157,6 +164,7 @@ ViewController {
 
         HWRoundButton{
             id: btnNext
+            enabled: false
             x: 75
             width: parent.width * 0.7
             height: parent.height * 0.1
@@ -165,6 +173,7 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             labelText: "ДАЛІ"
             onButtonClick: {
+
                 if(isAddNew){
                     navigationController.push("qrc:/cards/AddNewCard.qml")
                 }else{
