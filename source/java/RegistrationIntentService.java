@@ -8,21 +8,38 @@ import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.google.android.gms.gcm.GcmPubSub;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.iid.InstanceID;
+//import com.google.android.gms.gcm.GcmPubSub;
+//import com.google.android.gms.gcm.GoogleCloudMessaging;
+//import com.google.android.gms.iid.InstanceID;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import java.io.IOException;
 
-public class RegistrationIntentService extends IntentService {
+public class RegistrationIntentService extends FirebaseInstanceIdService {
 
-    private static final String TAG = "RegIntentService";
+    private static final String TAG = "MyFirebaseIIDService"
     private static final String[] TOPICS = {"global"};
     public RegistrationIntentService() {
         super(TAG);
     }
 
     @Override
+    public void onTokenRefresh() {
+        // Get updated InstanceID token.
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Refreshed token: " + refreshedToken);
+
+        // If you want to send messages to this application instance or
+        // manage this apps subscriptions on the server side, send the
+        // Instance ID token to your app server.
+        // sendRegistrationToServer(refreshedToken);
+        sharedPreferences.edit().putString(QuickstartPreferences.GCM_TOKEN, refreshedToken).apply();
+         Intent gotToken = new Intent(QuickstartPreferences.GCM_TOKEN);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(gotToken);
+    }
+    
+    //@Override
     protected void onHandleIntent(Intent intent) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -65,10 +82,10 @@ public class RegistrationIntentService extends IntentService {
      * @param token GCM token
      * @throws IOException if unable to reach the GCM PubSub service
      */
-    private void subscribeTopics(String token) throws IOException {
+    /*private void subscribeTopics(String token) throws IOException {
         GcmPubSub pubSub = GcmPubSub.getInstance(this);
         for (String topic : TOPICS) {
             pubSub.subscribe(token, "/topics/" + topic, null);
         }
-    }
+        }*/
 }

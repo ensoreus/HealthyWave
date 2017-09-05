@@ -12,11 +12,17 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.google.android.gms.gcm.GcmListenerService;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 
-public class MyGcmListenerService extends GcmListenerService
+//import com.google.android.gms.gcm.GcmListenerService;
+//import com.google.firebase;
+
+public class MyGcmListenerService extends FirebaseMessagingService
 {
-    private static final String TAG = "MyGcmListenerService";
+    private static final String TAG = "MyFirebaseListenerService";
 
     /**
      * Called when message is received.
@@ -26,11 +32,11 @@ public class MyGcmListenerService extends GcmListenerService
      *             For Set of keys use data.keySet().
      */
     @Override
-    public void onMessageReceived(String from, Bundle data)
+    public void onMessageReceived(RemoteMessage message)//String from, Bundle data)
     {
-        String message = data.getString("message");
-        Log.d(TAG, "From: " + from);
-        Log.d(TAG, "Message: " + message);
+        //String message = data.getString("message");
+        Log.d(TAG, "From: " + message.getFrom());
+        Log.d(TAG, "Message: " + message.getNotification().getBody();
 
         //adapt that if you want to react to topics
         //individually.
@@ -50,7 +56,7 @@ public class MyGcmListenerService extends GcmListenerService
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message);
+              sendNotification(message.getNotification().getBody());
     }
 
     /**
