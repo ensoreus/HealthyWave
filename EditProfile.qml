@@ -131,7 +131,7 @@ ViewController {
         StackView{
             id: stackLayout
             anchors.fill:parent
-            initialItem: avatarEditPage
+            initialItem: phoneEditPage
 
         }
     }
