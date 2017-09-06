@@ -10,7 +10,7 @@ import android.util.Log;
 
 //import com.google.android.gms.gcm.GcmPubSub;
 //import com.google.android.gms.gcm.GoogleCloudMessaging;
-//import com.google.android.gms.iid.InstanceID;
+import com.google.android.gms.iid.InstanceID;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -18,15 +18,14 @@ import java.io.IOException;
 
 public class RegistrationIntentService extends FirebaseInstanceIdService {
 
-    private static final String TAG = "MyFirebaseIIDService"
+    private static final String TAG = "MyFirebaseIIDService";
     private static final String[] TOPICS = {"global"};
-    public RegistrationIntentService() {
-        super(TAG);
-    }
+
 
     @Override
     public void onTokenRefresh() {
         // Get updated InstanceID token.
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
 
@@ -40,7 +39,7 @@ public class RegistrationIntentService extends FirebaseInstanceIdService {
     }
     
     //@Override
-    protected void onHandleIntent(Intent intent) {
+    /*protected void onHandleIntent(Intent intent) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         try {
@@ -73,7 +72,7 @@ public class RegistrationIntentService extends FirebaseInstanceIdService {
         // Notify UI that registration token has been received
         Intent gotToken = new Intent(QuickstartPreferences.GCM_TOKEN);
         LocalBroadcastManager.getInstance(this).sendBroadcast(gotToken);
-    }
+        }*/
 
 
     /**

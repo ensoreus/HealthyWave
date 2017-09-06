@@ -36,15 +36,11 @@ public class MyGcmListenerService extends FirebaseMessagingService
     {
         //String message = data.getString("message");
         Log.d(TAG, "From: " + message.getFrom());
-        Log.d(TAG, "Message: " + message.getNotification().getBody();
+        Log.d(TAG, "Message: " + message.getNotification().getBody());
 
         //adapt that if you want to react to topics
         //individually.
-        if (from.startsWith("/topics/")) {
-            // message received from some topic.
-        } else {
-            // normal downstream message.
-        }
+        
         /**
          * Production applications would usually process the message here.
          * Eg: - Syncing with server.
