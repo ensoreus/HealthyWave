@@ -33,6 +33,7 @@ public class RegistrationIntentService extends FirebaseInstanceIdService {
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
         // sendRegistrationToServer(refreshedToken);
+        //sendGCMToken(refreshedToken);
         sharedPreferences.edit().putString(QuickstartPreferences.GCM_TOKEN, refreshedToken).apply();
          Intent gotToken = new Intent(QuickstartPreferences.GCM_TOKEN);
         LocalBroadcastManager.getInstance(this).sendBroadcast(gotToken);

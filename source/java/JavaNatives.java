@@ -6,4 +6,5 @@ import android.content.Intent;
 
 class JavaNatives{
     public static native void sendGCMToken(String gcmToken);
+   // public static native void notificationArrived(String notification);
 }

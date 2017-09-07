@@ -1,7 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-
-<!--Google GCM -->
-<!--<string name="gcm_defaultSenderId">c297a</string> -->
-
+<string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+<string name="default_notification_channel_name" translatable="true">news</string>
 </resources>

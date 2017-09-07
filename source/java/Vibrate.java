@@ -15,9 +15,13 @@ import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-//import android.widget.ProgressBar;
-//import android.widget.TextView;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
@@ -29,20 +33,36 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
 
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     //private KeyStore m_keyStore;
+    private FirebaseAuth mAuth;
+    // ...
+    private Activity mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        String token = FirebaseInstanceId.getInstance().getToken();
+        if(token != null){
+            Log.i("Activity", token);
+            JavaNatives.sendGCMToken(token);
+        }
+
+         String channelId  = getString(R.string.default_notification_channel_id);
+            String channelName = getString(R.string.default_notification_channel_name);
+            NotificationManager notificationManager =
+                (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+//            notificationManager.createNotificationChannel(new NotificationChannel(channelId,
+//                    channelName, NotificationManager.IMPORTANCE_LOW));
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver()
         {
             @Override
             public void onReceive(Context context, Intent intent)
             {
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                String token = sharedPreferences.getString(QuickstartPreferences.GCM_TOKEN, "");
-                Log.i("Activity", token);
+                String token = FirebaseInstanceId.getInstance().getToken();
+                Log.i("Activity received", token);
                 JavaNatives.sendGCMToken(token);
             }
         };
