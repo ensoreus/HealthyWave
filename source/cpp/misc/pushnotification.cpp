@@ -7,7 +7,9 @@
 #endif
 
 QString g_gcmRegistrationToken = "";
+QString g_lastNotification = "";
 std::mutex g_RegistrationTokenMutex;
+std::mutex g_notificationMutex;
 
 PushNotificationRegistrationTokenHandler::PushNotificationRegistrationTokenHandler(QObject *parent)
     : QObject(parent),
@@ -53,14 +55,23 @@ void PushNotificationRegistrationTokenHandler::setAPNSRegistrationToken(const QS
 PushNotificationRegistrationTokenHandler::~PushNotificationRegistrationTokenHandler(){
 }
 
-
+QString PushNotificationRegistrationTokenHandler::getLastNotification(){
+  if(g_lastNotification != ""){
+      g_notificationMutex.lock();
+      //setGcmRegistrationToken(g_gcmRegistrationToken);
+      m_lastNotification = g_lastNotification;
+      g_lastNotification = "";
+      g_notificationMutex.unlock();
+  }
+  return m_lastNotification;
+}
 
 
 #ifdef Q_OS_ANDROID
 static void gcmTokenResult(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
 {
     const char* nativeString = env->GetStringUTFChars(gcmToken, 0);
-    qDebug() << "GCM Token is:" << nativeString;
+    qDebug() << "Firebase Token is:" << nativeString;
 
     //the following is kind of a "hack". We can't use
     //   PushNotificationRegistrationTokenHandler::instance()->setGcmRegistrationToken(QString(nativeString));
@@ -76,12 +87,36 @@ static void gcmTokenResult(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
 
 }
 
+static void gcmNotification(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
+{
+    const char* nativeString = env->GetStringUTFChars(gcmToken, 0);
+    qDebug() << "Firebase notification:" << nativeString;
+
+    //the following is kind of a "hack". We can't use
+    //   PushNotificationRegistrationTokenHandler::instance()->setGcmRegistrationToken(QString(nativeString));
+    //directly, as this function most probably get's called before the GUI application is initialized. Using a
+    //QObject before the application is initialized results in undefined behavior and might crash the application.
+    //So in order to avoid that we are storing the gcm registration token in a global variable. The
+    //PushNotificationRegistrationTokenHandler::getGcmRegistrationToken() method copies the value in it's own
+    //private member variable, as soon as the gcm registration token is available.
+    //Just to be on the safe side, we are protecting the variable with a mutex.
+    g_RegistrationTokenMutex.lock();
+    g_lastNotification = QString(nativeString);
+    g_RegistrationTokenMutex.unlock();
+
+}
+
 
 // create a vector with all our JNINativeMethod(s)
 static JNINativeMethod methods[] = {
     { "sendGCMToken", // const char* function name;
         "(Ljava/lang/String;)V",
         (void *)gcmTokenResult // function pointer
+    },
+    {
+      "notificationArrived",
+    "(Ljava/lang/String;)V",
+    (void *)gcmNotification
     }
 };
 
