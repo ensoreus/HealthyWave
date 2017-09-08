@@ -1,6 +1,6 @@
 #include "pushnotification.h"
 #include <mutex>
-
+//fMK5fhrPwf8:APA91bEuOMUkoiXXgNUecSyg394wF9PwozNLs9SeuBxTfi0TMYFiIuPCad6YCp8k5_rQzRDZd8NMSP269fZFWchvKBE5G4MAnTlBdAoGopBtkyB9sNPNkJEXapxs2-h7L5-qU_EZCjRh
 #ifdef Q_OS_ANDROID
 #include <QAndroidJniObject>
 #include <QtAndroidExtras>
@@ -56,16 +56,13 @@ PushNotificationRegistrationTokenHandler::~PushNotificationRegistrationTokenHand
 }
 
 QString PushNotificationRegistrationTokenHandler::getLastNotification(){
-  if(g_lastNotification != ""){
-      g_notificationMutex.lock();
-      //setGcmRegistrationToken(g_gcmRegistrationToken);
-      m_lastNotification = g_lastNotification;
-      g_lastNotification = "";
-      g_notificationMutex.unlock();
-  }
   return m_lastNotification;
 }
 
+void PushNotificationRegistrationTokenHandler::setLastNotification(const QString& message){
+    g_lastNotification = message;
+    emit lastNotificationChanged();
+}
 
 #ifdef Q_OS_ANDROID
 static void gcmTokenResult(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
@@ -100,9 +97,9 @@ static void gcmNotification(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
     //PushNotificationRegistrationTokenHandler::getGcmRegistrationToken() method copies the value in it's own
     //private member variable, as soon as the gcm registration token is available.
     //Just to be on the safe side, we are protecting the variable with a mutex.
-    g_RegistrationTokenMutex.lock();
-    g_lastNotification = QString(nativeString);
-    g_RegistrationTokenMutex.unlock();
+    g_notificationMutex.lock();
+    PushNotificationRegistrationTokenHandler::instance()->setLastNotification(QString(nativeString));
+    g_notificationMutex.unlock();
 
 }
 

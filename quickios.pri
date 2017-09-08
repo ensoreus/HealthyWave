@@ -34,7 +34,5 @@ ios {
         $$PWD/qidevice.mm
 
     # QuickIOS do not link static plugin since Qt 5.7
-
-    QMAKE_POST_LINK += /usr/libexec/PlistBuddy -c \"Add :UIViewControllerBasedStatusBarAppearance bool false\" $${OUT_PWD}/Info.plist
 }
 

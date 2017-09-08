@@ -8,7 +8,7 @@ class PushNotificationRegistrationTokenHandler : public QObject{
     Q_OBJECT
     Q_PROPERTY(QString gcmRegistrationToken READ getGcmRegistrationToken NOTIFY gcmRegistrationTokenChanged)
     Q_PROPERTY(QString apnsRegistrationToken READ getAPNSRegistrationToken WRITE setAPNSRegistrationToken NOTIFY apnsRegistrationTokenChanged)
-    Q_PROPERTY(QString lastNotification READ getLastNotification NOTIFY lastNotificationChanged)
+    Q_PROPERTY(QString lastNotification READ getLastNotification WRITE setLastNotification NOTIFY lastNotificationChanged)
 
 public:
     PushNotificationRegistrationTokenHandler(QObject* parent = 0);
@@ -21,6 +21,7 @@ public:
     QString getAPNSRegistrationToken() const;
     QString getLastNotification();
     void setAPNSRegistrationToken(const QString& apnsToken);
+    void setLastNotification(const QString& message);
     ~PushNotificationRegistrationTokenHandler();
 signals:
     void gcmRegistrationTokenChanged();
