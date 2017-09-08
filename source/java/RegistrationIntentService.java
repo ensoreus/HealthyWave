@@ -29,13 +29,8 @@ public class RegistrationIntentService extends FirebaseInstanceIdService {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
 
-        // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
-        // Instance ID token to your app server.
-        // sendRegistrationToServer(refreshedToken);
-        //sendGCMToken(refreshedToken);
         sharedPreferences.edit().putString(QuickstartPreferences.GCM_TOKEN, refreshedToken).apply();
-         Intent gotToken = new Intent(QuickstartPreferences.GCM_TOKEN);
+        Intent gotToken = new Intent(QuickstartPreferences.GCM_TOKEN);
         LocalBroadcastManager.getInstance(this).sendBroadcast(gotToken);
     }
     

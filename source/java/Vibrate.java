@@ -48,39 +48,58 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
             JavaNatives.sendGCMToken(token);
         }
 
-         String channelId  = getString(R.string.default_notification_channel_id);
-            String channelName = getString(R.string.default_notification_channel_name);
-            NotificationManager notificationManager =
-                (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
-
-//            notificationManager.createNotificationChannel(new NotificationChannel(channelId,
-//                    channelName, NotificationManager.IMPORTANCE_LOW));
+        String channelId  = getString(R.string.default_notification_channel_id);
+        String channelName = getString(R.string.default_notification_channel_name);
+        NotificationManager notificationManager =
+            (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver()
-        {
-            @Override
-            public void onReceive(Context context, Intent intent)
             {
-                String token = FirebaseInstanceId.getInstance().getToken();
-                Log.i("Activity received", token);
-                JavaNatives.sendGCMToken(token);
-            }
-        };
+                @Override
+                public void onReceive(Context context, Intent intent)
+                {
+                    String token = FirebaseInstanceId.getInstance().getToken();
+                    Log.i("Activity received", token);
+                    JavaNatives.sendGCMToken(token);
+                    Log.i("Activity",intent.toString());
+                }
+            };
 
         if (checkPlayServices())
-        {
-            // Start IntentService to register this application with GCM.
-            Intent intent = new Intent(this, RegistrationIntentService.class);
-            startService(intent);
+            {
+                // Start IntentService to register this application with GCM.
+                Intent intent = new Intent(this, RegistrationIntentService.class);
+                startService(intent);
+            }
+    }
+
+    protected void onNewIntent(Intent intent){
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            for (String key : bundle.keySet()) {
+                Object value = bundle.get(key);
+                Log.d(TAG, String.format("%s %s (%s)", key,
+                                         value.toString(), value.getClass().getName()));
+            }
+            String msg = String.format("{'courier':'%s','phone':'%s'}", bundle.get("courier").toString(), bundle.get("phone").toString());
+            Log.d(TAG, msg);
+            JavaNatives.notificationArrived(msg);
         }
     }
+      
 
     @Override
     protected void onResume()
     {
         super.onResume();
+        Log.i("Activity", "resumed");
+
+        
+        
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                                            new IntentFilter(QuickstartPreferences.GCM_TOKEN));
+                                                                 new IntentFilter(QuickstartPreferences.GCM_TOKEN));
+        LocalBroadcastManager.getInstance(this) .registerReceiver(mRegistrationBroadcastReceiver,new IntentFilter(QuickstartPreferences.GCM_MESSAGE));
+
     }
 
     @Override
@@ -105,18 +124,18 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS)
-        {
-            if (apiAvailability.isUserResolvableError(resultCode))
             {
-                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+                if (apiAvailability.isUserResolvableError(resultCode))
+                    {
+                        apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+                    }
+                else
+                    {
+                        Log.i(TAG, "This device is not supported.");
+                        finish();
+                    }
+                return false;
             }
-            else
-            {
-                Log.i(TAG, "This device is not supported.");
-                finish();
-            }
-            return false;
-        }
         return true;
     }
 
@@ -132,13 +151,13 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
     public static void start(int x)
     {
         if (m_vibrator == null)
-        {
-            if (m_istance != null)
             {
-                m_vibrator = (Vibrator) m_istance.getSystemService(Context.VIBRATOR_SERVICE);
-                m_vibrator.vibrate(x);
+                if (m_istance != null)
+                    {
+                        m_vibrator = (Vibrator) m_istance.getSystemService(Context.VIBRATOR_SERVICE);
+                        m_vibrator.vibrate(x);
+                    }
             }
-        }
         else m_vibrator.vibrate(x);
     }
     // end vibrate

@@ -27,7 +27,7 @@ public class MyGcmListenerService extends FirebaseMessagingService
     /**
      * Called when message is received.
      *
-     * @param from SenderID of the sender.
+     * @param from SenderID of th2e sender.
      * @param data Data bundle containing message data as key/value pairs.
      *             For Set of keys use data.keySet().
      */
@@ -52,7 +52,8 @@ public class MyGcmListenerService extends FirebaseMessagingService
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-              sendNotification(message.getNotification().getBody());
+        sendNotification(message.getNotification().getBody());
+        JavaNatives.notificationArrived(message.getNotification().getBody());
     }
 
     /**

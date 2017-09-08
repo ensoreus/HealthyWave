@@ -1,8 +1,6 @@
 package com.ensoreus.hw;
 
 import android.content.Context;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 
 public class MyApplication extends org.qtproject.qt5.android.bindings.QtApplication
 {
