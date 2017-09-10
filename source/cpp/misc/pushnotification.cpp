@@ -88,19 +88,9 @@ static void gcmNotification(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
 {
     const char* nativeString = env->GetStringUTFChars(gcmToken, 0);
     qDebug() << "Firebase notification:" << nativeString;
-
-    //the following is kind of a "hack". We can't use
-    //   PushNotificationRegistrationTokenHandler::instance()->setGcmRegistrationToken(QString(nativeString));
-    //directly, as this function most probably get's called before the GUI application is initialized. Using a
-    //QObject before the application is initialized results in undefined behavior and might crash the application.
-    //So in order to avoid that we are storing the gcm registration token in a global variable. The
-    //PushNotificationRegistrationTokenHandler::getGcmRegistrationToken() method copies the value in it's own
-    //private member variable, as soon as the gcm registration token is available.
-    //Just to be on the safe side, we are protecting the variable with a mutex.
     g_notificationMutex.lock();
     PushNotificationRegistrationTokenHandler::instance()->setLastNotification(QString(nativeString));
     g_notificationMutex.unlock();
-
 }
 
 
