@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "qrc:/profile"
 
 Item {
     Rectangle {
@@ -17,6 +18,7 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 0
             Rectangle{
+                id: avatarBg
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
                 width: 110 * ratio
@@ -38,8 +40,12 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: 100 * ratio
                     height: 100 * ratio
-                    onClicked: {
+                    onPressedChanged: {
+                        avatarBg.border.width = (pressed) ? 5 : 3
+                    }
 
+                    onClicked: {
+                        navigationController.present("qrc:/profile/AvatarPicker.qml")
                     }
                 }
             }

@@ -78,7 +78,6 @@ ViewController {
             }
         }
 
-
         RegistrationPageName{
             id: nameEditPage
             anchors.top: parent.top
@@ -131,7 +130,7 @@ ViewController {
         StackView{
             id: stackLayout
             anchors.fill:parent
-            initialItem: phoneEditPage
+            initialItem: avatarEditPage
 
         }
     }
