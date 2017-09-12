@@ -4,6 +4,7 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 import QuickIOS 0.1
 
+import PushNotificationRegistrationTokenHandler 1.0
 import "qrc:/controls"
 import "qrc:/feedback"
 
@@ -17,6 +18,30 @@ Rectangle {
     Component.onCompleted: {
         mainMenu.disableMenu()
         state = "hideAlert"
+
+    }
+
+    Connections{
+        target: PushNotificationRegistrationTokenHandler
+        onLastNotificationChanged:{
+            var notification = JSON.parse(PushNotificationRegistrationTokenHandler.lastNotification);
+            storage.getOrderById(notification.order, function(city, street, house, apt, time){
+                orderDelivered({
+                                   "address":{
+                                       "city":city,
+                                       "street":street,
+                                       "house":house,
+                                       "apartment":apt
+                                   },
+                                   "courierName": notification.courier,
+                                   "deliveryDate":"15/09/2017",
+                                   "deliveryTime":time,
+                                   "orderId":0
+                               })
+            })
+
+            console.log("MainSlider: " + PushNotificationRegistrationTokenHandler.lastNotification);
+        }
     }
 
     function orderDelivered(order){
@@ -29,18 +54,8 @@ Rectangle {
         repeat: false
         interval: 2000
         onTriggered: {
-            orderDelivered({
-                               "address":{
-                                   "city":"Киев",
-                                   "street":"Багговутівська",
-                                   "house":"13",
-                                   "apartment":"2"
-                               },
-                               "courierName":"Фомальгаут Антон",
-                               "deliveryDate":"15/09/2017",
-                               "deliveryTime":"14:03",
-                               "orderId":"234"
-                           })
+
+
         }
     }
 

@@ -3,6 +3,7 @@
         <file>main.qml</file>
         <file>Api.js</file>
         <file>Storage.qml</file>
+        <file>Utils.js</file>
     </qresource>
     <qresource prefix="/greeting">
         <file>GreetingSliderForm.ui.qml</file>

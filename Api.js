@@ -1,5 +1,5 @@
-
-var baseUrl = "http://94.130.18.75/debug/hs/GetData/"
+var baseUrl = "https://1c.hvilya-zd.com.ua/debug/hs/GetData/"
+//var baseUrl = "http://94.130.18.75/debug/hs/GetData/"
 //var baseUrl = "http://hz.vsde.biz:50080/debug/hs/GetData/"
 
 function auth(phone, secKey, callback){

@@ -32,12 +32,12 @@ ios:{
     MY_ENTITLEMENTS.value = $$PWD/ios/pushnotifications.entitlements
     QMAKE_MAC_XCODE_SETTINGS += MY_ENTITLEMENTS
 
-    QMAKE_IOS_DEPLOYMENT_TARGET=8.0
+    QMAKE_IOS_DEPLOYMENT_TARGET=10.0
 
     # Note for devices: 1=iPhone, 2=iPad, 1,2=Universal.
     QMAKE_IOS_TARGETED_DEVICE_FAMILY = 1
 
-    #QMAKE_INFO_PLIST = $$PWD/ios/Info.plist
+    QMAKE_INFO_PLIST = $$PWD/ios/Info.plist
 
     OBJECTIVE_SOURCES += \
                     $$PWD/source/cpp/misc/ios/pushnotification.mm

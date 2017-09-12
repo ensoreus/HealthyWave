@@ -11,7 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-
+import java.util.Map;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -35,9 +35,6 @@ public class MyGcmListenerService extends FirebaseMessagingService
     public void onMessageReceived(RemoteMessage message)//String from, Bundle data)
     {
         //String message = data.getString("message");
-        Log.d(TAG, "From: " + message.getFrom());
-        Log.d(TAG, "Message: " + message.getNotification().getBody());
-
         //adapt that if you want to react to topics
         //individually.
         
@@ -52,8 +49,16 @@ public class MyGcmListenerService extends FirebaseMessagingService
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message.getNotification().getBody());
-        JavaNatives.notificationArrived(message.getNotification().getBody());
+        Log.i(TAG,message.toString());
+        Map<String,String> bundle = message.getData();
+        if (bundle != null) {
+            String msg = String.format("{\"courier\":\"%s\", \"order\":\"%s\"}", bundle.get("CourierName").toString(), bundle.get("OrderNumber")/*, bundle.get("phone").toString()*/);
+        
+            sendNotification(msg);
+            JavaNatives.notificationArrived(msg);            
+        }
+        //        if(message.getNotification().getBody() == "")
+
     }
 
     /**

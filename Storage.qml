@@ -168,7 +168,7 @@ Item {
                 var json = "{\"secKey\":\"" + getSecKey() + "\", \"phone\":\"" + phoneRes +"\", \"token\":\""+ tokenRes+"\"}"
                 print (json)
                 var authData = JSON.parse(json)
-                print("@@@:"+authData.toString())
+                //print("@@@:"+authData.toString())
                 callback(authData)
             })
           })
@@ -205,7 +205,7 @@ Item {
 //        });
 //    }
 
-   /* function markRatedOrder(orderid){
+/* function markRatedOrder(orderid){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, address INTEGER, time TEXT, rated INTEGER)')
@@ -214,6 +214,7 @@ Item {
         });
     }
 */
+
     function getUnratedOrders(callback){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
@@ -242,11 +243,21 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, time TEXT, courier TEXT, rated INTEGER )')
-            var sqlstr = "select city, street, house, floor, apt, entrance, entranceDoor, time, courier, rated from orders where orderid = " + orderid;
+            var sqlstr = "select city, street, house, floor, apt, entrance, entranceDoor, time, courier, rated from orders where orderid = 0"// + orderid;
+            console.log(sqlstr);
             var result = tx.executeSql(sqlstr);
-            callback(result.rows.item(0))
+            if(typeof(result.rows.item(0)) != "undefined"){
+                var city = result.rows.item(0).city
+                var street = result.rows.item(0).street
+                var house = result.rows.item(0).house
+                var apt = result.rows.item(0).apt;
+                var time = result.rows.item(0).time
+                console.log(city + " " + street + " " + house + " " + apt)
+                callback(city, street, house, apt, time)
+            }
         });
     }
+
     function cleanUpUndefined(object){
         for(var key in object){
             if(typeof(object[key]) ==='undefined'){

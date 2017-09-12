@@ -366,12 +366,11 @@ ViewController {
                     Api.createOrder(context, authdata, function(result){
                         console.log(result.result)
                         context.orderId = result.result
-                        //storage.addOrder(context)
+                        storage.addUnratedOrder(context)
                     }, function(error){
                         console.log(error.error)
                     })
                 })
-
             }
         }
 

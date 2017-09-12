@@ -13,8 +13,7 @@ std::mutex g_notificationMutex;
 
 PushNotificationRegistrationTokenHandler::PushNotificationRegistrationTokenHandler(QObject *parent)
     : QObject(parent),
-      m_gcmToken(""),
-      m_apnsToken("")
+      m_gcmToken("")
 {
 }
 
@@ -31,25 +30,19 @@ PushNotificationRegistrationTokenHandler* PushNotificationRegistrationTokenHandl
 
 void PushNotificationRegistrationTokenHandler::setGcmRegistrationToken(const QString& gcmToken){
     m_gcmToken = gcmToken;
+    //emit gcmRegistrationTokenChanged();
 }
 
 QString PushNotificationRegistrationTokenHandler::getGcmRegistrationToken(){
+  #ifdef Q_OS_ANDROID
     if(g_gcmRegistrationToken != ""){
-        g_RegistrationTokenMutex.lock();
+      //g_RegistrationTokenMutex.lock();
         setGcmRegistrationToken(g_gcmRegistrationToken);
         g_gcmRegistrationToken = "";
-        g_RegistrationTokenMutex.unlock();
+      //g_RegistrationTokenMutex.unlock();
     }
+#endif
     return m_gcmToken;
-}
-
-QString PushNotificationRegistrationTokenHandler::getAPNSRegistrationToken() const{
-    return m_apnsToken;
-}
-
-void PushNotificationRegistrationTokenHandler::setAPNSRegistrationToken(const QString& apnsToken){
-    m_apnsToken = apnsToken;
-    apnsRegistrationTokenChanged(); //emit signal
 }
 
 PushNotificationRegistrationTokenHandler::~PushNotificationRegistrationTokenHandler(){
@@ -60,7 +53,7 @@ QString PushNotificationRegistrationTokenHandler::getLastNotification(){
 }
 
 void PushNotificationRegistrationTokenHandler::setLastNotification(const QString& message){
-    g_lastNotification = message;
+    m_lastNotification = message;
     emit lastNotificationChanged();
 }
 
@@ -88,9 +81,9 @@ static void gcmNotification(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
 {
     const char* nativeString = env->GetStringUTFChars(gcmToken, 0);
     qDebug() << "Firebase notification:" << nativeString;
-    g_notificationMutex.lock();
+    //g_notificationMutex.lock();
     PushNotificationRegistrationTokenHandler::instance()->setLastNotification(QString(nativeString));
-    g_notificationMutex.unlock();
+    //g_notificationMutex.unlock();
 }
 
 

@@ -27,15 +27,15 @@ Item {
             storage.storeSecKey(SecurityCore.secKey)
         }
         console.log(storage.getSecKey())
-        if (ostype === 1){
+        //if (ostype === 1){
             var token = PushNotificationRegistrationTokenHandler.gcmRegistrationToken
-        }
+        //}
     }
 
     Connections {
         target: PushNotificationRegistrationTokenHandler
         onGcmRegistrationTokenChanged: {
-            console.log("Value changed")
+            console.log("FCM token changed:"+PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
         }
     }
 
