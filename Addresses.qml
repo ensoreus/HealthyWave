@@ -160,9 +160,10 @@ AddressesForm {
             padding: 12
             height: parent.height
             anchors.right: parent.right
-
-            SwipeDelegate.onClicked: {
-                storage.getAuthData(function(authData){
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    storage.getAuthData(function(authData){
                     Api.deleteAddress(lstAddresses.model.get(index).city,
                                       lstAddresses.model.get(index).street,
                                       lstAddresses.model.get(index).house,
@@ -171,10 +172,12 @@ AddressesForm {
                                       lstAddresses.model.get(index).apartment, authData, function(result, authToken){
                                           storage.saveToken(authToken)
                                       }, function(error, authToken){
-
                                       })
                 })
-                lstAddresses.model.remove(index)
+                    lstAddresses.model.remove(index)}
+            }
+            SwipeDelegate.onClicked: {
+
             }
 
             background: Rectangle {

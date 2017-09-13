@@ -20,6 +20,7 @@ ComboBox {
     }
 
     indicator: Item{}
+    popup.implicitHeight: popup.contentItem.implicitHeight
 
     TextField {
         anchors.fill: parent

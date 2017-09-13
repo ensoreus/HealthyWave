@@ -10,6 +10,14 @@ RegistrationPromoCodeForm {
         promoCodeField.forceActiveFocus()
     }
 
+    function startProcessIndicator(){
+        waiterPanel.visible = true
+    }
+
+    function stopPropcessIndicator(){
+        waiterPanel.visible = false
+    }
+
     Component.onCompleted: {
         promoCodeField.inputMethodHints = Qt.ImhPreferNumbers
     }

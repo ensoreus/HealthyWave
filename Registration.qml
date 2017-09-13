@@ -28,7 +28,7 @@ Item {
         }
         console.log(storage.getSecKey())
         //if (ostype === 1){
-            var token = PushNotificationRegistrationTokenHandler.gcmRegistrationToken
+         //   var token = PushNotificationRegistrationTokenHandler.gcmRegistrationToken
         //}
     }
 
@@ -121,26 +121,7 @@ Item {
             }
 
             onNextPage: {
-                startProcessIndicator()
-
-                var nameEndPos = nameEditPage.nameField.text.lastIndexOf(" ");
-                var name = nameEditPage.nameField.text.slice(0, nameEndPos)
-                var lastname = nameEditPage.nameField.text.slice(nameEndPos + 1, nameEditPage.nameField.text.length)
-
-                console.log(PushNotificationRegistrationTokenHandler.gcmRegistrationToke)
-                var pushtoken = (ostype === 1) ? PushNotificationRegistrationTokenHandler.gcmRegistrationToken : PushNotificationRegistrationTokenHandler.apnsRegistrationToken
-                Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
-                    storage.saveToken(token)
-                    Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, ostype, function(response, url){
-                        if(!response.error){
-                            storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, promoCodeEditPage.text)
-                            stackLayout.push(promoCodeEditPage)
-                            stopPropcessIndicator()
-                        }else{
-                            stopPropcessIndicator()
-                        }
-                    })
-                })
+                stackLayout.push(promoCodeEditPage)
             }
             Behavior on x {
                 NumberAnimation {
@@ -161,15 +142,29 @@ Item {
                 promoCodeEditPage.presenterAnimationEnds()
             }
             onEndEditData: {
-                item1.state = "default"
+
             }
             onNextPage: {
-                logoBg.height = 283
-                logo.height = 114
-//                Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
-//                    storage.saveToken(token)
-//                    Api.
-//                })
+
+                startProcessIndicator()
+                var nameEndPos = nameEditPage.nameField.text.lastIndexOf(" ");
+                var name = nameEditPage.nameField.text.slice(0, nameEndPos)
+                var lastname = nameEditPage.nameField.text.slice(nameEndPos + 1, nameEditPage.nameField.text.length)
+
+                console.log(PushNotificationRegistrationTokenHandler.gcmRegistrationToke)
+                var pushtoken = PushNotificationRegistrationTokenHandler.gcmRegistrationToken
+                Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
+                    storage.saveToken(token)
+                    Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, ostype, function(response, url){
+                        if(!response.error){
+                            storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, promoCodeEditPage.text)
+                            stopPropcessIndicator()
+                            item1.state = "default"
+                        }else{
+                            stopPropcessIndicator()
+                        }
+                    })
+                })
                 stackLayout.push(congratsPage)
             }
         }

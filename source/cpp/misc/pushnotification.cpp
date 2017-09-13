@@ -30,7 +30,9 @@ PushNotificationRegistrationTokenHandler* PushNotificationRegistrationTokenHandl
 
 void PushNotificationRegistrationTokenHandler::setGcmRegistrationToken(const QString& gcmToken){
     m_gcmToken = gcmToken;
-    //emit gcmRegistrationTokenChanged();
+#ifdef Q_OS_IOS
+    emit gcmRegistrationTokenChanged();
+#endif
 }
 
 QString PushNotificationRegistrationTokenHandler::getGcmRegistrationToken(){

@@ -3,17 +3,13 @@
 #import <UserNotifications/UserNotifications.h>
 #import <Firebase/Firebase.h>
 
-//#import "NotificationCenterRegistrator.h"
 
 @interface QIOSApplicationDelegate
 @end
 
 NSString *const kGCMMessageIDKey = @"gcm.message_id";
-//static NotificationCenterRegistrator* registrator;
 
-//add a category to QIOSApplicationDelegate
 @interface QIOSApplicationDelegate (QPushNotificationDelegate)<UNUserNotificationCenterDelegate, FIRMessagingDelegate>
-//@property(nonatomic, strong) NotificationCenterRegistrator* registrator;
 @end
 
 
@@ -30,20 +26,20 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     | UNAuthorizationOptionBadge;
     [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:authOptions completionHandler:^(BOOL granted, NSError * _Nullable error) {
         if(error==nil){
+            if(granted){
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            }
             NSString *fcmToken = [FIRMessaging messaging].FCMToken;
             NSLog(@"FCM registration token: %@", fcmToken);
-            
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 QString apsStr = QString::fromNSString(fcmToken);
                 PushNotificationRegistrationTokenHandler::instance()->setGcmRegistrationToken(apsStr);
             });
-            
-            NSLog(@"granted: %d", granted);
         }else{
             NSLog(@"APNS error:%@", [error localizedDescription]);
         }
     }];
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
 
     return YES;
 }
@@ -56,16 +52,16 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
 // If swizzling is disabled then this function must be implemented so that the APNs device token can be paired to
 // the FCM registration token.
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     //NSLog(@"APNs device token retrieved: %@", deviceToken);
     
-    // With swizzling disabled you must set the APNs device token here.
-//    const unsigned *tokenBytes = (const unsigned*)[deviceToken bytes];
-//    NSString *tokenStr = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
-//                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
-//                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
-//                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
-//    NSLog(@"APNs token %@", tokenStr);
+    const unsigned *tokenBytes = (const unsigned*)[deviceToken bytes];
+    NSString *tokenStr = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    NSLog(@"APNs token %@", tokenStr);
     [FIRMessaging messaging].APNSToken = deviceToken;
 }
 
