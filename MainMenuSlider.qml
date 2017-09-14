@@ -7,7 +7,7 @@ import QuickIOS 0.1
 import PushNotificationRegistrationTokenHandler 1.0
 import "qrc:/controls"
 import "qrc:/feedback"
-
+import "qrc:/Utils.js" as Utils
 Rectangle {
     id:mainSlider
     x:0
@@ -24,8 +24,8 @@ Rectangle {
     Connections{
         target: PushNotificationRegistrationTokenHandler
         onLastNotificationChanged:{
-            var notification = JSON.parse(PushNotificationRegistrationTokenHandler.lastNotification);
-            storage.getOrderById(notification.order, function(city, street, house, apt, time){
+            var notification = Utils.extractDataFromNotification(PushNotificationRegistrationTokenHandler.lastNotification)
+            storage.getOrderById(notification.orderid, function(city, street, house, apt, time){
                 orderDelivered({
                                    "address":{
                                        "city":city,
@@ -36,11 +36,9 @@ Rectangle {
                                    "courierName": notification.courier,
                                    "deliveryDate":"15/09/2017",
                                    "deliveryTime":time,
-                                   "orderId":0
+                                   "orderId":notification.orderid
                                })
             })
-
-            console.log("MainSlider: " + PushNotificationRegistrationTokenHandler.lastNotification);
         }
     }
 

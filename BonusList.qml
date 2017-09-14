@@ -22,6 +22,7 @@ ViewController {
         storage.getAuthData(function(authdata){
             Api.getBonus(authdata, function(response){
                 console.log(response)
+                bonusModel.addItems(response.result)
             }, function(failure){
                 console.log(failure)
             })
@@ -52,48 +53,21 @@ ViewController {
                 lbMainTitle:title
                 lbComment: comment
                 lbActiveTill: activeTill
+
             }
 
             model: ListModel {
                 id: bonusModel
-                ListElement {
-                    title: "Перше замовлення онлайн"
-                    comment: "(тільки для старих замовників)"
-                    activeTill: "дійсний до 20-04-2017"
+                function itemsSelected(){
+
                 }
 
-                ListElement {
-                    title: "Ваша рекомендація - 2 бутля"
-                    comment: "вул. Ахматової, 42 кв.11"
-                    activeTill: "дійсний до 13-06-2017"
-                }
-
-                ListElement {
-                    title: "Знижка 20% на 3 доставки"
-                    comment: "(як для нового клієнта)"
-                    activeTill: "дійсний до 13-06-2017"
-                }
-                ListElement {
-                    title: "Знижка 20% на 3 доставки"
-                    comment: "(як для нового клієнта)"
-                    activeTill: "дійсний до 13-06-2017"
-                }
-                ListElement {
-                    title: "Знижка 20% на 3 доставки"
-                    comment: "(як для нового клієнта)"
-                    activeTill: "дійсний до 13-06-2017"
-                }
-                ListElement {
-                    title: "Знижка 20% на 3 доставки"
-                    comment: "(як для нового клієнта)"
-                    activeTill: "дійсний до 13-06-2017"
-                }
                 function addItems(data){
                     bonusModel.clear()
                     for(var index in data){
                         var item = data[index]
-                        var modelItem = {title:item.BonusName, activeTill:item.ValidityPeriod, PromoCode:item.PromoCode}
-                            bonusModel.append(modelItem)
+                        var modelItem = {bonus:item, selected:0 }
+                        bonusModel.append(item)
                     }
                 }
             }
@@ -106,6 +80,7 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.7
             height: parent.height * 0.1
+            visible: bonusModel.itemsSelected()
             labelText: "ВИКОРИСТАТИ"
         }
 

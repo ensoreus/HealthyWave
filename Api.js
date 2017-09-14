@@ -196,7 +196,7 @@ criterioncode5: Код выбранного критерия
 comment: комментарий клиента*/
 
 function sendFeedback(rate, comment, orderid, code1, code2, code3, code4, authdata, onSuccess, onFailure){
-    call("makefeedback", {
+    call("createfeedback", {
             "rating":rate,
              "comment":comment,
              "phone":authdata.phone,
@@ -209,12 +209,17 @@ function sendFeedback(rate, comment, orderid, code1, code2, code3, code4, authda
 }
 
 function getBonus(authdata, onSuccess, onFailure){
-    call("getbonus", {"phone":authdata.phone,}, authdata, onSuccess, onFailure)
+    call("getbonuslist", {"phone":authdata.phone,}, authdata, onSuccess, onFailure)
+}
+
+function addPromoCode(promocode, authdata, onSuccess, onFailure){
+    call("addpromocode", {"phone":authdata.phone, "promocode":promocode}, onSuccess, onFailure)
 }
 
 function call(routine, params, authData, onSuccess, onFailure){
     var xhr = new XMLHttpRequest();
     var url = baseUrl + routine + serializeParams(removeUndefinedFields(params))
+
     var sendRequest = function(token){
         print(url + "key=" + token)
         xhr.open("GET", url + "key=" + token);
@@ -250,6 +255,10 @@ function call(routine, params, authData, onSuccess, onFailure){
                 onSuccess(object, authData.token)
             }
         }
+    }
+
+    if(typeof(authData.key) == 'undefined'){
+        onAuthError(authData, onTokenUpdated)
     }
 
     xhr.onreadystatechange = onReady
