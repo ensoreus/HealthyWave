@@ -236,6 +236,10 @@ Rectangle {
                 target: feedbackAlertPrompt
                 visible:true
             }
+//            PropertyChanges {
+//                target: feedbackAlertPrompt
+//                opacity:1.0
+//            }
         },
         State{
             name: "hideAlert"
@@ -259,6 +263,12 @@ Rectangle {
                     from: 0.0
                     to : 0.5
                     duration: 200
+                }
+                OpacityAnimator{
+                    target: feedbackAlertPrompt
+                    from: 0
+                    to: 1
+                    duration: 300
                 }
                 ScaleAnimator{
                     target: feedbackAlertPrompt
