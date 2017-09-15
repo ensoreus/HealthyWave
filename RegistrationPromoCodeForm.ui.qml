@@ -25,10 +25,11 @@ Page {
             y: 65
             width: parent.width * 0.7
             height: parent.height * 0.02
-            color: "#808080"
+            color: "#505050"
             text: qsTr("Уведіть ваш промо-код*")
-            font.pointSize: 17
-            anchors.topMargin: parent.height * 0.05
+            font.pointSize: 15
+            font.weight: Font.Thin
+            anchors.topMargin: 60 * ratio
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -36,7 +37,7 @@ Page {
         Controls.HWTextField {
             id: promoCodeField
             height: parent.height * 0.1
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: 10 * ratio
             anchors.top: text1.bottom
             anchors.right: text1.right
             anchors.rightMargin: 0
@@ -49,10 +50,10 @@ Page {
             x: 340
             width: parent.width * 0.15
             height: parent.width * 0.15
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: 50 * ratio
             anchors.top: promoCodeField.bottom
-            anchors.right: promoCodeField.right
-            anchors.rightMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: parent.width * 0.15
             background: Image {
                 id: btnGlyph
                 source: "btn-next.png"
@@ -64,11 +65,12 @@ Page {
             x: 60
             y: 276
             height: 71
-            color: "#545454"
+            color: "#505050"
+            font.family: "SF UI Text"
+            font.pointSize: 15
             text: qsTr("*Уведіть бонусний промо-код, якщо Ви отримали його від ваших знайомих. Якщо промо-коду у Вас нема - рухайтесь далі, на Вас чекає сюрприз!")
             font.weight: Font.Thin
-            font.pointSize: 15
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: 30 * ratio
             anchors.top: btnNext.bottom
             anchors.right: promoCodeField.right
             anchors.rightMargin: 0

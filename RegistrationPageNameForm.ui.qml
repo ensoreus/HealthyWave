@@ -9,9 +9,6 @@ Page {
     property alias btnNext: btnNext
     property alias nameField: nameField
 
-
-
-
     Rectangle {
         id: rectangle
         color: "#ffffff"
@@ -22,19 +19,21 @@ Page {
             x: 70
             width: parent.width * 0.7
             height: parent.height * 0.02
-            color: "#808080"
             text: qsTr("Уведіть Ваше і'мя")
+            color: "#505050"
+            font.weight: Font.Thin
+            font.family: "SF UI Text"
             font.pointSize: 15
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: 60 * ratio
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
         HWTextField {
             id: nameField
-            width: parent.width * 0.15
-            height: parent.width * 0.15
-            anchors.topMargin: parent.height * 0.01
+            width: parent.width * 0.8
+            height: parent.height * 0.08
+            anchors.topMargin: 10 * ratio
             anchors.top: label.bottom
             anchors.right: label.right
             anchors.rightMargin: 0
@@ -51,7 +50,7 @@ Page {
             font.weight: Font.Thin
             font.pointSize: 15
             font.family: "SF UI Text"
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: 20 * ratio
             anchors.top: btnNext.bottom
             anchors.right: nameField.right
             anchors.rightMargin: 0
@@ -67,8 +66,8 @@ Page {
             text: qsTr("")
             anchors.topMargin: 50 * ratio
             anchors.top: nameField.bottom
-            anchors.right: nameField.right
-            anchors.rightMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: parent.width * 0.15
             background: Image {
                 id: btnGlyph
                 source: "btn-next.png"
@@ -90,6 +89,4 @@ Page {
             font.pointSize: 15
         }
     }
-
-
 }

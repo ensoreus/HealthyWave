@@ -19,9 +19,9 @@ Page {
             width: parent.width * 0.15
             height: parent.width * 0.15
             text: ""
-            anchors.topMargin: parent.height * 0.1
-            anchors.right: emailField.right
-            anchors.rightMargin: 0
+            anchors.topMargin: 30 * ratio
+            anchors.right: parent.right
+            anchors.rightMargin: parent.width * 0.15
             anchors.top: text2.bottom
             background: Image {
                 id: btnGlyph
@@ -35,11 +35,12 @@ Page {
             x: 52
             width: parent.width * 0.7
             height: parent.height * 0.02
-            color: "#808080"
+            color: "#505050"
+            font.weight: Font.Thin
             text: qsTr("Уведіть электрону адресу *")
             font.family: "SF UI Text"
-            font.pointSize: 16
-            anchors.topMargin: parent.height * 0.05
+            font.pointSize: 15
+            anchors.topMargin: 60 * ratio
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -47,7 +48,8 @@ Page {
         Controls.HWEmailField {
             id: emailField
             height: parent.height * 0.08
-            anchors.topMargin: parent.height * 0.01
+            width: parent.width * 0.8
+            anchors.topMargin: 10 * ratio
             anchors.top: text1.bottom
             anchors.right: text1.right
             anchors.rightMargin: 0
@@ -58,9 +60,10 @@ Page {
 
         Text {
             id: text2
-            height: 79
+            height: 51
+            color: "#505050"
             text: qsTr("*для получения информации об акциях и выгодных предложениях ")
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: 30 * ratio
             anchors.top: emailField.bottom
             anchors.right: emailField.right
             anchors.rightMargin: 0

@@ -23,7 +23,7 @@ Page {
             width: parent.width * 0.8
             height: item1.width * 0.1
             text: "+380"
-            anchors.topMargin: 20 * ratio
+            anchors.topMargin: 10 * ratio
             font.pointSize: 19
             anchors.top: text1.bottom
             anchors.right: text1.right
@@ -40,8 +40,8 @@ Page {
             text: qsTr("")
             anchors.topMargin: 50 * ratio
             anchors.top: phoneField.bottom
-            anchors.right: phoneField.right
-            anchors.rightMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: parent.width * 0.15
             background: Image {
                 id: btnGlyph
                 source: "btn-next.png"
@@ -55,10 +55,12 @@ Page {
             y: 174
             width: parent.width * 0.7
             height: item1.height * 0.02
-            color: "#808080"
+            color: "#505050"
             text: qsTr("Уведіть номер телефона")
             anchors.topMargin: 60 * ratio
             font.pointSize: 15
+            font.weight: Font.Thin
+            font.family: "SF UI Text"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
         }

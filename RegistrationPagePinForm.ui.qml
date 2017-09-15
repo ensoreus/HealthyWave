@@ -21,13 +21,16 @@ Page {
             id: text1
             width: parent.width * 0.6
             height: parent.height * 0.02
-            color: "#808080"
+            color: "#505050"
             text: qsTr("Уведіть код підтвердження")
-            font.pointSize: 17
+            font.family: "SF UI Text"
+            font.pointSize: 15
             anchors.topMargin: 60 * ratio
             anchors.top: parent.top
-            horizontalAlignment: Text.AlignHCenter
-            anchors.horizontalCenter: parent.horizontalCenter
+            font.weight: Font.Thin
+            horizontalAlignment: Text.AlignLeft
+            anchors.left: parent.left
+            anchors.leftMargin: parent.width * 0.15
         }
 
         Controls.HWPinField {
@@ -36,7 +39,7 @@ Page {
             width: parent.width * 0.5
             height: parent.height * 0.1
             border.width: 0
-            anchors.topMargin: 20 * ratio
+            anchors.topMargin: 10 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: text1.bottom
         }
@@ -48,8 +51,8 @@ Page {
             height: parent.width * 0.15
             text: ""
             anchors.topMargin: 50 * ratio
-            anchors.right: text1.right
-            anchors.rightMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: parent.width * 0.15
             anchors.top: pinField.bottom
             background: Image {
                 id: btnGlyph
@@ -61,7 +64,7 @@ Page {
         Text {
             id: lbSendAgain
             height: 20
-            color: "#808080"
+            color: "#505050"
             text: qsTr("Відправити код ще раз")
             anchors.leftMargin: 0
             font.pointSize: 15
@@ -69,6 +72,7 @@ Page {
             font.family: "SF UI Text"
             anchors.topMargin: 0
             anchors.top: btnNext.top
+            font.weight: Font.Thin
             verticalAlignment: Text.AlignVCenter
 
             MouseArea {
