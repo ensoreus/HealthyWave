@@ -16,11 +16,10 @@ HWTextField {
         id: image
         x: 7
         y: 6
-        width: 30
+        width: 20
         height: 25
         opacity: 1
         anchors.left: parent.left
-        anchors.leftMargin: 9
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 11
         anchors.top: parent.top
