@@ -10,6 +10,8 @@ ViewController {
         centerBarTitle: "Безкоштовна вода"
     }
 
+    property var bonusesToUse: []
+
     Clipboard{
         id: clipboard
     }
@@ -50,10 +52,34 @@ ViewController {
             delegate: BonusCell{
                 height: 100 * ratio
                 width: lstBonuses.width
-                lbMainTitle:title
-                lbComment: comment
-                lbActiveTill: activeTill
+                lbMainTitle:BonusName
+                cbUse.onCheckStateChanged: {
+                    if(cbUse.checked){
+                        bonusesToUse.push({})
+                    }else{
+                        var editedArray = bonusesToUse.reduce(function(res, item){
+                            if(item === PromoCode){
+                                return res
+                            }else{
+                                return res.concat(item)
+                            }
+                        })
 
+                    }
+                }
+
+                //lbComment: comment
+                lbActiveTill: formatDateLine(ValidityPeriod)
+                function formatDateLine(date){
+                    var yyyy = date.substring(0, 4)
+                    var MM = date.substring(4, 6)
+                    var dd = date.substring(6, 8)
+                    if(yyyy < 2016){
+                        return ""
+                    }else{
+                        return "дійсний до "+ dd + "-" + MM + "-" + yyyy
+                    }
+                }
             }
 
             model: ListModel {
@@ -70,6 +96,8 @@ ViewController {
                         bonusModel.append(item)
                     }
                 }
+
+
             }
         }
 

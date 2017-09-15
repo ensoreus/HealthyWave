@@ -6,6 +6,7 @@ Item {
     property alias lbMainTitle: lbMainTitle.text
     property alias lbComment: lbComment.text
     property alias lbActiveTill: lbActiveTill.text
+    property alias cbUse: cbUse
     Rectangle {
         id: rectangle
         color: "#ffffff"
@@ -21,13 +22,13 @@ Item {
             anchors.topMargin: parent.height * 0.1
             anchors.top: parent.top
             font.weight: Font.Light
-            font.pointSize: 15
+            font.pointSize: 14
             color: "#222222"
         }
 
         Text {
             id: lbComment
-            text: qsTr("Text")
+            text: qsTr("")
             anchors.topMargin: parent.height * 0.1
             anchors.top: lbMainTitle.bottom
             anchors.right: lbMainTitle.right
@@ -35,20 +36,21 @@ Item {
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
             font.weight: Font.Light
-            font.pointSize: 14
-            color:"grey"
+            font.pointSize: 12
+            color:"#9B9B9B"
         }
 
         Text {
             id: lbActiveTill
             y: 65
-            text: qsTr("Text")
+            text: qsTr("")
             anchors.right: lbComment.right
             anchors.rightMargin: 0
             anchors.left: lbComment.left
             anchors.leftMargin: 0
-            font.pointSize: 14
+            font.pointSize: 12
             font.weight: Font.Light
+            color: "#222222"
         }
 
         HWCheckBox {
