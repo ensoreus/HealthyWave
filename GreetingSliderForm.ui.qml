@@ -10,7 +10,7 @@ Item {
     property alias btnClose: btnClose
     property alias pageIndicator: pageIndicator
 
-    SwipeView{
+    SwipeView {
         id: skimmer
         anchors.fill: parent
         currentIndex: 0
@@ -34,15 +34,37 @@ Item {
             source: "greeting3.png"
         }
 
-
-        Image{
-            id:image4
+        Image {
+            id: image4
             source: "greeting4.png"
         }
 
-        Image{
+        Image {
             id: image5
-            source:"greeting5.png"
+            source: "greeting5.png"
+
+            MouseArea {
+                id: btnClose
+                x: 340
+                y: 0
+                width: parent.width * 0.15
+                height: parent.width * 0.15
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.right: parent.right
+                anchors.rightMargin: 0
+
+                Image {
+                    id: image
+                    fillMode: Image.PreserveAspectFit
+                    anchors.rightMargin: 15
+                    anchors.leftMargin: 15
+                    anchors.bottomMargin: 15
+                    anchors.topMargin: 15
+                    anchors.fill: parent
+                    source: "qrc:/commons/btn-cross.png"
+                }
+            }
         }
     }
 
@@ -55,28 +77,5 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         count: skimmer.count
         currentIndex: 0
-
-    }
-
-    MouseArea {
-        id: btnClose
-        x: 300
-        width: parent.width * 0.15
-        height: parent.width * 0.15
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-
-        Image {
-            id: image
-            fillMode: Image.PreserveAspectFit
-            anchors.rightMargin: 15
-            anchors.leftMargin: 15
-            anchors.bottomMargin: 15
-            anchors.topMargin: 15
-            anchors.fill: parent
-            source: "qrc:/commons/btn-cross.png"
-        }
     }
 }
