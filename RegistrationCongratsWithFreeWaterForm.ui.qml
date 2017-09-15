@@ -16,12 +16,11 @@ Page {
             id: txRegistered
             x: 187
             width: parent.width * 0.7
-            height: 15
+            height: 17
             text: qsTr("Вітаємо, Вас зареєстровано!")
             font.pointSize: 15
-            anchors.topMargin: parent.height * 0.2
+            anchors.topMargin: 20 * ratio
             anchors.top: parent.top
-            font.weight: Font.Light
             font.family: "SF UI Text"
             horizontalAlignment: Text.AlignHCenter
             anchors.horizontalCenter: parent.horizontalCenter
@@ -33,7 +32,7 @@ Page {
             height: parent.height * 0.1
             text: qsTr("Ми даруємо Вам 1 бутиль води безкоштовно ")
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: parent.height * 0.02
+            anchors.topMargin: 30 * ratio
             wrapMode: Text.WordWrap
             font.pointSize: 15
             font.underline: true

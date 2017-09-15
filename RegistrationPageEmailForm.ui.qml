@@ -22,7 +22,7 @@ Page {
             anchors.topMargin: 30 * ratio
             anchors.right: parent.right
             anchors.rightMargin: parent.width * 0.15
-            anchors.top: text2.bottom
+            anchors.top: emailField.bottom
             background: Image {
                 id: btnGlyph
                 source: "btn-next.png"
@@ -63,8 +63,8 @@ Page {
             height: 51
             color: "#505050"
             text: qsTr("*для получения информации об акциях и выгодных предложениях ")
-            anchors.topMargin: 30 * ratio
-            anchors.top: emailField.bottom
+            anchors.topMargin: 20 * ratio
+            anchors.top: btnNext.bottom
             anchors.right: emailField.right
             anchors.rightMargin: 0
             anchors.left: emailField.left

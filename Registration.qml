@@ -239,6 +239,10 @@ Item {
                 target: logo
                 height: logoBg.height * 0.4
             }
+            AnchorChanges{
+                target: logo
+                anchors.verticalCenter: logoBg.verticalCenter
+            }
         },
         State {
             name: "interactive"

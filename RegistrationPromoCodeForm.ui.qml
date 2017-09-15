@@ -78,6 +78,7 @@ Page {
             anchors.leftMargin: 0
             wrapMode: Text.WordWrap
         }
+
         Rectangle {
             id: waiterPanel
             opacity: 0.5
@@ -94,5 +95,4 @@ Page {
             }
         }
     }
-
 }
