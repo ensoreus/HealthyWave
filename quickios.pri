@@ -32,7 +32,5 @@ ios {
         $$PWD/qisystemutils.mm \
         $$PWD/qiviewdelegate.mm \
         $$PWD/qidevice.mm
-
-    # QuickIOS do not link static plugin since Qt 5.7
 }
 

@@ -25,7 +25,7 @@ MouseArea {
     property BarButtonItemStyle style : BarButtonItemStyle {}
 
     width: Math.max(textItem.contentWidth,imageItem.width)  + 16
-    height: textItem.contentHeight * (title !== "" ) + imageItem.height
+    height: textItem.contentHeight * (title !== "" ) + imageItem.height + 10
 
     Column {
         width: parent.width

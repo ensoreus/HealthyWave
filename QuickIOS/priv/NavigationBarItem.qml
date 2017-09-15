@@ -68,7 +68,7 @@ Rectangle {
       id: navigationTitleImage
       fillMode: Image.PreserveAspectFit
       anchors.top: parent.top
-      anchors.topMargin: 2
+      anchors.topMargin: 8
       anchors.bottom: parent.bottom
       anchors.bottomMargin: 2
       anchors.horizontalCenter: parent.horizontalCenter

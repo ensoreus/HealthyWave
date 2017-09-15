@@ -27,9 +27,6 @@ Item {
             storage.storeSecKey(SecurityCore.secKey)
         }
         console.log(storage.getSecKey())
-        //if (ostype === 1){
-         //   var token = PushNotificationRegistrationTokenHandler.gcmRegistrationToken
-        //}
     }
 
     Connections {
@@ -95,7 +92,6 @@ Item {
             width: parent.width
 
             onStartEditData: {
-                //item1.state = "interactive"
                 emailEditPage.presenterAnimationEnds()
             }
             onNextPage: {
@@ -196,12 +192,12 @@ Item {
 
             Image {
                 id: logo
-                x: 91
+                x: parent.height /2 - height / 2
                 y: 122
                 width:  400
                 height: parent.height * 0.4
                 sourceSize.width: 0
-                anchors.verticalCenter: parent.verticalCenter
+                //anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 fillMode: Image.PreserveAspectFit
                 source: "logo-hw.png"
@@ -248,7 +244,12 @@ Item {
             name: "interactive"
             PropertyChanges {
                 target: logoBg
-                height: item1.height * 0.1
+                height: item1.height * 0.11
+            }
+
+            AnchorChanges{
+                target: logo
+                anchors.bottom: parent.bottom
             }
 
             PropertyChanges {
