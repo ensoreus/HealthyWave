@@ -248,6 +248,7 @@ ViewController {
             height: parent.height * 0.08
             text: qsTr("*Якщо у Вас немає порожніх бутлів на обмін, \nВам необхідно внести заставу за бутель")
             font.pointSize: 11
+            color:"#505050"
             font.weight: Font.ExtraLight
             font.family: "SF UI Text"
             horizontalAlignment: Text.AlignHCenter

@@ -26,27 +26,29 @@ ViewController {
 
     Timer{
         id: checkUnratedOrders
-        interval: (60000 * 5)
+        interval: (60000 * 1)
         repeat: true
         onTriggered: {
-            storage.getUnratedOrders(function(sorder){
-                if(typeof(sorder) != "undefined"){
-                    var combineAaddress = "м. " + sorder.city + " вул." + sorder.street + " "+ sorder.house+" оф."+sorder.apartment
-                    var combinedOrderTime = sorder.time
-                    var dividePos = combinedOrderTime.search(":")
-                    var orderday = combinedOrderTime.slice(0, dividePos);
-                    bottomRatePanel.visible = true
+            storage.getLastUnratedOrder(function(orderid, city, street, house, apt, time){
+                if(typeof(city) != "undefined"){
+                    var combineAaddress = "м. " + city + " вул." + street + " "+ house+" оф."+apt
+                    //var combinedOrderTime = time
+                    //var dividePos = combinedOrderTime.search(":")
+                    //var orderday = combinedOrderTime.slice(0, dividePos);
+                    var orderday = "cьогодні"
                     order = {
-                        "orderId":sorder.orderId,
+                        "orderId":orderid,
                         "address":{
-                            "city":sorder.city,
-                            "street":sorder.street,
-                            "house":sorder.house,
-                            "apartment":sorder.apt
+                            "city":city,
+                            "street":street,
+                            "house":house,
+                            "apartment":apt
                         },
                         "deliveryDate":orderday,
-                        "courierName":sorder.courier
+                        "courierName":""
                     }
+
+                    bottomRatePanel.showWithOrder(combineAaddress)
                 }else{
                     bottomRatePanel.visible = false
                 }
@@ -128,6 +130,11 @@ ViewController {
         height: parent.height * 0.2
         onRateClick: {
             navigationController.push("qrc:/feedback/AddFeedback.qml", {"rate":rate, "order":order})
+        }
+
+        function showWithOrder(address){
+            visible = true
+            txAddress.text = address
         }
 
         Behavior on visible {

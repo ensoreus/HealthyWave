@@ -168,7 +168,6 @@ Item {
                 var json = "{\"secKey\":\"" + getSecKey() + "\", \"phone\":\"" + phoneRes +"\", \"token\":\""+ tokenRes+"\"}"
                 print (json)
                 var authData = JSON.parse(json)
-                //print("@@@:"+authData.toString())
                 callback(authData)
             })
           })
@@ -216,14 +215,23 @@ Item {
     }
 */
 
-    function getUnratedOrders(callback){
+    function getLastUnratedOrder(callback){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, time TEXT,courier TEXT, rated INTEGER )')
-            var sqlstr = "select orderid, city, street, house, floor, apt, entrance, entranceDoor, time, courier, rated from orders where rated = 0";
+            var sqlstr = "select orderid, city, street, house, floor, apt, entrance, entranceDoor, time, courier, rated from orders where rated = 0 ORDER BY rowid DESC";
             var result = tx.executeSql(sqlstr);
             if(result.rows.length > 0){
-                callback(result.rows.item(0))
+                if(typeof(result.rows.item(0)) != "undefined"){
+                    var orderid = result.rows.item(0).orderid
+                    var city = result.rows.item(0).city
+                    var street = result.rows.item(0).street
+                    var house = result.rows.item(0).house
+                    var apt = result.rows.item(0).apt;
+                    var time = result.rows.item(0).time
+                    console.log(city + " " + street + " " + house + " " + apt)
+                    callback(orderid, city, street, house, apt, time)
+                }
             }
         });
     }

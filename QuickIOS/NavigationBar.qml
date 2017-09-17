@@ -98,7 +98,7 @@ Rectangle {
       anchors.bottom: parent.bottom
 
       width: (22 + 16) * ratio;
-      height: 55 * ratio
+      height: 60 * ratio
 
       NavigationBackButton {
           id: backButton

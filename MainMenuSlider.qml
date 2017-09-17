@@ -47,16 +47,6 @@ Rectangle {
         state = "showAlert"
     }
 
-    Timer{
-        id: alertTimer
-        repeat: false
-        interval: 2000
-        onTriggered: {
-
-
-        }
-    }
-
     MainMenu{
         id: mainMenu
         anchors.fill: parent
@@ -117,7 +107,7 @@ Rectangle {
             prefersStatusBarHidden: false
             color: "#2bb0a4"
             navigationBar.color: "#2bb0a4"
-            navigationBar.height: 60 * ratio
+            navigationBar.height: 65 * ratio
             navigationBar.titleAttributes: NavigationBarTitleAttributes{
                 textColor: "white"
                 imageSource: "qrc:/commons/logo-hw.png"

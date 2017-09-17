@@ -59,7 +59,7 @@ function getPinCode(phone, secKey){
     return isSent
 }
 
-function confirmPinCode(pin, phone, callback){
+function confirmPinCode(pin, phone, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
