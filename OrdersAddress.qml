@@ -16,6 +16,7 @@ ViewController {
     property var dynamicElements
     property var lastTopAnchor: pAddresses.top
     id: orderAddressViewController
+
     navigationItem:NavigationItem{
         centerBarTitle:"Замовлення"
     }
@@ -155,10 +156,11 @@ ViewController {
             }
 
             function addNewOption(){
-                var onCheckedChanged = Qt.binding(function(){
+                var onCheckedChanged = function(){
                     isAddNew = rbAddNew.checked
                     console.log("add new checked")
-                })
+                    btnNext.enabled = true
+                }
                 var rbAddNew = createRadioButton(onCheckedChanged)
                 rbAddNew.checked = false
                 rbAddNew.text = "Додати нову адресу"

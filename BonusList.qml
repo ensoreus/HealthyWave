@@ -53,22 +53,19 @@ ViewController {
                 height: 100 * ratio
                 width: lstBonuses.width
                 lbMainTitle:BonusName
+                lbComment: Comment
                 cbUse.onCheckStateChanged: {
-                    if(cbUse.checked){
-                        bonusesToUse.push({})
-                    }else{
-                        var editedArray = bonusesToUse.reduce(function(res, item){
-                            if(item === PromoCode){
-                                return res
-                            }else{
-                                return res.concat(item)
-                            }
+                    if (cbUse.checked) {
+                        bonusesToUse.push(bonusModel.get(index))
+                    } else {
+                        bonusesToUse = bonusesToUse.filter( function(item){
+                            return (item.PromoCode != PromoCode)
                         })
                     }
                 }
 
-                //lbComment: comment
                 lbActiveTill: formatDateLine(ValidityPeriod)
+
                 function formatDateLine(date){
                     var yyyy = date.substring(0, 4)
                     var MM = date.substring(4, 6)
@@ -95,8 +92,6 @@ ViewController {
                         bonusModel.append(item)
                     }
                 }
-
-
             }
         }
 

@@ -213,7 +213,7 @@ function getBonus(authdata, onSuccess, onFailure){
 }
 
 function addPromoCode(promocode, authdata, onSuccess, onFailure){
-    call("addpromocode", {"phone":authdata.phone, "promocode":promocode}, onSuccess, onFailure)
+    call("addpromocode", {"phone":authdata.phone, "promocode":promocode}, authdata, onSuccess, onFailure)
 }
 
 function call(routine, params, authData, onSuccess, onFailure){

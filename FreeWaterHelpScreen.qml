@@ -1,6 +1,7 @@
 import QtQuick 2.4
 import QuickIOS 0.1
 import com.ensoreus.Clipboard 1.0
+import "qrc:/"
 
 NavigationController {
 
@@ -21,8 +22,20 @@ NavigationController {
         id: clipboard
     }
 
+    Storage{
+        id:storage
+    }
+
+
     FreeWaterHelpScreenForm {
         id: helpScreen
+        Component.onCompleted: {
+                storage.getPromoCode(function(promocode){
+                    promoCodeText.text = promocode
+                })
+            state = "promoCodeGen"
+        }
+
         property var navigationItem: NavigationItem{
             centerBarTitle:""
             centerBarImage:"qrc:/commons/logo-hw.png"
@@ -37,6 +50,8 @@ NavigationController {
                 }
             }
         }
+
+
         promoCodeText.onWillStartAnimation: {
                  promoCodeText.forceActiveFocus()
         }
@@ -46,9 +61,7 @@ NavigationController {
         btnCopyCode.onPressedChanged: {
             btnCopyCodeLabel.font.bold = !btnCopyCode.pressed
         }
-        Component.onCompleted: {
-            state = "promoCodeGen"
-        }
+
         btnHowItWorks.onClicked: {
             state = "howItWorks"
         }

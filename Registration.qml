@@ -149,13 +149,18 @@ Item {
 
                 console.log(PushNotificationRegistrationTokenHandler.gcmRegistrationToke)
                 var pushtoken = PushNotificationRegistrationTokenHandler.gcmRegistrationToken
-                Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(token, url){
+                var secKey = storage.getSecKey()
+                Api.auth(phoneEditPage.phoneField.text, secKey, function(token, url){
                     storage.saveToken(token)
-                    Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, ostype, function(response, url){
+                    Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, ostype, function(response){
                         if(!response.error){
-                            storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, promoCodeEditPage.text)
-                            stopPropcessIndicator()
-                            item1.state = "default"
+                            storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, response.promocode)
+                            Api.addPromoCode(promoCodeField.text, {secKey: secKey, phone: phoneEditPage.phoneField.text, token: token}, function(response){
+
+                                stopPropcessIndicator()
+                                item1.state = "default"
+                            }, function(failure){})
+
                         }else{
                             stopPropcessIndicator()
                         }
@@ -221,7 +226,6 @@ Item {
                 onNextPage: {
                     stackLayout.push(pinEditPage)
                     var result = Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
-                    //console.log(result)
                 }
             }
         }

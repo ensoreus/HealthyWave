@@ -363,7 +363,6 @@ ViewController {
                 context.confirmed = true
                 orderAccepted.visible = true
                 context.orderId = '1'
-                //storage.addUnratedOrder(context)
                 storage.getAuthData(function(authdata){
                     Api.createOrder(context, authdata, function(result){
                         console.log(result.result)

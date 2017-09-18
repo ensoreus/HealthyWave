@@ -42,8 +42,9 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('drop table if exists userData');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT)')
-            var sqlstr = "insert into userData ( phone, name, email ) values ('" + phone + "', '"+name+"', '"+email+"')";
+            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT)')
+            var sqlstr = "insert into userData ( phone, name, email, promocode ) values ('" + phone + "', '"+name+"', '"+email+"', '"+promocode+"')";
+            console.log(sqlstr)
             var result = tx.executeSql(sqlstr);
         });
     }
@@ -83,13 +84,13 @@ Item {
         });
     }
 
-    function getPromoCode(type, callback){
+    function getPromoCode(callback){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         var promocode = ""
         db.transaction(function(tx){
             var sqlstr = "select promocode from userData";
             var result = tx.executeSql(sqlstr);
-            promocode = result.rows.item(0).phone
+            promocode = result.rows.item(0).promocode
             if(typeof callback != 'undefined'){
                 callback(promocode)
             }else{
@@ -229,7 +230,6 @@ Item {
                     var house = result.rows.item(0).house
                     var apt = result.rows.item(0).apt;
                     var time = result.rows.item(0).time
-                    console.log(city + " " + street + " " + house + " " + apt)
                     callback(orderid, city, street, house, apt, time)
                 }
             }
