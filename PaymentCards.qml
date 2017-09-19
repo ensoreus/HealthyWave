@@ -86,6 +86,9 @@ ViewController {
                     var item = data[index]
                     var modelItem = {label:item.cardPan, cardService:(item.CardType === "Visa" ? "qrc:/commons/img-visa.png" : "qrc:/commons/img-mastercard.png"), token:item.CardToken}
                     append(modelItem)
+                    if(index == 0){
+                           context.cardToPay = item.CardToken
+                    }
                 }
                 addNewOption()
             }
@@ -102,7 +105,7 @@ ViewController {
             function append(item){
                 var checkChanged = function(){
                     btnNext.enabled = true
-                    context.cardToPay = (checked) ? token : ""
+                    context.cardToPay = (item.checked) ? token : ""
                 }
                 var rbCard = createRadioButton(checkChanged)
                 var iCardImage = createImage(rbCard, item.cardService)
@@ -128,7 +131,6 @@ ViewController {
 
             function createImage(rbParent, source){
                 var qml = "import QtQuick 2.0; Image{ fillMode: Image.PreserveAspectFit; source:\""+ source +"\"}"
-                console.log(qml)
                 var iCardType = Qt.createQmlObject(qml, rbParent, "commons")
                 iCardType.anchors.right = rbParent.right
                 iCardType.anchors.verticalCenter = rbParent.verticatCenter
@@ -140,7 +142,6 @@ ViewController {
                 if(typeof(dynamicElements) == 'undefined'){
                     dynamicElements = new Array(1)
                 }
-
                 var onCheckedChanged = function(){
                     isAddNew = rbAddNew.checked
                     btnNext.enabled = true
@@ -173,7 +174,7 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             labelText: "ДАЛІ"
             onButtonClick: {
-
+                console.log("cardToPay:"+context.cardToPay)
                 if(isAddNew){
                     navigationController.push("qrc:/cards/AddNewCard.qml")
                 }else{

@@ -1,16 +1,31 @@
-import QtQuick 2.0
+import QtQuick 2.9
 import QuickIOS 0.1
+import QtQuick.Controls 2.2
 import com.ensoreus.Clipboard 1.0
 
 import "qrc:/"
+import "qrc:/commons"
 import "qrc:/controls"
 import "qrc:/Api.js" as Api
+
 ViewController {
+    id: newOrderPage
     property var navigationItem: NavigationItem{
         centerBarTitle: "Безкоштовна вода"
     }
-
+    property var component
     property var bonusesToUse: []
+    property OrderContext context
+
+    function showBusyIndicator(){
+        wheel.visible = true
+        wheel.running = true
+    }
+
+    function hideBusyIndicator(){
+        wheel.visible = false
+        wheel.running = false
+    }
 
     Clipboard{
         id: clipboard
@@ -20,12 +35,29 @@ ViewController {
         id:storage
     }
 
+    function createContextObjects() {
+        component = Qt.createComponent("qrc:/commons/OrderContext.qml");
+        context = component.createObject(newOrderPage, {
+                                                                    "fullb":0,
+                                                                    "emptyb":0,
+                                                                    "firstorder":0,
+                                                                    "card": 0,
+                                                                    "pump": 0,
+                                                                    "cardToPay":"",
+                                                                    "bonuses":[]
+                                                                })
+    }
+
     Component.onCompleted: {
+        createContextObjects()
         storage.getAuthData(function(authdata){
+            showBusyIndicator()
             Api.getBonus(authdata, function(response){
                 console.log(response)
                 bonusModel.addItems(response.result)
+                hideBusyIndicator()
             }, function(failure){
+                hideBusyIndicator()
                 console.log(failure)
             })
         })
@@ -93,7 +125,16 @@ ViewController {
                     }
                 }
             }
+            BusyIndicator{
+                id: wheel
+                height: 80 * ratio
+                width: 80 * ratio
+                running: false
+                visible: false
+            }
         }
+
+
 
         HWRoundButton{
             id: btnUseSelectedBonuses
@@ -104,6 +145,10 @@ ViewController {
             height: parent.height * 0.1
             visible: bonusModel.itemsSelected()
             labelText: "ВИКОРИСТАТИ"
+            onButtonClick: {
+                context.bonuses = bonusesToUse
+                navigationController.push("qrc:/orders/NewOrder.qml", {"context":context})
+            }
         }
 
         Text{

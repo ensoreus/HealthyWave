@@ -123,6 +123,7 @@ function searchNearestTime(address, authData, onSuccess, onFailure){
 }
 
 function createOrder(orderContext, authData, onSuccess, onFailure){
+
     call("createorder", {
              "city":orderContext.address.city,
              "street":orderContext.address.street,
@@ -139,6 +140,8 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
              "to":orderContext.deliveryTime.toHour,
              "deliverydate":orderContext.deliveryTime.day,
              "callrequires":orderContext.needToCall,
+             "cardtoken":orderContext.cardToPay,
+             "paycard":typeof(orderContext.cardToPay) == "undefined" ? 0 : 1,
              "phone":authData.phone
          }, authData, onSuccess, onFailure)
 }

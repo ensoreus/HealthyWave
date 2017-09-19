@@ -53,5 +53,5 @@ function extractDataFromNotification( notification ) {
     })
     console.log("in extract courier:" + courier + " phone:" + phone + " orderid:"+orderid)
     return {"courier":courier, "phone":phone, "orderid":orderid}
-
 }
+
