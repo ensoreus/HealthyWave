@@ -24,7 +24,11 @@ ViewController {
     }
 
     onViewDidAppear:{
-        createContextObjects()
+        if(typeof(context)=="undefined"){
+            createContextObjects()
+        }else{
+            console.log(context)
+        }
     }
 
     function createContextObjects() {

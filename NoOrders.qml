@@ -34,7 +34,11 @@ ViewController{
         storage.getAuthData(function(authdata){
             Api.getOrders(authdata, function(response){
                 busyIndicatior.running = false
-                showOrdersList(response.result)
+                if(response.result.length > 0){
+                    showOrdersList(response.result)
+                }else{
+                    hideOrdersList()
+                }
                 console.log(response)
             }, function(failure){
                 busyIndicatior.running = false

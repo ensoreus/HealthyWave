@@ -1,8 +1,12 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.1
 import QuickIOS 0.1
+import QtQuick.Window 2.2
+
 import "qrc:/controls"
 import "qrc:/commons"
+import "qrc:/Api.js" as Api
+import "qrc:/"
 
 ViewController {
     property alias rbCashPayment: rbCashPayment
@@ -15,10 +19,15 @@ ViewController {
         centerBarTitle:"Замовлення"
     }
 
+    Storage{
+        id:storage
+    }
+
     onViewDidAppear:{
         fullb = context.fullb
         emptyb = context.emptyb
         updateSummary()
+        console.log("bouses:"+context.bonuses)
     }
 
     function updateSummary(){
@@ -75,7 +84,7 @@ ViewController {
     }
 
     function calcTotal(){
-        var total = calcFullBottles() + calcEmptyBottlesFee() + (cbPump.checked ? 100 : 0) - (cbFirst.checked ? 2 : 0)
+        var total = calcFullBottles() + calcEmptyBottlesFee() + (cbPump.checked ? 100 : 0)
         return total
     }
 
@@ -83,316 +92,362 @@ ViewController {
         return calcTotal() + " грн."
     }
 
+    //    function getBonuses(){
+    //        storage.getAuthData(function(authdata){
+    //            Api.getBonus(authdata, function(response){
+    //            },function(failure){
+    //            })
+    //        })
+    //    }
 
-    Rectangle {
-        id: content
-        color: "#ffffff"
-        anchors.fill: parent
+    Flickable{
+        id: flickableZone
+        anchors.fill:parent
+        contentHeight: content.height
+        contentWidth: content.width
 
-        HWHeader {
-            id: hAdditionaly
-            anchors.topMargin: parent.width * 0.01
-            anchors.top: parent.top
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.leftMargin: 0
-            title.text: "Додатково"
-        }
-
-        HWHeader {
-            id: hSum
-            x: 0
-            y: -1
-            anchors.topMargin: parent.height * 0.02
-            anchors.top: cbPump.bottom
-            anchors.leftMargin: 0
-            anchors.right: parent.right
-            anchors.left: parent.left
-            title.text: "Сума замовлення"
-        }
-
-        HWCheckBox {
-            id: cbFirst
-            y: 52
-            height: 13 * ratio
-            text: "Перше замовлення онлайн - \n 2 бутля безкоштовно"
-            anchors.rightMargin: parent.width * 0.02
-            anchors.right: parent.right
-            anchors.leftMargin: parent.width * 0.02
-            anchors.left: parent.left
-            anchors.top: hAdditionaly.bottom
-            anchors.topMargin: 0.02
-            checked: true
-            onCheckStateChanged: {
-                updateSummary()
+        Rectangle {
+            id: content
+            color: "#ffffff"
+            width:Screen.desktopAvailableWidth
+            Component.onCompleted: {
+                height = hAdditionaly.height + bonusLst.header + cbPump.height + hSum.height + borderImage.height + hPaymentType.height + rbCardPayment.height + rbCashPayment.height
             }
-        }
 
-        HWCheckBox {
-            id: cbPump
-            x: 5
-            height: 13 * ratio
-            text: "Механічна помпа - 100 грн."
-            anchors.topMargin: parent.height * 0.02
-            anchors.top: cbFirst.bottom
-            anchors.leftMargin: parent.width * 0.02
-            anchors.rightMargin: parent.width * 0.02
-            checked: true
-            anchors.right: parent.right
-            anchors.left: parent.left
-            onCheckStateChanged: {
-                updateSummary()
-            }
-        }
-
-        BorderImage {
-            id: borderImage
-            anchors.bottomMargin: parent.height * 0.3
-            anchors.bottom: parent.bottom
-            anchors.rightMargin: parent.width * 0.01
-            //anchors.topMargin: parent.height * 0.02
-            anchors.top: hSum.bottom
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            border.bottom: 5
-            border.top: 3
-            border.right: 5
-            border.left: 5
-            source: "img-orderdetails-bg.png"
-
-            Text {
-                id: lbWater
-                color: "#4a4a4a"
-                text: qsTr("Вода:")
-                font.weight: Font.Thin
-                font.pointSize: 14
-                font.family: "SF UI Text"
-                anchors.leftMargin: parent.width * 0.1
-                anchors.left: parent.left
-                anchors.topMargin: parent.height * 0.1
+            HWHeader {
+                id: hAdditionaly
+                anchors.topMargin: parent.width * 0.01
                 anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                height: (bonusModel.count + 1) * 13 * ratio
+                title.text: "Додатково"
+
             }
 
-            Text {
-                id: lbFreeWater
-                color: "#4a4a4a"
-                text: qsTr("Безкоштовна вода:")
-                font.weight: Font.Thin
-                font.pointSize: 14
-                anchors.topMargin: parent.height * 0.01
-                anchors.top: lbWater.bottom
-                anchors.left: lbWater.left
+            ListView{
+                id:bonusLst
+                anchors.top: hAdditionaly.bottom
+                anchors.topMargin: 5 * ratio
+                anchors.left: parent.left
+                anchors.right: parent.right
+                visible: bonusModel.count > 0
+                height:bonusModel.count * 13 * ratio
+                model:ListModel{
+                    id: bonusModel
+                }
+                delegate: HWCheckBox {
+                    id: cbBonusCheck
+                    y: 52
+                    height: 13 * ratio
+                    text: BonusName
+                    anchors.rightMargin: parent.width * 0.02
+                    anchors.right: parent.right
+                    anchors.leftMargin: parent.width * 0.02
+                    anchors.left: parent.left
+                    anchors.top: hAdditionaly.bottom
+                    anchors.topMargin: 0.02
+                    checked: true
+                    onCheckStateChanged: {
+                        updateSummary()
+                    }
+                }
+            }
+
+            HWCheckBox {
+                id: cbPump
+                x: 5
+                height: 13 * ratio
+                text: "Механічна помпа - 100 грн."
+                anchors.topMargin: parent.height * 0.02
+                anchors.top: bonusLst.bottom
+                anchors.leftMargin: parent.width * 0.02
+                anchors.rightMargin: parent.width * 0.02
+                checked: true
+                anchors.right: parent.right
+                anchors.left: parent.left
+                onCheckStateChanged: {
+                    updateSummary()
+                }
+            }
+
+            HWHeader {
+                id: hSum
+                x: 0
+                y: -1
+                anchors.topMargin: parent.height * 0.02
+                anchors.top: bonusLst.bottom
+                anchors.leftMargin: 0
+                anchors.right: parent.right
+                anchors.left: parent.left
+                title.text: "Сума замовлення"
+            }
+
+            //        HWCheckBox {
+            //            id: cbFirst
+            //            y: 52
+            //            height: 13 * ratio
+            //            text: "Перше замовлення онлайн - \n 2 бутля безкоштовно"
+            //            anchors.rightMargin: parent.width * 0.02
+            //            anchors.right: parent.right
+            //            anchors.leftMargin: parent.width * 0.02
+            //            anchors.left: parent.left
+            //            anchors.top: hAdditionaly.bottom
+            //            anchors.topMargin: 0.02
+            //            checked: true
+            //            onCheckStateChanged: {
+            //                updateSummary()
+            //            }
+            //        }
+
+
+
+            BorderImage {
+                id: borderImage
+                anchors.bottomMargin: parent.height * 0.3
+                anchors.bottom: parent.bottom
+                anchors.rightMargin: parent.width * 0.01
+                //anchors.topMargin: parent.height * 0.02
+                anchors.top: hSum.bottom
+                anchors.right: parent.right
+                anchors.left: parent.left
+                anchors.leftMargin: 5
+                border.bottom: 5
+                border.top: 3
+                border.right: 5
+                border.left: 5
+                source: "img-orderdetails-bg.png"
+
+                Text {
+                    id: lbWater
+                    color: "#4a4a4a"
+                    text: qsTr("Вода:")
+                    font.weight: Font.Thin
+                    font.pointSize: 14
+                    font.family: "SF UI Text"
+                    anchors.leftMargin: parent.width * 0.1
+                    anchors.left: parent.left
+                    anchors.topMargin: parent.height * 0.1
+                    anchors.top: parent.top
+                }
+
+                Text {
+                    id: lbFreeWater
+                    color: "#4a4a4a"
+                    text: qsTr("Безкоштовна вода:")
+                    font.weight: Font.Thin
+                    font.pointSize: 14
+                    anchors.topMargin: parent.height * 0.01
+                    anchors.top: lbWater.bottom
+                    anchors.left: lbWater.left
+                    anchors.leftMargin: 0
+                }
+
+                Text {
+                    id: lbTotalBottles
+                    color: "#4a4a4a"
+                    text: qsTr("Всього бутлів:")
+                    font.pointSize: 14
+                    font.weight: Font.Thin
+                    anchors.left: lbFreeWater.left
+                    anchors.leftMargin: 0
+                    anchors.topMargin: parent.height * 0.01
+                    anchors.top: lbFreeWater.bottom
+                }
+
+                Text {
+                    id: lbEmptyBottles
+                    color: "#4a4a4a"
+                    text: qsTr("Порожніх бутлів:")
+                    font.weight: Font.Thin
+                    font.pointSize: 14
+                    anchors.left: lbTotalBottles.left
+                    anchors.leftMargin: 0
+                    anchors.topMargin: parent.height * 0.01
+                    anchors.top: lbTotalBottles.bottom
+                }
+
+                Text {
+                    id: lbBottlesFee
+                    color: "#4a4a4a"
+                    text: qsTr("Застава за бутлі:")
+                    font.weight: Font.Thin
+                    font.pointSize: 14
+                    anchors.left: lbEmptyBottles.left
+                    anchors.leftMargin: 0
+                    anchors.topMargin: parent.height * 0.01
+                    anchors.top: lbEmptyBottles.bottom
+                }
+
+                Text {
+                    id: lbPump
+                    color: "#4a4a4a"
+                    text: qsTr("Механічна помпа:")
+                    font.weight: Font.Thin
+                    font.pointSize: 14
+                    anchors.left: lbBottlesFee.left
+                    anchors.leftMargin: 0
+                    anchors.topMargin: parent.height * 0.01
+                    anchors.top: lbBottlesFee.bottom
+                }
+
+                Text {
+                    id: lbSummaryOfOrder
+                    color: "#4a4a4a"
+                    text: qsTr("Сума замовлення:")
+                    anchors.left: lbPump.left
+                    anchors.topMargin: parent.height * 0.01
+                    anchors.top: lbPump.bottom
+                    font.pointSize: 14
+                }
+
+                Text {
+                    id: txWater
+                    color: "#4a4a4a"
+                    text: qsTr("")
+                    anchors.left: parent.horizontalCenter
+                    anchors.leftMargin: 15 * ratio
+                    anchors.top: lbWater.top
+                    anchors.topMargin: 0
+                    font.weight: Font.DemiBold
+                    font.pointSize: 14
+                    font.family: "SF UI Text"
+                }
+
+                Text {
+                    id: txFreeWater
+                    color: "#4a4a4a"
+                    text: qsTr("")
+                    anchors.left: parent.horizontalCenter
+                    anchors.leftMargin: 15 * ratio
+                    anchors.top: lbFreeWater.top
+                    anchors.topMargin: 0
+                    font.family: "SF UI Text"
+                    font.weight: Font.DemiBold
+                    font.pointSize: 14
+                }
+
+                Text {
+                    id: txTotalBottles
+                    color: "#4a4a4a"
+                    text: qsTr("")
+                    anchors.top: lbTotalBottles.top
+                    anchors.topMargin: 0
+                    anchors.left: parent.horizontalCenter
+                    anchors.leftMargin: 15 * ratio
+                    font.family: "SF UI Text"
+                    font.weight: Font.DemiBold
+                    font.pointSize: 14
+                }
+
+                Text {
+                    id: txBottlesFee
+                    color: "#4a4a4a"
+                    text: qsTr("")
+                    anchors.left: parent.horizontalCenter
+                    anchors.leftMargin: 15 * ratio
+                    anchors.top: lbBottlesFee.top
+                    anchors.topMargin: 0
+                    font.family: "SF UI Text"
+                    font.weight: Font.DemiBold
+                    font.pointSize: 14
+                }
+
+                Text {
+                    id: txEmptyBottles
+                    color: "#4a4a4a"
+                    text: qsTr("")
+                    anchors.left: parent.horizontalCenter
+                    anchors.leftMargin: 15 * ratio
+                    anchors.top: lbEmptyBottles.top
+                    anchors.topMargin: 0
+                    font.family: "SF UI Text"
+                    font.weight: Font.DemiBold
+                    font.pointSize: 14
+                }
+
+                Text {
+                    id: txPump
+                    color: "#4a4a4a"
+                    text: qsTr("")
+                    anchors.left: parent.horizontalCenter
+                    anchors.leftMargin: 15 * ratio
+                    anchors.top: lbPump.top
+                    anchors.topMargin: 0
+                    font.family: "SF UI Text"
+                    font.weight: Font.DemiBold
+                    font.pointSize: 14
+                }
+
+                Text {
+                    id: txSummaryOfOrder
+                    color: "#4a4a4a"
+                    text: qsTr("")
+                    anchors.left: parent.horizontalCenter
+                    anchors.leftMargin: 15 * ratio
+                    anchors.top: lbSummaryOfOrder.top
+                    anchors.topMargin: 0
+                    font.family: "SF UI Text"
+                    font.weight: Font.DemiBold
+                    font.pointSize: 18
+                }
+            }
+
+            HWHeader {
+                id: hPaymentType
+                x: -7
+                y: 9
+                anchors.top: borderImage.bottom
+                anchors.leftMargin: 0
+                anchors.right: parent.right
+                anchors.left: parent.left
+                title.text: "Спосіб оплати"
+            }
+
+            HWRadioButton {
+                id: rbCashPayment
+                text: "Готівковий розрахунок"
+                anchors.right: borderImage.right
+                anchors.rightMargin: 0
+                anchors.top: hPaymentType.bottom
+                anchors.left: parent.left
+                anchors.leftMargin: 10 * ratio
+            }
+
+            HWRadioButton {
+                id: rbCardPayment
+                text: "Платіжна картка"
+                checked: false
+                anchors.top: rbCashPayment.bottom
+                anchors.right: rbCashPayment.right
+                anchors.rightMargin: 0
+                anchors.left: rbCashPayment.left
                 anchors.leftMargin: 0
             }
 
-            Text {
-                id: lbTotalBottles
-                color: "#4a4a4a"
-                text: qsTr("Всього бутлів:")
-                font.pointSize: 14
-                font.weight: Font.Thin
-                anchors.left: lbFreeWater.left
-                anchors.leftMargin: 0
-                anchors.topMargin: parent.height * 0.01
-                anchors.top: lbFreeWater.bottom
-            }
+            HWRoundButton {
+                id: btnNext
+                width: parent.width * 0.7
+                height: parent.height * 0.1
+                labelText: "ДАЛІ"
+                anchors.bottomMargin: parent.height * 0.01
+                anchors.bottom: parent.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+                onButtonClick: {
 
-            Text {
-                id: lbEmptyBottles
-                color: "#4a4a4a"
-                text: qsTr("Порожніх бутлів:")
-                font.weight: Font.Thin
-                font.pointSize: 14
-                anchors.left: lbTotalBottles.left
-                anchors.leftMargin: 0
-                anchors.topMargin: parent.height * 0.01
-                anchors.top: lbTotalBottles.bottom
-            }
+                    context.card = rbCardPayment.checked
+                    context.pump = cbPump.checked
+                    //context.firstOrder = cbFirst.checked
 
-            Text {
-                id: lbBottlesFee
-                color: "#4a4a4a"
-                text: qsTr("Застава за бутлі:")
-                font.weight: Font.Thin
-                font.pointSize: 14
-                anchors.left: lbEmptyBottles.left
-                anchors.leftMargin: 0
-                anchors.topMargin: parent.height * 0.01
-                anchors.top: lbEmptyBottles.bottom
-            }
-
-            Text {
-                id: lbPump
-                color: "#4a4a4a"
-                text: qsTr("Механічна помпа:")
-                font.weight: Font.Thin
-                font.pointSize: 14
-                anchors.left: lbBottlesFee.left
-                anchors.leftMargin: 0
-                anchors.topMargin: parent.height * 0.01
-                anchors.top: lbBottlesFee.bottom
-            }
-
-            Text {
-                id: lbSummaryOfOrder
-                color: "#4a4a4a"
-                text: qsTr("Сума замовлення:")
-                anchors.left: lbPump.left
-                anchors.topMargin: parent.height * 0.01
-                anchors.top: lbPump.bottom
-                font.pointSize: 14
-            }
-
-            Text {
-                id: txWater
-                color: "#4a4a4a"
-                text: qsTr("")
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 15 * ratio
-                anchors.top: lbWater.top
-                anchors.topMargin: 0
-                font.weight: Font.DemiBold
-                font.pointSize: 14
-                font.family: "SF UI Text"
-            }
-
-            Text {
-                id: txFreeWater
-                color: "#4a4a4a"
-                text: qsTr("")
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 15 * ratio
-                anchors.top: lbFreeWater.top
-                anchors.topMargin: 0
-                font.family: "SF UI Text"
-                font.weight: Font.DemiBold
-                font.pointSize: 14
-            }
-
-            Text {
-                id: txTotalBottles
-                color: "#4a4a4a"
-                text: qsTr("")
-                anchors.top: lbTotalBottles.top
-                anchors.topMargin: 0
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 15 * ratio
-                font.family: "SF UI Text"
-                font.weight: Font.DemiBold
-                font.pointSize: 14
-            }
-
-            Text {
-                id: txBottlesFee
-                color: "#4a4a4a"
-                text: qsTr("")
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 15 * ratio
-                anchors.top: lbBottlesFee.top
-                anchors.topMargin: 0
-                font.family: "SF UI Text"
-                font.weight: Font.DemiBold
-                font.pointSize: 14
-            }
-
-            Text {
-                id: txEmptyBottles
-                color: "#4a4a4a"
-                text: qsTr("")
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 15 * ratio
-                anchors.top: lbEmptyBottles.top
-                anchors.topMargin: 0
-                font.family: "SF UI Text"
-                font.weight: Font.DemiBold
-                font.pointSize: 14
-            }
-
-            Text {
-                id: txPump
-                color: "#4a4a4a"
-                text: qsTr("")
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 15 * ratio
-                anchors.top: lbPump.top
-                anchors.topMargin: 0
-                font.family: "SF UI Text"
-                font.weight: Font.DemiBold
-                font.pointSize: 14
-            }
-
-            Text {
-                id: txSummaryOfOrder
-                color: "#4a4a4a"
-                text: qsTr("")
-                anchors.left: parent.horizontalCenter
-                anchors.leftMargin: 15 * ratio
-                anchors.top: lbSummaryOfOrder.top
-                anchors.topMargin: 0
-                font.family: "SF UI Text"
-                font.weight: Font.DemiBold
-                font.pointSize: 18
-            }
-        }
-
-        HWHeader {
-            id: hPaymentType
-            x: -7
-            y: 9
-            //anchors.topMargin: parent.height * 0.01
-            anchors.top: borderImage.bottom
-            anchors.leftMargin: 0
-            anchors.right: parent.right
-            anchors.left: parent.left
-            title.text: "Спосіб оплати"
-        }
-
-        HWRadioButton {
-            id: rbCashPayment
-            text: "Готівковий розрахунок"
-            anchors.right: borderImage.right
-            anchors.rightMargin: 0
-            //anchors.topMargin: parent.height * 0.01
-            anchors.top: hPaymentType.bottom
-            anchors.left: cbPump.left
-            anchors.leftMargin: 0
-        }
-
-        HWRadioButton {
-            id: rbCardPayment
-            text: "Платіжна картка"
-            checked: false
-            //anchors.topMargin: parent.height * 0.01
-            anchors.top: rbCashPayment.bottom
-            anchors.right: rbCashPayment.right
-            anchors.rightMargin: 0
-            anchors.left: rbCashPayment.left
-            anchors.leftMargin: 0
-        }
-
-        HWRoundButton {
-            id: btnNext
-            width: parent.width * 0.7
-            height: parent.height * 0.1
-            labelText: "ДАЛІ"
-            anchors.bottomMargin: parent.height * 0.01
-            anchors.bottom: parent.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            onButtonClick: {
-
-                context.card = rbCardPayment.checked
-                context.pump = cbPump.checked
-                context.firstOrder = cbFirst.checked
-
-                if (rbCardPayment.checked)
-                {
-                    navigationController.push("qrc:/orders/PaymentCards.qml", {"context":context})
-                }else{
-                    navigationController.push("qrc:/orders/OrdersAddress.qml", {"context":context})
+                    if (rbCardPayment.checked)
+                    {
+                        navigationController.push("qrc:/orders/PaymentCards.qml", {"context":context})
+                    }else{
+                        navigationController.push("qrc:/orders/OrdersAddress.qml", {"context":context})
+                    }
                 }
             }
         }
     }
-
 }

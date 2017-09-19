@@ -13,6 +13,7 @@ QtObject {
     property string orderId
     property string promocode
     property int needToCall: 0
+    property var bonuses
     property TimeEntity deliveryTime: TimeEntity{
         day:""
         fromHour: ""
