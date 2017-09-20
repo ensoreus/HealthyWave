@@ -1,10 +1,13 @@
 import QtQuick 2.0
 
 Rectangle {
-    property alias activeBonuses : activeBonusesModel
+    property alias activeBonuses : lstBonuses.model
     ListView{
         id: lstBonuses
         anchors.fill: parent
+        model:ListModel{
+            id:bonusModel
+        }
         delegate: Rectangle{
             color: "#F3F2F3"
             width: parent.width
@@ -18,7 +21,6 @@ Rectangle {
                 font.weight: Font.Thin
                 anchors.left: cell.left
                 anchors.right: cell.horizontalCenter
-                //anchors.leftMargin: 20 * ratio
                 wrapMode: Text.WordWrap
                 height: cell.height
                 width:100
@@ -33,20 +35,14 @@ Rectangle {
                 font.family: "SF UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 14
-                anchors.leftMargin: 0 * ratio
+                anchors.leftMargin: 2 * ratio
                 anchors.left:  cell.horizontalCenter
                 anchors.topMargin: 1 * ratio
                 anchors.top: lbBonusName.top
                 height: cell.height
             }
         }
-        model: ListModel{
-            id: activeBonusesModel
-//            ListElement{
-//                BonusName:"Стаканчики в подарок"
-//                ProductPrice:"19"
-//            }
-        }
+
     }
 
 }

@@ -27,6 +27,10 @@ ViewController {
         fullb = context.fullb
         emptyb = context.emptyb
         updateSummary()
+        if (typeof(context.bonuses) =="undefined"){
+            context.bonuses = new Array(1)
+        }
+
         getBonuses()
         console.log("bouses:"+context.bonuses)
         layoutHeight()
@@ -124,7 +128,7 @@ ViewController {
                 hPaymentType.height +
                 rbCardPayment.height +
                 rbCashPayment.height +
-                btnNext.height
+                btnNext.height + 30 * ratio
         content.height = (ch > parent.height) ? ch : parent.height
     }
 
@@ -147,7 +151,6 @@ ViewController {
                 anchors.right: parent.right
                 anchors.left: parent.left
                 anchors.leftMargin: 0
-                //height: 15 * ratio
                 title.text: "Додатково"
             }
 
@@ -184,9 +187,12 @@ ViewController {
 
                 function mapBonusSelectionOnContext(bonusIndex, isSelected){
                     if(isSelected){
-                        context.bonuses.push(bonusModel[bonusIndex])
+                        context.bonuses.push(bonusModel.get(bonusIndex))
+                        console.log(bonusModel.get(bonusIndex))
+                        bonusesInCheck.activeBonuses.append(bonusModel.get(bonusIndex))
+                        layoutHeight()
                     }else{
-                        context.splice(bonusIndex, 1)
+                        context.bonuses.splice(bonusIndex, 1)
                     }
                 }
 
@@ -236,7 +242,7 @@ ViewController {
                 anchors.top: hSum.bottom
                 anchors.right: parent.right
                 anchors.left: parent.left
-                anchors.leftMargin: 5
+                anchors.leftMargin: parent.width * 0.01
 
                 border.bottom: 5
                 border.top: 3
@@ -253,7 +259,7 @@ ViewController {
                     font.family: "SF UI Text"
                     anchors.leftMargin: parent.width * 0.1
                     anchors.left: parent.left
-                    anchors.topMargin: 15
+                    anchors.topMargin: 30 * ratio
                     anchors.top: parent.top
                 }
 
@@ -263,7 +269,7 @@ ViewController {
                     text: qsTr("Безкоштовна вода:")
                     font.weight: Font.Thin
                     font.pointSize: 14
-                    anchors.topMargin: 5
+                    anchors.topMargin: 5* ratio
                     anchors.top: lbWater.bottom
                     anchors.left: lbWater.left
                     anchors.leftMargin: 0
@@ -272,9 +278,10 @@ ViewController {
                 BonusesInCheck{
                     id:bonusesInCheck
                     anchors.top: lbFreeWater.bottom
-                    anchors.topMargin: 5
+                    anchors.topMargin: 5* ratio
                     anchors.left: lbBottlesFee.left
                     anchors.right: parent.right
+                    anchors.rightMargin: 18 * ratio
                     height: context.bonuses.count * 18 * ratio
                 }
 
@@ -286,7 +293,7 @@ ViewController {
                     font.weight: Font.Thin
                     anchors.left: lbFreeWater.left
                     anchors.leftMargin: 0
-                    anchors.topMargin: 5
+                    anchors.topMargin: 5* ratio
                     anchors.top: bonusesInCheck.bottom
                 }
 
@@ -298,7 +305,7 @@ ViewController {
                     font.pointSize: 14
                     anchors.left: lbTotalBottles.left
                     anchors.leftMargin: 0
-                    anchors.topMargin: 5
+                    anchors.topMargin: 5* ratio
                     anchors.top: lbTotalBottles.bottom
                 }
 
@@ -310,11 +317,9 @@ ViewController {
                     font.pointSize: 14
                     anchors.left: lbEmptyBottles.left
                     anchors.leftMargin: 0
-                    anchors.topMargin: 5
+                    anchors.topMargin: 5* ratio
                     anchors.top: lbEmptyBottles.bottom
                 }
-
-
 
                 Text {
                     id: lbPump
@@ -324,7 +329,7 @@ ViewController {
                     font.pointSize: 14
                     anchors.left: lbBottlesFee.left
                     anchors.leftMargin: 0
-                    anchors.topMargin: 10
+                    anchors.topMargin: 10* ratio
                     anchors.top: lbBottlesFee.bottom
                 }
 
@@ -333,7 +338,7 @@ ViewController {
                     color: "#4a4a4a"
                     text: qsTr("Сума замовлення:")
                     anchors.left: lbPump.left
-                    anchors.topMargin: 5
+                    anchors.topMargin: 15 * ratio
                     anchors.top: lbPump.bottom
                     font.pointSize: 14
                 }
