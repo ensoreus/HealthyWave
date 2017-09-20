@@ -27,7 +27,9 @@ ViewController {
         fullb = context.fullb
         emptyb = context.emptyb
         updateSummary()
+        getBonuses()
         console.log("bouses:"+context.bonuses)
+        layoutHeight()
     }
 
     function updateSummary(){
@@ -92,13 +94,39 @@ ViewController {
         return calcTotal() + " грн."
     }
 
-    //    function getBonuses(){
-    //        storage.getAuthData(function(authdata){
-    //            Api.getBonus(authdata, function(response){
-    //            },function(failure){
-    //            })
-    //        })
-    //    }
+    function getBonuses(){
+        storage.getAuthData(function(authdata){
+            bonusModel.clear()
+            Api.getBonus(authdata, function(response){
+                for(var item in response.result){
+                    bonusModel.append(response.result[item])
+                }
+            },function(failure){
+            })
+        })
+    }
+
+    function layoutHeight(){
+        borderImage.height = lbWater.height +
+                lbFreeWater.height +
+                lbTotalBottles.height +
+                lbEmptyBottles.height +
+                lbBottlesFee.height +
+                bonusesInCheck.height +
+                lbPump.height +
+                lbSummaryOfOrder.height +
+                100
+        var ch = hAdditionaly.height +
+                bonusLst.header +
+                cbPump.height +
+                hSum.height +
+                borderImage.height +
+                hPaymentType.height +
+                rbCardPayment.height +
+                rbCashPayment.height +
+                btnNext.height
+        content.height = (ch > parent.height) ? ch : parent.height
+    }
 
     Flickable{
         id: flickableZone
@@ -109,10 +137,8 @@ ViewController {
         Rectangle {
             id: content
             color: "#ffffff"
-            width:Screen.desktopAvailableWidth
-            Component.onCompleted: {
-                height = hAdditionaly.height + bonusLst.header + cbPump.height + hSum.height + borderImage.height + hPaymentType.height + rbCardPayment.height + rbCashPayment.height
-            }
+            width: 414 * ratio
+            height: 736 * ratio
 
             HWHeader {
                 id: hAdditionaly
@@ -121,9 +147,8 @@ ViewController {
                 anchors.right: parent.right
                 anchors.left: parent.left
                 anchors.leftMargin: 0
-                height: (bonusModel.count + 1) * 13 * ratio
+                //height: 15 * ratio
                 title.text: "Додатково"
-
             }
 
             ListView{
@@ -131,27 +156,47 @@ ViewController {
                 anchors.top: hAdditionaly.bottom
                 anchors.topMargin: 5 * ratio
                 anchors.left: parent.left
+                anchors.leftMargin: 30 * ratio
                 anchors.right: parent.right
                 visible: bonusModel.count > 0
-                height:bonusModel.count * 13 * ratio
+                height:(bonusModel.count * (18 + 5)) * ratio
                 model:ListModel{
                     id: bonusModel
                 }
+                spacing: 5 * ratio
                 delegate: HWCheckBox {
                     id: cbBonusCheck
                     y: 52
-                    height: 13 * ratio
+                    height: 18 * ratio
                     text: BonusName
-                    anchors.rightMargin: parent.width * 0.02
-                    anchors.right: parent.right
-                    anchors.leftMargin: parent.width * 0.02
-                    anchors.left: parent.left
+                    checked: bonusLst.isBonusesPreselected(PromoCode)
+                    anchors.rightMargin: bonusLst.width * 0.02
+                    anchors.right: bonusLst.right
+                    anchors.leftMargin: 20 * ratio
+                    anchors.left: bonusLst.left
                     anchors.top: hAdditionaly.bottom
                     anchors.topMargin: 0.02
-                    checked: true
                     onCheckStateChanged: {
+                        bonusLst.mapBonusSelectionOnContext(index, checked)
                         updateSummary()
                     }
+                }
+
+                function mapBonusSelectionOnContext(bonusIndex, isSelected){
+                    if(isSelected){
+                        context.bonuses.push(bonusModel[bonusIndex])
+                    }else{
+                        context.splice(bonusIndex, 1)
+                    }
+                }
+
+                function isBonusesPreselected(bonusCode){
+                    for (var item in context.bonuses){
+                        if(context.bonuses[item].PromoCode === bonusCode){
+                            return true
+                        }
+                    }
+                    return false
                 }
             }
 
@@ -160,12 +205,12 @@ ViewController {
                 x: 5
                 height: 13 * ratio
                 text: "Механічна помпа - 100 грн."
-                anchors.topMargin: parent.height * 0.02
+                anchors.topMargin: 5 * ratio
                 anchors.top: bonusLst.bottom
-                anchors.leftMargin: parent.width * 0.02
                 anchors.rightMargin: parent.width * 0.02
                 checked: true
                 anchors.right: parent.right
+                anchors.leftMargin: 30 * ratio
                 anchors.left: parent.left
                 onCheckStateChanged: {
                     updateSummary()
@@ -176,7 +221,7 @@ ViewController {
                 id: hSum
                 x: 0
                 y: -1
-                anchors.topMargin: parent.height * 0.02
+                anchors.topMargin: 23 * ratio
                 anchors.top: bonusLst.bottom
                 anchors.leftMargin: 0
                 anchors.right: parent.right
@@ -184,35 +229,15 @@ ViewController {
                 title.text: "Сума замовлення"
             }
 
-            //        HWCheckBox {
-            //            id: cbFirst
-            //            y: 52
-            //            height: 13 * ratio
-            //            text: "Перше замовлення онлайн - \n 2 бутля безкоштовно"
-            //            anchors.rightMargin: parent.width * 0.02
-            //            anchors.right: parent.right
-            //            anchors.leftMargin: parent.width * 0.02
-            //            anchors.left: parent.left
-            //            anchors.top: hAdditionaly.bottom
-            //            anchors.topMargin: 0.02
-            //            checked: true
-            //            onCheckStateChanged: {
-            //                updateSummary()
-            //            }
-            //        }
-
-
-
             BorderImage {
                 id: borderImage
-                anchors.bottomMargin: parent.height * 0.3
-                anchors.bottom: parent.bottom
                 anchors.rightMargin: parent.width * 0.01
-                //anchors.topMargin: parent.height * 0.02
+                anchors.topMargin: 15 * ratio
                 anchors.top: hSum.bottom
                 anchors.right: parent.right
                 anchors.left: parent.left
                 anchors.leftMargin: 5
+
                 border.bottom: 5
                 border.top: 3
                 border.right: 5
@@ -228,7 +253,7 @@ ViewController {
                     font.family: "SF UI Text"
                     anchors.leftMargin: parent.width * 0.1
                     anchors.left: parent.left
-                    anchors.topMargin: parent.height * 0.1
+                    anchors.topMargin: 15
                     anchors.top: parent.top
                 }
 
@@ -238,10 +263,19 @@ ViewController {
                     text: qsTr("Безкоштовна вода:")
                     font.weight: Font.Thin
                     font.pointSize: 14
-                    anchors.topMargin: parent.height * 0.01
+                    anchors.topMargin: 5
                     anchors.top: lbWater.bottom
                     anchors.left: lbWater.left
                     anchors.leftMargin: 0
+                }
+
+                BonusesInCheck{
+                    id:bonusesInCheck
+                    anchors.top: lbFreeWater.bottom
+                    anchors.topMargin: 5
+                    anchors.left: lbBottlesFee.left
+                    anchors.right: parent.right
+                    height: context.bonuses.count * 18 * ratio
                 }
 
                 Text {
@@ -252,8 +286,8 @@ ViewController {
                     font.weight: Font.Thin
                     anchors.left: lbFreeWater.left
                     anchors.leftMargin: 0
-                    anchors.topMargin: parent.height * 0.01
-                    anchors.top: lbFreeWater.bottom
+                    anchors.topMargin: 5
+                    anchors.top: bonusesInCheck.bottom
                 }
 
                 Text {
@@ -264,7 +298,7 @@ ViewController {
                     font.pointSize: 14
                     anchors.left: lbTotalBottles.left
                     anchors.leftMargin: 0
-                    anchors.topMargin: parent.height * 0.01
+                    anchors.topMargin: 5
                     anchors.top: lbTotalBottles.bottom
                 }
 
@@ -276,9 +310,11 @@ ViewController {
                     font.pointSize: 14
                     anchors.left: lbEmptyBottles.left
                     anchors.leftMargin: 0
-                    anchors.topMargin: parent.height * 0.01
+                    anchors.topMargin: 5
                     anchors.top: lbEmptyBottles.bottom
                 }
+
+
 
                 Text {
                     id: lbPump
@@ -288,7 +324,7 @@ ViewController {
                     font.pointSize: 14
                     anchors.left: lbBottlesFee.left
                     anchors.leftMargin: 0
-                    anchors.topMargin: parent.height * 0.01
+                    anchors.topMargin: 10
                     anchors.top: lbBottlesFee.bottom
                 }
 
@@ -297,7 +333,7 @@ ViewController {
                     color: "#4a4a4a"
                     text: qsTr("Сума замовлення:")
                     anchors.left: lbPump.left
-                    anchors.topMargin: parent.height * 0.01
+                    anchors.topMargin: 5
                     anchors.top: lbPump.bottom
                     font.pointSize: 14
                 }
@@ -438,7 +474,6 @@ ViewController {
 
                     context.card = rbCardPayment.checked
                     context.pump = cbPump.checked
-                    //context.firstOrder = cbFirst.checked
 
                     if (rbCardPayment.checked)
                     {

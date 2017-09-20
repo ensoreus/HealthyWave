@@ -143,6 +143,7 @@
         <file>img-alert.png</file>
         <file>OrderReceipt.qml</file>
         <file>OrderCell.qml</file>
+        <file>BonusesInCheck.qml</file>
     </qresource>
     <qresource prefix="/address">
         <file>Addresses.qml</file>

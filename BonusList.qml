@@ -125,6 +125,7 @@ ViewController {
                     }
                 }
             }
+
             BusyIndicator{
                 id: wheel
                 height: 80 * ratio
@@ -133,8 +134,6 @@ ViewController {
                 visible: false
             }
         }
-
-
 
         HWRoundButton{
             id: btnUseSelectedBonuses

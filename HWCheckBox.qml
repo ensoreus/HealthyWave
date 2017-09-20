@@ -7,24 +7,24 @@ CheckBox {
        checked: true
 
        indicator: Rectangle {
-           implicitWidth: 20 * ratio
-           implicitHeight: 20 * ratio
+           implicitWidth: 15 * ratio
+           implicitHeight: 15 * ratio
            x: control.leftPadding
            y: parent.height / 2 - height / 2
            radius: 3 * ratio
            color: control.checked ? "#58B7AD" : "white"
-           border.color: control.down ? "#58B7AD" : "#C8C7CC"
+           border.color: "#58B7AD"
 
 
            Text{
             anchors.fill: parent
-            anchors.bottomMargin: -5 * ratio
+            anchors.bottomMargin: 1 * ratio
             anchors.leftMargin: 1 * ratio
             anchors.rightMargin: 1 * ratio
             anchors.topMargin: 1 * ratio
             text:"✓"
             verticalAlignment: Text.AlignVCenter
-            font.pointSize: 25
+            font.pointSize: 17
             color: "white"
             visible: control.checked
            }
