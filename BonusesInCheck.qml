@@ -2,12 +2,14 @@ import QtQuick 2.0
 
 Rectangle {
     property alias activeBonuses : lstBonuses.model
+    height: lstBonuses.height
     ListView{
         id: lstBonuses
         anchors.fill: parent
         model:ListModel{
             id:bonusModel
         }
+        spacing: 5 * ratio
         delegate: Rectangle{
             color: "#F3F2F3"
             width: parent.width

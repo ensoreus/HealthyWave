@@ -9,6 +9,7 @@ import "qrc:/Api.js" as Api
 import "qrc:/"
 
 ViewController {
+    id: orderSummaryView
     property alias rbCashPayment: rbCashPayment
     property alias rbCardPayment: rbCardPayment
     property alias btnNext: btnNext
@@ -23,16 +24,21 @@ ViewController {
         id:storage
     }
 
+    Component.onCompleted: {
+        if (typeof(context.bonuses) =="undefined"){
+            context.bonuses = new Array(1)
+        }
+    }
+
+    onViewWillAppear: {
+        layoutHeight()
+    }
+
     onViewDidAppear:{
         fullb = context.fullb
         emptyb = context.emptyb
         updateSummary()
-        if (typeof(context.bonuses) =="undefined"){
-            context.bonuses = new Array(1)
-        }
-
         getBonuses()
-        console.log("bouses:"+context.bonuses)
         layoutHeight()
     }
 
@@ -119,7 +125,7 @@ ViewController {
                 bonusesInCheck.height +
                 lbPump.height +
                 lbSummaryOfOrder.height +
-                100
+               orderSummaryView.height * 0.2
         var ch = hAdditionaly.height +
                 bonusLst.header +
                 cbPump.height +
@@ -188,12 +194,26 @@ ViewController {
                 function mapBonusSelectionOnContext(bonusIndex, isSelected){
                     if(isSelected){
                         context.bonuses.push(bonusModel.get(bonusIndex))
-                        console.log(bonusModel.get(bonusIndex))
                         bonusesInCheck.activeBonuses.append(bonusModel.get(bonusIndex))
+                        bonusesInCheck.height = context.bonuses.length * 15 * ratio
                         layoutHeight()
                     }else{
+                        var chCode = bonusModel.get(bonusIndex).PromoCode
+                        var chIndex = indexOf(bonusesInCheck.activeBonuses, chCode)
+                        bonusesInCheck.activeBonuses.remove(chIndex)
                         context.bonuses.splice(bonusIndex, 1)
+                        bonusesInCheck.height = context.bonuses.length * 15 * ratio
+                        layoutHeight()
                     }
+                }
+
+                function indexOf(model, bonusCode){
+                    for(var ind = 0; ind < model.count; ind++){
+                        if(model.get(ind).PromoCode === bonusCode){
+                            return ind
+                        }
+                    }
+                    return -1
                 }
 
                 function isBonusesPreselected(bonusCode){
