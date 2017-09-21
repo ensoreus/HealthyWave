@@ -16,6 +16,7 @@ ViewController {
     property int fullb: 0
     property int emptyb: 0
     property OrderContext context
+    property bool isInit: true
     property var navigationItem: NavigationItem{
         centerBarTitle:"Замовлення"
     }
@@ -31,6 +32,7 @@ ViewController {
     }
 
     onViewWillAppear: {
+        isInit = false
         layoutHeight()
     }
 
@@ -110,10 +112,13 @@ ViewController {
             Api.getBonus(authdata, function(response){
                 for(var item in response.result){
                     bonusModel.append(response.result[item])
+                    bonusesInCheck.activeBonuses.append(bonusModel.get(item))
+                    bonusesInCheck.height = context.bonuses.length * 15 * ratio
                 }
             },function(failure){
             })
         })
+        bonusesInCheck.context = context
     }
 
     function layoutHeight(){
@@ -186,8 +191,10 @@ ViewController {
                     anchors.top: hAdditionaly.bottom
                     anchors.topMargin: 0.02
                     onCheckStateChanged: {
-                        bonusLst.mapBonusSelectionOnContext(index, checked)
-                        updateSummary()
+                        if(!isInit){
+                            bonusLst.mapBonusSelectionOnContext(index, checked)
+                            updateSummary()
+                        }
                     }
                 }
 
@@ -298,7 +305,7 @@ ViewController {
                 BonusesInCheck{
                     id:bonusesInCheck
                     anchors.top: lbFreeWater.bottom
-                    anchors.topMargin: 5* ratio
+                    anchors.topMargin: 5 * ratio
                     anchors.left: lbBottlesFee.left
                     anchors.right: parent.right
                     anchors.rightMargin: 18 * ratio

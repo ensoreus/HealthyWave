@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 Rectangle {
     property alias activeBonuses : lstBonuses.model
+    property var context
     height: lstBonuses.height
     ListView{
         id: lstBonuses
@@ -29,9 +30,10 @@ Rectangle {
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
             }
+
             Text{
                 id: lbBonusValue
-                text: ProductPrice + " грн."
+                text: bonusValue(bonusModel.get(index), context.bonuses[index].ProductPrice) + " грн."
                 color: "#4a4a4a"
                 width: 100
                 font.family: "SF UI Text"
@@ -46,5 +48,19 @@ Rectangle {
         }
 
     }
-
+    function bonusValue(bonus, initValue){
+        if (bonus.BonusType === "БесплатныйБутыльВоды"){
+            return 0
+        }else if (bonus.BonusType === "СкидкаСуммойНаОбщуюСуммуЗаказа"){
+            return -(initValue / 100 * bonus.Discount)
+        }else if (bonus.BonusType === "Подарок"){
+            return 0
+        }else if (bonus.BonusType === "СкидаПроцентнаяНаВоду"){
+            return -(initValue / 100 * bonus.Discount)
+        }else if (bonus.BonusType === "СкидкаСуммойНаПомпу"){
+            return -(bonus.Discount)
+        }else if (bonus.BonusType === "СкидкаПроцентнаяНаПомпу"){
+            return -(initValue / 100 * bonus.Discount)
+        }
+    }
 }

@@ -123,27 +123,38 @@ function searchNearestTime(address, authData, onSuccess, onFailure){
 }
 
 function createOrder(orderContext, authData, onSuccess, onFailure){
+    var params = {
+        "city":orderContext.address.city,
+        "street":orderContext.address.street,
+        "house":orderContext.address.house,
+        "entrance":orderContext.address.entrance,
+        "apartment":orderContext.address.apartment,
+        "floor":orderContext.address.floor,
+        "comment":orderContext.comment,
+        "bottle":orderContext.fullb,
+        "emptybottle":orderContext.emptyb,
+        "pump":orderContext.pump,
+        "promocode":typeof(orderContext.promocode) == 'undefined' ? "" : orderContext.promocode,
+        "from":orderContext.deliveryTime.fromHour,
+        "to":orderContext.deliveryTime.toHour,
+        "deliverydate":orderContext.deliveryTime.day,
+        "callrequires":orderContext.needToCall,
+        "cardtoken":orderContext.cardToPay,
+        "paycard":typeof(orderContext.cardToPay) == "undefined" ? 0 : 1,
+        "phone":authData.phone
+    }
+    call("createorder", collectBonuses(orderContext, params), authData, onSuccess, onFailure)
+}
 
-    call("createorder", {
-             "city":orderContext.address.city,
-             "street":orderContext.address.street,
-             "house":orderContext.address.house,
-             "entrance":orderContext.address.entrance,
-             "apartment":orderContext.address.apartment,
-             "floor":orderContext.address.floor,
-             "comment":orderContext.comment,
-             "bottle":orderContext.fullb,
-             "emptybottle":orderContext.emptyb,
-             "pump":orderContext.pump,
-             "promocode":typeof(orderContext.promocode) == 'undefined' ? "" : orderContext.promocode,
-             "from":orderContext.deliveryTime.fromHour,
-             "to":orderContext.deliveryTime.toHour,
-             "deliverydate":orderContext.deliveryTime.day,
-             "callrequires":orderContext.needToCall,
-             "cardtoken":orderContext.cardToPay,
-             "paycard":typeof(orderContext.cardToPay) == "undefined" ? 0 : 1,
-             "phone":authData.phone
-         }, authData, onSuccess, onFailure)
+function collectBonuses(context, params){
+    var i = 0
+    for(var k in context.bonuses){
+        var v = context.bonuses[k]
+        var pck = "promocode" + i
+        params[pck] = v.PromoCode
+        i++
+    }
+    return params
 }
 
 function getOrders(authdata, onSuccess, onFailure){
