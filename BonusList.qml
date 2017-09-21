@@ -132,6 +132,9 @@ ViewController {
                 width: 80 * ratio
                 running: false
                 visible: false
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: parent.top
+                anchors.topMargin: 40 * ratio
             }
         }
 
@@ -146,7 +149,7 @@ ViewController {
             labelText: "ВИКОРИСТАТИ"
             onButtonClick: {
                 context.bonuses = bonusesToUse
-                navigationController.push("qrc:/orders/NewOrder.qml", {"context":context})
+                navigationController.push("qrc:/orders/OrdersAddress.qml", {"context":context})
             }
         }
 

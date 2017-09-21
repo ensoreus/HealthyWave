@@ -4,9 +4,11 @@ Rectangle {
     property alias activeBonuses : lstBonuses.model
     property var context
     height: lstBonuses.height
+    color: "#F3F2F3"
     ListView{
         id: lstBonuses
         anchors.fill: parent
+        flickableDirection: Flickable.AutoFlickIfNeeded
         model:ListModel{
             id:bonusModel
         }
@@ -15,7 +17,7 @@ Rectangle {
             color: "#F3F2F3"
             width: parent.width
             id: cell
-            height: 15 * ratio
+            height: 18 * ratio
             Text{
                 id:lbBonusName
                 text: BonusName

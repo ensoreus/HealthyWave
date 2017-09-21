@@ -13,7 +13,7 @@ ViewController {
     property alias btnNext: btnNext
     property alias stEmptyBottles: stEmptyBottles
     property var context
-    property var component
+
 
     property var navigationItem: NavigationItem{
         centerBarTitle:"Нове замовлення"
@@ -21,26 +21,6 @@ ViewController {
 
     function calc(){
         stFullBottles.value.toFixed()
-    }
-
-    onViewDidAppear:{
-        if(typeof(context)=="undefined"){
-            createContextObjects()
-        }else{
-            console.log(context)
-        }
-    }
-
-    function createContextObjects() {
-        component = Qt.createComponent("qrc:/commons/OrderContext.qml");
-        newOrderViewController.context = component.createObject(newOrderViewController, {
-                                                                    "fullb":0,
-                                                                    "emptyb":0,
-                                                                    "firstorder":0,
-                                                                    "card": 0,
-                                                                    "pump": 0,
-                                                                    "cardToPay":""
-                                                                })
     }
 
     Rectangle {

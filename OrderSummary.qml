@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.8
 import QtQuick.Controls 2.1
 import QuickIOS 0.1
 import QtQuick.Window 2.2
@@ -113,7 +113,8 @@ ViewController {
                 for(var item in response.result){
                     bonusModel.append(response.result[item])
                     bonusesInCheck.activeBonuses.append(bonusModel.get(item))
-                    bonusesInCheck.height = context.bonuses.length * 15 * ratio
+                    bonusesInCheck.height = context.bonuses.count * (23) * ratio
+                    layoutHeight()
                 }
             },function(failure){
             })
@@ -139,8 +140,11 @@ ViewController {
                 hPaymentType.height +
                 rbCardPayment.height +
                 rbCashPayment.height +
-                btnNext.height + 30 * ratio
-        content.height = (ch > parent.height) ? ch : parent.height
+                btnNext.height + 230 * ratio
+
+        console.log(borderImage.height+" ch:"+ch+" parent:"+parent.height)
+        content.height = (ch > (parent.height - 100)) ? ch : (parent.height + 100)
+        flickableZone.contentHeight = content.height
     }
 
     Flickable{
@@ -173,11 +177,11 @@ ViewController {
                 anchors.leftMargin: 30 * ratio
                 anchors.right: parent.right
                 visible: bonusModel.count > 0
-                height:(bonusModel.count * (18 + 5)) * ratio
+                height:(bonusModel.count * (18 + 8)) * ratio
                 model:ListModel{
                     id: bonusModel
                 }
-                spacing: 5 * ratio
+                spacing: 8 * ratio
                 delegate: HWCheckBox {
                     id: cbBonusCheck
                     y: 52
@@ -202,14 +206,14 @@ ViewController {
                     if(isSelected){
                         context.bonuses.push(bonusModel.get(bonusIndex))
                         bonusesInCheck.activeBonuses.append(bonusModel.get(bonusIndex))
-                        bonusesInCheck.height = context.bonuses.length * 15 * ratio
+                        bonusesInCheck.height = context.bonuses.length * 23 * ratio
                         layoutHeight()
                     }else{
                         var chCode = bonusModel.get(bonusIndex).PromoCode
                         var chIndex = indexOf(bonusesInCheck.activeBonuses, chCode)
                         bonusesInCheck.activeBonuses.remove(chIndex)
                         context.bonuses.splice(bonusIndex, 1)
-                        bonusesInCheck.height = context.bonuses.length * 15 * ratio
+                        bonusesInCheck.height = context.bonuses.length * 23 * ratio
                         layoutHeight()
                     }
                 }
@@ -309,7 +313,7 @@ ViewController {
                     anchors.left: lbBottlesFee.left
                     anchors.right: parent.right
                     anchors.rightMargin: 18 * ratio
-                    height: context.bonuses.count * 18 * ratio
+                    height: context.bonuses.count * (18 + 5) * ratio
                 }
 
                 Text {
@@ -497,10 +501,10 @@ ViewController {
             HWRoundButton {
                 id: btnNext
                 width: parent.width * 0.7
-                height: parent.height * 0.1
+                height: 60 * ratio
                 labelText: "ДАЛІ"
-                anchors.bottomMargin: parent.height * 0.01
-                anchors.bottom: parent.bottom
+                anchors.top: rbCardPayment.bottom
+                anchors.bottomMargin: 10 * ratio
                 anchors.horizontalCenter: parent.horizontalCenter
                 onButtonClick: {
 

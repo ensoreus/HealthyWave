@@ -13,6 +13,7 @@ ViewController {
     property bool initializing: false
     property var radioBtnComponent
     property var isAddNew: false
+    property var component
     property var dynamicElements
     property var lastTopAnchor: pAddresses.top
     id: orderAddressViewController
@@ -25,6 +26,27 @@ ViewController {
         id:storage
     }
     
+    onViewDidAppear:{
+        orderAddressViewController.initializing = false
+        if(typeof(context)=="undefined" || context == null){
+            createContextObjects()
+        }else{
+            console.log(context)
+        }
+    }
+
+    function createContextObjects() {
+        component = Qt.createComponent("qrc:/commons/OrderContext.qml");
+        orderAddressViewController.context = component.createObject(orderAddressViewController, {
+                                                                    "fullb":0,
+                                                                    "emptyb":0,
+                                                                    "firstorder":0,
+                                                                    "card": 0,
+                                                                    "pump": 0,
+                                                                    "cardToPay":""
+                                                                })
+    }
+
     Component.onCompleted: {
         radioBtnComponent = Qt.createComponent("qrc:/controls/HWRadioButton.qml")
     }
@@ -46,10 +68,6 @@ ViewController {
                 pAddresses.addNewOption()
             })
         })
-    }
-
-    onViewDidAppear:{
-        orderAddressViewController.initializing = false
     }
 
     Rectangle {
@@ -144,7 +162,7 @@ ViewController {
                                                                     "anchors.top":lastTopAnchor,
                                                                     "anchors.topMargin":10 * ratio,
                                                                     "height":50 * ratio,
-                                                                    "fontPointSize": 13
+                                                                    "fontPointSize": 14
                                                                 })
                 lastTopAnchor = rbAddress.bottom
                 if(typeof(dynamicElements) === 'undefined'){
@@ -180,7 +198,7 @@ ViewController {
                 if(isAddNew){
                     navigationController.push("qrc:/address/NewAddress.qml", {"context":context})
                 }else{
-                    navigationController.push("qrc:/orders/OrderTime.qml", {"context":context})
+                    navigationController.push("qrc:/orders/NewOrder.qml", {"context":context})
                 }
             }
         }

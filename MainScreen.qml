@@ -88,7 +88,7 @@ ViewController {
             anchors.left: parent.left
             anchors.top: btnFreeWater.bottom
             onButtonClick: {
-                navigationController.push(Qt.resolvedUrl("qrc:/orders/NewOrder.qml"))
+                navigationController.push(Qt.resolvedUrl("qrc:/orders/OrdersAddress.qml"))
             }
         }
 
