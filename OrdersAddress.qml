@@ -87,7 +87,7 @@ ViewController {
         }
         Rectangle{
             id: pAddresses
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.05
             anchors.bottomMargin: parent.height * 0.2
             anchors.bottom: parent.bottom
             anchors.top: hWHeader.bottom

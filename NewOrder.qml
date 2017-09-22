@@ -32,10 +32,10 @@ ViewController {
             id: image
             width: parent.width * 0.4
             height: parent.height * 0.4
+            anchors.leftMargin: 20 * ratio
             anchors.topMargin: parent.height * 0.01
             anchors.top: parent.top
             anchors.left: parent.left
-            anchors.leftMargin: 0
             fillMode: Image.PreserveAspectFit
             source: "img-bottle.png"
         }
@@ -46,10 +46,10 @@ ViewController {
             color: "#4a4a4a"
             text: qsTr("Наши ціни")
             font.weight: Font.Thin
-            anchors.horizontalCenterOffset: rPricesPanel.x / 2
+            anchors.horizontalCenterOffset: rPricesPanel.x / 2 - 10 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: image.top
-            anchors.topMargin: 13 * ratio
+            anchors.topMargin: 40 * ratio
             font.pointSize: 18
             font.family: "SF UI text"
             font.underline: true
@@ -58,9 +58,10 @@ ViewController {
 
         Rectangle {
             id: rPricesPanel
-            height: parent.height * 0.30
+            height: parent.height * 0.22
             color: "#2bb0a4"
             radius: 15 * ratio
+            anchors.leftMargin: 10 * ratio
             anchors.topMargin: 5 * ratio
             anchors.rightMargin: 26 * ratio
             anchors.top: lbOurPrices.bottom
@@ -85,7 +86,7 @@ ViewController {
                 id: txtTwoBottles
                 color: "#ffffff"
                 text: qsTr("від 2 бут.")
-                anchors.topMargin: parent.height * 0.1
+                anchors.topMargin: parent.height * 0.07
                 anchors.top: txtOneBottle.bottom
                 anchors.leftMargin: parent.width * 0.05
                 anchors.left: parent.left
@@ -96,7 +97,7 @@ ViewController {
                 id: txtFiveBottles
                 color: "#ffffff"
                 text: qsTr("від 5 бут.")
-                anchors.topMargin: parent.height * 0.1
+                anchors.topMargin: parent.height * 0.07
                 anchors.top: txtTwoBottles.bottom
                 anchors.leftMargin: parent.width * 0.05
                 anchors.left: parent.left
