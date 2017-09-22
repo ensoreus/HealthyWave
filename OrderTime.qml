@@ -49,18 +49,34 @@ ViewController {
             x: 212
             width: parent.width * 0.9
             anchors.top: parent.top
-            anchors.topMargin: 0
+            anchors.topMargin: 20 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             title.text: "Вибір часу замовлення"
+        }
+
+        Text {
+            id: txHint
+            x: 307
+            width: parent.width * 0.7
+            text: qsTr("Запросити найближчий час доставки за Вашою адресою")
+            wrapMode: Text.WordWrap
+            font.weight: Font.DemiBold
+            font.pointSize: 15
+            horizontalAlignment: Text.AlignHCenter
+            anchors.topMargin: parent.height * 0.05
+            anchors.top: hWHeader.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         HWGreenButton {
             id: btnSearch
             x: 205
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: parent.height * 0.15
+            anchors.topMargin: parent.height * 0.07
             anchors.top: txHint.bottom
             onButtonClick: {
+                btnSearch.visible = false
+                txtChooseAnother.visible = false
                 content.startSearchAnimation()
                 storage.getAuthData(function(authData){
                     Api.searchNearestTime(context.address, authData, function(result){
@@ -77,12 +93,13 @@ ViewController {
                     })
                 })
             }
+
             function rightNow(){
                 var today = new Date();
                 var hh = today.getHours()
                 var mm = today.getMinutes();
 
-                if(hh<10) {
+                if(hh < 10) {
                     hh = '0'+hh
                 }
 
@@ -93,18 +110,7 @@ ViewController {
             }
         }
 
-        Text {
-            id: txHint
-            x: 307
-            width: parent.width * 0.7
-            text: qsTr("Запросити найближчий час доставки за Вашою адресою")
-            wrapMode: Text.WordWrap
-            font.weight: Font.DemiBold
-            horizontalAlignment: Text.AlignHCenter
-            anchors.topMargin: parent.height * 0.1
-            anchors.top: hWHeader.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
+
 
         Text {
             id: txtChooseAnother
@@ -116,7 +122,7 @@ ViewController {
             font.pointSize: 15
             font.weight: Font.Normal
             horizontalAlignment: Text.AlignHCenter
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: parent.height * 0.13
             anchors.top: btnSearch.bottom
             anchors.horizontalCenter: parent.horizontalCenter
 
@@ -129,10 +135,24 @@ ViewController {
             }
         }
 
+        Text {
+            id: txComment
+            color: "#9b9b9b"
+            text: qsTr("Коментар")
+            anchors.right: tfComment.right
+            anchors.rightMargin: 0
+            font.weight: Font.Thin
+            anchors.topMargin: parent.height * 0.2
+            anchors.top: txtChooseAnother.bottom
+            anchors.left: tfComment.left
+            anchors.leftMargin: 0
+
+        }
+
         HWTextField {
             id: tfComment
             x: 170
-            width: parent.width * 0.9
+            width: parent.width * 0.75
             anchors.topMargin: parent.height * 0.01
             anchors.top: txComment.bottom
             anchors.horizontalCenter: parent.horizontalCenter
@@ -146,21 +166,10 @@ ViewController {
             }
         }
 
-        Text {
-            id: txComment
-            color: "#9b9b9b"
-            text: qsTr("Коментар")
-            anchors.right: tfComment.right
-            anchors.rightMargin: 0
-            font.weight: Font.Thin
-            anchors.topMargin: parent.height * 0.05
-            anchors.top: txtChooseAnother.bottom
-            anchors.left: tfComment.left
-            anchors.leftMargin: 0
-
-        }
 
         HWRoundButton{
+
+            visible: context.deliveryTime.toHour != ""
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: parent.height * 0.05
@@ -179,6 +188,8 @@ ViewController {
             anchors.fill: parent
             onClose: {
                 visible = false
+                txtChooseAnother.visible = true
+                btnSearch .visible = true
             }
         }
     }

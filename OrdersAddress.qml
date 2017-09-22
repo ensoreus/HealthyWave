@@ -33,6 +33,7 @@ ViewController {
         }else{
             console.log(context)
         }
+        btnNext.enabled = false
     }
 
     function createContextObjects() {
@@ -59,13 +60,15 @@ ViewController {
                 orderAddressViewController.initializing = true
                 pAddresses.importData(addresses)
                 busyIndicator.running = false
-                orderAddressViewController.initializing = false
                 pAddresses.addNewOption()
+                orderAddressViewController.initializing = false
+
             }, function(error) {
                 console.log(error)
                 busyIndicator.running = false
-                orderAddressViewController.initializing = false
                 pAddresses.addNewOption()
+                orderAddressViewController.initializing = false
+
             })
         })
     }
@@ -136,8 +139,8 @@ ViewController {
 
             function append(item){
                 var checkChanged = function(){
-                    console.log("checked!")
                     if (!orderAddressViewController.initializing){
+                        console.log("checked!")
                         context.address.street = item.street
                         context.address.city = item.city
                         context.address.floor = item.floor
@@ -146,8 +149,11 @@ ViewController {
                         context.address.apartment = item.apartment
                         context.address.isPrimary = item.primary
                         context.address.entrance = item.entrance
+                        btnNext.enabled = true
                     }
+
                 }
+
                 var rbAddress = createRadioButton(checkChanged)
                 rbAddress.checked = item.primary
                 rbAddress.text = "м."+ item.city + ",\n вул."+item.street+", "+item.house+", оф." + item.apartment
@@ -175,9 +181,11 @@ ViewController {
 
             function addNewOption(){
                 var onCheckedChanged = function(){
-                    isAddNew = rbAddNew.checked
-                    console.log("add new checked")
-                    btnNext.enabled = true
+                     if (!orderAddressViewController.initializing){
+                        isAddNew = rbAddNew.checked
+                        console.log("add new checked")
+                        btnNext.enabled = true
+                     }
                 }
                 var rbAddNew = createRadioButton(onCheckedChanged)
                 rbAddNew.checked = false
