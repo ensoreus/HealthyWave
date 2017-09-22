@@ -160,7 +160,7 @@ ViewController {
                                                                     "anchors.left":pAddresses.left,
                                                                     "anchors.leftMargin":30 * ratio,
                                                                     "anchors.top":lastTopAnchor,
-                                                                    "anchors.topMargin":10 * ratio,
+                                                                    "anchors.topMargin": 7 * ratio,
                                                                     "height":50 * ratio,
                                                                     "fontPointSize": 14
                                                                 })

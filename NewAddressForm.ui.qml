@@ -120,7 +120,16 @@ ViewController {
                 y: 8
                 width: 272
                 height: 60
+                anchors.topMargin: 3 * ratio
+                anchors.top: parent.top
+                anchors.rightMargin: 3 * ratio
+                anchors.right: parent.right
+                anchors.leftMargin: 3 * ratio
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 3 * ratio
                 font.pointSize: 15
+                wrapMode: TextEdit.WordWrap
                 font.family: "SF UI Text"
                 placeholderText: "Ваш коментар..."
                 Keys.onReturnPressed: {
