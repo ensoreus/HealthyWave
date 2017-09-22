@@ -38,6 +38,7 @@ ViewController {
 
     onViewDidAppear:{
         fullb = context.fullb
+        context.pump = true
         emptyb = context.emptyb
         updateSummary()
         getBonuses()
@@ -98,7 +99,9 @@ ViewController {
     }
 
     function calcTotal(){
-        var total = calcFullBottles() + calcEmptyBottlesFee() + (cbPump.checked ? 100 : 0)
+        bonusesInCheck.updateSummaryDiscount()
+        console.log("summary discount:"+bonusesInCheck.summaryDiscount)
+        var total = calcFullBottles() + calcEmptyBottlesFee() + (cbPump.checked ? 100 : 0) + bonusesInCheck.summaryDiscount
         return total
     }
 
@@ -114,6 +117,7 @@ ViewController {
                     bonusModel.append(response.result[item])
                     bonusesInCheck.activeBonuses.append(bonusModel.get(item))
                     bonusesInCheck.height = context.bonuses.count * (23) * ratio
+                    updateSummary()
                     layoutHeight()
                 }
             },function(failure){
@@ -142,7 +146,7 @@ ViewController {
                 rbCashPayment.height +
                 btnNext.height + 230 * ratio
 
-        console.log(borderImage.height+" ch:"+ch+" parent:"+parent.height)
+        //console.log(borderImage.height+" ch:"+ch+" parent:"+parent.height)
         content.height = (ch > (parent.height - 100)) ? ch : (parent.height + 100)
         flickableZone.contentHeight = content.height
     }
@@ -206,16 +210,15 @@ ViewController {
                     if(isSelected){
                         context.bonuses.push(bonusModel.get(bonusIndex))
                         bonusesInCheck.activeBonuses.append(bonusModel.get(bonusIndex))
-                        bonusesInCheck.height = context.bonuses.length * 23 * ratio
-                        layoutHeight()
                     }else{
                         var chCode = bonusModel.get(bonusIndex).PromoCode
                         var chIndex = indexOf(bonusesInCheck.activeBonuses, chCode)
                         bonusesInCheck.activeBonuses.remove(chIndex)
                         context.bonuses.splice(bonusIndex, 1)
-                        bonusesInCheck.height = context.bonuses.length * 23 * ratio
-                        layoutHeight()
                     }
+                    bonusesInCheck.height = context.bonuses.length * 23 * ratio
+                    bonusesInCheck.updateSummaryDiscount()
+                    layoutHeight()
                 }
 
                 function indexOf(model, bonusCode){
@@ -314,6 +317,7 @@ ViewController {
                     anchors.right: parent.right
                     anchors.rightMargin: 18 * ratio
                     height: context.bonuses.count * (18 + 5) * ratio
+
                 }
 
                 Text {

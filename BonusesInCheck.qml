@@ -1,8 +1,10 @@
-import QtQuick 2.0
+import QtQuick 2.7
 
 Rectangle {
     property alias activeBonuses : lstBonuses.model
     property var context
+    property var summaryDiscount : 0
+
     height: lstBonuses.height
     color: "#F3F2F3"
     ListView{
@@ -11,6 +13,7 @@ Rectangle {
         flickableDirection: Flickable.AutoFlickIfNeeded
         model:ListModel{
             id:bonusModel
+
         }
         spacing: 5 * ratio
         delegate: Rectangle{
@@ -35,7 +38,7 @@ Rectangle {
 
             Text{
                 id: lbBonusValue
-                text: bonusValue(bonusModel.get(index), context.bonuses[index].ProductPrice) + " грн."
+                text: bonusValueCalc(bonusModel.get(index)) + " грн."
                 color: "#4a4a4a"
                 width: 100
                 font.family: "SF UI Text"
@@ -48,21 +51,38 @@ Rectangle {
                 height: cell.height
             }
         }
-
     }
-    function bonusValue(bonus, initValue){
+
+    function calcSummaryDiscount(){
+        var acc = 0
+        if (typeof(context) != "undefined"){
+            for(var i in context.bonuses){
+                var v = context.bonuses[i]
+                acc += bonusValueCalc(v)
+            }
+        }
+        return acc
+    }
+
+    function bonusValueCalc(bonus){
         if (bonus.BonusType === "БесплатныйБутыльВоды"){
             return 0
         }else if (bonus.BonusType === "СкидкаСуммойНаОбщуюСуммуЗаказа"){
-            return -(initValue / 100 * bonus.Discount)
+            return -bonus.DiscountValue
         }else if (bonus.BonusType === "Подарок"){
             return 0
         }else if (bonus.BonusType === "СкидаПроцентнаяНаВоду"){
-            return -(initValue / 100 * bonus.Discount)
+            var price = context.fullb > 1 ? 45 : 60
+            return -(price * context.fullb / 100 * bonus.DiscountValue)
         }else if (bonus.BonusType === "СкидкаСуммойНаПомпу"){
-            return -(bonus.Discount)
+            return (context.pump) ? -(bonus.DiscountValue) : 0
         }else if (bonus.BonusType === "СкидкаПроцентнаяНаПомпу"){
-            return -(initValue / 100 * bonus.Discount)
+            return (context.pump) ? -( bonus.DiscountValue) : 0
         }
     }
+
+    function updateSummaryDiscount(){
+        summaryDiscount = calcSummaryDiscount()
+    }
+
 }
