@@ -100,7 +100,6 @@ ViewController {
 
     function calcTotal(){
         bonusesInCheck.updateSummaryDiscount()
-        console.log("summary discount:"+bonusesInCheck.summaryDiscount)
         var total = calcFullBottles() + calcEmptyBottlesFee() + (cbPump.checked ? 100 : 0) + bonusesInCheck.summaryDiscount
         return total
     }
@@ -146,7 +145,6 @@ ViewController {
                 rbCashPayment.height +
                 btnNext.height + 230 * ratio
 
-        //console.log(borderImage.height+" ch:"+ch+" parent:"+parent.height)
         content.height = (ch > (parent.height - 100)) ? ch : (parent.height + 100)
         flickableZone.contentHeight = content.height
     }

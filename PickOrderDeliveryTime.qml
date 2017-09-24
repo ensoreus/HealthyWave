@@ -47,8 +47,8 @@ ViewController {
         DatePicker {
             id: datePicker
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.horizontalCenterOffset: - parent.width * 0.04
-            width: parent.width * 0.9
+            //anchors.horizontalCenterOffset: - parent.width * 0.04
+            width: parent.width
             height: parent.height * 0.35
             anchors.top: text1.bottom
             anchors.topMargin: parent.height * 0.05
