@@ -91,7 +91,7 @@ ViewController {
     }
 
     function feeForBottlesLine(){
-        return emptyb + " бут.  x 130 грн."
+        return (fullb - emptyb) > 0 ? (fullb - emptyb) : 0  + " бут.  x 130 грн."
     }
 
     function isPumpLine(){
@@ -214,7 +214,7 @@ ViewController {
                         var chCode = bonusModel.get(bonusIndex).PromoCode
                         var chIndex = indexOf(bonusesInCheck.activeBonuses, chCode)
                         bonusesInCheck.activeBonuses.remove(chIndex)
-                        context.bonuses.splice(bonusIndex, 1)
+                        context.bonuses.splice(chIndex, 1)
                     }
                     bonusesInCheck.height = context.bonuses.length * 23 * ratio
                     bonusesInCheck.updateSummaryDiscount()
@@ -488,7 +488,8 @@ ViewController {
                 anchors.rightMargin: 0
                 anchors.top: hPaymentType.bottom
                 anchors.left: parent.left
-                anchors.leftMargin: 10 * ratio
+                anchors.leftMargin: 30 * ratio
+                fontPointSize: 15
             }
 
             HWRadioButton {
@@ -500,6 +501,7 @@ ViewController {
                 anchors.rightMargin: 0
                 anchors.left: rbCashPayment.left
                 anchors.leftMargin: 0
+                fontPointSize: 15
             }
 
             HWRoundButton {

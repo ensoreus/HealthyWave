@@ -97,20 +97,24 @@ ViewController{
                 wrapMode: Text.WordWrap
                 height: parent.height * 0.2
                 width: parent.width * 0.8
-
             }
         }
 
         ListView{
             id: lstOrders
             anchors.fill: parent
-
             delegate: OrderCell{
                 height: 100
                 width: lstOrders.width
-                txPrice: cost
+                txPrice: cost + " грн."
                 txAddress: address
                 txDay: deliveryDay
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        navigationController.push("qrc:/orders/MyOrders.qml", {"order":ordersModel.get(index)})
+                    }
+                }
             }
 
             model:ListModel{
@@ -121,10 +125,24 @@ ViewController{
                     for(var index in data){
                         var ritem = data[index]
                         var date = dateFormat(ritem.OrderDate)
+                        var goods = ritem.Goods
+                        var waterPrice = 0
+                        var emptyBottles = 0
+                        for(var i in goods){
+                            var gitem = goods[i]
+                            if(gitem.Good === "Вода питна Хвиля Здоров'я"){
+                                waterPrice += gitem.Price
+                            }else if (gitem.Good === "Бутель полікарбонат (Хвиля Здоров'я)"){
+                                emptyBottles += gitem.Quantity
+                            }
+                        }
                         var item = {
                             "deliveryDay":date,
                             "address" : ritem.Address,
-                            "cost": ritem.OrderPrice
+                            "cost": ritem.OrderPrice,
+                            "paymentType":ritem.PaymentType,
+                            "waterPrice":waterPrice,
+                            "emptyBottles":emptyBottles
                         }
                         ordersModel.append(item)
                     }
@@ -148,8 +166,4 @@ ViewController{
             height: width
         }
     }
-
-
-
-
 }

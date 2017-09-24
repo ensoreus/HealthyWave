@@ -66,7 +66,7 @@ Rectangle {
 
     function bonusValueCalc(bonus){
         if (bonus.BonusType === "БесплатныйБутыльВоды"){
-            return 0
+            return -60
         }else if (bonus.BonusType === "СкидкаСуммойНаОбщуюСуммуЗаказа"){
             return -bonus.DiscountValue
         }else if (bonus.BonusType === "Подарок"){

@@ -263,6 +263,7 @@ function call(routine, params, authData, onSuccess, onFailure){
                 if (object.error.match(/^Ключ доступа не найден или просрочен:\.*/) || object.error.match(/Invalid parameter value \(parameter number '1'\)$/)){
                     onAuthError(authData, onTokenUpdated)
                 }else{
+                    console.log(object)
                     onFailure(object, authData.token)
                 }
             }else{

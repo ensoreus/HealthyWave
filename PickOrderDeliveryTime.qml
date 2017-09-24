@@ -58,10 +58,9 @@ ViewController {
             id: text2
             width: parent.width * 0.7
             text: qsTr("Коментар")
-            anchors.topMargin: parent.height * 0.02
+            anchors.topMargin: parent.height * 0.05
             anchors.top: datePicker.bottom
-            anchors.leftMargin: parent.width * 0.2
-            anchors.left: parent.left
+            anchors.left: txtComment.left
             font.pointSize: 13
             font.weight: Font.Light
             color:"#9B9B9B"
@@ -71,12 +70,8 @@ ViewController {
             id: txtComment
             anchors.topMargin: parent.height * 0.01
             anchors.top: text2.bottom
-            anchors.left: parent.left
-            anchors.leftMargin: parent.width * 0.1
-            anchors.right: parent.right
-            anchors.rightMargin: parent.width * 0.1
-            width: 100
-            height: parent.height * 0.08
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: parent.height * 0.06
             onWillStartAnimation: {
                     if (txtComment.aboutToFocus){
                         txtComment.forceActiveFocus()
@@ -96,11 +91,11 @@ ViewController {
             var mm = today.getMonth() + 1;
             var yyyy = today.getFullYear();
 
-            if(dd<10) {
+            if(dd < 10) {
                 dd = '0'+dd
             }
 
-            if(mm<10) {
+            if(mm < 10) {
                 mm = '0'+mm
             }
 
@@ -117,7 +112,7 @@ ViewController {
             x: 8
             width: parent.width * 0.7
             height: parent.height * 0.1
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: parent.height * 0.1
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: txtComment.bottom
             onButtonClick: {

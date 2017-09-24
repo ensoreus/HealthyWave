@@ -41,7 +41,7 @@ NavigationController {
             centerBarImage:"qrc:/commons/logo-hw.png"
             rightBarButtonItems: VisualItemModel{
                 BarButtonItem{
-                    image:"qrc:/commons/btn-cross.png"
+                    image:"qrc:/commons/btn-arrow-back.png"
                     imageSourceSize.width:35
                     imageSourceSize.height:35
                     onClicked:{

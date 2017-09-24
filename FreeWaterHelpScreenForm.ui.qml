@@ -239,6 +239,8 @@ ViewController {
             PropertyChanges {
                 target: mainText
                 height: parent.height * 0.35
+                font.family: "NS UI Text"
+                font.pointSize: 15
                 text: "Відправте своєму другу даний промокод і, після того як він зробить перше замовлення, Вам буде начислено 2 бутля води безкоштовно, які ви зможете використати у будь-який момент.<br> Коли Ваш друг робитиме перше замовлення, йому треба буде ввести цей промокод і він також отримає в подарунок 1 бутль води безкоштовно."
                 textFormat: Text.RichText
                 horizontalAlignment: Text.AlignLeft
