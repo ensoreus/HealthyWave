@@ -111,6 +111,11 @@ ViewController{
                 txDay: deliveryDay
                 MouseArea{
                     anchors.fill: parent
+
+                    onPressedChanged: {
+                       color = (pressed) ? "#C8C7CC" : "white"
+                    }
+
                     onClicked: {
                         navigationController.push("qrc:/orders/MyOrders.qml", {"order":ordersModel.get(index)})
                     }
@@ -128,21 +133,28 @@ ViewController{
                         var goods = ritem.Goods
                         var waterPrice = 0
                         var emptyBottles = 0
+                        var fee = 0
+                        var fullBottels = 0
                         for(var i in goods){
                             var gitem = goods[i]
                             if(gitem.Good === "Вода питна Хвиля Здоров'я"){
                                 waterPrice += gitem.Price
+                                fullBottels += gitem.Quantity
                             }else if (gitem.Good === "Бутель полікарбонат (Хвиля Здоров'я)"){
                                 emptyBottles += gitem.Quantity
+                                fee += gitem.Price
                             }
                         }
                         var item = {
                             "deliveryDay":date,
                             "address" : ritem.Address,
                             "cost": ritem.OrderPrice,
-                            "paymentType":ritem.PaymentType,
+                            "paymentType":ritem.PaymentMethod,
                             "waterPrice":waterPrice,
-                            "emptyBottles":emptyBottles
+                            "emptyBottles":emptyBottles,
+                            "bottlesFee": fee,
+                            "comment":ritem.Comment,
+                            "deliveryTimeTo":ritem.DeliveryTimeTo
                         }
                         ordersModel.append(item)
                     }

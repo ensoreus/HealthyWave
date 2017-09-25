@@ -292,6 +292,8 @@ ViewController {
             Text {
                 id: tfComments
                 text: qsTr("Text")
+                clip: true
+                renderType: Text.QtRendering
                 anchors.top: lbComments.top
                 anchors.topMargin: 0
                 anchors.right: tfDeliveryTime.right
