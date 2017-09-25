@@ -112,6 +112,18 @@ function sendNewAddress(city, street, house, entrance, apartment, floor, authdat
                                 "phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
+function updateAddress(newCity, newStreet, newHous, newApt, newEntrance, newFloor,
+                  oldcity, oldstreet, oldhouse, oldapt, oldentrance, oldfloor, authdata, onSuccess, onFailure){
+                  onSuccess()
+//    call("addaddresscustomer", {"city":city,
+//                                "street":street,
+//                                "house":house,
+//                                "apartment":apartment,
+//                                "entrance":entrance,
+//                                "floor":floor,
+//                                "phone":authdata.phone}, authdata, onSuccess, onFailure);
+}
+
 function searchNearestTime(address, authData, onSuccess, onFailure){
     call("timedelivery", {"city":address.city,
              "street":address.street,

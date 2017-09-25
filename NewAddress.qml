@@ -5,14 +5,30 @@ import "qrc:/"
 
 NewAddressForm {
     id: newAddressView
+    property var addressToEdit
+    property var isEditing: false
     signal addedNewAddress
+    signal editedAddress
 
     Storage{
         id:storage
     }
 
+    Component.onCompleted: {
+        if(typeof(addressToEdit) != "undefined" || addressToEdit != null){
+            isEditing = true
+            tfCity.text = addressToEdit.city
+            tfStreet.text = addressToEdit.street
+            tfHouse.text = addressToEdit.house
+            tfApt.text = addressToEdit.apartment
+            tfFloor.text = addressToEdit.floor
+            tfEntrance.text = addressToEdit.entrance
+            tfDoorCode.text = addressToEdit.doorCode
+        }
+    }
+
     tfCity.onTextSearchChanged: {
-        if(!tfCity.selectedFromList){
+        if(!tfCity.selectedFromList && !isEditing){
             tfCity.startWheelAnumation()
             storage.getAuthData(function(authData){
                 Api.call("getcity", {"city":tfCity.text}, authData, function(result, token){
@@ -36,7 +52,7 @@ NewAddressForm {
     }
 
     tfStreet.onTextSearchChanged: {
-        if(!tfStreet.selectedFromList){
+        if(!tfStreet.selectedFromList && !isEditing){
             tfStreet.startWheelAnumation()
             storage.getAuthData(function(authData){
                 Api.call("getstreet", {"street":tfStreet.text, "city":tfCity.text}, authData, function(result, token){
@@ -67,12 +83,23 @@ NewAddressForm {
                 tintColor: "white"
                 onClicked: {
                     storage.getAuthData(function(authdata){
-                        Api.sendNewAddress(tfCity.text, tfStreet.text, tfHouse.text, tfApt.text, tfEntrance.text, tfFloor.text, authdata, function(result, token){
-                            storage.saveToken(authdata.token)
-                            newAddressView.navigationController.pop()
-                            addedNewAddress()
-                        }, function(error, authdata){
-                        })
+                        if(isEditing){
+                            Api.updateAddress(tfCity.text, tfStreet.text, tfHouse.text, tfApt.text, tfEntrance.text, tfFloor.text,
+                                              addressToEdit.city, addressToEdit.street, addressToEdit.house, addressToEdit.apt, addressToEdit.entrance, addressToEdit.floor,
+                                              authdata, function(result, token){
+                                storage.saveToken(authdata.token)
+                                newAddressView.navigationController.pop()
+                                editedAddress()
+                            }, function(error, authdata){
+                            })
+                        }else{
+                            Api.sendNewAddress(tfCity.text, tfStreet.text, tfHouse.text, tfApt.text, tfEntrance.text, tfFloor.text, authdata, function(result, token){
+                                storage.saveToken(authdata.token)
+                                newAddressView.navigationController.pop()
+                                addedNewAddress()
+                            }, function(error, authdata){
+                            })
+                        }
                     })
                 }
             }

@@ -73,8 +73,8 @@ AddressesForm {
             addressesModel.clear()
             for(var index in data){
                 var item = data[index]
-                var modelItem = {city:item.city, street:item.street, house:item.house, apartment:item.apartment}
-                addressesModel.append(modelItem)
+                //var modelItem = i{city:item.city, street:item.street, house:item.house, apartment:item.apartment, entrance:item.entrance, floor:item.}
+                addressesModel.append(item)
             }
         }
     }
@@ -137,6 +137,16 @@ AddressesForm {
                 anchors.left: parent.left
             }
 
+            MouseArea{
+                anchors.fill: parent
+                onPressedChanged: {
+                    color = (pressed) ? "#C8C7CC" : "white"
+                }
+                onClicked: {
+                    navigationController.push("qrc:/address/NewAddress.qml", {"addressToEdit":addressesModel.get(index)})
+                }
+            }
+
             Rectangle {
                 id: separatorLine
                 y: 94 * ratio
@@ -184,6 +194,7 @@ AddressesForm {
                 color: deleteLabel.SwipeDelegate.pressed ? Qt.darker( "tomato", 1.1) : "tomato"
             }
         }
+
         ListView.onRemove: SequentialAnimation {
             PropertyAction {
                 target: swipeDelegate
