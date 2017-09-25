@@ -55,16 +55,18 @@ ViewController {
     onViewWillAppear:{
         busyIndicator.running = true
         storage.getAuthData(function(authData){
+            debugMsg.text = JSON.stringify(authData) + "\n"
             Api.getCustomerAddresses(authData, function(addresses) {
+                debugMsg.text = JSON.stringify(addresses)
                 pAddresses.clear()
                 orderAddressViewController.initializing = true
                 pAddresses.importData(addresses)
                 busyIndicator.running = false
                 pAddresses.addNewOption()
                 orderAddressViewController.initializing = false
-
             }, function(error) {
                 console.log(error)
+                debugMsg.text = error.error
                 busyIndicator.running = false
                 pAddresses.addNewOption()
                 orderAddressViewController.initializing = false
@@ -191,6 +193,18 @@ ViewController {
                 rbAddNew.checked = false
                 rbAddNew.text = "Додати нову адресу"
             }
+        }
+
+        Text{
+            id: debugMsg
+            visible: false
+            wrapMode: Text.WordWrap
+            anchors.top: hWHeader.bottom
+            anchors.topMargin: 30 * ratio
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width * 0.9
+            anchors.bottom: btnNext.top
+            anchors.bottomMargin: 10 * ratio
         }
 
         HWRoundButton {

@@ -192,7 +192,7 @@ ViewController {
                     checked: bonusLst.isBonusesPreselected(PromoCode)
                     anchors.rightMargin: bonusLst.width * 0.02
                     anchors.right: bonusLst.right
-                    anchors.leftMargin: 20 * ratio
+                    anchors.leftMargin: 15 * ratio
                     anchors.left: bonusLst.left
                     anchors.top: hAdditionaly.bottom
                     anchors.topMargin: 0.02
