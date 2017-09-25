@@ -51,7 +51,7 @@ ViewController {
             anchors.top: image.top
             anchors.topMargin: 40 * ratio
             font.pointSize: 17
-            font.family: "SF UI text"
+            font.family: "NS UI text"
             font.underline: true
             horizontalAlignment: Text.AlignHCenter
         }
@@ -79,7 +79,7 @@ ViewController {
                 anchors.top: parent.top
                 font.weight: Font.Thin
                 font.pointSize: fontSize
-                font.family: ".SF UI Text"
+                font.family: "NS UI Text"
             }
 
             Text {
@@ -128,7 +128,7 @@ ViewController {
                 anchors.top: txtFee.bottom
                 font.weight: Font.DemiBold
                 font.pointSize: fontSize
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 anchors.horizontalCenter: parent.horizontalCenter
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
@@ -179,7 +179,7 @@ ViewController {
             anchors.top: image.bottom
             font.weight: Font.Thin
             font.underline: false
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             font.pointSize: 13
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -203,7 +203,7 @@ ViewController {
             x: 317
             text: qsTr("К-ть порожних бутлів в замовленні")
             anchors.topMargin: parent.height * 0.05
-            font.family: ".SF UI Text"
+            font.family: "NS UI Text"
             font.weight: Font.Thin
             font.pointSize: 15
             anchors.top: stFullBottles.bottom
@@ -235,7 +235,7 @@ ViewController {
             font.pointSize: 11
             color:"#505050"
             font.weight: Font.ExtraLight
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
             anchors.topMargin: parent.height * 0.03
@@ -253,10 +253,8 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             labelText: "ДАЛІ"
             onButtonClick: {
-
                 context.fullb = stFullBottles.value.toFixed()
                 context.emptyb = stEmptyBottles.value.toFixed()
-
                 navigationController.push(Qt.resolvedUrl("qrc:/orders/OrderSummary.qml"), {"context":context})
             }
         }

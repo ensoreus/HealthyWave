@@ -154,7 +154,8 @@ ViewController{
                             "emptyBottles":emptyBottles,
                             "bottlesFee": fee,
                             "comment":ritem.Comment,
-                            "deliveryTimeTo":ritem.DeliveryTimeTo
+                            "deliveryTimeTo":ritem.DeliveryTimeTo,
+                            "fullBottles":fullBottels
                         }
                         ordersModel.append(item)
                     }

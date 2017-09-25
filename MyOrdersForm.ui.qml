@@ -20,10 +20,21 @@ ViewController {
         color: "#ffffff"
         anchors.fill: parent
 
+        HWHeader {
+            id: hWHeader
+            anchors.topMargin: 10 * ratio
+            anchors.top: hWAvatar.bottom
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+        }
+
         HWAvatar {
             id: hWAvatar
             width: 80
             height: 80
+            source: "qrc:/commons/avatar.png"
             anchors.top: parent.top
             anchors.topMargin: parent.height * 0.05
             anchors.horizontalCenterOffset: 0
@@ -31,7 +42,7 @@ ViewController {
 
         BorderImage {
             id: borderImage
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: 0
             border.bottom: 0
             border.top: 10
             border.right: 10
@@ -42,13 +53,14 @@ ViewController {
             anchors.leftMargin: 8
             anchors.bottom: parent.bottom
             anchors.bottomMargin: parent.height * 0.1
-            anchors.top: hWAvatar.bottom
+            anchors.top: hWHeader.bottom
             source: "img-orderdetails-bg.png"
 
             Text {
                 id: lbWater
                 y: 26
                 height: 16
+                color: "#4a4a4a"
                 text: qsTr("Вода:")
                 font.pointSize: 13
                 anchors.left: parent.left
@@ -56,7 +68,7 @@ ViewController {
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: -8
                 font.weight: Font.Thin
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 anchors.top: borderImage.top
                 anchors.topMargin: parent.height * 0.2
             }
@@ -65,20 +77,21 @@ ViewController {
                 id: tfWater
                 y: 27
                 height: 15
-                text: qsTr("Text")
+                text: qsTr("")
                 anchors.right: parent.right
                 anchors.rightMargin: 34
                 anchors.left: parent.horizontalCenter
                 anchors.leftMargin: 12
                 font.bold: true
-                font.family: ".SF UI Text"
-                font.pixelSize: 14
+                font.family: "NS UI Text"
+                font.pointSize: 13
                 anchors.top: lbWater.top
             }
 
             Text {
                 id: lbEmptyBottles
                 height: 15
+                color: "#4a4a4a"
                 text: qsTr("Порожніх бутлів:")
                 anchors.topMargin: 5
                 anchors.right: parent.horizontalCenter
@@ -87,15 +100,15 @@ ViewController {
                 anchors.leftMargin: 0
                 anchors.top: lbWater.bottom
                 font.weight: Font.Thin
-                font.family: "SF UI Text"
-                font.pixelSize: 13
+                font.family: "NS UI Text"
+                font.pointSize: 13
             }
 
             Text {
                 id: tfEmptyBottles
                 y: 53
                 height: 15
-                text: qsTr("Text")
+                text: qsTr("")
                 anchors.right: parent.right
                 anchors.rightMargin: 34
                 anchors.left: parent.horizontalCenter
@@ -103,12 +116,14 @@ ViewController {
                 anchors.top: lbEmptyBottles.top
                 anchors.topMargin: 0
                 font.bold: true
-                font.pixelSize: 14
+                font.family: "NS UI Text"
+                font.pointSize: 13
             }
 
             Text {
                 id: lbRentedButtles
                 height: 15
+                color: "#4a4a4a"
                 text: qsTr("Застава за бутлі:")
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: -8
@@ -117,29 +132,31 @@ ViewController {
                 anchors.left: lbEmptyBottles.left
                 anchors.leftMargin: 0
                 font.weight: Font.Thin
-                font.family: "SF UI Text"
-                font.pixelSize: 13
+                font.family: "NS UI Text"
+                font.pointSize: 13
             }
 
             Text {
                 id: tfRentedBottles
                 height: 15
-                text: qsTr("Text")
+                text: qsTr("")
                 font.bold: true
+                font.pointSize: 13
+                font.family: "NS UI Text"
                 anchors.right: parent.right
                 anchors.rightMargin: 34
                 anchors.left: parent.horizontalCenter
                 anchors.leftMargin: 12
                 anchors.top: lbRentedButtles.top
                 anchors.topMargin: 0
-                font.pixelSize: 14
             }
 
             Text {
                 id: lbSum
                 height: 15
+                color: "#4a4a4a"
                 text: qsTr("Сума замовлення:")
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 font.weight: Font.Thin
                 wrapMode: Text.WrapAnywhere
                 anchors.right: parent.horizontalCenter
@@ -148,13 +165,14 @@ ViewController {
                 anchors.topMargin: parent.height * 0.02
                 anchors.left: lbEmptyBottles.left
                 anchors.leftMargin: 0
-                font.pixelSize: 13
+                font.pointSize: 13
             }
 
             Text {
                 id: tfSum
                 height: 15
-                text: qsTr("Text")
+                text: qsTr("")
+                verticalAlignment: Text.AlignTop
                 anchors.right: parent.right
                 anchors.rightMargin: 34
                 anchors.left: parent.horizontalCenter
@@ -162,7 +180,7 @@ ViewController {
                 anchors.top: lbSum.top
                 anchors.topMargin: 0
                 font.bold: true
-                font.pixelSize: 14
+                font.family: "NS UI Text"
             }
 
             Rectangle {
@@ -185,15 +203,16 @@ ViewController {
                 anchors.top: bevel.bottom
                 anchors.topMargin: parent.height * 0.05
                 font.weight: Font.DemiBold
-                font.family: "SF UI Text"
                 anchors.left: lbSum.left
                 anchors.leftMargin: 0
-                font.pixelSize: 13
+                font.pointSize: 13
+                font.family: "NS UI Text"
             }
 
             Text {
                 id: tfDate
-                text: qsTr("Text")
+                color: "#444444"
+                text: qsTr("")
                 font.weight: Font.Thin
                 anchors.right: tfSum.right
                 anchors.rightMargin: 0
@@ -202,8 +221,8 @@ ViewController {
                 anchors.top: lbDate.top
                 anchors.topMargin: 0
                 font.bold: false
-                font.family: ".SF UI Text"
-                font.pixelSize: 14
+                font.pointSize: 13
+                font.family: "NS UI Text"
             }
 
             Text {
@@ -216,13 +235,15 @@ ViewController {
                 anchors.leftMargin: 0
                 font.bold: true
                 font.weight: Font.DemiBold
-                font.pixelSize: 13
+                font.pointSize: 13
+                font.family: "NS UI Text"
             }
 
             Text {
                 id: tfAddress
                 x: 51
-                text: qsTr("Text")
+                color: "#444444"
+                text: qsTr("")
                 anchors.top: lbAddress.top
                 anchors.topMargin: 0
                 anchors.right: tfDate.right
@@ -230,7 +251,8 @@ ViewController {
                 anchors.left: lbAddress.right
                 anchors.leftMargin: 6
                 font.weight: Font.Thin
-                font.pixelSize: 14
+                font.pointSize: 13
+                font.family: "NS UI Text"
             }
 
             Text {
@@ -238,19 +260,20 @@ ViewController {
                 width: 90
                 text: qsTr("Час достави:")
                 font.weight: Font.DemiBold
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 anchors.top: lbAddress.bottom
                 anchors.topMargin: parent.height * 0.02
                 anchors.left: lbAddress.left
                 anchors.leftMargin: 0
                 font.bold: true
-                font.pixelSize: 13
+                font.pointSize: 13
             }
 
             Text {
                 id: tfDeliveryTime
                 width: 205
-                text: qsTr("Text")
+                color: "#444444"
+                text: qsTr("")
                 anchors.top: lbDeliveryTime.top
                 anchors.topMargin: 0
                 anchors.right: tfAddress.right
@@ -258,7 +281,8 @@ ViewController {
                 anchors.left: lbDeliveryTime.right
                 anchors.leftMargin: 6
                 font.weight: Font.Thin
-                font.pixelSize: 14
+                font.family: "NS UI Text"
+                font.pointSize: 13
             }
 
             Text {
@@ -268,11 +292,11 @@ ViewController {
                 font.weight: Font.DemiBold
                 anchors.top: lbDeliveryTime.bottom
                 anchors.topMargin: parent.height * 0.02
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 font.bold: true
                 anchors.left: lbDeliveryTime.left
                 anchors.leftMargin: 0
-                font.pixelSize: 13
+                font.pointSize: 13
             }
 
             Text {
@@ -282,16 +306,17 @@ ViewController {
                 font.weight: Font.DemiBold
                 anchors.top: lbComments.bottom
                 anchors.topMargin: parent.height * 0.02
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 font.bold: true
                 anchors.left: lbComments.left
                 anchors.leftMargin: 0
-                font.pixelSize: 13
+                font.pointSize: 13
             }
 
             Text {
                 id: tfComments
-                text: qsTr("Text")
+                color: "#444444"
+                text: qsTr("")
                 clip: true
                 renderType: Text.QtRendering
                 anchors.top: lbComments.top
@@ -300,20 +325,22 @@ ViewController {
                 anchors.rightMargin: 0
                 anchors.left: lbComments.right
                 anchors.leftMargin: 6
-                font.pixelSize: 14
+                font.pointSize: 13
+                font.family: "NS UI Text"
             }
 
             Text {
                 id: tfPaymentType
-                text: qsTr("Text")
-                font.family: "SF UI Text"
+                color: "#444444"
+                text: qsTr("")
                 anchors.top: lbPaymentType.top
                 anchors.topMargin: 0
                 anchors.right: tfComments.right
                 anchors.rightMargin: 0
                 anchors.left: lbPaymentType.right
                 anchors.leftMargin: 6
-                font.pixelSize: 14
+                font.pointSize: 13
+                font.family: "NS UI Text"
             }
         }
     }

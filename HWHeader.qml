@@ -22,10 +22,10 @@ Item {
         width: parent.width * 0.4
         height: 30
         color: "#222222"
-        text: qsTr("Text")
+        text: qsTr("Деталі замовлення")
         font.weight: Font.Thin
         font.pointSize: 14
-        font.family: "SF UI Text"
+        font.family: "NS UI Text"
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         anchors.top: parent.top

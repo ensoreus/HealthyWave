@@ -73,7 +73,6 @@ AddressesForm {
             addressesModel.clear()
             for(var index in data){
                 var item = data[index]
-                //var modelItem = i{city:item.city, street:item.street, house:item.house, apartment:item.apartment, entrance:item.entrance, floor:item.}
                 addressesModel.append(item)
             }
         }
@@ -183,11 +182,9 @@ AddressesForm {
                                           storage.saveToken(authToken)
                                       }, function(error, authToken){
                                       })
-                })
-                    lstAddresses.model.remove(index)}
-            }
-            SwipeDelegate.onClicked: {
-
+                        })
+                       lstAddresses.model.remove(index)
+                }
             }
 
             background: Rectangle {
