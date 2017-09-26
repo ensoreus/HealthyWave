@@ -77,6 +77,7 @@ ViewController {
             onButtonClick: {
                 btnSearch.visible = false
                 txtChooseAnother.visible = false
+                searchTimeWaiter.showError = false
                 content.startSearchAnimation()
                 storage.getAuthData(function(authData){
                     Api.searchNearestTime(context.address, authData, function(result){

@@ -46,15 +46,23 @@ ViewController {
                     }
                 }
                 console.log(response.result)
+                updatePricesView()
                 rPricesPanel.state = "pricesReady"
             }, function(failure){
-                console.log(failure.error)
+                rPricesPanel.state = "error"
+                if (failure.error){
+                    rPricesPanel.errorMsg = failure.error
+                }else{
+                    rPricesPanel.errorMsg = "Помилка! \n Спробуйте пізніше"
+                }
             })
         })
     }
 
     function updatePricesView(){
-
+        lbOneBottle.text = context.prices.prices["price_1"] + " грн."
+        lbTwoBottle.text = context.prices.prices["price_2"] + " грн."
+        lbFiveBottle.text = context.prices.prices["price_5"] + " грн."
     }
 
     Rectangle {
@@ -204,6 +212,14 @@ ViewController {
                 font.pointSize: fontSize
             }
 
+            Text{
+                id: errorMsg
+                color: "white"
+                anchors.fill: parent
+                font.pointSize: 13
+                wrapMode: Text.WordWrap
+            }
+
             WhiteBusyIndicator{
                 id: busyIndicator
                 running: false
@@ -257,6 +273,10 @@ ViewController {
                         target: lbFiveBottle
                         visible: false
                     }
+                    PropertyChanges {
+                        target: errorMsg
+                        visible: false
+                    }
                 },
                 State{
                     name: "pricesReady"
@@ -300,8 +320,58 @@ ViewController {
                         target: lbFiveBottle
                         visible: true
                     }
+                    PropertyChanges {
+                        target: errorMsg
+                        visible: false
+                    }
+                },
+                State{
+                    name: "error"
+                    PropertyChanges {
+                        target: busyIndicator
+                        running: false
+                    }
+                    PropertyChanges {
+                        target: busyIndicator
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: txtOneBottle
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: txtTwoBottles
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: txtFiveBottles
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: txtFee
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: lbFeeForBottle
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: lbOneBottle
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: lbTwoBottle
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: lbFiveBottle
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: errorMsg
+                        visible: true
+                    }
                 }
-
             ]
         }
 

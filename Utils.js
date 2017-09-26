@@ -55,3 +55,14 @@ function extractDataFromNotification( notification ) {
     return {"courier":courier, "phone":phone, "orderid":orderid}
 }
 
+function calcFullBottles(context){
+    var price = 0
+    if (context.fullb < 2){
+        price = context.prices.prices["price_1"]
+    }else if (context.fullb >= 2 && context.fullb < 5){
+        price = context.prices.prices["price_2"]
+    }else{
+        price = context.prices.prices["price_5"]
+    }
+    return price
+}

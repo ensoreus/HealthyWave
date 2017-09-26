@@ -63,11 +63,11 @@ ViewController {
     function calcFullBottles(){
         var price = 0
         if (fullb < 2){
-            price = 60
+            price = context.prices.prices["price_1"]
         }else if (fullb >= 2 && fullb < 5){
-            price = 45
+            price = context.prices.prices["price_2"]
         }else{
-            price = 43
+            price = context.prices.prices["price_5"]
         }
         return price
     }
@@ -95,12 +95,12 @@ ViewController {
     }
 
     function isPumpLine(){
-        return cbPump.checked ? "100 грн."  : "0 грн."
+        return cbPump.checked ? context.prices.pump + " грн."  : "0 грн."
     }
 
     function calcTotal(){
         bonusesInCheck.updateSummaryDiscount()
-        var total = calcFullBottles() + calcEmptyBottlesFee() + (cbPump.checked ? 100 : 0) + bonusesInCheck.summaryDiscount
+        var total = calcFullBottles() + calcEmptyBottlesFee() + (cbPump.checked ? context.prices.pump : 0) + bonusesInCheck.summaryDiscount
         return total
     }
 
@@ -242,7 +242,7 @@ ViewController {
                 id: cbPump
                 x: 5
                 height: 13 * ratio
-                text: "Механічна помпа - 100 грн."
+                text: "Механічна помпа - " + context.prices.pump + " грн."
                 anchors.topMargin: 5 * ratio
                 anchors.top: bonusLst.bottom
                 anchors.rightMargin: parent.width * 0.02

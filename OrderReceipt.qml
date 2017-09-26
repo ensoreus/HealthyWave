@@ -3,6 +3,7 @@ import QuickIOS 0.1
 import "qrc:/commons"
 import "qrc:/controls"
 import "qrc:/Api.js" as Api
+import "qrc:/Utils.js" as Utils
 import "qrc:/"
 
 ViewController {
@@ -13,11 +14,11 @@ ViewController {
     }
 
     onViewDidAppear:{
-        txWater.text = context.fullb + " бут. х 45 грн."
+        txWater.text = context.fullb + " бут. х " + Utils.calcFullBottles(context) + " грн."
         txEmpty.text = context.emptyb + " шт."
         txFee.text = "130 грн."
-        txNoDiscount.text = context.fullb * 45 + " грн."
-        var discounted = context.fullb * 45 - (context.fullb * 45 / 100 * 20)
+        txNoDiscount.text = context.fullb * Utils.calcFullBottles(context) + " грн."
+        var discounted = context.fullb * Utils.calcFullBottles(context) - (context.fullb * Utils.calcFullBottles(context) / 100 * 20)
         txWithDiscount.text = discounted + " грн."
         txTotal.text = discounted + 130 + " грн."
         txAddress.text = "вул. " +context.address.street + ", буд." + context.address.house + " оф." + context.address.apartment
@@ -29,6 +30,7 @@ ViewController {
     Storage{
         id: storage
     }
+
     Rectangle {
         id: content
         color: "#ffffff"
@@ -112,16 +114,12 @@ ViewController {
                 anchors.left: parent.left
             }
 
-            Text {
+            BonusesInCheck{
                 id: lbWithDiscount
-                color: "#4a4a4a"
-                text: qsTr("Сума зі знижкою 20%:")
-                font.weight: Font.Thin
-                font.pointSize: 13
                 anchors.topMargin: parent.height * 0.01
                 anchors.top: lbNoDiscount.bottom
-                anchors.right: parent.horizontalCenter
-                anchors.rightMargin: 0
+                anchors.right: parent.left
+                anchors.rightMargin: parent.width * 0.08
                 anchors.leftMargin: parent.width * 0.08
                 anchors.left: parent.left
             }
@@ -209,20 +207,20 @@ ViewController {
                 anchors.leftMargin: 20* ratio
             }
 
-            Text {
-                id: txWithDiscount
-                text: qsTr("Text")
-                font.weight: Font.DemiBold
-                font.pointSize: 14
-                verticalAlignment: Text.AlignVCenter
-                anchors.top: lbWithDiscount.top
-                anchors.topMargin: 0
-                anchors.left: lbWithDiscount.right
-                anchors.leftMargin: 20* ratio
-                anchors.rightMargin: parent.width * 0.08
-                anchors.right: parent.right
+//            Text {
+//                id: txWithDiscount
+//                text: qsTr("Text")
+//                font.weight: Font.DemiBold
+//                font.pointSize: 14
+//                verticalAlignment: Text.AlignVCenter
+//                anchors.top: lbWithDiscount.top
+//                anchors.topMargin: 0
+//                anchors.left: lbWithDiscount.right
+//                anchors.leftMargin: 20* ratio
+//                anchors.rightMargin: parent.width * 0.08
+//                anchors.right: parent.right
 
-            }
+//            }
 
             Text {
                 id: txTotal

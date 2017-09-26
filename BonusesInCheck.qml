@@ -1,4 +1,5 @@
 import QtQuick 2.7
+import "qrc:/Utils.js" as Utils
 
 Rectangle {
     property alias activeBonuses : lstBonuses.model
@@ -13,7 +14,6 @@ Rectangle {
         flickableDirection: Flickable.AutoFlickIfNeeded
         model:ListModel{
             id:bonusModel
-
         }
         spacing: 5 * ratio
         delegate: Rectangle{
@@ -66,19 +66,20 @@ Rectangle {
 
     function bonusValueCalc(bonus){
         if (bonus.BonusType === "БесплатныйБутыльВоды"){
-            return -60
+            return -Utils.calcFullBottles(context)
         }else if (bonus.BonusType === "СкидкаСуммойНаОбщуюСуммуЗаказа"){
             return -bonus.DiscountValue
         }else if (bonus.BonusType === "Подарок"){
             return 0
-        }else if (bonus.BonusType === "СкидаПроцентнаяНаВоду"){
-            var price = context.fullb > 1 ? 45 : 60
+        }else if (bonus.BonusType === "СкидкаПроцентнаяНаВоду"){
+            var price = Utils.calcFullBottles(context)
             return -(price * context.fullb / 100 * bonus.DiscountValue)
         }else if (bonus.BonusType === "СкидкаСуммойНаПомпу"){
             return (context.pump) ? -(bonus.DiscountValue) : 0
         }else if (bonus.BonusType === "СкидкаПроцентнаяНаПомпу"){
-            return (context.pump) ? -( bonus.DiscountValue) : 0
+            return (context.pump) ? -( context.prices.pump / 100 * bonus.DiscountValue) : 0
         }
+        return 0
     }
 
     function updateSummaryDiscount(){
