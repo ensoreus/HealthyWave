@@ -277,6 +277,10 @@ ViewController {
                         target: errorMsg
                         visible: false
                     }
+                    PropertyChanges {
+                        target: btnNext
+                        enabled: false
+                    }
                 },
                 State{
                     name: "pricesReady"
@@ -324,6 +328,10 @@ ViewController {
                         target: errorMsg
                         visible: false
                     }
+                    PropertyChanges {
+                        target: btnNext
+                        enabled: true
+                    }
                 },
                 State{
                     name: "error"
@@ -370,6 +378,10 @@ ViewController {
                     PropertyChanges {
                         target: errorMsg
                         visible: true
+                    }
+                    PropertyChanges {
+                        target: btnNext
+                        enabled: false
                     }
                 }
             ]

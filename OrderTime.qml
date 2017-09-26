@@ -169,7 +169,6 @@ ViewController {
 
 
         HWRoundButton{
-
             visible: context.deliveryTime.toHour != ""
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom

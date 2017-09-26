@@ -16,11 +16,18 @@ ViewController {
     onViewDidAppear:{
         txWater.text = context.fullb + " бут. х " + Utils.calcFullBottles(context) + " грн."
         txEmpty.text = context.emptyb + " шт."
-        txFee.text = "130 грн."
+        var fee  = context.fullb - context.emptyb > 0 ? 130 : 0
+        txFee.text = fee + " грн."
         txNoDiscount.text = context.fullb * Utils.calcFullBottles(context) + " грн."
-        var discounted = context.fullb * Utils.calcFullBottles(context) - (context.fullb * Utils.calcFullBottles(context) / 100 * 20)
+        var discountSum = 0
+        for (var index in context.bonuses){
+            discountSum += Utils.bonusValueCalc(context.bonuses[index], context)
+        }
+        console.log(discountSum)
+
+        var discounted = context.fullb * Utils.calcFullBottles(context)  + (context.pump?context.prices.pump:0)+ discountSum
         txWithDiscount.text = discounted + " грн."
-        txTotal.text = discounted + 130 + " грн."
+        txTotal.text = discounted + fee + " грн."
         txAddress.text = "вул. " +context.address.street + ", буд." + context.address.house + " оф." + context.address.apartment
         txDeliveryTime.text = "сьогодні до " + context.deliveryTime.toHour
         txPaymentType.text = context.card == 1 ? "карткою" : "готівкою"
@@ -114,15 +121,29 @@ ViewController {
                 anchors.left: parent.left
             }
 
-            BonusesInCheck{
+            Text {
                 id: lbWithDiscount
+                color: "#4a4a4a"
+                text: qsTr("Сума зi знижкою:")
+                font.weight: Font.Thin
+                font.pointSize: 13
                 anchors.topMargin: parent.height * 0.01
                 anchors.top: lbNoDiscount.bottom
-                anchors.right: parent.left
-                anchors.rightMargin: parent.width * 0.08
+                anchors.right: parent.horizontalCenter
+                anchors.rightMargin: 0
                 anchors.leftMargin: parent.width * 0.08
                 anchors.left: parent.left
             }
+
+//            BonusesInCheck{
+//                id: lbWithDiscount
+//                anchors.topMargin: parent.height * 0.01
+//                anchors.top: lbNoDiscount.bottom
+//                anchors.right: parent.left
+//                anchors.rightMargin: parent.width * 0.08
+//                anchors.leftMargin: parent.width * 0.08
+//                anchors.left: parent.left
+//            }
 
             Text {
                 id: lbTotal
@@ -207,20 +228,19 @@ ViewController {
                 anchors.leftMargin: 20* ratio
             }
 
-//            Text {
-//                id: txWithDiscount
-//                text: qsTr("Text")
-//                font.weight: Font.DemiBold
-//                font.pointSize: 14
-//                verticalAlignment: Text.AlignVCenter
-//                anchors.top: lbWithDiscount.top
-//                anchors.topMargin: 0
-//                anchors.left: lbWithDiscount.right
-//                anchors.leftMargin: 20* ratio
-//                anchors.rightMargin: parent.width * 0.08
-//                anchors.right: parent.right
-
-//            }
+            Text {
+                id: txWithDiscount
+                text: qsTr("Text")
+                font.weight: Font.DemiBold
+                font.pointSize: 14
+                verticalAlignment: Text.AlignVCenter
+                anchors.top: lbWithDiscount.top
+                anchors.topMargin: 0
+                anchors.left: lbWithDiscount.right
+                anchors.leftMargin: 20* ratio
+                anchors.rightMargin: parent.width * 0.08
+                anchors.right: parent.right
+            }
 
             Text {
                 id: txTotal

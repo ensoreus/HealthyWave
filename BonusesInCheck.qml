@@ -38,7 +38,7 @@ Rectangle {
 
             Text{
                 id: lbBonusValue
-                text: bonusValueCalc(bonusModel.get(index)) + " грн."
+                text: Utils.bonusValueCalc(bonusModel.get(index), context) + " грн."
                 color: "#4a4a4a"
                 width: 100
                 font.family: "SF UI Text"
@@ -58,28 +58,10 @@ Rectangle {
         if (typeof(context) != "undefined"){
             for(var i in context.bonuses){
                 var v = context.bonuses[i]
-                acc += bonusValueCalc(v)
+                acc += Utils.bonusValueCalc(v, context)
             }
         }
         return acc
-    }
-
-    function bonusValueCalc(bonus){
-        if (bonus.BonusType === "БесплатныйБутыльВоды"){
-            return -Utils.calcFullBottles(context)
-        }else if (bonus.BonusType === "СкидкаСуммойНаОбщуюСуммуЗаказа"){
-            return -bonus.DiscountValue
-        }else if (bonus.BonusType === "Подарок"){
-            return 0
-        }else if (bonus.BonusType === "СкидкаПроцентнаяНаВоду"){
-            var price = Utils.calcFullBottles(context)
-            return -(price * context.fullb / 100 * bonus.DiscountValue)
-        }else if (bonus.BonusType === "СкидкаСуммойНаПомпу"){
-            return (context.pump) ? -(bonus.DiscountValue) : 0
-        }else if (bonus.BonusType === "СкидкаПроцентнаяНаПомпу"){
-            return (context.pump) ? -( context.prices.pump / 100 * bonus.DiscountValue) : 0
-        }
-        return 0
     }
 
     function updateSummaryDiscount(){

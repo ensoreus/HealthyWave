@@ -66,3 +66,21 @@ function calcFullBottles(context){
     }
     return price
 }
+
+function bonusValueCalc(bonus, context){
+    if (bonus.BonusType === "БесплатныйБутыльВоды"){
+        return -calcFullBottles(context)
+    }else if (bonus.BonusType === "СкидкаСуммойНаОбщуюСуммуЗаказа"){
+        return -bonus.DiscountValue
+    }else if (bonus.BonusType === "Подарок"){
+        return 0
+    }else if (bonus.BonusType === "СкидкаПроцентнаяНаВоду"){
+        var price = calcFullBottles(context)
+        return -(price * context.fullb / 100 * bonus.DiscountValue)
+    }else if (bonus.BonusType === "СкидкаСуммойНаПомпу"){
+        return (context.pump) ? -(bonus.DiscountValue) : 0
+    }else if (bonus.BonusType === "СкидкаПроцентнаяНаПомпу"){
+        return (context.pump) ? -( context.prices.pump / 100 * bonus.DiscountValue) : 0
+    }
+    return 0
+}
