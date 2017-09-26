@@ -272,6 +272,10 @@ function getPrices(address, authdata, onSuccess, onFailure){
              "phone":authdata.phone},authdata,onSuccess, onFailure)
 }
 
+function getContacts(authdata, onSuccess, onFailure){
+    call("getorganizationcontacts", {"phone":authdata.phone}, authdata, onSuccess, onFailure)
+}
+
 function call(routine, params, authData, onSuccess, onFailure){
     var xhr = new XMLHttpRequest();
     var url = baseUrl + routine + serializeParams(removeUndefinedFields(params))

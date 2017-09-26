@@ -1,11 +1,51 @@
-import QtQuick 2.0
+import QtQuick 2.7
+import QtQuick.Controls 2.2
 import QuickIOS 0.1
 import "qrc:/commons"
 import "qrc:/"
+import "qrc:/Api.js" as Api
 
 ViewController {
     property var navigationItem: NavigationItem{
         centerBarTitle: "Контакти"
+    }
+
+    Storage{
+        id: storage
+    }
+
+    onViewWillAppear: {
+        content.state = "pendingContacts"
+        storage.getAuthData(function(authdata){
+            Api.getContacts(authdata, function(response){
+                console.log(response.result)
+                for(var index in response.result){
+                    importData(response.result[index])
+                }
+                content.state = "readyContacts"
+            }, function(failure){
+                console.log(failure.error)
+                content.state = "readyContacts"
+            })
+        })
+    }
+
+    function importData(contactItem){
+        if (contactItem.ContactInformationType === "Замовлення онлайн"){
+            txOrderOnlinePhone.text = contactItem.ContactInformation
+        }else if(contactItem.ContactInformationType === "Кол-центр (зворотній дзвінок)"){
+            txCallCenterPhone2.text = contactItem.ContactInformation
+        }else if(contactItem.ContactInformationType === "Головний офіс"){
+            lbMainAddress.text = contactItem.ContactInformation
+        }else if(contactItem.ContactInformationType === "Пошта"){
+            txEmail.text = contactItem.ContactInformation
+        }else if(contactItem.ContactInformationType === "Viber"){
+            txViber.text = "+380" + contactItem.ContactInformation
+        }else if(contactItem.ContactInformationType === "Кол-центр"){
+            txCallCenterPhone.text = contactItem.ContactInformation
+        }else if(contactItem.ContactInformationType === "Telegram"){
+            txTelegram.text = contactItem.ContactInformation
+        }
     }
 
     Rectangle {
@@ -28,7 +68,7 @@ ViewController {
         Text {
             id: lbMainAddress
             height: 16
-            text: qsTr("Київ, вул. Родистів, 11")
+            //text: qsTr("Київ, вул. Родистів, 11")
             anchors.leftMargin: parent.width * 0.02
             font.weight: Font.DemiBold
             font.pointSize: 17
@@ -37,6 +77,13 @@ ViewController {
             anchors.topMargin: parent.height * 0.02
             anchors.top: lbMainOffice.bottom
             anchors.left: parent.left
+            BusyIndicator{
+                id:mainAddrWaiter
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                height: parent.height
+                width: parent.height
+            }
         }
         
         Text {
@@ -79,7 +126,7 @@ ViewController {
             Text {
                 id: txCallCenterPhone
                 height: 17
-                text: qsTr("8 911")
+                //text: qsTr("8 911")
                 anchors.topMargin: parent.height * 0.04
                 anchors.top: lbCallCenterPhone.bottom
                 anchors.right: parent.right
@@ -87,6 +134,13 @@ ViewController {
                 anchors.left: lbCallCenterPhone.left
                 anchors.leftMargin: 0
                 font.pointSize: 17
+                BusyIndicator{
+                    id:callCentrWaiter
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    width: parent.height
+                }
             }
 
             Image {
@@ -104,7 +158,7 @@ ViewController {
                         imgPhone.opacity = pressed ? 0.5 : 1
                     }
                     onClicked: {
-                        Qt.openUrlExternally("tel:+3808911") ;
+                        Qt.openUrlExternally("tel:+"+txCallCenterPhone.text) ;
                     }
                 }
             }
@@ -138,7 +192,7 @@ ViewController {
             Text {
                 id: txCallCenterPhone2
                 height: 17
-                text: qsTr("0 800 300 911")
+                //text: qsTr("0 800 300 911")
                 anchors.topMargin: parent.height * 0.04
                 anchors.top: lbCallCenterPhone2.bottom
                 anchors.right: parent.right
@@ -146,6 +200,15 @@ ViewController {
                 anchors.left: lbCallCenterPhone2.left
                 anchors.leftMargin: 0
                 font.pointSize: 17
+                BusyIndicator{
+                    id:callCentr2Waiter
+                    anchors.right: parent.right
+                    anchors.rightMargin: 50 * ratio
+                    running: true
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    width: parent.height
+                }
             }
 
             Image {
@@ -163,7 +226,7 @@ ViewController {
                         imgPhone2.opacity = pressed ? 0.5 : 1
                     }
                     onClicked: {
-                        Qt.openUrlExternally("tel:+380800300911") ;
+                        Qt.openUrlExternally("tel:+"+txCallCenterPhone2.text) ;
                     }
                 }
             }
@@ -197,7 +260,7 @@ ViewController {
             Text {
                 id: txOrderOnlinePhone
                 height: 17
-                text: qsTr("+380 67 618 11 01")
+                //text: qsTr("+380 67 618 11 01")
                 anchors.topMargin: parent.height * 0.04
                 anchors.top: lbOrderOnlinePhone.bottom
                 anchors.right: parent.right
@@ -205,6 +268,13 @@ ViewController {
                 anchors.left: lbOrderOnlinePhone.left
                 anchors.leftMargin: 0
                 font.pointSize: 17
+                BusyIndicator{
+                    id:orderOnlineWaiter
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    width: parent.height
+                }
             }
 
             Image {
@@ -222,7 +292,7 @@ ViewController {
                         imgPhone3.opacity = pressed ? 0.5 : 1
                     }
                     onClicked: {
-                        Qt.openUrlExternally("tel:+380676181101") ;
+                        Qt.openUrlExternally("tel:+"+txOrderOnlinePhone.text) ;
                     }
                 }
             }
@@ -270,7 +340,7 @@ ViewController {
             Text {
                 id: txViber
                 height: 17
-                text: qsTr("98 765-43-21")
+                //text: qsTr("98 765-43-21")
                 anchors.topMargin: parent.height * 0.04
                 anchors.top: lbViber.bottom
                 anchors.right: parent.right
@@ -278,6 +348,13 @@ ViewController {
                 anchors.left: lbViber.left
                 anchors.leftMargin: 0
                 font.pointSize: 17
+                BusyIndicator{
+                    id:viberWaiter
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    width: parent.height
+                }
             }
 
             Image {
@@ -303,7 +380,7 @@ ViewController {
                     imgViber.opacity = pressed ? 0.5 : 1
                 }
                 onClicked: {
-                    Qt.openUrlExternally("viber:chat?number=+380987654321") ;
+                    Qt.openUrlExternally("viber:chat?number=+"+txViber.text) ;
                 }
             }
         }
@@ -336,7 +413,7 @@ ViewController {
             Text {
                 id: txEmail
                 height: 17
-                text: qsTr("help@hv_zd.ua")
+                //text: qsTr("help@hv_zd.ua")
                 anchors.topMargin: parent.height * 0.04
                 anchors.top: lbEmail.bottom
                 anchors.right: parent.right
@@ -344,6 +421,13 @@ ViewController {
                 anchors.left: lbEmail.left
                 anchors.leftMargin: 0
                 font.pointSize: 17
+                BusyIndicator{
+                    id:mailWaiter
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    width: parent.height
+                }
             }
 
             Image {
@@ -370,7 +454,7 @@ ViewController {
                     imgEmail.opacity = pressed ? 0.5 : 1
                 }
                 onClicked: {
-                    Qt.openUrlExternally("mailto:help@hv_zd.ua") ;
+                    Qt.openUrlExternally("mailto:"+txEmail.text) ;
                 }
             }
         }
@@ -403,7 +487,7 @@ ViewController {
             Text {
                 id: txTelegram
                 height: 17
-                text: qsTr("+380 67 618 11 01")
+                //text: qsTr("+380 67 618 11 01")
                 anchors.topMargin: parent.height * 0.04
                 anchors.top: lbTelegram.bottom
                 anchors.right: parent.right
@@ -411,6 +495,13 @@ ViewController {
                 anchors.left: lbTelegram.left
                 anchors.leftMargin: 0
                 font.pointSize: 17
+                BusyIndicator{
+                    id:telegramWaiter
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    width: parent.height
+                }
             }
 
             Image {
@@ -438,10 +529,74 @@ ViewController {
                     imgTelegram.opacity = pressed ? 0.5 : 1
                 }
                 onClicked: {
-                    Qt.openUrlExternally("tg:resolve?number=+380676181101") ;
+                    Qt.openUrlExternally("tg:resolve?number=+"+txTelegram.text) ;
                 }
             }
         }
+        states: [
+            State {
+                name: "pendingContacts"
+                PropertyChanges {
+                    target: mainAddrWaiter
+                    running: true
+                }
+                PropertyChanges {
+                    target: callCentrWaiter
+                    running: true
+                }
+                PropertyChanges {
+                    target: callCentr2Waiter
+                    running: true
+                }
+                PropertyChanges {
+                    target: orderOnlineWaiter
+                    running: true
+                }
+                PropertyChanges {
+                    target: viberWaiter
+                    running: true
+                }
+                PropertyChanges {
+                    target: mailWaiter
+                    running: true
+                }
+                PropertyChanges {
+                    target: telegramWaiter
+                    running: true
+                }
+            },
+            State {
+                name: "readyContacts"
+                PropertyChanges {
+                    target: mainAddrWaiter
+                    running: false
+                }
+                PropertyChanges {
+                    target: callCentrWaiter
+                    running: false
+                }
+                PropertyChanges {
+                    target: callCentr2Waiter
+                    running: false
+                }
+                PropertyChanges {
+                    target: orderOnlineWaiter
+                    running: false
+                }
+                PropertyChanges {
+                    target: viberWaiter
+                    running: false
+                }
+                PropertyChanges {
+                    target: mailWaiter
+                    running: false
+                }
+                PropertyChanges {
+                    target: telegramWaiter
+                    running: false
+                }
+            }
+        ]
     }
 
 }
