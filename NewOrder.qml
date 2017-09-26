@@ -1,7 +1,10 @@
-import QtQuick 2.0
+import QtQuick 2.7
+import QtQuick.Controls 2.2
 import QuickIOS 0.1
 import "qrc:/controls"
 import "qrc:/commons"
+import "qrc:/Api.js" as Api
+import "qrc:/"
 
 ViewController {
     id: newOrderViewController
@@ -12,7 +15,7 @@ ViewController {
     property alias stFullBottles: stFullBottles
     property alias btnNext: btnNext
     property alias stEmptyBottles: stEmptyBottles
-    property var context
+    property OrderContext context
 
     property var fontSize: width > 320 ? 16 : 13
     property var navigationItem: NavigationItem{
@@ -21,6 +24,37 @@ ViewController {
 
     function calc(){
         stFullBottles.value.toFixed()
+    }
+
+    Storage{
+        id:storage
+    }
+
+    onViewWillAppear: {
+        rPricesPanel.state = "pendingPrices"
+        storage.getAuthData(function(authdata){
+            Api.getPrices(context.address, authdata, function(response){
+                for(var index in response.result){
+                    var priceList = response.result[index]
+                    if(priceList.find){
+                        context.prices.pump = priceList.pompa
+                        for(var key in priceList){
+                            if(key.startsWith("price_")){
+                                context.prices.prices[key] = priceList[key]
+                            }
+                        }
+                    }
+                }
+                console.log(response.result)
+                rPricesPanel.state = "pricesReady"
+            }, function(failure){
+                console.log(failure.error)
+            })
+        })
+    }
+
+    function updatePricesView(){
+
     }
 
     Rectangle {
@@ -169,6 +203,106 @@ ViewController {
                 anchors.right: parent.right
                 font.pointSize: fontSize
             }
+
+            WhiteBusyIndicator{
+                id: busyIndicator
+                running: false
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width * 0.5
+                height: parent.width * 0.5
+
+            }
+
+            states:[
+                State {
+                    name: "pendingPrices"
+                    PropertyChanges {
+                        target: busyIndicator
+                        running: true
+                    }
+                    PropertyChanges {
+                        target: busyIndicator
+                        visible: true
+                    }
+                    PropertyChanges {
+                        target: txtOneBottle
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: txtTwoBottles
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: txtFiveBottles
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: txtFee
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: lbFeeForBottle
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: lbOneBottle
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: lbTwoBottle
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: lbFiveBottle
+                        visible: false
+                    }
+                },
+                State{
+                    name: "pricesReady"
+                    PropertyChanges {
+                        target: busyIndicator
+                        running: false
+                    }
+                    PropertyChanges {
+                        target: busyIndicator
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: txtOneBottle
+                        visible: true
+                    }
+                    PropertyChanges {
+                        target: txtTwoBottles
+                        visible: true
+                    }
+                    PropertyChanges {
+                        target: txtFiveBottles
+                        visible: true
+                    }
+                    PropertyChanges {
+                        target: txtFee
+                        visible: true
+                    }
+                    PropertyChanges {
+                        target: lbFeeForBottle
+                        visible: true
+                    }
+                    PropertyChanges {
+                        target: lbOneBottle
+                        visible: true
+                    }
+                    PropertyChanges {
+                        target: lbTwoBottle
+                        visible: true
+                    }
+                    PropertyChanges {
+                        target: lbFiveBottle
+                        visible: true
+                    }
+                }
+
+            ]
         }
 
         Text {

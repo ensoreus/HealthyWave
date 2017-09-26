@@ -29,4 +29,8 @@ QtObject {
          house: 0
          isPrimary: 0
     }
+    property Prices prices:Prices{
+        prices: new Array(1)
+        pump:0
+    }
 }

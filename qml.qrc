@@ -60,6 +60,7 @@
         <file>SearchTimeWaiter.qml</file>
         <file>DatePicker.qml</file>
         <file>HWFramedRoundButton.qml</file>
+        <file>WhiteBusyIndicator.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>
@@ -86,6 +87,7 @@
         <file>img-messaging.png</file>
         <file>img-copy.png</file>
         <file>img-alert.png</file>
+        <file>Prices.qml</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>

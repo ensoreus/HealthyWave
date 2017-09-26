@@ -75,6 +75,12 @@ ViewController {
         })
     }
 
+
+    function updatePrices(){
+        storage.getAddresses()
+        Api.getPrices()
+    }
+
     Rectangle {
         id: rectangle
         color: "#ffffff"
@@ -110,7 +116,7 @@ ViewController {
                         context.address.street = item.street
                         context.address.city = item.city
                         context.address.floor = item.floor
-                        //context.address.doorCode = item.doorCode
+                        context.address.doorCode = item.doorCode
                         context.address.house = item.house
                         context.address.apartment = item.apartment
                         context.address.isPrimary = item.primary
@@ -126,6 +132,7 @@ ViewController {
                         entrance:item.entrance,
                         primary: item.primary
                     }
+
                     append(modelItem)
                 }
             }
@@ -146,7 +153,9 @@ ViewController {
                         context.address.street = item.street
                         context.address.city = item.city
                         context.address.floor = item.floor
-                        //context.address.doorCode = doorCode
+                        if (typeof(item.doorCode) != "undefined"){
+                            context.address.doorCode = item.doorCode
+                        }
                         context.address.house = item.house
                         context.address.apartment = item.apartment
                         context.address.isPrimary = item.primary

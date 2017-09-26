@@ -261,14 +261,14 @@ entrance: подъезд
 floor: этаж
 */
 
-function getPrices(city, street, house, apt, entrance, floor, authdata, onSuccess, onFailure){
+function getPrices(address, authdata, onSuccess, onFailure){
     call("getprices", {
-             "city":city,
-             "street":street,
-             "house":house,
-             "entrance":entrance,
-             "apartment":apt,
-             "floor":floor,
+             "city":address.city,
+             "street":address.street,
+             "house":address.house,
+             "entrance":address.entrance,
+             "apartment":address.apt,
+             "floor":address.floor,
              "phone":authdata.phone},authdata,onSuccess, onFailure)
 }
 
