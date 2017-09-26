@@ -102,26 +102,34 @@ function deleteAddress(city, street, house, entrance, floor, apartment, authdata
                                 "phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
-function sendNewAddress(city, street, house, entrance, apartment, floor, authdata, onSuccess, onFailure){
+function sendNewAddress(city, street, house, entrance, apartment, floor, doorcode, authdata, onSuccess, onFailure){
     call("addaddresscustomer", {"city":city,
                                 "street":street,
                                 "house":house,
                                 "apartment":apartment,
                                 "entrance":entrance,
                                 "floor":floor,
+                                "doorcode":doorcode,
                                 "phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
-function updateAddress(newCity, newStreet, newHous, newApt, newEntrance, newFloor,
-                  oldcity, oldstreet, oldhouse, oldapt, oldentrance, oldfloor, authdata, onSuccess, onFailure){
-                  onSuccess()
-//    call("addaddresscustomer", {"city":city,
-//                                "street":street,
-//                                "house":house,
-//                                "apartment":apartment,
-//                                "entrance":entrance,
-//                                "floor":floor,
-//                                "phone":authdata.phone}, authdata, onSuccess, onFailure);
+function updateAddress(newCity, newStreet, newHouse, newApt, newEntrance, newFloor, newDoorcode,
+                  oldcity, oldstreet, oldhouse, oldapt, oldentrance, oldfloor,olddoorcode, authdata, onSuccess, onFailure){
+    call("editaddresscustomer", {"city":oldcity,
+                                "citynew":newCity,
+                                "street":oldstreet,
+                                "streetnew":newStreet,
+                                "house":oldhouse,
+                                "housenew":newHouse,
+                                "apartment":oldapt,
+                                "apartmentnew":newApt,
+                                "entrance":oldentrance,
+                                "entrancenew":newEntrance,
+                                "floor":oldfloor,
+                                "floornew":newFloor,
+                                "doorcode":olddoorcode,
+                                "doorcode":newDoorcode,
+                                "phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
 function searchNearestTime(address, authData, onSuccess, onFailure){
@@ -240,6 +248,28 @@ function getBonus(authdata, onSuccess, onFailure){
 
 function addPromoCode(promocode, authdata, onSuccess, onFailure){
     call("addpromocode", {"phone":authdata.phone, "promocode":promocode}, authdata, onSuccess, onFailure)
+}
+
+/*
+key : ключ полученный при авторизации
+phone: Телефон клиента
+city: Город
+street: улица
+house: номер дома
+apartment: номер квартиры
+entrance: подъезд
+floor: этаж
+*/
+
+function getPrices(city, street, house, apt, entrance, floor, authdata, onSuccess, onFailure){
+    call("getprices", {
+             "city":city,
+             "street":street,
+             "house":house,
+             "entrance":entrance,
+             "apartment":apt,
+             "floor":floor,
+             "phone":authdata.phone},authdata,onSuccess, onFailure)
 }
 
 function call(routine, params, authData, onSuccess, onFailure){

@@ -197,7 +197,7 @@ ViewController {
 
         Text{
             id: debugMsg
-            visible: false
+            //visible: false
             wrapMode: Text.WordWrap
             anchors.top: hWHeader.bottom
             anchors.topMargin: 30 * ratio

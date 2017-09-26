@@ -46,8 +46,10 @@ ios:{
 }
 
 mac: {
+    QMAKE_MAC_SDK = macosx10.13
     SOURCES += SecImpl_ios.cpp
     LIBS+= -framework Security
+
 }
 
 android: {
