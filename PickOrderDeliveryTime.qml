@@ -2,6 +2,10 @@ import QtQuick 2.0
 import QuickIOS 0.1
 import "qrc:/controls"
 import "qrc:/commons"
+import "qrc:/"
+import "qrc:/Api.js" as Api
+import "qrc:/Utils.js" as Utils
+
 import QtQuick.Controls 2.1
 
 ViewController {
@@ -11,6 +15,20 @@ ViewController {
 
     property var navigationItem: NavigationItem{
         centerBarTitle:"Замовлення"
+    }
+
+    Storage{
+        id:storage
+    }
+
+    function getAvailableTime(date){
+        storage.getAuthData(function(authdata){
+            Api.getAvailableCustomTime(date, authdata, function(response){
+                console.log(response.result)
+            }, function(failure){
+                console.log(failure.error)
+            })
+        })
     }
 
     Rectangle {
@@ -47,11 +65,14 @@ ViewController {
         DatePicker {
             id: datePicker
             anchors.horizontalCenter: parent.horizontalCenter
-            //anchors.horizontalCenterOffset: - parent.width * 0.04
             width: parent.width
             height: parent.height * 0.35
             anchors.top: text1.bottom
             anchors.topMargin: parent.height * 0.05
+            onDayChanged: {
+                var day = Utils.formatDateShortYear(dayIndex)
+
+            }
         }
 
         Text {
@@ -86,22 +107,10 @@ ViewController {
             var dayIndex = datePicker.getColumn(0).currentIndex;
             var fromIndex = datePicker.getColumn(1).currentIndex;
             var toIndex = datePicker.getColumn(2).currentIndex;
-            var today = new Date();
-            var dd = today.getDate() + dayIndex;
-            var mm = today.getMonth() + 1;
-            var yyyy = today.getFullYear();
-
-            if(dd < 10) {
-                dd = '0'+dd
-            }
-
-            if(mm < 10) {
-                mm = '0'+mm
-            }
 
             var fromHour = fromIndex + 7
             var toHour = toIndex + 8
-            context.deliveryTime.day = dd+mm+yyyy
+            context.deliveryTime.day = Utils.formatDateFullYear(dayIndex)
             context.deliveryTime.fromHour = fromHour
             context.deliveryTime.toHour = toHour
         }

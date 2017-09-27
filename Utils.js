@@ -94,3 +94,35 @@ function surnameFromLine(line){
     var surname = line.slice(line.indexOf(" ") + 1, line.length)
     return surname
 }
+
+function formatDateFullYear(dayIndex){
+    var today = new Date();
+    var dd = today.getDate() + dayIndex;
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+
+    if(dd < 10) {
+        dd = '0'+dd
+    }
+
+    if(mm < 10) {
+        mm = '0'+mm
+    }
+    return dd+mm+yyyy
+}
+
+function formatDateShortYear(dayIndex){
+    var today = new Date();
+    var dd = today.getDate() + dayIndex;
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    var yy = yyyy.splice(2,2)
+    if(dd < 10) {
+        dd = '0'+dd
+    }
+
+    if(mm < 10) {
+        mm = '0'+mm
+    }
+    return dd+mm+yy
+}

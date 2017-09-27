@@ -287,6 +287,13 @@ function getContacts(authdata, onSuccess, onFailure){
     call("getorganizationcontacts", {"phone":authdata.phone}, authdata, onSuccess, onFailure)
 }
 
+function getAvailableCustomTime(day, authdata, onSuccess, onFailure){
+    call("timedeliveryday", {
+            "phone":authdata.phone,
+            "deliverydate":day
+         }, authdata, onSuccess, onFailure)
+}
+
 function call(routine, params, authData, onSuccess, onFailure){
     var xhr = new XMLHttpRequest();
     var url = baseUrl + routine + serializeParams(removeUndefinedFields(params))
