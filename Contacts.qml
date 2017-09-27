@@ -85,7 +85,7 @@ ViewController {
                 width: parent.height
             }
         }
-        
+
         Text {
             id: lbPhones
             text: qsTr("Телефони")
@@ -138,10 +138,11 @@ ViewController {
                     id:callCentrWaiter
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
-                    height: parent.height
-                    width: parent.height
+                    height: parent.height * 0.7
+                    width: parent.height * 0.7
                 }
             }
+
 
             Image {
                 id: imgPhone

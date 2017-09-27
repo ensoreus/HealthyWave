@@ -108,7 +108,7 @@ ViewController {
                 anchors.fill: parent
                 onPressedChanged: {
                     lbEdit.font.bold = !btnEdit.pressed
-                    navigationController.push("qrc:/profile/EditProfile.qml")
+                    navigationController.push("qrc:/profile/EditProfile.qml", {"mainScreen":profileViewController})
                 }
             }
         }

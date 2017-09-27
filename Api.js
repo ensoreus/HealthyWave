@@ -183,10 +183,21 @@ function getOrders(authdata, onSuccess, onFailure){
          }, authdata, onSuccess, onFailure)
 }
 
-function updateProfile(newphone, authdata, onSuccess, onFailure){
-    call("updateprofile", {
-            "oldphone":authdata.phone,
-            "phone":newphone,
+/*
+key : ключ полученный при авторизации
+phone: Телефон клиента
+name: Новое имя
+surname: Новая фамилия
+newemail: новый email
+newphone: новый телефон
+*/
+function updateProfile(newphone, name, surname, email, authdata, onSuccess, onFailure){
+    call("editcustomer", {
+             "phone":authdata.phone,
+             "newphone":newphone,
+             "surname":surname,
+             "name":name,
+             "email":email
          }, authdata, onSuccess, onFailure)
 }
 
