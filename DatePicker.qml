@@ -16,7 +16,10 @@ Tumbler {
     }
 
     function importData(data){
-
+        for(var index in data){
+            fromModel.append({h:"з "+data[index].from})
+            toModel.append({h:"до "+data[index].to})
+        }
     }
 
     Timer{
@@ -59,6 +62,7 @@ Tumbler {
     }
 
     TumblerColumn{
+        id: fromColumn
         columnForeground: Item {
             Rectangle {
                 width: parent.width
@@ -73,12 +77,15 @@ Tumbler {
                 anchors.bottom: parent.bottom
             }
         }
-        model: ["з 7", "з 8", "з 9", "з 10", "з 11", "з 12", "з 12", "з 13", "з 14", "з 15", "з 15", "з 16", "з 17", "з 18"]
+        model: ListModel{
+            id: fromModel
+        }
         width:  datepicker.width * 0.3
         role: "from"
     }
 
     TumblerColumn{
+        id: toColumn
         columnForeground: Item {
             Rectangle {
                 width: parent.width
@@ -93,7 +100,9 @@ Tumbler {
                 anchors.bottom: parent.bottom
             }
         }
-        model: [ "до 8", "до 9", "до 10", "до 11", "до 12", "до 13", "до 14", "до 15", "до 16", "до 17", "до 18", "до 19", "до 20"]
+        model: ListModel{
+            id:toModel
+        }
         width:  datepicker.width * 0.3
         role: "to"
     }
