@@ -29,7 +29,7 @@ ViewController {
             anchors.top: tfCity.bottom
             anchors.topMargin: 2
             font.pointSize: 13
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
@@ -42,7 +42,7 @@ ViewController {
             anchors.top: tfStreet.bottom
             anchors.topMargin: 2
             font.pointSize: 13
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
@@ -55,7 +55,7 @@ ViewController {
             anchors.top: tfHouse.bottom
             anchors.topMargin: 2
             font.pointSize: 13
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
@@ -68,7 +68,7 @@ ViewController {
             anchors.top: tfApt.bottom
             anchors.topMargin: 2
             font.pointSize: 13
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
@@ -81,7 +81,7 @@ ViewController {
             anchors.top: tfEntrance.bottom
             anchors.topMargin: 2
             font.pointSize: 13
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
@@ -94,7 +94,7 @@ ViewController {
             anchors.top: tfDoorCode.bottom
             anchors.topMargin: 2
             font.pointSize: 13
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05
@@ -130,7 +130,7 @@ ViewController {
                 anchors.bottomMargin: 3 * ratio
                 font.pointSize: 15
                 wrapMode: TextEdit.WordWrap
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 placeholderText: "Ваш коментар..."
                 Keys.onReturnPressed: {
                     Qt.inputMethod.hide()
@@ -145,7 +145,7 @@ ViewController {
             placeholderText: "Місто"
             anchors.top: navigationBar.bottom
             font.pointSize: 13
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.05

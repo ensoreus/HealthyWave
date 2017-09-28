@@ -116,7 +116,7 @@ function formatDateShortYear(dayIndex){
     var dd = today.getDate() + dayIndex;
     var mm = today.getMonth() + 1;
     var yyyy = today.getFullYear();
-    var yy = yyyy.splice(2,2)
+    var yy = yyyy.toString().slice(2,2)
     if(dd < 10) {
         dd = '0'+dd
     }

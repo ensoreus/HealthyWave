@@ -7,18 +7,23 @@ Tumbler {
     width: 300
     height: 100
     activeFocusOnTab: false
+    property var selectedDayIndex: 0
     signal dayChanged(var dayIndex)
 
     Component.onCompleted: {
         checkDayTimer.start()
+        dayChanged(selectedDayIndex)
     }
 
-    property var selectedDayIndex: 0
+    function importData(data){
+
+    }
 
     Timer{
         id:checkDayTimer
         interval: 300
-        triggeredOnStart:false
+        triggeredOnStart:true
+        repeat: true
         onTriggered: {
             checkDayIndex()
         }

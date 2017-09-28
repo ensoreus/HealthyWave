@@ -8,6 +8,6 @@ QtObject {
     property int entrance
     property int apartment
     property int house
-    property int doorCode
+    property string doorCode
     property int isPrimary
 }

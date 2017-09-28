@@ -22,13 +22,27 @@ ViewController {
     }
 
     function getAvailableTime(date){
+        startWaiter()
         storage.getAuthData(function(authdata){
             Api.getAvailableCustomTime(date, authdata, function(response){
+                stopWaiter()
+                datePicker.importData(response.result)
                 console.log(response.result)
             }, function(failure){
+                stopWaiter()
                 console.log(failure.error)
             })
         })
+    }
+
+    function startWaiter(){
+        waiter.running = true
+        overlay.visible = true
+    }
+
+    function stopWaiter(){
+        overlay.visible = false
+        waiter.running = false
     }
 
     Rectangle {
@@ -71,7 +85,23 @@ ViewController {
             anchors.topMargin: parent.height * 0.05
             onDayChanged: {
                 var day = Utils.formatDateShortYear(dayIndex)
+                getAvailableTime(day)
+            }
+            Rectangle{
+                id:overlay
+                opacity: 0.7
+                color: "white"
+                anchors.fill:parent
+                visible: false
+            }
 
+            BusyIndicator{
+                id:waiter
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.height * 0.3
+                height: width
+                running: false
             }
         }
 

@@ -10,7 +10,7 @@ ViewController {
     property alias btnNext: btnNext
     property alias busyIndicator: busyIndicator
     property OrderContext context
-    property bool initializing: false
+    property bool initializing: true
     property var radioBtnComponent
     property var isAddNew: false
     property var component
@@ -116,7 +116,8 @@ ViewController {
                         context.address.street = item.street
                         context.address.city = item.city
                         context.address.floor = item.floor
-                        context.address.doorCode = item.doorCode
+                        if (item.doorCode)
+                        context.address.doorCode = item.doorCode.toInt()
                         context.address.house = item.house
                         context.address.apartment = item.apartment
                         context.address.isPrimary = item.primary
@@ -150,6 +151,7 @@ ViewController {
                 var checkChanged = function(){
                     if (!orderAddressViewController.initializing){
                         console.log("checked!")
+                        isAddNew = false
                         context.address.street = item.street
                         context.address.city = item.city
                         context.address.floor = item.floor
@@ -206,7 +208,7 @@ ViewController {
 
         Text{
             id: debugMsg
-            visible: false
+            //visible: false
             wrapMode: Text.WordWrap
             anchors.top: hWHeader.bottom
             anchors.topMargin: 30 * ratio
