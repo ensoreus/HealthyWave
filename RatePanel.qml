@@ -23,7 +23,7 @@ Item {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             font.pointSize: 24
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             fontSizeMode: Text.VerticalFit
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
@@ -33,8 +33,8 @@ Item {
             id: txAddress
             height: parent.height * 0.08
             color: "#d4d4d4"
-            text: qsTr("вул. Хохлових 46 кв. 6")
-            anchors.topMargin: parent.height * 0.03
+            font.family: "NS UI Text"
+            anchors.topMargin: 5 * ratio
             anchors.top: lbDeliveryArrived.bottom
             anchors.right: lbDeliveryArrived.right
             anchors.rightMargin: 0
@@ -50,9 +50,9 @@ Item {
             height: parent.height * 0.08
             color: "#ffffff"
             text: qsTr("ОЦІНИТИ ДОСТАВКУ:")
-            anchors.topMargin: parent.height * 0.08
+            anchors.topMargin: 8 * ratio
             font.pointSize: 15
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             anchors.top: txAddress.bottom
@@ -64,8 +64,8 @@ Item {
 
         HWStarsRate{
             width: 300
-            height: parent.height * 0.3
-            anchors.topMargin: parent.height * 0.05
+            height: parent.height * 0.27
+            anchors.topMargin: 5 * ratio
             anchors.top : lbRateDelivery.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onRated: {

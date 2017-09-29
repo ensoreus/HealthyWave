@@ -126,3 +126,9 @@ function formatDateShortYear(dayIndex){
     }
     return dd+mm+yy
 }
+
+function isPhoneNum(num){
+    if(typeof(num) === "undefined"){
+        return num.match(/^\+380\d{9}$/)
+    }
+}

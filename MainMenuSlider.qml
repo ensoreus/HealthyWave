@@ -25,21 +25,37 @@ Rectangle {
         target: PushNotificationRegistrationTokenHandler
         onLastNotificationChanged:{
             var notification = Utils.extractDataFromNotification(PushNotificationRegistrationTokenHandler.lastNotification)
-            storage.getOrderById(notification.orderid, function(city, street, house, apt, time){
-                orderDelivered({
-                                   "address":{
-                                       "city":city,
-                                       "street":street,
-                                       "house":house,
-                                       "apartment":apt
-                                   },
-                                   "courierName": notification.courier,
-                                   "deliveryDate":"15/09/2017",
-                                   "deliveryTime":time,
-                                   "orderId":notification.orderid
-                               })
-            })
+            if(notification.pushtype === 1){
+                deliveryOnAWay(notification)
+            }else{
+                deliveryArrived(notification)
+            }
         }
+    }
+
+    function deliveryOnAWay(notification){
+        storage.orderOnItsWayWithCourier(notification.orderid,notification.courier, notification.courierPhone)
+        if(notification.courierPhone.length > 9){
+            mainScreen.showCallButton(notification.courierPhone)
+        }
+    }
+
+    function deliveryArrived(notification){
+        storage.getOrderById(notification.orderid, function(city, street, house, apt, time){
+            orderDelivered({
+                               "address":{
+                                   "city":city,
+                                   "street":street,
+                                   "house":house,
+                                   "apartment":apt
+                               },
+                               "courierName": notification.courier,
+                               "courierPhone":notification.courierPhone,
+                               "deliveryDate":"15/09/2017",
+                               "deliveryTime":time,
+                               "orderId":notification.orderid
+                           })
+        })
     }
 
     function orderDelivered(order){
@@ -226,10 +242,6 @@ Rectangle {
                 target: feedbackAlertPrompt
                 visible:true
             }
-//            PropertyChanges {
-//                target: feedbackAlertPrompt
-//                opacity:1.0
-//            }
         },
         State{
             name: "hideAlert"

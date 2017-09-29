@@ -8,12 +8,12 @@ ViewController {
     id: mainScreen
     width: 400
     height: 400
-    //property alias btnCall: btnCall
-    //property alias imgCall: imgCall
+    property alias btnCall: btnCall
+    property alias imgCall: imgCall
     //property alias mainScreenHintPanel: mainScreenHintPanel
     property alias btnOrder: btnOrder
     property var order
-
+    property var courierPhone: ""
     signal menuClick
 
     Storage{
@@ -24,12 +24,16 @@ ViewController {
         checkUnratedOrders.start()
     }
 
+    function showCallButton(phonenum){
+        imgCall.visible = true
+    }
+
     Timer{
         id: checkUnratedOrders
-        interval: (60000 * 1)
+        interval: (6000 * 1)
         repeat: true
         onTriggered: {
-            storage.getLastUnratedOrder(function(orderid, city, street, house, apt, time){
+            storage.getLastUnratedOrder(function(orderid, city, street, house, apt, time, courier, courierPhone ){
                 if(typeof(city) != "undefined"){
                     var combineAaddress = "м. " + city + " вул." + street + " "+ house+" оф."+apt
                     //var combinedOrderTime = time
@@ -45,9 +49,9 @@ ViewController {
                             "apartment":apt
                         },
                         "deliveryDate":orderday,
-                        "courierName":""
+                        "courierName": courier,
+                        "courierPhone":courierPhone
                     }
-
                     bottomRatePanel.showWithOrder(combineAaddress)
                 }else{
                     bottomRatePanel.visible = false

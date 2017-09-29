@@ -9,12 +9,13 @@ Item {
     width: 400
     height: 400
     //property alias ratePanel: ratePanel
-    //property alias btnCall: btnCall
+    property alias btnCall: btnCall
     //property alias imgCall: imgCall
     //property alias mainScreenHintPanel: mainScreenHintPanel
     property alias btnOrder: btnOrder
     property alias btnFreeWater: btnFreeWater
     property alias mainScreenContent: mainScreenContent
+    property var courierPhone: ""
 
     Rectangle {
         id: mainScreenContent
@@ -46,17 +47,7 @@ Item {
         }
     }
 
-    /*MainScreenHintPanel {
-        id: mainScreenHintPanel
-        anchors.top: mainScreenContent.bottom
-        anchors.topMargin: -100 * ratio
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-    }*/
-
-    /*Rectangle {
+    Rectangle {
         id: callContainer
         width: parent.width * 0.24
         height: parent.width * 0.30
@@ -71,17 +62,21 @@ Item {
             y: 243
             color: "#b9b9b9"
             text: qsTr("Зателефонувати")
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
-            font.pixelSize: 14
+            font.pointSize: 14
         }
 
         MouseArea {
             id: btnCall
             anchors.fill: parent
+            onClicked: {
+                Qt.openUrlExternally("tel:"+courierPhone)
+            }
         }
+
         Image {
             width: parent.width * 0.8
             height: parent.width * 0.8
@@ -96,10 +91,4 @@ Item {
         }
     }
 
-    RatePanel {
-        id: ratePanel
-        y: parent.height
-        width: parent.width
-        height: parent.height * 0.2
-    }*/
 }
