@@ -135,6 +135,15 @@ Item {
         });
     }
 
+    function getAvatar(callback){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            var sqlstr = "select avatar from userData";
+            var result = tx.executeSql(sqlstr);
+            callback(result.rows.item(0).avatar)
+        });
+    }
+
     function getCity(callback){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){

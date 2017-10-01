@@ -140,7 +140,7 @@ ViewController {
                                   authdata, function(response){
                                       stopProcessIndicator()
                                       if (response.result ){
-                                          storage.updateUserData(authdata.phone, nameEditPage.nameField.text, emailEditPage.emailField.text)
+                                          storage.updateUserData(authdata.phone, nameEditPage.nameField.text, emailEditPage.emailField.text, avatarEditPage.avatarUrl)
                                           navigationController.pop()
                                           navigationController.pop(mainScreen)
                                       }

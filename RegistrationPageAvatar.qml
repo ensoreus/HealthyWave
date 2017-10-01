@@ -1,10 +1,16 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QuickIOS 0.1
+import "qrc:/"
 import "qrc:/profile"
 import "qrc:/controls"
 
 Page {
+    property alias avatarUrl: avatar.source
+    Storage{
+        id: storage
+    }
+
     Rectangle {
         id: rectangle
         color: "#ffffff"
@@ -34,8 +40,6 @@ Page {
                     width: 100 * ratio
                     x: 5
                     y: 5
-                    //anchors.horizontalCenterOffset: -(parent.width * 0.1 * ratio)
-                    //anchors.verticalCenterOffset: (-19) * ratio
                     source: "qrc:/commons/avatar.png"
                 }
 
@@ -70,7 +74,6 @@ Page {
                             }
                         }
                 onSaved: {
-                            console.log("The image is saved to " + url);
                             avatar.source = url
                             imagepicker.close();
                             imagepicker.busy = false;
