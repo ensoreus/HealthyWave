@@ -91,7 +91,6 @@
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
-        <file>MainScreenForm.ui.qml</file>
         <file>MainMenu.qml</file>
         <file>MainMenuForm.ui.qml</file>
         <file>MainMenuSlider.qml</file>

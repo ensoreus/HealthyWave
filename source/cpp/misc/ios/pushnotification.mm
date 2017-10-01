@@ -3,6 +3,11 @@
 #import <UserNotifications/UserNotifications.h>
 #import <Firebase/Firebase.h>
 
+@implementation UIViewController(StatusBar)
+- (UIStatusBarStyle) preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+@end
 
 @interface QIOSApplicationDelegate
 @end

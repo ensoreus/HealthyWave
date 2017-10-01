@@ -41,6 +41,7 @@ Rectangle {
     }
 
     function deliveryArrived(notification){
+        mainScreen.hideCallButton()
         storage.getOrderById(notification.orderid, function(city, street, house, apt, time){
             orderDelivered({
                                "address":{

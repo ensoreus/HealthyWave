@@ -330,17 +330,14 @@ static bool applicationSetStatusBarStyle(QVariantMap& data) {
         qWarning() << "applicationSetStatusBarStyle: Missing argument";
         return false;
     }
-
     int style = data["style"].toInt();
-    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyle) style];
     return true;
 }
 
 static bool applicationSetStatusBarHidden(QVariantMap& data) {
     bool hidden = data["hidden"].toBool();
     int animation = data["animation"].toInt();
-
-    [[UIApplication sharedApplication] setStatusBarHidden:(bool) hidden withAnimation:(UIStatusBarAnimation) animation];
+    //[[UIApplication sharedApplication] setStatusBarHidden:(bool) hidden withAnimation:(UIStatusBarAnimation) animation];
     return true;
 }
 

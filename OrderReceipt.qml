@@ -25,10 +25,10 @@ ViewController {
         }
         console.log(discountSum)
 
-        var discounted = context.fullb * Utils.calcFullBottles(context)  + (context.pump?context.prices.pump:0)+ discountSum
+        var discounted = context.fullb * Utils.calcFullBottles(context) + (context.pump?context.prices.pump:0) + discountSum
         txWithDiscount.text = discounted + " грн."
         txTotal.text = discounted + fee + " грн."
-        txAddress.text = "вул. " +context.address.street + ", буд." + context.address.house + " оф." + context.address.apartment
+        txAddress.text = "вул. " + context.address.street + ", буд." + context.address.house + " оф." + context.address.apartment
         txDeliveryTime.text = "сьогодні до " + context.deliveryTime.toHour
         txPaymentType.text = context.card == 1 ? "карткою" : "готівкою"
         txComment.text = context.comment
