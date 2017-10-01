@@ -175,7 +175,8 @@ ViewController {
             //visible: false
             id: stackLayout
             anchors.fill:parent
-            initialItem: phoneEditPage
+            //initialItem: phoneEditPage
+            initialItem: avatarEditPage
         }
 
         Rectangle{

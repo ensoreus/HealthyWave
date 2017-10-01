@@ -42,7 +42,7 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('drop table if exists userData');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar BLOB)')
+            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT)')
             var sqlstr = "insert into userData ( phone, name, email, promocode ) values ('" + phone + "', '"+name+"', '"+email+"', '"+promocode+"')";
             console.log(sqlstr)
             var result = tx.executeSql(sqlstr);
@@ -53,7 +53,7 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             //tx.executeSql('drop table if exists userData');
-            //tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar BLOB)')
+            //tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT)')
             var sqlstr = "update userData set phone='"+phone+"', name='"+name+"', email='"+email+"', avatar='"+avatar+"' where 1";
             console.log(sqlstr)
             var result = tx.executeSql(sqlstr);

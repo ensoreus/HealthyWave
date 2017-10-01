@@ -1,7 +1,10 @@
-import QtQuick 2.0
+import QtQuick 2.7
+import QtQuick.Controls 2.2
+import QuickIOS 0.1
 import "qrc:/profile"
+import "qrc:/controls"
 
-Item {
+Page {
     Rectangle {
         id: rectangle
         color: "#ffffff"
@@ -26,12 +29,13 @@ Item {
                 radius: 110 / 2 * ratio
                 border.width: 3
                 border.color: "lightgrey"
-                Image {
+                HWAvatar {
                     id: avatar
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
                     width: 100 * ratio
-                    fillMode: Image.PreserveAspectFit
+                    x: 5
+                    y: 5
+                    //anchors.horizontalCenterOffset: -(parent.width * 0.1 * ratio)
+                    //anchors.verticalCenterOffset: (-19) * ratio
                     source: "qrc:/commons/avatar.png"
                 }
 
@@ -45,12 +49,34 @@ Item {
                     }
 
                     onClicked: {
-                        navigationController.present("qrc:/profile/AvatarPicker.qml")
+                        imagepicker.show()
                     }
                 }
             }
 
+            ImagePicker{
+                id:imagepicker
+                sourceType: ImagePicker.PhotoLibrary
+                anchors.top:avatarBg.bottom
+                anchors.right: parent.right
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
 
+                onReady: {
+                            if (status === ImagePicker.Ready) {
+                                image.source = "";
+                                imagepicker.busy = true;
+                                imagepicker.saveAsTemp();
+                            }
+                        }
+                onSaved: {
+                            console.log("The image is saved to " + url);
+                            avatar.source = url
+                            imagepicker.close();
+                            imagepicker.busy = false;
+                        }
+
+            }
         }
     }
 

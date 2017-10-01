@@ -37,19 +37,6 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 0
 
-        HWAvatar {
-            id: avatar
-            x: 0
-            y: 0
-            width: 100 * ratio
-            height: 100 * ratio
-            source: "qrc:/commons/avatar.png"
-            anchors.horizontalCenterOffset: -(parent.width * 0.1 * ratio)
-            anchors.verticalCenterOffset: (-19) * ratio
-            visible: true
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
 
         Text {
             id: userName
@@ -66,6 +53,19 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenterOffset: 0
             font.pointSize: 14
+        }
+        HWAvatar {
+            id: avatar
+            x: 0
+            y: 0
+            width: 100 * ratio
+            height: 100 * ratio
+            source: "qrc:/commons/avatar.png"
+            anchors.horizontalCenterOffset: -(parent.width * 0.1 * ratio)
+            anchors.verticalCenterOffset: (-19) * ratio
+            visible: true
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 

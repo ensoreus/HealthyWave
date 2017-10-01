@@ -80,7 +80,6 @@ qreal refWidth = 414.;
   QQuickWindow *window = qobject_cast<QQuickWindow *>(engine.rootObjects().first());
   QuickIOS::setupWindow(window);
   QuickIOS::setStatusBarStyle(QuickIOS::StatusBarStyleLightContent);
-  //qputenv("QT_QUICK_CONTROLS_1_STYLE", "Flat");
 #ifdef Q_OS_IOS
   setupStatusBar();
 #endif

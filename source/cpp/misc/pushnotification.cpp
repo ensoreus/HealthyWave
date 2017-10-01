@@ -1,6 +1,6 @@
 #include "pushnotification.h"
 #include <mutex>
-//fMK5fhrPwf8:APA91bEuOMUkoiXXgNUecSyg394wF9PwozNLs9SeuBxTfi0TMYFiIuPCad6YCp8k5_rQzRDZd8NMSP269fZFWchvKBE5G4MAnTlBdAoGopBtkyB9sNPNkJEXapxs2-h7L5-qU_EZCjRh
+
 #ifdef Q_OS_ANDROID
 #include <QAndroidJniObject>
 #include <QtAndroidExtras>

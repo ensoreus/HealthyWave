@@ -161,7 +161,6 @@
     <qresource prefix="/profile">
         <file>Profile.qml</file>
         <file>EditProfile.qml</file>
-        <file>AvatarPicker.qml</file>
     </qresource>
     <qresource prefix="/feedback">
         <file>AddFeedback.qml</file>

@@ -7,12 +7,11 @@ Image {
     y: 0
     width: 100
     height: 100
-    anchors.horizontalCenterOffset: -(parent.width * 0.1)
     visible: true
     anchors.horizontalCenter: parent.horizontalCenter
     clip: true
     fillMode: Image.PreserveAspectCrop
-    source: "qrc:/commons/avatar_qap.jpg"
+    source: "qrc:/commons/avatar.png"
     layer.enabled: true
     layer.effect: OpacityMask {
         maskSource: Item {
