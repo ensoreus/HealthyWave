@@ -1,10 +1,11 @@
 #include "SecurityCore.hpp"
-
+#include <QByteArray>
+#include <QImage>
+#include <QDataStream>
 
 SecurityCore::SecurityCore(QObject *parent) : QObject(parent)
 {
   _impl = new SecImplementation();
-
 }
 
 QString SecurityCore::generateSecKey(){
@@ -24,10 +25,53 @@ bool SecurityCore::retriveSecKey(){
 }
 
 QString SecurityCore::hmacMd5(const QString& line, const QString& key){
-   QMessageAuthenticationCode hashMaker(QCryptographicHash::Md5);
-   hashMaker.setKey(key.toStdString().c_str());
-   hashMaker.addData(line.toStdString().c_str());
-   return hashMaker.result().toHex();
+  QMessageAuthenticationCode hashMaker(QCryptographicHash::Md5);
+  hashMaker.setKey(key.toStdString().c_str());
+  hashMaker.addData(line.toStdString().c_str());
+  return hashMaker.result().toHex();
+}
+
+QString SecurityCore::base64Image(const QString& path){
+  QUrl url(path);
+  QFile picfile(url.toLocalFile());
+  qDebug()<< "base64Image: " << url.toLocalFile();
+
+  if(!picfile.open(QIODevice::ReadOnly)){
+      return "";
+    }
+  QString bs64;
+  QByteArray barray;
+  while (!picfile.atEnd()) {
+      QByteArray baChunk = picfile.readLine();
+      barray.append(baChunk);
+    }
+  QImage img;
+  img.loadFromData(barray);
+  QImage simg;
+  if(img.size().width() > img.size().height()){
+      simg = img.scaledToWidth(200);
+    }else{
+      simg = img.scaledToHeight(200);
+    }
+
+  QByteArray smallPicArray;
+  QBuffer buffer(&smallPicArray);
+  buffer.open(QBuffer::ReadWrite);
+  simg.save(&buffer, "PNG");
+  bs64 = smallPicArray.toBase64();
+  return bs64;
+}
+
+QString SecurityCore::saveBase64(const QString& ba){
+  QByteArray barray = ba.toLatin1();
+  QString tmpPath = QDir::tempPath();
+  barray.chop(1);
+  qDebug()<< barray;
+  QImage img;
+  img.loadFromData(barray);
+  QString avUrl = tmpPath + "/com.seotm.hw.av.png";
+  img.save(avUrl, "PNG");
+  return avUrl;
 }
 
 QString SecurityCore::createUid() const{

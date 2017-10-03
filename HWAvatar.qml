@@ -8,7 +8,7 @@ Image {
     width: 100
     height: 100
     visible: true
-    anchors.horizontalCenter: parent.horizontalCenter
+
     clip: true
     fillMode: Image.PreserveAspectCrop
     source: "qrc:/commons/avatar.png"

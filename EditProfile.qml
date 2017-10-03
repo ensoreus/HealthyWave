@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QuickIOS 0.1
 import QtQuick.Controls 2.1
+import SecurityCore 1.0
 import "qrc:/controls"
 import "qrc:/registration"
 import "qrc:/Api.js" as Api
@@ -131,23 +132,7 @@ ViewController {
             nameEditPage.presenterAnimationEnds()
         }
         onNextPage: {
-            startProcessIndicator()
-            storage.getAuthData(function(authdata){
-                Api.updateProfile(phoneEditPage.phoneField.text,
-                                  Utils.nameFromLine(nameEditPage.nameField.text),
-                                  Utils.surnameFromLine(nameEditPage.nameField.text),
-                                  emailEditPage.emailField.text,
-                                  authdata, function(response){
-                                      stopProcessIndicator()
-                                      if (response.result ){
-                                          storage.updateUserData(authdata.phone, nameEditPage.nameField.text, emailEditPage.emailField.text, avatarEditPage.avatarUrl)
-                                          navigationController.pop()
-                                          navigationController.pop(mainScreen)
-                                      }
-                                  }, function(failure){
-                                      stopProcessIndicator()
-                                  })
-            })
+            stackLayout.push(avatarEditPage)
         }
         Behavior on x {
             NumberAnimation {
@@ -163,6 +148,54 @@ ViewController {
         anchors.bottom: parent.bottom
         x:0
         width: parent.width
+        onAvatarSelected: {
+            btnNext.enabled = true
+        }
+
+        onNextPage:{
+            console.log("send avatar: " + avatarEditPage.avatarUrl)
+            var url = avatarEditPage.avatarUrl
+            startProcessIndicator()
+            storage.updateAvatar(url)
+            storage.getAuthData(function(authdata){
+                Api.updateProfile(phoneEditPage.phoneField.text,
+                                  Utils.nameFromLine(nameEditPage.nameField.text),
+                                  Utils.surnameFromLine(nameEditPage.nameField.text),
+                                  emailEditPage.emailField.text,
+                                  authdata, function(response){
+                                      if (response.result ){
+                                          storage.updateUserData(authdata.phone, nameEditPage.nameField.text, emailEditPage.emailField.text, avatarEditPage.avatarUrl)
+                                          Api.sendAvatar(SecurityCore.base64Image(avatarEditPage.avatarUrl), authdata, function(avResponse){
+                                              console.log(avResponse.result)
+                                              stopProcessIndicator()
+                                              navigationController.pop()
+                                              navigationController.pop(mainScreen)
+                                          }, function(avFailure){
+                                              console.log(failure.error)
+                                              stopProcessIndicator()
+                                              navigationController.pop()
+                                              navigationController.pop(mainScreen)
+                                          })
+                                      }
+                                  }, function(failure){
+                                      stopProcessIndicator()
+                                  })
+            })
+
+            /*storage.getAuthData(function(authdata){
+                Api.sendAvatar(SecurityCore.base64Image(url), authdata, function(avResponse){
+                    console.log(avResponse.result)
+                    stopProcessIndicator()
+                    navigationController.pop()
+                    navigationController.pop(mainScreen)
+                }, function(avFailure){
+                    console.log(failure.error)
+                    stopProcessIndicator()
+                    navigationController.pop()
+                    navigationController.pop(mainScreen)
+                })
+            })*/
+        }
     }
 
 
@@ -172,11 +205,9 @@ ViewController {
         anchors.fill: parent
 
         StackView{
-            //visible: false
             id: stackLayout
             anchors.fill:parent
-            //initialItem: phoneEditPage
-            initialItem: avatarEditPage
+            initialItem: phoneEditPage
         }
 
         Rectangle{

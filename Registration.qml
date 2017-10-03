@@ -156,7 +156,6 @@ Item {
                         if(!response.error){
                             storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, response.promocode)
                             Api.addPromoCode(promoCodeField.text, {secKey: secKey, phone: phoneEditPage.phoneField.text, token: token}, function(response){
-
                                 stopPropcessIndicator()
                                 item1.state = "default"
                             }, function(failure){})
@@ -165,6 +164,7 @@ Item {
                             stopPropcessIndicator()
                         }
                     })
+
                 })
                 stackLayout.push(congratsPage)
             }

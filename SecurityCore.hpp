@@ -18,7 +18,8 @@ public:
   Q_INVOKABLE bool retriveSecKey();
   Q_INVOKABLE QString hmacMd5(const QString& line, const QString& key);
   Q_INVOKABLE QString createUid() const;
-
+  Q_INVOKABLE QString base64Image(const QString& path);
+  Q_INVOKABLE QString saveBase64(const QString& ba);
 signals:
   void secKeyChanged();
   void secKeyGenerated();

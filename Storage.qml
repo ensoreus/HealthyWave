@@ -23,9 +23,20 @@ Item {
             tx.executeSql('CREATE TABLE IF NOT EXISTS secKey(key TEXT)')
             var result = tx.executeSql('select key from secKey');
             key = result.rows.item(result.rows.length - 1).key
-        }
-        );
+        });
         return key;
+    }
+
+    function getSecKeyAsync(callback){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        var key = ""
+        db.transaction( function(tx) {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS secKey(key TEXT)')
+            var result = tx.executeSql('select key from secKey');
+            key = result.rows.item(result.rows.length - 1).key
+            print("saved sec key:"+key)
+            callback(key)
+        });
     }
 
     function storeSecKey(secKey){
@@ -59,6 +70,26 @@ Item {
             var result = tx.executeSql(sqlstr);
         });
     }
+
+    function updateAvatar(picUrl){
+            var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+            db.transaction(function(tx){
+                tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT)')
+                var sqlstr = "update userData set avatar='"+picUrl+"' where 1";
+                console.log(sqlstr)
+                var result = tx.executeSql(sqlstr);
+            });
+    }
+
+    function getAvatarLocally(callback){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            var sqlstr = "select avatar from userData";
+            var result = tx.executeSql(sqlstr);
+            callback(result.rows.item(0).avatar)
+        });
+    }
+
 
     function saveToken(token){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
@@ -135,14 +166,6 @@ Item {
         });
     }
 
-    function getAvatar(callback){
-        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
-        db.transaction(function(tx){
-            var sqlstr = "select avatar from userData";
-            var result = tx.executeSql(sqlstr);
-            callback(result.rows.item(0).avatar)
-        });
-    }
 
     function getCity(callback){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
@@ -186,10 +209,12 @@ Item {
     function getAuthData(callback){
           getPhone(function(phoneRes){
             getToken(function(tokenRes){
-                var json = "{\"secKey\":\"" + getSecKey() + "\", \"phone\":\"" + phoneRes +"\", \"token\":\""+ tokenRes+"\"}"
-                print (json)
-                var authData = JSON.parse(json)
-                callback(authData)
+              getSecKeyAsync(function(secKey){
+                    var json = "{\"secKey\":\"" + secKey + "\", \"phone\":\"" + phoneRes +"\", \"token\":\""+ tokenRes+"\"}"
+                    print ("getAuthData:" + json)
+                    var authData = JSON.parse(json)
+                    callback(authData)
+              })
             })
           })
     }

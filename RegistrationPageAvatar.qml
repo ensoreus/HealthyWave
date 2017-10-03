@@ -7,12 +7,24 @@ import "qrc:/controls"
 
 Page {
     property alias avatarUrl: avatar.source
+    property alias btnNext: btnNext
+    signal nextPage
+    signal avatarSelected
+
     Storage{
         id: storage
     }
 
+    Component.onCompleted: {
+        storage.getAvatarLocally(function(path){
+            if (path != ""){
+                avatar.source = path
+            }
+        })
+    }
+
     Rectangle {
-        id: rectangle
+        id: content
         color: "#ffffff"
         anchors.fill: parent
 
@@ -41,6 +53,7 @@ Page {
                     x: 5
                     y: 5
                     source: "qrc:/commons/avatar.png"
+                    anchors.horizontalCenter: parent.horizontalCenter
                 }
 
                 MouseArea{
@@ -77,8 +90,24 @@ Page {
                             avatar.source = url
                             imagepicker.close();
                             imagepicker.busy = false;
-                        }
+                            avatarSelected()
+                }
+            }
+        }
 
+        HWRoundButton {
+            id: btnNext
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width * 0.8
+            height: parent.height * 0.1
+            anchors.top: header.bottom
+            anchors.topMargin: parent.height * 0.2
+            labelText: "ЗБЕРІГТИ"
+            enabled: false
+
+            onButtonClick: {
+                console.log("NEXT")
+                nextPage()
             }
         }
     }

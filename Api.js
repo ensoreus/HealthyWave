@@ -92,44 +92,96 @@ function getCustomerAddresses(authdata, onSuccess, onFailure){
     call("getaddresses", {"phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
+function getAvatar(authdata, onSuccess, onFailure){
+    call("getphoto", {"phone":authdata.phone}, authdata, onSuccess, onFailure)
+}
+
+function sendAvatar(pic, authdata, onSuccess, onFailure){
+    var xhr = new XMLHttpRequest();
+
+    var onTokenUpdated = function(token){
+        authdata.token = token
+    }
+
+    var onAuthError = function(authData, onTokenUpdated){
+        auth(authData.phone, authData.secKey, function(token){
+            onTokenUpdated(token)
+            sendAvatar(pic, authdata, onSuccess, onFailure)
+        })
+    }
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
+            print('HEADERS_RECEIVED');
+        } else if(xhr.readyState === XMLHttpRequest.DONE) {
+            var object = JSON.parse(xhr.responseText.toString());
+            if(typeof(object.error) != 'undefined'){
+                if (object.error.match(/^Ключ доступа не найден или просрочен:\.*/) || object.error.match(/Invalid parameter value \(parameter number '1'\)$/)){
+                    onAuthError(authdata, onTokenUpdated)
+                }else{
+                    console.log(object)
+                    onFailure(object, authdata.token)
+                }
+                print(xhr.responseText.toString());
+                //var isConfirmed = object.valueOf("result")
+                if(typeof(object) === "undefined"){
+                    onFailure(xhr.responseText)
+                }else{
+                    onSuccess(xhr.responseText)
+                }
+            }
+        }
+    }
+
+
+
+    xhr.open("POST", baseUrl + "uploadphoto?phone=" + authdata.phone + "&key="+authdata.token, true);
+    xhr.setRequestHeader("Content-type", "application/application/json");
+
+    var postpatrams = "{\"photo\":\""+pic+"\"}"
+    print(postpatrams)
+    xhr.send(postpatrams);
+    //call("uploadphoto", {"phone":authdata.phone,"photo":pic}, authdata, onSuccess, onFailure)
+}
+
 function deleteAddress(city, street, house, entrance, floor, apartment, authdata, onSuccess, onFailure){
     call("deleteaddresscustomer", {"city":city,
-                                "street":street,
-                                "house":house,
-                                "entrance":entrance,
-                                "apartment":apartment,
-                                "floor":floor,
-                                "phone":authdata.phone}, authdata, onSuccess, onFailure);
+             "street":street,
+             "house":house,
+             "entrance":entrance,
+             "apartment":apartment,
+             "floor":floor,
+             "phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
 function sendNewAddress(city, street, house, entrance, apartment, floor, doorcode, authdata, onSuccess, onFailure){
     call("addaddresscustomer", {"city":city,
-                                "street":street,
-                                "house":house,
-                                "apartment":apartment,
-                                "entrance":entrance,
-                                "floor":floor,
-                                "doorcode":doorcode,
-                                "phone":authdata.phone}, authdata, onSuccess, onFailure);
+             "street":street,
+             "house":house,
+             "apartment":apartment,
+             "entrance":entrance,
+             "floor":floor,
+             "doorcode":doorcode,
+             "phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
 function updateAddress(newCity, newStreet, newHouse, newApt, newEntrance, newFloor, newDoorcode,
-                  oldcity, oldstreet, oldhouse, oldapt, oldentrance, oldfloor,olddoorcode, authdata, onSuccess, onFailure){
+                       oldcity, oldstreet, oldhouse, oldapt, oldentrance, oldfloor,olddoorcode, authdata, onSuccess, onFailure){
     call("editaddresscustomer", {"city":oldcity,
-                                "citynew":newCity,
-                                "street":oldstreet,
-                                "streetnew":newStreet,
-                                "house":oldhouse,
-                                "housenew":newHouse,
-                                "apartment":oldapt,
-                                "apartmentnew":newApt,
-                                "entrance":oldentrance,
-                                "entrancenew":newEntrance,
-                                "floor":oldfloor,
-                                "floornew":newFloor,
-                                "doorcode":olddoorcode,
-                                "doorcode":newDoorcode,
-                                "phone":authdata.phone}, authdata, onSuccess, onFailure);
+             "citynew":newCity,
+             "street":oldstreet,
+             "streetnew":newStreet,
+             "house":oldhouse,
+             "housenew":newHouse,
+             "apartment":oldapt,
+             "apartmentnew":newApt,
+             "entrance":oldentrance,
+             "entrancenew":newEntrance,
+             "floor":oldfloor,
+             "floornew":newFloor,
+             "doorcode":olddoorcode,
+             "doorcode":newDoorcode,
+             "phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 
 function searchNearestTime(address, authData, onSuccess, onFailure){
@@ -155,13 +207,13 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
         "emptybottle":orderContext.emptyb,
         "pump":orderContext.pump,
         "promocode":typeof(orderContext.promocode) == 'undefined' ? "" : orderContext.promocode,
-        "from":orderContext.deliveryTime.fromHour,
-        "to":orderContext.deliveryTime.toHour,
-        "deliverydate":orderContext.deliveryTime.day,
-        "callrequires":orderContext.needToCall,
-        "cardtoken":orderContext.cardToPay,
-        "paycard":typeof(orderContext.cardToPay) == "undefined" ? 0 : 1,
-        "phone":authData.phone
+                                                                    "from":orderContext.deliveryTime.fromHour,
+                                                                    "to":orderContext.deliveryTime.toHour,
+                                                                    "deliverydate":orderContext.deliveryTime.day,
+                                                                    "callrequires":orderContext.needToCall,
+                                                                    "cardtoken":orderContext.cardToPay,
+                                                                    "paycard":typeof(orderContext.cardToPay) == "undefined" ? 0 : 1,
+                                                                                                                              "phone":authData.phone
     }
     call("createorder", collectBonuses(orderContext, params), authData, onSuccess, onFailure)
 }
@@ -179,7 +231,7 @@ function collectBonuses(context, params){
 
 function getOrders(authdata, onSuccess, onFailure){
     call("getorders", {
-            "phone":authdata.phone
+             "phone":authdata.phone
          }, authdata, onSuccess, onFailure)
 }
 
@@ -203,9 +255,9 @@ function updateProfile(newphone, name, surname, email, authdata, onSuccess, onFa
 
 function registerPushToken(token, ostype, authdata, onSuccess, onFailure){
     call("registerPushToken", {
-            "ostype":ostype,
+             "ostype":ostype,
              "token":token,
-            "phone":authdata.phone,
+             "phone":authdata.phone,
          }, authdata, onSuccess, onFailure)
 }
 
@@ -220,7 +272,7 @@ rating: Выбранная клиентом оценка
 
 function getFeedbackCodes(rate, authdata, onSuccess, onFailure){
     call("getlistfeedback", {
-            "phone":authdata.phone,
+             "phone":authdata.phone,
              "rating":rate
          }, authdata, onSuccess, onFailure)
 }
@@ -242,7 +294,7 @@ comment: комментарий клиента*/
 
 function sendFeedback(rate, comment, orderid, code1, code2, code3, code4, authdata, onSuccess, onFailure){
     call("createfeedback", {
-            "rating":rate,
+             "rating":rate,
              "comment":comment,
              "phone":authdata.phone,
              "ordernumber":orderid,
@@ -289,14 +341,19 @@ function getContacts(authdata, onSuccess, onFailure){
 
 function getAvailableCustomTime(day, authdata, onSuccess, onFailure){
     call("timedeliveryday", {
-            "phone":authdata.phone,
-            "deliverydate":day
+             "phone":authdata.phone,
+             "deliverydate":day
          }, authdata, onSuccess, onFailure)
 }
 
 function call(routine, params, authData, onSuccess, onFailure){
     var xhr = new XMLHttpRequest();
     var url = baseUrl + routine + serializeParams(removeUndefinedFields(params))
+
+    if(typeof(authData.secKey) === "undefined"){
+        print("ERROR: NO SEC KEY!!")
+        console.trace()
+    }
 
     var sendRequest = function(token){
         print(url + "key=" + token)

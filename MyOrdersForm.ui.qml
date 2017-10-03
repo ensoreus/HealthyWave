@@ -5,6 +5,7 @@ import "qrc:/controls"
 ViewController {
     width: 400
     height: 400
+    property alias hWAvatar: hWAvatar
     property alias tfRentedBottles: tfRentedBottles
     property alias tfSum: tfSum
     property alias tfDate: tfDate

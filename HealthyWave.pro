@@ -1,4 +1,4 @@
-QT += qml quick network sql
+QT += qml quick network sql gui
 
 CONFIG += c++11
 

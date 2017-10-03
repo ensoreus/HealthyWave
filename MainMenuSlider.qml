@@ -134,6 +134,7 @@ Rectangle {
             initialViewController: MainScreen{
                 id:mainScreen
                 onMenuClick: {
+                    mainMenu.setupAvatar()
                     if (mainScreenContainer.state == "slideOut"){
                         mainScreenContainer.state = "slideIn"
                     }else{

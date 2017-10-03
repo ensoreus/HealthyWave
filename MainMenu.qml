@@ -1,8 +1,10 @@
 import QtQuick 2.4
 import QtGraphicalEffects 1.0
 import QtQuick.Window 2.0
+import SecurityCore 1.0
 
 import "qrc:/"
+import "qrc:/Api.js" as Api
 
 MainMenuForm {
 
@@ -45,6 +47,8 @@ MainMenuForm {
         storage.getName(function(name){
             userName.text = name
         })
+        //syncAvatar()
+        setupAvatar()
     }
 
     btnMyOrders.onClicked: {
@@ -109,5 +113,27 @@ MainMenuForm {
 
     btnSite.onClicked: {
         siteLink()
+    }
+
+    function setupAvatar(){
+        storage.getAvatarLocally(function(path){
+            if(path != "" && path != null){
+                avatar.source = path
+            }
+        })
+    }
+
+    function syncAvatar(){
+        storage.getAuthData(function(authdata){
+            Api.getAvatar(authdata, function(response){
+                if(response.Photo != null){
+                    var url = SecurityCore.saveBase64(response.Photo)
+                    storage.updateAvatar(url)
+                    avatar.source = url
+                }
+            }, function(failure){
+                console.log(failure.error)
+            })
+        })
     }
 }

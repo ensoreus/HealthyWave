@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QuickIOS 0.1
 import "qrc:/"
+import "qrc:/controls"
 import "qrc:/commons"
 
 ViewController {
@@ -28,9 +29,18 @@ ViewController {
         storage.getName(function(name){
             lbName.text = name
         })
-        storage.getPromoCode("initial", function(promo){
+
+        storage.getAvatarLocally(function(avUrl){
+            if(avUrl != "" && avUrl != null){
+                avatar.source = avUrl
+            }
+        })
+
+        storage.getPromoCode(function(promo){
             txPromoCode.text = promo
         })
+
+
     }
 
     Rectangle {
@@ -49,10 +59,9 @@ ViewController {
             anchors.right: parent.right
             anchors.rightMargin: 0
 
-            Image {
+            HWAvatar {
                 id: avatar
-                width: 100
-                fillMode: Image.PreserveAspectFit
+                width: 100 * ratio
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: parent.height * 0.04
                 anchors.top: parent.top
