@@ -156,14 +156,16 @@ ViewController {
             console.log("send avatar: " + avatarEditPage.avatarUrl)
             var url = avatarEditPage.avatarUrl
             startProcessIndicator()
-            storage.updateAvatar(url)
+            //storage.updateAvatar(url)
             storage.getAuthData(function(authdata){
                 Api.updateProfile(phoneEditPage.phoneField.text,
                                   Utils.nameFromLine(nameEditPage.nameField.text),
                                   Utils.surnameFromLine(nameEditPage.nameField.text),
                                   emailEditPage.emailField.text,
-                                  authdata, function(response){
-                                      if (response.result ){
+                                  authdata, function(response)
+                                  {
+                                      if ( response.result ){
+                                          console.log(response.result)
                                           storage.updateUserData(authdata.phone, nameEditPage.nameField.text, emailEditPage.emailField.text, avatarEditPage.avatarUrl)
                                           Api.sendAvatar(SecurityCore.base64Image(avatarEditPage.avatarUrl), authdata, function(avResponse){
                                               console.log(avResponse.result)
@@ -176,6 +178,10 @@ ViewController {
                                               navigationController.pop()
                                               navigationController.pop(mainScreen)
                                           })
+                                      }else{
+                                        stopProcessIndicator()
+                                          navigationController.pop()
+                                          navigationController.pop(mainScreen)
                                       }
                                   }, function(failure){
                                       stopProcessIndicator()

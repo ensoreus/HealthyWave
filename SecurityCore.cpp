@@ -62,18 +62,26 @@ QString SecurityCore::base64Image(const QString& path){
   return bs64;
 }
 
+QString SecurityCore::tempDir() const{
+    auto path = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+    QUrl  pathurl(path);
+    pathurl.setScheme("file");
+    return pathurl.toString();
+}
+
 QString SecurityCore::saveBase64(const QString& ba){
-  QByteArray barray = ba.toLatin1();
-  QString tmpPath = QDir::tempPath();
-  barray.chop(1);
-  qDebug()<< barray;
-  QImage img;
-  img.loadFromData(barray);
-  QString avUrl = tmpPath + "/com.seotm.hw.av.png";
+  QByteArray barray = ba.toUtf8();
+  QString tmpPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+  //qDebug()<< barray;
+  QImage img = QImage::fromData(barray, "PNG");
+  QString avUrl = tmpPath + "/av.png";
+  QUrl pathurl(avUrl);
+  pathurl.setScheme("file");
   img.save(avUrl, "PNG");
-  return avUrl;
+  return pathurl.toString();
 }
 
 QString SecurityCore::createUid() const{
   return QUuid::createUuid().toString();
 }
+

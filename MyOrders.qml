@@ -1,5 +1,7 @@
 import QtQuick 2.4
 import QuickIOS 0.1
+import SecurityCore 1.0
+
 import "qrc:/"
 
 MyOrdersForm {
@@ -27,7 +29,7 @@ MyOrdersForm {
         }
         storage.getAvatarLocally(function(url){
                if(url != "" && url != null){
-                   hWAvatar.source = url
+                   hWAvatar.source = SecurityCore.tempDir() + "/"+url
                }
         })
     }

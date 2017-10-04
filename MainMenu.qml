@@ -118,7 +118,7 @@ MainMenuForm {
     function setupAvatar(){
         storage.getAvatarLocally(function(path){
             if(path != "" && path != null){
-                avatar.source = path
+                avatar.source = SecurityCore.tempDir() + "/" + path
             }
         })
     }

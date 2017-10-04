@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import QuickIOS 0.1
+import SecurityCore 1.0
+
 import "qrc:/"
 import "qrc:/controls"
 import "qrc:/commons"
@@ -32,7 +34,7 @@ ViewController {
 
         storage.getAvatarLocally(function(avUrl){
             if(avUrl != "" && avUrl != null){
-                avatar.source = avUrl
+                avatar.source = SecurityCore.tempDir() + "/" + avUrl
             }
         })
 
@@ -61,7 +63,7 @@ ViewController {
 
             HWAvatar {
                 id: avatar
-                width: 100 * ratio
+                width: height
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: parent.height * 0.04
                 anchors.top: parent.top

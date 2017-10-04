@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QuickIOS 0.1
+import SecurityCore 1.0
 import "qrc:/"
 import "qrc:/profile"
 import "qrc:/controls"
@@ -17,8 +18,8 @@ Page {
 
     Component.onCompleted: {
         storage.getAvatarLocally(function(path){
-            if (path != ""){
-                avatar.source = path
+            if (path != "" && path != null){
+                avatar.source = SecurityCore.tempDir() + path
             }
         })
     }
@@ -87,7 +88,9 @@ Page {
                             }
                         }
                 onSaved: {
+                            console.log("SAVED AS:" + url)
                             avatar.source = url
+                            storage.updateAvatar(url)
                             imagepicker.close();
                             imagepicker.busy = false;
                             avatarSelected()

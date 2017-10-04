@@ -119,16 +119,15 @@ function sendAvatar(pic, authdata, onSuccess, onFailure){
                 if (object.error.match(/^Ключ доступа не найден или просрочен:\.*/) || object.error.match(/Invalid parameter value \(parameter number '1'\)$/)){
                     onAuthError(authdata, onTokenUpdated)
                 }else{
-                    console.log(object)
-                    onFailure(object, authdata.token)
+                    onFailure(object)
                 }
                 print(xhr.responseText.toString());
                 //var isConfirmed = object.valueOf("result")
-                if(typeof(object) === "undefined"){
-                    onFailure(xhr.responseText)
-                }else{
-                    onSuccess(xhr.responseText)
-                }
+            }
+            if(typeof(object) === "undefined"){
+                onFailure(xhr.responseText)
+            }else{
+                onSuccess(xhr.responseText)
             }
         }
     }

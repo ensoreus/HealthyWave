@@ -20,6 +20,7 @@ public:
   Q_INVOKABLE QString createUid() const;
   Q_INVOKABLE QString base64Image(const QString& path);
   Q_INVOKABLE QString saveBase64(const QString& ba);
+  Q_INVOKABLE QString tempDir() const;
 signals:
   void secKeyChanged();
   void secKeyGenerated();
