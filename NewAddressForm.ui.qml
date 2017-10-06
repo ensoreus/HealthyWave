@@ -16,6 +16,8 @@ ViewController {
     property alias tfStreet: tfStreet
     property alias tfCity: tfCity
     property alias textArea: textArea
+    property alias overlay: overlay
+    property alias busyIndicator: busyIndicator
 
     Rectangle {
         id: container
@@ -151,6 +153,21 @@ ViewController {
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
         }
+    }
 
+    Rectangle {
+        id: overlay
+        color: "white"
+        opacity: 0.8
+        anchors.fill: parent
+    }
+
+    BusyIndicator {
+        id: busyIndicator
+        width: 80 * ratio
+        height: 80 * ratio
+        running: true
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 }

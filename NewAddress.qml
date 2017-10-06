@@ -15,6 +15,7 @@ NewAddressForm {
     }
 
     Component.onCompleted: {
+        hideWaiter()
         if(typeof(addressToEdit) != "undefined" || addressToEdit != null){
             isEditing = true
             tfCity.text = addressToEdit.city
@@ -35,6 +36,7 @@ NewAddressForm {
                     tfCity.model = result.result
                     tfCity.popup.open()
                     storage.saveToken(token)
+                    btnCommit.enabled = validateInput()
                     tfCity.stopWheelAnimation()
                 },function(error, token){
                     console.error("call:" + error.error)
@@ -60,6 +62,7 @@ NewAddressForm {
                     tfStreet.popup.open()
                     storage.saveToken(token)
                     tfStreet.stopWheelAnimation()
+                    btnCommit.enabled = validateInput()
                 },function(error, token){
                     console.error("call:" + error.error)
                     tfStreet.stopWheelAnimation()
@@ -79,25 +82,34 @@ NewAddressForm {
         centerBarTitle:"Нова адреса"
         rightBarButtonItems: VisualItemModel {
             BarButtonItem {
+                id: btnCommit
                 title: "Зберегти"
                 tintColor: "white"
+                onEnabledChanged: {
+                    tintColor = (enabled) ? "white" : "grey"
+                }
                 onClicked: {
+                    showWaiter()
                     storage.getAuthData(function(authdata){
                         if(isEditing){
                             Api.updateAddress(tfCity.text, tfStreet.text, tfHouse.text, tfEntrance.text, tfApt.text,  tfFloor.text, tfDoorCode.text,
                                               addressToEdit.city, addressToEdit.street, addressToEdit.house, addressToEdit.apartment, addressToEdit.entrance, addressToEdit.floor, addressToEdit.doorcode,
                                               authdata, function(result, token){
                                 storage.saveToken(authdata.token)
+                                hideWaiter()
                                 newAddressView.navigationController.pop()
                                 editedAddress()
                             }, function(error, authdata){
+                                hideWaiter()
                             })
                         }else{
                             Api.sendNewAddress(tfCity.text, tfStreet.text, tfHouse.text,tfEntrance.text , tfApt.text, tfFloor.text, tfDoorCode.text, authdata, function(result, token){
                                 storage.saveToken(authdata.token)
+                                hideWaiter()
                                 newAddressView.navigationController.pop()
                                 addedNewAddress()
                             }, function(error, authdata){
+                                hideWaiter()
                             })
                         }
                     })
@@ -106,9 +118,35 @@ NewAddressForm {
         }
     }
 
+    function validateInput(){
+        var isValid = true;
+        isValid &= (tfCity.text.length > 3)
+        isValid &= (tfStreet.text.length > 3)
+        isValid &= (tfHouse.text.length > 0)
+        isValid &= (tfApt.text.length > 0)
+        return isValid
+    }
+
+    function showWaiter() {
+        btnCommit.enabled = false
+        overlay.visible = true
+        busyIndicator.visible = true
+    }
+
+    function hideWaiter() {
+         btnCommit.enabled = true
+         overlay.visible = false
+         busyIndicator.visible = false
+    }
+
 
     tfHouse.onWillStartAnimation: {
         tfHouse.forceActiveFocus()
+    }
+
+    tfHouse.onTextChanged: {
+        btnCommit.enabled = validateInput()
+        console.log("tfHouse:"+validateInput())
     }
 
     tfEntrance.onWillStartAnimation: {
@@ -121,6 +159,11 @@ NewAddressForm {
 
     tfApt.onWillStartAnimation: {
         tfApt.forceActiveFocus()
+    }
+
+    tfApt.onTextChanged: {
+        btnCommit.enabled = validateInput()
+        console.log("tfApt:"+validateInput())
     }
 
     tfFloor.onWillStartAnimation: {
