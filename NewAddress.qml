@@ -84,7 +84,7 @@ NewAddressForm {
                 onClicked: {
                     storage.getAuthData(function(authdata){
                         if(isEditing){
-                            Api.updateAddress(tfCity.text, tfStreet.text, tfHouse.text, tfApt.text, tfEntrance.text, tfFloor.text, tfDoorCode.text,
+                            Api.updateAddress(tfCity.text, tfStreet.text, tfHouse.text, tfEntrance.text, tfApt.text,  tfFloor.text, tfDoorCode.text,
                                               addressToEdit.city, addressToEdit.street, addressToEdit.house, addressToEdit.apartment, addressToEdit.entrance, addressToEdit.floor, addressToEdit.doorcode,
                                               authdata, function(result, token){
                                 storage.saveToken(authdata.token)
@@ -93,7 +93,7 @@ NewAddressForm {
                             }, function(error, authdata){
                             })
                         }else{
-                            Api.sendNewAddress(tfCity.text, tfStreet.text, tfHouse.text, tfApt.text, tfEntrance.text, tfFloor.text, tfDoorCode.text, authdata, function(result, token){
+                            Api.sendNewAddress(tfCity.text, tfStreet.text, tfHouse.text,tfEntrance.text , tfApt.text, tfFloor.text, tfDoorCode.text, authdata, function(result, token){
                                 storage.saveToken(authdata.token)
                                 newAddressView.navigationController.pop()
                                 addedNewAddress()

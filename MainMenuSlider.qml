@@ -8,6 +8,7 @@ import PushNotificationRegistrationTokenHandler 1.0
 import "qrc:/controls"
 import "qrc:/feedback"
 import "qrc:/Utils.js" as Utils
+
 Rectangle {
     id:mainSlider
     x:0
@@ -18,16 +19,55 @@ Rectangle {
     Component.onCompleted: {
         mainMenu.disableMenu()
         state = "hideAlert"
-
     }
+
+    Timer{
+        id: orderTimer
+        interval: 3000
+        repeat: true
+        onTriggered: {
+                mainScreen.hideCallButton()
+            storage.getUnratedOrderIds(function(orderId){
+                 var notification = {orderid:orderId,
+                                    courier:"Иван Иванов",
+                                    courierPhone:"+380982559836"
+                                    }
+                storage.getOrderById(orderId, function(city, street, house, apt, time, courier, courierPhone){
+                    deliveryOnAWay(notification)
+                    repeat = false
+                })
+            })
+        }
+    }
+
+    /*Timer{
+        id: deliveredTimer
+        interval: 10000
+        repeat: true
+        onTriggered: {
+            state = "hideAlert"
+            storage.getUnratedOrderIds(function(orderId){
+                 var notification = {orderid:orderId,
+                                    courier:"Иван Иванов",
+                                    courierPhone:"+380982559836"
+                                    }
+                storage.getOrderById(orderId, function(city, street, house, apt, time, courier, courierPhone){
+                    deliveryArrived(notification)
+                    repeat = false
+                })
+            })
+        }
+    }*/
 
     Connections{
         target: PushNotificationRegistrationTokenHandler
         onLastNotificationChanged:{
             var notification = Utils.extractDataFromNotification(PushNotificationRegistrationTokenHandler.lastNotification)
             if(notification.pushtype === 1){
+                console.log("ORDER ON A WAY")
                 deliveryOnAWay(notification)
             }else{
+                console.log("ORDER DELIVERED")
                 deliveryArrived(notification)
             }
         }
@@ -44,17 +84,17 @@ Rectangle {
         mainScreen.hideCallButton()
         storage.getOrderById(notification.orderid, function(city, street, house, apt, time){
             orderDelivered({
-                               "address":{
+                               "address" :{
                                    "city":city,
                                    "street":street,
                                    "house":house,
                                    "apartment":apt
                                },
-                               "courierName": notification.courier,
+                               "courierName" : notification.courier,
                                "courierPhone":notification.courierPhone,
                                "deliveryDate":"15/09/2017",
                                "deliveryTime":time,
-                               "orderId":notification.orderid
+                               "orderId"     :notification.orderid
                            })
         })
     }

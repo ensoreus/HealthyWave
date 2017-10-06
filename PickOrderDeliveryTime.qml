@@ -141,8 +141,8 @@ ViewController {
             var fromHour = fromIndex + 7
             var toHour = toIndex + 8
             context.deliveryTime.day = Utils.formatDateFullYear(dayIndex)
-            context.deliveryTime.fromHour = fromHour
-            context.deliveryTime.toHour = toHour
+            context.deliveryTime.fromHour = fromHour+":00"
+            context.deliveryTime.toHour = toHour+":00"
         }
 
         HWRoundButton {

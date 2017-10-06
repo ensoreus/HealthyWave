@@ -379,8 +379,8 @@ function call(routine, params, authData, onSuccess, onFailure){
                 return;
             }
             var object = JSON.parse(xhr.responseText.toString());
-            if(typeof(object.error) != 'undefined'){
-                if (object.error.match(/^Ключ доступа не найден или просрочен:\.*/) || object.error.match(/Invalid parameter value \(parameter number '1'\)$/)){
+            if(typeof(object.error) != 'undefined' ){
+                if (object.ErrorCode === "1001" /*match(/^Ключ доступа не найден или просрочен:\.) || object.error.match(/Invalid parameter value \(parameter number '1'\)$/)*/){
                     onAuthError(authData, onTokenUpdated)
                 }else{
                     console.log(object)

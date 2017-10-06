@@ -34,7 +34,6 @@ Item {
             tx.executeSql('CREATE TABLE IF NOT EXISTS secKey(key TEXT)')
             var result = tx.executeSql('select key from secKey');
             key = result.rows.item(result.rows.length - 1).key
-            print("saved sec key:"+key)
             callback(key)
         });
     }
@@ -228,7 +227,7 @@ Item {
         db.transaction(function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, time TEXT, courier TEXT, courierPhone TEXT, rated INTEGER )')
             var sqlstr = "insert into orders ( orderid, city, street, house, floor, apt, entrance, entranceDoor, time, courier, courierPhone, rated ) values ('"+ context.orderId +"', '" + context.address.city + "', '"+ context.address.street +"', '"+context.address.house+"', '"+ context.address.floor +"', '"+context.address.apartment+"', '"+ context.address.entrance+"', '"+ context.address.entranceCode+"', '"+context.deliveryDate+":"+context.deliveryTime+"','"+context.courierName+"', '"+ context.courierPhone +"',0)";
-           console.log(sqlstr)
+            console.log(sqlstr)
             tx.executeSql(sqlstr);
         });
     }

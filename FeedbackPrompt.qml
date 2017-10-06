@@ -31,7 +31,7 @@ import "qrc:/controls"
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             font.pointSize: 13
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             fontSizeMode: Text.VerticalFit
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
@@ -60,7 +60,7 @@ import "qrc:/controls"
             text: qsTr("ОЦІНИТИ ДОСТАВКУ:")
             anchors.topMargin: parent.height * 0.08
             font.pointSize: 12
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             anchors.top: txAddress.bottom

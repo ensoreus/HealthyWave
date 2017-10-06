@@ -21,7 +21,7 @@ ViewController {
         txRate.text = ratingByWord(rate)
         txAddress.text = "м."+order.address.city+" вул."+order.address.street+" "+order.address.house+" оф." + order.address.apartment
         txDate.text = order.deliveryDate
-        txCourierName.text = order.courierName
+        txCourierName.text = order.courier
     }
 
     onViewDidAppear: {
