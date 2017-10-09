@@ -158,7 +158,7 @@ ViewController {
         Rectangle {
             id: content
             color: "#ffffff"
-            width: 414 * ratio
+            width:  Qt.platform.os === "osx" ?  414 * ratio : Screen.width
             height: 736 * ratio
 
             HWHeader {
