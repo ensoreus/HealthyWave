@@ -25,6 +25,7 @@ ViewController {
     function hideBusyIndicator(){
         wheel.visible = false
         wheel.running = false
+        imgscroll.visible = false
     }
 
     Clipboard{
@@ -38,14 +39,14 @@ ViewController {
     function createContextObjects() {
         component = Qt.createComponent("qrc:/commons/OrderContext.qml");
         context = component.createObject(newOrderPage, {
-                                                                    "fullb":0,
-                                                                    "emptyb":0,
-                                                                    "firstorder":0,
-                                                                    "card": 0,
-                                                                    "pump": 0,
-                                                                    "cardToPay":"",
-                                                                    "bonuses":[]
-                                                                })
+                                             "fullb":0,
+                                             "emptyb":0,
+                                             "firstorder":0,
+                                             "card": 0,
+                                             "pump": 0,
+                                             "cardToPay":"",
+                                             "bonuses":[]
+                                         })
     }
 
     Component.onCompleted: {
@@ -74,6 +75,8 @@ ViewController {
 
         ListView {
             id: lstBonuses
+            clip: true
+
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.leftMargin: -1
@@ -136,15 +139,44 @@ ViewController {
                 anchors.top: parent.top
                 anchors.topMargin: 40 * ratio
             }
+
+            function isLastCellVisible(){
+                //lstBonu
+                console.log("pos:" + (lstBonuses.contentHeight - lstBonuses.height))
+                return ((lstBonuses.contentHeight - lstBonuses.height) > (lstBonuses.contentY + 50 * ratio))
+            }
+            ScrollBar.vertical: ScrollBar{
+                id:scrollBar
+                interactive: false
+                size: 20 * ratio
+                policy: ScrollBar.AlwaysOn
+                onPositionChanged: {
+                    imgscroll.visible = lstBonuses.isLastCellVisible()
+                }
+            }
+
+        }
+
+        Image {
+            id: imgscroll
+            x: 270
+            y: 216
+            width: 100
+            height: 43
+            fillMode: Image.PreserveAspectFit
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: lstBonuses.bottom
+            anchors.topMargin: 0
+            source: "qrc:/commons/img-arrow-down-grey.png"
         }
 
         HWRoundButton{
             id: btnUseSelectedBonuses
-            anchors.top: lstBonuses.bottom
-            anchors.topMargin: parent.height * 0.2
+            anchors.top: imgscroll.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width * 0.7
             height: parent.height * 0.1
+            anchors.topMargin: 53
             visible: bonusModel.itemsSelected()
             labelText: "ВИКОРИСТАТИ"
             onButtonClick: {
@@ -152,6 +184,7 @@ ViewController {
                 navigationController.push("qrc:/orders/OrdersAddress.qml", {"context":context})
             }
         }
+
 
         Text{
             id: lbAddPromo
@@ -167,6 +200,7 @@ ViewController {
             anchors.right: parent.right
         }
 
+
         HWTextField{
             id:txAddPromo
             anchors.horizontalCenter: parent.horizontalCenter
@@ -175,7 +209,7 @@ ViewController {
             width: parent.width * 0.7
             height: parent.height * 0.05
             onWillStartAnimation: {
-                    txAddPromo.forceActiveFocus()
+                txAddPromo.forceActiveFocus()
             }
             Image{
                 id: imgPastePromo
@@ -193,5 +227,6 @@ ViewController {
                 }
             }
         }
+
     }
 }

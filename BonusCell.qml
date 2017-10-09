@@ -11,7 +11,7 @@ Item {
         id: rectangle
         color: "#ffffff"
         anchors.fill: parent
-        border.color:"#C8C7CC"
+
         Text {
             id: lbMainTitle
             text: qsTr("Перше замовлення онлайн")
@@ -66,6 +66,16 @@ Item {
             anchors.rightMargin: parent.width * 0.1
             anchors.right: parent.right
             implicitHeight: 26.4
+        }
+
+        Rectangle{
+            border.width: 0
+            color:"#C8C7CC"
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 1
+            height: 1
+            anchors.left: parent.left
+            anchors.right: parent.right
         }
     }
 }
