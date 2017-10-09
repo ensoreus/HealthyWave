@@ -20,12 +20,12 @@ ViewController {
     function showBusyIndicator(){
         wheel.visible = true
         wheel.running = true
+        imgscroll.visible = false
     }
 
     function hideBusyIndicator(){
         wheel.visible = false
         wheel.running = false
-        imgscroll.visible = false
     }
 
     Clipboard{
@@ -57,7 +57,10 @@ ViewController {
                 console.log(response)
                 bonusModel.addItems(response.result)
                 hideBusyIndicator()
+
+                imgscroll.visible = bonusModel.count > 3//lstBonuses.isLastCellVisible()
             }, function(failure){
+                imgscroll.visible= false
                 hideBusyIndicator()
                 console.log(failure)
             })
@@ -127,6 +130,7 @@ ViewController {
                         bonusModel.append(item)
                     }
                 }
+
             }
 
             BusyIndicator{
@@ -141,7 +145,6 @@ ViewController {
             }
 
             function isLastCellVisible(){
-                //lstBonu
                 console.log("pos:" + (lstBonuses.contentHeight - lstBonuses.height))
                 return ((lstBonuses.contentHeight - lstBonuses.height) > (lstBonuses.contentY + 50 * ratio))
             }
@@ -161,13 +164,13 @@ ViewController {
             id: imgscroll
             x: 270
             y: 216
-            width: 100
-            height: 43
+            width: 50 * ratio
+            height: 20 * ratio
             fillMode: Image.PreserveAspectFit
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lstBonuses.bottom
             anchors.topMargin: 0
-            source: "qrc:/commons/img-arrow-down-grey.png"
+            source: "qrc:/commons/img-arrow-down-thin.png"
         }
 
         HWRoundButton{

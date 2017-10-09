@@ -91,6 +91,7 @@
         <file>img-arrow-down.png</file>
         <file>img-arrow-down-green.png</file>
         <file>img-arrow-down-grey.png</file>
+        <file>img-arrow-down-thin.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
