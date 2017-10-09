@@ -39,6 +39,7 @@ ViewController {
             anchors.top: parent.top
             anchors.topMargin: parent.height * 0.05
             anchors.horizontalCenterOffset: 0
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         BorderImage {
@@ -248,9 +249,9 @@ ViewController {
                 anchors.top: lbAddress.top
                 anchors.topMargin: 0
                 anchors.right: tfDate.right
-                anchors.rightMargin: 0
+                anchors.rightMargin: 6 * ratio
                 anchors.left: lbAddress.right
-                anchors.leftMargin: 6
+                anchors.leftMargin: 6 * ratio
                 font.weight: Font.Thin
                 font.pointSize: 13
                 font.family: "NS UI Text"
@@ -323,9 +324,9 @@ ViewController {
                 anchors.top: lbComments.top
                 anchors.topMargin: 0
                 anchors.right: tfDeliveryTime.right
-                anchors.rightMargin: 0
+                anchors.rightMargin: 6 * ratio
                 anchors.left: lbComments.right
-                anchors.leftMargin: 6
+                anchors.leftMargin: 6 * ratio
                 font.pointSize: 13
                 font.family: "NS UI Text"
             }
