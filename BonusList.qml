@@ -30,6 +30,9 @@ ViewController {
 
     Clipboard{
         id: clipboard
+        onIsEmptyChanged: {
+            imgPastePromo.checkState()
+        }
     }
 
     Storage{
@@ -51,14 +54,15 @@ ViewController {
 
     Component.onCompleted: {
         createContextObjects()
+        imgPastePromo.checkState()
         storage.getAuthData(function(authdata){
             showBusyIndicator()
             Api.getBonus(authdata, function(response){
                 console.log(response)
                 bonusModel.addItems(response.result)
                 hideBusyIndicator()
-
-                imgscroll.visible = bonusModel.count > 3//lstBonuses.isLastCellVisible()
+                imgPastePromo.checkState()
+                imgscroll.visible = bonusModel.count > 3 //lstBonuses.isLastCellVisible()
             }, function(failure){
                 imgscroll.visible= false
                 hideBusyIndicator()
@@ -108,7 +112,7 @@ ViewController {
                     var yyyy = date.substring(0, 4)
                     var MM = date.substring(4, 6)
                     var dd = date.substring(6, 8)
-                    if(yyyy < 2016){
+                    if (yyyy < 2016){
                         return ""
                     }else{
                         return "дійсний до "+ dd + "-" + MM + "-" + yyyy
@@ -147,6 +151,7 @@ ViewController {
             function isLastCellVisible(){
                 return ((lstBonuses.contentHeight - lstBonuses.height) > (lstBonuses.contentY + 50 * ratio))
             }
+
             ScrollBar.vertical: ScrollBar{
                 id:scrollBar
                 interactive: false
@@ -156,7 +161,6 @@ ViewController {
                     imgscroll.visible = lstBonuses.isLastCellVisible()
                 }
             }
-
         }
 
         Image {
@@ -189,6 +193,7 @@ ViewController {
 
 
         Text{
+            property var error: ""
             id: lbAddPromo
             text:"Додати новий промо-код*"
             font.pointSize: 14
@@ -200,6 +205,41 @@ ViewController {
             anchors.leftMargin: parent.width * 0.1
             anchors.rightMargin: parent.width * 0.1
             anchors.right: parent.right
+            states:[
+                State{
+                    name:"addnew"
+                    PropertyChanges {
+                        target: lbAddPromo
+                        text:"Додати новий промо-код*"
+                    }
+                    PropertyChanges {
+                        target: lbAddPromo
+                        color: "#9B9B9B"
+                    }
+
+
+                },
+                State{
+                    name:"error"
+                    PropertyChanges {
+                        target:lbAddPromo
+                        color: "black"
+
+                    }
+                    PropertyChanges {
+                        target: lbAddPromo
+                        text: error
+                    }
+                }
+            ]
+
+            function showError(errorToShow){
+                error = errorToShow
+                state = "error"
+            }
+            function clearError(){
+                state = "addnew"
+            }
         }
 
 
@@ -209,10 +249,22 @@ ViewController {
             anchors.top: lbAddPromo.bottom
             anchors.topMargin: parent.height * 0.03
             width: parent.width * 0.7
-            height: parent.height * 0.05
+            height: 30 * ratio
+            Component.onCompleted: {
+                imgPastePromo.state = "pasting"
+            }
+
             onWillStartAnimation: {
                 txAddPromo.forceActiveFocus()
             }
+            onTextChanged: {
+                if (text.length > 0){
+                    imgPastePromo.state = "commiting"
+                }else{
+                    imgPastePromo.state = "pasting"
+                }
+            }
+
             Image{
                 id: imgPastePromo
                 source: "qrc:/commons/img-copy.png"
@@ -220,13 +272,91 @@ ViewController {
                 height: parent.height * 0.8
                 width: height
                 anchors.right: parent.right
+                Text{
+                    id: lbAdd
+                    anchors.fill: parent
+                    color:"white"
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    text:"Додати"
+                }
+
                 MouseArea{
                     id:btnPastePromo
                     anchors.fill: parent
                     onClicked: {
-                        txAddPromo.text = clipboard.text()
+                        lbAddPromo.clearError()
+                        if(imgPastePromo.state === "pasting"){
+                            txAddPromo.text = clipboard.text()
+                        }else{
+                            storage.getAuthData(function(authdata){
+                                Api.addPromoCode(txAddPromo.text, authdata, function(response){
+                                    lbAddPromo.showError("Промокод додано")
+                                }, function(failure){
+                                    lbAddPromo.showError(failure.error)
+                                })
+                            })
+                        }
                     }
                 }
+
+                function checkState(){
+                    if (txAddPromo.text.length > 0){
+                        imgPastePromo.state = "commiting"
+                    }else{
+                        var vald = clipboard.text().length > 0&& clipboard.text().match(/^\w*$/)
+                        imgPastePromo.state = (vald) ? "pasting" : "hidden"
+                    }
+                }
+
+                states:[
+                    State {
+                        name: "pasting"
+                        PropertyChanges {
+                            target: imgPastePromo
+                            source: "qrc:/commons/img-copy.png"
+                        }
+                        PropertyChanges {
+                            target: imgPastePromo
+                            width: parent.height * 0.8
+                        }
+                        PropertyChanges {
+                            target: lbAdd
+                            visible: false
+                        }
+                        PropertyChanges {
+                            target: imgPastePromo
+                            visible: true
+                        }
+                    },
+                    State{
+                        name: "commiting"
+                        PropertyChanges {
+                            target: imgPastePromo
+                            source: "qrc:/commons/btn-add-green.png"
+                        }
+                        PropertyChanges {
+                            target: imgPastePromo
+                            visible: true
+                        }
+                        PropertyChanges {
+                            target: imgPastePromo
+                            width: parent.height * 2
+                        }
+                        PropertyChanges {
+                            target: lbAdd
+                            visible: true
+                        }
+                    },
+                    State{
+                        name:"hidden"
+                        PropertyChanges {
+                            target: imgPastePromo
+                            visible: false
+                        }
+                    }
+
+                ]
             }
         }
 

@@ -51,9 +51,8 @@ NavigationController {
             }
         }
 
-
         promoCodeText.onWillStartAnimation: {
-                 promoCodeText.forceActiveFocus()
+             promoCodeText.forceActiveFocus()
         }
         btnCopyCode.onClicked: {
              clipboard.setText(promoCodeText.text)
