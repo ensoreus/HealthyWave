@@ -145,7 +145,6 @@ ViewController {
             }
 
             function isLastCellVisible(){
-                console.log("pos:" + (lstBonuses.contentHeight - lstBonuses.height))
                 return ((lstBonuses.contentHeight - lstBonuses.height) > (lstBonuses.contentY + 50 * ratio))
             }
             ScrollBar.vertical: ScrollBar{

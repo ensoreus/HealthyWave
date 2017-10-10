@@ -7,6 +7,8 @@
 class ClipboardManager : public QObject
 {
   Q_OBJECT
+  Q_PROPERTY(bool empty READ isEmpty NOTIFY isEmptyChanged)
+
  public:
      explicit ClipboardManager(QObject *parent = 0) : QObject(parent) {
          clipboard = QGuiApplication::clipboard();
@@ -21,7 +23,12 @@ class ClipboardManager : public QObject
         return clipboard->text();
     }
 
+  bool isEmpty() const{
+    return clipboard->text().length() == 0;
+  }
 
+signals:
+  void isEmptyChanged();
 
  private:
      QClipboard *clipboard;
