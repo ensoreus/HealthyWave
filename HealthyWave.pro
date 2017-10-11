@@ -6,9 +6,10 @@ SOURCES += main.cpp \
     NetworkCore.cpp \
     SecurityCore.cpp \
     source/cpp/misc/pushnotification.cpp \
-    source/cpp/misc/sharepicker.cpp \
-    ClipboardManager.cpp
+    ClipboardManager.cpp \
+    shareutils.cpp
 
+HEADERS += shareutils.h
 
 RESOURCES += qml.qrc
 include(quickios.pri)
@@ -42,8 +43,9 @@ ios:{
 
     OBJECTIVE_SOURCES += \
                     $$PWD/source/cpp/misc/ios/pushnotification.mm \
-                    $$PWD/source/cpp/misc/ios/sharepicker_ios.mm
-
+                    $$PWD/source/cpp/misc/ios/iosshareutils.mm
+    HEADERS += $$PWD/source/cpp/misc/ios/iosshareutils.h
+    INCLUDEPATH += $$PWD/source/cpp/misc
     CONFIG -= bitcode
 }
 
@@ -67,8 +69,9 @@ android: {
 
     INCLUDEPATH += source/cpp/misc/android \
                     source/cpp/misc
-    SOURCES +=  SecImpl_android.cpp \
-                source/cpp/misc/android/sharepicker_android.cpp
+    SOURCES +=  SecImpl_android.cpp
+    SOURCES += source/cpp/misc/android/androidshareutils.cpp
+    HEADERS += source/cpp/misc/android/androidshareutils.h
 }
 
 
@@ -78,7 +81,6 @@ HEADERS += \
     NetworkCore.hpp \
     SecImplementation.hpp \
     source/cpp/misc/pushnotification.h \
-    source/cpp/misc/sharepicker.hpp \
     ClipboardManager.hpp
 
 DISTFILES += \

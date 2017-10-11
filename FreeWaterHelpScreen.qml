@@ -27,6 +27,9 @@ NavigationController {
         id:storage
     }
 
+    SharePicker{
+        id: sharePicker
+    }
 
     FreeWaterHelpScreenForm {
         id: helpScreen
@@ -77,7 +80,7 @@ NavigationController {
             }else{
                 url = "https://itunes.apple.com/us/app/hvila-zdorova/id719638260?mt=8"
             }
-            SharePicker.share("Рекомендую скачать удобное приложение, сервис по доставке воды «Хвиля Здоров’я», самая быстрая доставка воды в Киеве. При регистрации указывайте мой промокод «evgen1u» и получай безплатный бутыль. Скчивай и устанавливай:
+            sharePicker.share("Рекомендую скачать удобное приложение, сервис по доставке воды «Хвиля Здоров’я», самая быстрая доставка воды в Киеве. При регистрации указывайте мой промокод '"+ promoCodeText.text+"' и получай безплатный бутыль. Скчивай и устанавливай:
 ", url)
         }
 

@@ -9,7 +9,7 @@
 #include <QQuickView>
 #include "StatusBarSetup.h"
 #include "source/cpp/misc/pushnotification.h"
-#include "source/cpp/misc/sharepicker.hpp"
+#include "shareutils.h"
 #include "NetworkCore.hpp"
 #include <ClipboardManager.hpp>
 
@@ -25,7 +25,7 @@ static QObject * seccore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJS
 
 //static QObject * netcore_qjsvalue_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine){
 //  Q_UNUSED(scriptEngine)
-//  auto net = new NetworkCore();
+//  auto net = new ShareUtils();
 //  qDebug()<<engine->offlineStoragePath();
 //  engine->setObjectOwnership(net, QQmlEngine::CppOwnership);
 //  return net;
