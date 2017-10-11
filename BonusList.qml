@@ -62,7 +62,7 @@ ViewController {
                 bonusModel.addItems(response.result)
                 hideBusyIndicator()
                 imgPastePromo.checkState()
-                imgscroll.visible = bonusModel.count > 3 //lstBonuses.isLastCellVisible()
+                imgscroll.visible = bonusModel.count > 3
             }, function(failure){
                 imgscroll.visible= false
                 hideBusyIndicator()

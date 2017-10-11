@@ -9,6 +9,7 @@
 #include <QQuickView>
 #include "StatusBarSetup.h"
 #include "source/cpp/misc/pushnotification.h"
+#include "source/cpp/misc/sharepicker.hpp"
 #include "NetworkCore.hpp"
 #include <ClipboardManager.hpp>
 
@@ -66,6 +67,7 @@ qreal refWidth = 414.;
   app.setApplicationName("HealthyWave");
 
   QuickIOS::registerTypes();
+  qmlRegisterType<ShareUtils> ("com.ensoreus.hw.sharepicker", 1, 0, "SharePicker");
   //qmlRegisterSingletonType<SecurityCore>("com.ensoreus.NetworkCore", 1, 0, "NetworkCore", netcore_qjsvalue_singletontype_provider);
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
   qmlRegisterSingletonType<PushNotificationRegistrationTokenHandler>("PushNotificationRegistrationTokenHandler", 1, 0, "PushNotificationRegistrationTokenHandler", PushNotificationRegistrationTokenHandler::pushNotificationRegistrationTokenProvider);

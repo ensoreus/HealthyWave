@@ -6,6 +6,7 @@ SOURCES += main.cpp \
     NetworkCore.cpp \
     SecurityCore.cpp \
     source/cpp/misc/pushnotification.cpp \
+    source/cpp/misc/sharepicker.cpp \
     ClipboardManager.cpp
 
 
@@ -40,7 +41,8 @@ ios:{
     QMAKE_INFO_PLIST = $$PWD/ios/Info.plist
 
     OBJECTIVE_SOURCES += \
-                    $$PWD/source/cpp/misc/ios/pushnotification.mm
+                    $$PWD/source/cpp/misc/ios/pushnotification.mm \
+                    $$PWD/source/cpp/misc/ios/sharepicker_ios.mm
 
     CONFIG -= bitcode
 }
@@ -62,7 +64,11 @@ android: {
 
     ANDROID_JAVA_SOURCES.files = $$files($$PWD/source/java/*.java)
     INSTALLS += ANDROID_JAVA_SOURCES
-    SOURCES += SecImpl_android.cpp
+
+    INCLUDEPATH += source/cpp/misc/android \
+                    source/cpp/misc
+    SOURCES +=  SecImpl_android.cpp \
+                source/cpp/misc/android/sharepicker_android.cpp
 }
 
 
@@ -72,6 +78,7 @@ HEADERS += \
     NetworkCore.hpp \
     SecImplementation.hpp \
     source/cpp/misc/pushnotification.h \
+    source/cpp/misc/sharepicker.hpp \
     ClipboardManager.hpp
 
 DISTFILES += \

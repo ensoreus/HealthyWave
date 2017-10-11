@@ -1,6 +1,7 @@
 import QtQuick 2.4
 import QuickIOS 0.1
 import com.ensoreus.Clipboard 1.0
+import com.ensoreus.hw.sharepicker 1.0
 import "qrc:/"
 
 NavigationController {
@@ -67,6 +68,17 @@ NavigationController {
 
         btnBack.onButtonClick:{
             state = "promoCodeGen"
+        }
+
+        btnInvite.onButtonClick: {
+            var url = ""
+            if(Qt.platform.os === "android"){
+                url ="https://play.google.com/store/apps/details?id=ukraine.water"
+            }else{
+                url = "https://itunes.apple.com/us/app/hvila-zdorova/id719638260?mt=8"
+            }
+            SharePicker.share("Рекомендую скачать удобное приложение, сервис по доставке воды «Хвиля Здоров’я», самая быстрая доставка воды в Киеве. При регистрации указывайте мой промокод «evgen1u» и получай безплатный бутыль. Скчивай и устанавливай:
+", url)
         }
 
         transitions: [
