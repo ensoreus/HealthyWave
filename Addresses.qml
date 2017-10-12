@@ -183,6 +183,7 @@ AddressesForm {
                 color: deleteLabel.SwipeDelegate.pressed ? Qt.darker( "tomato", 1.1) : "tomato"
             }
         }
+
         onClicked: {
             navigationController.push("qrc:/address/NewAddress.qml", {"addressToEdit":addressesModel.get(index)})
         }

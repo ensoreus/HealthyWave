@@ -93,6 +93,7 @@
         <file>img-arrow-down-grey.png</file>
         <file>img-arrow-down-thin.png</file>
         <file>btn-add-green.png</file>
+        <file>Default@3x.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>

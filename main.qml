@@ -33,6 +33,8 @@ ApplicationWindow {
         }
     }
 
+
+
     Registration.Registration{
         id:registration
         anchors.fill: parent
@@ -65,6 +67,30 @@ ApplicationWindow {
                     target: greeting; property: "visible"
                     value: false
                 }
+            }
+        }
+    }
+
+    Image{
+        id:splash
+        anchors.fill:parent
+        source: "qrc:/commons/Default@3x.png"
+        Timer{
+            id: splashTimer
+            interval: 2000
+            repeat: false
+            running: true
+            onTriggered: {
+                splash.opacity = 0
+            }
+        }
+        Behavior on opacity {
+            PropertyAnimation{
+                target: splash
+                property: "opacity"
+                duration: 500
+                from: 1.0
+                to: 0.0
             }
         }
     }
