@@ -136,15 +136,7 @@ AddressesForm {
                 anchors.left: parent.left
             }
 
-            MouseArea{
-                anchors.fill: parent
-                onPressedChanged: {
-                    color = (pressed) ? "#C8C7CC" : "white"
-                }
-                onClicked: {
-                    navigationController.push("qrc:/address/NewAddress.qml", {"addressToEdit":addressesModel.get(index)})
-                }
-            }
+
 
             Rectangle {
                 id: separatorLine
@@ -190,6 +182,9 @@ AddressesForm {
             background: Rectangle {
                 color: deleteLabel.SwipeDelegate.pressed ? Qt.darker( "tomato", 1.1) : "tomato"
             }
+        }
+        onClicked: {
+            navigationController.push("qrc:/address/NewAddress.qml", {"addressToEdit":addressesModel.get(index)})
         }
 
         ListView.onRemove: SequentialAnimation {
