@@ -36,7 +36,7 @@ Page {
 
         Controls.HWTextField {
             id: promoCodeField
-            height: parent.height * 0.1
+            height:  40 * ratio
             anchors.topMargin: 10 * ratio
             anchors.top: text1.bottom
             anchors.right: text1.right

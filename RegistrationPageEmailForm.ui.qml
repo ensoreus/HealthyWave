@@ -47,7 +47,7 @@ Page {
 
         Controls.HWEmailField {
             id: emailField
-            height: parent.height * 0.08
+            height: 40 * ratio
             width: parent.width * 0.8
             anchors.topMargin: 10 * ratio
             anchors.top: text1.bottom

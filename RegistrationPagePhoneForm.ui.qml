@@ -21,7 +21,7 @@ Page {
         Controls.HWPhoneField {
             id: phoneField
             width: parent.width * 0.8
-            height: item1.width * 0.1
+            height: 40 * ratio
             text: "+380"
             anchors.topMargin: 10 * ratio
             font.pointSize: 19

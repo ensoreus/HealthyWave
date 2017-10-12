@@ -32,7 +32,7 @@ Page {
         HWTextField {
             id: nameField
             width: parent.width * 0.8
-            height: parent.height * 0.08
+            height:  40 * ratio
             anchors.topMargin: 10 * ratio
             anchors.top: label.bottom
             anchors.right: label.right
