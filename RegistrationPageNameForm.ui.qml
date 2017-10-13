@@ -22,7 +22,7 @@ Page {
             text: qsTr("Уведіть Ваше і'мя")
             color: "#505050"
             font.weight: Font.Thin
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             font.pointSize: 15
             anchors.topMargin: 60 * ratio
             anchors.top: parent.top
@@ -49,7 +49,7 @@ Page {
             wrapMode: Text.WordWrap
             font.weight: Font.Thin
             font.pointSize: 15
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.topMargin: 20 * ratio
             anchors.top: btnNext.bottom
             anchors.right: nameField.right

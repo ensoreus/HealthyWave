@@ -66,9 +66,9 @@ Page {
             y: 276
             height: 71
             color: "#505050"
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             font.pointSize: 15
-            text: qsTr("*Уведіть бонусний промо-код, якщо Ви отримали його від ваших знайомих. Якщо промо-коду у Вас нема - рухайтесь далі, на Вас чекає сюрприз!")
+            text: qsTr("*Уведіть бонусний промо-код, якщо Ви отримали його від ваших знайомих.\nЯкщо промо-коду у Вас нема - рухайтесь далі, на Вас чекає сюрприз!")
             font.weight: Font.Thin
             anchors.topMargin: 30 * ratio
             anchors.top: btnNext.bottom

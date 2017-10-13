@@ -61,8 +61,10 @@ Item {
             onNextPage: {
                 Api.confirmPinCode(pinEditPage.pinField.pin, phoneEditPage.phoneField.text, function(response){
                     if(response.result === true){
+                        Qt.inputMethod.hide()
                         stackLayout.push(emailEditPage)
                     }else{
+                        Qt.inputMethod.hide()
                         txtError.text = "Невірний PIN-код";
                         pinField.clear()
                     }
@@ -72,14 +74,8 @@ Item {
             btnSendAgain.onClicked: {
                 txtError.text = ""
                 pinField.clear()
+                Qt.inputMethod.hide()
                 Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
-            }
-
-            Behavior on x {
-                NumberAnimation {
-                    duration: 200
-                    easing.type: Easing.InOutQuad
-                }
             }
         }
 
@@ -95,13 +91,8 @@ Item {
                 emailEditPage.presenterAnimationEnds()
             }
             onNextPage: {
+                Qt.inputMethod.hide()
                 stackLayout.push(nameEditPage)
-            }
-            Behavior on x {
-                NumberAnimation {
-                    duration: 200
-                    easing.type: Easing.InOutQuad
-                }
             }
         }
 
@@ -110,20 +101,14 @@ Item {
             id: nameEditPage
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            x:0
             width: parent.width
             onStartEditData: {
                 nameEditPage.presenterAnimationEnds()
             }
 
             onNextPage: {
+                Qt.inputMethod.hide()
                 stackLayout.push(promoCodeEditPage)
-            }
-            Behavior on x {
-                NumberAnimation {
-                    duration: 200
-                    easing.type: Easing.InOutQuad
-                }
             }
         }
 
@@ -134,14 +119,13 @@ Item {
             x: 0
             width: parent.width
             onStartEditData: {
-                //item1.state = "interactive"
                 promoCodeEditPage.presenterAnimationEnds()
             }
             onEndEditData: {
 
             }
             onNextPage: {
-
+                Qt.inputMethod.hide()
                 startProcessIndicator()
                 var nameEndPos = nameEditPage.nameField.text.lastIndexOf(" ");
                 var name = nameEditPage.nameField.text.slice(0, nameEndPos)
@@ -164,7 +148,6 @@ Item {
                             stopPropcessIndicator()
                         }
                     })
-
                 })
                 stackLayout.push(congratsPage)
             }
@@ -222,8 +205,8 @@ Item {
                 onStartEditData: {
                     item1.state = "interactive"
                 }
-
                 onNextPage: {
+                    Qt.inputMethod.hide()
                     stackLayout.push(pinEditPage)
                     var result = Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
                 }

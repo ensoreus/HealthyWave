@@ -38,7 +38,7 @@ Page {
             color: "#505050"
             font.weight: Font.Thin
             text: qsTr("Уведіть электрону адресу *")
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             font.pointSize: 15
             anchors.topMargin: 60 * ratio
             anchors.top: parent.top
@@ -72,7 +72,7 @@ Page {
             wrapMode: Text.WordWrap
             font.weight: Font.Thin
             font.pointSize: 15
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
         }
     }
 }

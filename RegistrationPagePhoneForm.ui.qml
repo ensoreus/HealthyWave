@@ -60,7 +60,7 @@ Page {
             anchors.topMargin: 60 * ratio
             font.pointSize: 15
             font.weight: Font.Thin
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
         }

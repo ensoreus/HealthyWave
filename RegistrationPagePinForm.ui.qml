@@ -23,7 +23,7 @@ Page {
             height: parent.height * 0.02
             color: "#505050"
             text: qsTr("Уведіть код підтвердження")
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             font.pointSize: 15
             anchors.topMargin: 60 * ratio
             anchors.top: parent.top
@@ -69,7 +69,7 @@ Page {
             anchors.leftMargin: 0
             font.pointSize: 15
             anchors.left: text1.left
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.topMargin: 0
             anchors.top: btnNext.top
             font.weight: Font.Thin
@@ -89,7 +89,7 @@ Page {
             color: "#720000"
             text: qsTr("")
             font.pointSize: 15
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             horizontalAlignment: Text.AlignHCenter
             anchors.rightMargin: parent.width * 0.2
             anchors.right: parent.right
