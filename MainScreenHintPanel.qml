@@ -30,6 +30,10 @@ Rectangle {
             text: qsTr("Як отримати безкоштовну воду?")
             font.bold: true
             font.pointSize: 15
+            anchors.right: parent.right
+            anchors.rightMargin: 5
+            anchors.left: parent.left
+            anchors.leftMargin: 5
         }
 
         Text {
@@ -42,6 +46,10 @@ Rectangle {
             text: qsTr("Відправте своєму другу цей промо-код і коли він зробить перше замовлення")
             wrapMode: Text.WordWrap
             font.pointSize: 13
+            anchors.right: parent.right
+            anchors.rightMargin: 5
+            anchors.left: parent.left
+            anchors.leftMargin: 5
         }
     }
 

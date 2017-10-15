@@ -8,7 +8,7 @@ Item {
         var isReg= false
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction( function(tx) {
-            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT)')
+            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT, isFirstStart INTEGER)')
             var result = tx.executeSql('select phone from userData');
             isReg = result.rows.length > 0
         }
@@ -52,7 +52,7 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('drop table if exists userData');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT)')
+            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT, isFirstStart INTEGER)')
             var sqlstr = "insert into userData ( phone, name, email, promocode ) values ('" + phone + "', '"+name+"', '"+email+"', '"+promocode+"')";
             console.log(sqlstr)
             var result = tx.executeSql(sqlstr);
@@ -75,7 +75,7 @@ Item {
         print ("updateAvatar:"+picname)
             var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
             db.transaction(function(tx){
-                tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT)')
+                tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT, isFirstStart INTEGER)')
                 var sqlstr = "update userData set avatar='"+picname+"' where 1";
                 console.log(sqlstr)
                 var result = tx.executeSql(sqlstr);
@@ -329,5 +329,29 @@ Item {
             }
         }
         return object
+    }
+
+    function isFirstStart(callback){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT, isFirstStart INTEGER)')
+            var sqlstr = "select isFirstStart from userData";
+            console.log(sqlstr);
+            var result = tx.executeSql(sqlstr);
+            if(typeof(result.rows.item(0)) != "undefined"){
+                var firstStart = result.rows.item(0).isFirstStart
+                callback( firstStart )
+            }
+        });
+    }
+
+    function dropFirstStartFlag(){
+        var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
+        db.transaction(function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT, isFirstStart INTEGER)')
+            var sqlstr = "update userData set isFirstStart = 0";
+            console.log(sqlstr);
+            tx.executeSql(sqlstr);
+        });
     }
 }
