@@ -126,6 +126,7 @@ Item {
             }
             onNextPage: {
                 Qt.inputMethod.hide()
+                item1.state = "default"
                 startProcessIndicator()
                 var nameEndPos = nameEditPage.nameField.text.lastIndexOf(" ");
                 var name = nameEditPage.nameField.text.slice(0, nameEndPos)
@@ -139,17 +140,26 @@ Item {
                     Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, ostype, function(response){
                         if(!response.error){
                             storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, response.promocode)
-                            Api.addPromoCode(promoCodeField.text, {secKey: secKey, phone: phoneEditPage.phoneField.text, token: token}, function(response){
+                            if(promoCodeField.text.length > 3){
+                                Api.addPromoCode(promoCodeField.text, {secKey: secKey, phone: phoneEditPage.phoneField.text, token: token}, function(response){
+                                    //item1.state = "default"
+                                    stopPropcessIndicator()
+                                    Qt.inputMethod.hide()
+                                    stackLayout.push(congratsPage)
+                                }, function(failure){
+                                    stopPropcessIndicator()
+                                    stackLayout.push(congratsPage)
+                                })
+                            }else{
                                 stopPropcessIndicator()
-                                item1.state = "default"
-                            }, function(failure){})
-
+                                stackLayout.push(congratsPage)
+                            }
                         }else{
                             stopPropcessIndicator()
                         }
                     })
                 })
-                stackLayout.push(congratsPage)
+
             }
         }
 

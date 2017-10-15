@@ -32,12 +32,17 @@ Rectangle{
         anchors.left: parent.left
         anchors.leftMargin: 1
         validator: RegExpValidator{
-            regExp: /\d?/
+            regExp: /\d{1}/
+        }
+
+        onWillStartAnimation: {
+            forceActiveFocus()
         }
 
         onTextChanged: {
             if (text.length > 0){
-                pinDigit2.forceActiveFocus()
+                console.log("digit1:"+text)
+                pinDigit2.forceActiveFocus(Qt.TabFocusReason)
             }
         }
     }
@@ -55,13 +60,15 @@ Rectangle{
 
         inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d+/
+            regExp: /\d{1}/
         }
-
+        onWillStartAnimation: {
+            forceActiveFocus()
+        }
         onTextChanged: {
             if (text.length > 0){
-                pinDigit2.deselect()
-                pinDigit3.forceActiveFocus()
+                 console.log("digit2:"+text)
+                pinDigit3.forceActiveFocus(Qt.TabFocusReason)
             }
         }
     }
@@ -79,12 +86,15 @@ Rectangle{
 
         inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d+/
+            regExp: /\d{1}/
         }
-
+        onWillStartAnimation: {
+            forceActiveFocus()
+        }
         onTextChanged: {
             if (text.length > 0){
-                pinDigit4.forceActiveFocus()
+                 console.log("digit3:"+text)
+                pinDigit4.forceActiveFocus(Qt.TabFocusReason)
             }
         }
     }
@@ -102,12 +112,15 @@ Rectangle{
 
         inputMethodHints: Qt.ImhDigitsOnly
         validator: RegExpValidator{
-            regExp: /\d+/
+            regExp: /\d{1}/
         }
-
+        onWillStartAnimation: {
+            forceActiveFocus()
+        }
         onTextChanged: {
             if (text.length > 0){
-               focus = false
+                console.log("digit4:"+text)
+                focus = false
                 lastDigitEdit()
             }
         }
