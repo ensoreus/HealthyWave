@@ -37,13 +37,12 @@ Rectangle{
 
         onWillStartAnimation: {
             forceActiveFocus()
-            //focus = true
         }
+
         onTextChanged: {
             if (text.length > 0){
                 console.log("digit1:"+text)
-                pinDigit1.focus = false
-                pinDigit2.focus = true
+                pinDigit2.forceActiveFocus(Qt.TabFocusReason)
             }
         }
     }
@@ -66,12 +65,11 @@ Rectangle{
         onWillStartAnimation: {
             forceActiveFocus()
         }
+
         onTextChanged: {
             if (text.length > 0){
                  console.log("digit2:"+text)
-                pinDigit2.focus = false
-                pinDigit3.focus = true
-                //pinDigit3.forceActiveFocus(Qt.TabFocusReason)
+                pinDigit3.forceActiveFocus(Qt.TabFocusReason)
             }
         }
     }
@@ -94,12 +92,11 @@ Rectangle{
         onWillStartAnimation: {
             forceActiveFocus()
         }
+
         onTextChanged: {
             if (text.length > 0){
                  console.log("digit3:"+text)
-                pinDigit3.focus = false
-                pinDigit4.focus = true
-                //pinDigit4.forceActiveFocus(Qt.TabFocusReason)
+                pinDigit4.forceActiveFocus(Qt.TabFocusReason)
             }
         }
     }
@@ -122,6 +119,7 @@ Rectangle{
         onWillStartAnimation: {
             forceActiveFocus()
         }
+
         onTextChanged: {
             if (text.length > 0){
                 console.log("digit4:"+text)
@@ -139,7 +137,8 @@ Rectangle{
         anchors.top: parent.top
         anchors.rightMargin: 0
         onClicked: {
-            rectangle.focus = true
+            rectangle.aboutToFocus = true
+            console.log("pinAuxMouseArea.click")
             willStartAnimation()
         }
     }
