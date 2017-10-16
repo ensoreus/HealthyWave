@@ -2,7 +2,7 @@ import QtQuick 2.4
 import QuickIOS 0.1
 import "qrc:/controls" as Controls
 
-ViewController {
+Rectangle {
     width: 400
     height: 400
     property alias btnCopyCode: btnCopyCode
@@ -15,18 +15,29 @@ ViewController {
     property alias btnCopyCodeLabel: btnCopyCodeLabel
     property alias promoCodeText: promoCodeText
 
-    property var navigationItem: NavigationItem{
-        centerBarImage: "qrc:/commons/logo-hw.png"
-        rightBarButtonItem: BarButtonItem{
-            image:"qrc:/commons/btn-cross.png"
-        }
+//    property var navigationItem: NavigationItem{
+//        centerBarImage: "qrc:/commons/logo-hw.png"
+//        rightBarButtonItem: BarButtonItem{
+//            image:"qrc:/commons/btn-cross.png"
+//        }
+//    }
+
+    MainScreenHintPanel{
+        id: hintPanel
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
     }
 
     Rectangle {
         id: rectangle
         height: parent.height - 60 * ratio
         color: "#ffffff"
-        anchors.fill:parent
+        //anchors.fill:parent
+        anchors.top: hintPanel.bottom
+        anchors.right: hintPanel.right
+        anchors.left: hintPanel.left
+        anchors.bottom: parent.bottom
 
         Text {
             id: mainLabel
@@ -34,7 +45,7 @@ ViewController {
             text: qsTr("Отримуй воду безкоштовно")
             anchors.topMargin: parent.height * 0.05
             font.weight: Font.Light
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             font.pointSize: 22
@@ -61,7 +72,7 @@ ViewController {
             anchors.left: parent.left
             anchors.leftMargin: 30 * ratio
             font.weight: Font.Light
-            font.family: "ST UI Text"
+            font.family: "NS UI Text"
             font.pointSize: 14
         }
 
@@ -86,7 +97,7 @@ ViewController {
                 anchors.rightMargin: 5 * ratio
                 anchors.verticalCenter: parent.verticalCenter
                 font.weight: Font.DemiBold
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 font.wordSpacing: -2 * ratio
@@ -115,7 +126,7 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
             font.weight: Font.Light
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 16
         }
@@ -129,7 +140,7 @@ ViewController {
             anchors.topMargin: 15 * ratio
             font.weight: Font.Light
             font.underline: true
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             anchors.left: mainText.left
             anchors.leftMargin: 0
             font.pointSize: 14

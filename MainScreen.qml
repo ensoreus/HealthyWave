@@ -110,7 +110,7 @@ ViewController {
         }
     }
 
-    MainScreenHintPanel {
+    FreeWaterHelpScreen {
         id: mainScreenHintPanel
         anchors.top: parent.bottom
         anchors.topMargin: -100 * ratio
@@ -118,9 +118,9 @@ ViewController {
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
-        onShowHideHintPanel:{
-            mainScreen.present("qrc:/mainScreen/FreeWaterHelpScreen.qml", {}, true)
-        }
+//        onShowHideHintPanel:{
+//            mainScreen.present("qrc:/mainScreen/FreeWaterHelpScreen.qml", {}, true)
+//        }
     }
 
     Rectangle {
