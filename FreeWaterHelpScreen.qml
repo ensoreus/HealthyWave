@@ -45,7 +45,6 @@ Rectangle{
             property var oldY: -100 * ratio
             property var isDownDir: false
             onMouseYChanged: {
-                console.log("swipe up:" + mouseY +" m:"+helpScreenContainer.anchors.topMargin)
                 helpScreenContainer.anchors.topMargin += mouseY
                 isDownDir = oldY > mouseY
                 oldY = mouseY

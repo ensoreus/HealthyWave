@@ -112,9 +112,22 @@ ViewController {
 
     FreeWaterHelpScreen {
         id: mainScreenHintPanel
+        property var isAttract: false
+        onIsAttractChanged: {
+            console.log(isAttract)
+            if(!isAttract){
+                jumpTimer.stop()
+            }else{
+                jumpTimer.start()
+            }
+        }
 
         Component.onCompleted: {
             state = "hidden"
+            storage.isFirstStart(function(isFirstStart){
+                isAttract = isFirstStart
+                storage.dropFirstStartFlag()
+            })
         }
 
         anchors.top: parent.bottom
@@ -134,6 +147,37 @@ ViewController {
             state = "hidden"
         }
 
+        Timer{
+            id:jumpTimer
+            interval: 3000
+            running: false
+            repeat: true
+            onTriggered: {
+                jumpAnimation.start()
+            }
+        }
+
+        SequentialAnimation{
+            id: jumpAnimation
+            PropertyAnimation{
+                target: mainScreenHintPanel
+                property:"anchors.topMargin"
+                from: -100 * ratio
+                to: -120 * ratio
+                easing.type: Easing.OutQuad
+                duration: 150
+            }
+            PropertyAnimation{
+                target: mainScreenHintPanel
+                property: "anchors.topMargin"
+                from: -120 * ratio
+                to: -100 * ratio
+                easing.amplitude: 2
+                easing.type: Easing.OutBounce
+                duration: 300
+            }
+        }
+
         states:[
             State{
                 name:"shown"
@@ -144,6 +188,10 @@ ViewController {
                 PropertyChanges {
                     target: mainScreenHintPanel
                     anchors.topMargin: -30 * ratio
+                }
+                PropertyChanges {
+                    target: mainScreenHintPanel
+                    isAttract: false
                 }
             },
             State{
@@ -156,23 +204,9 @@ ViewController {
                     target: mainScreenHintPanel
                     anchors.topMargin: -100 * ratio
                 }
-            },
-            State{
-                name:"attractingCharged"
                 PropertyChanges {
                     target: mainScreenHintPanel
-                    anchors.topMargin: -150 * ratio
-                }
-            },
-            State{
-                name:"attractingFall"
-                AnchorChanges{
-                    target:mainScreenHintPanel
-                    anchors.top: parent.bottom
-                }
-                PropertyChanges {
-                    target: mainScreenHintPanel
-                    anchors.topMargin: -100 * ratio
+                    isAttract: false
                 }
             }
         ]
