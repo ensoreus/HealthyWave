@@ -54,14 +54,12 @@ ViewController {
 
     Component.onCompleted: {
         createContextObjects()
-        imgPastePromo.checkState()
         storage.getAuthData(function(authdata){
             showBusyIndicator()
             Api.getBonus(authdata, function(response){
                 console.log(response)
                 bonusModel.addItems(response.result)
                 hideBusyIndicator()
-                imgPastePromo.checkState()
                 imgscroll.visible = bonusModel.count > 3
             }, function(failure){
                 imgscroll.visible= false
@@ -193,7 +191,6 @@ ViewController {
 
 
         Text{
-            property var error: ""
             id: lbAddPromo
             text:"Додати новий промо-код*"
             font.pointSize: 14
@@ -205,46 +202,12 @@ ViewController {
             anchors.leftMargin: parent.width * 0.1
             anchors.rightMargin: parent.width * 0.1
             anchors.right: parent.right
-            states:[
-                State{
-                    name:"addnew"
-                    PropertyChanges {
-                        target: lbAddPromo
-                        text:"Додати новий промо-код*"
-                    }
-                    PropertyChanges {
-                        target: lbAddPromo
-                        color: "#9B9B9B"
-                    }
-
-
-                },
-                State{
-                    name:"error"
-                    PropertyChanges {
-                        target:lbAddPromo
-                        color: "black"
-
-                    }
-                    PropertyChanges {
-                        target: lbAddPromo
-                        text: error
-                    }
-                }
-            ]
-
-            function showError(errorToShow){
-                error = errorToShow
-                state = "error"
-            }
-            function clearError(){
-                state = "addnew"
-            }
         }
 
 
         HWTextField{
             id:txAddPromo
+
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lbAddPromo.bottom
             anchors.topMargin: parent.height * 0.03
@@ -272,92 +235,36 @@ ViewController {
                 height: parent.height * 0.8
                 width: height
                 anchors.right: parent.right
-                Text{
-                    id: lbAdd
-                    anchors.fill: parent
-                    color:"white"
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    text:"Додати"
-                }
 
                 MouseArea{
                     id:btnPastePromo
                     anchors.fill: parent
                     onClicked: {
-                        lbAddPromo.clearError()
-                        if(imgPastePromo.state === "pasting"){
-                            txAddPromo.text = clipboard.text()
-                        }else{
+                        txMessages.text = ""
                             storage.getAuthData(function(authdata){
                                 Api.addPromoCode(txAddPromo.text, authdata, function(response){
-                                    lbAddPromo.showError("Промокод додано")
+                                    txMessages.text = "Промокод додано"
                                 }, function(failure){
-                                    lbAddPromo.showError(failure.error)
+                                    txMessages.text = failure.error
                                 })
                             })
-                        }
                     }
                 }
-
-                function checkState(){
-                    if (txAddPromo.text.length > 0){
-                        imgPastePromo.state = "commiting"
-                    }else{
-                        var vald = clipboard.text().length > 0&& clipboard.text().match(/^\w*$/)
-                        imgPastePromo.state = (vald) ? "pasting" : "hidden"
-                    }
-                }
-
-                states:[
-                    State {
-                        name: "pasting"
-                        PropertyChanges {
-                            target: imgPastePromo
-                            source: "qrc:/commons/img-copy.png"
-                        }
-                        PropertyChanges {
-                            target: imgPastePromo
-                            width: parent.height * 0.8
-                        }
-                        PropertyChanges {
-                            target: lbAdd
-                            visible: false
-                        }
-                        PropertyChanges {
-                            target: imgPastePromo
-                            visible: true
-                        }
-                    },
-                    State{
-                        name: "commiting"
-                        PropertyChanges {
-                            target: imgPastePromo
-                            source: "qrc:/commons/btn-add-green.png"
-                        }
-                        PropertyChanges {
-                            target: imgPastePromo
-                            visible: true
-                        }
-                        PropertyChanges {
-                            target: imgPastePromo
-                            width: parent.height * 2
-                        }
-                        PropertyChanges {
-                            target: lbAdd
-                            visible: true
-                        }
-                    },
-                    State{
-                        name:"hidden"
-                        PropertyChanges {
-                            target: imgPastePromo
-                            visible: false
-                        }
-                    }
-
-                ]
             }
+        }
+
+        Text {
+            id: txMessages
+            property var error: ""
+            text: qsTr("Text")
+            color: "red"
+            anchors.right: txAddPromo.right
+            anchors.rightMargin: 0
+            anchors.left: txAddPromo.left
+            anchors.leftMargin: 0
+            anchors.top: txAddPromo.bottom
+            anchors.topMargin: 3
+            font.pointSize: 12
         }
 
     }
