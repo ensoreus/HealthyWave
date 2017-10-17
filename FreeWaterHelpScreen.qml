@@ -4,20 +4,14 @@ import com.ensoreus.Clipboard 1.0
 import com.ensoreus.hw.sharepicker 1.0
 import "qrc:/"
 
-NavigationController {
+Rectangle{
+
+    signal showUp
+    signal hideDown
 
     id: helpScreenContainer
     x: 0
-    width: parent.width
-    prefersStatusBarHidden: false
-    color: "#2bb0a4"
-    navigationBar.color: "#2bb0a4"
-    navigationBar.height: 60 * ratio
-    initialViewController: helpScreen
-    navigationBar.titleAttributes: NavigationBarTitleAttributes{
-        textColor: "white"
-        imageSource: "qrc:/commons/logo-hw.png"
-    }
+    width: 300
 
     Clipboard{
         id: clipboard
@@ -33,6 +27,11 @@ NavigationController {
 
     FreeWaterHelpScreenForm {
         id: helpScreen
+        //anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        //anchors.bottom: parent.bottom
+
         Component.onCompleted: {
                 storage.getPromoCode(function(promocode){
                     promoCodeText.text = promocode
@@ -40,16 +39,29 @@ NavigationController {
             state = "promoCodeGen"
         }
 
-        property var navigationItem: NavigationItem{
-            centerBarTitle:""
-            centerBarImage:"qrc:/commons/logo-hw.png"
-            rightBarButtonItems: VisualItemModel{
-                BarButtonItem{
-                    image:"qrc:/commons/btn-arrow-back.png"
-                    imageSourceSize.width:35
-                    imageSourceSize.height:35
-                    onClicked:{
-                        helpScreenContainer.dismissViewController(true);
+        MouseArea{
+            id: swipeArea
+            anchors.fill: parent
+            property var oldY: -100 * ratio
+            property var isDownDir: false
+            onMouseYChanged: {
+                console.log("swipe up:" + mouseY +" m:"+helpScreenContainer.anchors.topMargin)
+                helpScreenContainer.anchors.topMargin += mouseY
+                isDownDir = oldY > mouseY
+                oldY = mouseY
+            }
+            onReleased: {
+                if(isDownDir){
+                    if(helpScreenContainer.anchors.topMargin < height * 0.3){
+                        helpScreenContainer.showUp()
+                    }else{
+                        helpScreenContainer.hideDown()
+                    }
+                }else{
+                    if(helpScreenContainer.anchors.topMargin > height * 0.3){
+                        helpScreenContainer.showUp()
+                    }else{
+                        helpScreenContainer.hideDown()
                     }
                 }
             }
@@ -118,6 +130,7 @@ NavigationController {
                     easing.type: Easing.InOutQuad
                 }
             },
+
             Transition {
                 from: "howItWorks"
                 to: "promoCodeGen"

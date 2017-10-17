@@ -15,15 +15,9 @@ Rectangle {
     property alias btnCopyCodeLabel: btnCopyCodeLabel
     property alias promoCodeText: promoCodeText
 
-//    property var navigationItem: NavigationItem{
-//        centerBarImage: "qrc:/commons/logo-hw.png"
-//        rightBarButtonItem: BarButtonItem{
-//            image:"qrc:/commons/btn-cross.png"
-//        }
-//    }
-
-    MainScreenHintPanel{
+    MainScreenHintPanel {
         id: hintPanel
+        height: 100
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
@@ -88,7 +82,6 @@ Rectangle {
             anchors.left: parent.left
             anchors.leftMargin: 36 * ratio
 
-
             Text {
                 id: btnCopyCodeLabel
                 width: 60 * ratio
@@ -130,7 +123,6 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 16
         }
-
 
         Text {
             id: lbHowItWorks
@@ -268,6 +260,4 @@ Rectangle {
             }
         }
     ]
-
-
 }

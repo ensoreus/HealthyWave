@@ -112,15 +112,90 @@ ViewController {
 
     FreeWaterHelpScreen {
         id: mainScreenHintPanel
+
+        Component.onCompleted: {
+            state = "hidden"
+        }
+
         anchors.top: parent.bottom
         anchors.topMargin: -100 * ratio
         anchors.right: parent.right
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
-//        onShowHideHintPanel:{
-//            mainScreen.present("qrc:/mainScreen/FreeWaterHelpScreen.qml", {}, true)
-//        }
+
+        onShowUp: {
+            console.log("show up")
+            state = "shown"
+        }
+
+        onHideDown: {
+            console.log("hidden down")
+            state = "hidden"
+        }
+
+        states:[
+            State{
+                name:"shown"
+                AnchorChanges{
+                    target:mainScreenHintPanel
+                    anchors.top: parent.top
+                }
+                PropertyChanges {
+                    target: mainScreenHintPanel
+                    anchors.topMargin: -30 * ratio
+                }
+            },
+            State{
+                name:"hidden"
+                AnchorChanges{
+                    target:mainScreenHintPanel
+                    anchors.top: parent.bottom
+                }
+                PropertyChanges {
+                    target: mainScreenHintPanel
+                    anchors.topMargin: -100 * ratio
+                }
+            },
+            State{
+                name:"attractingCharged"
+                PropertyChanges {
+                    target: mainScreenHintPanel
+                    anchors.topMargin: -150 * ratio
+                }
+            },
+            State{
+                name:"attractingFall"
+                AnchorChanges{
+                    target:mainScreenHintPanel
+                    anchors.top: parent.bottom
+                }
+                PropertyChanges {
+                    target: mainScreenHintPanel
+                    anchors.topMargin: -100 * ratio
+                }
+            }
+        ]
+        transitions: [
+            Transition {
+                from: "shown"
+                to: "hidden"
+                SmoothedAnimation{
+                    duration: 200
+                    maximumEasingTime: 300
+                    reversingMode: SmoothedAnimation.Immediate
+                }
+            },
+            Transition {
+                from: "hidden"
+                to: "shown"
+                SmoothedAnimation{
+                    duration: 100
+                    maximumEasingTime: 200
+                    reversingMode: SmoothedAnimation.Immediate
+                }
+            }
+        ]
     }
 
     Rectangle {
