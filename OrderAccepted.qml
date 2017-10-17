@@ -18,8 +18,10 @@ Item {
         id: image
         x: 208
         y: 171
-        width: parent.width * 0.84
-        height: parent.width * 0.78
+//        width: parent.width * 0.84
+//        height: parent.width * 0.78
+        width: parent.width * 0.94
+        height: parent.width * 0.94
         fillMode: Image.PreserveAspectFit
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
@@ -80,7 +82,7 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
                         color: "white"
-                        font.pointSize:14
+                        font.pointSize:15
                         font.bold: true
                     }
 
@@ -95,7 +97,7 @@ Item {
                         anchors.topMargin: 0
                         horizontalAlignment: Text.AlignHCenter
                         color: "white"
-                        font.pointSize:15
+                        font.pointSize:16
                         font.bold: true
                     }
 
@@ -107,6 +109,7 @@ Item {
                         color: "#ffffff"
                         text: qsTr("Бажаєте, щоб наш спеціаліст передзвонив \nВам для підтвердження замовлення?")
                         fontSizeMode: Text.HorizontalFit
+                        font.pointSize: 15
                         wrapMode: Text.WordWrap
                         horizontalAlignment: Text.AlignHCenter
                         anchors.topMargin: parent.height * 0.05
