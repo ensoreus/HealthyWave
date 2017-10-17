@@ -157,6 +157,8 @@ Tumbler {
                 opacity: 1.0
                 font.pointSize: 15
                 font.family: "NS UI Text"
+                font.bold: styleData.activeFocus
+                font.styleName: Font.Bold
                 renderType: Text.QtRendering
                 anchors.centerIn: parent
 
@@ -187,6 +189,8 @@ Tumbler {
                         opacity: control.enabled ? 1 : 0.9
                         text: styleData.value
                         font.pointSize: 15
+                        font.bold: styleData.activeFocus
+                        font.styleName: Font.Bold
                         font.family: "NS UI Text"
                         renderType:  Text.QtRendering
                         horizontalAlignment: Text.AlignHCenter
