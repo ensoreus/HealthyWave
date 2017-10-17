@@ -213,19 +213,9 @@ ViewController {
             anchors.topMargin: parent.height * 0.03
             width: parent.width * 0.7
             height: 30 * ratio
-            Component.onCompleted: {
-                imgPastePromo.state = "pasting"
-            }
 
             onWillStartAnimation: {
                 txAddPromo.forceActiveFocus()
-            }
-            onTextChanged: {
-                if (text.length > 0){
-                    imgPastePromo.state = "commiting"
-                }else{
-                    imgPastePromo.state = "pasting"
-                }
             }
 
             Image{
@@ -241,13 +231,13 @@ ViewController {
                     anchors.fill: parent
                     onClicked: {
                         txMessages.text = ""
-                            storage.getAuthData(function(authdata){
-                                Api.addPromoCode(txAddPromo.text, authdata, function(response){
-                                    txMessages.text = "Промокод додано"
-                                }, function(failure){
-                                    txMessages.text = failure.error
-                                })
+                        storage.getAuthData(function(authdata){
+                            Api.addPromoCode(txAddPromo.text, authdata, function(response){
+                                txMessages.text = "Промокод додано"
+                            }, function(failure){
+                                txMessages.text = failure.error
                             })
+                        })
                     }
                 }
             }
@@ -256,7 +246,7 @@ ViewController {
         Text {
             id: txMessages
             property var error: ""
-            text: qsTr("Text")
+            text: ""
             color: "red"
             anchors.right: txAddPromo.right
             anchors.rightMargin: 0
