@@ -93,7 +93,7 @@ ViewController{
                 anchors.horizontalCenter: parent.horizontalCenter
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 font.pointSize: 18
                 wrapMode: Text.WordWrap
                 height: parent.height * 0.2

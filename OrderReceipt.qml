@@ -71,6 +71,7 @@ ViewController {
                 text: qsTr("Вода:")
                 font.weight: Font.Thin
                 font.pointSize: 13
+                font.family: "NS UI Text"
                 anchors.topMargin: parent.height * 0.05
                 anchors.top: parent.top
                 anchors.right: parent.horizontalCenter
@@ -83,6 +84,7 @@ ViewController {
                 id: lbEmptyBottle
                 color: "#4a4a4a"
                 text: qsTr("Порожніх бутлів:")
+                font.family: "NS UI Text"
                 font.weight: Font.Thin
                 font.pointSize: 13
                 anchors.topMargin: parent.width * 0.01
@@ -97,6 +99,7 @@ ViewController {
                 id: lbFee
                 color: "#4a4a4a"
                 text: qsTr("Застава за бутлі:")
+                font.family: "NS UI Text"
                 font.weight: Font.Light
                 font.pointSize: 13
                 anchors.topMargin: parent.height * 0.01
@@ -111,6 +114,7 @@ ViewController {
                 id: lbNoDiscount
                 color: "#4a4a4a"
                 text: qsTr("Сума без знижки:")
+                font.family: "NS UI Text"
                 font.weight: Font.Thin
                 font.pointSize: 13
                 anchors.topMargin: parent.height * 0.01
@@ -124,6 +128,7 @@ ViewController {
             Text {
                 id: lbWithDiscount
                 color: "#4a4a4a"
+                font.family: "NS UI Text"
                 text: qsTr("Сума зi знижкою:")
                 font.weight: Font.Thin
                 font.pointSize: 13
@@ -148,6 +153,7 @@ ViewController {
             Text {
                 id: lbTotal
                 color: "#4a4a4a"
+                font.family: "NS UI Text"
                 text: qsTr("Сума замовлення:")
                 font.weight: Font.Thin
                 font.pointSize: 13
@@ -175,6 +181,7 @@ ViewController {
             Text {
                 id: txWater
                 text: qsTr("Text")
+                font.family: "NS UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 14
                 verticalAlignment: Text.AlignVCenter
@@ -189,6 +196,7 @@ ViewController {
             Text {
                 id: txEmpty
                 text: qsTr("Text")
+                font.family: "NS UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 14
                 verticalAlignment: Text.AlignVCenter
@@ -203,6 +211,7 @@ ViewController {
             Text {
                 id: txFee
                 text: qsTr("Text")
+                font.family: "NS UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 14
                 verticalAlignment: Text.AlignVCenter
@@ -245,6 +254,7 @@ ViewController {
             Text {
                 id: txTotal
                 text: qsTr("Text")
+                font.family: "NS UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 14
                 anchors.rightMargin: 51
@@ -260,6 +270,7 @@ ViewController {
                 id: lbAddress
                 color: "#4a4a4a"
                 text: qsTr("Адреса:")
+                font.family: "NS UI Text"
                 font.pointSize: 13
                 font.weight: Font.Thin
                 anchors.right: lbTotal.right
@@ -274,6 +285,7 @@ ViewController {
                 id: txAddress
                 height: 15
                 text: qsTr("Text")
+                font.family: "NS UI Text"
                 anchors.topMargin: parent.height * 0.01
                 anchors.top: lbAddress.bottom
                 font.weight: Font.DemiBold
@@ -289,6 +301,7 @@ ViewController {
                 height: 15
                 color: "#4a4a4a"
                 text: qsTr("Час доставки:")
+                font.family: "NS UI Text"
                 anchors.topMargin: parent.height * 0.01
                 anchors.top: txAddress.bottom
                 font.weight: Font.Thin
@@ -303,6 +316,7 @@ ViewController {
                 id: txDeliveryTime
                 height: 15
                 text: qsTr("Text")
+                font.family: "NS UI Text"
                 anchors.topMargin: parent.height * 0.01
                 anchors.top: lbDeliveryTime.bottom
                 anchors.right: rectangle1.right
@@ -317,6 +331,7 @@ ViewController {
                 id: lbComment
                 color: "#4a4a4a"
                 text: qsTr("Коментар:")
+                font.family: "NS UI Text"
                 font.weight: Font.Thin
                 font.pointSize: 13
                 anchors.topMargin: parent.height * 0.01
@@ -330,6 +345,7 @@ ViewController {
             Text {
                 id: txComment
                 text: qsTr("")
+                font.family: "NS UI Text"
                 anchors.topMargin: parent.height * 0.01
                 anchors.top: lbComment.bottom
                 anchors.right: rectangle1.right
@@ -344,6 +360,7 @@ ViewController {
                 id: lbPaymentType
                 color: "#4a4a4a"
                 text: qsTr("Оплата:")
+                font.family: "NS UI Text"
                 font.weight: Font.Thin
                 font.pointSize: 13
                 anchors.topMargin: parent.height * 0.01
@@ -357,6 +374,7 @@ ViewController {
             Text {
                 id: txPaymentType
                 text: qsTr("Text")
+                font.family: "NS UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 13
                 anchors.topMargin: parent.height * 0.01
