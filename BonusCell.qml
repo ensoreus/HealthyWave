@@ -2,7 +2,7 @@ import QtQuick 2.0
 import "qrc:/controls"
 
 Item {
-    height: 100 * ratio
+    height: 60 * ratio
     property alias lbMainTitle: lbMainTitle.text
     property alias lbComment: lbComment.text
     property alias lbActiveTill: lbActiveTill.text
@@ -29,7 +29,7 @@ Item {
         Text {
             id: lbComment
             text: qsTr("")
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.05
             anchors.top: lbMainTitle.bottom
             anchors.right: lbMainTitle.right
             anchors.rightMargin: 0
@@ -42,8 +42,9 @@ Item {
 
         Text {
             id: lbActiveTill
-            y: 65
             text: qsTr("")
+            anchors.topMargin: parent.height * 0.05
+            anchors.top: lbComment.bottom
             anchors.right: lbComment.right
             anchors.rightMargin: 0
             anchors.left: lbComment.left
@@ -57,7 +58,10 @@ Item {
             id: cbUse
             x: 515
             y: 67
-            width: parent.height * 0.3
+            width: parent.height * 0.5
+            indicatorWidth: 20 * ratio
+            indicatorHeight: 20 * ratio
+            markSize: 22
             height: width
             text: ""
             checked: false

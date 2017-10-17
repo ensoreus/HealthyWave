@@ -3,10 +3,15 @@ import QtQuick.Controls 2.1
 
 CheckBox {
     id: control
+    property alias indicatorWidth: indicatorRect.width
+    property alias indicatorHeight: indicatorRect.height
+    property alias markSize: checkmark.font.pointSize
+
        text: qsTr("CheckBox")
        checked: true
 
        indicator: Rectangle {
+           id: indicatorRect
            implicitWidth: 15 * ratio
            implicitHeight: 15 * ratio
            x: control.leftPadding
@@ -17,6 +22,7 @@ CheckBox {
 
 
            Text{
+               id: checkmark
             anchors.fill: parent
             anchors.bottomMargin: 1 * ratio
             anchors.leftMargin: 1 * ratio
