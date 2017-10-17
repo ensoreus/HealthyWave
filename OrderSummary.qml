@@ -91,7 +91,12 @@ ViewController {
     }
 
     function feeForBottlesLine(){
-        return (fullb - emptyb) > 0 ? (fullb - emptyb) : 0  + " бут.  x 130 грн."
+        if((fullb - emptyb) > 0){
+            lbBottlesFee.visible = true
+            return (fullb - emptyb) + " бут.  x " + context.prices.prices["bottle"] + " грн."
+        }
+        lbBottlesFee.visible = false
+        return ""
     }
 
     function isPumpLine(){
@@ -288,7 +293,7 @@ ViewController {
                     text: qsTr("Вода:")
                     font.weight: Font.Thin
                     font.pointSize: 14
-                    font.family: "SF UI Text"
+                    font.family: "NS UI Text"
                     anchors.leftMargin: parent.width * 0.1
                     anchors.left: parent.left
                     anchors.topMargin: 30 * ratio
@@ -364,6 +369,7 @@ ViewController {
                     anchors.leftMargin: 0
                     anchors.topMargin: 10* ratio
                     anchors.top: lbBottlesFee.bottom
+                    visible: cbPump.checked
                 }
 
                 Text {
@@ -386,7 +392,7 @@ ViewController {
                     anchors.topMargin: 0
                     font.weight: Font.DemiBold
                     font.pointSize: 14
-                    font.family: "SF UI Text"
+                    font.family: "NS UI Text"
                 }
 
                 Text {
@@ -397,7 +403,7 @@ ViewController {
                     anchors.leftMargin: 15 * ratio
                     anchors.top: lbFreeWater.top
                     anchors.topMargin: 0
-                    font.family: "SF UI Text"
+                    font.family: "NS UI Text"
                     font.weight: Font.DemiBold
                     font.pointSize: 14
                 }
@@ -410,7 +416,7 @@ ViewController {
                     anchors.topMargin: 0
                     anchors.left: parent.horizontalCenter
                     anchors.leftMargin: 15 * ratio
-                    font.family: "SF UI Text"
+                    font.family: "NS UI Text"
                     font.weight: Font.DemiBold
                     font.pointSize: 14
                 }
@@ -423,7 +429,7 @@ ViewController {
                     anchors.leftMargin: 15 * ratio
                     anchors.top: lbBottlesFee.top
                     anchors.topMargin: 0
-                    font.family: "SF UI Text"
+                    font.family: "NS UI Text"
                     font.weight: Font.DemiBold
                     font.pointSize: 14
                 }
@@ -436,7 +442,7 @@ ViewController {
                     anchors.leftMargin: 15 * ratio
                     anchors.top: lbEmptyBottles.top
                     anchors.topMargin: 0
-                    font.family: "SF UI Text"
+                    font.family: "NS UI Text"
                     font.weight: Font.DemiBold
                     font.pointSize: 14
                 }
@@ -452,6 +458,7 @@ ViewController {
                     font.family: "SF UI Text"
                     font.weight: Font.DemiBold
                     font.pointSize: 14
+                    visible: cbPump.checked
                 }
 
                 Text {
@@ -462,7 +469,7 @@ ViewController {
                     anchors.leftMargin: 15 * ratio
                     anchors.top: lbSummaryOfOrder.top
                     anchors.topMargin: 0
-                    font.family: "SF UI Text"
+                    font.family: "NS UI Text"
                     font.weight: Font.DemiBold
                     font.pointSize: 18
                 }

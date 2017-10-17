@@ -136,6 +136,7 @@ ViewController{
                         var emptyBottles = 0
                         var fee = 0
                         var fullBottels = 0
+
                         for(var i in goods){
                             var gitem = goods[i]
                             if(gitem.Good === "Вода питна Хвиля Здоров'я"){

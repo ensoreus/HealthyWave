@@ -417,8 +417,8 @@ ViewController {
         Text {
             id: txBottlesEmpty
             x: 317
-            text: qsTr("К-ть порожних бутлів в замовленні")
-            anchors.topMargin: parent.height * 0.05
+            text: qsTr("К-ть порожних бутлів в замовленні*")
+            anchors.topMargin: parent.height * 0.06
             font.family: "NS UI Text"
             font.weight: Font.Thin
             font.pointSize: 15
@@ -449,12 +449,12 @@ ViewController {
             height: parent.height * 0.08
             text: qsTr("*Якщо у Вас немає порожніх бутлів на обмін, \nВам необхідно внести заставу за бутель")
             font.pointSize: 11
-            color:"#505050"
+            color: "#9B9B9B"
             font.weight: Font.ExtraLight
             font.family: "NS UI Text"
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
-            anchors.topMargin: parent.height * 0.03
+            anchors.topMargin: parent.height * 0.04
             anchors.top: stEmptyBottles.bottom
             anchors.horizontalCenter: parent.horizontalCenter
         }

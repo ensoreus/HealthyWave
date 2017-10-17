@@ -149,6 +149,7 @@ ViewController {
                 var rbAddNew = createRadioButton(onCheckedChanged)
                 rbAddNew.checked = false
                 rbAddNew.fontPointSize = 15
+                rbAddNew.anchors.topMargin = 30 * ratio
                 rbAddNew.text = "Додати нову картку"
                 dynamicElements.push(rbAddNew)
             }

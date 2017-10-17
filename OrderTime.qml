@@ -74,23 +74,43 @@ ViewController {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: parent.height * 0.07
             anchors.top: txHint.bottom
+            Timer{
+                id: searchTimer
+
+
+                interval: 5000
+                repeat: false
+                running: false
+
+
+            }
+
             onButtonClick: {
                 btnSearch.visible = false
                 txtChooseAnother.visible = false
                 searchTimeWaiter.showError = false
                 content.startSearchAnimation()
+
                 storage.getAuthData(function(authData){
                     Api.searchNearestTime(context.address, authData, function(result){
                         console.log(result)
-                        searchTimeWaiter.timeLabel = result.result
-                        searchTimeWaiter.showError = false
-                        content.stopSearchAnimation()
-                        context.deliveryTime.fromHour = rightNow()
-                        context.deliveryTime.toHour = result.result
+                        searchTimer.onTriggered.connect(function delayResponse(result){
+                            searchTimeWaiter.timeLabel = result.result
+                            searchTimeWaiter.showError = false
+                            content.stopSearchAnimation()
+                            context.deliveryTime.fromHour = rightNow()
+                            context.deliveryTime.toHour = result.result
+                            txHint.text = "Найближчий час доставки
+за Вашою адресою"
+                        })
+                        searchTimer.start()
                     }, function(error){
-                        searchTimeWaiter.showError = true
                         console.log(error)
-                        content.stopSearchAnimation()
+                        searchTimer.onTriggered.connect(function delayError(failure){
+                            searchTimeWaiter.showError = true
+                            content.stopSearchAnimation()
+                        })
+                        searchTimer.start()
                     })
                 })
             }

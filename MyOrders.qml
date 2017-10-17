@@ -22,14 +22,14 @@ MyOrdersForm {
             tfPaymentType.text = order.paymentType
             tfDate.text = order.deliveryDay
             tfEmptyBottles.text = order.emptyBottles + " шт."
-            tfWater.text = (order.fullBottles + (order.fullBottle > 1) ? " 45" : " 60") + " грн."
+            tfWater.text =  order.fullBottles + " x " + order.waterPrice + " грн."
             tfComments.text = order.comment
-            var fee = order.fullBottles - order.emptyBottles
-            tfRentedBottles.text = ((fee >= 0) ? fee : 0 )+ " x 130 грн."
+            tfRentedBottles.text = order.emptyBottles + " x " + order.bottlesFee + " грн."
+            tfRentedBottles.visible = order.emptyBottles > 0
         }
         storage.getAvatarLocally(function(url){
                if(url != "" && url != null){
-                   hWAvatar.source = SecurityCore.tempDir() + "/"+url
+                   hWAvatar.source = SecurityCore.tempDir() + "/" + url
                }
         })
     }
