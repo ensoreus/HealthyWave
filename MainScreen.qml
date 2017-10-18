@@ -73,6 +73,15 @@ ViewController {
             }
         }
     }
+    onViewDidAppear: {
+        mainScreenHintPanel.state = "hidden"
+        console.log("on completed")
+        storage.isFirstStart(function(isFirstStart){
+            console.log("first start:"+isFirstStart)
+            mainScreenHintPanel.isAttract = isFirstStart
+            storage.dropFirstStartFlag()
+        })
+    }
 
     Rectangle {
         id: item1
@@ -123,11 +132,7 @@ ViewController {
         }
 
         Component.onCompleted: {
-            state = "hidden"
-            storage.isFirstStart(function(isFirstStart){
-                isAttract = isFirstStart
-                storage.dropFirstStartFlag()
-            })
+
         }
 
         anchors.top: parent.bottom

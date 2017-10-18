@@ -48,8 +48,8 @@ Rectangle {
         Image {
             id: image
             x: 150 * ratio
-            width: parent.width * 0.5
-            height: parent.width * 0.5
+            width: parent.width * 0.4
+            height: parent.width * 0.4
             fillMode: Image.PreserveAspectFit
             anchors.top: mainLabel.bottom
             anchors.topMargin: 20 * ratio
@@ -195,8 +195,8 @@ Rectangle {
             }
             PropertyChanges {
                 target: image
-                width: parent.width * 0.5
-                height: parent.width * 0.5
+                width: parent.width * 0.4
+                height: parent.width * 0.4
             }
 
             PropertyChanges {

@@ -52,8 +52,8 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('drop table if exists userData');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT, isFirstStart INTEGER)')
-            var sqlstr = "insert into userData ( phone, name, email, promocode ) values ('" + phone + "', '"+name+"', '"+email+"', '"+promocode+"')";
+            tx.executeSql('CREATE TABLE userData (phone TEXT, name TEXT, email TEXT, promocode TEXT, avatar TEXT, isFirstStart INTEGER)')
+            var sqlstr = "insert into userData ( phone, name, email, promocode, isFirstStart ) values ('" + phone + "', '"+name+"', '"+email+"', '"+promocode+"', 1)";
             console.log(sqlstr)
             var result = tx.executeSql(sqlstr);
         });

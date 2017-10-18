@@ -164,7 +164,7 @@ Rectangle {
             prefersStatusBarHidden: false
             color: "#2bb0a4"
             navigationBar.color: "#2bb0a4"
-            navigationBar.height: 65 * ratio
+            navigationBar.height: 80 * ratio
             navigationBar.titleAttributes: NavigationBarTitleAttributes{
                 textColor: "white"
                 imageSource: "qrc:/commons/logo-hw.png"

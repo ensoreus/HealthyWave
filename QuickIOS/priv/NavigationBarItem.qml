@@ -44,7 +44,7 @@ Rectangle {
     anchors.horizontalCenter: parent.horizontalCenter
 
     color: "#000000"
-    font.pointSize: 18
+    font.pointSize: 20
     scale: paintedWidth > width ? (width / paintedWidth) : 1
   }
 
@@ -72,8 +72,8 @@ Rectangle {
       anchors.bottom: parent.bottom
       anchors.bottomMargin: 2
       anchors.horizontalCenter: parent.horizontalCenter
-      width: parent.width * 0.3
-      height: 40 * ratio
+      width: parent.width * 0.4
+      height: 80 * ratio
   }
 
   Item {
