@@ -30,7 +30,7 @@ ViewController {
             height: parent.height * 0.08
             anchors.top: tfCity.bottom
             anchors.topMargin: 2
-            font.pointSize: 13
+            font.pointSize: 15
             font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
@@ -43,7 +43,7 @@ ViewController {
             height: parent.height * 0.08
             anchors.top: tfStreet.bottom
             anchors.topMargin: 2
-            font.pointSize: 13
+            font.pointSize: 15
             font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
@@ -56,7 +56,7 @@ ViewController {
             height: parent.height * 0.08
             anchors.top: tfHouse.bottom
             anchors.topMargin: 2
-            font.pointSize: 13
+            font.pointSize: 15
             font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
@@ -69,7 +69,7 @@ ViewController {
             height: parent.height * 0.08
             anchors.top: tfApt.bottom
             anchors.topMargin: 2
-            font.pointSize: 13
+            font.pointSize: 15
             font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
@@ -82,7 +82,7 @@ ViewController {
             height: parent.height * 0.08
             anchors.top: tfEntrance.bottom
             anchors.topMargin: 2
-            font.pointSize: 13
+            font.pointSize: 15
             font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
@@ -95,7 +95,7 @@ ViewController {
             height: parent.height * 0.08
             anchors.top: tfDoorCode.bottom
             anchors.topMargin: 2
-            font.pointSize: 13
+            font.pointSize: 15
             font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
@@ -146,7 +146,7 @@ ViewController {
             anchors.topMargin: parent.height * 0.05
             placeholderText: "Місто"
             anchors.top: navigationBar.bottom
-            font.pointSize: 13
+            font.pointSize: 15
             font.family: "NS UI Text"
             anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
