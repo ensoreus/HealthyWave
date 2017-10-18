@@ -7,12 +7,11 @@ Page {
     id: item1
     width: 400
     height: 400
+    property alias txMessage: txMessage
+    property alias btnAddPromo: btnAddPromo
     property alias btnNext: btnNext
     property alias promoCodeField: promoCodeField
     property alias waiterPanel: waiterPanel
-    Component.onCompleted: {
-        waiterPanel.visible = false
-    }
 
     Rectangle {
         id: rectangle
@@ -36,13 +35,46 @@ Page {
 
         Controls.HWTextField {
             id: promoCodeField
-            height:  40 * ratio
+            height: 40 * ratio
             anchors.topMargin: 10 * ratio
             anchors.top: text1.bottom
             anchors.right: text1.right
             anchors.rightMargin: 0
             anchors.left: text1.left
             anchors.leftMargin: 0
+
+            Image {
+                id: imgAddPromo
+                x: 258
+                width: 39
+                fillMode: Image.PreserveAspectFit
+                anchors.right: parent.right
+                anchors.rightMargin: 3
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 3
+                anchors.top: parent.top
+                anchors.topMargin: 3
+                source: "qrc:/commons/img-copy.png"
+
+                MouseArea {
+                    id: btnAddPromo
+                    anchors.fill: parent
+                }
+            }
+        }
+
+        Text {
+            id: txMessage
+            text: qsTr("")
+            font.family: "NS UI Text"
+            anchors.bottom: btnNext.bottom
+            anchors.bottomMargin: 0
+            anchors.right: btnNext.left
+            anchors.rightMargin: 0
+            anchors.left: promoCodeField.left
+            anchors.leftMargin: 0
+            anchors.top: promoCodeField.bottom
+            anchors.topMargin: 3
         }
 
         Button {
@@ -60,6 +92,7 @@ Page {
                 anchors.fill: parent
             }
         }
+
         Text {
             id: text2
             x: 60

@@ -1,10 +1,16 @@
 import QtQuick 2.4
+import "qrc:/Api.js" as Api
+import "qrc:/"
 
 RegistrationPromoCodeForm {
     id:promoCodePage
     signal nextPage
     signal startEditData
     signal endEditData
+
+    Storage{
+        id: storage
+    }
 
     function presenterAnimationEnds(){
         promoCodeField.forceActiveFocus()
@@ -20,6 +26,8 @@ RegistrationPromoCodeForm {
 
     Component.onCompleted: {
         promoCodeField.inputMethodHints = Qt.ImhPreferNumbers
+        waiterPanel.visible = false
+        stopPropcessIndicator()
     }
 
     btnNext.onPressed: {

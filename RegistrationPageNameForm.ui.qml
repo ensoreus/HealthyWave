@@ -5,6 +5,7 @@ import "qrc:/controls"
 Page {
     width: 400
     height: 400
+    property alias waiterPanel: waiterPanel
     property alias btnNext: btnNext
     property alias nameField: nameField
 
@@ -71,6 +72,21 @@ Page {
                 id: btnGlyph
                 source: "btn-next.png"
                 anchors.fill: parent
+            }
+        }
+        Rectangle {
+            id: waiterPanel
+            opacity: 0.5
+            anchors.fill: parent
+
+            BusyIndicator {
+                id: busyIndicator
+                x: 170
+                width: parent.width * 0.2
+                height: parent.width * 0.2
+                anchors.topMargin: parent.height * 0.3
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
             }
         }
     }

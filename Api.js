@@ -73,7 +73,6 @@ function confirmPinCode(pin, phone, callback) {
     }
     xhr.open("GET", baseUrl + "confirmpincode?pincode=" + pin);
     xhr.send();
-    return xhr.status
 }
 
 function updateName(name, authdata, onSuccess, onFailure){

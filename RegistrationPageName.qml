@@ -10,7 +10,18 @@ RegistrationPageNameForm {
         nameField.forceActiveFocus()
     }
 
+    function startProcessIndicator(){
+        waiterPanel.visible = true
+    }
 
+    function stopPropcessIndicator(){
+        waiterPanel.visible = false
+    }
+
+
+    Component.onCompleted: {
+        stopPropcessIndicator()
+    }
 
     btnNext.onPressed: {
         if (nameField.acceptableInput){

@@ -108,25 +108,6 @@ Item {
 
             onNextPage: {
                 Qt.inputMethod.hide()
-                stackLayout.push(promoCodeEditPage)
-            }
-        }
-
-        RegistrationPromoCode{
-            id: promoCodeEditPage
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            x: 0
-            width: parent.width
-            onStartEditData: {
-                promoCodeEditPage.presenterAnimationEnds()
-            }
-            onEndEditData: {
-
-            }
-            onNextPage: {
-                Qt.inputMethod.hide()
-                item1.state = "default"
                 startProcessIndicator()
                 var nameEndPos = nameEditPage.nameField.text.lastIndexOf(" ");
                 var name = nameEditPage.nameField.text.slice(0, nameEndPos)
@@ -140,26 +121,41 @@ Item {
                     Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, ostype, function(response){
                         if(!response.error){
                             storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, response.promocode)
-                            if(promoCodeField.text.length > 3){
-                                Api.addPromoCode(promoCodeField.text, {secKey: secKey, phone: phoneEditPage.phoneField.text, token: token}, function(response){
-                                    //item1.state = "default"
-                                    stopPropcessIndicator()
-                                    Qt.inputMethod.hide()
-                                    stackLayout.push(congratsPage)
-                                }, function(failure){
-                                    stopPropcessIndicator()
-                                    stackLayout.push(congratsPage)
-                                })
-                            }else{
-                                stopPropcessIndicator()
-                                stackLayout.push(congratsPage)
-                            }
+                            stopPropcessIndicator()
+                            Qt.inputMethod.hide()
+                            stackLayout.push(promoCodeEditPage)
                         }else{
                             stopPropcessIndicator()
                         }
                     })
                 })
+            }
+        }
 
+        RegistrationPromoCode{
+            id: promoCodeEditPage
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            x: 0
+            width: parent.width
+            onStartEditData: {
+                promoCodeEditPage.presenterAnimationEnds()
+            }
+            btnAddPromo.onClicked: {
+                storage.getAuthData(function(authdata){
+                    Api.addPromoCode(promoCodeField.text, authdata, function(response){
+                        txMessage.text = response.result
+                        txMessage.color = "grey"
+                    },function(failure){
+                        txMessage.text = failure.error
+                        txMessage.color = "red"
+                    })
+                })
+            }
+            onNextPage: {
+                Qt.inputMethod.hide()
+                item1.state = "default"
+                stackLayout.push(congratsPage)
             }
         }
 
