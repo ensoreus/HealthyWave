@@ -5,7 +5,6 @@ import "qrc:/controls"
 Page {
     width: 400
     height: 400
-    property alias debugConsole: debugConsole
     property alias btnNext: btnNext
     property alias nameField: nameField
 
@@ -32,7 +31,7 @@ Page {
         HWTextField {
             id: nameField
             width: parent.width * 0.8
-            height:  40 * ratio
+            height: 40 * ratio
             anchors.topMargin: 10 * ratio
             anchors.top: label.bottom
             anchors.right: label.right
@@ -73,20 +72,6 @@ Page {
                 source: "btn-next.png"
                 anchors.fill: parent
             }
-        }
-
-        TextEdit {
-            id: debugConsole
-            height: parent.height * 0.4
-            text: qsTr("")
-            wrapMode: Text.WordWrap
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            anchors.left: parent.left
-            anchors.leftMargin: 0
-            anchors.top: btnNext.bottom
-            anchors.topMargin: 100
-            font.pointSize: 15
         }
     }
 }

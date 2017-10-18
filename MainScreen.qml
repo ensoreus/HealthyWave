@@ -131,10 +131,6 @@ ViewController {
             }
         }
 
-        Component.onCompleted: {
-
-        }
-
         anchors.top: parent.bottom
         anchors.topMargin: -100 * ratio
         anchors.right: parent.right
