@@ -54,6 +54,7 @@ ViewController {
 
     Component.onCompleted: {
         createContextObjects()
+        btnUseSelectedBonuses.enabled = false
         storage.getAuthData(function(authdata){
             showBusyIndicator()
             Api.getBonus(authdata, function(response){
@@ -67,10 +68,6 @@ ViewController {
                 console.log(failure)
             })
         })
-    }
-
-    onViewWillAppear: {
-
     }
 
     Rectangle {
@@ -97,10 +94,12 @@ ViewController {
                 cbUse.onCheckStateChanged: {
                     if (cbUse.checked) {
                         bonusesToUse.push(bonusModel.get(index))
+                        btnUseSelectedBonuses.enabled = true
                     } else {
                         bonusesToUse = bonusesToUse.filter( function(item){
                             return (item.PromoCode != PromoCode)
                         })
+                        btnUseSelectedBonuses.enabled = bonusesToUse.length > 0
                     }
                 }
 
