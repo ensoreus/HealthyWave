@@ -38,7 +38,7 @@ ViewController {
 
     onViewDidAppear:{
         fullb = context.fullb
-        context.pump = true
+        context.pump = false
         emptyb = context.emptyb
         updateSummary()
         getBonuses()
@@ -251,7 +251,7 @@ ViewController {
                 anchors.topMargin: 5 * ratio
                 anchors.top: bonusLst.bottom
                 anchors.rightMargin: parent.width * 0.02
-                checked: true
+                checked: false
                 anchors.right: parent.right
                 anchors.leftMargin: 30 * ratio
                 anchors.left: parent.left
@@ -455,7 +455,7 @@ ViewController {
                     anchors.leftMargin: 15 * ratio
                     anchors.top: lbPump.top
                     anchors.topMargin: 0
-                    font.family: "SF UI Text"
+                    font.family: "NS UI Text"
                     font.weight: Font.DemiBold
                     font.pointSize: 14
                     visible: cbPump.checked

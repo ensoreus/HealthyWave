@@ -448,7 +448,7 @@ ViewController {
             width: parent.width * 0.8
             height: parent.height * 0.08
             text: qsTr("*Якщо у Вас немає порожніх бутлів на обмін, \nВам необхідно внести заставу за бутель")
-            font.pointSize: 11
+            font.pointSize: 13
             color: "#9B9B9B"
             font.weight: Font.ExtraLight
             font.family: "NS UI Text"
