@@ -198,8 +198,7 @@ ViewController {
             color: "#9B9B9B"
             anchors.top: btnUseSelectedBonuses.bottom
             anchors.topMargin: parent.height * 0.03
-            anchors.left: parent.left
-            anchors.leftMargin: parent.width * 0.1
+            anchors.left: txAddPromo.left
             anchors.rightMargin: parent.width * 0.1
             anchors.right: parent.right
         }
@@ -212,12 +211,25 @@ ViewController {
             anchors.top: lbAddPromo.bottom
             anchors.topMargin: parent.height * 0.03
             width: parent.width * 0.7
-            height: 30 * ratio
+            height: 40 * ratio
 
             onWillStartAnimation: {
                 txAddPromo.forceActiveFocus()
             }
+            onAccepted: {
+                sendPromocode()
+            }
 
+            function sendPromocode(){
+                txMessages.text = ""
+                storage.getAuthData(function(authdata){
+                    Api.addPromoCode(txAddPromo.text, authdata, function(response){
+                        txMessages.text = "Промокод додано"
+                    }, function(failure){
+                        txMessages.text = failure.error
+                    })
+                })
+            }
             Image{
                 id: imgPastePromo
                 source: "qrc:/commons/img-copy.png"
@@ -230,14 +242,7 @@ ViewController {
                     id:btnPastePromo
                     anchors.fill: parent
                     onClicked: {
-                        txMessages.text = ""
-                        storage.getAuthData(function(authdata){
-                            Api.addPromoCode(txAddPromo.text, authdata, function(response){
-                                txMessages.text = "Промокод додано"
-                            }, function(failure){
-                                txMessages.text = failure.error
-                            })
-                        })
+                        txAddPromo.sendPromocode()
                     }
                 }
             }
