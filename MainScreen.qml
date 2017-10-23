@@ -19,7 +19,6 @@ ViewController {
 
     Component.onCompleted: {
         checkUnratedOrders.start()
-        bottomRatePanel.visible = true
     }
 
     function showCallButton(phonenum){

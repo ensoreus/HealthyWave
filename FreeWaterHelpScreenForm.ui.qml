@@ -3,6 +3,7 @@ import QuickIOS 0.1
 import "qrc:/controls" as Controls
 
 Rectangle {
+    id: root
     width: 400
     height: 400
     property alias btnCopyCode: btnCopyCode
@@ -48,8 +49,8 @@ Rectangle {
         Image {
             id: image
             x: 150 * ratio
-            width: parent.width * 0.4
-            height: parent.width * 0.4
+            width: parent.width * 0.3
+            height: parent.width * 0.3
             fillMode: Image.PreserveAspectFit
             anchors.top: mainLabel.bottom
             anchors.topMargin: 20 * ratio
@@ -62,7 +63,7 @@ Rectangle {
             color: "#9b9b9b"
             text: qsTr("Ваш промокод")
             anchors.top: mainText.bottom
-            anchors.topMargin: 15 * ratio
+            anchors.topMargin: 10 * ratio
             anchors.left: parent.left
             anchors.leftMargin: 30 * ratio
             font.weight: Font.Light
@@ -73,12 +74,12 @@ Rectangle {
         Controls.HWTextField {
             id: promoCodeText
             x: 35.8 * ratio
+            anchors.topMargin: 5 * ratio
             bottomPadding: 5.6
             anchors.right: parent.right
             anchors.rightMargin: 36 * ratio
             readOnly: true
             anchors.top: promoCodeLabel.bottom
-            anchors.topMargin: 7
             anchors.left: parent.left
             anchors.leftMargin: 36 * ratio
 
@@ -128,8 +129,9 @@ Rectangle {
             id: lbHowItWorks
             color: "#9012fe"
             text: qsTr("Як це працює?")
+            anchors.topMargin: parent.height * 0.07
+            anchors.bottomMargin: 20 * ratio
             anchors.top: promoCodeText.bottom
-            anchors.topMargin: 15 * ratio
             font.weight: Font.Light
             font.underline: true
             font.family: "NS UI Text"
@@ -148,11 +150,13 @@ Rectangle {
             x: 21 * ratio
             width: parent.width * 0.7
             height: 50 * ratio
+            anchors.topMargin: parent.height * 0.3
+            anchors.top: lbHowItWorks.bottom
+            anchors.bottomMargin: 20 * ratio
+            anchors.bottom: root.bottom
             labelHighlightColor: "#00AD9A"
             labelColor: "#000000"
             labelText: "ЗАПРОСИТИ"
-            anchors.top: lbHowItWorks.bottom
-            anchors.topMargin: 15 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
@@ -162,11 +166,13 @@ Rectangle {
             visible: false
             width: parent.width * 0.7
             height: btnInvite.height
+            anchors.topMargin: parent.height * 0.12
+            anchors.top: mainText.bottom
+            anchors.bottomMargin: 20 * ratio
+            anchors.bottom: root.bottom
             labelHighlightColor: "#00AD9A"
             labelColor: "#000000"
             labelText: "МІЙ ПРОМОКОД"
-            anchors.top: mainText.bottom
-            anchors.topMargin: 95 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             showGlyph: true
         }
@@ -195,8 +201,8 @@ Rectangle {
             }
             PropertyChanges {
                 target: image
-                width: parent.width * 0.4
-                height: parent.width * 0.4
+                width: parent.width * 0.3
+                height: parent.width * 0.3
             }
 
             PropertyChanges {
@@ -207,6 +213,25 @@ Rectangle {
             PropertyChanges {
                 target: btnBack
                 visible: false
+            }
+            PropertyChanges {
+                target: hintPanel
+                visible: true
+            }
+
+            PropertyChanges {
+                target: mainLabel
+                anchors.topMargin: parent.height * 0.05
+            }
+
+            PropertyChanges {
+                target: mainText
+                textFormat: Text.RichText
+                lineHeight: 1
+                height: 65 * ratio
+                text: qsTr("Відправ промо код свому другу і отримай безкоштовно 2 бутля води")
+                horizontalAlignment: Text.AlignHCenter
+                font.pointSize: 16
             }
         },
 
@@ -240,17 +265,28 @@ Rectangle {
             }
 
             PropertyChanges {
+                target: mainLabel
+                anchors.topMargin: 0
+            }
+
+            PropertyChanges {
                 target: mainText
-                height: parent.height * 0.35
+                height: parent.height * 0.9
                 font.family: "NS UI Text"
                 font.pointSize: 15
                 text: "Відправте своєму другу даний промокод і, після того як він зробить перше замовлення, Вам буде начислено 2 бутля води безкоштовно, які ви зможете використати у будь-який момент.<br> Коли Ваш друг робитиме перше замовлення, йому треба буде ввести цей промокод і він також отримає в подарунок 1 бутль води безкоштовно."
                 textFormat: Text.RichText
                 horizontalAlignment: Text.AlignLeft
+                lineHeight: 2
             }
 
             PropertyChanges {
                 target: btnInvite
+                visible: false
+            }
+
+            PropertyChanges {
+                target: hintPanel
                 visible: false
             }
 
