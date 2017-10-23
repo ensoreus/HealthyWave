@@ -14,6 +14,7 @@ QtObject {
     property string promocode
     property int needToCall: 0
     property var bonuses
+    property var freeWater: 0
     property TimeEntity deliveryTime: TimeEntity{
         day:""
         fromHour: ""

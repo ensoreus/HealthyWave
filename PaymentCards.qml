@@ -179,7 +179,7 @@ ViewController {
                 if(isAddNew){
                     navigationController.push("qrc:/cards/AddNewCard.qml")
                 }else{
-                    navigationController.push("qrc:/orders/OrdersAddress.qml",{"context":context})
+                    navigationController.push("qrc:/orders/OrderTime.qml",{"context":context})
                 }
             }
         }

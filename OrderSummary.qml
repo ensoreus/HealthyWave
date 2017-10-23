@@ -2,6 +2,7 @@ import QtQuick 2.8
 import QtQuick.Controls 2.1
 import QuickIOS 0.1
 import QtQuick.Window 2.2
+import QtQml.Models 2.3
 
 import "qrc:/controls"
 import "qrc:/commons"
@@ -21,28 +22,27 @@ ViewController {
         centerBarTitle:"Замовлення"
     }
 
+    onIsInitChanged: {
+        console.log("INIT changed:"+isInit)
+    }
+
     Storage{
         id:storage
     }
 
     Component.onCompleted: {
+        isInit = true
         if (typeof(context.bonuses) =="undefined"){
             context.bonuses = new Array(1)
         }
-    }
-
-    onViewWillAppear: {
-        isInit = false
-        layoutHeight()
-    }
-
-    onViewDidAppear:{
         fullb = context.fullb
         context.pump = false
         emptyb = context.emptyb
         updateSummary()
-        getBonuses()
         layoutHeight()
+        getBonuses()
+
+
     }
 
     function updateSummary(){
@@ -51,20 +51,21 @@ ViewController {
         txFreeWater.text = freeBottleLine()
         txBottlesFee.text = feeForBottlesLine()
         txPump.text = isPumpLine()
-        txTotalBottles.text =context.fullb + 1 + " бут."
+        txTotalBottles.text = context.fullb + " бут."
         txSummaryOfOrder.text = totalLine()
     }
 
     function fullBottlesLine(){
         var price = calcFullBottles()
-        return fullb + " бут.  x " + price + " грн."
+        return (fullb - context.freeWater) + " бут.  x " + price + " грн."
     }
 
     function calcFullBottles(){
         var price = 0
-        if (fullb < 2){
+        var payedFullBottles = fullb - context.freeWater
+        if (payedFullBottles < 2){
             price = context.prices.prices["price_1"]
-        }else if (fullb >= 2 && fullb < 5){
+        }else if (payedFullBottles >= 2 && payedFullBottles < 5){
             price = context.prices.prices["price_2"]
         }else{
             price = context.prices.prices["price_5"]
@@ -73,16 +74,16 @@ ViewController {
     }
 
     function freeBottleLine(){
-        return "1 бут. x 0 грн."
+        return context.freeWater + " бут. x 0 грн."
     }
 
     function calcEmptyBottlesFee(){
-        var price = (fullb - emptyb) * 130
+        var price = (fullb - emptyb) * context.prices.prices["bottle"]
         return price
     }
 
     function totalBottlesLine(){
-        var total  = emptyb + fullb + " бут."
+        var total  = emptyb + fullb - context.freeWater + " бут."
         return total
     }
 
@@ -105,7 +106,7 @@ ViewController {
 
     function calcTotal(){
         bonusesInCheck.updateSummaryDiscount()
-        var total = calcFullBottles() + calcEmptyBottlesFee() + (cbPump.checked ? context.prices.pump : 0) + bonusesInCheck.summaryDiscount
+        var total = calcFullBottles() * (fullb - context.freeWater) + calcEmptyBottlesFee() + (cbPump.checked ? context.prices.pump : 0) // + bonusesInCheck.summaryDiscount
         return total
     }
 
@@ -113,17 +114,18 @@ ViewController {
         return calcTotal() + " грн."
     }
 
-    function getBonuses(){
+    function getBonuses() {
         storage.getAuthData(function(authdata){
-            bonusModel.clear()
             Api.getBonus(authdata, function(response){
+                bonusModel.clear()
+                isInit = true
                 for(var item in response.result){
-                    bonusModel.append(response.result[item])
-                    bonusesInCheck.activeBonuses.append(bonusModel.get(item))
-                    bonusesInCheck.height = context.bonuses.count * (23) * ratio
+                    var bonus = response.result[item]
+                    bonusModel.importData(bonus)
                     updateSummary()
                     layoutHeight()
                 }
+                isInit = false
             },function(failure){
             })
         })
@@ -139,7 +141,7 @@ ViewController {
                 bonusesInCheck.height +
                 lbPump.height +
                 lbSummaryOfOrder.height +
-               orderSummaryView.height * 0.2
+                orderSummaryView.height * 0.2
         var ch = hAdditionaly.height +
                 bonusLst.header +
                 cbPump.height +
@@ -187,21 +189,34 @@ ViewController {
                 height:(bonusModel.count * (18 + 8)) * ratio
                 model:ListModel{
                     id: bonusModel
+                    function importData(bonusItem){
+                        var bonus = {
+                            "BonusName":bonusItem.BonusName,
+                            "PromoCode":bonusItem.PromoCode,
+                            "BonusType":bonusItem.BonusType,
+                            "Comment":bonusItem.Comment,
+                            "ValidityPeriod":bonusItem.ValidityPeriod,
+                            "preselected": bonusLst.isBonusesPreselected(bonusItem.PromoCode)
+                        }
+                        console.log("importData.bonus:"+bonus.checked)
+                        bonusModel.append(bonus)
+                    }
                 }
+
                 spacing: 8 * ratio
                 delegate: HWCheckBox {
                     id: cbBonusCheck
                     y: 52
                     height: 18 * ratio
                     text: BonusName
-                    checked: bonusLst.isBonusesPreselected(PromoCode)
+                    checked: preselected
                     anchors.rightMargin: bonusLst.width * 0.02
                     anchors.right: bonusLst.right
                     anchors.leftMargin: 15 * ratio
                     anchors.left: bonusLst.left
-                    anchors.top: hAdditionaly.bottom
+                    anchors.top: bonusLst.top
                     anchors.topMargin: 0.02
-                    onCheckStateChanged: {
+                    onCheckedChanged: {
                         if(!isInit){
                             bonusLst.mapBonusSelectionOnContext(index, checked)
                             updateSummary()
@@ -210,17 +225,30 @@ ViewController {
                 }
 
                 function mapBonusSelectionOnContext(bonusIndex, isSelected){
-                    if(isSelected){
-                        context.bonuses.push(bonusModel.get(bonusIndex))
-                        bonusesInCheck.activeBonuses.append(bonusModel.get(bonusIndex))
+                    console.log("changing:" + bonusModel.get(bonusIndex).BonusName + " index:" + bonusIndex + " isSelected:" + isSelected)
+                    if ( isSelected ){
+                        var bonus = bonusModel.get(bonusIndex)
+                        if (bonus.BonusType === "БесплатныйБутыльВоды"){
+                            context.freeWater++
+                        }else{
+                            //                          context.bonuses.push(bonusModel.get(bonusIndex))
+                            //                          bonusesInCheck.activeBonuses.append(bonusModel.get(bonusIndex))
+                        }
                     }else{
                         var chCode = bonusModel.get(bonusIndex).PromoCode
-                        var chIndex = indexOf(bonusesInCheck.activeBonuses, chCode)
-                        bonusesInCheck.activeBonuses.remove(chIndex)
-                        context.bonuses.splice(chIndex, 1)
+                        var chType = bonusModel.get(bonusIndex).BonusType
+                        if (chType === "БесплатныйБутыльВоды" && context.freeWater > 0){
+                            context.freeWater--
+                        }else{
+                            //                          bonusesInCheck.activeBonuses.append(bonusModel.get(bonusIndex))
+                            //                          var chIndex = indexOf(bonusesInCheck.activeBonuses, chCode)
+                            //                          bonusesInCheck.activeBonuses.remove(chIndex)
+                            //                          context.bonuses.splice(chIndex, 1)
+                        }
                     }
-                    bonusesInCheck.height = context.bonuses.length * 23 * ratio
-                    bonusesInCheck.updateSummaryDiscount()
+                    bonusesInCheck.height = 0
+                    //context.bonuses.length * 23 * ratio
+                    //bonusesInCheck.updateSummaryDiscount()
                     layoutHeight()
                 }
 
@@ -234,13 +262,22 @@ ViewController {
                 }
 
                 function isBonusesPreselected(bonusCode){
-                    for (var item in context.bonuses){
-                        if(context.bonuses[item].PromoCode === bonusCode){
-                            return true
+                        console.log( "isBonusesPreselected:" + context.bonuses.length )
+                        for (var item in context.bonuses){
+                            if(context.bonuses[item].PromoCode === bonusCode){
+                                if (context.bonuses[item].BonusType === "БесплатныйБутыльВоды"){
+                                    context.freeWater++
+                                }
+                                updateSummary()
+                                console.log(context.bonuses[item].BonusName + " preselected")
+                                return true
+                            }
                         }
+                        updateSummary()
+                        console.log("not preselected")
+                        return false
                     }
-                    return false
-                }
+
             }
 
             HWCheckBox {
@@ -251,7 +288,7 @@ ViewController {
                 anchors.topMargin: 5 * ratio
                 anchors.top: bonusLst.bottom
                 anchors.rightMargin: parent.width * 0.02
-                checked: false
+                checked:false
                 anchors.right: parent.right
                 anchors.leftMargin: 30 * ratio
                 anchors.left: parent.left
@@ -280,7 +317,6 @@ ViewController {
                 anchors.right: parent.right
                 anchors.left: parent.left
                 anchors.leftMargin: parent.width * 0.01
-
                 border.bottom: 5
                 border.top: 3
                 border.right: 5
@@ -310,6 +346,7 @@ ViewController {
                     anchors.top: lbWater.bottom
                     anchors.left: lbWater.left
                     anchors.leftMargin: 0
+                    font.family: "NS UI Text"
                 }
 
                 BonusesInCheck{
@@ -333,6 +370,7 @@ ViewController {
                     anchors.leftMargin: 0
                     anchors.topMargin: 5* ratio
                     anchors.top: bonusesInCheck.bottom
+                    font.family: "NS UI Text"
                 }
 
                 Text {
@@ -345,6 +383,7 @@ ViewController {
                     anchors.leftMargin: 0
                     anchors.topMargin: 5* ratio
                     anchors.top: lbTotalBottles.bottom
+                    font.family: "NS UI Text"
                 }
 
                 Text {
@@ -357,6 +396,7 @@ ViewController {
                     anchors.leftMargin: 0
                     anchors.topMargin: 5* ratio
                     anchors.top: lbEmptyBottles.bottom
+                    font.family: "NS UI Text"
                 }
 
                 Text {
@@ -370,6 +410,7 @@ ViewController {
                     anchors.topMargin: 10* ratio
                     anchors.top: lbBottlesFee.bottom
                     visible: cbPump.checked
+                    font.family: "NS UI Text"
                 }
 
                 Text {
@@ -380,6 +421,7 @@ ViewController {
                     anchors.topMargin: 15 * ratio
                     anchors.top: lbPump.bottom
                     font.pointSize: 14
+                    font.family: "NS UI Text"
                 }
 
                 Text {
@@ -524,9 +566,9 @@ ViewController {
 
                     if (rbCardPayment.checked)
                     {
-                        navigationController.push("qrc:/orders/PaymentCards.qml", {"context":context})
+                        navigationController.push("qrc:/orders/PaymentCards.qml", { "context":context })
                     }else{
-                        navigationController.push("qrc:/orders/OrderTime.qml", {"context":context})
+                        navigationController.push("qrc:/orders/OrderTime.qml", { "context":context })
                     }
                 }
             }

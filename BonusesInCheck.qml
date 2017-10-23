@@ -41,7 +41,7 @@ Rectangle {
                 text: Utils.bonusValueCalc(bonusModel.get(index), context) + " грн."
                 color: "#4a4a4a"
                 width: 100
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 14
                 anchors.leftMargin: 2 * ratio

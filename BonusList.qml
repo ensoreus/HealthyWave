@@ -28,12 +28,6 @@ ViewController {
         wheel.running = false
     }
 
-    Clipboard{
-        id: clipboard
-        onIsEmptyChanged: {
-            imgPastePromo.checkState()
-        }
-    }
 
     Storage{
         id:storage
@@ -119,9 +113,6 @@ ViewController {
 
             model: ListModel {
                 id: bonusModel
-                function itemsSelected(){
-
-                }
 
                 function addItems(data){
                     bonusModel.clear()
@@ -180,7 +171,6 @@ ViewController {
             width: parent.width * 0.7
             height: parent.height * 0.1
             anchors.topMargin: 53
-            visible: bonusModel.itemsSelected()
             labelText: "ВИКОРИСТАТИ"
             onButtonClick: {
                 context.bonuses = bonusesToUse

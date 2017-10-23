@@ -396,7 +396,7 @@ ViewController {
             font.weight: Font.Thin
             font.underline: false
             font.family: "NS UI Text"
-            font.pointSize: 13
+            font.pointSize: 15
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
