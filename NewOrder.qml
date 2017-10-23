@@ -38,6 +38,7 @@ ViewController {
                     var priceList = response.result[index]
                     if(priceList.find){
                         context.prices.pump = priceList.pompa
+                        context.prices.bottle = priceList.bottle
                         for(var key in priceList){
                             if(key.startsWith("price_")){
                                 context.prices.prices[key] = priceList[key]

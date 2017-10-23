@@ -33,5 +33,6 @@ QtObject {
     property Prices prices:Prices{
         prices: new Array(1)
         pump:0
+        bottle:130
     }
 }
