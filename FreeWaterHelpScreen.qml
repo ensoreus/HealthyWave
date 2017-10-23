@@ -25,6 +25,15 @@ Rectangle{
         id: sharePicker
     }
 
+    function disable(){
+        swipeArea.enabled = false
+    }
+
+    function enable(){
+        swipeArea.enabled = true
+    }
+
+
     FreeWaterHelpScreenForm {
         id: helpScreen
         //anchors.top: parent.top

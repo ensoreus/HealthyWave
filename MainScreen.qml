@@ -19,6 +19,7 @@ ViewController {
 
     Component.onCompleted: {
         checkUnratedOrders.start()
+        bottomRatePanel.visible = true
     }
 
     function showCallButton(phonenum){
@@ -283,6 +284,14 @@ ViewController {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: parent.height * 0.2
+        onVisibleChanged: {
+            if(visible){
+                mainScreenHintPanel.disable()
+            }else{
+                mainScreenHintPanel.enable()
+            }
+        }
+
         onRateClick: {
             navigationController.push("qrc:/feedback/AddFeedback.qml", {"rate":rate, "order":order})
         }
@@ -291,6 +300,8 @@ ViewController {
             visible = true
             txAddress.text = address
         }
+
+
 
         Behavior on visible {
             PropertyAnimation{

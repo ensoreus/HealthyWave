@@ -21,24 +21,24 @@ Rectangle {
         state = "hideAlert"
     }
 
-    Timer{
-        id: orderTimer
-        interval: 3000
-        repeat: true
-        onTriggered: {
-                mainScreen.hideCallButton()
-            storage.getUnratedOrderIds(function(orderId){
-                 var notification = {orderid:orderId,
-                                    courier:"Иван Иванов",
-                                    courierPhone:"+380982559836"
-                                    }
-                storage.getOrderById(orderId, function(city, street, house, apt, time, courier, courierPhone){
-                    deliveryOnAWay(notification)
-                    repeat = false
-                })
-            })
-        }
-    }
+//    Timer{
+//        id: orderTimer
+//        interval: 3000
+//        repeat: true
+//        onTriggered: {
+//                mainScreen.hideCallButton()
+//            storage.getUnratedOrderIds(function(orderId){
+//                 var notification = {orderid:orderId,
+//                                    courier:"Иван Иванов",
+//                                    courierPhone:"+380982559836"
+//                                    }
+//                storage.getOrderById(orderId, function(city, street, house, apt, time, courier, courierPhone){
+//                    deliveryOnAWay(notification)
+//                    repeat = false
+//                })
+//            })
+//        }
+//    }
 
     /*Timer{
         id: deliveredTimer
@@ -65,7 +65,7 @@ Rectangle {
             var notification = Utils.extractDataFromNotification(PushNotificationRegistrationTokenHandler.lastNotification)
             if(notification.pushtype === 1){
                 console.log("ORDER ON A WAY")
-                deliveryOnAWay(notification)
+                //deliveryOnAWay(notification)
             }else{
                 console.log("ORDER DELIVERED")
                 deliveryArrived(notification)
@@ -170,7 +170,6 @@ Rectangle {
                 imageSource: "qrc:/commons/logo-hw.png"
             }
 
-
             initialViewController: MainScreen{
                 id:mainScreen
                 onMenuClick: {
@@ -247,8 +246,6 @@ Rectangle {
                 }
             ]
         }
-
-
     }
     Rectangle{
         anchors.fill: parent
