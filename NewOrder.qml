@@ -16,7 +16,6 @@ ViewController {
     property alias btnNext: btnNext
     property alias stEmptyBottles: stEmptyBottles
     property OrderContext context
-
     property var fontSize: width > 320 ? 16 : 13
     property var navigationItem: NavigationItem{
         centerBarTitle:"Нове замовлення"

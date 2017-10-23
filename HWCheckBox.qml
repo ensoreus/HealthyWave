@@ -6,34 +6,34 @@ CheckBox {
     property alias indicatorWidth: indicatorRect.width
     property alias indicatorHeight: indicatorRect.height
     property alias markSize: checkmark.font.pointSize
+    property var style: "Regular"
 
-       text: qsTr("CheckBox")
-       checked: true
+    text: qsTr("CheckBox")
+    checked: true
 
-       indicator: Rectangle {
-           id: indicatorRect
-           implicitWidth: 15 * ratio
-           implicitHeight: 15 * ratio
-           x: control.leftPadding
-           y: parent.height / 2 - height / 2
-           radius: 3 * ratio
-           color: control.checked ? "#58B7AD" : "white"
-           border.color: "#58B7AD"
+    indicator: Rectangle {
+        id: indicatorRect
+        implicitWidth: (style === "Regular") ? 15 * ratio : 25 * ratio
+        implicitHeight: (style === "Regular") ? 15 * ratio : 25 * ratio
+        x: control.leftPadding
+        y: parent.height / 2 - height / 2
+        radius: 3 * ratio
+        color: control.checked ? "#58B7AD" : "white"
+        border.color: "#58B7AD"
 
-
-           Text{
-               id: checkmark
-            anchors.fill: parent
-            anchors.bottomMargin: 1 * ratio
-            anchors.leftMargin: 1 * ratio
-            anchors.rightMargin: 1 * ratio
-            anchors.topMargin: 1 * ratio
-            text:"✓"
+        Text{
+            id: checkmark
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: (style === "Regular") ? 15 * ratio : 25 * ratio
+            height: (style === "Regular") ? 15 * ratio : 25 * ratio
+            text: "✓"
             verticalAlignment: Text.AlignVCenter
-            font.pointSize: 17
+            horizontalAlignment: Text.AlignHCenter
+            font.pointSize: (style === "Regular") ? 17 : 20
             color: "white"
             visible: control.checked
-           }
-       }
+        }
+    }
 
 }

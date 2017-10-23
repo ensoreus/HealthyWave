@@ -18,6 +18,7 @@ ViewController {
     property int emptyb: 0
     property OrderContext context
     property bool isInit: true
+    property var bonusListStyle: "Big"
     property var navigationItem: NavigationItem{
         centerBarTitle:"Замовлення"
     }
@@ -41,8 +42,6 @@ ViewController {
         updateSummary()
         layoutHeight()
         getBonuses()
-
-
     }
 
     function updateSummary(){
@@ -125,6 +124,11 @@ ViewController {
                     bonusModel.importData(bonus)
                     updateSummary()
                     layoutHeight()
+                    if(item == "1"){
+                        bonusListStyle = "Regular"
+                    }
+
+                    break /// RED
                 }
                 isInit = false
             },function(failure){
@@ -187,7 +191,7 @@ ViewController {
                 anchors.leftMargin: 30 * ratio
                 anchors.right: parent.right
                 visible: bonusModel.count > 0
-                height:(bonusModel.count * (18 + 8)) * ratio
+                height:(bonusModel.count * (18 + ((bonusListStyle === "Regular") ? 8 * ratio : 26 * ratio))) * ratio
                 model:ListModel{
                     id: bonusModel
                     function importData(bonusItem){
@@ -199,24 +203,24 @@ ViewController {
                             "ValidityPeriod":bonusItem.ValidityPeriod,
                             "preselected": bonusLst.isBonusesPreselected(bonusItem.PromoCode)
                         }
-                        console.log("importData.bonus:"+bonus.checked)
                         bonusModel.append(bonus)
                     }
                 }
 
-                spacing: 8 * ratio
+                spacing: (bonusListStyle === "Regular") ? 8 * ratio : 26 * ratio
                 delegate: HWCheckBox {
                     id: cbBonusCheck
                     y: 52
-                    height: 18 * ratio
+                    height: 18//(style === "Regular") ? 18 * ratio : 25 * ratio
                     text: BonusName
+                    style: bonusListStyle
                     checked: preselected
                     anchors.rightMargin: bonusLst.width * 0.02
                     anchors.right: bonusLst.right
                     anchors.leftMargin: 15 * ratio
                     anchors.left: bonusLst.left
-                    anchors.top: bonusLst.top
-                    anchors.topMargin: 0.02
+//                    anchors.top: bonusLst.top
+//                    anchors.topMargin: 0.02
                     onCheckedChanged: {
                         if(!isInit){
                             bonusLst.mapBonusSelectionOnContext(index, checked)
@@ -285,6 +289,7 @@ ViewController {
                 id: cbPump
                 x: 5
                 height: 13 * ratio
+                style: bonusListStyle
                 text: "Механічна помпа - " + context.prices.pump + " грн."
                 anchors.topMargin: 5 * ratio
                 anchors.top: bonusLst.bottom
