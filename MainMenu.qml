@@ -47,7 +47,6 @@ MainMenuForm {
         storage.getName(function(name){
             userName.text = name
         })
-        //syncAvatar()
         setupAvatar()
     }
 
@@ -126,7 +125,7 @@ MainMenuForm {
     function syncAvatar(){
         storage.getAuthData(function(authdata){
             Api.getAvatar(authdata, function(response){
-                if(response.Photo != null){
+                if (response.Photo != null){
                     var url = SecurityCore.saveBase64(response.Photo)
                     storage.updateAvatar(url)
                     avatar.source = url

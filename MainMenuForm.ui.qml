@@ -42,7 +42,6 @@ Item {
             id: userName
             width: 200 * ratio
             color: "#ffffff"
-            text: qsTr("Льорем Іпсум")
             anchors.horizontalCenterOffset: -(parent.width * 0.1) * ratio
             fontSizeMode: Text.Fit
             anchors.top: avatar.bottom

@@ -42,7 +42,7 @@ Rectangle {
     verticalAlignment: Text.AlignVCenter
     horizontalAlignment: Text.AlignHCenter
     anchors.horizontalCenter: parent.horizontalCenter
-
+    anchors.verticalCenter: parent.verticalCenter
     color: "#000000"
     font.pointSize: 20
     scale: paintedWidth > width ? (width / paintedWidth) : 1
@@ -55,7 +55,7 @@ Rectangle {
       anchors.leftMargin: backStage ? (22 + 16) * ratio : 0
       anchors.top: parent.top
       anchors.bottom: parent.bottom
-
+      //anchors.verticalCenter: parent.verticalCenter
       Row {
           anchors.verticalCenter: parent.verticalCenter
           Repeater {
@@ -68,12 +68,12 @@ Rectangle {
       id: navigationTitleImage
       fillMode: Image.PreserveAspectFit
       anchors.top: parent.top
-      anchors.topMargin: 3
+      anchors.topMargin: 2
       anchors.bottom: parent.bottom
       anchors.bottomMargin: 2
       anchors.horizontalCenter: parent.horizontalCenter
       width: parent.width * 0.4
-      height: 80 * ratio
+      height: 65 * ratio
   }
 
   Item {
@@ -82,7 +82,6 @@ Rectangle {
       x: parent.width - rightBarRepeater.width
       anchors.top: parent.top
       anchors.bottom: parent.bottom
-
       Row {
           id: rightBarRepeater
           anchors.verticalCenter: parent.verticalCenter

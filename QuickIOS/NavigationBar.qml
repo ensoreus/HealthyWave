@@ -44,7 +44,7 @@ Rectangle {
   property var currentRightButtonItems : navigationItem.rightBarButtonItems
 
   width: parent.width
-  height: 80 //QIDevice.screenFillStatusBar ? ( 50 + 20 ) * ratio : 50 * ratio
+  height: 65 //QIDevice.screenFillStatusBar ? ( 50 + 20 ) * ratio : 50 * ratio
 
   color : "#f8f8f8"
 
@@ -75,8 +75,9 @@ Rectangle {
       id : stack
       anchors.left: parent.left
       anchors.right: parent.right
+      anchors.top: parent.top
       anchors.bottom: parent.bottom
-      height : 80 * ratio
+      height : 65 * ratio
       delegate: NavigationBarTransition {}
 
       property NavigationBarItem topBarItem : dummyNavigationBarItem
@@ -98,7 +99,7 @@ Rectangle {
       anchors.bottom: parent.bottom
 
       width: (22 + 16) * ratio;
-      height: 80 * ratio
+      height: 65 * ratio
 
       NavigationBackButton {
           id: backButton
