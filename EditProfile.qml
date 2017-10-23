@@ -149,7 +149,7 @@ ViewController {
         x:0
         width: parent.width
         onAvatarSelected: {
-            btnNext.enabled = true
+            //btnNext.enabled = true
         }
 
         onNextPage:{

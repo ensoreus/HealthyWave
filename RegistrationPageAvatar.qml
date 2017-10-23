@@ -70,6 +70,19 @@ Page {
                         imagepicker.show()
                     }
                 }
+                Text{
+                    id: hint
+                    anchors.top: avatar.bottom
+                    anchors.topMargin: 5 * ratio
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width
+                    font.family: "NS UI Text"
+                    font.pointSize: 13
+                    color: "darkgrey"
+                    horizontalAlignment: Text.AlignHCenter
+                    text:"Натисніть зображення щоб змінити"
+
+                }
             }
 
             ImagePicker{
@@ -106,7 +119,7 @@ Page {
             anchors.top: header.bottom
             anchors.topMargin: parent.height * 0.2
             labelText: "ЗБЕРІГТИ"
-            enabled: false
+            enabled: true
 
             onButtonClick: {
                 console.log("NEXT")
