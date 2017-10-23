@@ -127,8 +127,6 @@ ViewController {
                     if(item == "1"){
                         bonusListStyle = "Regular"
                     }
-
-                    break /// RED
                 }
                 isInit = false
             },function(failure){

@@ -76,13 +76,9 @@ ViewController {
             anchors.top: txHint.bottom
             Timer{
                 id: searchTimer
-
-
                 interval: 5000
                 repeat: false
                 running: false
-
-
             }
 
             onButtonClick: {
@@ -90,11 +86,10 @@ ViewController {
                 txtChooseAnother.visible = false
                 searchTimeWaiter.showError = false
                 content.startSearchAnimation()
-
                 storage.getAuthData(function(authData){
                     Api.searchNearestTime(context.address, authData, function(result){
                         console.log(result)
-                        searchTimer.onTriggered.connect(function delayResponse(result){
+                        searchTimer.onTriggered.connect(function delayResponse(){
                             searchTimeWaiter.timeLabel = result.result
                             searchTimeWaiter.showError = false
                             content.stopSearchAnimation()
