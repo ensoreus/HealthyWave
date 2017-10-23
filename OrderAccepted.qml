@@ -18,10 +18,10 @@ Item {
         id: image
         x: 208
         y: 171
-        width: parent.width * 0.84
-        height: parent.width * 0.78
-//        width: parent.width * 0.94
-//        height: parent.width * 0.94
+//        width: parent.width * 0.84
+//        height: parent.width * 0.78
+        width: parent.width * 0.94
+        height: parent.width * 0.94
         fillMode: Image.PreserveAspectFit
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
