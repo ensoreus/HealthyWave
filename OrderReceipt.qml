@@ -413,6 +413,7 @@ ViewController {
 
         OrderAccepted{
             visible: false
+            opacity: 0
             id: orderAccepted
             anchors.fill: parent
             onAgree: {
@@ -429,6 +430,17 @@ ViewController {
                 navigationController.pop()
                 navigationController.pop()
                 navigationController.pop()
+            }
+
+            Behavior on visible {
+                NumberAnimation {
+                    target: orderAccepted
+                    property: "opacity"
+                    duration: 200
+                    from: 0.0
+                    to: 1.0
+                    easing.type: Easing.InOutQuad
+                }
             }
         }
     }

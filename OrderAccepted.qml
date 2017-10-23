@@ -198,7 +198,6 @@ Item {
                     }
                 }
             }
-
             Page{
                 id: orderAcceptedWithDisagreePage
                 visible: false

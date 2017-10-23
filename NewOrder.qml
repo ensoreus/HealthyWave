@@ -45,6 +45,9 @@ ViewController {
                         }
                         updatePricesView()
                         rPricesPanel.state = "pricesReady"
+                    }else{
+                        errorMsg.text = "Адресу не знайдено\nОберіть іншу будласка"
+                        rPricesPanel.state ="error"
                     }
                 }
                 console.log(response.result)
@@ -218,7 +221,12 @@ ViewController {
                 id: errorMsg
                 color: "white"
                 anchors.fill: parent
-                font.pointSize: 13
+                font.pointSize: 15
+                height: parent.height
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.WordWrap
             }
 
