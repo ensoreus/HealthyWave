@@ -9,6 +9,7 @@ Item {
     property string labelColor: "white"
     property string labelHighlightColor: "blue"
     property alias labelText: label.text
+    property alias labelPointSize: label.font.pointSize
     property alias showGlyph: glyph.visible
 
     width: 200 * ratio

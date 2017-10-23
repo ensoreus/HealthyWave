@@ -127,6 +127,19 @@ function formatDateShortYear(dayIndex){
     return dd+mm+yy
 }
 
+function displayDayForIndex(index){
+    switch(index){
+    case 0: return "сьогодні"
+        break
+    case 1: return "завтра"
+        break
+    case 2: return "післязавтра"
+        break
+    default:
+        return ""
+    }
+}
+
 function isPhoneNum(num){
     if(typeof(num) === "undefined"){
         return num.match(/^\+380\d{9}$/)

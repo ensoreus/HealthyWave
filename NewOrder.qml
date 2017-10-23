@@ -43,11 +43,13 @@ ViewController {
                                 context.prices.prices[key] = priceList[key]
                             }
                         }
+                        updatePricesView()
+                        rPricesPanel.state = "pricesReady"
                     }
                 }
                 console.log(response.result)
-                updatePricesView()
-                rPricesPanel.state = "pricesReady"
+
+
             }, function(failure){
                 rPricesPanel.state = "error"
                 if (failure.error){

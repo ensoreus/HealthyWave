@@ -29,7 +29,7 @@ ViewController {
         txWithDiscount.text = discounted + " грн."
         txTotal.text = discounted + fee + " грн."
         txAddress.text = "вул. " + context.address.street + ", буд." + context.address.house + " оф." + context.address.apartment
-        txDeliveryTime.text = "сьогодні до " + context.deliveryTime.toHour
+        txDeliveryTime.text = context.deliveryTime.displayDate + " до " + context.deliveryTime.toHour
         txPaymentType.text = context.card == 1 ? "карткою" : "готівкою"
         txComment.text = context.comment
     }

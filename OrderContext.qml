@@ -17,6 +17,7 @@ QtObject {
     property var freeWater: 0
     property TimeEntity deliveryTime: TimeEntity{
         day:""
+        displayDate: ""
         fromHour: ""
         toHour: ""
     }

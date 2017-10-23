@@ -141,6 +141,8 @@ ViewController {
             var fromHour = fromIndex + 7
             var toHour = toIndex + 8
             context.deliveryTime.day = Utils.formatDateFullYear(dayIndex)
+            context.deliveryTime.displayDate = Utils.displayDayForIndex(dayIndex)
+            console.log("day:"+context.deliveryTime.day)
             context.deliveryTime.fromHour = fromHour+":00"
             context.deliveryTime.toHour = toHour+":00"
         }

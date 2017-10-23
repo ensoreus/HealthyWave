@@ -4,6 +4,7 @@ import "qrc:/controls"
 import "qrc:/commons"
 import "qrc:/"
 import "qrc:/Api.js" as Api
+import "qrc:/Utils.js" as Utils
 
 ViewController {
     property alias btnSearch: btnSearch
@@ -93,6 +94,8 @@ ViewController {
                             searchTimeWaiter.timeLabel = result.result
                             searchTimeWaiter.showError = false
                             content.stopSearchAnimation()
+                            context.deliveryTime.day = Utils.formatDateShortYear(0)
+                            context.deliveryTime.displayDate = Utils.displayDayForIndex(0)
                             context.deliveryTime.fromHour = rightNow()
                             context.deliveryTime.toHour = result.result
                             txHint.text = "Найближчий час доставки

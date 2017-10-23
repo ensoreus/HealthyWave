@@ -18,10 +18,10 @@ Item {
         id: image
         x: 208
         y: 171
-//        width: parent.width * 0.84
-//        height: parent.width * 0.78
-        width: parent.width * 0.94
-        height: parent.width * 0.94
+        width: parent.width * 0.84
+        height: parent.width * 0.78
+//        width: parent.width * 0.94
+//        height: parent.width * 0.94
         fillMode: Image.PreserveAspectFit
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
@@ -82,7 +82,7 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
                         color: "white"
-                        font.pointSize:15
+                        font.pointSize: width / 18
                         font.bold: true
                     }
 
@@ -97,19 +97,19 @@ Item {
                         anchors.topMargin: 0
                         horizontalAlignment: Text.AlignHCenter
                         color: "white"
-                        font.pointSize:16
+                        font.pointSize: width / 20
                         font.bold: true
                     }
 
                     Text {
                         id: txShouldCallQuestion
                         x: 220
-                        width: parent.width * 0.8
+                        width: parent.width * 0.9
                         height: parent.height * 0.25
                         color: "#ffffff"
                         text: qsTr("Бажаєте, щоб наш спеціаліст передзвонив \nВам для підтвердження замовлення?")
-                        fontSizeMode: Text.HorizontalFit
-                        font.pointSize: 15
+                        //fontSizeMode: Text.HorizontalFit
+                        font.pointSize: width / 20
                         wrapMode: Text.WordWrap
                         horizontalAlignment: Text.AlignHCenter
                         anchors.topMargin: parent.height * 0.05
@@ -125,6 +125,7 @@ Item {
                         anchors.top: txShouldCallQuestion.bottom
                         anchors.topMargin: parent.height * 0.1
                         labelText:"ТАК, ХОЧУ ЩОБ ПЕРЕДЗВОНИЛИ!"
+                        labelPointSize: width / 21
                         onButtonClick: {
                             agree()
                             orderAcceptedWithAgreePage.visible = true
@@ -140,6 +141,7 @@ Item {
                         anchors.top: btnAgree.bottom
                         anchors.topMargin: parent.height * 0.03
                         labelText:"НІ, ЧЕКАЮ ЗАМОВЛЕННЯ БЕЗ ДЗВІНКА"
+                        labelPointSize: width / 21
                         onButtonClick: {
                             notAgree()
                             orderAcceptedWithDisagreePage.visible = true
@@ -158,7 +160,7 @@ Item {
                     Text {
                         id: txtOrderAccepted
                         text: "ДЯКУЄМО ЗА ЗАМОВЛЕННЯ!"
-                        font.pointSize: 12
+                        font.pointSize: width / 16
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.top: parent.top
                         anchors.topMargin: parent.width * 0.1
@@ -171,7 +173,7 @@ Item {
                     Text{
                         id: txtWaitForCall
                         text: "Очікуйте на дзвінок нашого спеціаліста."
-                        font.pointSize: 12
+                        font.pointSize: width / 18
                         anchors.horizontalCenter: parent.horizontalCenter
                         horizontalAlignment: Text.AlignHCenter
                         anchors.top: txtOrderAccepted.bottom
@@ -189,6 +191,7 @@ Item {
                         anchors.top: txtWaitForCall.bottom
                         anchors.topMargin: parent.height * 0.1
                         labelText:"OK"
+                        labelPointSize: width / 20
                         onButtonClick: {
                             orderDone()
                         }
@@ -207,7 +210,7 @@ Item {
                         id: txtThanks
                         text: "ДЯКУЄМО ЗА ЗАМОВЛЕННЯ!"
                         anchors.horizontalCenter: parent.horizontalCenter
-                        font.pointSize: 12
+                        font.pointSize: width / 16
                         visible: true
                         anchors.top: parent.top
                         anchors.topMargin: parent.width * 0.3
@@ -225,6 +228,7 @@ Item {
                         anchors.top: txtThanks.bottom
                         anchors.topMargin: parent.height * 0.1
                         labelText:"OK"
+                        labelPointSize: width / 16
                         onButtonClick: {
                             orderDone()
                         }

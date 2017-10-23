@@ -55,7 +55,7 @@ Tumbler {
                 anchors.bottom: parent.bottom
             }
         }
-        model:["Сьогодні", "Завтра", "Післязавтра","Сьогодні", "Завтра", "Післязавтра"]
+        model:["Сьогодні", "Завтра", "Післязавтра"]
         width:  datepicker.width * 0.4
         role: "day"
 
