@@ -48,32 +48,32 @@ Rectangle{
             state = "promoCodeGen"
         }
 
-        MouseArea{
-            id: swipeArea
-            anchors.fill: parent
-            property var oldY: -100 * ratio
-            property var isDownDir: false
-            onMouseYChanged: {
-                helpScreenContainer.anchors.topMargin += mouseY
-                isDownDir = oldY > mouseY
-                oldY = mouseY
-            }
-            onReleased: {
-                if(isDownDir){
-                    if(helpScreenContainer.anchors.topMargin < height * 0.3){
-                        helpScreenContainer.showUp()
-                    }else{
-                        helpScreenContainer.hideDown()
-                    }
-                }else{
-                    if(helpScreenContainer.anchors.topMargin > height * 0.3){
-                        helpScreenContainer.showUp()
-                    }else{
-                        helpScreenContainer.hideDown()
-                    }
-                }
-            }
-        }
+//        MouseArea{
+//            id: swipeArea
+//            anchors.fill: parent
+//            property var oldY: -100 * ratio
+//            property var isDownDir: false
+//            onMouseYChanged: {
+//                helpScreenContainer.anchors.topMargin += mouseY
+//                isDownDir = oldY > mouseY
+//                oldY = mouseY
+//            }
+//            onReleased: {
+//                if(isDownDir){
+//                    if(helpScreenContainer.anchors.topMargin < height * 0.3){
+//                        helpScreenContainer.showUp()
+//                    }else{
+//                        helpScreenContainer.hideDown()
+//                    }
+//                }else{
+//                    if(helpScreenContainer.anchors.topMargin > height * 0.3){
+//                        helpScreenContainer.showUp()
+//                    }else{
+//                        helpScreenContainer.hideDown()
+//                    }
+//                }
+//            }
+//        }
 
         promoCodeText.onWillStartAnimation: {
              promoCodeText.forceActiveFocus()

@@ -399,15 +399,6 @@ ViewController {
                 context.confirmed = true
                 orderAccepted.visible = true
                 context.orderId = '1'
-                storage.getAuthData(function(authdata){
-                    Api.createOrder(context, authdata, function(result){
-                        console.log(result.result)
-                        context.orderId = result.result
-                        storage.addUnratedOrder(context)
-                    }, function(error){
-                        console.log(error.error)
-                    })
-                })
             }
         }
 
@@ -418,9 +409,33 @@ ViewController {
             anchors.fill: parent
             onAgree: {
                 context.needToCall = 1
+                orderAccepted.showWaiter()
+                storage.getAuthData(function(authdata){
+                    Api.createOrder(context, authdata, function(result){
+                        console.log(result.result)
+                        context.orderId = result.result
+                        storage.addUnratedOrder(context)
+                        orderAccepted.hideWaiter(true)
+                    }, function(error){
+                        orderAccepted.showError(error.error)
+                        console.log(error.error)
+                    })
+                })
             }
             onNotAgree: {
                 context.needToCall = 0
+                orderAccepted.showWaiter()
+                storage.getAuthData(function(authdata){
+                    Api.createOrder(context, authdata, function(result){
+                        console.log(result.result)
+                        context.orderId = result.result
+                        storage.addUnratedOrder(context)
+                        orderAccepted.hideWaiter(false)
+                    }, function(error){
+                        orderAccepted.showError(error.error)
+                        console.log(error.error)
+                    })
+                })
             }
             onOrderDone: {
                 visible = false
@@ -436,10 +451,10 @@ ViewController {
                 NumberAnimation {
                     target: orderAccepted
                     property: "opacity"
-                    duration: 200
+                    duration: 400
                     from: 0.0
                     to: 1.0
-                    easing.type: Easing.InOutQuad
+                    easing.type: Easing.OutCurve
                 }
             }
         }

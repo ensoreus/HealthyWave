@@ -382,7 +382,7 @@ function call(routine, params, authData, onSuccess, onFailure){
                 if (object.ErrorCode === "1001" /*match(/^Ключ доступа не найден или просрочен:\.) || object.error.match(/Invalid parameter value \(parameter number '1'\)$/)*/){
                     onAuthError(authData, onTokenUpdated)
                 }else{
-                    console.log(object)
+                    console.log("Failure:"+object.error)
                     onFailure(object, authData.token)
                 }
             }else{
