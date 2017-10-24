@@ -21,11 +21,10 @@ ViewController {
         txRate.text = ratingByWord(rate)
         txAddress.text = "м."+order.address.city+" вул."+order.address.street+" "+order.address.house+" оф." + order.address.apartment
         txDate.text = order.deliveryDate
-        txCourierName.text = order.courier
+        txCourierName.text = order.courierName
     }
 
     onViewDidAppear: {
-
         storage.getAuthData(function(authdata){
             Api.getFeedbackCodes(ratePanel.rate,authdata, function(response){
                 console.log(response.result)

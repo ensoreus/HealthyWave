@@ -26,11 +26,11 @@ Rectangle{
     }
 
     function disable(){
-        swipeArea.enabled = false
+        helpScreen.hintPanel.enabled = false
     }
 
     function enable(){
-        swipeArea.enabled = true
+        helpScreen.hintPanel.enabled = true
     }
 
 
