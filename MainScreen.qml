@@ -220,7 +220,7 @@ ViewController {
                     property: "y"
                     from: 0
                     to: mainScreen.height - 100 * ratio
-                    easing: Easing.InOutCubic
+                    easing.type: Easing.InOutCubic
                 }
             },
             Transition {
@@ -232,7 +232,7 @@ ViewController {
                     property: "y"
                     from: mainScreen.height - 100 * ratio
                     to: 0 * ratio
-                    easing: Easing.InOutCubic
+                    easing.type: Easing.InOutCubic
                 }
             }
         ]
