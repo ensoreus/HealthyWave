@@ -53,6 +53,19 @@ ViewController {
         }
     }
 
+    function questionByRate(rate){
+        switch(rate){
+        case 1:
+        case 2:
+            return "На що нам варто звернути увагу?"
+        case 3:
+        case 4:
+            return "Що нам варто вдосконалити?"
+        case 5:
+            return "Що сподобалось?"
+        }
+    }
+
     function setupCodes(items){
         if(typeof(items[0]) != 'undefined'){
             lbLook.visible = true
@@ -78,14 +91,14 @@ ViewController {
             lbLate.visible = false
             cbLate.visible = false
         }
-        if(typeof(items[3]) != 'undefined'){
-            lbOther.visible = true
-            cbOther.visible = true
-            lbOther.text =  "4."+items[3].Name
-        }else{
-            lbOther.visible = false
-            cbOther.visible = false
-        }
+//        if(typeof(items[3]) != 'undefined'){
+//            lbOther.visible = true
+//            cbOther.visible = true
+//            lbOther.text =  "4."+items[3].Name
+//        }else{
+//            lbOther.visible = false
+//            cbOther.visible = false
+//        }
     }
 
     Rectangle {
@@ -238,7 +251,7 @@ ViewController {
             id: lbIssues
             x: 307
             height: 21
-            text: qsTr("На що варто звернути увагу?")
+            text: questionByRate(rate)
             anchors.topMargin: parent.height * 0.01
             anchors.top: rDetailsArea.bottom
             anchors.horizontalCenter: parent.horizontalCenter
@@ -345,12 +358,12 @@ ViewController {
             anchors.top: cbLate.bottom
             anchors.leftMargin: parent.width * 0.1
             anchors.left: parent.left
-            visible: false
+            visible: true
         }
 
         Text {
             id: lbOther
-            text: qsTr("")
+            text: qsTr("4. Ваш варіант")
             font.pointSize: 15
             verticalAlignment: Text.AlignVCenter
             anchors.rightMargin: parent.width * 0.2
@@ -361,10 +374,10 @@ ViewController {
             anchors.top: cbOther.top
             anchors.topMargin: 0
             anchors.left: cbOther.right
-            visible: false
+            visible: true
         }
 
-        /*Rectangle {
+        Rectangle {
             id: txComment
             height: cbOther.checked ? parent.height * 0.1 : 0
             color: "#ffffff"
@@ -383,8 +396,14 @@ ViewController {
                 y: 8
                 width: 272
                 height: 60
+                anchors.fill: parent
+                anchors.topMargin: 3 * ratio
+                anchors.bottomMargin: 3 * ratio
+                anchors.rightMargin: 3 * ratio
+                anchors.leftMargin: 3 * ratio
+                wrapMode: TextEdit.WordWrap
                 font.pointSize: 15
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 placeholderText: "Ваш коментар..."
                 Keys.onReturnPressed: {
                     Qt.inputMethod.hide()
@@ -399,7 +418,7 @@ ViewController {
                     duration: 300
                 }
             }
-        }*/
+        }
 
         HWGreenRoundButton {
             id: hWGreenButton
@@ -407,14 +426,14 @@ ViewController {
             width: parent.width * 0.7
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: parent.height * 0.02
-            anchors.top:  lbOther.bottom
+            anchors.top:  txComment.bottom
             labelText: "Завершити"
             onButtonClick: {
                 storage.getAuthData(function(authdata){
                     var code1 = cbLook.checked   ? commentCodes[0].Code : ""
                     var code2 = cbSpeech.checked ? commentCodes[1].Code : ""
                     var code3 = cbLate.checked   ? commentCodes[2].Code : ""
-                    var code4 = cbOther.checked  ? commentCodes[3].Code : ""
+                    var code4 = cbOther.checked  ? taComment.text : ""
 
                     Api.sendFeedback(ratePanel.rate, "", order.orderId, code1, code2, code3, code4, authdata, function(response){
                         storage.orderRated(order.orderId)

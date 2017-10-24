@@ -73,8 +73,10 @@ ViewController {
             }
         }
     }
+
     onViewDidAppear: {
         mainScreenHintPanel.state = "hidden"
+        bottomRatePanel.visible = true
         console.log("on completed")
         storage.isFirstStart(function(isFirstStart){
             console.log("first start:"+isFirstStart)
