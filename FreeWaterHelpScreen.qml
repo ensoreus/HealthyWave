@@ -48,6 +48,14 @@ Rectangle{
             state = "promoCodeGen"
         }
 
+        hintPanel.onShowHideHintPanel: {
+            if (helpScreenContainer.anchors.topMargin == (-30 * ratio)){
+                hideDown()
+            }else{
+                showUp()
+            }
+        }
+
 //        MouseArea{
 //            id: swipeArea
 //            anchors.fill: parent
@@ -129,7 +137,6 @@ Rectangle{
                     duration: 200
                     easing.type: Easing.InOutQuad
                 }
-
 
                 NumberAnimation {
                     target: mainLabel

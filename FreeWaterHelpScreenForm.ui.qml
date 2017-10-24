@@ -15,7 +15,7 @@ Rectangle {
     property alias image: image
     property alias btnCopyCodeLabel: btnCopyCodeLabel
     property alias promoCodeText: promoCodeText
-
+    property alias hintPanel: hintPanel
     MainScreenHintPanel {
         id: hintPanel
         height: 100

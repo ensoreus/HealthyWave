@@ -137,7 +137,6 @@ ViewController {
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
-
         onShowUp: {
             console.log("show up")
             state = "shown"
@@ -215,19 +214,25 @@ ViewController {
             Transition {
                 from: "shown"
                 to: "hidden"
-                SmoothedAnimation{
+                PropertyAnimation{
                     duration: 200
-                    maximumEasingTime: 300
-                    reversingMode: SmoothedAnimation.Immediate
+                    target: mainScreenHintPanel
+                    property: "y"
+                    from: 0
+                    to: mainScreen.height - 100 * ratio
+                    easing: Easing.InOutCubic
                 }
             },
             Transition {
                 from: "hidden"
                 to: "shown"
-                SmoothedAnimation{
-                    duration: 100
-                    maximumEasingTime: 200
-                    reversingMode: SmoothedAnimation.Immediate
+                PropertyAnimation{
+                    duration: 200
+                    target: mainScreenHintPanel
+                    property: "y"
+                    from: mainScreen.height - 100 * ratio
+                    to: 0 * ratio
+                    easing: Easing.InOutCubic
                 }
             }
         ]
