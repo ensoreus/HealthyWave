@@ -34,17 +34,24 @@ Rectangle{
     }
 
 
+    function updateUserData(){
+        helpScreen.updateUserData()
+    }
+
     FreeWaterHelpScreenForm {
         id: helpScreen
         //anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         //anchors.bottom: parent.bottom
-
-        Component.onCompleted: {
+        function updateUserData(){
             storage.getPromoCode(function(promocode){
                 promoCodeText.text = promocode
             })
+        }
+        Component.onCompleted: {
+            updateUserData()
+
             state = "promoCodeGen"
         }
 

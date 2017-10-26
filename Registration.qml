@@ -169,6 +169,7 @@ Item {
 
             onButtonContinue: {
                 item1.opacity = 0
+                registrationDone()
             }
         }
 
@@ -191,7 +192,6 @@ Item {
                 width:  400
                 height: parent.height * 0.4
                 sourceSize.width: 0
-                //anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 fillMode: Image.PreserveAspectFit
                 source: "logo-hw.png"

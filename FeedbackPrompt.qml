@@ -13,7 +13,7 @@ import "qrc:/controls"
         id: alertBg
         x: 234
         y: 164
-        width: parent.width * 0.7
+        width: parent.width * 0.9
         height: width
         fillMode: Image.PreserveAspectFit
         anchors.horizontalCenter: parent.horizontalCenter

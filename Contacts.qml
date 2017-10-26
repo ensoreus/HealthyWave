@@ -56,7 +56,7 @@ ViewController {
         Text {
             id: lbMainOffice
             color: "#626262"
-            text: qsTr("Головний офіс")
+            text: "Головний офіс"
             anchors.topMargin: parent.height * 0.01
             anchors.top: parent.top
             anchors.leftMargin: parent.width * 0.02
@@ -88,7 +88,7 @@ ViewController {
 
         Text {
             id: lbPhones
-            text: qsTr("Телефони")
+            text: "Телефони"
             anchors.leftMargin: parent.width * 0.02
             anchors.left: parent.left
             anchors.topMargin: parent.height * 0.03
@@ -113,7 +113,7 @@ ViewController {
                 id: lbCallCenterPhone
                 height: 15
                 color: "#626262"
-                text: qsTr("Кол-центр(зворотній зв'язок)")
+                text: "Кол-центр(зворотній зв'язок)"
                 font.pointSize: 12
                 anchors.right: parent.right
                 anchors.rightMargin: 0
@@ -180,7 +180,7 @@ ViewController {
                 id: lbCallCenterPhone2
                 height: 15
                 color: "#626262"
-                text: qsTr("Кол-центр")
+                text: "Кол-центр"
                 font.pointSize: 12
                 anchors.right: parent.right
                 anchors.rightMargin: 0
@@ -248,7 +248,7 @@ ViewController {
                 id: lbOrderOnlinePhone
                 height: 15
                 color: "#626262"
-                text: qsTr("Замовлення онлайн")
+                text: "Замовлення онлайн"
                 font.pointSize: 12
                 anchors.right: parent.right
                 anchors.rightMargin: 0
@@ -328,7 +328,7 @@ ViewController {
                 id: lbViber
                 height: 15
                 color: "#626262"
-                text: qsTr("Viber")
+                text: "Viber"
                 font.pointSize: 12
                 anchors.right: parent.right
                 anchors.rightMargin: 0
@@ -401,7 +401,7 @@ ViewController {
                 id: lbEmail
                 height: 15
                 color: "#626262"
-                text: qsTr("Пошта")
+                text: "Пошта"
                 font.pointSize: 12
                 anchors.right: parent.right
                 anchors.rightMargin: 0
@@ -475,7 +475,7 @@ ViewController {
                 id: lbTelegram
                 height: 15
                 color: "#626262"
-                text: qsTr("Telegram")
+                text: "Telegram"
                 font.pointSize: 12
                 anchors.right: parent.right
                 anchors.rightMargin: 0

@@ -29,6 +29,10 @@ ViewController {
         callContainer.visible = false
     }
 
+    function updateUserData(){
+        mainScreenHintPanel.updateUserData()
+    }
+
     Timer{
         id: checkUnratedOrders
         interval: (6000 * 1)

@@ -20,6 +20,7 @@ ApplicationWindow {
     }
 
     Main.MainMenuSlider {
+        id: mainSlider
         anchors.fill:parent
     }
 
@@ -36,6 +37,10 @@ ApplicationWindow {
     Registration.Registration{
         id:registration
         anchors.fill: parent
+        onRegistrationDone:{
+            mainSlider.updateUserData()
+        }
+
         Behavior on opacity{
             SequentialAnimation{
                 OpacityAnimator {

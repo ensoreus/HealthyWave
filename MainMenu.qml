@@ -43,13 +43,6 @@ MainMenuForm {
         id:storage
     }
 
-    Component.onCompleted: {
-        storage.getName(function(name){
-            userName.text = name
-        })
-        setupAvatar()
-    }
-
     btnMyOrders.onClicked: {
         myOrdersItem()
     }

@@ -18,7 +18,22 @@ Rectangle {
 
     Component.onCompleted: {
         mainMenu.disableMenu()
-        state = "hideAlert"
+        //RED
+       state = "hideAlert"
+//        var address = {
+//            "city":"Киев",
+//            "street":"Ахматовой",
+//            "house":2,
+//            "apt":1,
+//            "floor":2
+//        }
+//        storage.addUnratedOrder({"orderId":12345,
+//                                "address":address,
+//                                "day":"26102017",
+//                                "time":"14:24",
+//                                "courier":"Alex",
+//                                "courierPhone":"+380982559836"})
+        //RED
     }
 
 //    Timer{
@@ -71,6 +86,11 @@ Rectangle {
                 deliveryArrived(notification)
             }
         }
+    }
+
+    function updateUserData(){
+        mainMenu.updateUserData()
+        mainScreen.updateUserData()
     }
 
     function deliveryOnAWay(notification){
@@ -153,6 +173,13 @@ Rectangle {
             } else {
                 mainScreen.navigationController.push(Qt.resolvedUrl(item["file"]));
             }
+        }
+
+        function updateUserData(){
+            storage.getName(function(name){
+                userName.text = name
+            })
+            setupAvatar()
         }
 
         NavigationController {
@@ -258,7 +285,7 @@ Rectangle {
         id:feedbackAlertPrompt
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        width: parent.width * 0.7
+        width: parent.width * 0.9
         height: width
         onClose: {
             mainSlider.state = "hideAlert"
