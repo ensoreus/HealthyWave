@@ -14,7 +14,7 @@ ApplicationWindow {
 //    height:568
 //    width:320
     color: "#1EB2A4"
-    title: qsTr("Хвиля здоров'я")
+    title: "Хвиля здоров'я"
     Storage{
         id:storage
     }
@@ -25,7 +25,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        if(!storage.isRegistered()){
+        if(storage.isRegistered()){
             registration.visible = true
             greeting.visible = true
         }else{

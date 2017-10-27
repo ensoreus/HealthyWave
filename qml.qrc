@@ -94,6 +94,7 @@
         <file>img-arrow-down-thin.png</file>
         <file>btn-add-green.png</file>
         <file>Default@3x.png</file>
+        <file>btn-promo-add.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>

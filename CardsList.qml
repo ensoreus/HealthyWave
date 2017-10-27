@@ -167,38 +167,6 @@ ViewController {
                         border.color: "#444444"
                     }
                 }
-
-                /*swipe.right: Label {
-                    id: deleteLabel
-                    text: qsTr("Видалити")
-                    color: "white"
-                    verticalAlignment: Label.AlignVCenter
-                    padding: 12
-                    height: parent.height
-                    anchors.right: parent.right
-                }
-
-                background: Rectangle {
-                    color: deleteLabel.SwipeDelegate.pressed ? Qt.darker( "tomato", 1.1) : "tomato"
-                }
-                ListView.onRemove: SequentialAnimation {
-                    PropertyAction {
-                        target: swipeDelegate
-                        property: "ListView.delayRemove"
-                        value: true
-                    }
-                    NumberAnimation {
-                        target: swipeDelegate
-                        property: "height"
-                        to: 0
-                        easing.type: Easing.InOutQuad
-                    }
-                    PropertyAction {
-                        target: swipeDelegate;
-                        property: "ListView.delayRemove";
-                        value: false
-                    }
-                }*/
             }
 
         }

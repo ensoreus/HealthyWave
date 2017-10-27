@@ -25,7 +25,7 @@ Page {
             width: parent.width * 0.7
             height: parent.height * 0.02
             color: "#505050"
-            text: qsTr("Уведіть ваш промо-код*")
+            text: "Уведіть ваш промо-код*"
             font.pointSize: 15
             font.weight: Font.Thin
             anchors.topMargin: 60 * ratio
@@ -36,6 +36,7 @@ Page {
         Controls.HWTextField {
             id: promoCodeField
             height: 40 * ratio
+            font.family: "NS UI Text"
             anchors.topMargin: 10 * ratio
             anchors.top: text1.bottom
             anchors.right: text1.right
@@ -54,7 +55,7 @@ Page {
                 anchors.bottomMargin: 3
                 anchors.top: parent.top
                 anchors.topMargin: 3
-                source: "qrc:/commons/img-copy.png"
+                source: "qrc:/commons/btn-promo-add.png"
 
                 MouseArea {
                     id: btnAddPromo
@@ -65,7 +66,6 @@ Page {
 
         Text {
             id: txMessage
-            text: qsTr("")
             font.family: "NS UI Text"
             anchors.bottom: btnNext.bottom
             anchors.bottomMargin: 0

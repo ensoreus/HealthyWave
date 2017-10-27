@@ -40,10 +40,8 @@ Rectangle{
 
     FreeWaterHelpScreenForm {
         id: helpScreen
-        //anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        //anchors.bottom: parent.bottom
         function updateUserData(){
             storage.getPromoCode(function(promocode){
                 promoCodeText.text = promocode
@@ -51,7 +49,6 @@ Rectangle{
         }
         Component.onCompleted: {
             updateUserData()
-
             state = "promoCodeGen"
         }
 
@@ -66,9 +63,11 @@ Rectangle{
         promoCodeText.onWillStartAnimation: {
             promoCodeText.forceActiveFocus()
         }
+
         btnCopyCode.onClicked: {
             clipboard.setText(promoCodeText.text)
         }
+
         btnCopyCode.onPressedChanged: {
             btnCopyCodeLabel.font.bold = !btnCopyCode.pressed
         }
