@@ -8,7 +8,6 @@ Page {
     width: 400
     height: 400
     property alias txMessage: txMessage
-    property alias btnAddPromo: btnAddPromo
     property alias btnNext: btnNext
     property alias promoCodeField: promoCodeField
     property alias waiterPanel: waiterPanel
@@ -33,42 +32,20 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
-        Controls.HWTextField {
+        Controls.PromoTextField {
             id: promoCodeField
             height: 40 * ratio
-            font.family: "NS UI Text"
             anchors.topMargin: 10 * ratio
             anchors.top: text1.bottom
             anchors.right: text1.right
             anchors.rightMargin: 0
             anchors.left: text1.left
             anchors.leftMargin: 0
-
-            Image {
-                id: imgAddPromo
-                x: 258
-                width: 39
-                fillMode: Image.PreserveAspectFit
-                anchors.right: parent.right
-                anchors.rightMargin: 3
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 3
-                anchors.top: parent.top
-                anchors.topMargin: 3
-                source: "qrc:/commons/btn-promo-add.png"
-
-                MouseArea {
-                    id: btnAddPromo
-                    anchors.fill: parent
-                }
-            }
         }
 
         Text {
             id: txMessage
             font.family: "NS UI Text"
-            anchors.bottom: btnNext.bottom
-            anchors.bottomMargin: 0
             anchors.right: btnNext.left
             anchors.rightMargin: 0
             anchors.left: promoCodeField.left
@@ -77,13 +54,32 @@ Page {
             anchors.topMargin: 3
         }
 
+        Text {
+            id: text2
+            x: 60
+            y: 276
+            height: parent.height * 0.2
+            color: "#505050"
+            font.family: "NS UI Text"
+            font.pointSize: 15
+            text: "*Уведіть бонусний промо-код, якщо Ви отримали його від ваших знайомих.\n\n\nЯкщо промо-коду у Вас нема - рухайтесь далі, на Вас чекає сюрприз!"
+            anchors.topMargin: 5
+            font.weight: Font.Thin
+            anchors.top: txMessage.bottom
+            anchors.right: promoCodeField.right
+            anchors.rightMargin: 0
+            anchors.left: promoCodeField.left
+            anchors.leftMargin: 0
+            wrapMode: Text.WordWrap
+        }
+
         Button {
             id: btnNext
             x: 340
             width: parent.width * 0.15
             height: parent.width * 0.15
-            anchors.topMargin: 50 * ratio
-            anchors.top: promoCodeField.bottom
+            anchors.topMargin: 5
+            anchors.top: text2.bottom
             anchors.right: parent.right
             anchors.rightMargin: parent.width * 0.15
             background: Image {
@@ -93,27 +89,9 @@ Page {
             }
         }
 
-        Text {
-            id: text2
-            x: 60
-            y: 276
-            height: 71
-            color: "#505050"
-            font.family: "NS UI Text"
-            font.pointSize: 15
-            text: qsTr("*Уведіть бонусний промо-код, якщо Ви отримали його від ваших знайомих.\nЯкщо промо-коду у Вас нема - рухайтесь далі, на Вас чекає сюрприз!")
-            font.weight: Font.Thin
-            anchors.topMargin: 30 * ratio
-            anchors.top: btnNext.bottom
-            anchors.right: promoCodeField.right
-            anchors.rightMargin: 0
-            anchors.left: promoCodeField.left
-            anchors.leftMargin: 0
-            wrapMode: Text.WordWrap
-        }
-
         Rectangle {
             id: waiterPanel
+            visible: false
             opacity: 0.5
             anchors.fill: parent
 

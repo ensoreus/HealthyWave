@@ -4,9 +4,11 @@ import "qrc:/"
 
 RegistrationPromoCodeForm {
     id:promoCodePage
+
     signal nextPage
     signal startEditData
     signal endEditData
+    signal addPromo
 
     Storage{
         id: storage
@@ -37,6 +39,10 @@ RegistrationPromoCodeForm {
         }else{
             console.log("wrong promo")
         }
+    }
+
+    promoCodeField.onAddPromo:{
+        addPromo()
     }
 
     promoCodeField.onWillStartAnimation: {

@@ -76,6 +76,7 @@ Page {
         }
         Rectangle {
             id: waiterPanel
+            visible: false
             opacity: 0.5
             anchors.fill: parent
 

@@ -61,6 +61,7 @@
         <file>DatePicker.qml</file>
         <file>HWFramedRoundButton.qml</file>
         <file>WhiteBusyIndicator.qml</file>
+        <file>PromoTextField.qml</file>
     </qresource>
     <qresource prefix="/commons">
         <file>avatar_qap.jpg</file>

@@ -141,7 +141,8 @@ Item {
             onStartEditData: {
                 promoCodeEditPage.presenterAnimationEnds()
             }
-            btnAddPromo.onClicked: {
+
+            onAddPromo: {
                 storage.getAuthData(function(authdata){
                     Api.addPromoCode(promoCodeField.text, authdata, function(response){
                         txMessage.text = response.result
@@ -152,6 +153,7 @@ Item {
                     })
                 })
             }
+
             onNextPage: {
                 Qt.inputMethod.hide()
                 item1.state = "default"
