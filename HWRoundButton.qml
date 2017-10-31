@@ -10,6 +10,21 @@ Item {
     property string labelHighlightColor: "blue"
     property alias labelText: label.text
     property alias showGlyph: glyph.visible
+    onEnabledChanged: {
+        if(enabled){
+            enable()
+        }else{
+           disable()
+        }
+    }
+
+    function enable(){
+        state = "enabled"
+    }
+
+    function disable(){
+        state = "disabled"
+    }
 
     width: 200 * ratio
     height: 50 * ratio
@@ -45,7 +60,6 @@ Item {
             source:Qt.resolvedUrl("qrc:/commons/img-back-arrow.png")
         }
 
-
         MouseArea{
             anchors.fill: parent
             id: clickable
@@ -71,5 +85,29 @@ Item {
         }
 
     }
+    states:[
+        State{
+            name:"enabled"
+            PropertyChanges{
+                target: clickable
+                enabled: true
+            }
+            PropertyChanges {
+                target: contents
+                opacity: 1.0
+            }
+        },
+        State{
+            name:"disabled"
+            PropertyChanges {
+                target: clickable
+                enabled: false
+            }
+            PropertyChanges {
+                target: contents
+                opacity: 0.5
+            }
+        }
+    ]
 
 }

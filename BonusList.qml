@@ -48,7 +48,7 @@ ViewController {
 
     Component.onCompleted: {
         createContextObjects()
-        btnUseSelectedBonuses.enabled = false
+        btnUseSelectedBonuses.disable()
         storage.getAuthData(function(authdata){
             showBusyIndicator()
             Api.getBonus(authdata, function(response){
@@ -88,12 +88,16 @@ ViewController {
                 cbUse.onCheckStateChanged: {
                     if (cbUse.checked) {
                         bonusesToUse.push(bonusModel.get(index))
-                        btnUseSelectedBonuses.enabled = true
+                        btnUseSelectedBonuses.enable()
                     } else {
                         bonusesToUse = bonusesToUse.filter( function(item){
                             return (item.PromoCode != PromoCode)
                         })
-                        btnUseSelectedBonuses.enabled = bonusesToUse.length > 0
+                        if(bonusesToUse.length > 0){
+                            btnUseSelectedBonuses.enable()
+                        }else{
+                            btnUseSelectedBonuses.disable()
+                        }
                     }
                 }
 
@@ -186,7 +190,7 @@ ViewController {
             font.weight: Font.Light
             color: "#9B9B9B"
             anchors.top: btnUseSelectedBonuses.bottom
-            anchors.topMargin: parent.height * 0.03
+            anchors.topMargin: parent.height * 0.1
             anchors.left: txAddPromo.left
             anchors.rightMargin: parent.width * 0.1
             anchors.right: parent.right
@@ -195,10 +199,9 @@ ViewController {
 
         HWTextField{
             id:txAddPromo
-
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lbAddPromo.bottom
-            anchors.topMargin: parent.height * 0.03
+            anchors.topMargin: parent.height * 0.01
             width: parent.width * 0.7
             height: 40 * ratio
 
@@ -221,7 +224,7 @@ ViewController {
             }
             Image{
                 id: imgPastePromo
-                source: "qrc:/commons/img-copy.png"
+                source: "qrc:/commons/btn-promo-add.png"
                 anchors.verticalCenter: parent.verticalCenter
                 height: parent.height * 0.8
                 width: height
