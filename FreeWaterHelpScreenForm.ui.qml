@@ -37,7 +37,7 @@ Rectangle {
         Text {
             id: mainLabel
             x: 187 * ratio
-            text: qsTr("Отримуй воду безкоштовно")
+            text: "Отримуй воду безкоштовно"
             anchors.topMargin: parent.height * 0.05
             font.weight: Font.Light
             font.family: "NS UI Text"
@@ -61,7 +61,7 @@ Rectangle {
         Text {
             id: promoCodeLabel
             color: "#9b9b9b"
-            text: qsTr("Ваш промокод")
+            text: "Ваш промокод"
             anchors.top: mainText.bottom
             anchors.topMargin: 10 * ratio
             anchors.left: parent.left
@@ -86,7 +86,7 @@ Rectangle {
             Text {
                 id: btnCopyCodeLabel
                 width: 60 * ratio
-                text: qsTr("копіювати")
+                text: "копіювати"
                 anchors.right: parent.right
                 anchors.rightMargin: 5 * ratio
                 anchors.verticalCenter: parent.verticalCenter
@@ -112,7 +112,7 @@ Rectangle {
             id: mainText
             width: 264 * ratio
             height: 65 * ratio
-            text: qsTr("Відправ промо код свому другу і отримай безкоштовно 2 бутля води")
+            text: "Відправ промо код свому другу і отримай безкоштовно 2 бутля води"
             anchors.top: image.bottom
             anchors.topMargin: 15 * ratio
             anchors.left: parent.left
@@ -128,7 +128,7 @@ Rectangle {
         Text {
             id: lbHowItWorks
             color: "#9012fe"
-            text: qsTr("Як це працює?")
+            text: "Як це працює?"
             anchors.topMargin: parent.height * 0.07
             anchors.bottomMargin: 20 * ratio
             anchors.top: promoCodeText.bottom
@@ -183,7 +183,7 @@ Rectangle {
             name: "promoCodeGen"
             PropertyChanges {
                 target: mainLabel
-                text: qsTr("Отримуй воду безкоштовно")
+                text: "Отримуй воду безкоштовно"
             }
             PropertyChanges {
                 target: promoCodeLabel
@@ -229,7 +229,7 @@ Rectangle {
                 textFormat: Text.RichText
                 lineHeight: 1
                 height: 65 * ratio
-                text: qsTr("Відправ промо код свому другу і отримай безкоштовно 2 бутля води")
+                text: "Відправ промо код свому другу і отримай безкоштовно 2 бутля води"
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 16
             }
@@ -240,7 +240,7 @@ Rectangle {
 
             PropertyChanges {
                 target: mainLabel
-                text: qsTr("Як це працює?")
+                text: "Як це працює?"
             }
 
             PropertyChanges {

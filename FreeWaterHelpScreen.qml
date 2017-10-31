@@ -3,11 +3,14 @@ import QuickIOS 0.1
 import com.ensoreus.Clipboard 1.0
 import com.ensoreus.hw.sharepicker 1.0
 import "qrc:/"
+import "qrc:/Api.js" as Api
 
 Rectangle{
 
     signal showUp
     signal hideDown
+    property var androidlink: ""
+    property var ioslink: ""
 
     id: helpScreenContainer
     x: 0
@@ -33,6 +36,25 @@ Rectangle{
         helpScreen.hintPanel.enabled = true
     }
 
+    Component.onCompleted: {
+        storage.getAuthData(function(authdata){
+            Api.getAppLink(authdata, function(response){
+                for(var index in response.result){
+                    var linkinfo = response.result[index]
+                    if(linkinfo.ContactInformationType === "AppStore"){
+                        console.log("app store lnk:" + linkinfo.ContactInformation)
+                        ioslink = linkinfo.ContactInformation
+                    }
+                    if(linkinfo.ContactInformationType === "Google Play Market"){
+                        console.log("android:" + linkinfo.ContactInformation)
+                        androidlink = linkinfo.ContactInformation
+                    }
+                }
+            },function(failure){
+
+            })
+        })
+    }
 
     function updateUserData(){
         helpScreen.updateUserData()
@@ -82,13 +104,9 @@ Rectangle{
 
         btnInvite.onButtonClick: {
             var url = ""
-            if(Qt.platform.os === "android"){
-                url ="https://play.google.com/store/apps/details?id=ukraine.water"
-            }else{
-                url = "https://itunes.apple.com/us/app/hvila-zdorova/id719638260?mt=8"
-            }
-            sharePicker.share("Рекомендую скачать удобное приложение, сервис по доставке воды «Хвиля Здоров’я», самая быстрая доставка воды в Киеве. При регистрации указывайте мой промокод '"+ promoCodeText.text+"' и получай безплатный бутыль. Скчивай и устанавливай:
-", url)
+            var message = "Рекомендую скачати зручний додаток, сервис для доставки води «Хвиля Здоров’я», найшвидша доставка води у Києві. При реєстрації вказуйте мій промокод '"+ promoCodeText.text+"' и отримуй безкоштовний бутиль. Зкачуй и встановлюй:
+" + androidlink +"\n\n"+ioslink
+            sharePicker.share(message,"")
         }
 
         transitions: [
