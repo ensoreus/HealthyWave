@@ -23,10 +23,6 @@ ViewController {
         centerBarTitle:"Замовлення"
     }
 
-    onIsInitChanged: {
-        console.log("INIT changed:"+isInit)
-    }
-
     Storage{
         id:storage
     }
@@ -209,7 +205,7 @@ ViewController {
                 delegate: HWCheckBox {
                     id: cbBonusCheck
                     y: 52
-                    height: 18//(style === "Regular") ? 18 * ratio : 25 * ratio
+                    height: 18
                     text: BonusName
                     style: bonusListStyle
                     checked: preselected
@@ -217,8 +213,6 @@ ViewController {
                     anchors.right: bonusLst.right
                     anchors.leftMargin: 15 * ratio
                     anchors.left: bonusLst.left
-//                    anchors.top: bonusLst.top
-//                    anchors.topMargin: 0.02
                     onCheckedChanged: {
                         if(!isInit){
                             bonusLst.mapBonusSelectionOnContext(index, checked)
@@ -228,30 +222,19 @@ ViewController {
                 }
 
                 function mapBonusSelectionOnContext(bonusIndex, isSelected){
-                    console.log("changing:" + bonusModel.get(bonusIndex).BonusName + " index:" + bonusIndex + " isSelected:" + isSelected)
                     if ( isSelected ){
                         var bonus = bonusModel.get(bonusIndex)
                         if (bonus.BonusType === "БесплатныйБутыльВоды"){
                             context.freeWater++
-                        }else{
-                            //                          context.bonuses.push(bonusModel.get(bonusIndex))
-                            //                          bonusesInCheck.activeBonuses.append(bonusModel.get(bonusIndex))
                         }
                     }else{
                         var chCode = bonusModel.get(bonusIndex).PromoCode
                         var chType = bonusModel.get(bonusIndex).BonusType
                         if (chType === "БесплатныйБутыльВоды" && context.freeWater > 0){
                             context.freeWater--
-                        }else{
-                            //                          bonusesInCheck.activeBonuses.append(bonusModel.get(bonusIndex))
-                            //                          var chIndex = indexOf(bonusesInCheck.activeBonuses, chCode)
-                            //                          bonusesInCheck.activeBonuses.remove(chIndex)
-                            //                          context.bonuses.splice(chIndex, 1)
                         }
                     }
                     bonusesInCheck.height = 0
-                    //context.bonuses.length * 23 * ratio
-                    //bonusesInCheck.updateSummaryDiscount()
                     layoutHeight()
                 }
 
@@ -305,7 +288,7 @@ ViewController {
                 id: hSum
                 x: 0
                 y: -1
-                anchors.topMargin: 23 * ratio
+                anchors.topMargin: 30 * ratio
                 anchors.top: bonusLst.bottom
                 anchors.leftMargin: 0
                 anchors.right: parent.right

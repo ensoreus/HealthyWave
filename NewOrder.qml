@@ -91,7 +91,7 @@ ViewController {
             id: lbOurPrices
             x: 301
             color: "#4a4a4a"
-            text: qsTr("Наши ціни")
+            text: "Наши ціни"
             font.weight: Font.Thin
             anchors.horizontalCenterOffset: rPricesPanel.x / 2 - 10 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
@@ -119,7 +119,7 @@ ViewController {
             Text {
                 id: txtOneBottle
                 color: "#ffffff"
-                text: qsTr("1 бут")
+                text: "1 бут"
                 anchors.leftMargin: parent.width * 0.05
                 anchors.left: parent.left
                 anchors.topMargin: parent.height * 0.06
@@ -132,7 +132,7 @@ ViewController {
             Text {
                 id: txtTwoBottles
                 color: "#ffffff"
-                text: qsTr("від 2 бут.")
+                text: "від 2 бут."
                 anchors.topMargin: parent.height * 0.06
                 anchors.top: txtOneBottle.bottom
                 anchors.leftMargin: parent.width * 0.05
@@ -143,7 +143,7 @@ ViewController {
             Text {
                 id: txtFiveBottles
                 color: "#ffffff"
-                text: qsTr("від 5 бут.")
+                text: "від 5 бут."
                 anchors.topMargin: parent.height * 0.06
                 anchors.top: txtTwoBottles.bottom
                 anchors.leftMargin: parent.width * 0.05
@@ -155,7 +155,7 @@ ViewController {
                 id: txtFee
                 x: 68
                 color: "#ffffff"
-                text: qsTr("  Застава за 1 бут.")
+                text: "  Застава за 1 бут."
                 anchors.topMargin: parent.height * 0.05
                 anchors.top: txtFiveBottles.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -170,7 +170,7 @@ ViewController {
                 width: 54
                 height: 23
                 color: "#ffffff"
-                text: qsTr("130 грн")
+                text: "130 грн"
                 anchors.topMargin: parent.height * 0.03
                 anchors.top: txtFee.bottom
                 font.weight: Font.DemiBold
@@ -185,7 +185,7 @@ ViewController {
                 id: lbOneBottle
                 x: 202
                 color: "#ffffff"
-                text: qsTr("60 грн")
+                text: "60 грн"
                 anchors.top: txtOneBottle.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.05
@@ -197,7 +197,7 @@ ViewController {
                 id: lbTwoBottle
                 x: 202
                 color: "#ffffff"
-                text: qsTr("45 грн")
+                text: "45 грн"
                 anchors.top: txtTwoBottles.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.05
@@ -209,7 +209,7 @@ ViewController {
                 id: lbFiveBottle
                 x: 202
                 color: "#ffffff"
-                text: qsTr("43 грн")
+                text: "43 грн"
                 anchors.top: txtFiveBottles.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.05
@@ -400,7 +400,7 @@ ViewController {
         Text {
             id: txBottlesTotal
             x: 314
-            text: qsTr("К-ть бутлів в замовленні")
+            text: "К-ть бутлів в замовленні"
             anchors.topMargin: parent.height * 0.03
             anchors.top: image.bottom
             font.weight: Font.Thin
@@ -427,7 +427,7 @@ ViewController {
         Text {
             id: txBottlesEmpty
             x: 317
-            text: qsTr("К-ть порожних бутлів в замовленні*")
+            text: "К-ть порожних бутлів в замовленні*"
             anchors.topMargin: parent.height * 0.06
             font.family: "NS UI Text"
             font.weight: Font.Thin
@@ -457,7 +457,7 @@ ViewController {
             x: 48
             width: parent.width * 0.8
             height: parent.height * 0.08
-            text: qsTr("*Якщо у Вас немає порожніх бутлів на обмін, \nВам необхідно внести заставу за бутель")
+            text: "*Якщо у Вас немає порожніх бутлів на обмін, \nВам необхідно внести заставу за бутель"
             font.pointSize: 13
             color: "#9B9B9B"
             font.weight: Font.ExtraLight

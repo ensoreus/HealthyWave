@@ -24,8 +24,8 @@ MyOrdersForm {
             tfEmptyBottles.text = order.emptyBottles + " шт."
             tfWater.text =  order.fullBottles + " x " + order.waterPrice + " грн."
             tfComments.text = order.comment
-            tfRentedBottles.text = order.emptyBottles + " x " + order.bottlesFee + " грн."
-            tfRentedBottles.visible = order.emptyBottles > 0
+            tfRentedBottles.text = (order.fullBottles - order.emptyBottles) + " x " + order.bottlesFee + " грн."
+            tfRentedBottles.visible = (order.fullBottles - order.emptyBottles) > 0
         }
         storage.getAvatarLocally(function(url){
                if(url != "" && url != null){
