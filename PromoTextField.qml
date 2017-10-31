@@ -8,6 +8,7 @@ Rectangle{
     property bool aboutToFocus: false
     property string lineColor: "black"
     property alias text: txPromoField.text
+    property alias readOnly: txPromoField.readOnly
     height: parent.width * 0.1
     color: "white"
 
@@ -34,11 +35,11 @@ Rectangle{
         id: txPromoField
         width: 300
         font.family: "NS UI Text"
-
         font.pointSize: 17
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: imgAdd.left
+        verticalAlignment: Text.AlignVCenter
         background: Rectangle{
             id: background
             border.width: 2

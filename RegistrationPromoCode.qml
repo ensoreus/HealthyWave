@@ -33,12 +33,12 @@ RegistrationPromoCodeForm {
     }
 
     btnNext.onPressed: {
-        if (promoCodeField.acceptableInput){
+       // if (promoCodeField.acceptableInput){
             btnNext.opacity = 0.8
             nextPage()
-        }else{
+        /*}else{
             console.log("wrong promo")
-        }
+        }*/
     }
 
     promoCodeField.onAddPromo:{

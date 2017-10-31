@@ -227,6 +227,10 @@ function collectBonuses(context, params){
     return params
 }
 
+function getPromocodeGifter(promocode, authdata, onSuccess, onFailure){
+    call("getinfopromocode", {"promocode":promocode, "phone":authdata.phone}, authdata, onSuccess, onFailure)
+}
+
 function getOrders(authdata, onSuccess, onFailure){
     call("getorders", {
              "phone":authdata.phone
@@ -342,6 +346,10 @@ function getAvailableCustomTime(day, authdata, onSuccess, onFailure){
              "phone":authdata.phone,
              "deliverydate":day
          }, authdata, onSuccess, onFailure)
+}
+
+function getAppLink(authdata, onSuccess, onFailure){
+    call("getlinkapp", {"phone":authdata.phone}, authdata, onSuccess, onFailure)
 }
 
 function call(routine, params, authData, onSuccess, onFailure){

@@ -147,6 +147,7 @@ Item {
                     Api.addPromoCode(promoCodeField.text, authdata, function(response){
                         txMessage.text = response.result
                         txMessage.color = "grey"
+                        congratsPage.getPromoGifter(promoCodeField.text)
                     },function(failure){
                         txMessage.text = failure.error
                         txMessage.color = "red"
@@ -168,7 +169,6 @@ Item {
             anchors.bottom: parent.bottom
             x: parent.width
             width: parent.width
-
             onButtonContinue: {
                 item1.opacity = 0
                 registrationDone()
