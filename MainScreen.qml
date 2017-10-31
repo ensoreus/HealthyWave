@@ -35,7 +35,7 @@ ViewController {
 
     Timer{
         id: checkUnratedOrders
-        interval: (6000 * 1)
+        interval: (60000 * 1)
         repeat: true
         onTriggered: {
             storage.getLastUnratedOrder(function(orderid, city, street, house, apt, time, courier, courierPhone ){
@@ -73,6 +73,19 @@ ViewController {
                 image: "qrc:/commons/btn-menu.png"
                 onClicked: {
                     menuClick();
+                }
+            }
+        }
+        rightBarButtonItems: VisualItemModel{
+            BarButtonItem{
+                id: btnClose
+                visible: false
+                onTintColorChanged: {
+                    tintColor = "white"
+                }
+                image: "qrc:/commons/btn-cross-small.png"
+                onClicked: {
+                    mainScreenHintPanel.state = "hidden"
                 }
             }
         }
@@ -198,6 +211,10 @@ ViewController {
                     target: mainScreenHintPanel
                     isAttract: false
                 }
+                PropertyChanges {
+                    target: btnClose
+                    visible: true
+                }
             },
             State{
                 name:"hidden"
@@ -212,6 +229,10 @@ ViewController {
                 PropertyChanges {
                     target: mainScreenHintPanel
                     isAttract: false
+                }
+                PropertyChanges {
+                    target: btnClose
+                    visible: false
                 }
             }
         ]
@@ -257,7 +278,7 @@ ViewController {
             x: 43
             y: 243
             color: "#b9b9b9"
-            text: qsTr("Зателефонувати")
+            text: "Зателефонувати"
             font.family: "NS UI Text"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom

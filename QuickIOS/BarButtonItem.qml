@@ -32,12 +32,13 @@ MouseArea {
         anchors.verticalCenter: parent.verticalCenter
 
         Item {
-            width: imageItem.width * ratio
-            height: imageItem.height * ratio
+            width: imageItem.width * 0.8
+            height: imageItem.height * 0.8
             anchors.horizontalCenter: parent.horizontalCenter
 
             Image {
                 id : imageItem
+                fillMode: Image.PreserveAspectFit
                 visible: renderOriginalImage
             }
 
