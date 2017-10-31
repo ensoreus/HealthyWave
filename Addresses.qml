@@ -109,7 +109,7 @@ AddressesForm {
                 color: "#444444"
                 font.pointSize: 20
                 verticalAlignment: Text.AlignVCenter
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 anchors.right: image.left
                 anchors.rightMargin: 0
                 anchors.topMargin: parent.height * 0.1
@@ -125,7 +125,7 @@ AddressesForm {
                 height: parent.height * 0.2
                 color: "#777777"
                 text: city
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
                 font.weight: Font.Thin
                 font.pointSize: 14
                 anchors.right: image.left
@@ -155,7 +155,7 @@ AddressesForm {
 
         swipe.right:Label {
             id: deleteLabel
-            text: qsTr("Delete")
+            text: "Вилучити"
             color: "white"
             verticalAlignment: Label.AlignVCenter
             padding: 12

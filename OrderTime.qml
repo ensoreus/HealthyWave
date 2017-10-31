@@ -204,6 +204,7 @@ ViewController {
             visible: false
             id: searchTimeWaiter
             anchors.fill: parent
+            anchors.bottomMargin: parent.height * 0.2
             onClose: {
                 visible = false
                 txtChooseAnother.visible = true

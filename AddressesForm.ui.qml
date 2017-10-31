@@ -46,7 +46,7 @@ ViewController {
                 x: 10
                 y: 216
                 height: 15
-                text: qsTr("Наразі у Вас немає жодної адреси")
+                text: "Наразі у Вас немає жодної адреси"
                 anchors.topMargin: parent.height * 0.05
                 anchors.top: image.bottom
                 anchors.right: parent.right
@@ -55,7 +55,7 @@ ViewController {
                 anchors.leftMargin: 10
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 11
-                font.family: "SF UI Text"
+                font.family: "NS UI Text"
             }
 
             Image {
