@@ -5,11 +5,20 @@ TextField{
     id:root
     signal willStartAnimation
     property bool aboutToFocus: false
+    property bool valid: true
     property string lineColor: "black"
 
     width: 300
     height: parent.width * 0.1
     font.pointSize: 17
+
+    onValidChanged:{
+        if(valid){
+            state="valid"
+        }else{
+            state="invalid"
+        }
+    }
 
     background: Rectangle{
         color: "white"
@@ -35,4 +44,29 @@ TextField{
             willStartAnimation()
         }
     }
+
+    states: [
+            State{
+                name:"invalid"
+                PropertyChanges {
+                    target: background.border
+                    width: 1
+                }
+                PropertyChanges {
+                    target: background.border
+                    color: "#ff5817"
+                }
+            },
+            State{
+                name:"valid"
+                PropertyChanges {
+                    target: background.border
+                    width: 0
+                }
+                PropertyChanges {
+                    target: background.border
+                    color: "#ffffff"
+                }
+            }
+        ]
 }

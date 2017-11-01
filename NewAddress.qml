@@ -89,6 +89,8 @@ NewAddressForm {
                     tintColor = (enabled) ? "white" : "grey"
                 }
                 onClicked: {
+                    if(!validateInput())
+                        return
                     showWaiter()
                     storage.getAuthData(function(authdata){
                         if(isEditing){
@@ -120,10 +122,19 @@ NewAddressForm {
 
     function validateInput(){
         var isValid = true;
-        isValid &= (tfCity.text.length > 3)
-        isValid &= (tfStreet.text.length > 3)
-        isValid &= (tfHouse.text.length > 0)
-        isValid &= (tfApt.text.length > 0)
+        tfCity.valid = (tfCity.text.length > 3)
+        tfStreet.valid = (tfCity.text.length > 3)
+        tfHouse.valid = (tfHouse.text.length > 0)
+        tfApt.valid = (tfApt.text.length > 0)
+        tfFloor.valid = (tfFloor.length > 0)
+        tfEntrance.valid = (tfEntrance.length > 0)
+        isValid &= tfCity.valid
+        isValid &= tfStreet.valid
+        isValid &= tfHouse.valid
+        isValid &= tfApt.valid
+        isValid &= tfFloor.valid
+        isValid &= tfEntrance.valid
+
         return isValid
     }
 
@@ -144,10 +155,12 @@ NewAddressForm {
         tfHouse.forceActiveFocus()
     }
 
+
     tfHouse.onTextChanged: {
         btnCommit.enabled = validateInput()
         console.log("tfHouse:"+validateInput())
     }
+
 
     tfEntrance.onWillStartAnimation: {
         tfEntrance.forceActiveFocus()

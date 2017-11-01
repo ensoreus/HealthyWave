@@ -6,6 +6,7 @@ ComboBox {
     height: 40
     property alias busyIndicator: busyIndicator
     property bool selectedFromList: false
+    property bool valid: true
     id:root
 
     property alias placeholderText: textEdit.placeholderText
@@ -17,6 +18,14 @@ ComboBox {
     }
     function stopWheelAnimation(){
         busyIndicator.running = false
+    }
+
+    onValidChanged:{
+        if(valid){
+            state="valid"
+        }else{
+            state="invalid"
+        }
     }
 
     indicator: Item{}
@@ -32,7 +41,7 @@ ComboBox {
             color: "white"
             border.color: "white"
             border.width: 0
-
+            id: background
             Rectangle{
                 id: textEditBackground
                 border.width: 0
@@ -44,6 +53,31 @@ ComboBox {
             }
         }
     }
+
+    states: [
+            State{
+                name:"invalid"
+                PropertyChanges {
+                    target: background.border
+                    width: 1
+                }
+                PropertyChanges {
+                    target: background.border
+                    color: "#ff5817"
+                }
+            },
+            State{
+                name:"valid"
+                PropertyChanges {
+                    target: background.border
+                    width: 0
+                }
+                PropertyChanges {
+                    target: background.border
+                    color: "#ffffff"
+                }
+            }
+        ]
 
     BusyIndicator {
         id: busyIndicator
