@@ -16,17 +16,15 @@ ViewController {
     onViewDidAppear:{
         txWater.text = context.fullb + " бут. х " + Utils.calcFullBottles(context) + " грн."
         txEmpty.text = context.emptyb + " шт."
-        var fee  = context.fullb - context.emptyb > 0 ? 130 : 0
-        txFee.text = fee + " грн."
-        txNoDiscount.text = context.fullb * Utils.calcFullBottles(context) + " грн."
+        var fee  = context.fullb - context.emptyb > 0 ? context.prices.bottle : 0
+//        txFee.text = fee + " грн."
         var discountSum = 0
         for (var index in context.bonuses){
             discountSum += Utils.bonusValueCalc(context.bonuses[index], context)
         }
-        console.log(discountSum)
-
+        txFreeWater.text = context.freeWater + " бут. х 0 грн."
+        txTotalBottles.text = context.emptyb + context.fullb - context.freeWater + " бут."
         var discounted = context.fullb * Utils.calcFullBottles(context) + (context.pump?context.prices.pump:0) + discountSum
-        txWithDiscount.text = discounted + " грн."
         txTotal.text = discounted + fee + " грн."
         txAddress.text = "вул. " + context.address.street + ", буд." + context.address.house + " оф." + context.address.apartment
         txDeliveryTime.text = context.deliveryTime.displayDate + " до " + context.deliveryTime.toHour
@@ -55,7 +53,7 @@ ViewController {
 
         BorderImage {
             id: borderImage
-            anchors.bottomMargin: parent.height * 0.15
+            anchors.bottomMargin: parent.height * 0.25
             anchors.bottom: parent.bottom
             anchors.top: hWHeader.bottom
             anchors.topMargin: 0
@@ -68,7 +66,7 @@ ViewController {
             Text {
                 id: lbWater
                 color: "#4a4a4a"
-                text: qsTr("Вода:")
+                text: "Вода:"
                 font.weight: Font.Thin
                 font.pointSize: 13
                 font.family: "NS UI Text"
@@ -80,14 +78,14 @@ ViewController {
                 anchors.left: parent.left
             }
 
-            Text {
-                id: lbEmptyBottle
+            Text{
+                id: lbFreeWater
                 color: "#4a4a4a"
-                text: qsTr("Порожніх бутлів:")
-                font.family: "NS UI Text"
+                text: "Безкоштовна вода:"
                 font.weight: Font.Thin
                 font.pointSize: 13
-                anchors.topMargin: parent.width * 0.01
+                font.family: "NS UI Text"
+                anchors.topMargin: parent.height * 0.02
                 anchors.top: lbWater.bottom
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: 0
@@ -95,15 +93,15 @@ ViewController {
                 anchors.left: parent.left
             }
 
-            Text {
-                id: lbFee
+            Text{
+                id: lbTotalBottles
                 color: "#4a4a4a"
-                text: qsTr("Застава за бутлі:")
-                font.family: "NS UI Text"
-                font.weight: Font.Light
+                text: "Всього бутлів:"
+                font.weight: Font.Thin
                 font.pointSize: 13
-                anchors.topMargin: parent.height * 0.01
-                anchors.top: lbEmptyBottle.bottom
+                font.family: "NS UI Text"
+                anchors.topMargin: parent.height * 0.02
+                anchors.top: lbFreeWater.bottom
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: 0
                 anchors.leftMargin: parent.width * 0.08
@@ -111,41 +109,31 @@ ViewController {
             }
 
             Text {
-                id: lbNoDiscount
+                id: lbEmptyBottle
                 color: "#4a4a4a"
-                text: qsTr("Сума без знижки:")
+                text: "Порожніх бутлів:"
                 font.family: "NS UI Text"
                 font.weight: Font.Thin
                 font.pointSize: 13
-                anchors.topMargin: parent.height * 0.01
-                anchors.top: lbFee.bottom
+                anchors.topMargin: parent.width * 0.02
+                anchors.top: lbTotalBottles.bottom
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: 0
                 anchors.leftMargin: parent.width * 0.08
                 anchors.left: parent.left
             }
 
-            Text {
-                id: lbWithDiscount
-                color: "#4a4a4a"
-                font.family: "NS UI Text"
-                text: qsTr("Сума зi знижкою:")
-                font.weight: Font.Thin
-                font.pointSize: 13
-                anchors.topMargin: parent.height * 0.01
-                anchors.top: lbNoDiscount.bottom
-                anchors.right: parent.horizontalCenter
-                anchors.rightMargin: 0
-                anchors.leftMargin: parent.width * 0.08
-                anchors.left: parent.left
-            }
-
-//            BonusesInCheck{
-//                id: lbWithDiscount
+//            Text {
+//                id: lbFee
+//                color: "#4a4a4a"
+//                text: "Застава за бутлі:"
+//                font.family: "NS UI Text"
+//                font.weight: Font.Light
+//                font.pointSize: 13
 //                anchors.topMargin: parent.height * 0.01
-//                anchors.top: lbNoDiscount.bottom
-//                anchors.right: parent.left
-//                anchors.rightMargin: parent.width * 0.08
+//                anchors.top: lbEmptyBottle.bottom
+//                anchors.right: parent.horizontalCenter
+//                anchors.rightMargin: 0
 //                anchors.leftMargin: parent.width * 0.08
 //                anchors.left: parent.left
 //            }
@@ -154,11 +142,11 @@ ViewController {
                 id: lbTotal
                 color: "#4a4a4a"
                 font.family: "NS UI Text"
-                text: qsTr("Сума замовлення:")
+                text: "Сума замовлення:"
                 font.weight: Font.Thin
                 font.pointSize: 13
                 anchors.topMargin: parent.height * 0.05
-                anchors.top: lbWithDiscount.bottom
+                anchors.top: lbEmptyBottle.bottom
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: 0
                 anchors.leftMargin: parent.width * 0.08
@@ -180,7 +168,6 @@ ViewController {
 
             Text {
                 id: txWater
-                text: qsTr("Text")
                 font.family: "NS UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 14
@@ -193,9 +180,36 @@ ViewController {
                 anchors.leftMargin: 20 * ratio
             }
 
+            Text{
+                id: txFreeWater
+                font.family: "NS UI Text"
+                font.weight: Font.DemiBold
+                font.pointSize: 14
+                verticalAlignment: Text.AlignVCenter
+                anchors.top: lbFreeWater.top
+                anchors.topMargin: 0
+                anchors.rightMargin: parent.width * 0.08
+                anchors.right: parent.right
+                anchors.left: lbWater.right
+                anchors.leftMargin: 20 * ratio
+            }
+
+            Text{
+                id: txTotalBottles
+                font.family: "NS UI Text"
+                font.weight: Font.DemiBold
+                font.pointSize: 14
+                verticalAlignment: Text.AlignVCenter
+                anchors.top: lbTotalBottles.top
+                anchors.topMargin: 0
+                anchors.rightMargin: parent.width * 0.08
+                anchors.right: parent.right
+                anchors.left: lbWater.right
+                anchors.leftMargin: 20 * ratio
+            }
+
             Text {
                 id: txEmpty
-                text: qsTr("Text")
                 font.family: "NS UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 14
@@ -208,52 +222,22 @@ ViewController {
                 anchors.leftMargin: 20* ratio
             }
 
-            Text {
-                id: txFee
-                text: qsTr("Text")
-                font.family: "NS UI Text"
-                font.weight: Font.DemiBold
-                font.pointSize: 14
-                verticalAlignment: Text.AlignVCenter
-                anchors.top: lbFee.top
-                anchors.topMargin: 0
-                anchors.rightMargin: parent.width * 0.08
-                anchors.right: parent.right
-                anchors.left: lbFee.right
-                anchors.leftMargin: 20 * ratio
-            }
-
-            Text {
-                id: txNoDiscount
-                text: qsTr("Text")
-                font.weight: Font.DemiBold
-                font.pointSize: 14
-                verticalAlignment: Text.AlignVCenter
-                anchors.top: lbNoDiscount.top
-                anchors.topMargin: 0
-                anchors.rightMargin: parent.width * 0.08
-                anchors.right: parent.right
-                anchors.left: lbNoDiscount.right
-                anchors.leftMargin: 20* ratio
-            }
-
-            Text {
-                id: txWithDiscount
-                text: qsTr("Text")
-                font.weight: Font.DemiBold
-                font.pointSize: 14
-                verticalAlignment: Text.AlignVCenter
-                anchors.top: lbWithDiscount.top
-                anchors.topMargin: 0
-                anchors.left: lbWithDiscount.right
-                anchors.leftMargin: 20* ratio
-                anchors.rightMargin: parent.width * 0.08
-                anchors.right: parent.right
-            }
+//            Text {
+//                id: txFee
+//                font.family: "NS UI Text"
+//                font.weight: Font.DemiBold
+//                font.pointSize: 14
+//                verticalAlignment: Text.AlignVCenter
+//                anchors.top: lbFee.top
+//                anchors.topMargin: 0
+//                anchors.rightMargin: parent.width * 0.08
+//                anchors.right: parent.right
+//                anchors.left: lbFee.right
+//                anchors.leftMargin: 20 * ratio
+//            }
 
             Text {
                 id: txTotal
-                text: qsTr("Text")
                 font.family: "NS UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 14
@@ -263,13 +247,13 @@ ViewController {
                 anchors.topMargin: 0
                 anchors.right: parent.right
                 anchors.left: lbTotal.right
-                anchors.leftMargin: 20* ratio
+                anchors.leftMargin: 20 * ratio
             }
 
             Text {
                 id: lbAddress
                 color: "#4a4a4a"
-                text: qsTr("Адреса:")
+                text: "Адреса:"
                 font.family: "NS UI Text"
                 font.pointSize: 13
                 font.weight: Font.Thin
@@ -284,9 +268,8 @@ ViewController {
             Text {
                 id: txAddress
                 height: 15
-                text: qsTr("Text")
                 font.family: "NS UI Text"
-                anchors.topMargin: parent.height * 0.01
+                anchors.topMargin: parent.height * 0.02
                 anchors.top: lbAddress.bottom
                 font.weight: Font.DemiBold
                 font.pointSize: 13
@@ -300,9 +283,9 @@ ViewController {
                 id: lbDeliveryTime
                 height: 15
                 color: "#4a4a4a"
-                text: qsTr("Час доставки:")
+                text: "Час доставки:"
                 font.family: "NS UI Text"
-                anchors.topMargin: parent.height * 0.01
+                anchors.topMargin: parent.height * 0.02
                 anchors.top: txAddress.bottom
                 font.weight: Font.Thin
                 font.pointSize: 13
@@ -315,9 +298,8 @@ ViewController {
             Text {
                 id: txDeliveryTime
                 height: 15
-                text: qsTr("Text")
                 font.family: "NS UI Text"
-                anchors.topMargin: parent.height * 0.01
+                anchors.topMargin: parent.height * 0.02
                 anchors.top: lbDeliveryTime.bottom
                 anchors.right: rectangle1.right
                 anchors.rightMargin: 0
@@ -330,11 +312,11 @@ ViewController {
             Text {
                 id: lbComment
                 color: "#4a4a4a"
-                text: qsTr("Коментар:")
+                text: "Коментар:"
                 font.family: "NS UI Text"
                 font.weight: Font.Thin
                 font.pointSize: 13
-                anchors.topMargin: parent.height * 0.01
+                anchors.topMargin: parent.height * 0.02
                 anchors.top: txDeliveryTime.bottom
                 anchors.right: rectangle1.right
                 anchors.rightMargin: 0
@@ -344,9 +326,8 @@ ViewController {
 
             Text {
                 id: txComment
-                text: qsTr("")
                 font.family: "NS UI Text"
-                anchors.topMargin: parent.height * 0.01
+                anchors.topMargin: parent.height * 0.02
                 anchors.top: lbComment.bottom
                 anchors.right: rectangle1.right
                 anchors.rightMargin: 0
@@ -359,11 +340,11 @@ ViewController {
             Text {
                 id: lbPaymentType
                 color: "#4a4a4a"
-                text: qsTr("Оплата:")
+                text: "Оплата:"
                 font.family: "NS UI Text"
                 font.weight: Font.Thin
                 font.pointSize: 13
-                anchors.topMargin: parent.height * 0.01
+                anchors.topMargin: parent.height * 0.02
                 anchors.top: txComment.bottom
                 anchors.right: rectangle1.right
                 anchors.rightMargin: 0
@@ -373,11 +354,10 @@ ViewController {
 
             Text {
                 id: txPaymentType
-                text: qsTr("Text")
                 font.family: "NS UI Text"
                 font.weight: Font.DemiBold
                 font.pointSize: 13
-                anchors.topMargin: parent.height * 0.01
+                anchors.topMargin: parent.height * 0.02
                 anchors.top: lbPaymentType.bottom
                 anchors.right: rectangle1.right
                 anchors.rightMargin: 0
@@ -393,7 +373,7 @@ ViewController {
             labelColor: "black"
             labelText: "ПІДТВЕРДИТИ"
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: parent.height * 0.01
+            anchors.topMargin: parent.height * 0.1
             anchors.top: borderImage.bottom
             onButtonClick: {
                 context.confirmed = true

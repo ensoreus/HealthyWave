@@ -90,7 +90,7 @@ ViewController {
     function feeForBottlesLine(){
         if((fullb - emptyb) > 0){
             lbBottlesFee.visible = true
-            return (fullb - emptyb) + " бут.  x " + context.prices.prices["bottle"] + " грн."
+            return (fullb - emptyb) + " бут.  x " + context.prices.bottle + " грн."
         }
         lbBottlesFee.visible = false
         return ""
@@ -132,7 +132,7 @@ ViewController {
     }
 
     function layoutHeight(){
-        borderImage.height = lbWater.height +
+        var bimageHeight = lbWater.height +
                 lbFreeWater.height +
                 lbTotalBottles.height +
                 lbEmptyBottles.height +
@@ -141,6 +141,8 @@ ViewController {
                 lbPump.height +
                 lbSummaryOfOrder.height +
                 orderSummaryView.height * 0.2
+        borderImage.height = bimageHeight < 200 ? 250 : bimageHeight
+
         var ch = hAdditionaly.height +
                 bonusLst.header +
                 cbPump.height +
@@ -288,8 +290,8 @@ ViewController {
                 id: hSum
                 x: 0
                 y: -1
-                anchors.topMargin: 30 * ratio
-                anchors.top: bonusLst.bottom
+                anchors.topMargin: 15 * ratio
+                anchors.top: cbPump.bottom
                 anchors.leftMargin: 0
                 anchors.right: parent.right
                 anchors.left: parent.left
@@ -309,11 +311,11 @@ ViewController {
                 border.right: 5
                 border.left: 5
                 source: "img-orderdetails-bg.png"
-
+                height: 707
                 Text {
                     id: lbWater
                     color: "#4a4a4a"
-                    text: qsTr("Вода:")
+                    text: "Вода:"
                     font.weight: Font.Thin
                     font.pointSize: 14
                     font.family: "NS UI Text"
@@ -326,7 +328,7 @@ ViewController {
                 Text {
                     id: lbFreeWater
                     color: "#4a4a4a"
-                    text: qsTr("Безкоштовна вода:")
+                    text: "Безкоштовна вода:"
                     font.weight: Font.Thin
                     font.pointSize: 14
                     anchors.topMargin: 5* ratio
@@ -350,7 +352,7 @@ ViewController {
                 Text {
                     id: lbTotalBottles
                     color: "#4a4a4a"
-                    text: qsTr("Всього бутлів:")
+                    text: "Всього бутлів:"
                     font.pointSize: 14
                     font.weight: Font.Thin
                     anchors.left: lbFreeWater.left
@@ -363,7 +365,7 @@ ViewController {
                 Text {
                     id: lbEmptyBottles
                     color: "#4a4a4a"
-                    text: qsTr("Порожніх бутлів:")
+                    text: "Порожніх бутлів:"
                     font.weight: Font.Thin
                     font.pointSize: 14
                     anchors.left: lbTotalBottles.left
@@ -376,7 +378,7 @@ ViewController {
                 Text {
                     id: lbBottlesFee
                     color: "#4a4a4a"
-                    text: qsTr("Застава за бутлі:")
+                    text: "Застава за бутлі:"
                     font.weight: Font.Thin
                     font.pointSize: 14
                     anchors.left: lbEmptyBottles.left
@@ -389,7 +391,7 @@ ViewController {
                 Text {
                     id: lbPump
                     color: "#4a4a4a"
-                    text: qsTr("Механічна помпа:")
+                    text: "Механічна помпа:"
                     font.weight: Font.Thin
                     font.pointSize: 14
                     anchors.left: lbBottlesFee.left
@@ -403,7 +405,7 @@ ViewController {
                 Text {
                     id: lbSummaryOfOrder
                     color: "#4a4a4a"
-                    text: qsTr("Сума замовлення:")
+                    text: "Сума замовлення:"
                     anchors.left: lbPump.left
                     anchors.topMargin: 15 * ratio
                     anchors.top: lbPump.bottom
@@ -414,7 +416,7 @@ ViewController {
                 Text {
                     id: txWater
                     color: "#4a4a4a"
-                    text: qsTr("")
+                    text: ""
                     anchors.left: parent.horizontalCenter
                     anchors.leftMargin: 15 * ratio
                     anchors.top: lbWater.top
@@ -427,7 +429,7 @@ ViewController {
                 Text {
                     id: txFreeWater
                     color: "#4a4a4a"
-                    text: qsTr("")
+                    text: ""
                     anchors.left: parent.horizontalCenter
                     anchors.leftMargin: 15 * ratio
                     anchors.top: lbFreeWater.top
@@ -440,7 +442,7 @@ ViewController {
                 Text {
                     id: txTotalBottles
                     color: "#4a4a4a"
-                    text: qsTr("")
+                    text: ""
                     anchors.top: lbTotalBottles.top
                     anchors.topMargin: 0
                     anchors.left: parent.horizontalCenter
@@ -453,7 +455,6 @@ ViewController {
                 Text {
                     id: txBottlesFee
                     color: "#4a4a4a"
-                    text: qsTr("")
                     anchors.left: parent.horizontalCenter
                     anchors.leftMargin: 15 * ratio
                     anchors.top: lbBottlesFee.top
@@ -466,7 +467,6 @@ ViewController {
                 Text {
                     id: txEmptyBottles
                     color: "#4a4a4a"
-                    text: qsTr("")
                     anchors.left: parent.horizontalCenter
                     anchors.leftMargin: 15 * ratio
                     anchors.top: lbEmptyBottles.top
@@ -479,7 +479,6 @@ ViewController {
                 Text {
                     id: txPump
                     color: "#4a4a4a"
-                    text: qsTr("")
                     anchors.left: parent.horizontalCenter
                     anchors.leftMargin: 15 * ratio
                     anchors.top: lbPump.top
@@ -493,7 +492,6 @@ ViewController {
                 Text {
                     id: txSummaryOfOrder
                     color: "#4a4a4a"
-                    text: qsTr("")
                     anchors.left: parent.horizontalCenter
                     anchors.leftMargin: 15 * ratio
                     anchors.top: lbSummaryOfOrder.top

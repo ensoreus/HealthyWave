@@ -43,7 +43,7 @@ Rectangle {
         font.weight: Font.Bold
         font.bold: true
         font.pointSize: 19
-        font.family: "SF UI Text"
+        font.family: "NS UI Text"
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         visible: !logo.visible
@@ -89,8 +89,8 @@ Rectangle {
             id: backImage
             width: 30
             anchors.leftMargin: parent.width * 0.2
-            anchors.bottomMargin: parent.width * 0.1
-            anchors.topMargin: parent.height * 0.1
+            anchors.bottomMargin: parent.width * 0.3
+            anchors.topMargin: parent.height * 0.3
             fillMode: Image.PreserveAspectFit
             anchors.bottom: parent.bottom
             anchors.top: parent.top
