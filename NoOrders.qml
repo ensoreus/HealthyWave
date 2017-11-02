@@ -80,7 +80,7 @@ ViewController{
                 anchors.top: txtNoOrders.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
                 onButtonClick: {
-                    navigationController.push(Qt.resolvedUrl("qrc:/address/OrdersAddreess.qml"));
+                    navigationController.push(Qt.resolvedUrl("qrc:/orders/OrdersAddress.qml"));
                 }
             }
 

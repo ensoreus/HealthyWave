@@ -142,7 +142,6 @@ ViewController {
             var toHour = datePicker.getColumn(2).model.get(toIndex).h.slice(2)
             context.deliveryTime.day = Utils.formatDateFullYear(dayIndex)
             context.deliveryTime.displayDate = Utils.displayDayForIndex(dayIndex)
-            console.log("day:"+context.deliveryTime.day)
             context.deliveryTime.fromHour = fromHour
             context.deliveryTime.toHour = toHour
         }
