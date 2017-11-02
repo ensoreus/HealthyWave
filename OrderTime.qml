@@ -18,6 +18,11 @@ ViewController {
         id:storage
     }
 
+    onViewWillAppear:{
+        txComment.visible = false
+        tfComment.visible = false
+    }
+
     navigationItem:NavigationItem{
         centerBarTitle:"Замовлення"
     }
@@ -59,7 +64,7 @@ ViewController {
             id: txHint
             x: 307
             width: parent.width * 0.7
-            text: qsTr("Запросити найближчий час доставки за Вашою адресою")
+            text: "Запросити найближчій час доставки на сьогодні"
             wrapMode: Text.WordWrap
             font.weight: Font.DemiBold
             font.pointSize: 15
@@ -98,12 +103,13 @@ ViewController {
                             context.deliveryTime.displayDate = Utils.displayDayForIndex(0)
                             context.deliveryTime.fromHour = rightNow()
                             context.deliveryTime.toHour = result.result
-                            txHint.text = "Найближчий час доставки
-за Вашою адресою"
+                            txHint.text = "Доставка за вашою адресою на
+ сьогодні можлива протягом часу до "
+                            txComment.visible = true
+                            tfComment.visible = true
                         })
                         searchTimer.start()
                     }, function(error){
-                        console.log(error)
                         searchTimer.onTriggered.connect(function delayError(failure){
                             searchTimeWaiter.showError = true
                             content.stopSearchAnimation()
@@ -136,7 +142,7 @@ ViewController {
             x: 307
             width: parent.width * 0.6
             color: "#9013fe"
-            text: qsTr("Вибрати інший час")
+            text: "Вибрати інший час"
             font.underline: true
             font.pointSize: 15
             font.weight: Font.Normal
@@ -157,7 +163,7 @@ ViewController {
         Text {
             id: txComment
             color: "#9b9b9b"
-            text: qsTr("Коментар")
+            text: "Коментар"
             anchors.right: tfComment.right
             anchors.rightMargin: 0
             font.weight: Font.Thin

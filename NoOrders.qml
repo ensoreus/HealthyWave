@@ -87,7 +87,7 @@ ViewController{
             Text {
                 id: txtNoOrders
                 x: 307
-                text: qsTr("Ви ще не зробили жодного замовлення")
+                text: "Ви ще не зробили жодного замовлення"
                 anchors.topMargin: parent.height * 0.05
                 anchors.top: image.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
