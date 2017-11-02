@@ -79,7 +79,6 @@ Item {
             }
         }
 
-
         RegistrationPageEmail{
             id: emailEditPage
             anchors.top: parent.top
@@ -96,7 +95,6 @@ Item {
             }
         }
 
-
         RegistrationPageName{
             id: nameEditPage
             anchors.top: parent.top
@@ -104,6 +102,9 @@ Item {
             width: parent.width
             onStartEditData: {
                 nameEditPage.presenterAnimationEnds()
+            }
+            onShowInfo: {
+                stackLayout.push(infoPage)
             }
 
             onNextPage: {
@@ -162,7 +163,6 @@ Item {
             }
         }
 
-
         RegistrationCongratsWithFreeWater{
             id: congratsPage
             anchors.top: parent.top
@@ -172,6 +172,17 @@ Item {
             onButtonContinue: {
                 item1.opacity = 0
                 registrationDone()
+            }
+        }
+
+        RegistrationInfo{
+            id: infoPage
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            x: 0
+            width: parent.width
+            onClose: {
+                stackLayout.pop()
             }
         }
 

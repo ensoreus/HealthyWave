@@ -32,6 +32,7 @@
         <file>RegistrationCongratsWithFreeWater.qml</file>
         <file>RegistrationCongratsWithFreeWaterForm.ui.qml</file>
         <file>RegistrationPageAvatar.qml</file>
+        <file>RegistrationInfo.qml</file>
     </qresource>
     <qresource prefix="/controls">
         <file>HWPhoneField.qml</file>
@@ -98,6 +99,7 @@
         <file>btn-promo-add.png</file>
         <file>btn-cross-small.png</file>
         <file>img-discount.png</file>
+        <file>btn-green-back.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
@@ -182,5 +184,10 @@
     <qresource prefix="/bonus">
         <file>BonusList.qml</file>
         <file>BonusCell.qml</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>info.qml</file>
+        <file>index.html</file>
+        <file>info.html</file>
     </qresource>
 </RCC>

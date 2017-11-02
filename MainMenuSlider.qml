@@ -138,7 +138,8 @@ Rectangle {
             {"file":"qrc:/cards/CardsList.qml", "title":"Оплата", "present":false},
             {"file":"qrc:/profile/Profile.qml", "title":"Профіль", "present":false},
             {"file":"qrc:/contacts/Contacts.qml", "title":"Контакти", "present":false},
-            {"file":"qrc:/bonus/BonusList.qml", "title":"Бонуси", "present":false}
+            {"file":"qrc:/bonus/BonusList.qml", "title":"Бонуси", "present":false},
+            {"file":"qrc:/info/info.qml","title":"Юридична інформація", "present":false}
         ]
 
         onMyOrdersItem: {
@@ -163,6 +164,14 @@ Rectangle {
 
         onBonusesItem: {
             pushViewController(5)
+        }
+
+        onInfoLink: {
+            pushViewController(6)
+        }
+
+        onSiteLink: {
+            Qt.openUrlExternally("https://hvilya-zd.com.ua")
         }
 
         function pushViewController(index){

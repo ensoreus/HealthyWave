@@ -5,6 +5,7 @@ import "qrc:/controls"
 Page {
     width: 400
     height: 400
+    property alias btnInfo: btnInfo
     property alias waiterPanel: waiterPanel
     property alias btnNext: btnNext
     property alias nameField: nameField
@@ -19,7 +20,7 @@ Page {
             x: 70
             width: parent.width * 0.7
             height: parent.height * 0.02
-            text: qsTr("Уведіть Ваше і'мя")
+            text: "Уведіть Ваше і'мя"
             color: "#505050"
             font.weight: Font.Thin
             font.family: "NS UI Text"
@@ -45,7 +46,8 @@ Page {
             id: text2
             height: parent.height * 0.25
             color: "#505050"
-            text: qsTr("*Продолжая, Вы подтверждаете, что прочитали и принимаете Условия предоставления услуг и Политику конфиденциальности. ")
+            text: "*Продолжая, Вы подтверждаете, что прочитали и принимаете <u>Условия предоставления услуг и Политику конфиденциальности</u>. "
+            textFormat: Text.RichText
             wrapMode: Text.WordWrap
             font.weight: Font.Thin
             font.pointSize: 15
@@ -56,6 +58,11 @@ Page {
             anchors.rightMargin: 0
             anchors.left: nameField.left
             anchors.leftMargin: 0
+
+            MouseArea {
+                id: btnInfo
+                anchors.fill: parent
+            }
         }
 
         Button {
@@ -63,7 +70,6 @@ Page {
             x: 299
             width: parent.width * 0.15
             height: parent.width * 0.15
-            text: qsTr("")
             anchors.topMargin: 50 * ratio
             anchors.top: nameField.bottom
             anchors.right: parent.right

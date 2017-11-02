@@ -5,6 +5,7 @@ RegistrationPageNameForm {
     signal nextPage
     signal startEditData
     signal endEditData
+    signal showInfo
 
     function presenterAnimationEnds(){
         nameField.forceActiveFocus()
@@ -30,6 +31,10 @@ RegistrationPageNameForm {
         }else{
             console.log("wrong email")
         }
+    }
+
+    btnInfo.onClicked: {
+        showInfo()
     }
 
     nameField.onWillStartAnimation: {
