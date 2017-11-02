@@ -63,7 +63,7 @@ ViewController {
                 y: 26
                 height: 16
                 color: "#4a4a4a"
-                text: qsTr("Вода:")
+                text: "Вода:"
                 font.pointSize: 13
                 anchors.left: parent.left
                 anchors.leftMargin: 45
@@ -79,7 +79,6 @@ ViewController {
                 id: tfWater
                 y: 27
                 height: 15
-                text: qsTr("")
                 anchors.right: parent.right
                 anchors.rightMargin: 34
                 anchors.left: parent.horizontalCenter
@@ -94,7 +93,7 @@ ViewController {
                 id: lbEmptyBottles
                 height: 15
                 color: "#4a4a4a"
-                text: qsTr("Порожніх бутлів:")
+                text: "Порожніх бутлів:"
                 anchors.topMargin: 5
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: -8
@@ -110,7 +109,6 @@ ViewController {
                 id: tfEmptyBottles
                 y: 53
                 height: 15
-                text: qsTr("")
                 anchors.right: parent.right
                 anchors.rightMargin: 34
                 anchors.left: parent.horizontalCenter
@@ -126,7 +124,7 @@ ViewController {
                 id: lbRentedButtles
                 height: 15
                 color: "#4a4a4a"
-                text: qsTr("Застава за бутлі:")
+                text: "Застава за бутлі:"
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: -8
                 anchors.top: lbEmptyBottles.bottom
@@ -141,7 +139,6 @@ ViewController {
             Text {
                 id: tfRentedBottles
                 height: 15
-                text: qsTr("")
                 font.bold: true
                 font.pointSize: 13
                 font.family: "NS UI Text"
@@ -157,7 +154,7 @@ ViewController {
                 id: lbSum
                 height: 15
                 color: "#4a4a4a"
-                text: qsTr("Сума замовлення:")
+                text: "Сума замовлення:"
                 font.family: "NS UI Text"
                 font.weight: Font.Thin
                 wrapMode: Text.WrapAnywhere
@@ -173,7 +170,6 @@ ViewController {
             Text {
                 id: tfSum
                 height: 15
-                text: qsTr("")
                 verticalAlignment: Text.AlignTop
                 anchors.right: parent.right
                 anchors.rightMargin: 34
@@ -200,7 +196,7 @@ ViewController {
             Text {
                 id: lbDate
                 width: 126
-                text: qsTr("Дата замовлення:")
+                text: "Дата замовлення:"
                 font.bold: true
                 anchors.top: bevel.bottom
                 anchors.topMargin: parent.height * 0.05
@@ -214,7 +210,6 @@ ViewController {
             Text {
                 id: tfDate
                 color: "#444444"
-                text: qsTr("")
                 font.weight: Font.Thin
                 anchors.right: tfSum.right
                 anchors.rightMargin: 0
@@ -230,7 +225,7 @@ ViewController {
             Text {
                 id: lbAddress
                 width: 55
-                text: qsTr("Адреса:")
+                text: "Адреса:"
                 anchors.top: lbDate.bottom
                 anchors.topMargin: parent.height * 0.02
                 anchors.left: lbDate.left
@@ -245,7 +240,6 @@ ViewController {
                 id: tfAddress
                 x: 51
                 color: "#444444"
-                text: qsTr("")
                 anchors.top: lbAddress.top
                 anchors.topMargin: 0
                 anchors.right: tfDate.right
@@ -260,7 +254,7 @@ ViewController {
             Text {
                 id: lbDeliveryTime
                 width: 90
-                text: qsTr("Час достави:")
+                text: "Час достави:"
                 font.weight: Font.DemiBold
                 font.family: "NS UI Text"
                 anchors.top: lbAddress.bottom
@@ -275,7 +269,6 @@ ViewController {
                 id: tfDeliveryTime
                 width: 205
                 color: "#444444"
-                text: qsTr("")
                 anchors.top: lbDeliveryTime.top
                 anchors.topMargin: 0
                 anchors.right: tfAddress.right
@@ -290,7 +283,7 @@ ViewController {
             Text {
                 id: lbComments
                 width: 83
-                text: qsTr("Коментарії:")
+                text: "Коментарії:"
                 font.weight: Font.DemiBold
                 anchors.top: lbDeliveryTime.bottom
                 anchors.topMargin: parent.height * 0.02
@@ -304,7 +297,7 @@ ViewController {
             Text {
                 id: lbPaymentType
                 width: 105
-                text: qsTr("Спосіб оплати: ")
+                text: "Спосіб оплати: "
                 font.weight: Font.DemiBold
                 anchors.top: lbComments.bottom
                 anchors.topMargin: parent.height * 0.02
@@ -318,7 +311,6 @@ ViewController {
             Text {
                 id: tfComments
                 color: "#444444"
-                text: qsTr("")
                 clip: true
                 renderType: Text.QtRendering
                 anchors.top: lbComments.top
@@ -334,7 +326,6 @@ ViewController {
             Text {
                 id: tfPaymentType
                 color: "#444444"
-                text: qsTr("")
                 anchors.top: lbPaymentType.top
                 anchors.topMargin: 0
                 anchors.right: tfComments.right

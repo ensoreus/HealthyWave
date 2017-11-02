@@ -37,7 +37,6 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 0
 
-
         Text {
             id: userName
             width: 200 * ratio
@@ -84,7 +83,7 @@ Item {
             id: lbMyOrders
             width: 347 * ratio
             height: parent.height * 0.05
-            text: qsTr("Мої замовлення")
+            text: "Мої замовлення"
             anchors.horizontalCenterOffset: -50 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
@@ -103,7 +102,7 @@ Item {
             id: lbPayment
             width: 347 * ratio
             height: parent.height * 0.05
-            text: qsTr("Оплата")
+            text: "Оплата"
             anchors.horizontalCenterOffset: -50 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lbMyOrders.bottom
@@ -122,7 +121,7 @@ Item {
             id: lbAddress
             width: 347 * ratio
             height: parent.height * 0.05
-            text: qsTr("Адреса достави")
+            text: "Адреса достави"
             anchors.horizontalCenterOffset: -50 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lbPayment.bottom
@@ -141,7 +140,7 @@ Item {
             id: lbContacts
             width: 347 * ratio
             height: parent.height * 0.05
-            text: qsTr("Контакти")
+            text: "Контакти"
             anchors.horizontalCenterOffset: -50 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lbAddress.bottom
@@ -161,7 +160,7 @@ Item {
             id: lbProfile
             width: 347 * ratio
             height: parent.height * 0.05
-            text: qsTr("Профіль")
+            text: "Профіль"
             anchors.horizontalCenterOffset: -50 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lbContacts.bottom
@@ -181,7 +180,7 @@ Item {
             id: lbBonuses
             width: 347 * ratio
             height: parent.height * 0.05
-            text: qsTr("Бонуси")
+            text: "Бонуси"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.leftMargin: 25 * ratio
             MouseArea {
@@ -211,7 +210,7 @@ Item {
                 y: 0
                 width: 97 * ratio
                 height: 15 * ratio
-                text: qsTr("Офіційний сайт:")
+                text: "Офіційний сайт:"
                 anchors.left: parent.left
                 anchors.leftMargin: 0
                 font.pointSize: 12
@@ -221,7 +220,7 @@ Item {
                 id: lbLink
                 y: 0
                 height: 15 * ratio
-                text: qsTr("www.hvilya-zd.com.ua")
+                text: "www.hvilya-zd.com.ua"
                 font.underline: true
                 anchors.right: parent.right
                 anchors.rightMargin: 0
@@ -238,7 +237,7 @@ Item {
 
             Text {
                 id: lbInfo
-                text: qsTr("ЮРИДИЧНА ІНФОРМАЦІЯ")
+                text: "ЮРИДИЧНА ІНФОРМАЦІЯ"
                 font.underline: true
                 anchors.top: lbLink.bottom
                 anchors.topMargin: 1 * ratio

@@ -111,7 +111,7 @@ Item {
                     width: parent.width * 0.9
                     height: parent.height * 0.25
                     color: "#ffffff"
-                    text: qsTr("Бажаєте, щоб наш спеціаліст передзвонив \nВам для підтвердження замовлення?")
+                    text: "Бажаєте, щоб наш спеціаліст передзвонив \nВам для підтвердження замовлення?"
                     //fontSizeMode: Text.HorizontalFit
                     font.pointSize: weAreOn.width / 20
                     wrapMode: Text.WordWrap

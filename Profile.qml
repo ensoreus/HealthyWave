@@ -77,7 +77,7 @@ ViewController {
                 id: lbName
                 y: 41
                 height: parent.height * 0.2
-                text: qsTr("")
+
                 font.pointSize: 18
                 font.bold: true
                 verticalAlignment: Text.AlignVCenter
@@ -91,7 +91,7 @@ ViewController {
 
         Text {
             id: lbInfo
-            text: qsTr("Інформація")
+            text: "Інформація"
             font.weight: Font.DemiBold
             font.pointSize: 15
             anchors.topMargin: parent.height * 0.03
@@ -106,7 +106,7 @@ ViewController {
             id: lbEdit
             x: 350
             color: "#1eb2a4"
-            text: qsTr("Редагувати")
+            text: "Редагувати"
             font.weight: Font.DemiBold
             font.pointSize: 15
             anchors.topMargin: parent.height * 0.03
@@ -127,7 +127,7 @@ ViewController {
         Text {
             id: lbPhone
             height: parent.height * 0.05
-            text: qsTr("Телефон")
+            text: "Телефон"
             anchors.topMargin: parent.height * 0.05
             anchors.top: underline.bottom
             horizontalAlignment: Text.AlignLeft
@@ -141,7 +141,6 @@ ViewController {
             id: txPhone
             height: parent.height * 0.05
             color: "#1eb2a4"
-            text: qsTr("")
             font.weight: Font.DemiBold
             font.pointSize: 15
             horizontalAlignment: Text.AlignRight
@@ -156,7 +155,7 @@ ViewController {
         Text {
             id: lbEmail
             height: parent.height * 0.05
-            text: qsTr("Пошта")
+            text: "Пошта"
             anchors.topMargin: parent.height * 0.05
             anchors.top: lbPhone.bottom
             anchors.leftMargin: parent.width * 0.05
@@ -183,7 +182,6 @@ ViewController {
             id: txEmail
             height: parent.height * 0.05
             color: "#1eb2a4"
-            text: qsTr("Text")
             anchors.leftMargin: parent.width * 0.1
             anchors.left: lbPhone.left
             anchors.top: lbEmail.top
@@ -199,7 +197,7 @@ ViewController {
             id: lbPass
             x: 32
             height: parent.height * 0.05
-            text: qsTr("Промо-код")
+            text: "Промо-код"
             anchors.topMargin: parent.height * 0.1
             anchors.leftMargin: 0
             anchors.top: lbEmail.bottom

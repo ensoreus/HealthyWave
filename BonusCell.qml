@@ -14,7 +14,7 @@ Item {
 
         Text {
             id: lbMainTitle
-            text: qsTr("Перше замовлення онлайн")
+            text: "Перше замовлення онлайн"
             anchors.rightMargin: parent.width * 0.1
             anchors.right: cbUse.left
             anchors.leftMargin: parent.width * 0.05
@@ -28,7 +28,6 @@ Item {
 
         Text {
             id: lbComment
-            text: qsTr("")
             anchors.topMargin: parent.height * 0.05
             anchors.top: lbMainTitle.bottom
             anchors.right: lbMainTitle.right
@@ -42,7 +41,6 @@ Item {
 
         Text {
             id: lbActiveTill
-            text: qsTr("")
             anchors.topMargin: parent.height * 0.05
             anchors.top: lbComment.bottom
             anchors.right: lbComment.right

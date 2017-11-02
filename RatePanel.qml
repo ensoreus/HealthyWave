@@ -17,7 +17,7 @@ Item {
             width: parent.width * 0.8
             height: parent.height * 0.12
             color: "#ffffff"
-            text: qsTr("ВАШЕ ЗАМОВЛЕННЯ ДОСТАВЛЕНО")
+            text: "ВАШЕ ЗАМОВЛЕННЯ ДОСТАВЛЕНО"
             font.bold: true
             anchors.topMargin: parent.height * 0.08
             anchors.top: parent.top
@@ -49,7 +49,7 @@ Item {
             id: lbRateDelivery
             height: parent.height * 0.08
             color: "#ffffff"
-            text: qsTr("ОЦІНИТИ ДОСТАВКУ:")
+            text: "ОЦІНИТИ ДОСТАВКУ:"
             anchors.topMargin: 8 * ratio
             font.pointSize: 15
             font.family: "NS UI Text"

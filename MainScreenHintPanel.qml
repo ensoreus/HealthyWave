@@ -27,7 +27,7 @@ Rectangle {
             y: 8 * ratio
             width: 398 * ratio
             height: 15 * ratio
-            text: qsTr("Як отримати безкоштовну воду?")
+            text: "Як отримати безкоштовну воду?"
             font.bold: true
             font.pointSize: 15
             anchors.right: parent.right
@@ -43,7 +43,7 @@ Rectangle {
             width: 398 * ratio
             height: 45 * ratio
             color: "#8c8c8c"
-            text: qsTr("Відправте своєму другу цей промо-код і коли він зробить перше замовлення")
+            text: "Відправте своєму другу цей промо-код і коли він зробить перше замовлення"
             wrapMode: Text.WordWrap
             font.pointSize: 13
             anchors.right: parent.right

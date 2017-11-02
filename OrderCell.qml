@@ -11,7 +11,6 @@ Rectangle {
     Text {
         id: txDay
         color: "#777777"
-        text: qsTr("Text")
         anchors.rightMargin: parent.width * 0.2
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.2
@@ -24,7 +23,6 @@ Rectangle {
     Text {
         id: txAddress
         color: "#9b9b9b"
-        text: qsTr("Text")
         font.weight: Font.Thin
         font.pointSize: 13
         anchors.right: txDay.right
@@ -40,7 +38,6 @@ Rectangle {
         x: 8
         y: 43
         color: "#777777"
-        text: qsTr("Text")
         font.weight: Font.DemiBold
         font.pointSize: 17
         horizontalAlignment: Text.AlignRight
