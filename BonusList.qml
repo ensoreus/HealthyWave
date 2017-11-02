@@ -69,6 +69,35 @@ ViewController {
         color: "#ffffff"
         anchors.fill: parent
 
+        Image{
+            id: noBonuses
+            anchors.top:parent.top
+            anchors.topMargin: parent.height * 0.3
+            anchors.left: parent.left
+            anchors.leftMargin: -1
+            anchors.right: parent.right
+            anchors.rightMargin: -1
+            fillMode: Image.PreserveAspectFit
+            visible: false
+            source: "qrc:/commons/img-discount.png"
+        }
+
+        Text{
+            id:txNoBonuses
+            anchors.top: noBonuses.bottom
+            anchors.topMargin: parent.height * 0.03
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.family: "NS UI Text"
+            font.pointSize: 18
+            visible: false
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            height: parent.height * 0.1
+            width: parent.width * 0.8
+            color: "black"
+            text: "Ви ще не маєте бонусів"
+        }
+
         ListView {
             id: lstBonuses
             clip: true
@@ -125,6 +154,15 @@ ViewController {
                         var modelItem = {bonus:item, selected:0 }
                         bonusModel.append(item)
                     }
+                    if (data.length === 0){
+                        noBonuses.visible = true
+                        txNoBonuses.visible = true
+                        btnUseSelectedBonuses.visible = false
+                    }else{
+                        noBonuses.visible = false
+                        txNoBonuses.visible = false
+                        btnUseSelectedBonuses.visible = true
+                    }
                 }
 
             }
@@ -155,6 +193,7 @@ ViewController {
             }
         }
 
+
         Image {
             id: imgscroll
             x: 270
@@ -176,12 +215,12 @@ ViewController {
             height: parent.height * 0.1
             anchors.topMargin: 53
             labelText: "ВИКОРИСТАТИ"
+            visible: false
             onButtonClick: {
                 context.bonuses = bonusesToUse
                 navigationController.push("qrc:/orders/OrdersAddress.qml", {"context":context})
             }
         }
-
 
         Text{
             id: lbAddPromo

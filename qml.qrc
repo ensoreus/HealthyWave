@@ -97,6 +97,7 @@
         <file>Default@3x.png</file>
         <file>btn-promo-add.png</file>
         <file>btn-cross-small.png</file>
+        <file>img-discount.png</file>
     </qresource>
     <qresource prefix="/mainScreen">
         <file>MainScreen.qml</file>
