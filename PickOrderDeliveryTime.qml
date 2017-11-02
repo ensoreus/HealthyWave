@@ -66,7 +66,7 @@ ViewController {
             x: 307
             width: parent.width * 0.7
             height: parent.height * 0.1
-            text: qsTr("Виберіть інший час доставки  за Вашою адресою")
+            text: "Виберіть інший час доставки  за Вашою адресою"
             wrapMode: Text.WordWrap
             font.weight: Font.DemiBold
             font.pointSize: 15
@@ -108,7 +108,7 @@ ViewController {
         Text {
             id: text2
             width: parent.width * 0.7
-            text: qsTr("Коментар")
+            text: "Коментар"
             anchors.topMargin: parent.height * 0.05
             anchors.top: datePicker.bottom
             anchors.left: txtComment.left
@@ -138,13 +138,13 @@ ViewController {
             var fromIndex = datePicker.getColumn(1).currentIndex;
             var toIndex = datePicker.getColumn(2).currentIndex;
 
-            var fromHour = fromIndex + 7
-            var toHour = toIndex + 8
+            var fromHour = datePicker.getColumn(1).model.get(fromIndex).h.slice(2);
+            var toHour = datePicker.getColumn(2).model.get(toIndex).h.slice(2)
             context.deliveryTime.day = Utils.formatDateFullYear(dayIndex)
             context.deliveryTime.displayDate = Utils.displayDayForIndex(dayIndex)
             console.log("day:"+context.deliveryTime.day)
-            context.deliveryTime.fromHour = fromHour+":00"
-            context.deliveryTime.toHour = toHour+":00"
+            context.deliveryTime.fromHour = fromHour
+            context.deliveryTime.toHour = toHour
         }
 
         HWRoundButton {

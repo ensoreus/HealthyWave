@@ -107,7 +107,6 @@ Tumbler {
         role: "to"
     }
 
-
     style:TumblerStyle {
         id: tumblerStyle
 
