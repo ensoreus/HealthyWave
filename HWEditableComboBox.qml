@@ -39,45 +39,65 @@ ComboBox {
         }
         background: Rectangle{
             color: "white"
-            border.color: "white"
-            border.width: 0
-            id: background
             Rectangle{
-                id: textEditBackground
-                border.width: 0
+                id: background
+                color: "white"
+                anchors.fill: parent
+                anchors.topMargin: 4
+                anchors.rightMargin: 4
+                anchors.leftMargin: 4
+                anchors.bottomMargin: 4
+            }
+
+            Rectangle{
+                id: underline
+                border.width: 2
                 height: 2
                 x: 0
                 y: root.height - 2
                 width: root.width
                 color: "#c8c7cc"
+                border.color: "#c8c7cc"
             }
         }
     }
 
     states: [
-            State{
-                name:"invalid"
-                PropertyChanges {
-                    target: background.border
-                    width: 1
-                }
-                PropertyChanges {
-                    target: background.border
-                    color: "#ff5817"
-                }
-            },
-            State{
-                name:"valid"
-                PropertyChanges {
-                    target: background.border
-                    width: 0
-                }
-                PropertyChanges {
-                    target: background.border
-                    color: "#ffffff"
-                }
+        State{
+            name:"invalid"
+            PropertyChanges {
+                target: background.border
+                width: 2
             }
-        ]
+            PropertyChanges {
+                target: background
+                radius: 5
+            }
+            PropertyChanges {
+                target: background.border
+                color: "#ff5817"
+            }
+            PropertyChanges {
+                target: underline
+                visible: false
+            }
+        },
+        State{
+            name:"valid"
+            PropertyChanges {
+                target: background.border
+                width: 0
+            }
+            PropertyChanges {
+                target: background.border
+                color: "#ffffff"
+            }
+            PropertyChanges {
+                target: underline
+                visible: true
+            }
+        }
+    ]
 
     BusyIndicator {
         id: busyIndicator

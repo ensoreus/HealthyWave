@@ -7,6 +7,7 @@ NewAddressForm {
     id: newAddressView
     property var addressToEdit
     property var isEditing: false
+    property bool isInit: true
     signal addedNewAddress
     signal editedAddress
 
@@ -26,6 +27,7 @@ NewAddressForm {
             tfEntrance.text = addressToEdit.entrance
             tfDoorCode.text = addressToEdit.doorCode
         }
+        isInit = false
     }
 
     tfCity.onTextSearchChanged: {
@@ -36,7 +38,7 @@ NewAddressForm {
                     tfCity.model = result.result
                     tfCity.popup.open()
                     storage.saveToken(token)
-                    btnCommit.enabled = validateInput()
+                    //btnCommit.enabled = validateInput()
                     tfCity.stopWheelAnimation()
                 },function(error, token){
                     console.error("call:" + error.error)
@@ -62,7 +64,7 @@ NewAddressForm {
                     tfStreet.popup.open()
                     storage.saveToken(token)
                     tfStreet.stopWheelAnimation()
-                    btnCommit.enabled = validateInput()
+                    //btnCommit.enabled = validateInput()
                 },function(error, token){
                     console.error("call:" + error.error)
                     tfStreet.stopWheelAnimation()
@@ -89,8 +91,11 @@ NewAddressForm {
                     tintColor = (enabled) ? "white" : "grey"
                 }
                 onClicked: {
-                    if(!validateInput())
+                    if(!markInvalid()){
+
                         return
+                    }
+
                     showWaiter()
                     storage.getAuthData(function(authdata){
                         if(isEditing){
@@ -122,12 +127,23 @@ NewAddressForm {
 
     function validateInput(){
         var isValid = true;
+        isValid &= (tfCity.text.length > 3)
+        isValid &= (tfStreet.text.length > 3)
+        isValid &= (tfHouse.text.length > 0)
+        isValid &= (tfApt.text.length > 0)
+        isValid &= (tfFloor.text.length > 0)
+        isValid &= (tfEntrance.text.length > 0)
+        return isValid
+    }
+    function markInvalid(){
+        var isValid = true;
         tfCity.valid = (tfCity.text.length > 3)
-        tfStreet.valid = (tfCity.text.length > 3)
+        tfStreet.valid = (tfStreet.text.length > 3)
         tfHouse.valid = (tfHouse.text.length > 0)
         tfApt.valid = (tfApt.text.length > 0)
-        tfFloor.valid = (tfFloor.length > 0)
-        tfEntrance.valid = (tfEntrance.length > 0)
+        tfFloor.valid = (tfFloor.text.length > 0)
+        tfEntrance.valid = (tfEntrance.text.length > 0)
+
         isValid &= tfCity.valid
         isValid &= tfStreet.valid
         isValid &= tfHouse.valid
@@ -157,7 +173,7 @@ NewAddressForm {
 
 
     tfHouse.onTextChanged: {
-        btnCommit.enabled = validateInput()
+        //btnCommit.enabled = validateInput()
         console.log("tfHouse:"+validateInput())
     }
 
@@ -175,7 +191,7 @@ NewAddressForm {
     }
 
     tfApt.onTextChanged: {
-        btnCommit.enabled = validateInput()
+        //btnCommit.enabled = validateInput()
         console.log("tfApt:"+validateInput())
     }
 

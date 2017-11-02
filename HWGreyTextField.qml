@@ -22,8 +22,17 @@ TextField{
     }
 
     background: Rectangle{
-        id: background
         color: "white"
+        Rectangle{
+            id: background
+            color: "white"
+            anchors.fill: parent
+            anchors.topMargin: 4
+            anchors.rightMargin: 4
+            anchors.leftMargin: 4
+            anchors.bottomMargin: 4
+        }
+
         Rectangle{
             id: underline
             border.width: 2
@@ -48,28 +57,40 @@ TextField{
         }
     }
     states: [
-            State{
-                name:"invalid"
-                PropertyChanges {
-                    target: background.border
-                    width: 1
-                }
-                PropertyChanges {
-                    target: background.border
-                    color: "#ff5817"
-                }
-            },
-            State{
-                name:"valid"
-                PropertyChanges {
-                    target: background.border
-                    width: 0
-                }
-                PropertyChanges {
-                    target: background.border
-                    color: "#ffffff"
-                }
+        State{
+            name:"invalid"
+            PropertyChanges {
+                target: background.border
+                width: 2
             }
-        ]
+            PropertyChanges {
+                target: background
+                radius: 5
+            }
+            PropertyChanges {
+                target: background.border
+                color: "#ff5817"
+            }
+            PropertyChanges {
+                target: underline
+                visible: false
+            }
+        },
+        State{
+            name:"valid"
+            PropertyChanges {
+                target: background.border
+                width: 0
+            }
+            PropertyChanges {
+                target: background.border
+                color: "#ffffff"
+            }
+            PropertyChanges {
+                target: underline
+                visible: true
+            }
+        }
+    ]
 }
 
