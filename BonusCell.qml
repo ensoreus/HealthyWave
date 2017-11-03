@@ -56,15 +56,15 @@ Item {
             id: cbUse
             x: 515
             y: 67
+            style:"Big"
             width: parent.height * 0.5
-            indicatorWidth: 20 * ratio
-            indicatorHeight: 20 * ratio
+            indicatorWidth: 25 * ratio
+            indicatorHeight: 25 * ratio
             markSize: 22
             height: width
             text: ""
             checked: false
-            anchors.topMargin: parent.height * 0.1
-            anchors.top: parent.top
+            anchors.verticalCenter: parent.verticalCenter
             anchors.rightMargin: parent.width * 0.1
             anchors.right: parent.right
             implicitHeight: 26.4
