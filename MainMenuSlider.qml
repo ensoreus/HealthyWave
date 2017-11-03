@@ -133,13 +133,13 @@ Rectangle {
         }
 
         property var menuModel: [
-            {"file":"qrc:/orders/NoOrders.qml", "title":"Замовлення", "present": false},
-            {"file":"qrc:/address/Addresses.qml", "title":"Мої адреси", "present": false},
-            {"file":"qrc:/cards/CardsList.qml", "title":"Оплата", "present":false},
-            {"file":"qrc:/profile/Profile.qml", "title":"Профіль", "present":false},
-            {"file":"qrc:/contacts/Contacts.qml", "title":"Контакти", "present":false},
-            {"file":"qrc:/bonus/BonusList.qml", "title":"Бонуси", "present":false},
-            {"file":"qrc:/info/info.qml","title":"Юридична інформація", "present":false}
+            {"file":"qrc:/orders/NoOrders.qml", "title":"Замовлення"},
+            {"file":"qrc:/address/Addresses.qml", "title":"Мої адреси"},
+            {"file":"qrc:/cards/CardsList.qml", "title":"Оплата"},
+            {"file":"qrc:/profile/Profile.qml", "title":"Профіль"},
+            {"file":"qrc:/contacts/Contacts.qml", "title":"Контакти"},
+            {"file":"qrc:/bonus/BonusList.qml", "title":"Бонуси"},
+            {"file":"qrc:/info/info.qml", "title":"Юридична інформація"}
         ]
 
         onMyOrdersItem: {
@@ -177,11 +177,7 @@ Rectangle {
         function pushViewController(index){
             mainScreenContainer.state = "slideIn"
             var item = menuModel[index]
-            if (item["present"]) {
-                mainScreen.present(Qt.resolvedUrl(item["file"]));
-            } else {
-                mainScreen.navigationController.push(Qt.resolvedUrl(item["file"]));
-            }
+            mainScreen.navigationController.push(Qt.resolvedUrl(item["file"]));
         }
 
         function updateUserData(){
