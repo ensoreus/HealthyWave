@@ -20,7 +20,7 @@ Rectangle{
         anchors.topMargin: 2 * ratio
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2 * ratio
-        width: parent.height * 0.8
+        width: parent.height * 0.7
         fillMode: Image.PreserveAspectFit
         MouseArea{
             id: btnAdd
@@ -32,6 +32,11 @@ Rectangle{
     }
 
     TextField {
+        Component.onCompleted: {
+            imgAdd.opacity =  (text.length > 0) ? 1.0 : 0.5
+            btnAdd.enabled = (text.length > 0)
+        }
+
         id: txPromoField
         width: 300
         font.family: "NS UI Text"
@@ -39,7 +44,7 @@ Rectangle{
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: imgAdd.left
-        verticalAlignment: Text.AlignVCenter
+        verticalAlignment: Text.AlignBottom
         background: Rectangle{
             id: background
             border.width: 2
@@ -49,6 +54,12 @@ Rectangle{
             width: root.width
             color: root.lineColor
         }
+
+        onTextEdited: {
+            imgAdd.opacity =  (text.length > 0) ? 1.0 : 0.5
+            btnAdd.enabled = (text.length > 0)
+        }
+
         MouseArea {
             id: phoneAuxMouseArea
             x: 0

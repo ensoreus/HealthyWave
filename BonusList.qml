@@ -256,7 +256,7 @@ ViewController {
                 txMessages.text = ""
                 storage.getAuthData(function(authdata){
                     Api.addPromoCode(txAddPromo.text, authdata, function(response){
-                        txMessages.text = "Промокод додано"
+                        txMessages.text = "Промокод прийнято"
                         txMessages.color = "green"
                     }, function(failure){
                         txMessages.text = failure.error

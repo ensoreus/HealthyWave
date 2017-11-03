@@ -146,8 +146,8 @@ Item {
             onAddPromo: {
                 storage.getAuthData(function(authdata){
                     Api.addPromoCode(promoCodeField.text, authdata, function(response){
-                        txMessage.text = response.result
-                        txMessage.color = "grey"
+                        txMessage.text = "Прмокод прийнято"
+                        txMessage.color = "green"
                         congratsPage.getPromoGifter(promoCodeField.text)
                     },function(failure){
                         txMessage.text = failure.error

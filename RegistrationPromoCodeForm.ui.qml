@@ -58,7 +58,7 @@ Page {
             id: text2
             x: 60
             y: 276
-            height: parent.height * 0.2
+            height: parent.height * 0.25
             color: "#505050"
             font.family: "NS UI Text"
             font.pointSize: 15
