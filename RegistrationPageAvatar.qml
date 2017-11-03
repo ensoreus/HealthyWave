@@ -9,8 +9,8 @@ import "qrc:/controls"
 Page {
     property alias avatarUrl: avatar.source
     property alias btnNext: btnNext
+    property bool avatarSelected: false
     signal nextPage
-    signal avatarSelected
 
     Storage{
         id: storage
@@ -122,7 +122,6 @@ Page {
             enabled: true
 
             onButtonClick: {
-                console.log("NEXT")
                 nextPage()
             }
         }

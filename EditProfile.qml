@@ -19,7 +19,7 @@ ViewController {
     property var actualPhone
     property var actualAvatar
     property var mainScreen
-
+    property bool isChanged: false
     Storage{
         id: storage
     }
@@ -58,6 +58,7 @@ ViewController {
             if(actualPhone === phoneEditPage.phoneField.text){
                 stackLayout.push(emailEditPage)
             }else{
+                isChanged = true
                 stackLayout.push(pinEditPage)
                 var result = Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
                 console.log(result)
@@ -112,6 +113,9 @@ ViewController {
             emailEditPage.presenterAnimationEnds()
         }
         onNextPage: {
+            if (actualEmail != emailEditPage.emailField.text){
+              isChanged = true
+            }
             stackLayout.push(nameEditPage)
         }
         Behavior on x {
@@ -132,6 +136,9 @@ ViewController {
             nameEditPage.presenterAnimationEnds()
         }
         onNextPage: {
+            if (actualName != nameEditPage.nameField.text){
+              isChanged = true
+            }
             stackLayout.push(avatarEditPage)
         }
         Behavior on x {
@@ -148,15 +155,16 @@ ViewController {
         anchors.bottom: parent.bottom
         x:0
         width: parent.width
-        onAvatarSelected: {
-            //btnNext.enabled = true
-        }
-
         onNextPage:{
             console.log("send avatar: " + avatarEditPage.avatarUrl)
             var url = avatarEditPage.avatarUrl
             startProcessIndicator()
             //storage.updateAvatar(url)
+            if(!isChanged){
+                navigationController.pop()
+                navigationController.pop(mainScreen)
+                return
+            }
             storage.getAuthData(function(authdata){
                 Api.updateProfile(phoneEditPage.phoneField.text,
                                   Utils.nameFromLine(nameEditPage.nameField.text),
@@ -167,6 +175,7 @@ ViewController {
                                       if ( response.result ){
                                           console.log(response.result)
                                           storage.updateUserData(authdata.phone, nameEditPage.nameField.text, emailEditPage.emailField.text, avatarEditPage.avatarUrl)
+                                          if(avatarSelected){
                                           Api.sendAvatar(SecurityCore.base64Image(avatarEditPage.avatarUrl), authdata, function(avResponse){
                                               console.log(avResponse.result)
                                               stopProcessIndicator()
@@ -178,6 +187,7 @@ ViewController {
                                               navigationController.pop()
                                               navigationController.pop(mainScreen)
                                           })
+                                          }
                                       }else{
                                         stopProcessIndicator()
                                           navigationController.pop()
