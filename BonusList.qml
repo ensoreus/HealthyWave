@@ -236,7 +236,7 @@ ViewController {
         }
 
 
-        HWTextField{
+        PromoTextField {
             id:txAddPromo
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: lbAddPromo.bottom
@@ -247,7 +247,8 @@ ViewController {
             onWillStartAnimation: {
                 txAddPromo.forceActiveFocus()
             }
-            onAccepted: {
+
+            onAddPromo: {
                 sendPromocode()
             }
 
@@ -256,26 +257,12 @@ ViewController {
                 storage.getAuthData(function(authdata){
                     Api.addPromoCode(txAddPromo.text, authdata, function(response){
                         txMessages.text = "Промокод додано"
+                        txMessages.color = "green"
                     }, function(failure){
                         txMessages.text = failure.error
+                        txMessages.color = "red"
                     })
                 })
-            }
-            Image{
-                id: imgPastePromo
-                source: "qrc:/commons/btn-promo-add.png"
-                anchors.verticalCenter: parent.verticalCenter
-                height: parent.height * 0.8
-                width: height
-                anchors.right: parent.right
-
-                MouseArea{
-                    id:btnPastePromo
-                    anchors.fill: parent
-                    onClicked: {
-                        txAddPromo.sendPromocode()
-                    }
-                }
             }
         }
 
