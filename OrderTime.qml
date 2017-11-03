@@ -26,6 +26,7 @@ ViewController {
     navigationItem:NavigationItem{
         centerBarTitle:"Замовлення"
     }
+
     Rectangle {
         id: content
         color: "#ffffff"
@@ -212,9 +213,11 @@ ViewController {
             anchors.fill: parent
             anchors.bottomMargin: parent.height * 0.2
             onClose: {
+                reset()
                 visible = false
                 txtChooseAnother.visible = true
-                btnSearch .visible = true
+                btnSearch.visible = true
+
             }
         }
     }

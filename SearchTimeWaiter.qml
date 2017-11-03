@@ -8,12 +8,17 @@ Item{
     property alias showError: errorLabel.visible
     signal close
 
+    function reset(){
+        timeLabel.visible = false
+        timeLabel.text = ""
+        errorLabel.visible = false
+    }
+
     width: 215
     height: 215
     Component.onCompleted: {
         visible = false
-        timeLabel.visible = false
-        errorLabel.visible = false
+        reset()
     }
 
     function startAnimation(){
@@ -34,7 +39,6 @@ Item{
         timeLabel.visible = false
         visible = false
     }
-
 
     Rectangle{
         id: overlay
@@ -94,12 +98,7 @@ Item{
         anchors.horizontalCenter: image.horizontalCenter
         anchors.verticalCenter: content.verticalCenter
         text: ""
-        onTextChanged: {
-            timeHeaderlabel.visible = true
-            timeLabel.visible = true
-        }
     }
-
 
     Text{
         id: errorLabel
@@ -109,11 +108,9 @@ Item{
         anchors.horizontalCenter: image.horizontalCenter
         anchors.verticalCenter: image.verticalCenter
         visible: false
-
         text: "Неможливо
 доставити
 сьогодні"
-
     }
 
     DropShadow {
@@ -135,16 +132,6 @@ Item{
         color: "#80000000"
         source: timeLabel
     }
-
-    /*DropShadow {
-        anchors.fill: errorLabel
-        horizontalOffset: 3
-        verticalOffset: 3
-        radius: 8.0
-        samples: 17
-        color: "#80000000"
-        source: errorLabel
-    }*/
 
     Timer{
         id:timer
@@ -199,9 +186,7 @@ Item{
                 target: overlay
                 opacity: 0.5
             }
-
         }
-
     ]
 
     transitions:[
