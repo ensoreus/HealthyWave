@@ -146,8 +146,8 @@ ViewController {
 
             Image {
                 id: imgPhone
-                width: parent.height * 0.3
-                height: parent.height * 0.3
+                width: parent.height * 0.5
+                height: parent.height * 0.5
                 fillMode: Image.PreserveAspectFit
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.rightMargin: parent.width * 0.03
@@ -214,8 +214,8 @@ ViewController {
 
             Image {
                 id: imgPhone2
-                width: parent.height * 0.3
-                height: parent.height * 0.3
+                width: parent.height * 0.5
+                height: parent.height * 0.5
                 fillMode: Image.PreserveAspectFit
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.rightMargin: parent.width * 0.03
@@ -280,8 +280,8 @@ ViewController {
 
             Image {
                 id: imgPhone3
-                width: parent.height * 0.3
-                height: parent.height * 0.3
+                width: parent.height * 0.5
+                height: parent.height * 0.5
                 fillMode: Image.PreserveAspectFit
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.rightMargin: parent.width * 0.03
@@ -360,8 +360,8 @@ ViewController {
 
             Image {
                 id: imgViber
-                width: parent.height * 0.3
-                height: parent.height * 0.3
+                width: parent.height * 0.5
+                height: parent.height * 0.5
                 fillMode: Image.PreserveAspectFit
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.rightMargin: parent.width * 0.03
@@ -381,7 +381,7 @@ ViewController {
                     imgViber.opacity = pressed ? 0.5 : 1
                 }
                 onClicked: {
-                    Qt.openUrlExternally("viber:chat?number=+"+txViber.text) ;
+                    Qt.openUrlExternally("viber://add?number="+txViber.text) ;
                 }
             }
         }
@@ -414,7 +414,6 @@ ViewController {
             Text {
                 id: txEmail
                 height: 17
-                //text: qsTr("help@hv_zd.ua")
                 anchors.topMargin: parent.height * 0.04
                 anchors.top: lbEmail.bottom
                 anchors.right: parent.right
@@ -433,8 +432,8 @@ ViewController {
 
             Image {
                 id: imgEmail
-                width: parent.height * 0.3
-                height: parent.height * 0.3
+                width: parent.height * 0.5
+                height: parent.height * 0.5
                 fillMode: Image.PreserveAspectFit
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.rightMargin: parent.width * 0.03
@@ -507,8 +506,8 @@ ViewController {
 
             Image {
                 id: imgTelegram
-                width: parent.height * 0.3
-                height: parent.height * 0.3
+                width: parent.height * 0.5
+                height: parent.height * 0.5
                 fillMode: Image.PreserveAspectFit
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.rightMargin: parent.width * 0.03

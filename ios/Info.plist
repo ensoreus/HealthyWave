@@ -32,6 +32,11 @@
 	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.lifestyle</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>viber</string>
+		<string>tg</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NOTE</key>

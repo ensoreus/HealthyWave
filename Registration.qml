@@ -104,6 +104,7 @@ Item {
                 nameEditPage.presenterAnimationEnds()
             }
             onShowInfo: {
+                infoPage.visible = true
                 stackLayout.push(infoPage)
             }
 
@@ -180,6 +181,7 @@ Item {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             x: 0
+            visible: false
             width: parent.width
             onClose: {
                 stackLayout.pop()
