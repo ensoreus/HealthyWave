@@ -5,6 +5,8 @@ import SecurityCore 1.0
 import "qrc:/"
 import "qrc:/controls"
 import "qrc:/commons"
+import com.ensoreus.Clipboard 1.0
+import com.ensoreus.hw.sharepicker 1.0
 
 ViewController {
     id: profileViewController
@@ -19,6 +21,14 @@ ViewController {
 
     Storage{
         id:storage
+    }
+
+    SharePicker{
+        id: sharePicker
+    }
+
+    Clipboard{
+        id: clipboard
     }
 
     onViewWillAppear:{
@@ -41,8 +51,6 @@ ViewController {
         storage.getPromoCode(function(promo){
             txPromoCode.text = promo
         })
-
-
     }
 
     Rectangle {
@@ -198,10 +206,12 @@ ViewController {
             x: 32
             height: parent.height * 0.05
             text: "Промо-код"
+
             anchors.topMargin: parent.height * 0.1
             anchors.leftMargin: 0
             anchors.top: lbEmail.bottom
             anchors.left: lbEmail.left
+            verticalAlignment: Text.AlignVCenter
             font.weight: Font.DemiBold
             font.pointSize: 15
         }
@@ -211,33 +221,70 @@ ViewController {
             height: parent.height * 0.05
             color: "#1eb2a4"
             text: ""
+            width: parent.width * 0.3
             verticalAlignment: Text.AlignVCenter
-            anchors.rightMargin: parent.width * 0.1
-            anchors.right: parent.right
+
             anchors.leftMargin: parent.width * 0.1
             anchors.left: lbPass.right
             anchors.top: lbPass.top
             anchors.topMargin: 0
+
             font.weight: Font.DemiBold
             font.pointSize: 15
             horizontalAlignment: Text.AlignRight
         }
 
+        Text{
+            id:txCopy
+            height:parent.height * 0.05
+            verticalAlignment: Text.AlignVCenter
+            anchors.leftMargin: 3 * ratio
+            anchors.left: txPromoCode.right
+            text:"копіювати"
+            anchors.top: lbPass.top
+            font.weight: Font.DemiBold
+            font.pointSize: 15
+            width: parent.width * 0.2
+            horizontalAlignment: Text.AlignRight
+            MouseArea {
+                id: btnCopy
+                anchors.fill: parent
+                onPressedChanged: {
+                    if(pressed){
+                         txCopy.scale = 1.1
+                    }else{
+                         txCopy.scale = 1
+                    }
+                }
+                onClicked: {
+                    clipboard.setText(txPromoCode.text)
+                }
+            }
+        }
+
         Image {
             id: imgShare
-            width: txPromoCode.height * 0.5
+            width: txPromoCode.height * 0.8
             height: width
             fillMode: Image.PreserveAspectFit
             anchors.leftMargin: 10 * ratio
-            anchors.left: txPromoCode.right
+            anchors.left: txCopy.right
             anchors.verticalCenter: txPromoCode.verticalCenter
-            source: "qrc:/commons/img-share.png"
+            source: "qrc:/commons/img-share@2x.png"
 
             MouseArea {
                 id: btnShare
                 anchors.fill: parent
                 onPressedChanged: {
-                    imgShare.scale = 1.1
+                    if(pressed){
+                        imgShare.scale = 1.1
+                    }else{
+                        imgShare.scale = 1
+                    }
+                }
+
+                onClicked: {
+                    sharePicker.share(txPromoCode.text)
                 }
             }
         }
