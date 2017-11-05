@@ -126,7 +126,6 @@ ViewController {
             Text {
                 id: txCallCenterPhone
                 height: 17
-                //text: qsTr("8 911")
                 anchors.topMargin: parent.height * 0.04
                 anchors.top: lbCallCenterPhone.bottom
                 anchors.right: parent.right
@@ -487,7 +486,6 @@ ViewController {
             Text {
                 id: txTelegram
                 height: 17
-                //text: qsTr("+380 67 618 11 01")
                 anchors.topMargin: parent.height * 0.04
                 anchors.top: lbTelegram.bottom
                 anchors.right: parent.right
@@ -529,7 +527,7 @@ ViewController {
                     imgTelegram.opacity = pressed ? 0.5 : 1
                 }
                 onClicked: {
-                    Qt.openUrlExternally("tg:resolve?number=+"+txTelegram.text) ;
+                    Qt.openUrlExternally("tg:resolve?number="+txTelegram.text) ;
                 }
             }
         }

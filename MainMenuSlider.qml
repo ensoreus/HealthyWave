@@ -103,6 +103,7 @@ Rectangle {
     function deliveryArrived(notification){
         mainScreen.hideCallButton()
         storage.getOrderById(notification.orderid, function(city, street, house, apt, time){
+            storage.markAsDelivered(notification.orderid)
             orderDelivered({
                                "address" :{
                                    "city":city,
@@ -127,7 +128,6 @@ Rectangle {
     MainMenu{
         id: mainMenu
         anchors.fill: parent
-
         Component.onCompleted: {
             state = "slideIn"
         }

@@ -17,7 +17,6 @@ ViewController {
         txWater.text = context.fullb + " бут. х " + Utils.calcFullBottles(context) + " грн."
         txEmpty.text = context.emptyb + " шт."
         var fee  = context.fullb - context.emptyb > 0 ? context.prices.bottle : 0
-//        txFee.text = fee + " грн."
         var discountSum = 0
         for (var index in context.bonuses){
             discountSum += Utils.bonusValueCalc(context.bonuses[index], context)
@@ -123,21 +122,6 @@ ViewController {
                 anchors.left: parent.left
             }
 
-//            Text {
-//                id: lbFee
-//                color: "#4a4a4a"
-//                text: "Застава за бутлі:"
-//                font.family: "NS UI Text"
-//                font.weight: Font.Light
-//                font.pointSize: 13
-//                anchors.topMargin: parent.height * 0.01
-//                anchors.top: lbEmptyBottle.bottom
-//                anchors.right: parent.horizontalCenter
-//                anchors.rightMargin: 0
-//                anchors.leftMargin: parent.width * 0.08
-//                anchors.left: parent.left
-//            }
-
             Text {
                 id: lbTotal
                 color: "#4a4a4a"
@@ -221,20 +205,6 @@ ViewController {
                 anchors.left: lbEmptyBottle.right
                 anchors.leftMargin: 20* ratio
             }
-
-//            Text {
-//                id: txFee
-//                font.family: "NS UI Text"
-//                font.weight: Font.DemiBold
-//                font.pointSize: 14
-//                verticalAlignment: Text.AlignVCenter
-//                anchors.top: lbFee.top
-//                anchors.topMargin: 0
-//                anchors.rightMargin: parent.width * 0.08
-//                anchors.right: parent.right
-//                anchors.left: lbFee.right
-//                anchors.leftMargin: 20 * ratio
-//            }
 
             Text {
                 id: txTotal
@@ -334,7 +304,7 @@ ViewController {
                 anchors.left: rectangle1.left
                 anchors.leftMargin: 0
                 font.weight: Font.DemiBold
-                font.pixelSize: 12
+                font.pointSize: 12
             }
 
             Text {
@@ -394,7 +364,7 @@ ViewController {
                     Api.createOrder(context, authdata, function(result){
                         console.log(result.result)
                         context.orderId = result.result
-                        storage.addUnratedOrder(context)
+                        storage.addOrder(context)
                         orderAccepted.hideWaiter(true)
                     }, function(error){
                         orderAccepted.showError(error.error)
@@ -409,7 +379,7 @@ ViewController {
                     Api.createOrder(context, authdata, function(result){
                         console.log(result.result)
                         context.orderId = result.result
-                        storage.addUnratedOrder(context)
+                        storage.addOrder(context)
                         orderAccepted.hideWaiter(false)
                     }, function(error){
                         orderAccepted.showError(error.error)

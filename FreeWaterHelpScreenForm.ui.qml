@@ -30,6 +30,7 @@ Rectangle {
         color: "#ffffff"
         //anchors.fill:parent
         anchors.top: hintPanel.bottom
+        anchors.topMargin: 10 * ratio
         anchors.right: hintPanel.right
         anchors.left: hintPanel.left
         anchors.bottom: parent.bottom
@@ -112,7 +113,7 @@ Rectangle {
             id: mainText
             width: 264 * ratio
             height: 65 * ratio
-            text: "Відправ промо код свому другу і отримай безкоштовно 2 бутля води"
+            text: "Відправ промо код свому другу і отримай безкоштовно 1 бутль води"
             anchors.top: image.bottom
             anchors.topMargin: 15 * ratio
             anchors.left: parent.left
