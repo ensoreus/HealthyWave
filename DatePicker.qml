@@ -117,7 +117,7 @@ Tumbler {
         padding.top: __frameHeight
         padding.bottom: __frameHeight
 
-        visibleItemCount: 5
+        visibleItemCount: 3
 
         readonly property real __frameHeight: 1 * ratio
 

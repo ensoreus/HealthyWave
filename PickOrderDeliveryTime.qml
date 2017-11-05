@@ -107,7 +107,7 @@ ViewController {
 
         Rectangle{
             id: selectFrameTop
-            y: datePicker.height /   2 - 35 / 2 + datePicker.y
+            y: datePicker.height /   2 - 40 / 2 + datePicker.y
             height: 1
             color: "transparent"
             border.width: 1
@@ -120,7 +120,7 @@ ViewController {
 
         Rectangle{
             id: selectFrameBottom
-            y: datePicker.height / 2 + 35 / 2 + datePicker.y
+            y: datePicker.height / 2 + 40 / 2 + datePicker.y
             height: 1
             color: "transparent"
             border.width: 1
