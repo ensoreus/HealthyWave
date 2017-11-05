@@ -105,6 +105,32 @@ ViewController {
             }
         }
 
+        Rectangle{
+            id: selectFrameTop
+            y: datePicker.height /   2 - 35 / 2 + datePicker.y
+            height: 1
+            color: "transparent"
+            border.width: 1
+            border.color: "#1EB2A4"
+            anchors.left: parent.left
+            anchors.leftMargin: 15 * ratio
+            anchors.right: parent.right
+            anchors.rightMargin: 15 * ratio
+        }
+
+        Rectangle{
+            id: selectFrameBottom
+            y: datePicker.height / 2 + 35 / 2 + datePicker.y
+            height: 1
+            color: "transparent"
+            border.width: 1
+            border.color: "#1EB2A4"
+            anchors.left: parent.left
+            anchors.leftMargin: 15 * ratio
+            anchors.right: parent.right
+            anchors.rightMargin: 15 * ratio
+        }
+
         Text {
             id: text2
             width: parent.width * 0.7

@@ -107,6 +107,8 @@ Tumbler {
         role: "to"
     }
 
+
+
     style:TumblerStyle {
         id: tumblerStyle
 
@@ -122,7 +124,6 @@ Tumbler {
         background: null
 
         foreground: null
-
 
         highlight: Item {   }
 
@@ -154,13 +155,12 @@ Tumbler {
                 text: styleData.value
                 color: control.enabled ? (styleData.activeFocus ? "black" : "grey") : "grey"
                 opacity: 1.0
-                font.pointSize: 15
+                font.pointSize: 20
                 font.family: "NS UI Text"
                 font.bold: styleData.activeFocus
                 font.styleName: Font.Bold
                 renderType: Text.QtRendering
                 anchors.centerIn: parent
-
                 readonly property real enabledOpacity: 1.0
             }
 
@@ -176,9 +176,8 @@ Tumbler {
 
                 sourceComponent: Rectangle {
                     // Use a Rectangle that is the same color as the highlight in order to avoid rendering text on top of text.
-                    color: styleData.activeFocus ? "grey" : "transparent"
+                    color: styleData.activeFocus ? "black" : "transparent"
                     anchors.fill: parent
-
                     Text {
                         id: focusText
                         y: styleData.displacement < 0 ? 0 : parent.height - height
@@ -187,7 +186,7 @@ Tumbler {
                         color: control.enabled ? (styleData.activeFocus ? "grey" : "black") : "lightgrey"
                         opacity: control.enabled ? 1 : 0.9
                         text: styleData.value
-                        font.pointSize: 15
+                        font.pointSize: 20
                         font.bold: styleData.activeFocus
                         font.styleName: Font.Bold
                         font.family: "NS UI Text"
@@ -199,4 +198,5 @@ Tumbler {
             }
         }
     }
+
 }
