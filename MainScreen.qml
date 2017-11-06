@@ -93,7 +93,6 @@ ViewController {
 
     onViewDidAppear: {
         mainScreenHintPanel.state = "hidden"
-        //console.log("on completed")
         storage.isFirstStart(function(isFirstStart){
             console.log("first start:"+isFirstStart)
             mainScreenHintPanel.isAttract = isFirstStart
@@ -155,6 +154,7 @@ ViewController {
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
+        height: parent.height
         onShowUp: {
             console.log("show up")
             state = "shown"

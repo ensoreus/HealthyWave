@@ -26,11 +26,7 @@ Rectangle {
 
     Rectangle {
         id: rectangle
-        height: parent.height - 60 * ratio
-        color: "#ffffff"
-        //anchors.fill:parent
         anchors.top: hintPanel.bottom
-        anchors.topMargin: 10 * ratio
         anchors.right: hintPanel.right
         anchors.left: hintPanel.left
         anchors.bottom: parent.bottom
@@ -39,7 +35,7 @@ Rectangle {
             id: mainLabel
             x: 187 * ratio
             text: "Отримуй воду безкоштовно"
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: 30 * ratio
             font.weight: Font.Light
             font.family: "NS UI Text"
             anchors.top: parent.top
@@ -151,7 +147,7 @@ Rectangle {
             x: 21 * ratio
             width: parent.width * 0.7
             height: 50 * ratio
-            anchors.topMargin: parent.height * 0.3
+            anchors.topMargin: parent.height * 0.18
             anchors.top: lbHowItWorks.bottom
             anchors.bottomMargin: 20 * ratio
             anchors.bottom: root.bottom
@@ -167,10 +163,7 @@ Rectangle {
             visible: false
             width: parent.width * 0.7
             height: btnInvite.height
-            anchors.topMargin: parent.height * 0.12
-            anchors.top: mainText.bottom
-            anchors.bottomMargin: 20 * ratio
-            anchors.bottom: root.bottom
+            anchors.bottom: parent.bottom
             labelHighlightColor: "#00AD9A"
             labelColor: "#000000"
             labelText: "МІЙ ПРОМОКОД"
@@ -230,7 +223,7 @@ Rectangle {
                 textFormat: Text.RichText
                 lineHeight: 1
                 height: 65 * ratio
-                text: "Відправ промо код свому другу і отримай безкоштовно 2 бутля води"
+                text: "Відправ промо код свому другу і отримай безкоштовно 1 бутль води"
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 16
             }
@@ -272,10 +265,10 @@ Rectangle {
 
             PropertyChanges {
                 target: mainText
-                height: parent.height * 0.9
+                height: parent.height * 0.8
                 font.family: "NS UI Text"
                 font.pointSize: 15
-                text: "Відправте своєму другу даний промокод і, після того як він зробить перше замовлення, Вам буде начислено 2 бутля води безкоштовно, які ви зможете використати у будь-який момент.<br> Коли Ваш друг робитиме перше замовлення, йому треба буде ввести цей промокод і він також отримає в подарунок 1 бутль води безкоштовно."
+                text: "Відправте своєму другу даний промокод і, після того як він зробить перше замовлення, Вам буде начислено 1 бутль води безкоштовно, які ви зможете використати у будь-який момент.<br> Коли Ваш друг робитиме перше замовлення, йому треба буде ввести цей промокод і він також отримає в подарунок 1 бутль води безкоштовно."
                 textFormat: Text.RichText
                 horizontalAlignment: Text.AlignLeft
                 lineHeight: 2

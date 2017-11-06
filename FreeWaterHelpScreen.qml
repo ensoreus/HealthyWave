@@ -15,7 +15,8 @@ Rectangle{
     id: helpScreenContainer
     x: 0
     width: 300
-
+    height: 400
+    color: "blue"
     Clipboard{
         id: clipboard
     }
@@ -62,8 +63,7 @@ Rectangle{
 
     FreeWaterHelpScreenForm {
         id: helpScreen
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.fill: parent
         function updateUserData(){
             storage.getPromoCode(function(promocode){
                 promoCodeText.text = promocode
@@ -75,7 +75,7 @@ Rectangle{
         }
 
         hintPanel.onShowHideHintPanel: {
-            if (helpScreenContainer.anchors.topMargin == (-30 * ratio)){
+            if (helpScreenContainer.anchors.topMargin == ( -30 * ratio )){
                 hideDown()
             }else{
                 showUp()
