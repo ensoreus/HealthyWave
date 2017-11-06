@@ -11,7 +11,7 @@ Rectangle{
     signal hideDown
     property var androidlink: ""
     property var ioslink: ""
-
+    property alias hintPanel: helpScreen.hintPanel
     id: helpScreenContainer
     x: 0
     width: 300

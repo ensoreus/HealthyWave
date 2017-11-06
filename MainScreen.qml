@@ -234,6 +234,10 @@ ViewController {
                     target: btnClose
                     visible: false
                 }
+                PropertyChanges{
+                    target: mainScreenHintPanel.hintPanel
+                    visible: true
+                }
             }
         ]
         transitions: [
