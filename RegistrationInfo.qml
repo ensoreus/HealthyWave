@@ -16,9 +16,8 @@ Page {
     }
     Image{
         id: imgBack
-        anchors.top: webContent
-        anchors.topMargin: 5 * ratio
-        anchors.bottom: parent.bottom
+        anchors.top: webContent.bottom
+        anchors.topMargin: 10 * ratio
         anchors.left: parent.left
         anchors.leftMargin: parent.width * 0.1
         width: parent.height * 0.1
