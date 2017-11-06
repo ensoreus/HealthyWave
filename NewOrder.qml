@@ -35,7 +35,6 @@ ViewController {
             Api.getPrices(context.address, authdata, function(response){
                 for(var index in response.result){
                     var priceList = response.result[index]
-                    if(priceList.find){
                         context.prices.pump = priceList.pompa
                         context.prices.bottle = priceList.bottle
                         for(var key in priceList){
@@ -45,10 +44,6 @@ ViewController {
                         }
                         updatePricesView()
                         rPricesPanel.state = "pricesReady"
-                    }else{
-                        errorMsg.text = "Адресу не знайдено\nОберіть іншу будласка"
-                        rPricesPanel.state ="error"
-                    }
                 }
                 console.log(response.result)
 
