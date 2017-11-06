@@ -74,7 +74,7 @@ ViewController {
 
     function calcEmptyBottlesFee(){
         var price = (fullb - emptyb) * context.prices.bottle
-        console.log("fee:"+context.prices.bottle)
+        if(price < 0) return 0
         return price
     }
 
