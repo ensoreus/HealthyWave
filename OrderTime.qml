@@ -65,7 +65,7 @@ ViewController {
             id: txHint
             x: 307
             width: parent.width * 0.7
-            text: "Запросити найближчій час доставки на сьогодні"
+            text: "Запросити найближчій час доставки на сьогодні за Вашою адресою"
             wrapMode: Text.WordWrap
             font.weight: Font.DemiBold
             font.pointSize: 15
@@ -143,7 +143,7 @@ ViewController {
             x: 307
             width: parent.width * 0.6
             color: "#9013fe"
-            text: "Вибрати інший час"
+            text: "Вибрати інший час доставки"
             font.underline: true
             font.pointSize: 15
             font.weight: Font.Normal

@@ -90,14 +90,16 @@ ViewController {
             lbLate.visible = false
             cbLate.visible = false
         }
-//        if(typeof(items[3]) != 'undefined'){
-//            lbOther.visible = true
-//            cbOther.visible = true
-//            lbOther.text =  "4."+items[3].Name
-//        }else{
-//            lbOther.visible = false
-//            cbOther.visible = false
-//        }
+        if(typeof(items[3]) != 'undefined'){
+            lbOther.visible = true
+            cbOther.visible = true
+            lbOther.height = 0
+            lbOther.text =  "4."+items[3].Name
+        }else{
+            lbOther.visible = false
+            lbOther.height = 20
+            cbOther.visible = false
+        }
     }
 
     Rectangle {
@@ -111,7 +113,7 @@ ViewController {
             x: 299
             width: parent.width * 0.2
             height: 23
-            text: qsTr("ОЦІНКА:")
+            text: "ОЦІНКА:"
             font.pointSize: 20
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignRight
@@ -124,7 +126,7 @@ ViewController {
         Text {
             id: txRate
             height: 23
-            text: qsTr("Text")
+
             verticalAlignment: Text.AlignVCenter
             font.pointSize: 20
             anchors.top: lbRate.top
@@ -154,7 +156,7 @@ ViewController {
                 id: lbCourierName
                 x: 243
                 height: 20 * ratio
-                text: qsTr("Ваш доставник:")
+                text: "Ваш доставник:"
                 anchors.left: parent.left
                 anchors.leftMargin: 0
                 font.weight: Font.Thin
@@ -188,7 +190,7 @@ ViewController {
                 width: 89
                 height: 15
                 color: "#9f9f9f"
-                text: qsTr("Доставка від:")
+                text: "Доставка від:"
                 font.pointSize: 13
                 anchors.top: parent.top
                 anchors.topMargin: 0
@@ -217,7 +219,7 @@ ViewController {
                 width: 100
                 height: 15
                 color: "#9f9f9f"
-                text: qsTr("за адресою")
+                text: "за адресою"
                 font.pointSize: 13
                 font.weight: Font.Thin
                 horizontalAlignment: Text.AlignLeft
@@ -230,7 +232,6 @@ ViewController {
             Text {
                 id: txAddress
                 color: "#9f9f9f"
-                text: qsTr("Text")
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 0
                 anchors.right: parent.right
@@ -362,7 +363,7 @@ ViewController {
 
         Text {
             id: lbOther
-            text: qsTr("4. Ваш варіант")
+            text:"4"
             font.pointSize: 15
             verticalAlignment: Text.AlignVCenter
             anchors.rightMargin: parent.width * 0.2
@@ -376,9 +377,38 @@ ViewController {
             visible: true
         }
 
+        HWCheckBox {
+            id: cbComment
+            width: height
+            text: ""
+            checked: false
+            state: ""
+            anchors.topMargin: parent.height * 0.02
+            anchors.top: cbOther.bottom
+            anchors.leftMargin: parent.width * 0.1
+            anchors.left: parent.left
+            visible: true
+        }
+
+        Text {
+            id: lbComment
+            text: "Ваш варіант"
+            font.pointSize: 15
+            verticalAlignment: Text.AlignVCenter
+            anchors.rightMargin: parent.width * 0.2
+            anchors.leftMargin: 10
+            anchors.right: parent.right
+            anchors.bottom: cbComment.bottom
+            anchors.bottomMargin: 0
+            anchors.top: cbComment.top
+            anchors.topMargin: 0
+            anchors.left: cbComment.right
+            visible: true
+        }
+
         Rectangle {
             id: txComment
-            height: cbOther.checked ? parent.height * 0.1 : 0
+            height: cbComment.checked ? parent.height * 0.1 : 0
             color: "#ffffff"
             radius: 8
             border.color: "#dfdfdf"
@@ -432,9 +462,10 @@ ViewController {
                     var code1 = cbLook.checked   ? commentCodes[0].Code : ""
                     var code2 = cbSpeech.checked ? commentCodes[1].Code : ""
                     var code3 = cbLate.checked   ? commentCodes[2].Code : ""
-                    var code4 = cbOther.checked  ? taComment.text : ""
+                    var code4 = cbOther.checked  ? commentCodes[3].Code : ""
+                    var comment = taComment.text
 
-                    Api.sendFeedback(ratePanel.rate, "", order.orderId, code1, code2, code3, code4, authdata, function(response){
+                    Api.sendFeedback(ratePanel.rate, comment, order.orderId, code1, code2, code3, code4, authdata, function(response){
                         storage.orderRated(order.orderId)
                     }, function(response){
                         console.log(response.error)

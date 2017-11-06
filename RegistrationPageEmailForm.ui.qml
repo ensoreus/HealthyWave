@@ -37,7 +37,7 @@ Page {
             height: parent.height * 0.02
             color: "#505050"
             font.weight: Font.Thin
-            text: qsTr("Уведіть электрону адресу *")
+            text: "Уведіть электрону адресу *"
             font.family: "NS UI Text"
             font.pointSize: 15
             anchors.topMargin: 60 * ratio
@@ -62,7 +62,7 @@ Page {
             id: text2
             height: 51
             color: "#505050"
-            text: qsTr("*для получения информации об акциях и выгодных предложениях ")
+            text: "*для отримання інформації про акції і вигідні пропозиції"
             anchors.topMargin: 20 * ratio
             anchors.top: btnNext.bottom
             anchors.right: emailField.right

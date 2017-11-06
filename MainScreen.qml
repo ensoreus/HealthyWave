@@ -35,7 +35,7 @@ ViewController {
 
     Timer{
         id: checkUnratedOrders
-        interval: (60000 * 1)
+        interval: (6000 * 1)
         repeat: true
         onTriggered: {
             storage.getLastUnratedOrder(function(orderid, city, street, house, apt, time, courier, courierPhone ){
@@ -93,7 +93,7 @@ ViewController {
 
     onViewDidAppear: {
         mainScreenHintPanel.state = "hidden"
-        console.log("on completed")
+        //console.log("on completed")
         storage.isFirstStart(function(isFirstStart){
             console.log("first start:"+isFirstStart)
             mainScreenHintPanel.isAttract = isFirstStart

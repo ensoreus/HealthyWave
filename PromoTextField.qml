@@ -9,7 +9,7 @@ Rectangle{
     property string lineColor: "black"
     property alias text: txPromoField.text
     property alias readOnly: txPromoField.readOnly
-    height: parent.width * 0.1
+    height: parent.width * 0.06
     color: "white"
 
     Image {
@@ -17,7 +17,6 @@ Rectangle{
         source: "qrc:/commons/btn-promo-add.png"
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: 2 * ratio
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2 * ratio
         width: parent.height * 0.7
@@ -41,18 +40,25 @@ Rectangle{
         width: 300
         font.family: "NS UI Text"
         font.pointSize: 17
-        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: imgAdd.left
         verticalAlignment: Text.AlignBottom
+        height: 40 * ratio
         background: Rectangle{
             id: background
-            border.width: 2
-            height: 2
-            x: 0
-            y: root.height - 2
-            width: root.width
-            color: root.lineColor
+            border.color: "grey"
+            border.width: 0
+            height: root.height
+            Rectangle{
+                id: underline
+                border.width: 2
+                height: 2
+                x: 0
+                y: root.height - 2 * ratio
+                width: root.width
+                color: root.lineColor
+            }
         }
 
         onTextEdited: {

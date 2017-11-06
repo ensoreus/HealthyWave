@@ -41,6 +41,7 @@ Page {
             anchors.rightMargin: 0
             anchors.left: text1.left
             anchors.leftMargin: 0
+
         }
 
         Text {
@@ -63,7 +64,7 @@ Page {
             font.family: "NS UI Text"
             font.pointSize: 15
             text: "*Уведіть бонусний промо-код, якщо Ви отримали його від ваших знайомих.\n\n\nЯкщо промо-коду у Вас нема - рухайтесь далі, на Вас чекає сюрприз!"
-            anchors.topMargin: 5
+            anchors.topMargin: 30 * ratio
             font.weight: Font.Thin
             anchors.top: txMessage.bottom
             anchors.right: promoCodeField.right
