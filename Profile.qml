@@ -224,7 +224,7 @@ ViewController {
             width: parent.width * 0.3
             verticalAlignment: Text.AlignVCenter
 
-            anchors.leftMargin: parent.width * 0.1
+            anchors.leftMargin: 5 * ratio
             anchors.left: lbPass.right
             anchors.top: lbPass.top
             anchors.topMargin: 0
@@ -284,7 +284,7 @@ ViewController {
                 }
 
                 onClicked: {
-                    sharePicker.share(txPromoCode.text)
+                    sharePicker.share(txPromoCode.text,"")
                 }
             }
         }

@@ -8,6 +8,7 @@ import PushNotificationRegistrationTokenHandler 1.0
 import "qrc:/controls"
 import "qrc:/feedback"
 import "qrc:/Utils.js" as Utils
+import "qrc:/Api.js" as Api
 
 Rectangle {
     id:mainSlider
@@ -34,6 +35,8 @@ Rectangle {
 //                                "courier":"Alex",
 //                                "courierPhone":"+380982559836"})
         //RED
+
+
     }
 
 //    Timer{
@@ -88,6 +91,8 @@ Rectangle {
         }
     }
 
+
+
     function updateUserData(){
         mainMenu.updateUserData()
         mainScreen.updateUserData()
@@ -102,8 +107,9 @@ Rectangle {
 
     function deliveryArrived(notification){
         mainScreen.hideCallButton()
-        storage.getOrderById(notification.orderid, function(city, street, house, apt, time){
-            storage.markAsDelivered(notification.orderid)
+        var orderid = notification.orderid.slice(0, -1)
+        storage.getOrderById(orderid, function(city, street, house, apt, time){
+            storage.markAsDelivered(orderid)
             orderDelivered({
                                "address" :{
                                    "city":city,
@@ -113,9 +119,9 @@ Rectangle {
                                },
                                "courierName" : notification.courier,
                                "courierPhone":notification.courierPhone,
-                               "deliveryDate":"15/09/2017",
+                               "deliveryDate":"сьогодні",
                                "deliveryTime":time,
-                               "orderId"     :notification.orderid
+                               "orderId"     :orderid
                            })
         })
     }

@@ -131,8 +131,8 @@ NewAddressForm {
         isValid &= (tfStreet.text.length > 3)
         isValid &= (tfHouse.text.length > 0)
         isValid &= (tfApt.text.length > 0)
-        isValid &= (tfFloor.text.length > 0)
-        isValid &= (tfEntrance.text.length > 0)
+        //isValid &= (tfFloor.text.length > 0)
+        //isValid &= (tfEntrance.text.length > 0)
         return isValid
     }
     function markInvalid(){
@@ -141,15 +141,15 @@ NewAddressForm {
         tfStreet.valid = (tfStreet.text.length > 3)
         tfHouse.valid = (tfHouse.text.length > 0)
         tfApt.valid = (tfApt.text.length > 0)
-        tfFloor.valid = (tfFloor.text.length > 0)
-        tfEntrance.valid = (tfEntrance.text.length > 0)
+        //tfFloor.valid = (tfFloor.text.length > 0)
+        //tfEntrance.valid = (tfEntrance.text.length > 0)
 
         isValid &= tfCity.valid
         isValid &= tfStreet.valid
         isValid &= tfHouse.valid
         isValid &= tfApt.valid
-        isValid &= tfFloor.valid
-        isValid &= tfEntrance.valid
+       // isValid &= tfFloor.valid
+       // isValid &= tfEntrance.valid
 
         return isValid
     }

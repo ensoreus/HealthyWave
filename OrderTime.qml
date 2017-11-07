@@ -106,8 +106,9 @@ ViewController {
                             context.deliveryTime.displayDate = Utils.displayDayForIndex(0)
                             context.deliveryTime.fromHour = rightNow()
                             context.deliveryTime.toHour = result.result
-                            txHint.text = "Доставка за вашою адресою на
- сьогодні можлива протягом часу:"
+                            txHint.text = "Доставка за вашою
+адресою на сьогодні
+можлива протягом часу:"
                             txComment.visible = true
                             tfComment.visible = true
                         })
@@ -214,7 +215,7 @@ ViewController {
             visible: false
             id: searchTimeWaiter
             anchors.fill: parent
-            anchors.bottomMargin: parent.height * 0.2
+            anchors.bottomMargin: parent.height * 0.17
             onClose: {
                 reset()
                 visible = false

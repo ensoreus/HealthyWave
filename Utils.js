@@ -140,6 +140,12 @@ function displayDayForIndex(index){
     }
 }
 
+function decode_utf16 (word) {
+    var prepared = "'\""+word.toLowerCase()+"\"'"
+    console.log(prepared)
+    return JSON.parse(prepared)
+}
+
 function isPhoneNum(num){
     if(typeof(num) === "undefined"){
         return num.match(/^\+380\d{9}$/)

@@ -352,6 +352,10 @@ function getAppLink(authdata, onSuccess, onFailure){
     call("getlinkapp", {"phone":authdata.phone}, authdata, onSuccess, onFailure)
 }
 
+function updatePushToken(token, authdata, onSuccess, onFailure){
+    call("updatetokendevice", {"phone":authdata.phone, "ostype":ostype, "token":token}, authdata, onSuccess, onFailure)
+}
+
 function call(routine, params, authData, onSuccess, onFailure){
     var xhr = new XMLHttpRequest();
     var url = baseUrl + routine + serializeParams(removeUndefinedFields(params))

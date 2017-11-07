@@ -289,7 +289,7 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, time TEXT, courier TEXT, courierPhone TEXT, rated INTEGER )')
-            var sqlstr = "select city, street, house, floor, apt, entrance, entranceDoor, time, courier, courierPhone, rated from orders where orderid = "+ orderid;
+            var sqlstr = "select city, street, house, floor, apt, entrance, entranceDoor, time, courier, courierPhone, rated from orders where orderid = '"+ orderid+"'";
             console.log(sqlstr);
             var result = tx.executeSql(sqlstr);
             if(typeof(result.rows.item(0)) != "undefined"){
@@ -310,7 +310,7 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, time TEXT, courier TEXT, courierPhone TEXT, rated INTEGER )')
-            var sqlstr = "update orders set courier = '"+courierName+"', courierPhone='"+courierPhone+"'  where orderid = "+ orderid;
+            var sqlstr = "update orders set courier = '"+courierName+"', courierPhone='"+courierPhone+"'  where orderid = '"+ orderid+"'";
             console.log(sqlstr);
             var result = tx.executeSql(sqlstr);
         });
@@ -320,7 +320,7 @@ Item {
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, time TEXT, courier TEXT, courierPhone TEXT, rated INTEGER )')
-            var sqlstr = "select courier, courierPhone, rated from orders where orderid = "+ orderid;
+            var sqlstr = "select courier, courierPhone, rated from orders where orderid = '"+ orderid+"'";
             console.log(sqlstr);
             var result = tx.executeSql(sqlstr);
             if(typeof(result.rows.item(0)) != "undefined"){

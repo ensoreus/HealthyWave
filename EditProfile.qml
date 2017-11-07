@@ -187,9 +187,13 @@ ViewController {
                                               navigationController.pop()
                                               navigationController.pop(mainScreen)
                                           })
+                                          }else{
+                                              stopProcessIndicator()
+                                              navigationController.pop()
+                                              navigationController.pop(mainScreen)
                                           }
                                       }else{
-                                        stopProcessIndicator()
+                                          stopProcessIndicator()
                                           navigationController.pop()
                                           navigationController.pop(mainScreen)
                                       }

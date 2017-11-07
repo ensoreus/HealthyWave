@@ -117,7 +117,7 @@ Page {
             width: parent.width * 0.8
             height: parent.height * 0.1
             anchors.top: header.bottom
-            anchors.topMargin: parent.height * 0.2
+            anchors.topMargin: parent.height * 0.4
             labelText: "ЗБЕРІГТИ"
             enabled: true
 

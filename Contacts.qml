@@ -19,9 +19,20 @@ ViewController {
         storage.getAuthData(function(authdata){
             Api.getContacts(authdata, function(response){
                 console.log(response.result)
-                for(var index in response.result){
-                    importData(response.result[index])
-                }
+                var controls = [
+                            {"tx":txOrderOnlinePhone,"lb":lbOrderOnlinePhone},
+                            {"tx":txCallCenterPhone2,"lb":lbCallCenterPhone2},
+                            {"tx":txCallCenterPhone,"lb":lbCallCenterPhone}
+                        ]
+                response.result.forEach(function(item, index, arra){
+                    if(item.ContactType === "Телефон"){
+                        controls[index].tx.text = item.ContactInformation
+                        controls[index].lb.text = item.ContactInformationType
+                    }else{
+                        importData(response.result[index])
+                    }
+                })
+
                 content.state = "readyContacts"
             }, function(failure){
                 console.log(failure.error)
@@ -31,18 +42,12 @@ ViewController {
     }
 
     function importData(contactItem){
-        if (contactItem.ContactInformationType === "Замовлення онлайн"){
-            txOrderOnlinePhone.text = contactItem.ContactInformation
-        }else if(contactItem.ContactInformationType === "Кол-центр (зворотній дзвінок)"){
-            txCallCenterPhone2.text = contactItem.ContactInformation
-        }else if(contactItem.ContactInformationType === "Головний офіс"){
+        if(contactItem.ContactInformationType === "Головний офіс"){
             lbMainAddress.text = contactItem.ContactInformation
         }else if(contactItem.ContactInformationType === "Пошта"){
             txEmail.text = contactItem.ContactInformation
         }else if(contactItem.ContactInformationType === "Viber"){
             txViber.text = "+380" + contactItem.ContactInformation
-        }else if(contactItem.ContactInformationType === "Кол-центр"){
-            txCallCenterPhone.text = contactItem.ContactInformation
         }else if(contactItem.ContactInformationType === "Telegram"){
             txTelegram.text = contactItem.ContactInformation
         }

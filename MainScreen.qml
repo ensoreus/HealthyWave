@@ -2,6 +2,10 @@ import QtQuick 2.4
 import QuickIOS 0.1
 import "qrc:/controls" as Controls
 import "qrc:/"
+import "qrc:/Api.js" as Api
+import "qrc:/Utils.js" as Utils
+
+import PushNotificationRegistrationTokenHandler 1.0
 
 ViewController {
     anchors.fill: parent
@@ -18,7 +22,21 @@ ViewController {
     }
 
     Component.onCompleted: {
+        PushNotificationRegistrationTokenHandler.gcmRegistrationToken
         checkUnratedOrders.start()
+    }
+
+    Connections {
+        target: PushNotificationRegistrationTokenHandler
+        onGcmRegistrationTokenChanged: {
+            storage.getAuthData(function(authdata){
+                Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, authdata, function(response){
+                    console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+                }, function(failure){
+                    console.log("failed to update token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+                })
+            })
+        }
     }
 
     function showCallButton(phonenum){
@@ -35,7 +53,7 @@ ViewController {
 
     Timer{
         id: checkUnratedOrders
-        interval: (6000 * 1)
+        interval: (60000)
         repeat: true
         onTriggered: {
             storage.getLastUnratedOrder(function(orderid, city, street, house, apt, time, courier, courierPhone ){
@@ -94,10 +112,13 @@ ViewController {
     onViewDidAppear: {
         mainScreenHintPanel.state = "hidden"
         storage.isFirstStart(function(isFirstStart){
-            console.log("first start:"+isFirstStart)
             mainScreenHintPanel.isAttract = isFirstStart
             storage.dropFirstStartFlag()
+            if(!isFirstStart){
+
+            }
         })
+
     }
 
     Rectangle {
@@ -126,7 +147,7 @@ ViewController {
             anchors.topMargin: parent.height * 0.2
             anchors.rightMargin: parent.width * 0.1
             anchors.leftMargin: parent.width * 0.1
-            labelText: "БЕЗКОШТОВНА ВОДА"
+            labelText: Utils.decode_utf16("\\U041a\\U0443\\U0440\\U044c\\U0435\\U04401")//"БЕЗКОШТОВНА ВОДА"
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.top: parent.top

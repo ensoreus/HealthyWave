@@ -147,7 +147,7 @@ Rectangle {
             x: 21 * ratio
             width: parent.width * 0.7
             height: 50 * ratio
-            anchors.topMargin: parent.height * 0.18
+            anchors.topMargin: parent.height * 0.8
             anchors.top: lbHowItWorks.bottom
             anchors.bottomMargin: 20 * ratio
             anchors.bottom: root.bottom
