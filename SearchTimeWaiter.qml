@@ -10,12 +10,15 @@ Item{
 
     function reset(){
         timeLabel.visible = false
+        timeHeaderlabel.visible = false
         timeLabel.text = ""
         errorLabel.visible = false
+        label.visible = false
     }
 
     width: 215
     height: 215
+
     Component.onCompleted: {
         visible = false
         reset()
@@ -24,7 +27,9 @@ Item{
     function startAnimation(){
         state = "wiggleOut"
         visible = true
-        //errorLabel.visible = false
+        label.visible = false
+        timeHeaderlabel.visible = false
+        errorLabel.visible = false
         timer.start()
     }
 
@@ -38,6 +43,14 @@ Item{
         timeHeaderlabel.visible = false
         timeLabel.visible = false
         visible = false
+    }
+
+    function showTime(time){
+        timeHeaderlabel.visible = true
+        timeLabel.visible = true
+        timeLabel.text = time
+        errorLabel.visible = false
+        label.visible = false
     }
 
     Rectangle{
@@ -108,7 +121,8 @@ Item{
         anchors.horizontalCenter: image.horizontalCenter
         anchors.verticalCenter: image.verticalCenter
         visible: false
-        text: "Неможливо
+        text: "Нажаль
+неможливо
 доставити
 сьогодні"
     }
@@ -132,6 +146,26 @@ Item{
         color: "#80000000"
         source: timeLabel
     }
+
+//    DropShadow{
+//        anchors.fill: timeHeaderlabel
+//        horizontalOffset: 3
+//        verticalOffset: 3
+//        radius: 8.0
+//        samples: 17
+//        color: "#80000000"
+//        source: timeHeaderlabel
+//    }
+
+//    DropShadow{
+//        anchors.fill: errorLabel
+//        horizontalOffset: 3
+//        verticalOffset: 3
+//        radius: 8.0
+//        samples: 17
+//        color: "#80000000"
+//        source: errorLabel
+//    }
 
     Timer{
         id:timer

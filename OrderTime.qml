@@ -97,15 +97,17 @@ ViewController {
                     Api.searchNearestTime(context.address, authData, function(result){
                         console.log(result)
                         searchTimer.onTriggered.connect(function delayResponse(){
-                            searchTimeWaiter.timeLabel = result.result
-                            searchTimeWaiter.showError = false
+                            //searchTimeWaiter.timeLabel = result.result
+                            //searchTimeWaiter.showError = false
+                            searchTimeWaiter.showTime(result.result)
+                            txtChooseAnother.visible = true
                             content.stopSearchAnimation()
                             context.deliveryTime.day = Utils.formatDateShortYear(0)
                             context.deliveryTime.displayDate = Utils.displayDayForIndex(0)
                             context.deliveryTime.fromHour = rightNow()
                             context.deliveryTime.toHour = result.result
                             txHint.text = "Доставка за вашою адресою на
- сьогодні можлива протягом часу до "
+ сьогодні можлива протягом часу:"
                             txComment.visible = true
                             tfComment.visible = true
                         })
@@ -114,6 +116,7 @@ ViewController {
                         searchTimer.onTriggered.connect(function delayError(failure){
                             searchTimeWaiter.showError = true
                             content.stopSearchAnimation()
+                            txtChooseAnother.visible = true
                         })
                         searchTimer.start()
                     })
@@ -148,7 +151,7 @@ ViewController {
             font.pointSize: 15
             font.weight: Font.Normal
             horizontalAlignment: Text.AlignHCenter
-            anchors.topMargin: parent.height * 0.13
+            anchors.topMargin: parent.height * 0.3
             anchors.top: btnSearch.bottom
             anchors.horizontalCenter: parent.horizontalCenter
 
@@ -168,7 +171,7 @@ ViewController {
             anchors.right: tfComment.right
             anchors.rightMargin: 0
             font.weight: Font.Thin
-            anchors.topMargin: parent.height * 0.2
+            anchors.topMargin: parent.height * 0.1
             anchors.top: txtChooseAnother.bottom
             anchors.left: tfComment.left
             anchors.leftMargin: 0
