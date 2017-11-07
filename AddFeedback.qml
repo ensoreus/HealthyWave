@@ -467,8 +467,10 @@ ViewController {
 
                     Api.sendFeedback(ratePanel.rate, comment, order.orderId, code1, code2, code3, code4, authdata, function(response){
                         storage.orderRated(order.orderId)
+                        navigationController.pop()
                     }, function(response){
                         console.log(response.error)
+                        navigationController.pop()
                     })
                 })
             }
