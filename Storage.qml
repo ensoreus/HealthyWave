@@ -242,11 +242,11 @@ Item {
         });
     }
 
-    function markAsDelivered(orderId){
+    function markAsDelivered(orderId, courierName, courierPhone){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction(function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, time TEXT, courier TEXT, courierPhone TEXT, rated INTEGER )')
-            var sqlstr = "update orders set rated = 0 where orderid ='"+orderId+"'";
+            var sqlstr = "update orders set rated = 0, courier = '" + courierName + "', courierPhone = '"+ courierPhone +"'  where orderid ='"+orderId+"'";
             tx.executeSql(sqlstr);
         });
     }

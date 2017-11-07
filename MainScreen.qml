@@ -147,7 +147,7 @@ ViewController {
             anchors.topMargin: parent.height * 0.2
             anchors.rightMargin: parent.width * 0.1
             anchors.leftMargin: parent.width * 0.1
-            labelText: Utils.decode_utf16("\\U041a\\U0443\\U0440\\U044c\\U0435\\U04401")//"БЕЗКОШТОВНА ВОДА"
+            labelText: "БЕЗКОШТОВНА ВОДА"
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.top: parent.top

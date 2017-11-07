@@ -109,7 +109,7 @@ Rectangle {
         mainScreen.hideCallButton()
         var orderid = notification.orderid.slice(0, -1)
         storage.getOrderById(orderid, function(city, street, house, apt, time){
-            storage.markAsDelivered(orderid)
+            storage.markAsDelivered(orderid, Utils.decode_utf16(notification.courier), notification.courierPhone)
             orderDelivered({
                                "address" :{
                                    "city":city,
@@ -117,8 +117,8 @@ Rectangle {
                                    "house":house,
                                    "apartment":apt
                                },
-                               "courierName" : notification.courier,
-                               "courierPhone":notification.courierPhone,
+                               "courierName" : Utils.decode_utf16(notification.courier),
+                               "courierPhone": notification.courierPhone,
                                "deliveryDate":"сьогодні",
                                "deliveryTime":time,
                                "orderId"     :orderid
@@ -300,7 +300,6 @@ Rectangle {
         height: width
         onClose: {
             mainSlider.state = "hideAlert"
-            storage.addUnratedOrder(order)
         }
         onMakeFeedback: {
             mainSlider.state = "hideAlert"
