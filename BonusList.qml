@@ -49,6 +49,10 @@ ViewController {
     Component.onCompleted: {
         createContextObjects()
         btnUseSelectedBonuses.disable()
+        getBonuses()
+    }
+
+    function getBonuses(){
         storage.getAuthData(function(authdata){
             showBusyIndicator()
             Api.getBonus(authdata, function(response){
@@ -248,6 +252,12 @@ ViewController {
                 txAddPromo.forceActiveFocus()
             }
 
+            onTextChanged: {
+                if(text.length == 0){
+                    txMessages.text = ""
+                }
+            }
+
             onAddPromo: {
                 sendPromocode()
             }
@@ -258,6 +268,7 @@ ViewController {
                     Api.addPromoCode(txAddPromo.text, authdata, function(response){
                         txMessages.text = "Промокод прийнято"
                         txMessages.color = "green"
+                        getBonuses()
                     }, function(failure){
                         txMessages.text = failure.error
                         txMessages.color = "red"
