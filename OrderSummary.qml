@@ -27,11 +27,19 @@ ViewController {
         id:storage
     }
 
+    onViewWillAppear: {
+        initCheck()
+    }
+
     Component.onCompleted: {
         isInit = true
         if (typeof(context.bonuses) =="undefined"){
             context.bonuses = new Array(1)
         }
+        initCheck()
+    }
+
+    function initCheck(){
         fullb = context.fullb
         context.pump = false
         emptyb = context.emptyb
@@ -227,7 +235,10 @@ ViewController {
                     if ( isSelected ){
                         var bonus = bonusModel.get(bonusIndex)
                         if (bonus.BonusType === "БесплатныйБутыльВоды"){
-                            context.freeWater++
+                            if(context.fullb > 1){
+                                context.freeWater++
+                            }
+                            lbFreeWaterHint.visible = true
                         }
                     }else{
                         var chCode = bonusModel.get(bonusIndex).PromoCode
@@ -250,14 +261,17 @@ ViewController {
                 }
 
                 function isBonusesPreselected(bonusCode){
-                        console.log( "isBonusesPreselected:" + context.bonuses.length )
+                        //console.log( "isBonusesPreselected:" + context.bonuses.length )
                         for (var item in context.bonuses){
                             if(context.bonuses[item].PromoCode === bonusCode){
                                 if (context.bonuses[item].BonusType === "БесплатныйБутыльВоды"){
-                                    context.freeWater++
+                                    if(context.fullb > 1){
+                                        context.freeWater++
+                                    }
+                                    lbFreeWaterHint.visible = true
                                 }
                                 updateSummary()
-                                console.log(context.bonuses[item].BonusName + " preselected")
+                                //console.log(context.bonuses[item].BonusName + " preselected")
                                 return true
                             }
                         }
@@ -536,13 +550,30 @@ ViewController {
                 fontPointSize: 15
             }
 
+            Text{
+                id: lbFreeWaterHint
+                anchors.top: rbCardPayment.bottom
+                anchors.topMargin: 10 * ratio
+                anchors.left: parent.left
+                anchors.leftMargin: parent.width * 0.05
+                anchors.right: parent.right
+                anchors.rightMargin: parent.width * 0.05
+                font.bold: true
+                font.family: "NS UI Text"
+                font.pointSize: 15
+                height: 35 * ratio
+                wrapMode: Text.WordWrap
+                visible: false
+                text:"* За умови замовлення не менше 2 бутлів в одному замовленні."
+            }
+
             HWRoundButton {
                 id: btnNext
                 width: parent.width * 0.7
                 height: 60 * ratio
                 labelText: "ДАЛІ"
-                anchors.top: rbCardPayment.bottom
-                anchors.bottomMargin: 10 * ratio
+                anchors.top: lbFreeWaterHint.bottom
+                anchors.topMargin: 10 * ratio
                 anchors.horizontalCenter: parent.horizontalCenter
                 onButtonClick: {
 

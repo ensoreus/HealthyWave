@@ -108,7 +108,7 @@ ViewController {
                             context.deliveryTime.toHour = result.result
                             txHint.text = "Доставка за вашою
 адресою на сьогодні
-можлива протягом часу:"
+можлива протягом найближчого часу:"
                             txComment.visible = true
                             tfComment.visible = true
                         })

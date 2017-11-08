@@ -118,7 +118,7 @@ Page {
             height: parent.height * 0.1
             anchors.top: header.bottom
             anchors.topMargin: parent.height * 0.4
-            labelText: "ЗБЕРІГТИ"
+            labelText: "ЗБЕРЕГТИ"
             enabled: true
 
             onButtonClick: {

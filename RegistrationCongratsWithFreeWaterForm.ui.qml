@@ -74,6 +74,22 @@ Page {
             wrapMode: Text.WordWrap
         }
 
+        Text {
+            id: lbFreeWaterHint
+            x: 187
+            height: 35 * ratio
+            width: parent.width * 0.9
+            text: qsTr("* За умови замовлення не менше 2 бутлів в одному замовленні.")
+            font.bold: true
+            font.family: "NS UI Text"
+            horizontalAlignment: Text.AlignHCenter
+            fontSizeMode: Text.HorizontalFit
+            wrapMode: Text.WordWrap
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: txProceed.bottom
+            anchors.topMargin: 5
+        }
+
         HWRoundButton {
             id: btnContinue
             x: 186
