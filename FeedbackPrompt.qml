@@ -57,9 +57,9 @@ import "qrc:/controls"
             id: lbRateDelivery
             height: parent.height * 0.08
             color: "#ffffff"
-            text: qsTr("ОЦІНИТИ ДОСТАВКУ:")
+            text: "ОЦІНИТИ ДОСТАВКУ:"
             anchors.topMargin: parent.height * 0.08
-            font.pointSize: 12
+            font.pointSize: 11
             font.family: "NS UI Text"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter

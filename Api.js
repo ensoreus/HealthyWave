@@ -332,7 +332,7 @@ function getPrices(address, authdata, onSuccess, onFailure){
              "street":address.street,
              "house":address.house,
              "entrance":address.entrance,
-             "apartment":address.apt,
+             "apartment":address.apartment,
              "floor":address.floor,
              "phone":authdata.phone},authdata,onSuccess, onFailure)
 }

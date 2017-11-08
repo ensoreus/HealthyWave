@@ -75,12 +75,6 @@ ViewController {
         })
     }
 
-
-    function updatePrices(){
-        storage.getAddresses()
-        Api.getPrices()
-    }
-
     Rectangle {
         id: rectangle
         color: "#ffffff"
