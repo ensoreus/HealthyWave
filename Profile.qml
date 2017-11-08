@@ -238,8 +238,8 @@ ViewController {
             id:txCopy
             height:parent.height * 0.05
             verticalAlignment: Text.AlignVCenter
-            anchors.leftMargin: 3 * ratio
-            anchors.left: txPromoCode.right
+            anchors.rightMargin: 3 * ratio
+            anchors.right: imgShare.left
             text:"копіювати"
             anchors.top: lbPass.top
             font.weight: Font.DemiBold
@@ -267,8 +267,8 @@ ViewController {
             width: txPromoCode.height * 0.8
             height: width
             fillMode: Image.PreserveAspectFit
-            anchors.leftMargin: 10 * ratio
-            anchors.left: txCopy.right
+            anchors.rightMargin: 5 * ratio
+            anchors.right: parent.right
             anchors.verticalCenter: txPromoCode.verticalCenter
             source: "qrc:/commons/img-share@2x.png"
 

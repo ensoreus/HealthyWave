@@ -173,7 +173,7 @@ NewAddressForm {
 
 
     tfHouse.onTextChanged: {
-        //btnCommit.enabled = validateInput()
+        btnCommit.enabled = validateInput()
         console.log("tfHouse:"+validateInput())
     }
 
@@ -191,8 +191,7 @@ NewAddressForm {
     }
 
     tfApt.onTextChanged: {
-        //btnCommit.enabled = validateInput()
-        console.log("tfApt:"+validateInput())
+        btnCommit.enabled = validateInput()
     }
 
     tfFloor.onWillStartAnimation: {

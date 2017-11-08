@@ -163,7 +163,7 @@ ViewController {
 
                 var rbAddress = createRadioButton(checkChanged)
                 rbAddress.checked = item.primary
-                rbAddress.text = "м."+ item.city + ",\n вул."+item.street+", "+item.house+", оф." + item.apartment
+                rbAddress.text = "м."+ item.city + ",\n вул."+item.street+", "+item.house+", кв." + item.apartment
             }
 
             function createRadioButton(onCheckChanged){

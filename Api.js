@@ -143,24 +143,37 @@ function sendAvatar(pic, authdata, onSuccess, onFailure){
 }
 
 function deleteAddress(city, street, house, entrance, floor, apartment, authdata, onSuccess, onFailure){
-    call("deleteaddresscustomer", {"city":city,
-             "street":street,
-             "house":house,
-             "entrance":entrance,
-             "apartment":apartment,
-             "floor":floor,
-             "phone":authdata.phone}, authdata, onSuccess, onFailure);
+    var params = {"city":city,
+        "street":street,
+        "house":house,
+        "apartment":apartment,
+        "phone":authdata.phone}
+    if (floor > 0){
+        params["floor"] = floor
+    }
+    if (entrance > 0){
+        params["entrance"] = entrance
+    }
+    call("deleteaddresscustomer", params, authdata, onSuccess, onFailure);
 }
 
 function sendNewAddress(city, street, house, entrance, apartment, floor, doorcode, authdata, onSuccess, onFailure){
-    call("addaddresscustomer", {"city":city,
-             "street":street,
-             "house":house,
-             "apartment":apartment,
-             "entrance":entrance,
-             "floor":floor,
-             "doorcode":doorcode,
-             "phone":authdata.phone}, authdata, onSuccess, onFailure);
+    var params = {"city":city,
+        "street":street,
+        "house":house,
+        "apartment":apartment,
+        "phone":authdata.phone}
+    if (floor > 0){
+        params["floor"] = floor
+    }
+    if (entrance > 0){
+        params["entrance"] = entrance
+    }
+    if (typeof(doorcode) != "undefined"  &&  doorcode.length > 0){
+        params["doorcode"] = doorcode
+    }
+
+    call("addaddresscustomer", params, authdata, onSuccess, onFailure);
 }
 
 function updateAddress(newCity, newStreet, newHouse, newApt, newEntrance, newFloor, newDoorcode,
@@ -183,13 +196,20 @@ function updateAddress(newCity, newStreet, newHouse, newApt, newEntrance, newFlo
 }
 
 function searchNearestTime(address, authData, onSuccess, onFailure){
-    call("timedelivery", {"city":address.city,
-             "street":address.street,
-             "house":address.house,
-             "entrance":address.entrance,
-             "apartment":address.apartment,
-             "floor":address.floor,
-             "phone":authData.phone}, authData, onSuccess, onFailure)
+    var params = {"city":address.city,
+        "street":address.street,
+        "house":address.house,
+        "apartment":address.apartment,
+        "phone":authData.phone}
+
+    if (address.floor > 0){
+        params["floor"] = address.floor
+    }
+    if (address.entrance > 0){
+        params["entrance"] = address.entrance
+    }
+
+    call("timedelivery", params, authData, onSuccess, onFailure)
 }
 
 function createOrder(orderContext, authData, onSuccess, onFailure){
@@ -197,9 +217,7 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
         "city":orderContext.address.city,
         "street":orderContext.address.street,
         "house":orderContext.address.house,
-        "entrance":orderContext.address.entrance,
         "apartment":orderContext.address.apartment,
-        "floor":orderContext.address.floor,
         "comment":orderContext.comment,
         "bottle":orderContext.fullb,
         "emptybottle":orderContext.emptyb,
@@ -213,6 +231,13 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
                                                                     "paycard":typeof(orderContext.cardToPay) == "undefined" ? 0 : 1,
                                                                                                                               "phone":authData.phone
     }
+    if (orderContext.address.floor > 0){
+        params["floor"] = orderContext.address.floor
+    }
+    if (orderContext.address.entrance > 0){
+        params["entrance"] = orderContext.address.entrance
+    }
+
     call("createorder", collectBonuses(orderContext, params), authData, onSuccess, onFailure)
 }
 
@@ -327,14 +352,19 @@ floor: этаж
 */
 
 function getPrices(address, authdata, onSuccess, onFailure){
-    call("getprices", {
-             "city":address.city,
-             "street":address.street,
-             "house":address.house,
-             "entrance":address.entrance,
-             "apartment":address.apartment,
-             "floor":address.floor,
-             "phone":authdata.phone},authdata,onSuccess, onFailure)
+    var params = {
+        "city":address.city,
+        "street":address.street,
+        "house":address.house,
+        "apartment":address.apartment,
+        "phone":authdata.phone}
+    if (address.floor > 0){
+        params["floor"] = address.floor
+    }
+    if (address.entrance > 0){
+        params["entrance"] = address.entrance
+    }
+    call("getprices", params, authdata,onSuccess, onFailure)
 }
 
 function getContacts(authdata, onSuccess, onFailure){
