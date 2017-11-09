@@ -328,7 +328,7 @@ ViewController {
                 font.weight: Font.Thin
                 font.pointSize: 13
                 anchors.topMargin: parent.height * 0.02
-                anchors.top: txDeliveryTime.bottom
+                anchors.top: txPaymentType.bottom
                 anchors.right: rectangle1.right
                 anchors.rightMargin: 0
                 anchors.left: rectangle1.left
@@ -356,7 +356,7 @@ ViewController {
                 font.weight: Font.Thin
                 font.pointSize: 13
                 anchors.topMargin: parent.height * 0.02
-                anchors.top: txComment.bottom
+                anchors.top: txDeliveryTime.bottom
                 anchors.right: rectangle1.right
                 anchors.rightMargin: 0
                 anchors.left: rectangle1.left

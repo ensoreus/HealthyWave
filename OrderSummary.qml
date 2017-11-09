@@ -98,9 +98,11 @@ ViewController {
     function feeForBottlesLine(){
         if((fullb - emptyb) > 0){
             lbBottlesFee.visible = true
+            lbBottlesFee.height = 25 * ratio
             return (fullb - emptyb) + " бут.  x " + context.prices.bottle + " грн."
         }
         lbBottlesFee.visible = false
+        lbBottlesFee.height = 0
         return ""
     }
 
@@ -410,7 +412,7 @@ ViewController {
                     font.pointSize: 14
                     anchors.left: lbBottlesFee.left
                     anchors.leftMargin: 0
-                    anchors.topMargin: 10* ratio
+                    anchors.topMargin: 5 * ratio
                     anchors.top: lbBottlesFee.bottom
                     visible: cbPump.checked
                     font.family: "NS UI Text"
