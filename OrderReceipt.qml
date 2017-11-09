@@ -29,6 +29,17 @@ ViewController {
         txDeliveryTime.text = context.deliveryTime.displayDate + " до " + context.deliveryTime.toHour
         txPaymentType.text = context.card == 1 ? "карткою" : "готівкою"
         txComment.text = context.comment
+        if(context.pump){
+            txPump.text = context.prices.pump + " грн."
+            txPump.visible = true
+            lbPump.visible = true
+            lbPump.height = 25 * ratio
+        }else{
+            txPump.visible = false
+            lbPump.visible = false
+            lbPump.height = 0
+        }
+
     }
 
     Storage{
@@ -122,6 +133,22 @@ ViewController {
                 anchors.left: parent.left
             }
 
+            Text{
+                id: lbPump
+                color: "#4a4a4a"
+                text: "Механічна помпа:"
+                font.family: "NS UI Text"
+                font.weight: Font.Thin
+                font.pointSize: 13
+                height: 25 * ratio
+                anchors.topMargin: parent.width * 0.02
+                anchors.top: lbEmptyBottle.bottom
+                anchors.right: parent.horizontalCenter
+                anchors.rightMargin: 0
+                anchors.leftMargin: parent.width * 0.08
+                anchors.left: parent.left
+            }
+
             Text {
                 id: lbTotal
                 color: "#4a4a4a"
@@ -130,7 +157,7 @@ ViewController {
                 font.weight: Font.Thin
                 font.pointSize: 13
                 anchors.topMargin: parent.height * 0.05
-                anchors.top: lbEmptyBottle.bottom
+                anchors.top: lbPump.bottom
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: 0
                 anchors.leftMargin: parent.width * 0.08
@@ -199,6 +226,20 @@ ViewController {
                 font.pointSize: 14
                 verticalAlignment: Text.AlignVCenter
                 anchors.top: lbEmptyBottle.top
+                anchors.topMargin: 0
+                anchors.rightMargin: parent.width * 0.08
+                anchors.right: parent.right
+                anchors.left: lbEmptyBottle.right
+                anchors.leftMargin: 20* ratio
+            }
+
+            Text {
+                id: txPump
+                font.family: "NS UI Text"
+                font.weight: Font.DemiBold
+                font.pointSize: 14
+                verticalAlignment: Text.AlignVCenter
+                anchors.top: lbPump.top
                 anchors.topMargin: 0
                 anchors.rightMargin: parent.width * 0.08
                 anchors.right: parent.right

@@ -64,6 +64,7 @@ Item{
         enabled: false
         id:overlayTap
         anchors.fill: parent
+        anchors.bottomMargin: parent.height * 0.4
         onClicked: {
             close()
         }

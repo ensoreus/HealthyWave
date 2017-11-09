@@ -64,7 +64,7 @@ ViewController {
         Text {
             id: txHint
             x: 307
-            width: parent.width * 0.7
+            width: parent.width * 0.8
             text: "Запросити найближчій час доставки на сьогодні за Вашою адресою"
             wrapMode: Text.WordWrap
             font.weight: Font.DemiBold
@@ -97,8 +97,6 @@ ViewController {
                     Api.searchNearestTime(context.address, authData, function(result){
                         console.log(result)
                         searchTimer.onTriggered.connect(function delayResponse(){
-                            //searchTimeWaiter.timeLabel = result.result
-                            //searchTimeWaiter.showError = false
                             searchTimeWaiter.showTime(result.result)
                             txtChooseAnother.visible = true
                             content.stopSearchAnimation()
@@ -106,9 +104,7 @@ ViewController {
                             context.deliveryTime.displayDate = Utils.displayDayForIndex(0)
                             context.deliveryTime.fromHour = rightNow()
                             context.deliveryTime.toHour = result.result
-                            txHint.text = "Доставка за вашою
-адресою на сьогодні
-можлива протягом найближчого часу:"
+                            txHint.text = "Доставка за вашою адресою на сьогодні можлива протягом найближчого часу:"
                             txComment.visible = true
                             tfComment.visible = true
                         })
@@ -173,11 +169,10 @@ ViewController {
             anchors.right: tfComment.right
             anchors.rightMargin: 0
             font.weight: Font.Thin
-            anchors.topMargin: parent.height * 0.1
-            anchors.top: txtChooseAnother.bottom
+            anchors.bottomMargin: parent.height * 0.1
+            anchors.bottom: btnNext.top
             anchors.left: tfComment.left
             anchors.leftMargin: 0
-
         }
 
         HWTextField {
@@ -199,6 +194,7 @@ ViewController {
 
 
         HWRoundButton{
+            id: btnNext
             visible: context.deliveryTime.toHour != ""
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
@@ -216,7 +212,7 @@ ViewController {
             visible: false
             id: searchTimeWaiter
             anchors.fill: parent
-            anchors.bottomMargin: parent.height * 0.17
+            anchors.bottomMargin: parent.height * 0.15
             onClose: {
                 reset()
                 visible = false
