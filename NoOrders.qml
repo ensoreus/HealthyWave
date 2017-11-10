@@ -139,12 +139,12 @@ ViewController{
 
                         for(var i in goods){
                             var gitem = goods[i]
-                            if(gitem.Good === "Вода питна Хвиля Здоров'я"){
-                                waterPrice += gitem.Price
+                            if(gitem.Good === "Вода"){
+                                waterPrice += gitem.Sum
                                 fullBottels += gitem.Quantity
-                            }else if (gitem.Good === "Бутель полікарбонат (Хвиля Здоров'я)"){
+                            }else if (gitem.Good === "Пустые бутыли"){
                                 emptyBottles += gitem.Quantity
-                                fee += gitem.Price
+                                fee += gitem.Sum
                             }
                         }
                         var item = {

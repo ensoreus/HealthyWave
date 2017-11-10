@@ -1,6 +1,6 @@
 import QtQuick 2.4
 import QuickIOS 0.1
-import "qrc:/controls" as Controls
+import "qrc:/controls"
 import "qrc:/"
 import "qrc:/Api.js" as Api
 import "qrc:/Utils.js" as Utils
@@ -114,9 +114,6 @@ ViewController {
         storage.isFirstStart(function(isFirstStart){
             mainScreenHintPanel.isAttract = isFirstStart
             storage.dropFirstStartFlag()
-            if(!isFirstStart){
-
-            }
         })
 
     }
@@ -126,7 +123,7 @@ ViewController {
         color: "#ffffff"
         anchors.fill: parent
 
-        Controls.HWRoundButton {
+        HWRoundButton {
             id: btnOrder
             height: 60 * ratio
             anchors.topMargin: parent.height * 0.04
@@ -141,7 +138,7 @@ ViewController {
             }
         }
 
-        Controls.HWGreenRoundButton {
+        HWGreenRoundButton {
             id: btnFreeWater
             height: 60 * ratio
             anchors.topMargin: parent.height * 0.2
@@ -155,6 +152,16 @@ ViewController {
                 navigationController.push("qrc:/bonus/BonusList.qml")
             }
         }
+
+//        PinField{
+//            height: 60 * ratio
+//            anchors.topMargin: parent.height * 0.2
+//            anchors.rightMargin: parent.width * 0.1
+//            anchors.leftMargin: parent.width * 0.1
+//            anchors.right: parent.right
+//            anchors.left: parent.left
+//            anchors.top: btnOrder.top
+//        }
     }
 
     FreeWaterHelpScreen {
