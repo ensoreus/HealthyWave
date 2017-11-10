@@ -38,7 +38,6 @@ NewAddressForm {
                     tfCity.model = result.result
                     tfCity.popup.open()
                     storage.saveToken(token)
-                    //btnCommit.enabled = validateInput()
                     tfCity.stopWheelAnimation()
                 },function(error, token){
                     console.error("call:" + error.error)
@@ -64,7 +63,6 @@ NewAddressForm {
                     tfStreet.popup.open()
                     storage.saveToken(token)
                     tfStreet.stopWheelAnimation()
-                    //btnCommit.enabled = validateInput()
                 },function(error, token){
                     console.error("call:" + error.error)
                     tfStreet.stopWheelAnimation()
@@ -99,7 +97,7 @@ NewAddressForm {
                     showWaiter()
                     storage.getAuthData(function(authdata){
                         if(isEditing){
-                            Api.updateAddress(tfCity.text, tfStreet.text, tfHouse.text, tfEntrance.text, tfApt.text,  tfFloor.text, tfDoorCode.text,
+                            Api.updateAddress(tfCity.text, tfStreet.text, tfHouse.text, tfApt.text, tfEntrance.text, tfFloor.text, tfDoorCode.text,
                                               addressToEdit.city, addressToEdit.street, addressToEdit.house, addressToEdit.apartment, addressToEdit.entrance, addressToEdit.floor, addressToEdit.doorcode,
                                               authdata, function(result, token){
                                 storage.saveToken(authdata.token)

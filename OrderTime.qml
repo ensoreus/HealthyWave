@@ -104,6 +104,7 @@ ViewController {
                             context.deliveryTime.displayDate = Utils.displayDayForIndex(0)
                             context.deliveryTime.fromHour = rightNow()
                             context.deliveryTime.toHour = result.result
+                             txHint.visible = true
                             txHint.text = "Доставка за вашою адресою на сьогодні можлива протягом найближчого часу:"
                             txComment.visible = true
                             tfComment.visible = true
@@ -152,7 +153,7 @@ ViewController {
             anchors.topMargin: parent.height * 0.3
             anchors.top: btnSearch.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-
+            height: 30 * ratio
             MouseArea {
                 id: btnChooseAnother
                 anchors.fill: parent

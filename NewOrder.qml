@@ -119,7 +119,6 @@ ViewController {
                 anchors.left: parent.left
                 anchors.topMargin: parent.height * 0.06
                 anchors.top: parent.top
-                font.weight: Font.Thin
                 font.pointSize: fontSize
                 font.family: "NS UI Text"
             }
@@ -156,7 +155,6 @@ ViewController {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.underline: true
                 font.pointSize: fontSize
-                font.weight: Font.Thin
             }
 
             Text {

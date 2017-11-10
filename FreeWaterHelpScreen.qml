@@ -43,11 +43,11 @@ Rectangle{
                 for(var index in response.result){
                     var linkinfo = response.result[index]
                     if(linkinfo.ContactInformationType === "AppStore"){
-                        console.log("app store lnk:" + linkinfo.ContactInformation)
+                        //console.log("app store lnk:" + linkinfo.ContactInformation)
                         ioslink = linkinfo.ContactInformation
                     }
                     if(linkinfo.ContactInformationType === "Google Play Market"){
-                        console.log("android:" + linkinfo.ContactInformation)
+                        //console.log("android:" + linkinfo.ContactInformation)
                         androidlink = linkinfo.ContactInformation
                     }
                 }

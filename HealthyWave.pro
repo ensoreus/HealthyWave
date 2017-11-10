@@ -72,6 +72,8 @@ android: {
     SOURCES +=  SecImpl_android.cpp
     SOURCES += source/cpp/misc/android/androidshareutils.cpp
     HEADERS += source/cpp/misc/android/androidshareutils.h
+    ANDROID_EXTRA_LIBS += $$PWD/android-openssl-qt/prebuilt/armeabi-v7a/libcrypto.so
+    ANDROID_EXTRA_LIBS += $$PWD/android-openssl-qt/prebuilt/armeabi-v7a/libssl.so
 }
 
 

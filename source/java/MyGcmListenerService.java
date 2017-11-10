@@ -52,7 +52,7 @@ public class MyGcmListenerService extends FirebaseMessagingService
         Log.i(TAG,message.toString());
         Map<String,String> bundle = message.getData();
         if (bundle != null) {
-            String msg = String.format("{\"courier\":\"%s\", \"order\":\"%s\"}", bundle.get("CourierName").toString(), bundle.get("OrderNumber")/*, bundle.get("phone").toString()*/);
+            String msg = String.format("{\"courier\":\"%s\", \"orderid\":\"%s\"}", bundle.get("CourierName").toString(), bundle.get("OrderNumber")/*, bundle.get("phone").toString()*/);
         
             sendNotification(msg);
             JavaNatives.notificationArrived(msg);            

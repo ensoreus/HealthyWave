@@ -1,0 +1,4 @@
+[submodule "android-openssl-qt"]
+	path = android-openssl-qt
+	url = https://github.com/ekke/android-openssl-qt.git
+	branch = master

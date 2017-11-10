@@ -191,7 +191,7 @@ function updateAddress(newCity, newStreet, newHouse, newApt, newEntrance, newFlo
              "floor":oldfloor,
              "floornew":newFloor,
              "doorcode":olddoorcode,
-             "doorcode":newDoorcode,
+             "doorcodenew":newDoorcode,
              "phone":authdata.phone}, authdata, onSuccess, onFailure);
 }
 

@@ -114,7 +114,7 @@ ViewController {
                         context.address.doorCode = item.doorCode.toInt()
                         context.address.house = item.house
                         context.address.apartment = item.apartment
-                        context.address.isPrimary = item.primary
+                        //context.address.isPrimary = item.primary
                         context.address.entrance = item.entrance
                     }
                     var modelItem = {
@@ -123,9 +123,9 @@ ViewController {
                         house:item.house,
                         apartment:item.apartment,
                         floor:item.floor,
-                        //doorCode:item.doorCode,
+                        doorCode:item.doorCode,
                         entrance:item.entrance,
-                        primary: item.primary
+                       // primary: item.primary
                     }
 
                     append(modelItem)
@@ -154,7 +154,7 @@ ViewController {
                         }
                         context.address.house = item.house
                         context.address.apartment = item.apartment
-                        context.address.isPrimary = item.primary
+                        //context.address.isPrimary = item.primary
                         context.address.entrance = item.entrance
                         btnNext.enabled = true
                     }
@@ -162,7 +162,7 @@ ViewController {
                 }
 
                 var rbAddress = createRadioButton(checkChanged)
-                rbAddress.checked = item.primary
+                //rbAddress.checked = item.primary
                 rbAddress.text = "м."+ item.city + ",\n вул."+item.street+", "+item.house+", кв." + item.apartment
             }
 
