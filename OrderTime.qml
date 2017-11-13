@@ -100,7 +100,7 @@ ViewController {
                             searchTimeWaiter.showTime(result.result)
                             txtChooseAnother.visible = true
                             content.stopSearchAnimation()
-                            context.deliveryTime.day = Utils.formatDateShortYear(0)
+                            context.deliveryTime.day = Utils.formatDateFullYear(0)
                             context.deliveryTime.displayDate = Utils.displayDayForIndex(0)
                             context.deliveryTime.fromHour = rightNow()
                             context.deliveryTime.toHour = result.result

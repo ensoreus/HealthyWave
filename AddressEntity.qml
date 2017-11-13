@@ -4,10 +4,10 @@ QtObject {
     property int id
     property string city
     property string street
-    property int floor
-    property int entrance
-    property int apartment
-    property int house
+    property string floor
+    property string entrance
+    property string apartment
+    property string house
     property string doorCode
     property int isPrimary
 }

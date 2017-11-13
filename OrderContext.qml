@@ -24,11 +24,11 @@ QtObject {
     property AddressEntity address: AddressEntity{
          city:""
          street:""
-         floor:0
-         entrance: 0
-         apartment: 0
+         floor:""
+         entrance: ""
+         apartment: ""
          doorCode: ""
-         house: 0
+         house: ""
          isPrimary: 0
     }
     property Prices prices:Prices{

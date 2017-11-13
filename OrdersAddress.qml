@@ -16,6 +16,7 @@ ViewController {
     property var component
     property var dynamicElements
     property var lastTopAnchor: pAddresses.top
+    property var addressesCount: 0
     id: orderAddressViewController
 
     navigationItem:NavigationItem{
@@ -26,17 +27,14 @@ ViewController {
         id:storage
     }
     
-    onViewDidAppear:{
+    onViewWillAppear:{
         orderAddressViewController.initializing = false
-        if(typeof(context)=="undefined" || context == null){
-            createContextObjects()
-        }else{
-            console.log(context)
-        }
+        createContextObjects()
         btnNext.enabled = false
     }
 
     function createContextObjects() {
+        console.log("created context")
         component = Qt.createComponent("qrc:/commons/OrderContext.qml");
         orderAddressViewController.context = component.createObject(orderAddressViewController, {
                                                                     "fullb":0,
@@ -46,13 +44,14 @@ ViewController {
                                                                     "pump": 0,
                                                                     "cardToPay":""
                                                                 })
+        console.log("created context")
     }
 
     Component.onCompleted: {
         radioBtnComponent = Qt.createComponent("qrc:/controls/HWRadioButton.qml")
     }
 
-    onViewWillAppear:{
+    onViewDidAppear:{
         busyIndicator.running = true
         storage.getAuthData(function(authData){
             debugMsg.text = JSON.stringify(authData) + "\n"
@@ -102,16 +101,17 @@ ViewController {
             anchors.leftMargin: 0
 
             function importData(data){
-                //                addressesModel.clear()  0662624467
+                addressesCount = data.addresses.length
+                btnNext.enable()
                 dynamicElements = new Array(1)
                 for(var index in data.addresses){
                     var item = data.addresses[index]
-                    if(item.primary){
+                    if(data.addresses.length === 1){
                         context.address.street = item.street
                         context.address.city = item.city
                         context.address.floor = item.floor
-                        if (item.doorCode)
-                        context.address.doorCode = item.doorCode.toInt()
+                        if (item.doorcode)
+                        context.address.doorCode = item.doorcode
                         context.address.house = item.house
                         context.address.apartment = item.apartment
                         //context.address.isPrimary = item.primary
@@ -123,7 +123,7 @@ ViewController {
                         house:item.house,
                         apartment:item.apartment,
                         floor:item.floor,
-                        doorCode:item.doorCode,
+                        doorcode:item.doorcode,
                         entrance:item.entrance,
                        // primary: item.primary
                     }
@@ -149,8 +149,8 @@ ViewController {
                         context.address.street = item.street
                         context.address.city = item.city
                         context.address.floor = item.floor
-                        if (typeof(item.doorCode) != "undefined"){
-                            context.address.doorCode = item.doorCode
+                        if (typeof(item.doorcode) != "undefined"){
+                            context.address.doorcode = item.doorcode
                         }
                         context.address.house = item.house
                         context.address.apartment = item.apartment
@@ -158,11 +158,10 @@ ViewController {
                         context.address.entrance = item.entrance
                         btnNext.enabled = true
                     }
-
                 }
 
                 var rbAddress = createRadioButton(checkChanged)
-                //rbAddress.checked = item.primary
+                rbAddress.checked = (addressesCount === 1)
                 rbAddress.text = "м."+ item.city + ",\n вул."+item.street+", "+item.house+", кв." + item.apartment
             }
 
@@ -175,7 +174,8 @@ ViewController {
                                                                     "anchors.top":lastTopAnchor,
                                                                     "anchors.topMargin": 7 * ratio,
                                                                     "height":50 * ratio,
-                                                                    "fontPointSize": 14
+                                                                    "fontPointSize": 14,
+                                                                    "checked":(addressesCount === 1)
                                                                 })
                 lastTopAnchor = rbAddress.bottom
                 if(typeof(dynamicElements) === 'undefined'){
@@ -195,7 +195,7 @@ ViewController {
                      }
                 }
                 var rbAddNew = createRadioButton(onCheckedChanged)
-                rbAddNew.checked = false
+                rbAddNew.checked = false//addressesCount === 0
                 rbAddNew.anchors.topMargin = 30 * ratio
                 rbAddNew.text = "Додати нову адресу"
             }

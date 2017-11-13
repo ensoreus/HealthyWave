@@ -408,7 +408,7 @@ ViewController {
                         storage.addOrder(context)
                         orderAccepted.hideWaiter(true)
                     }, function(error){
-                        orderAccepted.showError(error.error)
+                        orderAccepted.showError(error.error, error.information)
                         console.log(error.error)
                     })
                 })
@@ -423,7 +423,7 @@ ViewController {
                         storage.addOrder(context)
                         orderAccepted.hideWaiter(false)
                     }, function(error){
-                        orderAccepted.showError(error.error)
+                        orderAccepted.showError(error.error, error.information)
                         console.log(error.error)
                     })
                 })

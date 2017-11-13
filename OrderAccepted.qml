@@ -23,8 +23,9 @@ Item {
         }
     }
 
-    function showError(error){
-        lbError.text = error
+    function showError(error, info){
+        var errorDesc = (typeof(info) === "undefined") ? "" : info
+        lbError.text = error + "\r\n" + errorDesc
         errorPage.visible = true
         stackContainer.push(errorPage)
     }

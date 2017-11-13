@@ -25,7 +25,7 @@ NewAddressForm {
             tfApt.text = addressToEdit.apartment
             tfFloor.text = addressToEdit.floor
             tfEntrance.text = addressToEdit.entrance
-            tfDoorCode.text = addressToEdit.doorCode
+            tfDoorCode.text = addressToEdit.doorcode
         }
         isInit = false
     }

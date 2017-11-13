@@ -108,7 +108,7 @@ function formatDateFullYear(dayIndex){
     if(mm < 10) {
         mm = '0'+mm
     }
-    return dd+mm+yyyy
+    return dd.toString()+mm.toString()+yyyy.toString()
 }
 
 function formatDateShortYear(dayIndex){
@@ -124,7 +124,7 @@ function formatDateShortYear(dayIndex){
     if(mm < 10) {
         mm = '0'+mm
     }
-    return dd+mm+yy
+    return dd.toString()+mm.toString()+yy.toString()
 }
 
 function displayDayForIndex(index){
