@@ -195,7 +195,9 @@ ViewController {
                      }
                 }
                 var rbAddNew = createRadioButton(onCheckedChanged)
-                rbAddNew.checked = false//addressesCount === 0
+                isAddNew = (addressesCount === 0)
+                rbAddNew.checked = isAddNew
+
                 rbAddNew.anchors.topMargin = 30 * ratio
                 rbAddNew.text = "Додати нову адресу"
             }
