@@ -222,15 +222,21 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
         "bottle":orderContext.fullb,
         "emptybottle":orderContext.emptyb,
         "pump":orderContext.pump,
-        "promocode":typeof(orderContext.promocode) == 'undefined' ? "" : orderContext.promocode,
-                                                                    "from":orderContext.deliveryTime.fromHour,
-                                                                    "to":orderContext.deliveryTime.toHour,
-                                                                    "deliverydate":orderContext.deliveryTime.day,
-                                                                    "callrequires":orderContext.needToCall,
-                                                                    "cardtoken":orderContext.cardToPay,
-                                                                    "paycard":typeof(orderContext.cardToPay) == "undefined" ? 0 : 1,
-                                                                                                                              "phone":authData.phone
+        "from":orderContext.deliveryTime.fromHour,
+        "to":orderContext.deliveryTime.toHour,
+        "deliverydate":orderContext.deliveryTime.day,
+        "callrequires":orderContext.needToCall,
+        "cardtoken":orderContext.cardToPay,
+        "paycard":typeof(orderContext.cardToPay) == "undefined" ? 0 : 1,
+                                                                  "phone":authData.phone
     }
+
+    for (var index in orderContext.bouses){
+        var bonusPromo = orderContext.bouses[index]
+        var key = "promocode" + index + 1
+        params[key] = bonusPromo
+    }
+
     if (orderContext.address.floor > 0){
         params["floor"] = orderContext.address.floor
     }

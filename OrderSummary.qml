@@ -112,7 +112,7 @@ ViewController {
 
     function calcTotal(){
         bonusesInCheck.updateSummaryDiscount()
-        var total = calcFullBottles() * (fullb - context.freeWater) + calcEmptyBottlesFee() + (cbPump.checked ? context.prices.pump : 0) // + bonusesInCheck.summaryDiscount
+        var total = calcFullBottles() * (fullb - context.freeWater) + calcEmptyBottlesFee() + (cbPump.checked ? context.prices.pump : 0)
         return total
     }
 
@@ -239,6 +239,7 @@ ViewController {
                         if (bonus.BonusType === "БесплатныйБутыльВоды"){
                             if(context.fullb > 1){
                                 context.freeWater++
+                                context.bonuses.push(bonus.PromoCode)
                             }
                             lbFreeWaterHint.visible = true
                         }
@@ -246,6 +247,8 @@ ViewController {
                         var chCode = bonusModel.get(bonusIndex).PromoCode
                         var chType = bonusModel.get(bonusIndex).BonusType
                         if (chType === "БесплатныйБутыльВоды" && context.freeWater > 0){
+                            var cbindex = context.bonuses.indexOf(bonus.PromoCode)
+                            context.bonuses.splice(cbindex)
                             context.freeWater--
                         }
                     }
