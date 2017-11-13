@@ -55,6 +55,8 @@ Rectangle{
 
             })
         })
+        //Qt.platform.os === "osx" ?  414 * ratio : Screen.width
+
     }
 
     function updateUserData(){
