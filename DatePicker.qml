@@ -8,6 +8,7 @@ Tumbler {
     height: 100
     activeFocusOnTab: false
     property var selectedDayIndex: 0
+    property var isAutoAdjustTimeRange: false
     signal dayChanged(var dayIndex)
 
     Component.onCompleted: {
@@ -82,6 +83,13 @@ Tumbler {
         }
         width:  datepicker.width * 0.3
         role: "from"
+        onCurrentIndexChanged: {
+            if(!isAutoAdjustTimeRange){
+                isAutoAdjustTimeRange = true
+                setCurrentIndexAt(2, currentIndex)
+                isAutoAdjustTimeRange = false
+            }
+        }
     }
 
     TumblerColumn{
@@ -105,6 +113,14 @@ Tumbler {
         }
         width:  datepicker.width * 0.3
         role: "to"
+        onCurrentIndexChanged: {
+            if(!isAutoAdjustTimeRange){
+                isAutoAdjustTimeRange = true
+                setCurrentIndexAt(1, currentIndex)
+                 isAutoAdjustTimeRange = false
+            }
+        }
+
     }
 
 

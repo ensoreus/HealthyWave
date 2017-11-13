@@ -30,7 +30,7 @@ ViewController {
     onViewWillAppear:{
         orderAddressViewController.initializing = false
         createContextObjects()
-        btnNext.enabled = false
+        //btnNext.enabled = false
     }
 
     function createContextObjects() {
@@ -102,7 +102,7 @@ ViewController {
 
             function importData(data){
                 addressesCount = data.addresses.length
-                btnNext.enable()
+//                btnNext.enable()
                 dynamicElements = new Array(1)
                 for(var index in data.addresses){
                     var item = data.addresses[index]
@@ -156,7 +156,7 @@ ViewController {
                         context.address.apartment = item.apartment
                         //context.address.isPrimary = item.primary
                         context.address.entrance = item.entrance
-                        btnNext.enabled = true
+                        //btnNext.enabled = true
                     }
                 }
 
@@ -191,7 +191,7 @@ ViewController {
                      if (!orderAddressViewController.initializing){
                         isAddNew = rbAddNew.checked
                         console.log("add new checked")
-                        btnNext.enabled = true
+                       // btnNext.enabled = true
                      }
                 }
                 var rbAddNew = createRadioButton(onCheckedChanged)
