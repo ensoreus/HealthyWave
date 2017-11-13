@@ -58,8 +58,8 @@ import "qrc:/controls"
             height: parent.height * 0.08
             color: "#ffffff"
             text: "ОЦІНИТИ ДОСТАВКУ:"
-            anchors.topMargin: parent.height * 0.08
-            font.pointSize: 11
+            anchors.topMargin: parent.height * 0.4
+            font.pointSize: 10
             font.family: "NS UI Text"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
@@ -74,8 +74,8 @@ import "qrc:/controls"
             id: rateStars
             backgroundColor:"#1EB2A4"
             width: 200
-            height: 30
-            anchors.topMargin: parent.height * 0.05
+            height: 25
+            anchors.topMargin: parent.height * 0.1
             anchors.top : lbRateDelivery.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             onRated: {

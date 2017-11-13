@@ -1,11 +1,13 @@
 import QtQuick 2.0
 import QuickIOS 0.1
 import QtQuick.Controls 2.1
+import QtQuick.Window 2.3
 import "qrc:/"
 import "qrc:/controls"
 import "qrc:/Api.js" as Api
 
 ViewController {
+    id: addFeedback
     property var navigationItem: NavigationItem{
         centerBarTitle: "Оцінка замовлення"
     }
@@ -20,7 +22,7 @@ ViewController {
     onViewWillAppear: {
         txRate.text = ratingByWord(rate)
         txAddress.text = "м."+order.address.city+" вул."+order.address.street+" "+order.address.house+" оф." + order.address.apartment
-        txDate.text = order.deliveryDate
+        //txDate.text = order.deliveryDate
         txCourierName.text = order.courierName
     }
 
@@ -102,12 +104,25 @@ ViewController {
         }
     }
 
-    Rectangle {
-        id: content
-        height: 73
-        color: "#ffffff"
-        anchors.fill: parent
+    //    Flickable{
+    //        id: scrollView
+    //        anchors.fill: parent
+    //        contentWidth: 414//addFeedback.width
+    //        contentHeight: 800//content.height
 
+    Flickable {
+        id: content
+        height: parent.height * 1.1
+        //color: "#ffffff"
+        anchors.fill:parent
+        contentWidth: Qt.platform.os === "osx" ? 414 : Screen.width
+        contentHeight: hWGreenButton.y + 100
+        Rectangle{
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: hWGreenButton.y + 100
+            color: "white"
         Text {
             id: lbRate
             x: 299
@@ -178,8 +193,8 @@ ViewController {
         }
         Rectangle {
             id: rDetailsArea
-            width: parent.width * 0.7
-            height: 71
+            width: parent.width * 0.9
+            height: 71 * ratio
             color: "#ffffff"
             anchors.topMargin: parent.height * 0.04
             anchors.top: courierPart.bottom
@@ -190,43 +205,13 @@ ViewController {
                 width: 89
                 height: 15
                 color: "#9f9f9f"
-                text: "Доставка від:"
+                text: "Доставка від сьогодні за адресою "
                 font.pointSize: 13
                 anchors.top: parent.top
                 anchors.topMargin: 0
-                anchors.left: parent.left
-                anchors.leftMargin: 0
+                anchors.horizontalCenter: parent.horizontalCenter
                 font.weight: Font.Thin
-            }
-
-            Text {
-                id: txDate
-                width: 119
-                height: 15
-                color: "#9f9f9f"
-                text: qsTr("Text")
-                font.weight: Font.Thin
-                font.pointSize: 14
                 horizontalAlignment: Text.AlignHCenter
-                anchors.top: parent.top
-                anchors.topMargin: 0
-                anchors.left: lbDelivery.right
-                anchors.leftMargin: 6
-            }
-
-            Text {
-                id: lbAddress
-                width: 100
-                height: 15
-                color: "#9f9f9f"
-                text: "за адресою"
-                font.pointSize: 13
-                font.weight: Font.Thin
-                horizontalAlignment: Text.AlignLeft
-                anchors.left: txDate.right
-                anchors.leftMargin: 6
-                anchors.top: parent.top
-                anchors.topMargin: 0
             }
 
             Text {
@@ -239,7 +224,7 @@ ViewController {
                 anchors.left: parent.left
                 anchors.leftMargin: 0
                 anchors.topMargin: 6 * ratio
-                anchors.top: txDate.bottom
+                anchors.top: lbDelivery.bottom
                 horizontalAlignment: Text.AlignHCenter
                 font.weight: Font.Thin
                 font.pointSize: 13
@@ -259,6 +244,8 @@ ViewController {
             font.pointSize: 17
             horizontalAlignment: Text.AlignHCenter
         }
+
+
 
         HWCheckBox {
             id: cbLook
@@ -358,7 +345,7 @@ ViewController {
             anchors.top: cbLate.bottom
             anchors.leftMargin: parent.width * 0.1
             anchors.left: parent.left
-            visible: true
+            visible: false
         }
 
         Text {
@@ -374,7 +361,7 @@ ViewController {
             anchors.top: cbOther.top
             anchors.topMargin: 0
             anchors.left: cbOther.right
-            visible: true
+            visible: false
         }
 
         HWCheckBox {
@@ -413,7 +400,7 @@ ViewController {
             radius: 8
             border.color: "#dfdfdf"
             anchors.topMargin: parent.height * 0.02
-            anchors.top: lbOther.bottom
+            anchors.top: lbComment.bottom
             anchors.rightMargin: parent.width * 0.14
             anchors.right: parent.right
             anchors.leftMargin: parent.width * 0.14
@@ -449,6 +436,7 @@ ViewController {
             }
         }
 
+
         HWGreenRoundButton {
             id: hWGreenButton
             x: 15
@@ -475,7 +463,7 @@ ViewController {
                 })
             }
         }
-
     }
-
+    }
+    // }
 }
