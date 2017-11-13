@@ -15,7 +15,7 @@ Item {
             id: lbDeliveryArrived
             x: 252
             width: parent.width * 0.8
-            height: parent.height * 0.12
+            height: parent.height * 0.1
             color: "#ffffff"
             text: "ВАШЕ ЗАМОВЛЕННЯ ДОСТАВЛЕНО"
             font.bold: true
@@ -31,7 +31,7 @@ Item {
 
         Text {
             id: txAddress
-            height: parent.height * 0.08
+            height: parent.height * 0.1
             color: "#d4d4d4"
             font.family: "NS UI Text"
             anchors.topMargin: 5 * ratio
@@ -47,13 +47,12 @@ Item {
 
         Text {
             id: lbRateDelivery
-            height: parent.height * 0.08
+            height: parent.height * 0.1
             color: "#ffffff"
             text: "ОЦІНИТИ ДОСТАВКУ:"
-            anchors.topMargin: 8 * ratio
-            font.pointSize: 15
+            anchors.topMargin: 10 * ratio
+            font.pointSize: 13
             font.family: "NS UI Text"
-            verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             anchors.top: txAddress.bottom
             anchors.right: txAddress.right
@@ -64,7 +63,7 @@ Item {
 
         HWStarsRate{
             width: 300
-            height: parent.height * 0.27
+            height: parent.height * 0.3
             anchors.topMargin: 5 * ratio
             anchors.top : lbRateDelivery.bottom
             anchors.horizontalCenter: parent.horizontalCenter
