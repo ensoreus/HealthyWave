@@ -30,7 +30,9 @@ ViewController {
     
     onViewWillAppear:{
         orderAddressViewController.initializing = false
-        createContextObjects()
+        if(typeof(context) === 'undefined'){
+            createContextObjects()
+        }
         //btnNext.enabled = false
     }
 

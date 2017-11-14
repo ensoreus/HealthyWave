@@ -13,7 +13,7 @@ QtObject {
     property string orderId
     property string promocode
     property int needToCall: 0
-    property var bonuses: new Array(1)
+    property var bonuses: new Array(0)
     property var freeWater: 0
     property TimeEntity deliveryTime: TimeEntity{
         day:""

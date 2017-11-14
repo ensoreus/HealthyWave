@@ -14,7 +14,7 @@ ViewController {
         centerBarTitle: "Безкоштовна вода"
     }
     property var component
-    property var bonusesToUse: []
+    //property var bonusesToUse: new Array()
     property OrderContext context
 
     function showBusyIndicator(){
@@ -42,7 +42,7 @@ ViewController {
                                              "card": 0,
                                              "pump": 0,
                                              "cardToPay":"",
-                                             "bonuses":[]
+                                             "bonuses":new Array(1)
                                          })
     }
 
@@ -114,19 +114,22 @@ ViewController {
             height: parent.height * 0.45
 
             delegate: BonusCell{
-                height: 70 * ratio
+                height: 80 * ratio
                 width: lstBonuses.width
                 lbMainTitle:BonusName
                 lbComment: Comment
+                lbConstraint: (BonusType === "БесплатныйБутыльВоды") ? "* за умови замовлення не менше 2 бутлів в замовленні" : ""
                 cbUse.onCheckStateChanged: {
                     if (cbUse.checked) {
-                        bonusesToUse.push(bonusModel.get(index))
+                        console.log("before:"+context.bonuses.length)
+                        context.bonuses.push(bonusModel.get(index))
+                        console.log("after:"+context.bonuses.join(","))
                         btnUseSelectedBonuses.enable()
                     } else {
-                        bonusesToUse = bonusesToUse.filter( function(item){
+                        context.bonuses = context.bonuses.filter( function(item){
                             return (item.PromoCode != PromoCode)
                         })
-                        if(bonusesToUse.length > 0){
+                        if(context.bonuses.length > 0){
                             btnUseSelectedBonuses.enable()
                         }else{
                             btnUseSelectedBonuses.disable()
@@ -221,7 +224,7 @@ ViewController {
             labelText: "ВИКОРИСТАТИ"
             visible: false
             onButtonClick: {
-                context.bonuses = bonusesToUse
+                //context.bonuses = bonusesToUse.splice()
                 navigationController.push("qrc:/orders/OrdersAddress.qml", {"context":context})
             }
         }

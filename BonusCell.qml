@@ -5,6 +5,7 @@ Item {
     height: 60 * ratio
     property alias lbMainTitle: lbMainTitle.text
     property alias lbComment: lbComment.text
+    property alias lbConstraint: lbConstraint.text
     property alias lbActiveTill: lbActiveTill.text
     property alias cbUse: cbUse
     Rectangle {
@@ -15,12 +16,12 @@ Item {
         Text {
             id: lbMainTitle
             text: "Перше замовлення онлайн"
-            anchors.rightMargin: parent.width * 0.1
+            anchors.topMargin: parent.height * 0.05
+            anchors.top: parent.top
+            anchors.rightMargin: 3
             anchors.right: cbUse.left
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
-            anchors.topMargin: parent.height * 0.1
-            anchors.top: parent.top
             font.weight: Font.Light
             font.pointSize: 14
             color: "#222222"
@@ -28,7 +29,7 @@ Item {
 
         Text {
             id: lbComment
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: parent.height * 0.01
             anchors.top: lbMainTitle.bottom
             anchors.right: lbMainTitle.right
             anchors.rightMargin: 0
@@ -39,13 +40,28 @@ Item {
             color:"#9B9B9B"
         }
 
+        Text{
+            id:lbConstraint
+            anchors.topMargin: parent.height * 0.01
+            anchors.top: lbComment.bottom
+            anchors.right: cbUse.left
+            anchors.rightMargin: 3
+            fontSizeMode: Text.HorizontalFit
+            anchors.left: lbComment.left
+            anchors.leftMargin: 0
+            font.pointSize: 10
+            font.weight: Font.Bold
+            font.bold: true
+            color: "black"
+        }
+
         Text {
             id: lbActiveTill
-            anchors.topMargin: parent.height * 0.05
-            anchors.top: lbComment.bottom
-            anchors.right: lbComment.right
+            anchors.topMargin: parent.height * 0.01
+            anchors.top: lbConstraint.bottom
+            anchors.right: lbConstraint.right
             anchors.rightMargin: 0
-            anchors.left: lbComment.left
+            anchors.left: lbConstraint.left
             anchors.leftMargin: 0
             font.pointSize: 12
             font.weight: Font.Light

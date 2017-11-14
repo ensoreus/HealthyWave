@@ -33,9 +33,9 @@ ViewController {
 
     Component.onCompleted: {
         isInit = true
-        if (typeof(context.bonuses) =="undefined"){
-            context.bonuses = new Array(1)
-        }
+        //        if (typeof(context.bonuses) =="undefined"){
+        //            context.bonuses = new Array(1)
+        //        }
         initCheck()
     }
 
@@ -266,24 +266,27 @@ ViewController {
                 }
 
                 function isBonusesPreselected(bonusCode){
-                        //console.log( "isBonusesPreselected:" + context.bonuses.length )
-                        for (var item in context.bonuses){
-                            if(context.bonuses[item].PromoCode === bonusCode){
-                                if (context.bonuses[item].BonusType === "БесплатныйБутыльВоды"){
-                                    if(context.fullb > 1){
-                                        context.freeWater++
-                                    }
-                                    lbFreeWaterHint.visible = true
+                    //console.log( "isBonusesPreselected:" + context.bonuses.length + " code:"+ bonusCode)
+                    for (var index in context.bonuses){
+                        var item = context.bonuses[index]
+                        if(item.PromoCode === bonusCode){
+                            if (item.BonusType === "БесплатныйБутыльВоды"){
+                                if(context.fullb > 1){
+                                    context.freeWater++
+                                }else{
+                                    context.bonuses.splice(index,1)
+                                    return false
                                 }
-                                updateSummary()
-                                //console.log(context.bonuses[item].BonusName + " preselected")
-                                return true
+                                lbFreeWaterHint.visible = true
                             }
+                            updateSummary()
+                            return true
                         }
-                        updateSummary()
-                        console.log("not preselected")
-                        return false
                     }
+                    updateSummary()
+                    console.log("not preselected")
+                    return false
+                }
 
             }
 
@@ -364,7 +367,7 @@ ViewController {
                     anchors.left: lbBottlesFee.left
                     anchors.right: parent.right
                     anchors.rightMargin: 18 * ratio
-                    height: context.bonuses.count * (18 + 5) * ratio
+                    height: 0 // context.bonuses.count * (18 + 5) * ratio
 
                 }
 
