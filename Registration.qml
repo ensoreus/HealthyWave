@@ -59,7 +59,7 @@ Item {
             }
 
             onNextPage: {
-                Api.confirmPinCode(pinEditPage.pinField.pin, phoneEditPage.phoneField.text, function(response){
+                Api.confirmPinCode(pinEditPage.pinField.text, phoneEditPage.phoneField.text, function(response){
                     if(response.result === true){
                         Qt.inputMethod.hide()
                         stackLayout.push(emailEditPage)

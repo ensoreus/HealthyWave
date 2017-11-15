@@ -33,15 +33,16 @@ Page {
             anchors.leftMargin: parent.width * 0.15
         }
 
-        Controls.HWPinField {
+        Controls.PinField {
             id: pinField
-            x: 103
-            width: parent.width * 0.5
-            height: parent.height * 0.1
-            border.width: 0
-            anchors.topMargin: 10 * ratio
+            x: 100
+            width: 240
+            height: 42
+            anchors.horizontalCenterOffset: 20
             anchors.horizontalCenter: parent.horizontalCenter
+            padding: 8
             anchors.top: text1.bottom
+            anchors.topMargin: 18 * ratio
         }
 
         Button {
@@ -50,7 +51,7 @@ Page {
             width: parent.width * 0.15
             height: parent.width * 0.15
             text: ""
-            anchors.topMargin: 50 * ratio
+            anchors.topMargin: 10
             anchors.right: parent.right
             anchors.rightMargin: parent.width * 0.15
             anchors.top: pinField.bottom

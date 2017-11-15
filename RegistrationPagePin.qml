@@ -17,7 +17,7 @@ RegistrationPagePinForm {
     }
 
     btnNext.onPressed: {
-        if (pinField.pin.length == 4){
+        if (pinField.text.length == 4){
             btnNext.opacity = 0.8
             nextPage()
         }else{
@@ -29,17 +29,17 @@ RegistrationPagePinForm {
         lbSendAgain.color = (btnSendAgain.pressed) ? "#9013FE" : "#808080"
     }
 
-    pinField.onWillStartAnimation: {
-        if (pinField.aboutToFocus){
-            pinPage.startEditData()
-            pinField.aboutToFocus = false
-        }
-    }
-    pinField.onFocusChanged: {
-        if(!pinField.focus){
-            pinPage.endEditData()
-        }
-    }
+//    pinField.onWillStartAnimation: {
+//        if (pinField.aboutToFocus){
+//            pinPage.startEditData()
+//            pinField.aboutToFocus = false
+//        }
+//    }
+//    pinField.onFocusChanged: {
+//        if(!pinField.focus){
+//            pinPage.endEditData()
+//        }
+//    }
 
     pinField.onLastDigitEdit: {
         btnNext.opacity =  1.0

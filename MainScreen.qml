@@ -53,7 +53,7 @@ ViewController {
 
     Timer{
         id: checkUnratedOrders
-        interval: (600)
+        interval: (60000)
         repeat: true
         onTriggered: {
             storage.getLastUnratedOrder(function(orderid, city, street, house, apt, time, courier, courierPhone ){

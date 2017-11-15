@@ -90,7 +90,6 @@ NewAddressForm {
                 }
                 onClicked: {
                     if(!markInvalid()){
-
                         return
                     }
 
@@ -105,6 +104,7 @@ NewAddressForm {
                                 newAddressView.navigationController.pop()
                                 editedAddress()
                             }, function(error, authdata){
+                                newAddressView.navigationController.pop()
                                 hideWaiter()
                             })
                         }else{
@@ -114,6 +114,7 @@ NewAddressForm {
                                 newAddressView.navigationController.pop()
                                 addedNewAddress()
                             }, function(error, authdata){
+                                newAddressView.navigationController.pop()
                                 hideWaiter()
                             })
                         }
@@ -171,7 +172,6 @@ NewAddressForm {
 
 
     tfHouse.onTextChanged: {
-        btnCommit.enabled = validateInput()
         console.log("tfHouse:"+validateInput())
     }
 
@@ -189,7 +189,7 @@ NewAddressForm {
     }
 
     tfApt.onTextChanged: {
-        btnCommit.enabled = validateInput()
+       // btnCommit.enabled = validateInput()
     }
 
     tfFloor.onWillStartAnimation: {

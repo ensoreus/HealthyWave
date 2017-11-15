@@ -59,8 +59,8 @@ AddressesForm {
                     hideAddressesList()
                 }
                 busyIndicator.running = false
-            },function(error, newToken){
-                storage.saveToken(newToken)
+            },function(error){
+                //storage.saveToken(newToken)
                 hideAddressesList()
                 busyIndicator.running = false
             })
