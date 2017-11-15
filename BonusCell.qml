@@ -16,6 +16,8 @@ Item {
         Text {
             id: lbMainTitle
             text: "Перше замовлення онлайн"
+            font.family: "NS UI Text"
+            font.bold: true
             anchors.topMargin: parent.height * 0.05
             anchors.top: parent.top
             anchors.rightMargin: 3
@@ -23,7 +25,7 @@ Item {
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
             font.weight: Font.Light
-            font.pointSize: 14
+            font.pointSize: 15
             color: "#222222"
         }
 
@@ -38,6 +40,7 @@ Item {
             font.weight: Font.Light
             font.pointSize: 12
             color:"#9B9B9B"
+            font.family: "NS UI Text"
         }
 
         Text{
@@ -49,10 +52,11 @@ Item {
             fontSizeMode: Text.HorizontalFit
             anchors.left: lbComment.left
             anchors.leftMargin: 0
-            font.pointSize: 10
+            font.pointSize: 11
             font.weight: Font.Bold
             font.bold: true
             color: "black"
+            font.family: "NS UI Text"
         }
 
         Text {
@@ -66,6 +70,8 @@ Item {
             font.pointSize: 12
             font.weight: Font.Light
             color: "#222222"
+            font.family: "NS UI Text"
+            font.italic: true
         }
 
         HWCheckBox {
@@ -81,7 +87,7 @@ Item {
             text: ""
             checked: false
             anchors.verticalCenter: parent.verticalCenter
-            anchors.rightMargin: parent.width * 0.1
+            anchors.rightMargin: parent.width * 0.05
             anchors.right: parent.right
             implicitHeight: 26.4
         }
