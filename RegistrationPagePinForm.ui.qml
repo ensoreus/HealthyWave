@@ -51,7 +51,7 @@ Page {
             width: parent.width * 0.15
             height: parent.width * 0.15
             text: ""
-            anchors.topMargin: 10
+            anchors.topMargin: 20
             anchors.right: parent.right
             anchors.rightMargin: parent.width * 0.15
             anchors.top: pinField.bottom
