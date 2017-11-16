@@ -53,6 +53,8 @@ Page {
             anchors.leftMargin: 0
             anchors.top: promoCodeField.bottom
             anchors.topMargin: 3
+            wrapMode: Text.WordWrap
+            height: 25 * ratio
         }
 
         Text {

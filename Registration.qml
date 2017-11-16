@@ -157,6 +157,10 @@ Item {
                 })
             }
 
+            onClearMessage: {
+                txMessage.text = ""
+            }
+
             onNextPage: {
                 Qt.inputMethod.hide()
                 item1.state = "default"

@@ -9,6 +9,7 @@ RegistrationPromoCodeForm {
     signal startEditData
     signal endEditData
     signal addPromo
+    signal clearMessage
 
     Storage{
         id: storage
@@ -39,6 +40,12 @@ RegistrationPromoCodeForm {
 
     promoCodeField.onAddPromo:{
         addPromo()
+    }
+
+    promoCodeField.onTextChanged: {
+        if(promoCodeField.text.length == 0){
+            clearMessage()
+        }
     }
 
     promoCodeField.onWillStartAnimation: {
