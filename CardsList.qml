@@ -25,12 +25,13 @@ ViewController {
     function showAddressList(){
         lstCards.visible = true
         rNoCards.visible = false
-
+        processingRect.visible = false
     }
 
     function hideAddressList(){
         lstCards.visible = false
-        rNoCards.visible = true
+        processingRect.visible = false
+        //rNoCards.visible = true
     }
 
     Storage{
@@ -40,13 +41,16 @@ ViewController {
     onViewDidAppear:{
 
         hideAddressList()
+        processingRect.visible = true
         storage.getAuthData(function(authdata){
             Api.getCards(authdata, function(response){
                 if(response.result.length > 0){
                     showAddressList()
                     cardsModel.importData(response.result)
+
                 }else{
                     hideAddressList()
+                    rNoCards.visible = true
                 }
             }, function(failure){
                 hideAddressList()
@@ -169,6 +173,19 @@ ViewController {
                 }
             }
 
+        }
+
+        Rectangle{
+            id: processingRect
+            anchors.fill: parent
+            BusyIndicator{
+                id: processInndicator
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: parent.width * 0.5
+                width: height
+            }
+            visible: false
         }
     }
 
