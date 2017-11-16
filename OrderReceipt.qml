@@ -345,7 +345,10 @@ ViewController {
                 anchors.left: rectangle1.left
                 anchors.leftMargin: 0
                 font.weight: Font.DemiBold
+                wrapMode: Text.WordWrap
+                height: 30 * ratio
                 font.pointSize: 12
+                elide: Text.ElideRight
             }
 
             Text {

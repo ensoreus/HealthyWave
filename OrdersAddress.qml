@@ -30,11 +30,7 @@ ViewController {
     
     onViewWillAppear:{
         console.log("address bonus"+ context.bonuses[0].PromoCode)
-        orderAddressViewController.initializing = false
-        if(typeof(context) === 'undefined' || context === null){
-            console.log("orderAddressViewController: reset context")
-            createContextObjects()
-        }
+
         //btnNext.enabled = false
     }
 
@@ -56,6 +52,11 @@ ViewController {
     }
 
     onViewDidAppear:{
+        orderAddressViewController.initializing = false
+        if(typeof(context) === 'undefined' || context === null){
+            console.log("orderAddressViewController: reset context")
+            createContextObjects()
+        }
         busyIndicator.running = true
         storage.getAuthData(function(authData){
             debugMsg.text = JSON.stringify(authData) + "\n"
