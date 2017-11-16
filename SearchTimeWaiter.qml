@@ -77,56 +77,125 @@ Item{
         height: content.width * 0.55
         fillMode: Image.PreserveAspectFit
         anchors.verticalCenter: content.verticalCenter
+        anchors.verticalCenterOffset: - parent.height * 0.1
         anchors.horizontalCenter: content.horizontalCenter
         source: "qrc:/commons/img-TimeSearchStatus.png"
+
+        Text{
+            id: label
+            font.pointSize: 16
+            color: "white"
+            horizontalAlignment: Text.AlignHCenter
+            anchors.horizontalCenter: image.horizontalCenter
+            anchors.verticalCenter: image.verticalCenter
+            text: "TETETET"
+        }
+
+        Text{
+            id: timeHeaderlabel
+            font.pointSize: 18
+            color: "white"
+            height: 20 * ratio
+            horizontalAlignment: Text.AlignHCenter
+            anchors.horizontalCenter: image.horizontalCenter
+            anchors.top: image.top
+            anchors.topMargin: image.width * 0.2
+            visible: false
+            text:"до"
+        }
+
+        Text{
+            id: timeLabel
+            font.pointSize: 40
+            color: "white"
+            horizontalAlignment: Text.AlignHCenter
+            anchors.horizontalCenter: image.horizontalCenter
+            anchors.verticalCenter: image.verticalCenter
+            text: ""
+        }
+
+        Text{
+            id: errorLabel
+            font.pointSize: 15
+            color: "white"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            anchors.horizontalCenter: image.horizontalCenter
+            anchors.verticalCenter: image.verticalCenter
+            visible: false
+            width: parent.width * 0.6
+            height: width
+            wrapMode: Text.WordWrap
+
+            text: "Нажаль неможливо доставити сьогодні"
+        }
+        DropShadow {
+            anchors.fill: label
+            horizontalOffset: 3
+            verticalOffset: 3
+            radius: 8.0
+            samples: 17
+            color: "#80000000"
+            source: label
+        }
+
+        DropShadow {
+            anchors.fill: timeLabel
+            horizontalOffset: 3
+            verticalOffset: 3
+            radius: 8.0
+            samples: 17
+            color: "#80000000"
+            source: timeLabel
+        }
     }
 
-    Text{
-        id: label
-        font.pointSize: 16
-        color: "white"
-        horizontalAlignment: Text.AlignHCenter
-        anchors.horizontalCenter: image.horizontalCenter
-        anchors.verticalCenter: image.verticalCenter
-        text: "TETETET"
-    }
+//    Text{
+//        id: label
+//        font.pointSize: 16
+//        color: "white"
+//        horizontalAlignment: Text.AlignHCenter
+//        anchors.horizontalCenter: image.horizontalCenter
+//        anchors.verticalCenter: image.verticalCenter
+//        text: "TETETET"
+//    }
 
-    Text{
-        id: timeHeaderlabel
-        font.pointSize: 18
-        color: "white"
-        height: 20 * ratio
-        horizontalAlignment: Text.AlignHCenter
-        anchors.horizontalCenter: image.horizontalCenter
-        anchors.top: image.top
-        anchors.topMargin: image.width * 0.2
-        visible: false
-        text:"до"
-    }
+//    Text{
+//        id: timeHeaderlabel
+//        font.pointSize: 18
+//        color: "white"
+//        height: 20 * ratio
+//        horizontalAlignment: Text.AlignHCenter
+//        anchors.horizontalCenter: image.horizontalCenter
+//        anchors.top: image.top
+//        anchors.topMargin: image.width * 0.2
+//        visible: false
+//        text:"до"
+//    }
 
-    Text{
-        id: timeLabel
-        font.pointSize: 40
-        color: "white"
-        horizontalAlignment: Text.AlignHCenter
-        anchors.horizontalCenter: image.horizontalCenter
-        anchors.verticalCenter: content.verticalCenter
-        text: ""
-    }
+//    Text{
+//        id: timeLabel
+//        font.pointSize: 40
+//        color: "white"
+//        horizontalAlignment: Text.AlignHCenter
+//        anchors.horizontalCenter: image.horizontalCenter
+//        anchors.verticalCenter: content.verticalCenter
+//        text: ""
+//    }
 
-    Text{
-        id: errorLabel
-        font.pointSize: 15
-        color: "white"
-        horizontalAlignment: Text.AlignHCenter
-        anchors.horizontalCenter: image.horizontalCenter
-        anchors.verticalCenter: image.verticalCenter
-        visible: false
-        text: "Нажаль
-неможливо
-доставити
-сьогодні"
-    }
+//    Text{
+//        id: errorLabel
+//        font.pointSize: 15
+//        color: "white"
+//        horizontalAlignment: Text.AlignHCenter
+//        anchors.horizontalCenter: image.horizontalCenter
+//        anchors.verticalCenter: image.verticalCenter
+//        visible: false
+//        text: "Нажаль
+//неможливо
+//доставити
+//сьогодні"
+//    }
 
     DropShadow {
         anchors.fill: label

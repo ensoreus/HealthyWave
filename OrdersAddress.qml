@@ -27,8 +27,6 @@ ViewController {
     Storage{
         id:storage
     }
-    
-
 
     function createContextObjects() {
         console.log("created context")
@@ -197,8 +195,6 @@ ViewController {
                     var onCheckedChanged = function(){
                         if (!orderAddressViewController.initializing){
                             isAddNew = rbAddNew.checked
-                            console.log("add new checked")
-                            // btnNext.enabled = true
                         }
                     }
                     var rbAddNew = createRadioButton(onCheckedChanged, (addressesCount === 0) )

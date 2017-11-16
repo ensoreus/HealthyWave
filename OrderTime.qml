@@ -56,7 +56,7 @@ ViewController {
             x: 212
             width: parent.width * 0.9
             anchors.top: parent.top
-            anchors.topMargin: 20 * ratio
+            anchors.topMargin: 5 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             title.text: "Вибір часу замовлення"
         }
@@ -70,7 +70,7 @@ ViewController {
             font.weight: Font.DemiBold
             font.pointSize: 15
             horizontalAlignment: Text.AlignHCenter
-            anchors.topMargin: parent.height * 0.05
+            anchors.topMargin: parent.height * 0.02
             anchors.top: hWHeader.bottom
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -104,7 +104,7 @@ ViewController {
                             context.deliveryTime.displayDate = Utils.displayDayForIndex(0)
                             context.deliveryTime.fromHour = rightNow()
                             context.deliveryTime.toHour = result.result
-                             txHint.visible = true
+                            txHint.visible = true
                             txHint.text = "Доставка за вашою адресою на сьогодні можлива протягом найближчого часу:"
                             txComment.visible = true
                             tfComment.visible = true
@@ -150,7 +150,7 @@ ViewController {
             font.pointSize: 15
             font.weight: Font.Normal
             horizontalAlignment: Text.AlignHCenter
-            anchors.topMargin: parent.height * 0.3
+            anchors.topMargin: parent.height * 0.2
             anchors.top: btnSearch.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             height: 30 * ratio
@@ -170,8 +170,10 @@ ViewController {
             anchors.right: tfComment.right
             anchors.rightMargin: 0
             font.weight: Font.Thin
-            anchors.bottomMargin: parent.height * 0.1
-            anchors.bottom: btnNext.top
+            anchors.top: txtChooseAnother.bottom
+            anchors.topMargin: parent.height * 0.1
+//            anchors.bottomMargin: parent.height * 0.1
+//            anchors.bottom: btnNext.top
             anchors.left: tfComment.left
             anchors.leftMargin: 0
         }
@@ -193,6 +195,21 @@ ViewController {
             }
         }
 
+        SearchTimeWaiter {
+            visible: false
+            id: searchTimeWaiter
+            anchors.fill: parent
+            //anchors.top: txHint.bottom
+            //anchors.topMargin: parent.height * 0.05
+            anchors.bottomMargin: parent.height * 0.15
+            onClose: {
+                reset()
+                visible = false
+                txtChooseAnother.visible = true
+                btnSearch.visible = true
+                txHint.visible = true
+            }
+        }
 
         HWRoundButton{
             id: btnNext
@@ -209,19 +226,7 @@ ViewController {
             }
         }
 
-        SearchTimeWaiter {
-            visible: false
-            id: searchTimeWaiter
-            anchors.fill: parent
-            anchors.bottomMargin: parent.height * 0.15
-            onClose: {
-                reset()
-                visible = false
-                txtChooseAnother.visible = true
-                btnSearch.visible = true
-                txHint.visible = true
-            }
-        }
+
     }
 
 }

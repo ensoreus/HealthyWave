@@ -63,7 +63,7 @@ ViewController {
 
         BorderImage {
             id: borderImage
-            anchors.bottomMargin: parent.height * 0.25
+            anchors.bottomMargin: parent.height * 0.17
             anchors.bottom: parent.bottom
             anchors.top: hWHeader.bottom
             anchors.topMargin: 0
@@ -346,7 +346,7 @@ ViewController {
                 anchors.leftMargin: 0
                 font.weight: Font.DemiBold
                 wrapMode: Text.WordWrap
-                height: 30 * ratio
+                height: 20 * ratio
                 font.pointSize: 12
                 elide: Text.ElideRight
             }
@@ -387,7 +387,7 @@ ViewController {
             labelColor: "black"
             labelText: "ПІДТВЕРДИТИ"
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.07
             anchors.top: borderImage.bottom
             onButtonClick: {
                 context.confirmed = true

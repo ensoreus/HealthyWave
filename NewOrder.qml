@@ -85,7 +85,7 @@ ViewController {
             id: lbOurPrices
             x: 301
             color: "#4a4a4a"
-            text: "Наши ціни"
+            text: "Наші ціни"
             font.weight: Font.Thin
             anchors.horizontalCenterOffset: rPricesPanel.x / 2 - 10 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
@@ -393,7 +393,7 @@ ViewController {
             id: txBottlesTotal
             x: 314
             text: "К-ть бутлів в замовленні"
-            anchors.topMargin: parent.height * 0.03
+            anchors.topMargin: parent.height * 0.01
             anchors.top: image.bottom
             font.weight: Font.Thin
             font.underline: false
@@ -420,7 +420,7 @@ ViewController {
             id: txBottlesEmpty
             x: 317
             text: "К-ть порожних бутлів в замовленні*"
-            anchors.topMargin: parent.height * 0.06
+            anchors.topMargin: parent.height * 0.03
             font.family: "NS UI Text"
             font.weight: Font.Thin
             font.pointSize: 15
@@ -448,15 +448,15 @@ ViewController {
             id: lbHint
             x: 48
             width: parent.width * 0.8
-            height: parent.height * 0.08
+            height: parent.height * 0.09
             text: "*Якщо у Вас немає порожніх бутлів на обмін, \nВам необхідно внести заставу за бутель"
-            font.pointSize: 13
+            font.pointSize: 12
             color: "#9B9B9B"
             font.weight: Font.ExtraLight
             font.family: "NS UI Text"
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
-            anchors.topMargin: parent.height * 0.04
+            anchors.topMargin: parent.height * 0.03
             anchors.top: stEmptyBottles.bottom
             anchors.horizontalCenter: parent.horizontalCenter
         }
