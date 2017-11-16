@@ -30,6 +30,7 @@ ViewController {
     }
 
     onViewWillAppear: {
+        context.reset()
         rPricesPanel.state = "pendingPrices"
         storage.getAuthData(function(authdata){
             Api.getPrices(context.address, authdata, function(response){
@@ -46,8 +47,6 @@ ViewController {
                         rPricesPanel.state = "pricesReady"
                 }
                 console.log(response.result)
-
-
             }, function(failure){
                 rPricesPanel.state = "error"
                 if (failure.error){

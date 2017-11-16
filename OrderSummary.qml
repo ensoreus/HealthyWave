@@ -33,10 +33,7 @@ ViewController {
 
     Component.onCompleted: {
         isInit = true
-        //        if (typeof(context.bonuses) =="undefined"){
-        //            context.bonuses = new Array(1)
-        //        }
-        initCheck()
+        //initCheck()
     }
 
     function initCheck(){
@@ -120,25 +117,37 @@ ViewController {
         return calcTotal() + " грн."
     }
 
+    function checkIfFreeWaterBonusPresent(bonuses){
+        bonuses.forEach(function(item, index, array){
+            if(item.BonusType === "БесплатныйБутыльВоды"){
+                   lbFreeWaterHint.visible = true
+            }
+        })
+    }
+
     function getBonuses() {
         storage.getAuthData(function(authdata){
             Api.getBonus(authdata, function(response){
                 bonusModel.clear()
                 isInit = true
+                checkIfFreeWaterBonusPresent(response.result)
                 for(var item in response.result){
                     var bonus = response.result[item]
                     bonusModel.importData(bonus)
+                    lbFreeWaterHint.visible = true
                     updateSummary()
                     layoutHeight()
-                    if(item == "1"){
+                    if(item === "1"){
                         bonusListStyle = "Regular"
                     }
+                    bonusLst.checkIfPreselectedBonusEligible(item)
                 }
                 isInit = false
+
             },function(failure){
+
             })
         })
-        bonusesInCheck.context = context
     }
 
     function layoutHeight(){
@@ -207,7 +216,8 @@ ViewController {
                             "BonusType":bonusItem.BonusType,
                             "Comment":bonusItem.Comment,
                             "ValidityPeriod":bonusItem.ValidityPeriod,
-                            "preselected": bonusLst.isBonusesPreselected(bonusItem.PromoCode)
+                            "preselected": bonusLst.isBonusesPreselected(bonusItem.PromoCode),
+                            "eligible": bonusLst.isBonusEnabled(bonusItem.PromoCode)
                         }
                         bonusModel.append(bonus)
                     }
@@ -220,11 +230,13 @@ ViewController {
                     height: 18
                     text: BonusName
                     style: bonusListStyle
+                    enabled: eligible
                     checked: preselected
-                    anchors.rightMargin: bonusLst.width * 0.02
-                    anchors.right: bonusLst.right
-                    anchors.leftMargin: 15 * ratio
-                    anchors.left: bonusLst.left
+//                    anchors.rightMargin: bonusLst.width * 0.02
+//                    anchors.right: bonusLst.right
+//                    anchors.leftMargin: 15 * ratio
+//                    anchors.left: bonusLst.left
+                    x:0
                     onCheckedChanged: {
                         if(!isInit){
                             bonusLst.mapBonusSelectionOnContext(index, checked)
@@ -241,13 +253,12 @@ ViewController {
                                 context.freeWater++
                                 context.bonuses.push(bonus.PromoCode)
                             }
-                            lbFreeWaterHint.visible = true
                         }
                     }else{
                         var chCode = bonusModel.get(bonusIndex).PromoCode
                         var chType = bonusModel.get(bonusIndex).BonusType
                         if (chType === "БесплатныйБутыльВоды" && context.freeWater > 0){
-                            var cbindex = context.bonuses.indexOf(bonus.PromoCode)
+                            var cbindex = context.bonuses.indexOf(chCode)
                             context.bonuses.splice(cbindex)
                             context.freeWater--
                         }
@@ -265,29 +276,61 @@ ViewController {
                     return -1
                 }
 
-                function isBonusesPreselected(bonusCode){
-                    //console.log( "isBonusesPreselected:" + context.bonuses.length + " code:"+ bonusCode)
+                function checkIfPreselectedBonusEligible(bonusCode){
                     for (var index in context.bonuses){
                         var item = context.bonuses[index]
                         if(item.PromoCode === bonusCode){
                             if (item.BonusType === "БесплатныйБутыльВоды"){
+                                if(context.fullb === 1){
+                                    context.bonuses.splice(index,1)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                function isBonusEnabled(bonusCode){
+                    print(context.bonuses)
+                    for (var index in context.bonuses){
+                        var item = context.bonuses[index]
+                        if(item.PromoCode === bonusCode){
+                            if (item.BonusType === "БесплатныйБутыльВоды"){
+                                if(context.fullb === 1){
+                                    return false
+                                }else{
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                    updateSummary()
+                    return true
+                }
+
+                function isBonusesPreselected(bonusCode){
+                    console.log( "isBonusesPreselected:" + context.bonuses.length + " code:"+ bonusCode)
+                    for (var index in context.bonuses){
+                        var item = context.bonuses[index]
+                        if(item.PromoCode === bonusCode){
+                            if (item.BonusType === "БесплатныйБутыльВоды"){
+                                 console.log("summary before get bonuses"+ context.bonuses[0].PromoCode)
                                 if(context.fullb > 1){
                                     context.freeWater++
                                 }else{
-                                    context.bonuses.splice(index,1)
+
                                     return false
                                 }
-                                lbFreeWaterHint.visible = true
                             }
+                            console.log("summary after get bonuses"+ context.bonuses[0].PromoCode)
                             updateSummary()
                             return true
                         }
+
                     }
                     updateSummary()
                     console.log("not preselected")
                     return false
                 }
-
             }
 
             HWCheckBox {
@@ -558,29 +601,14 @@ ViewController {
                 fontPointSize: 15
             }
 
-            Text{
-                id: lbFreeWaterHint
-                anchors.top: rbCardPayment.bottom
-                anchors.topMargin: 10 * ratio
-                anchors.left: parent.left
-                anchors.leftMargin: parent.width * 0.05
-                anchors.right: parent.right
-                anchors.rightMargin: parent.width * 0.05
-                font.bold: true
-                font.family: "NS UI Text"
-                font.pointSize: 15
-                height: 35 * ratio
-                wrapMode: Text.WordWrap
-                visible: false
-                text:"* За умови замовлення не менше 2 бутлів в одному замовленні."
-            }
+
 
             HWRoundButton {
                 id: btnNext
                 width: parent.width * 0.7
                 height: 60 * ratio
                 labelText: "ДАЛІ"
-                anchors.top: lbFreeWaterHint.bottom
+                anchors.top: rbCardPayment.bottom
                 anchors.topMargin: 10 * ratio
                 anchors.horizontalCenter: parent.horizontalCenter
                 onButtonClick: {
@@ -595,6 +623,22 @@ ViewController {
                         navigationController.push("qrc:/orders/OrderTime.qml", { "context":context })
                     }
                 }
+            }
+
+            Text{
+                id: lbFreeWaterHint
+                anchors.top: btnNext.bottom
+                anchors.topMargin: 10 * ratio
+                anchors.left: parent.left
+                anchors.leftMargin: parent.width * 0.05
+                anchors.right: parent.right
+                anchors.rightMargin: parent.width * 0.05
+                font.family: "NS UI Text"
+                font.pointSize: 12
+                height: 35 * ratio
+                wrapMode: Text.WordWrap
+                visible: false
+                text:"* За умови замовлення не менше 2 бутлів в одному замовленні."
             }
         }
     }

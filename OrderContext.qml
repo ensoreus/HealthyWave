@@ -36,4 +36,15 @@ QtObject {
         pump:0
         bottle:130
     }
+    function reset(){
+        fullb = 1
+        emptyb = 1
+        freeWater = 0
+        card = 0
+        cardToPay = ""
+        needToCall = false
+        pump = 0
+
+    }
+
 }

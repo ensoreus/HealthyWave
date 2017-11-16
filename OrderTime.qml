@@ -115,7 +115,7 @@ ViewController {
                             searchTimeWaiter.showError = true
                             content.stopSearchAnimation()
                             txtChooseAnother.visible = true
-                            txHint.visible = false
+                            //txHint.visible = false
                         })
                         searchTimer.start()
                     })

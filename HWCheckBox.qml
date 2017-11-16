@@ -20,7 +20,7 @@ CheckBox {
         radius: 3 * ratio
         color: control.checked ? "#58B7AD" : "white"
         border.color: "#58B7AD"
-
+        opacity: (enabled) ? 1.0 : 0.5
         Text{
             id: checkmark
             anchors.verticalCenter: parent.verticalCenter

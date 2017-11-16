@@ -172,7 +172,7 @@ function sendNewAddress(city, street, house, entrance, apartment, floor, doorcod
     if (typeof(doorcode) != "undefined"  &&  doorcode.length > 0){
         params["doorcode"] = doorcode
     }
-
+    console.log("CREATE ADDRESS")
     call("addaddresscustomer", params, authdata, onSuccess, onFailure);
 }
 
@@ -427,7 +427,7 @@ function call(routine, params, authData, onSuccess, onFailure){
             }
             var object = JSON.parse(xhr.responseText.toString());
             if(typeof(object.error) != 'undefined' ){
-                if (object.ErrorCode === "1001" /*match(/^Ключ доступа не найден или просрочен:\.) || object.error.match(/Invalid parameter value \(parameter number '1'\)$/)*/){
+                if (object.ErrorCode === "1001" || object.ErrorCode === "1027" || object.ErrorCode === "1011"){
                     onAuthError(authData, onTokenUpdated)
                 }else{
                     console.log("Failure:"+object.error)
@@ -439,7 +439,7 @@ function call(routine, params, authData, onSuccess, onFailure){
         }
     }
 
-    if(typeof(authData.key) == 'undefined'){
+    if(typeof(authData.key) === 'undefined'){
         onAuthError(authData, onTokenUpdated)
     }
 

@@ -29,8 +29,10 @@ ViewController {
     }
     
     onViewWillAppear:{
+        console.log("address bonus"+ context.bonuses[0].PromoCode)
         orderAddressViewController.initializing = false
         if(typeof(context) === 'undefined' || context === null){
+            console.log("orderAddressViewController: reset context")
             createContextObjects()
         }
         //btnNext.enabled = false
@@ -47,7 +49,6 @@ ViewController {
                                                                         "pump": 0,
                                                                         "cardToPay":""
                                                                     })
-        console.log("created context")
     }
 
     Component.onCompleted: {
@@ -120,7 +121,7 @@ ViewController {
                             context.address.city = item.city
                             context.address.floor = item.floor
                             if (item.doorcode)
-                                context.address.doorCode = item.doorcode
+                                context.address.doorcode = item.doorcode
                             context.address.house = item.house
                             context.address.apartment = item.apartment
                             //context.address.isPrimary = item.primary

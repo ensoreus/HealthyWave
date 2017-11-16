@@ -14,7 +14,6 @@ ViewController {
         centerBarTitle: "Безкоштовна вода"
     }
     property var component
-    //property var bonusesToUse: new Array()
     property OrderContext context
 
     function showBusyIndicator(){
@@ -27,7 +26,6 @@ ViewController {
         wheel.visible = false
         wheel.running = false
     }
-
 
     Storage{
         id:storage
@@ -42,7 +40,7 @@ ViewController {
                                              "card": 0,
                                              "pump": 0,
                                              "cardToPay":"",
-                                             "bonuses":new Array(1)
+                                             "bonuses":new Array(0)
                                          })
     }
 
@@ -123,7 +121,7 @@ ViewController {
                     if (cbUse.checked) {
                         console.log("before:"+context.bonuses.length)
                         context.bonuses.push(bonusModel.get(index))
-                        console.log("after:"+context.bonuses.join(","))
+                        console.log("after:"+context.bonuses[0].PromoCode)
                         btnUseSelectedBonuses.enable()
                     } else {
                         context.bonuses = context.bonuses.filter( function(item){
