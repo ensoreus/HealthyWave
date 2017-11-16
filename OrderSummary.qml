@@ -216,8 +216,7 @@ ViewController {
                             "BonusType":bonusItem.BonusType,
                             "Comment":bonusItem.Comment,
                             "ValidityPeriod":bonusItem.ValidityPeriod,
-                            "preselected": bonusLst.isBonusesPreselected(bonusItem.PromoCode),
-                            "eligible": bonusLst.isBonusEnabled(bonusItem.PromoCode)
+                            "preselected": bonusLst.isBonusesPreselected(bonusItem.PromoCode)
                         }
                         bonusModel.append(bonus)
                     }
@@ -230,7 +229,7 @@ ViewController {
                     height: 18
                     text: BonusName
                     style: bonusListStyle
-                    enabled: eligible
+                    enabled: bonusLst.isBonusEnabled(PromoCode)
                     checked: preselected
 //                    anchors.rightMargin: bonusLst.width * 0.02
 //                    anchors.right: bonusLst.right
@@ -290,9 +289,8 @@ ViewController {
                 }
 
                 function isBonusEnabled(bonusCode){
-                    print(context.bonuses)
-                    for (var index in context.bonuses){
-                        var item = context.bonuses[index]
+                    for(var index= 0; index < bonusModel.count; index++){
+                        var item = bonusModel.get(index)
                         if(item.PromoCode === bonusCode){
                             if (item.BonusType === "БесплатныйБутыльВоды"){
                                 if(context.fullb === 1){
@@ -308,27 +306,22 @@ ViewController {
                 }
 
                 function isBonusesPreselected(bonusCode){
-                    console.log( "isBonusesPreselected:" + context.bonuses.length + " code:"+ bonusCode)
+                    //console.log( "isBonusesPreselected:" + context.bonuses.length + " code:"+ bonusCode)
                     for (var index in context.bonuses){
                         var item = context.bonuses[index]
                         if(item.PromoCode === bonusCode){
                             if (item.BonusType === "БесплатныйБутыльВоды"){
-                                 console.log("summary before get bonuses"+ context.bonuses[0].PromoCode)
                                 if(context.fullb > 1){
                                     context.freeWater++
                                 }else{
-
                                     return false
                                 }
                             }
-                            console.log("summary after get bonuses"+ context.bonuses[0].PromoCode)
                             updateSummary()
                             return true
                         }
-
                     }
                     updateSummary()
-                    console.log("not preselected")
                     return false
                 }
             }
