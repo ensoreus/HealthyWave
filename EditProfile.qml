@@ -141,11 +141,28 @@ ViewController {
             }
             stackLayout.push(avatarEditPage)
         }
+        onShowInfo:{
+            infoPage.visible = true
+            stackLayout.push(infoPage)
+        }
+
         Behavior on x {
             NumberAnimation {
                 duration: 200
                 easing.type: Easing.InOutQuad
             }
+        }
+    }
+
+    RegistrationInfo{
+        id: infoPage
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        x: 0
+        visible: false
+        width: parent.width
+        onClose: {
+            stackLayout.pop()
         }
     }
 
