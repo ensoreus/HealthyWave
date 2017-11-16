@@ -115,7 +115,7 @@ ViewController {
                             searchTimeWaiter.showError = true
                             content.stopSearchAnimation()
                             txtChooseAnother.visible = true
-                            //txHint.visible = false
+                            txHint.text = "На жаль, доставка на сьогодні за Вашою адресою неможлива, виберіть інший час"
                         })
                         searchTimer.start()
                     })
@@ -150,7 +150,7 @@ ViewController {
             font.pointSize: 15
             font.weight: Font.Normal
             horizontalAlignment: Text.AlignHCenter
-            anchors.topMargin: parent.height * 0.2
+            anchors.topMargin: parent.height * 0.25
             anchors.top: btnSearch.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             height: 30 * ratio
