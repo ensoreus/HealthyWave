@@ -28,11 +28,7 @@ ViewController {
         id:storage
     }
     
-    onViewWillAppear:{
-        console.log("address bonus"+ context.bonuses[0].PromoCode)
 
-        //btnNext.enabled = false
-    }
 
     function createContextObjects() {
         console.log("created context")
