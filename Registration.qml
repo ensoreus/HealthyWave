@@ -71,8 +71,8 @@ Item {
             function checkPin(){
                 Api.confirmPinCode(pinEditPage.pinField.text, phoneEditPage.phoneField.text, function(response){
                     if(response.result === true){
-                        Qt.inputMethod.hide()
-                        stackLayout.push(emailEditPage)
+                        item1.opacity = 0
+                        registrationDone()
                         //checkIsRegistered()
                     }else{
                         Qt.inputMethod.hide()
@@ -85,6 +85,7 @@ Item {
             function checkIsRegistered(){
                 Api.isRegistered(phoneEditPage.phoneField.text, function(response){
                     if(response.result === true){
+                        //Api.getCustomerInfo()
                         item1.opacity = 0
                         registrationDone()
                     }else if(response.result === false){
@@ -134,19 +135,24 @@ Item {
                 console.log(PushNotificationRegistrationTokenHandler.gcmRegistrationToke)
                 var pushtoken = PushNotificationRegistrationTokenHandler.gcmRegistrationToken
                 var secKey = storage.getSecKey()
-                    Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, {"phone":phoneEditPage.phoneField.text, "token":SecurityCore.secKey}, function(response){
-                        console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
-                    }, function(failure){
-                        console.log("failed to update token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
-                    })
+
                 Api.auth(phoneEditPage.phoneField.text, secKey, function(token, url){
                     storage.saveToken(token)
                     Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, ostype, function(response){
                         if(!response.error){
                             storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, response.promocode)
-                            stopPropcessIndicator()
-                            Qt.inputMethod.hide()
-                            stackLayout.push(promoCodeEditPage)
+                            Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, {"phone":phoneEditPage.phoneField.text, "token":token}, function(response){
+                                console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+                                stopPropcessIndicator()
+                                Qt.inputMethod.hide()
+                                stackLayout.push(promoCodeEditPage)
+                            }, function(failure){
+                                console.log("failed to update token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+                                stopPropcessIndicator()
+                                Qt.inputMethod.hide()
+                                stackLayout.push(promoCodeEditPage)
+                            })
+
                         }else{
                             stopPropcessIndicator()
                         }

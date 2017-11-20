@@ -37,6 +37,10 @@ Rectangle{
         helpScreen.hintPanel.enabled = true
     }
 
+    function willHide(){
+        helpScreen.state = "promoCodeGen"
+    }
+
     Component.onCompleted: {
         storage.getAuthData(function(authdata){
             Api.getAppLink(authdata, function(response){
@@ -78,6 +82,7 @@ Rectangle{
 
         hintPanel.onShowHideHintPanel: {
             if (helpScreenContainer.anchors.topMargin == ( -30 * ratio )){
+                state = "promoCodeGen"
                 hideDown()
             }else{
                 showUp()

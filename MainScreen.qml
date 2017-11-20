@@ -266,6 +266,10 @@ ViewController {
                     target: mainScreenHintPanel.hintPanel
                     visible: true
                 }
+                StateChangeScript{
+                    name:"onHide"
+                    script: mainScreenHintPanel.willHide()
+                }
             }
         ]
         transitions: [

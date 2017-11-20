@@ -38,24 +38,6 @@ Page {
             anchors.top: txRegistered.bottom
             anchors.topMargin: 2
             font.pointSize: 15
-
-            Text {
-                id: txGifted
-                x: -20
-                y: 28
-                width: parent.width * 0.9
-                height: parent.height * 0.1
-                text: "Ми даруємо Вам 1 бутиль води безкоштовно *"
-                anchors.topMargin: 10
-                anchors.horizontalCenter: parent.horizontalCenter
-                wrapMode: Text.WordWrap
-                font.pointSize: 15
-                font.underline: true
-                font.bold: true
-                anchors.top: txPromoGifter.bottom
-                font.family: "NS UI Text"
-                horizontalAlignment: Text.AlignHCenter
-            }
         }
 
         Text {
@@ -63,9 +45,7 @@ Page {
             x: 37
             width: parent.width * 0.7
             text: "Зараз Ви можете користуватися найкращим сервісом доставки води в Києві."
-            anchors.bottomMargin: parent.height * 0.1
-            anchors.bottom: btnContinue.top
-            anchors.topMargin: parent.height * 0.02
+            anchors.topMargin: parent.height * 0.05
             fontSizeMode: Text.Fit
             font.pointSize: 15
             anchors.top: txGifted.bottom
@@ -77,11 +57,30 @@ Page {
         }
 
         Text {
+            id: txGifted
+            x: 56
+            y: 47
+            width: parent.width * 0.9
+            height: parent.height * 0.1
+            text: "Ми даруємо Вам 1 бутиль води безкоштовно *"
+            anchors.topMargin: parent.height * 0.05
+            anchors.horizontalCenter: parent.horizontalCenter
+            wrapMode: Text.WordWrap
+            font.pointSize: 15
+            font.underline: true
+            font.bold: true
+            anchors.top: txPromoGifter.bottom
+            font.family: "NS UI Text"
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+        Text {
             id: lbFreeWaterHint
             x: 187
             height: 35 * ratio
             width: parent.width * 0.9
             text: qsTr("* За умови замовлення не менше 2 бутлів в одному замовленні.")
+            anchors.topMargin: parent.height * 0.1
             font.bold: false
             font.family: "NS UI Text"
             horizontalAlignment: Text.AlignHCenter
@@ -89,7 +88,6 @@ Page {
             wrapMode: Text.WordWrap
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: txProceed.bottom
-            anchors.topMargin: 5
         }
 
         HWRoundButton {

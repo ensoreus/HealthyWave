@@ -153,8 +153,6 @@ function sendAvatar(pic, authdata, onSuccess, onFailure){
         }
     }
 
-
-
     xhr.open("POST", baseUrl + "uploadphoto?phone=" + authdata.phone + "&key="+authdata.token, true);
     xhr.setRequestHeader("Content-type", "application/application/json");
 
@@ -162,6 +160,11 @@ function sendAvatar(pic, authdata, onSuccess, onFailure){
     print(postpatrams)
     xhr.send(postpatrams);
     //call("uploadphoto", {"phone":authdata.phone,"photo":pic}, authdata, onSuccess, onFailure)
+}
+
+
+function getCustomerInfo(authdata, onSuccess, onFailure){
+    call("getcustomerbyphone", authdata.phone, onSuccess, onFailure)
 }
 
 function deleteAddress(city, street, house, entrance, floor, apartment, authdata, onSuccess, onFailure){
