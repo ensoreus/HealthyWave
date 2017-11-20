@@ -13,8 +13,29 @@ function auth(phone, secKey, callback){
             callback(object.key, url)
         }
     }
+    if(typeof(secKey) === 'undefined'){
+        console.log("sec key undefined")
+        return
+    }
 
     var url = baseUrl + "authorization?phone=" + phone + "&securitykey=" + secKey
+    console.log(url)
+    xhr.open("GET", url);
+    xhr.send();
+}
+
+function isRegistered(phone, callback){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
+            print('HEADERS_RECEIVED');
+        } else if(xhr.readyState === XMLHttpRequest.DONE) {
+            var object = JSON.parse(xhr.responseText.toString());
+            callback(object, url)
+        }
+    }
+
+    var url = baseUrl + "findcustomer?phone=" + phone
     console.log(url)
     xhr.open("GET", url);
     xhr.send();
@@ -46,8 +67,9 @@ function getPinCode(phone, secKey){
         if(xhr.readyState === XMLHttpRequest.DONE) {
             console.log(xhr.status)
             console.log("ret:" + xhr.responseText.toString())
+
+            print(xhr.responseText.toString());
             var object = JSON.parse(xhr.responseText.toString());
-            //print(JSON.stringify(object, null, 2));
             isSent = object.valueOf("result")
         }
     }
@@ -427,7 +449,7 @@ function call(routine, params, authData, onSuccess, onFailure){
             }
             var object = JSON.parse(xhr.responseText.toString());
             if(typeof(object.error) != 'undefined' ){
-                if (object.ErrorCode === "1001" || object.ErrorCode === "1027" || object.ErrorCode === "1011"){
+                if (object.ErrorCode === "1001" || object.ErrorCode === "1027" || object.ErrorCode === "1011" || object.ErrorCode === "1002"){
                     onAuthError(authData, onTokenUpdated)
                 }else{
                     console.log("Failure:"+object.error)

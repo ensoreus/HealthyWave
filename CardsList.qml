@@ -182,7 +182,7 @@ ViewController {
                 id: processInndicator
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                height: parent.width * 0.5
+                height: parent.width * 0.3
                 width: height
             }
             visible: false

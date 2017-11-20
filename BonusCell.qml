@@ -31,7 +31,7 @@ Item {
 
         Text {
             id: lbComment
-            anchors.topMargin: parent.height * 0.01
+            anchors.topMargin: parent.height * 0.015
             anchors.top: lbMainTitle.bottom
             anchors.right: lbMainTitle.right
             anchors.rightMargin: 0
@@ -45,7 +45,7 @@ Item {
 
         Text{
             id:lbConstraint
-            anchors.topMargin: parent.height * 0.01
+            anchors.topMargin: parent.height * 0.015
             anchors.top: lbComment.bottom
             anchors.right: cbUse.left
             anchors.rightMargin: 3
@@ -61,7 +61,7 @@ Item {
 
         Text {
             id: lbActiveTill
-            anchors.topMargin: parent.height * 0.01
+            anchors.topMargin: parent.height * 0.015
             anchors.top: lbConstraint.bottom
             anchors.right: lbConstraint.right
             anchors.rightMargin: 0
@@ -70,7 +70,7 @@ Item {
             font.pointSize: 12
             font.weight: Font.Light
             color: "#222222"
-            font.family: "NS UI Text"
+            font.family: "SF UI Text"
             font.italic: true
         }
 

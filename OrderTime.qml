@@ -68,9 +68,9 @@ ViewController {
             text: "Запросити найближчій час доставки на сьогодні за Вашою адресою"
             wrapMode: Text.WordWrap
             font.weight: Font.DemiBold
-            font.pointSize: 15
+            font.pointSize: 14
             horizontalAlignment: Text.AlignHCenter
-            anchors.topMargin: parent.height * 0.02
+            //anchors.topMargin: parent.height * 0.02
             anchors.top: hWHeader.bottom
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -171,7 +171,7 @@ ViewController {
             anchors.rightMargin: 0
             font.weight: Font.Thin
             anchors.top: txtChooseAnother.bottom
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.07
 //            anchors.bottomMargin: parent.height * 0.1
 //            anchors.bottom: btnNext.top
             anchors.left: tfComment.left
@@ -225,8 +225,6 @@ ViewController {
                 navigationController.push("qrc:/orders/OrderReceipt.qml" , {"context":context})
             }
         }
-
-
     }
 
 }

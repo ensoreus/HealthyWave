@@ -14,7 +14,7 @@ ViewController {
     }
 
     onViewDidAppear:{
-        txWater.text = context.fullb + " бут. х " + Utils.calcFullBottles(context) + " грн."
+        txWater.text = (context.fullb - context.freeWater) + " бут. х " + Utils.calcFullBottles(context) + " грн."
         txEmpty.text = context.emptyb + " шт."
         var fee  = context.fullb - context.emptyb > 0 ? context.prices.bottle : 0
         var discountSum = 0
@@ -22,7 +22,7 @@ ViewController {
             discountSum += Utils.bonusValueCalc(context.bonuses[index], context)
         }
         txFreeWater.text = context.freeWater + " бут. х 0 грн."
-        txTotalBottles.text = context.emptyb + context.fullb - context.freeWater + " бут."
+        txTotalBottles.text = context.fullb - context.freeWater + " бут." /// TODO:
         var discounted = context.fullb * Utils.calcFullBottles(context) + (context.pump?context.prices.pump:0) + discountSum
         txTotal.text = discounted + fee + " грн."
         txAddress.text = "вул. " + context.address.street + ", буд." + context.address.house + " оф." + context.address.apartment
@@ -387,7 +387,7 @@ ViewController {
             labelColor: "black"
             labelText: "ПІДТВЕРДИТИ"
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: parent.height * 0.07
+            anchors.topMargin: parent.height * 0.04
             anchors.top: borderImage.bottom
             onButtonClick: {
                 context.confirmed = true

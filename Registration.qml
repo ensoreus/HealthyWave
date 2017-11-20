@@ -26,13 +26,12 @@ Item {
             SecurityCore.generateSecKey()
             storage.storeSecKey(SecurityCore.secKey)
         }
-        console.log(storage.getSecKey())
     }
 
     Connections {
         target: PushNotificationRegistrationTokenHandler
         onGcmRegistrationTokenChanged: {
-            console.log("FCM token changed:"+PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+            console.log("FCM token changed:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
         }
     }
 
@@ -59,10 +58,22 @@ Item {
             }
 
             onNextPage: {
+                checkPin()
+            }
+
+            btnSendAgain.onClicked: {
+                txtError.text = ""
+                pinField.clear()
+                Qt.inputMethod.hide()
+                Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
+            }
+
+            function checkPin(){
                 Api.confirmPinCode(pinEditPage.pinField.text, phoneEditPage.phoneField.text, function(response){
                     if(response.result === true){
                         Qt.inputMethod.hide()
                         stackLayout.push(emailEditPage)
+                        //checkIsRegistered()
                     }else{
                         Qt.inputMethod.hide()
                         txtError.text = "Невірний PIN-код";
@@ -71,11 +82,16 @@ Item {
                 })
             }
 
-            btnSendAgain.onClicked: {
-                txtError.text = ""
-                pinField.clear()
-                Qt.inputMethod.hide()
-                Api.getPinCode(phoneEditPage.phoneField.text, storage.getSecKey())
+            function checkIsRegistered(){
+                Api.isRegistered(phoneEditPage.phoneField.text, function(response){
+                    if(response.result === true){
+                        item1.opacity = 0
+                        registrationDone()
+                    }else if(response.result === false){
+                        Qt.inputMethod.hide()
+                        stackLayout.push(emailEditPage)
+                    }
+                })
             }
         }
 
@@ -118,6 +134,11 @@ Item {
                 console.log(PushNotificationRegistrationTokenHandler.gcmRegistrationToke)
                 var pushtoken = PushNotificationRegistrationTokenHandler.gcmRegistrationToken
                 var secKey = storage.getSecKey()
+                    Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, {"phone":phoneEditPage.phoneField.text, "token":SecurityCore.secKey}, function(response){
+                        console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+                    }, function(failure){
+                        console.log("failed to update token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+                    })
                 Api.auth(phoneEditPage.phoneField.text, secKey, function(token, url){
                     storage.saveToken(token)
                     Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, ostype, function(response){
