@@ -25,6 +25,8 @@ Item {
         if(!storage.isRegistered()){
             SecurityCore.generateSecKey()
             storage.storeSecKey(SecurityCore.secKey)
+            console.log("generated Push Token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+            console.log("generated sec Key:" + SecurityCore.secKey)
         }
     }
 
@@ -32,11 +34,34 @@ Item {
         target: PushNotificationRegistrationTokenHandler
         onGcmRegistrationTokenChanged: {
             console.log("FCM token changed:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+            sendPushToken()
         }
     }
 
     Storage{
         id:storage
+    }
+
+    function sendPushToken(onTokenUpdted){
+        var secKey = storage.getSecKey()
+        if(PushNotificationRegistrationTokenHandler.gcmRegistrationToken === ""){
+            onTokenUpdted()
+            return
+        }
+        Api.auth(phoneEditPage.phoneField.text, secKey, function(token, url){
+        Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, {"phone":phoneEditPage.phoneField.text, "token":token, "secKey":SecurityCore.secKey}, function(response){
+            console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+            onTokenUpdted()
+
+        }, function(failure){
+            console.log("failed to update token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+            stopPropcessIndicator()
+            Qt.inputMethod.hide()
+            onTokenUpdted()
+        })
+        })
+
+
     }
 
     Rectangle {
@@ -86,24 +111,13 @@ Item {
                 Api.isRegistered(phoneEditPage.phoneField.text, function(response){
                     if(response.result === true){
                         Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(authkey){
+                            storage.saveToken(authkey)
                             Api.getCustomerInfo({"phone":phoneEditPage.phoneField.text, "token":authkey, "secKey":storage.getSecKey()}, function(response){
-                                var name = response.result["customer"]
-                                var email = typeof(response.result["email"]) === 'undefined' ? "" : response.result["email"]
-                                var promocode = typeof(response.result["promocode"]) === 'undefined' ? "" : response.result["promocode"]
-/*
-{
- "PackageType": "GetCustomerByPhone",
- "СreationDate": "2017-06-01",
- "customer": "Петров Иван",
- "primary_adress": "Ярославская 9, кв 8, П-1, Эт-3",
- "adresses": [
-  "Ярославская 9, кв 8, П-1, Эт-3",
-  "Агрегатная 2, кв 125, П-4, Эт-5"
- ]
-}
-*/
+                                var name = response.customer
+                                var email = typeof(response.email) === 'undefined' ? "" : response.email
+                                var promocode = typeof(response.promocode) === 'undefined' ? "" : response.promocode
                                 storage.saveInitialUserData(phoneEditPage.phoneField.text, name, email, promocode)
-                                Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, {"phone":phoneEditPage.phoneField.text, "token":token}, function(response){
+                                Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, {"phone":phoneEditPage.phoneField.text, "token":authkey, "secKey":storage.getSecKey()}, function(response){
                                     console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
                                     item1.opacity = 0
                                     registrationDone()
@@ -164,32 +178,26 @@ Item {
                 var nameEndPos = nameEditPage.nameField.text.lastIndexOf(" ");
                 var name = nameEditPage.nameField.text.slice(0, nameEndPos)
                 var lastname = nameEditPage.nameField.text.slice(nameEndPos + 1, nameEditPage.nameField.text.length)
-
+                var secKey = storage.getSecKey()
                 console.log(PushNotificationRegistrationTokenHandler.gcmRegistrationToke)
                 var pushtoken = PushNotificationRegistrationTokenHandler.gcmRegistrationToken
-                var secKey = storage.getSecKey()
-
                 Api.auth(phoneEditPage.phoneField.text, secKey, function(token, url){
                     storage.saveToken(token)
                     Api.registerUser(phoneEditPage.phoneField.text, emailEditPage.emailField.text, token, name, lastname, pushtoken, ostype, function(response){
                         if(!response.error){
                             storage.saveInitialUserData(phoneEditPage.phoneField.text, nameEditPage.nameField.text, emailEditPage.emailField.text, response.promocode)
-                            Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, {"phone":phoneEditPage.phoneField.text, "token":token}, function(response){
-                                console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+                            sendPushToken(function(){
                                 stopPropcessIndicator()
                                 Qt.inputMethod.hide()
-                                stackLayout.push(promoCodeEditPage)
-                            }, function(failure){
-                                console.log("failed to update token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
-                                stopPropcessIndicator()
-                                Qt.inputMethod.hide()
-                                stackLayout.push(promoCodeEditPage)
                             })
+                            stackLayout.push(promoCodeEditPage)
                         }else{
                             stopPropcessIndicator()
+                            stackLayout.push(promoCodeEditPage)
                         }
                     })
                 })
+
             }
         }
 
