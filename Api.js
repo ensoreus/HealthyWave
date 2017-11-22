@@ -164,7 +164,7 @@ function sendAvatar(pic, authdata, onSuccess, onFailure){
 
 
 function getCustomerInfo(authdata, onSuccess, onFailure){
-    call("getcustomerbyphone", authdata.phone, onSuccess, onFailure)
+    call("getcustomerbyphone", {"phone":authdata.phone}, authdata, onSuccess, onFailure)
 }
 
 function deleteAddress(city, street, house, entrance, floor, apartment, authdata, onSuccess, onFailure){

@@ -438,7 +438,7 @@ ViewController {
                 navigationController.pop()
                 navigationController.pop()
                 navigationController.pop()
-                navigationController.pop()
+                //navigationController.pop()
             }
 
             Behavior on visible {

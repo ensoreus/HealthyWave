@@ -58,7 +58,7 @@ import "qrc:/controls"
             height: parent.height * 0.08
             color: "#ffffff"
             text: "ОЦІНИТИ ДОСТАВКУ:"
-            anchors.topMargin: parent.height * 0.4
+            anchors.topMargin: parent.height * 0.04
             font.pointSize: 10
             font.family: "NS UI Text"
             verticalAlignment: Text.AlignVCenter

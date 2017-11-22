@@ -290,6 +290,8 @@ ViewController {
             anchors.top: txAddPromo.bottom
             anchors.topMargin: 3
             font.pointSize: 12
+            height: 30
+            wrapMode: Text.WordWrap
         }
 
     }

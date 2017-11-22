@@ -71,8 +71,8 @@ Item {
             function checkPin(){
                 Api.confirmPinCode(pinEditPage.pinField.text, phoneEditPage.phoneField.text, function(response){
                     if(response.result === true){
-                        item1.opacity = 0
-                        registrationDone()
+                        Qt.inputMethod.hide()
+                        stackLayout.push(emailEditPage)
                         //checkIsRegistered()
                     }else{
                         Qt.inputMethod.hide()
@@ -85,7 +85,40 @@ Item {
             function checkIsRegistered(){
                 Api.isRegistered(phoneEditPage.phoneField.text, function(response){
                     if(response.result === true){
-                        //Api.getCustomerInfo()
+                        Api.auth(phoneEditPage.phoneField.text, storage.getSecKey(), function(authkey){
+                            Api.getCustomerInfo({"phone":phoneEditPage.phoneField.text, "token":authkey, "secKey":storage.getSecKey()}, function(response){
+                                var name = response.result["customer"]
+                                var email = typeof(response.result["email"]) === 'undefined' ? "" : response.result["email"]
+                                var promocode = typeof(response.result["promocode"]) === 'undefined' ? "" : response.result["promocode"]
+/*
+{
+ "PackageType": "GetCustomerByPhone",
+ "СreationDate": "2017-06-01",
+ "customer": "Петров Иван",
+ "primary_adress": "Ярославская 9, кв 8, П-1, Эт-3",
+ "adresses": [
+  "Ярославская 9, кв 8, П-1, Эт-3",
+  "Агрегатная 2, кв 125, П-4, Эт-5"
+ ]
+}
+*/
+                                storage.saveInitialUserData(phoneEditPage.phoneField.text, name, email, promocode)
+                                Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, {"phone":phoneEditPage.phoneField.text, "token":token}, function(response){
+                                    console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+                                    item1.opacity = 0
+                                    registrationDone()
+                                }, function(failure){
+                                    console.log("failed to update token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+                                    item1.opacity = 0
+                                    registrationDone()
+                                })
+
+                            }, function(){
+                                storage.saveInitialUserData(phoneEditPage.phoneField.text, "", "", "")
+                                item1.opacity = 0
+                                registrationDone()
+                            })
+                        })
                         item1.opacity = 0
                         registrationDone()
                     }else if(response.result === false){
@@ -152,7 +185,6 @@ Item {
                                 Qt.inputMethod.hide()
                                 stackLayout.push(promoCodeEditPage)
                             })
-
                         }else{
                             stopPropcessIndicator()
                         }

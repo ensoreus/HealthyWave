@@ -62,7 +62,7 @@ Page {
             y: 47
             width: parent.width * 0.9
             height: parent.height * 0.1
-            text: "Ми даруємо Вам 1 бутиль води безкоштовно *"
+            text: "Ми даруємо Вам 1 бутиль води безкоштовно*"
             anchors.topMargin: parent.height * 0.05
             anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
@@ -80,7 +80,7 @@ Page {
             height: 35 * ratio
             width: parent.width * 0.9
             text: qsTr("* За умови замовлення не менше 2 бутлів в одному замовленні.")
-            anchors.topMargin: parent.height * 0.1
+            anchors.topMargin: parent.height * 0.05
             font.bold: false
             font.family: "NS UI Text"
             horizontalAlignment: Text.AlignHCenter

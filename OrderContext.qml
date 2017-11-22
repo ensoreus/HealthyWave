@@ -27,7 +27,7 @@ QtObject {
          floor:""
          entrance: ""
          apartment: ""
-         doorCode: ""
+         doorcode: ""
          house: ""
          isPrimary: 0
     }

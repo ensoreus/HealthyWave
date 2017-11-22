@@ -149,7 +149,7 @@ ViewController {
                 function append(item, isFirst){
                     var checkChanged = function(){
                         if (!orderAddressViewController.initializing){
-                            console.log("checked!")
+                            console.log("checked!" + item.street)
                             isAddNew = false
                             context.address.street = item.street
                             context.address.city = item.city
@@ -159,9 +159,7 @@ ViewController {
                             }
                             context.address.house = item.house
                             context.address.apartment = item.apartment
-                            //context.address.isPrimary = item.primary
                             context.address.entrance = item.entrance
-                            //btnNext.enabled = true
                         }
                     }
 
