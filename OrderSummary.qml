@@ -416,7 +416,7 @@ ViewController {
                     anchors.left: lbFreeWater.left
                     anchors.leftMargin: 0
                     anchors.topMargin: 5* ratio
-                    anchors.top: bonusesInCheck.bottom
+                    anchors.top: lbFreeWater.bottom
                     font.family: "NS UI Text"
                 }
 
@@ -594,8 +594,6 @@ ViewController {
                 fontPointSize: 15
             }
 
-
-
             HWRoundButton {
                 id: btnNext
                 width: parent.width * 0.7
@@ -605,7 +603,6 @@ ViewController {
                 anchors.topMargin: 10 * ratio
                 anchors.horizontalCenter: parent.horizontalCenter
                 onButtonClick: {
-
                     context.card = rbCardPayment.checked
                     context.pump = cbPump.checked
 

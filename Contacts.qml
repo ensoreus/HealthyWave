@@ -19,18 +19,37 @@ ViewController {
         storage.getAuthData(function(authdata){
             Api.getContacts(authdata, function(response){
                 console.log(response.result)
-                var controls = [
+                var phControls = [
                             {"tx":txOrderOnlinePhone,"lb":lbOrderOnlinePhone},
                             {"tx":txCallCenterPhone2,"lb":lbCallCenterPhone2},
                             {"tx":txCallCenterPhone,"lb":lbCallCenterPhone}
                         ]
-                response.result.forEach(function(item, index, arra){
-                    if(item.ContactType === "Телефон"){
-                        controls[index].tx.text = item.ContactInformation
-                        controls[index].lb.text = item.ContactInformationType
-                    }else{
-                        importData(response.result[index])
+//                var msgControls = [
+//                            {"tx":txEmail,"lb":lbEmail},
+//                            {"tx":txViber,"lb":lbViber},
+//                            {"tx":txTelegram,"lb":lbTelegram}
+//                        ]
+                var filteredPhones = response.result.filter(function(item){
+                    if(item.ContactInformationType === "Головний офіс"){
+                        lbMainAddress.text = item.ContactInformation
+                        return false
                     }
+                    return item.ContactType === "Телефон"
+                })
+
+                var filteredMessangers = response.result.filter(function(item){
+                    return item.ContactType === "Мессенджер" || item.ContactType === "EMail"
+                })
+
+                filteredPhones.forEach(function(item, index, arra){
+                        phControls[index].tx.text = item.ContactInformation
+                        phControls[index].lb.text = item.ContactInformationType
+                })
+
+                filteredMessangers.forEach(function(item, index, array){
+//                    msgControls[index].tx.text = item.ContactInformation
+//                    msgControls[index].lb.text = item.ContactInformationType
+                    importData(item)
                 })
 
                 content.state = "readyContacts"
@@ -42,9 +61,7 @@ ViewController {
     }
 
     function importData(contactItem){
-        if(contactItem.ContactInformationType === "Головний офіс"){
-            lbMainAddress.text = contactItem.ContactInformation
-        }else if(contactItem.ContactInformationType === "Пошта"){
+        if(contactItem.ContactInformationType === "Пошта"){
             txEmail.text = contactItem.ContactInformation
         }else if(contactItem.ContactInformationType === "Viber"){
             txViber.text = "+380" + contactItem.ContactInformation
