@@ -44,12 +44,13 @@ Item {
 
     function sendPushToken(onTokenUpdted){
         var secKey = storage.getSecKey()
-        if(PushNotificationRegistrationTokenHandler.gcmRegistrationToken === ""){
+        if(PushNotificationRegistrationTokenHandler.gcmRegistrationToken.length === 0 || (phoneEditPage.phoneField.text.length < 5)){
             onTokenUpdted()
             return
         }
-        Api.auth(phoneEditPage.phoneField.text, secKey, function(token, url){
-        Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, {"phone":phoneEditPage.phoneField.text, "token":token, "secKey":SecurityCore.secKey}, function(response){
+        Api.auth(phoneEditPage.phoneField.text, SecurityCore.secKey, function(token, url){
+
+            Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, {"phone":phoneEditPage.phoneField.text, "token":token, "secKey":SecurityCore.secKey}, function(response){
             console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
             onTokenUpdted()
 
@@ -96,9 +97,9 @@ Item {
             function checkPin(){
                 Api.confirmPinCode(pinEditPage.pinField.text, phoneEditPage.phoneField.text, function(response){
                     if(response.result === true){
-                        Qt.inputMethod.hide()
-                        stackLayout.push(emailEditPage)
-                        //checkIsRegistered()
+                        //Qt.inputMethod.hide()
+                        //stackLayout.push(emailEditPage)
+                        checkIsRegistered()
                     }else{
                         Qt.inputMethod.hide()
                         txtError.text = "Невірний PIN-код";

@@ -14,6 +14,7 @@ ViewController {
     property var order
     property var commentCodes
     property alias rate: ratePanel.rate
+    property var onRated: function(){}
 
     Storage{
         id:storage
@@ -184,6 +185,7 @@ ViewController {
                     anchors.left: lbCourierName.right
                     anchors.top: lbCourierName.top
                     anchors.topMargin: 0
+                    elide: Text.ElideRight
                 }
             }
             Rectangle {
@@ -370,6 +372,9 @@ ViewController {
                 anchors.leftMargin: parent.width * 0.1
                 anchors.left: parent.left
                 visible: true
+                onCheckedChanged: {
+                    txComment.height = checked ? parent.height * 0.1 : 0
+                }
             }
 
             Text {
@@ -390,7 +395,7 @@ ViewController {
 
             Rectangle {
                 id: txComment
-                height: cbComment.checked ? parent.height * 0.1 : 0
+                height: 0
                 color: "#ffffff"
                 radius: 8
                 border.color: "#dfdfdf"
@@ -431,6 +436,20 @@ ViewController {
                 }
             }
 
+            Rectangle{
+                id: waiterOverlay
+                anchors.fill: parent
+                color: "white"
+                opacity: 0.5
+                BusyIndicator{
+                    id:waiter
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: parent.width * 0.2
+                    height: parent.height * 0.2
+                }
+                visible: false
+            }
 
             HWGreenRoundButton {
                 id: hWGreenButton
@@ -447,11 +466,14 @@ ViewController {
                         var code3 = cbLate.checked   ? commentCodes[2].Code : ""
                         var code4 = cbOther.checked  ? commentCodes[3].Code : ""
                         var comment = taComment.text
-
+                        waiterOverlay.visible = true
                         Api.sendFeedback(ratePanel.rate, comment, order.orderId, code1, code2, code3, code4, authdata, function(response){
                             storage.orderRated(order.orderId)
+                            onRated()
+                            waiterOverlay.visible = false
                             navigationController.pop()
                         }, function(response){
+                            waiterOverlay.visible = false
                             console.log(response.error)
                             navigationController.pop()
                         })

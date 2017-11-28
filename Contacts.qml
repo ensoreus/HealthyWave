@@ -47,8 +47,6 @@ ViewController {
                 })
 
                 filteredMessangers.forEach(function(item, index, array){
-//                    msgControls[index].tx.text = item.ContactInformation
-//                    msgControls[index].lb.text = item.ContactInformationType
                     importData(item)
                 })
 

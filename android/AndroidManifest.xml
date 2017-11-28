@@ -101,5 +101,9 @@
     <!-- %%INSERT_FEATURES -->
 
 <!-- %%INSERT_PERMISSIONS -->
+<permission android:protectionLevel="signature"
+        android:name="com.example.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.example.permission.C2D_MESSAGE" />
 <uses-permission android:name="android.permission.CALL_PHONE"/>
+<uses-permission android:name="android.permission.WRITE_USER_DICTIONARY"/>
 </manifest>

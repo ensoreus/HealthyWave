@@ -51,6 +51,7 @@ Page {
                 HWAvatar {
                     id: avatar
                     width: 100 * ratio
+                    height: 100 * ratio
                     x: 5
                     y: 5
                     source: "qrc:/commons/avatar.png"

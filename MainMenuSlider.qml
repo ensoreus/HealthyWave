@@ -80,6 +80,7 @@ Rectangle {
     Connections{
         target: PushNotificationRegistrationTokenHandler
         onLastNotificationChanged:{
+            console.log("to parse:"+PushNotificationRegistrationTokenHandler.lastNotification)
             var notification = (Qt.platform.os === "android") ? JSON.parse(PushNotificationRegistrationTokenHandler.lastNotification) : Utils.extractDataFromNotification(PushNotificationRegistrationTokenHandler.lastNotification)
             if(notification.pushtype === 1){
                 console.log("ORDER ON A WAY")

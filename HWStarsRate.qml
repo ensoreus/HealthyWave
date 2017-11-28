@@ -7,9 +7,18 @@ Item {
 
     property int rate: 0
     property alias backgroundColor: content.color
+
     height: 100
     function rearrangeStars(){
         content.rearrangeStars()
+    }
+
+    function resetRate(){
+        star1.state = "StarOff"
+        star2.state = "StarOff"
+        star3.state = "StarOff"
+        star4.state = "StarOff"
+        star5.state = "StarOff"
     }
 
     onRateChanged: {
@@ -57,7 +66,7 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 0
             onRated: {
-                content.resetRate()
+                ratePanel.resetRate()
                 star1.state = "StarOn";
                 ratePanel.rated(1)
             }
@@ -70,7 +79,7 @@ Item {
             anchors.top: star1.top
             anchors.topMargin: 0
             onRated: {
-                content.resetRate()
+                ratePanel.resetRate()
                 star1.state = "StarOn"
                 star2.state = "StarOn"
                 ratePanel.rated(2)
@@ -87,7 +96,7 @@ Item {
             anchors.topMargin: 0
             x: 0
             onRated: {
-                content.resetRate()
+                ratePanel.resetRate()
                 star1.state = "StarOn"
                 star2.state = "StarOn"
                 star3.state = "StarOn"
@@ -104,7 +113,7 @@ Item {
             anchors.topMargin: 0
             x: 0
             onRated: {
-                content.resetRate()
+                ratePanel.resetRate()
                 star1.state = "StarOn"
                 star2.state = "StarOn"
                 star3.state = "StarOn"
@@ -123,7 +132,7 @@ Item {
             anchors.top: star4.top
             x: 0
             onRated: {
-                content.resetRate()
+                ratePanel.resetRate()
                 star1.state = "StarOn"
                 star2.state = "StarOn"
                 star3.state = "StarOn"
@@ -132,14 +141,6 @@ Item {
                 ratePanel.rated(5)
             }
 
-        }
-
-        function resetRate(){
-            star1.state = "StarOff"
-            star2.state = "StarOff"
-            star3.state = "StarOff"
-            star4.state = "StarOff"
-            star5.state = "StarOff"
         }
 
         function positionForStar(index, container){

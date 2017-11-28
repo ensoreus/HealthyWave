@@ -96,7 +96,7 @@ Page {
             y: 365
             width: parent.width * 0.7
             height: 60 * ratio
-            anchors.bottomMargin: parent.height * 0.13
+            anchors.bottomMargin: parent.height * 0.07
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             labelText: "ПРОДОВЖИТИ"

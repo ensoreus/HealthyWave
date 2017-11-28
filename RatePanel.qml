@@ -6,6 +6,10 @@ Item {
     property alias txAddress: txAddress
     signal rateClick(var rate)
 
+    function resetRating(){
+        stars.resetRate()
+    }
+
     Rectangle {
         id: content
         color: "#00ad9a"
@@ -62,6 +66,7 @@ Item {
         }
 
         HWStarsRate{
+            id: stars
             width: 300
             height: parent.height * 0.3
             anchors.topMargin: 5 * ratio

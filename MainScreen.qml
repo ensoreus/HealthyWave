@@ -23,20 +23,27 @@ ViewController {
 
     Component.onCompleted: {
         PushNotificationRegistrationTokenHandler.gcmRegistrationToken
-        checkUnratedOrders.start()
+        //checkUnratedOrders.start()
+        if(PushNotificationRegistrationTokenHandler.gcmRegistrationToken.length > 0){
+            updatePushToken()
+        }
     }
 
     Connections {
         target: PushNotificationRegistrationTokenHandler
         onGcmRegistrationTokenChanged: {
-            storage.getAuthData(function(authdata){
-                Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, authdata, function(response){
-                    console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
-                }, function(failure){
-                    console.log("failed to update token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
-                })
-            })
+            updatePushToken()
         }
+    }
+
+    function updatePushToken(){
+        storage.getAuthData(function(authdata){
+            Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, authdata, function(response){
+                console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+            }, function(failure){
+                console.log("failed to update token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
+            })
+        })
     }
 
     function showCallButton(phonenum){
@@ -53,8 +60,9 @@ ViewController {
 
     Timer{
         id: checkUnratedOrders
-        interval: (60000)
+        interval: 6000
         repeat: true
+        running: true
         onTriggered: {
             storage.getLastUnratedOrder(function(orderid, city, street, house, apt, time, courier, courierPhone ){
                 if(typeof(city) != "undefined"){
@@ -350,6 +358,7 @@ ViewController {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: parent.height * 0.2
+        opacity: 0.0
         onVisibleChanged: {
             if(visible){
                 mainScreenHintPanel.disable()
@@ -359,17 +368,22 @@ ViewController {
         }
 
         onRateClick: {
-            navigationController.push("qrc:/feedback/AddFeedback.qml", {"rate":rate, "order":order})
+            navigationController.push("qrc:/feedback/AddFeedback.qml", {"rate":rate, "order":order, "onRated":hide})
         }
 
         function showWithOrder(address){
+            resetRating()
             visible = true
+            opacity = 1.0
             txAddress.text = address
         }
 
+        function hide(){
+            opacity = 0.0
+            visible = false
+        }
 
-
-        Behavior on visible {
+        Behavior on opacity {
             PropertyAnimation{
                 target: bottomRatePanel
                 property: "y"
@@ -377,6 +391,7 @@ ViewController {
                 from: (visible) ? height : 0
                 to: (visible) ? 0 : height
             }
+
         }
     }
 
