@@ -58,33 +58,43 @@ ViewController {
         mainScreenHintPanel.updateUserData()
     }
 
+    function checkUnratedOrders(){
+        storage.getLastUnratedOrder(function(orderid, city, street, house, apt, time, courier, courierPhone ){
+            if(typeof(city) != "undefined"){
+                var combineAaddress = "м. " + city + " вул." + street + " "+ house+" оф."+apt
+                var orderday = "cьогодні"
+                order = {
+                    "orderId":orderid,
+                    "address":{
+                        "city":city,
+                        "street":street,
+                        "house":house,
+                        "apartment":apt
+                    },
+                    "deliveryDate":orderday,
+                    "courierName": courier,
+                    "courierPhone":courierPhone
+                }
+                bottomRatePanel.showWithOrder(combineAaddress)
+            }else{
+                bottomRatePanel.visible = false
+            }
+        }, function(){
+            bottomRatePanel.visible = false
+        })
+    }
+
+    onViewWillAppear: {
+        checkUnratedOrders()
+    }
+
     Timer{
-        id: checkUnratedOrders
+        id: checkUnratedOrdersTimer
         interval: 6000
         repeat: true
         running: true
         onTriggered: {
-            storage.getLastUnratedOrder(function(orderid, city, street, house, apt, time, courier, courierPhone ){
-                if(typeof(city) != "undefined"){
-                    var combineAaddress = "м. " + city + " вул." + street + " "+ house+" оф."+apt
-                    var orderday = "cьогодні"
-                    order = {
-                        "orderId":orderid,
-                        "address":{
-                            "city":city,
-                            "street":street,
-                            "house":house,
-                            "apartment":apt
-                        },
-                        "deliveryDate":orderday,
-                        "courierName": courier,
-                        "courierPhone":courierPhone
-                    }
-                    bottomRatePanel.showWithOrder(combineAaddress)
-                }else{
-                    bottomRatePanel.visible = false
-                }
-            })
+            checkUnratedOrders()
         }
     }
 

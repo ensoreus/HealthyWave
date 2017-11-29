@@ -251,7 +251,7 @@ Item {
         });
     }
 
-    function getLastUnratedOrder(callback){
+    function getLastUnratedOrder(callback, noUnorated){
         var db = LocalStorage.openDatabaseSync("local.sqlite", "1.0", "database", 10000);
         db.transaction( function(tx){
             tx.executeSql('CREATE TABLE IF NOT EXISTS orders (orderid TEXT, city TEXT, street TEXT, house TEXT, floor TEXT, apt TEXT, entrance TEXT, entranceDoor TEXT, time TEXT, courier TEXT, courierPhone TEXT, rated INTEGER )')
@@ -269,6 +269,8 @@ Item {
                     var courierPhone = result.rows.item(0).courierPhone
                     callback(orderid, city, street, house, apt, time, courier, courierPhone)
                 }
+            }else{
+                noUnorated()
             }
         });
     }
