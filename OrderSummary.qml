@@ -8,6 +8,7 @@ import "qrc:/controls"
 import "qrc:/commons"
 import "qrc:/Api.js" as Api
 import "qrc:/"
+import "qrc:/Utils.js" as Utils
 
 ViewController {
     id: orderSummaryView
@@ -56,21 +57,8 @@ ViewController {
     }
 
     function fullBottlesLine(){
-        var price = calcFullBottles()
+        var price = Utils.calcFullBottles(context)
         return (fullb - context.freeWater) + " бут.  x " + price + " грн."
-    }
-
-    function calcFullBottles(){
-        var price = 0
-        var payedFullBottles = fullb - context.freeWater
-        if (payedFullBottles < 2){
-            price = context.prices.prices["price_1"]
-        }else if (payedFullBottles >= 2 && payedFullBottles < 5){
-            price = context.prices.prices["price_2"]
-        }else{
-            price = context.prices.prices["price_5"]
-        }
-        return price
     }
 
     function freeBottleLine(){
@@ -109,7 +97,7 @@ ViewController {
 
     function calcTotal(){
         bonusesInCheck.updateSummaryDiscount()
-        var total = calcFullBottles() * (fullb - context.freeWater) + calcEmptyBottlesFee() + (cbPump.checked ? context.prices.pump : 0)
+        var total = Utils.calcFullBottles(context) * (fullb - context.freeWater) + calcEmptyBottlesFee() + (cbPump.checked ? context.prices.pump : 0)
         return total
     }
 
@@ -552,7 +540,8 @@ ViewController {
                     color: "#4a4a4a"
                     anchors.left: parent.horizontalCenter
                     anchors.leftMargin: 15 * ratio
-                    anchors.top: lbSummaryOfOrder.top
+                    //anchors.top: lbSummaryOfOrder.top
+                    anchors.verticalCenter: lbSummaryOfOrder.verticalCenter
                     anchors.topMargin: 0
                     font.family: "NS UI Text"
                     font.weight: Font.DemiBold

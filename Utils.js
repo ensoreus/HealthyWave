@@ -57,9 +57,10 @@ function extractDataFromNotification( notification ) {
 
 function calcFullBottles(context){
     var price = 0
-    if (context.fullb < 2){
+    var qty = (context.fullb - context.freeWater)
+    if (qty < 2){
         price = context.prices.prices["price_1"]
-    }else if (context.fullb >= 2 && context.fullb < 5){
+    }else if (qty >= 2 && qty < 5){
         price = context.prices.prices["price_2"]
     }else{
         price = context.prices.prices["price_5"]

@@ -16,20 +16,20 @@ ViewController {
     onViewDidAppear:{
         txWater.text = (context.fullb - context.freeWater) + " бут. х " + Utils.calcFullBottles(context) + " грн."
         txEmpty.text = context.emptyb + " шт."
-        var fee  = context.fullb - context.emptyb > 0 ? context.prices.bottle : 0
+        var fee  = calcEmptyBottlesFee()//context.fullb - context.emptyb > 0 ? context.prices.bottle : 0
         var discountSum = 0
         for (var index in context.bonuses){
             discountSum += Utils.bonusValueCalc(context.bonuses[index], context)
         }
         txFreeWater.text = context.freeWater + " бут. х 0 грн."
-        txTotalBottles.text = context.fullb - context.freeWater + " бут." /// TODO:
-        var discounted = context.fullb * Utils.calcFullBottles(context) + (context.pump?context.prices.pump:0) + discountSum
+        txTotalBottles.text = context.fullb + " бут." /// TODO:
+        var discounted = (context.fullb - context.freeWater) * Utils.calcFullBottles(context) + (context.pump?context.prices.pump:0) + discountSum
         txTotal.text = discounted + fee + " грн."
         txAddress.text = "вул. " + context.address.street + ", буд." + context.address.house + " оф." + context.address.apartment
         txDeliveryTime.text = context.deliveryTime.displayDate + " до " + context.deliveryTime.toHour
         txPaymentType.text = context.card == 1 ? "карткою" : "готівкою"
         txComment.text = context.comment
-        if(context.pump){
+        if(typeof(context.pump) != "undefined" &&  context.pump > 0){
             txPump.text = context.prices.pump + " грн."
             txPump.visible = true
             lbPump.visible = true
@@ -41,6 +41,25 @@ ViewController {
         }
 
     }
+
+    function calcEmptyBottlesFee(){
+        var price = (context.fullb - context.emptyb) * context.prices.bottle
+        if(price < 0) return 0
+        return price
+    }
+
+//    function calcFullBottles(){
+//        var price = 0
+//        var payedFullBottles = context.fullb - context.freeWater
+//        if (payedFullBottles < 2){
+//            price = context.prices.prices["price_1"]
+//        }else if (payedFullBottles >= 2 && payedFullBottles < 5){
+//            price = context.prices.prices["price_2"]
+//        }else{
+//            price = context.prices.prices["price_5"]
+//        }
+//        return price
+//    }
 
     Storage{
         id: storage
@@ -254,8 +273,9 @@ ViewController {
                 font.pointSize: 14
                 anchors.rightMargin: 51
                 verticalAlignment: Text.AlignVCenter
-                anchors.top: lbTotal.top
-                anchors.topMargin: 0
+//                anchors.top: lbTotal.top
+//                anchors.topMargin: 0
+                anchors.verticalCenter: lbTotal.verticalCenter
                 anchors.right: parent.right
                 anchors.left: lbTotal.right
                 anchors.leftMargin: 20 * ratio
