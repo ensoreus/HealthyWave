@@ -473,7 +473,6 @@ ViewController {
                             waiterOverlay.visible = false
                             navigationController.pop()
                         }, function(response){
-                            storage.orderRated(order.orderId)
                             waiterOverlay.visible = false
                             console.log(response.error)
                             navigationController.pop()

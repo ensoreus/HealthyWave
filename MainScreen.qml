@@ -23,7 +23,6 @@ ViewController {
 
     Component.onCompleted: {
         PushNotificationRegistrationTokenHandler.gcmRegistrationToken
-        //checkUnratedOrders.start()
         if(PushNotificationRegistrationTokenHandler.gcmRegistrationToken.length > 0){
             updatePushToken()
         }

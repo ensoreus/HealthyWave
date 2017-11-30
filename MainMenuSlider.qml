@@ -44,7 +44,7 @@ Rectangle {
 //        interval: 3000
 //        repeat: true
 //        onTriggered: {
-//                mainScreen.hideCallButton()
+//            mainScreen.hideCallButton()
 //            storage.getUnratedOrderIds(function(orderId){
 //                 var notification = {orderid:orderId,
 //                                    courier:"Иван Иванов",
@@ -84,15 +84,13 @@ Rectangle {
             var notification = (Qt.platform.os === "android") ? JSON.parse(PushNotificationRegistrationTokenHandler.lastNotification) : Utils.extractDataFromNotification(PushNotificationRegistrationTokenHandler.lastNotification)
             if(notification.pushtype === 1){
                 console.log("ORDER ON A WAY")
-                //deliveryOnAWay(notification)
+                deliveryOnAWay(notification)
             }else{
                 console.log("ORDER DELIVERED:"+PushNotificationRegistrationTokenHandler.lastNotification)
                 deliveryArrived(notification)
             }
         }
     }
-
-
 
     function updateUserData(){
         mainMenu.updateUserData()
