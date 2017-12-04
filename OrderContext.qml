@@ -44,6 +44,7 @@ QtObject {
         cardToPay = ""
         needToCall = false
         pump = 0
+        confirmed = false
 
     }
 

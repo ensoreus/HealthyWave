@@ -453,11 +453,13 @@ ViewController {
             }
             onOrderDone: {
                 visible = false
-                navigationController.pop()
-                navigationController.pop()
-                navigationController.pop()
-                navigationController.pop()
-                navigationController.pop()
+                context.confirmed = true
+                navigationController.popToInitial()
+                //navigationController.pop()
+                //navigationController.pop()
+//                navigationController.pop()
+//               navigationController.pop()
+//                navigationController.pop()
                 //navigationController.pop()
             }
 

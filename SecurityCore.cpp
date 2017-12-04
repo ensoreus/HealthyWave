@@ -2,6 +2,10 @@
 #include <QByteArray>
 #include <QImage>
 #include <QDataStream>
+#ifdef Q_OS_ANDROID
+#include <QtAndroidExtras>
+#include <QtAndroid>
+#endif
 
 SecurityCore::SecurityCore(QObject *parent) : QObject(parent)
 {
@@ -63,11 +67,22 @@ QString SecurityCore::base64Image(const QString& path){
 }
 
 QString SecurityCore::tempDir() const{
+#ifdef Q_OS_ANDROID
+  auto path = and_tempDir();
+#else
     auto path = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+#endif
     QUrl  pathurl(path);
     pathurl.setScheme("file");
     return pathurl.toString();
 }
+
+#ifdef Q_OS_ANDROID
+QString SecurityCore::and_tempDir() const{
+  //QAndroidJniObject context = androidContext();
+  //auto isApproved = context.callObjectMethod("");
+}
+#endif
 
 QString SecurityCore::saveBase64(const QString& ba){
   QByteArray barray = ba.toUtf8();

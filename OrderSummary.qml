@@ -34,6 +34,7 @@ ViewController {
 
     Component.onCompleted: {
         isInit = true
+        bonusModel.clear()
         //initCheck()
     }
 
@@ -43,7 +44,9 @@ ViewController {
         emptyb = context.emptyb
         updateSummary()
         layoutHeight()
-        getBonuses()
+        if(!context.confirmed){
+             getBonuses()
+        }
     }
 
     function updateSummary(){
@@ -194,19 +197,12 @@ ViewController {
                 anchors.leftMargin: 30 * ratio
                 anchors.right: parent.right
                 visible: bonusModel.count > 0
-                height:(bonusModel.count * (18 + ((bonusListStyle === "Regular") ? 8 * ratio : 26 * ratio))) * ratio
+                height: (bonusModel.count * (18 + ((bonusListStyle === "Regular") ? 8 * ratio : 26 * ratio))) * ratio
                 model:ListModel{
                     id: bonusModel
                     function importData(bonusItem){
-                        var bonus = {
-                            "BonusName":bonusItem.BonusName,
-                            "PromoCode":bonusItem.PromoCode,
-                            "BonusType":bonusItem.BonusType,
-                            "Comment":bonusItem.Comment,
-                            "ValidityPeriod":bonusItem.ValidityPeriod,
-                            "preselected": bonusLst.isBonusesPreselected(bonusItem.PromoCode)
-                        }
-                        bonusModel.append(bonus)
+                        bonusItem.preselected = bonusLst.isBonusesPreselected(bonusItem.PromoCode)
+                        bonusModel.append(bonusItem)
                     }
                 }
 

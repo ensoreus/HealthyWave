@@ -16,7 +16,7 @@ Item {
     property ListModel views : ListModel {}
 
     property var tintColor
-
+    property var isPopToInitial: false
     signal pushed(var viewController)
     signal popped(var viewController)
 
@@ -64,7 +64,20 @@ Item {
     }
 
     function popToInitial(){
-            popToInitial()
+        isPopToInitial = true
+        pop()
+      //stack.pop(initialViewController, StackView.Immediate)
+    }
+
+    onPopped: {
+        if(isPopToInitial){
+            if(stack.depth > 1){
+                pop()
+            }else{
+                isPopToInitial = false
+                console.log("stop popping:"+ stack.index)
+            }
+        }
     }
 
     width: 100

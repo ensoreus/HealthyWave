@@ -21,12 +21,16 @@ public:
   Q_INVOKABLE QString base64Image(const QString& path);
   Q_INVOKABLE QString saveBase64(const QString& ba);
   Q_INVOKABLE QString tempDir() const;
+
 signals:
   void secKeyChanged();
   void secKeyGenerated();
 
 private:
   SecImplementation* _impl;
+#ifdef Q_OS_ANDROID
+  QString and_tempDir() const;
+#endif
 };
 
 #endif // SECURITYCORE_HPP
