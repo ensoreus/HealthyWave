@@ -130,6 +130,7 @@ ViewController {
                     layoutHeight()
                     if(item === "1"){
                         bonusListStyle = "Regular"
+                        cbPump.cstyle = "Regular"
                     }
                     bonusLst.checkIfPreselectedBonusEligible(item)
                 }
@@ -212,7 +213,7 @@ ViewController {
                     y: 52
                     height: 18
                     text: BonusName
-                    style: bonusListStyle
+                    cstyle: bonusListStyle
                     enabled: bonusLst.isBonusEnabled(PromoCode)
                     checked: preselected
 //                    anchors.rightMargin: bonusLst.width * 0.02
@@ -314,7 +315,7 @@ ViewController {
                 id: cbPump
                 x: 5
                 height: 13 * ratio
-                style: bonusListStyle
+                //cstyle: (bonusModel.count > 1) ? "Regular" : "Big"
                 text: "Механічна помпа - " + context.prices.pump + " грн."
                 anchors.topMargin: 5 * ratio
                 anchors.top: bonusLst.bottom
