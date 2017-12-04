@@ -27,9 +27,9 @@ Rectangle {
 
     Flickable {
         id: flickable
-        contentHeight: mainText.height + btnBack.height + 300
+        contentHeight: mainText.height + btnBack.height + ((contentWidth <= 320 * ratio) ? 200 * ratio : 150 * ratio)
         flickableDirection: Flickable.VerticalFlick
-        contentWidth: Qt.platform.os === "osx" ?  320 * ratio : Screen.width
+        contentWidth: Qt.platform.os === "osx" ? 320 * ratio : Screen.width
         anchors.top: hintPanel.bottom
         anchors.right: hintPanel.right
         anchors.left: hintPanel.left
@@ -173,7 +173,8 @@ Rectangle {
                 visible: false
                 width: parent.width * 0.7
                 height: btnInvite.height
-                anchors.top: mainText.bottom
+                //anchors.top: mainText.bottom
+                anchors.bottom: parent.bottom
                 labelHighlightColor: "#00AD9A"
                 labelColor: "#000000"
                 labelText: "МІЙ ПРОМОКОД"
