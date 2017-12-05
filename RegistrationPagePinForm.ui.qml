@@ -67,6 +67,7 @@ Page {
             height: 20
             color: "#505050"
             text: qsTr("Відправити код ще раз")
+            font.underline: true
             anchors.leftMargin: 0
             font.pointSize: 15
             anchors.left: text1.left
