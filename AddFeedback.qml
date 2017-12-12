@@ -130,7 +130,7 @@ ViewController {
                 horizontalAlignment: Text.AlignRight
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: 0
-                anchors.topMargin: parent.height * 0.05
+                anchors.topMargin: parent.height * 0.02
                 anchors.top: parent.top
             }
 
@@ -153,15 +153,17 @@ ViewController {
                 backgroundColor: "white"
                 width: 300 * ratio
                 height: 40 * ratio
-                anchors.topMargin: parent.height * 0.05
+                anchors.topMargin: parent.height * 0.02
                 anchors.top: lbRate.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
+                editable: false
             }
+
             Rectangle{
                 id:courierPart
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: lbCourierName.width + txCourierName.width
-                anchors.topMargin: parent.height * 0.04
+                anchors.topMargin: parent.height * 0.02
                 anchors.top: ratePanel.bottom
                 Text {
                     id: lbCourierName
@@ -178,7 +180,6 @@ ViewController {
                     id: txCourierName
                     //width: 55
                     height: 20 * ratio
-                    text: qsTr("Text")
                     anchors.leftMargin: 5
                     font.pointSize: 15
                     font.weight: Font.DemiBold
@@ -429,8 +430,8 @@ ViewController {
                     PropertyAnimation{
                         target: txComment
                         property: "height"
-                        from: txComment.height == 0 ? 0 : parent.height * 0.1
-                        to: txComment.height == 0 ? parent.height * 0.1 : 0
+                        from: txComment.height == 0 ? 0 : parent.height * 0.14
+                        to: txComment.height == 0 ? parent.height * 0.14 : 0
                         duration: 300
                     }
                 }

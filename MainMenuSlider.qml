@@ -19,63 +19,8 @@ Rectangle {
 
     Component.onCompleted: {
         mainMenu.disableMenu()
-        //RED
-       state = "hideAlert"
-//        var address = {
-//            "city":"Киев",
-//            "street":"Ахматовой",
-//            "house":2,
-//            "apt":1,
-//            "floor":2
-//        }
-//        storage.addUnratedOrder({"orderId":12345,
-//                                "address":address,
-//                                "day":"26102017",
-//                                "time":"14:24",
-//                                "courier":"Alex",
-//                                "courierPhone":"+380982559836"})
-        //RED
-
-
+       state = "showAlert"
     }
-
-//    Timer{
-//        id: orderTimer
-//        interval: 3000
-//        repeat: true
-//        onTriggered: {
-//            mainScreen.hideCallButton()
-//            storage.getUnratedOrderIds(function(orderId){
-//                 var notification = {orderid:orderId,
-//                                    courier:"Иван Иванов",
-//                                    courierPhone:"+380982559836"
-//                                    }
-//                storage.getOrderById(orderId, function(city, street, house, apt, time, courier, courierPhone){
-//                    deliveryOnAWay(notification)
-//                    repeat = false
-//                })
-//            })
-//        }
-//    }
-
-    /*Timer{
-        id: deliveredTimer
-        interval: 10000
-        repeat: true
-        onTriggered: {
-            state = "hideAlert"
-            storage.getUnratedOrderIds(function(orderId){
-                 var notification = {orderid:orderId,
-                                    courier:"Иван Иванов",
-                                    courierPhone:"+380982559836"
-                                    }
-                storage.getOrderById(orderId, function(city, street, house, apt, time, courier, courierPhone){
-                    deliveryArrived(notification)
-                    repeat = false
-                })
-            })
-        }
-    }*/
 
     Connections{
         target: PushNotificationRegistrationTokenHandler
@@ -110,7 +55,7 @@ Rectangle {
         console.log("PUSH SHOWN orderID:"+notification+" "+notification.orderid)
         var orderid = (Qt.platform.os === "ios") ? notification.orderid.slice(0, -1) : notification.orderid
         storage.getOrderById(orderid, function(city, street, house, apt, time){
-            storage.markAsDelivered(orderid, Utils.decode_utf16(notification.courier), notification.courierPhone)
+            storage.markAsDelivered(orderid, notification.courier /*Utils.decode_utf16(notification.courier)*/, notification.courierPhone)
             orderDelivered({
                                "address" :{
                                    "city":city,
@@ -118,7 +63,7 @@ Rectangle {
                                    "house":house,
                                    "apartment":apt
                                },
-                               "courierName" : Utils.decode_utf16(notification.courier),
+                               "courierName" : notification.courier, //Utils.decode_utf16(notification.courier),
                                "courierPhone": notification.courierPhone,
                                "deliveryDate":"сьогодні",
                                "deliveryTime":time,

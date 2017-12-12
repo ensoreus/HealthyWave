@@ -3,6 +3,7 @@ import QtQuick 2.0
 Item {
     id: theStar
     signal rated
+    property bool editable: true
     function rate(){
         rated()
     }
@@ -16,6 +17,7 @@ Item {
     MouseArea {
         id: starPanArea
         anchors.fill: parent
+        enabled: editable
         onPressed:{
             rated()
         }

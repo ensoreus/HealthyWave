@@ -58,7 +58,7 @@ import "qrc:/controls"
             height: parent.height * 0.08
             color: "#ffffff"
             text: "ОЦІНИТИ ДОСТАВКУ:"
-            anchors.topMargin: parent.height * 0.04
+            anchors.topMargin: parent.height * 0.03
             font.pointSize: 10
             font.family: "NS UI Text"
             verticalAlignment: Text.AlignVCenter
@@ -88,7 +88,7 @@ import "qrc:/controls"
             height: parent.height * 0.15
             labelText: "ЗАЧИНИТИ"
             anchors.top: rateStars.bottom
-            anchors.topMargin: 10 * ratio
+            anchors.topMargin: 25 * ratio
             anchors.horizontalCenter: parent.horizontalCenter
             onButtonClick: {
                 close(order)

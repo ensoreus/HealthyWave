@@ -4,7 +4,7 @@ import QtQuick 2.0
 Item {
     id: ratePanel
     signal rated(var rate)
-
+    property bool editable: true
     property int rate: 0
     property alias backgroundColor: content.color
 
@@ -65,6 +65,7 @@ Item {
             height: parent.height
             anchors.top: parent.top
             anchors.topMargin: 0
+            editable: ratePanel.editable
             onRated: {
                 ratePanel.resetRate()
                 star1.state = "StarOn";
@@ -78,6 +79,7 @@ Item {
             height: parent.height
             anchors.top: star1.top
             anchors.topMargin: 0
+            editable: ratePanel.editable
             onRated: {
                 ratePanel.resetRate()
                 star1.state = "StarOn"
@@ -94,6 +96,7 @@ Item {
             height: parent.height
             anchors.top: star2.top
             anchors.topMargin: 0
+            editable: ratePanel.editable
             x: 0
             onRated: {
                 ratePanel.resetRate()
@@ -111,6 +114,7 @@ Item {
             height: parent.height
             anchors.top: star3.top
             anchors.topMargin: 0
+            editable: ratePanel.editable
             x: 0
             onRated: {
                 ratePanel.resetRate()
@@ -130,6 +134,7 @@ Item {
             height: parent.height
             anchors.leftMargin: 20
             anchors.top: star4.top
+            editable: ratePanel.editable
             x: 0
             onRated: {
                 ratePanel.resetRate()
