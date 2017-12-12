@@ -434,7 +434,10 @@ ViewController {
                         orderAccepted.hideWaiter(true)
                     }, function(error){
                         orderAccepted.showError(error.error, error.information)
-                        console.log("error:"+error.error)
+                        context.orderId = result.result
+                        storage.addOrder(context)
+                        orderAccepted.hideWaiter(true)
+                        //console.log("error:"+error.error)
                     })
                 })
             }
@@ -447,9 +450,13 @@ ViewController {
                         context.orderId = result.result
                         storage.addOrder(context)
                         orderAccepted.hideWaiter(false)
+
                     }, function(error){
-                        orderAccepted.showError(error.error, error.information)
-                        console.log("error:"+error.error)
+                        context.orderId = result.result
+                        storage.addOrder(context)
+                        orderAccepted.hideWaiter(false)
+                        //orderAccepted.showError(error.error, error.information)
+                        //console.log("error:"+error.error)
                     })
                 })
             }

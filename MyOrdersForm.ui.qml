@@ -72,7 +72,7 @@ ViewController {
                 font.weight: Font.Thin
                 font.family: "NS UI Text"
                 anchors.top: borderImage.top
-                anchors.topMargin: parent.height * 0.2
+                anchors.topMargin: parent.height * 0.1
             }
 
             Text {
@@ -90,6 +90,37 @@ ViewController {
             }
 
             Text {
+                id: lbFreeBottles
+                height: 15
+                color: "#4a4a4a"
+                text: "Безкоштовна вода:"
+                anchors.topMargin: 5
+                anchors.right: parent.horizontalCenter
+                anchors.rightMargin: -8
+                anchors.left: lbWater.left
+                anchors.leftMargin: 0
+                anchors.top: lbWater.bottom
+                font.weight: Font.Thin
+                font.family: "NS UI Text"
+                font.pointSize: 13
+            }
+
+            Text {
+                id: tfFreeBottles
+                y: 53
+                height: 15
+                anchors.right: parent.right
+                anchors.rightMargin: 34
+                anchors.left: parent.horizontalCenter
+                anchors.leftMargin: 12
+                anchors.top: lbFreeBottles.top
+                anchors.topMargin: 0
+                font.bold: true
+                font.family: "NS UI Text"
+                font.pointSize: 13
+            }
+
+            Text {
                 id: lbEmptyBottles
                 height: 15
                 color: "#4a4a4a"
@@ -99,7 +130,7 @@ ViewController {
                 anchors.rightMargin: -8
                 anchors.left: lbWater.left
                 anchors.leftMargin: 0
-                anchors.top: lbWater.bottom
+                anchors.top: lbFreeBottles.bottom
                 font.weight: Font.Thin
                 font.family: "NS UI Text"
                 font.pointSize: 13
@@ -151,6 +182,36 @@ ViewController {
             }
 
             Text {
+                id: lbOtherItem
+                height: 15
+                color: "#4a4a4a"
+                text: "Інши товари:"
+                anchors.right: parent.horizontalCenter
+                anchors.rightMargin: -8
+                anchors.top: lbRentedButtles.bottom
+                anchors.topMargin: parent.height * 0.02
+                anchors.left: lbEmptyBottles.left
+                anchors.leftMargin: 0
+                font.weight: Font.Thin
+                font.family: "NS UI Text"
+                font.pointSize: 13
+            }
+
+            Text {
+                id: tfOtherItems
+                height: 15
+                font.bold: true
+                font.pointSize: 13
+                font.family: "NS UI Text"
+                anchors.right: parent.right
+                anchors.rightMargin: 34
+                anchors.left: parent.horizontalCenter
+                anchors.leftMargin: 12
+                anchors.top: lbOtherItem.top
+                anchors.topMargin: 0
+            }
+
+            Text {
                 id: lbSum
                 height: 15
                 color: "#4a4a4a"
@@ -160,9 +221,9 @@ ViewController {
                 wrapMode: Text.WrapAnywhere
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: -8
-                anchors.top: lbRentedButtles.bottom
+                anchors.top: lbOtherItem.bottom
                 anchors.topMargin: parent.height * 0.02
-                anchors.left: lbEmptyBottles.left
+                anchors.left: lbOtherItem.left
                 anchors.leftMargin: 0
                 font.pointSize: 13
             }
@@ -284,9 +345,9 @@ ViewController {
                 id: lbComments
                 width: 83
                 text: "Коментарії:"
+                anchors.topMargin: 5
                 font.weight: Font.DemiBold
-                anchors.top: lbDeliveryTime.bottom
-                anchors.topMargin: parent.height * 0.02
+                anchors.top: lbPaymentType.bottom
                 font.family: "NS UI Text"
                 font.bold: true
                 anchors.left: lbDeliveryTime.left
@@ -298,9 +359,9 @@ ViewController {
                 id: lbPaymentType
                 width: 105
                 text: "Спосіб оплати: "
+                anchors.topMargin: 5
                 font.weight: Font.DemiBold
-                anchors.top: lbComments.bottom
-                anchors.topMargin: parent.height * 0.02
+                anchors.top: lbDeliveryTime.bottom
                 font.family: "NS UI Text"
                 font.bold: true
                 anchors.left: lbComments.left
@@ -310,17 +371,20 @@ ViewController {
 
             Text {
                 id: tfComments
+                height: 30
                 color: "#444444"
+                font.weight: Font.Normal
+                anchors.rightMargin: 2
                 clip: true
                 renderType: Text.QtRendering
                 anchors.top: lbComments.top
                 anchors.topMargin: 0
                 anchors.right: tfDeliveryTime.right
-                anchors.rightMargin: 6 * ratio
                 anchors.left: lbComments.right
                 anchors.leftMargin: 6 * ratio
                 font.pointSize: 13
                 font.family: "NS UI Text"
+                maximumLineCount: 2
             }
 
             Text {

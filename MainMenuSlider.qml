@@ -19,7 +19,7 @@ Rectangle {
 
     Component.onCompleted: {
         mainMenu.disableMenu()
-       state = "showAlert"
+       state = "hideAlert"
     }
 
     Connections{

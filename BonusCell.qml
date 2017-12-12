@@ -70,7 +70,7 @@ Item {
             font.pointSize: 12
             font.weight: Font.Light
             color: "#222222"
-            font.family: "SF UI Text"
+            font.family: "NS UI Text"
             font.italic: true
         }
 

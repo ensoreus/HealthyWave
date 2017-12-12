@@ -280,8 +280,9 @@ Rectangle {
                 target: mainText
                 height: parent.height * 0.6
                 font.family: "NS UI Text"
-                font.pointSize: 13
+                font.pointSize: 14
                 text: "Відправте своєму другу даний промо-код! Якщо він вкаже його при реєстрації та зробить перше замовлення, Вам буде нараховано 1 бутиль води безкоштовно, отримати  який Ви зможете в будь-який час, та за будь-якою адресою. Ваш друг також не залишиться без подарунку, при першому замовленні ми і йому подаруємо 1 бутиль води безкоштовно."
+                renderType: Text.NativeRendering
                 textFormat: Text.RichText
                 horizontalAlignment: Text.AlignLeft
                 lineHeight: 2
