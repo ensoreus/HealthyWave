@@ -72,9 +72,10 @@ ViewController {
                 id: image
                 x: 192
                 y: 144
-                width: parent.width * 0.4
-                height: parent.height * 0.4
+                width: parent.width * 0.28
+                height: parent.height * 0.18
                 anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: -parent.height * 0.1
                 anchors.horizontalCenter: parent.horizontalCenter
                 fillMode: Image.PreserveAspectFit
                 source: "img-cards-ico.png"
@@ -82,8 +83,8 @@ ViewController {
 
             HWRoundButton {
                 id: btnAddNew
-                width: parent.width * 0.7
-                height: parent.height * 0.1
+                width: parent.width * 0.67
+                height: parent.height * 0.08
                 anchors.topMargin: parent.height * 0.05
                 anchors.top: text1.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -101,6 +102,7 @@ ViewController {
                 horizontalAlignment: Text.AlignHCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.topMargin: parent.height * 0.05
+                font.pointSize: 13
                 anchors.top: image.bottom
             }
         }

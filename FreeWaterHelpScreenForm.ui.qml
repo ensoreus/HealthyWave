@@ -27,7 +27,8 @@ Rectangle {
 
     Flickable {
         id: flickable
-        contentHeight: mainText.height + btnBack.height + ((contentWidth <= 320 * ratio) ? 200 * ratio : 150 * ratio)
+        contentHeight: mainText.height + btnBack.height
+                       + ((contentWidth <= 320 * ratio) ? 200 * ratio : 150 * ratio)
         flickableDirection: Flickable.VerticalFlick
         contentWidth: Qt.platform.os === "osx" ? 320 * ratio : Screen.width
         anchors.top: hintPanel.bottom
@@ -68,7 +69,7 @@ Rectangle {
             Text {
                 id: promoCodeLabel
                 color: "#9b9b9b"
-                text: "Ваш промокод"
+                text: "Ваш промо-код"
                 anchors.top: mainText.bottom
                 anchors.topMargin: 10 * ratio
                 anchors.left: parent.left
@@ -119,7 +120,7 @@ Rectangle {
                 id: mainText
                 width: 264 * ratio
                 height: 65 * ratio
-                text: "Відправ промо код свому другу і отримай безкоштовно 1 бутль води"
+                text: "Відправ промо-код своєму другу і отримай безкоштовно 1 бутиль води"
                 anchors.top: image.bottom
                 anchors.topMargin: 15 * ratio
                 anchors.left: parent.left
@@ -235,7 +236,7 @@ Rectangle {
                 textFormat: Text.RichText
                 lineHeight: 1
                 height: 65 * ratio
-                text: "Відправ промо код свому другу і отримай безкоштовно 1 бутль води"
+                text: "Відправ промо-код своєму другу і отримай безкоштовно 1 бутиль води"
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 16
             }
@@ -280,7 +281,7 @@ Rectangle {
                 height: parent.height * 0.6
                 font.family: "NS UI Text"
                 font.pointSize: 13
-                text: "Відправте своєму другу даний промокод і, після того як він зробить перше замовлення, Вам буде начислено 1 бутль води безкоштовно, які ви зможете використати у будь-який момент.<br> Коли Ваш друг робитиме перше замовлення, йому треба буде ввести цей промокод і він також отримає в подарунок 1 бутль води безкоштовно."
+                text: "Відправте своєму другу даний промо-код! Якщо він вкаже його при реєстрації та зробить перше замовлення, Вам буде нараховано 1 бутиль води безкоштовно, отримати  який Ви зможете в будь-який час, та за будь-якою адресою. Ваш друг також не залишиться без подарунку, при першому замовленні ми і йому подаруємо 1 бутиль води безкоштовно."
                 textFormat: Text.RichText
                 horizontalAlignment: Text.AlignLeft
                 lineHeight: 2

@@ -23,7 +23,7 @@ ViewController {
         }
         txFreeWater.text = context.freeWater + " бут. х 0 грн."
         txTotalBottles.text = context.fullb + " бут." /// TODO:
-        var discounted = (context.fullb - context.freeWater) * Utils.calcFullBottles(context) + (context.pump?context.prices.pump:0) + discountSum
+        var discounted = (context.fullb - context.freeWater) * Utils.calcFullBottles(context) + (context.pump?context.prices.pump:0)// + discountSum
         txTotal.text = discounted + fee + " грн."
         txAddress.text = "вул. " + context.address.street + ", буд." + context.address.house + " оф." + context.address.apartment
         txDeliveryTime.text = context.deliveryTime.displayDate + " до " + context.deliveryTime.toHour
@@ -366,8 +366,10 @@ ViewController {
                 anchors.leftMargin: 0
                 font.weight: Font.DemiBold
                 wrapMode: Text.WordWrap
-                height: 20 * ratio
+                height: 35 * ratio
                 font.pointSize: 12
+
+                maximumLineCount: 2
                 elide: Text.ElideRight
             }
 
@@ -426,13 +428,13 @@ ViewController {
                 orderAccepted.showWaiter()
                 storage.getAuthData(function(authdata){
                     Api.createOrder(context, authdata, function(result){
-                        console.log(result.result)
+                        console.log("success:"+result.result)
                         context.orderId = result.result
                         storage.addOrder(context)
                         orderAccepted.hideWaiter(true)
                     }, function(error){
                         orderAccepted.showError(error.error, error.information)
-                        console.log(error.error)
+                        console.log("error:"+error.error)
                     })
                 })
             }
@@ -441,13 +443,13 @@ ViewController {
                 orderAccepted.showWaiter()
                 storage.getAuthData(function(authdata){
                     Api.createOrder(context, authdata, function(result){
-                        console.log(result.result)
+                        console.log("success:"+result.result)
                         context.orderId = result.result
                         storage.addOrder(context)
                         orderAccepted.hideWaiter(false)
                     }, function(error){
                         orderAccepted.showError(error.error, error.information)
-                        console.log(error.error)
+                        console.log("error:"+error.error)
                     })
                 })
             }
@@ -455,12 +457,6 @@ ViewController {
                 visible = false
                 context.confirmed = true
                 navigationController.popToInitial()
-                //navigationController.pop()
-                //navigationController.pop()
-//                navigationController.pop()
-//               navigationController.pop()
-//                navigationController.pop()
-                //navigationController.pop()
             }
 
             Behavior on visible {

@@ -43,6 +43,7 @@ ViewController{
                 console.log(response)
             }, function(failure){
                 busyIndicatior.running = false
+                hideOrdersList()
                 console.log(failure)
             })
         })

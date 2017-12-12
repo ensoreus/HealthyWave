@@ -54,7 +54,7 @@ ViewController {
                 anchors.left: parent.left
                 anchors.leftMargin: 10
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 11
+                font.pointSize: 13
                 font.family: "NS UI Text"
             }
 
@@ -79,7 +79,7 @@ ViewController {
                 height: parent.height * 0.08
                 labelText: "ДОДАТИ"
                 labelColor: "black"
-                opacity: 0.6
+                //opacity: 0.6
                 anchors.top: lbNoAddresses.bottom
                 anchors.topMargin: 52
                 anchors.horizontalCenter: parent.horizontalCenter

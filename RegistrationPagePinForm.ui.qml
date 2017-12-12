@@ -22,7 +22,7 @@ Page {
             width: parent.width * 0.6
             height: parent.height * 0.02
             color: "#505050"
-            text: qsTr("Уведіть код підтвердження")
+            text: qsTr("Введіть код підтвердження")
             font.family: "NS UI Text"
             font.pointSize: 15
             anchors.topMargin: 60 * ratio

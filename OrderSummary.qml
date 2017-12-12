@@ -35,7 +35,6 @@ ViewController {
     Component.onCompleted: {
         isInit = true
         bonusModel.clear()
-        //initCheck()
     }
 
     function initCheck(){
@@ -130,7 +129,7 @@ ViewController {
                     layoutHeight()
                     if(item === "1"){
                         bonusListStyle = "Regular"
-                        cbPump.cstyle = "Regular"
+                        cbPump.style = "Regular"
                     }
                     bonusLst.checkIfPreselectedBonusEligible(item)
                 }
@@ -213,7 +212,7 @@ ViewController {
                     y: 52
                     height: 18
                     text: BonusName
-                    cstyle: bonusListStyle
+                    style: bonusListStyle
                     enabled: bonusLst.isBonusEnabled(PromoCode)
                     checked: preselected
 //                    anchors.rightMargin: bonusLst.width * 0.02
@@ -235,6 +234,7 @@ ViewController {
                         if (bonus.BonusType === "БесплатныйБутыльВоды"){
                             if(context.fullb > 1){
                                 context.freeWater++
+                                console.log("added promocode:"+bonus.PromoCode)
                                 context.bonuses.push(bonus.PromoCode)
                             }
                         }
@@ -244,6 +244,7 @@ ViewController {
                         if (chType === "БесплатныйБутыльВоды" && context.freeWater > 0){
                             var cbindex = context.bonuses.indexOf(chCode)
                             context.bonuses.splice(cbindex)
+                            console.log("removed bonus:"+chCode)
                             context.freeWater--
                         }
                     }
@@ -315,7 +316,7 @@ ViewController {
                 id: cbPump
                 x: 5
                 height: 13 * ratio
-                //cstyle: (bonusModel.count > 1) ? "Regular" : "Big"
+                style: (bonusModel.count > 1) ? "Regular" : "Big"
                 text: "Механічна помпа - " + context.prices.pump + " грн."
                 anchors.topMargin: 5 * ratio
                 anchors.top: bonusLst.bottom

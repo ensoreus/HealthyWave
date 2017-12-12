@@ -119,9 +119,7 @@ ViewController {
                 lbConstraint: (BonusType === "БесплатныйБутыльВоды") ? "* за умови замовлення не менше 2 бутлів в замовленні" : ""
                 cbUse.onCheckStateChanged: {
                     if (cbUse.checked) {
-                        console.log("before:"+context.bonuses.length)
                         context.bonuses.push(bonusModel.get(index))
-                        console.log("after:"+context.bonuses[0].PromoCode)
                         btnUseSelectedBonuses.enable()
                     } else {
                         context.bonuses = context.bonuses.filter( function(item){

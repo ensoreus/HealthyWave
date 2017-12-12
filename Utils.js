@@ -34,6 +34,7 @@ function extractDataFromNotification( notification ) {
     var courier = "";
     var phone = "";
     var orderid = "";
+    var pushtype = "";
     sliced.forEach(function(item, index, array){
         var endPos  = item.indexOf(" =")
 
@@ -49,10 +50,13 @@ function extractDataFromNotification( notification ) {
             if(key.endsWith("Phone")){
                 phone = pair[1]
             }
+            if(key.endsWith("pushtype")){
+                pushtype = pair[1]
+            }
         }
     })
-    console.log("in extract courier:" + courier + " phone:" + phone + " orderid:"+orderid)
-    return {"courier":courier, "phone":phone, "orderid":orderid}
+    console.log("in extract courier:" + courier + " phone:" + phone + " orderid:"+orderid + " pushtype:"+pushtype)
+    return {"courier":courier, "phone":phone, "orderid":orderid, "pushtype":pushtype}
 }
 
 function calcFullBottles(context){

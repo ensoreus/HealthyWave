@@ -29,6 +29,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import android.content.pm.PackageManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.app.ActivityCompat;
+import com.esafirm.imagepicker.features.ImagePicker;
 
 public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
 {
@@ -94,7 +95,7 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
                 Log.d(TAG, String.format("%s %s (%s)", key,
                                          value.toString(), value.getClass().getName()));
             }
-            String msg = String.format("{\"orderid\":\"%s\",\"courier\":\"%s\",\"phone\":\"%s\"}", bundle.get("OrderNumber").toString(), bundle.get("CourierName").toString(), bundle.get("Phone").toString());
+            String msg = String.format("{\"orderid\":\"%s\",\"courier\":\"%s\",\"phone\":\"%s\", \"pushtype\":\"%s;\"}", bundle.get("OrderNumber").toString(), bundle.get("CourierName").toString(), bundle.get("Phone").toString(), bundle.get("pushtype"));
             Log.d(TAG, msg);
             JavaNatives.notificationArrived(msg);
         }
@@ -107,12 +108,9 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
         super.onResume();
         Log.i("Activity", "resumed");
 
-        
-        
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                                                                  new IntentFilter(QuickstartPreferences.GCM_TOKEN));
         LocalBroadcastManager.getInstance(this) .registerReceiver(mRegistrationBroadcastReceiver,new IntentFilter(QuickstartPreferences.GCM_MESSAGE));
-
     }
 
     @Override

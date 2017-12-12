@@ -46,6 +46,7 @@ ViewController {
     }
 
     function showCallButton(phonenum){
+        courierPhone = phonenum
         callContainer.visible = true
     }
 
@@ -132,7 +133,6 @@ ViewController {
             mainScreenHintPanel.isAttract = isFirstStart
             storage.dropFirstStartFlag()
         })
-
     }
 
     Rectangle {

@@ -197,7 +197,7 @@ function sendNewAddress(city, street, house, entrance, apartment, floor, doorcod
     if (typeof(doorcode) != "undefined"  &&  doorcode.length > 0){
         params["doorcode"] = doorcode
     }
-    console.log("CREATE ADDRESS")
+    console.log("CREATE ADDRESS:"+params)
     call("addaddresscustomer", params, authdata, onSuccess, onFailure);
 }
 
@@ -256,8 +256,9 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
                                                                   "phone":authData.phone
     }
 
-    for (var index in orderContext.bouses){
-        var bonusPromo = orderContext.bouses[index]
+    for (var index in orderContext.bonuses){
+        var bonusPromo = orderContext.bonuses[index]
+        console.log("aplying bonus:"+bonusPromo)
         var key = "promocode" + index + 1
         params[key] = bonusPromo
     }

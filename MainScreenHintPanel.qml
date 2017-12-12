@@ -43,7 +43,7 @@ Rectangle {
             width: 398 * ratio
             height: 45 * ratio
             color: "#8c8c8c"
-            text: "Відправте своєму другу цей промо-код і коли він зробить перше замовлення"
+            text: "Відправ промо-код своєму другу і отримай безкоштовно 1 бутиль води.."
             wrapMode: Text.WordWrap
             font.pointSize: 13
             anchors.right: parent.right

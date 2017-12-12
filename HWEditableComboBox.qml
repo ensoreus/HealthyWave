@@ -34,6 +34,7 @@ ComboBox {
     TextField {
         anchors.fill: parent
         id:textEdit
+        inputMethodHints: Qt.ImhNoPredictiveText
         onTextChanged: {
             textSearchChanged(textEdit.text)
         }

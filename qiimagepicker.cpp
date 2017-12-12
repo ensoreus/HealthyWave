@@ -7,6 +7,10 @@
 #include <QThreadPool>
 #include <QImageWriter>
 #include <QImageReader>
+#ifdef Q_OS_ANDROID
+#include <QtAndroid>
+#include <QtAndroidExtras>
+#endif
 #include "qisystemdispatcher.h"
 #include "qiimagepicker.h"
 
@@ -75,12 +79,26 @@ void QIImagePicker::show(bool animated)
     if (res) {
         setStatus(Running);
     }
+#elif defined(Q_OS_ANDROID)
+    setStatus(Running);
+    QStringList paths = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
+    //QAndroidJniObject imagePickerConfig = QAndroidJniObject::callStaticObjectMethod("com/esafirm/imagepicker/features/ImagePickerConfigFactory",
+    //                                                                          "createDefault",
+    //                                                                          "()Lcom/esafirm/imagepicker/features/ImagePickerConfig;");
+    //qDebug()<< imagePickerConfig.callObjectMethod("")
+    /*
+    QAndroidJniObject imagePicker = QAndroidJniObject::callStaticObjectMethod("com/esafirm/imagepicker/features/ImagePicker",
+                                                                        "create",
+                                                                        "(LActivity;)Lcom/esafirm/imagepicker/features/ImagePickerWithActivity;",
+                                                                              QtAndroid::androidActivity().object());
+    imagePicker.callObjectMethod("start", "(I;)V;", 243);*/
+    //JNIEnv* env = QAndroidJniEnvironment::;
 
 #else
     Q_UNUSED(animated);
     // For desktop preview
     setStatus(Running);
-    QStringList paths = QStandardPaths::standardLocations(QStandardPaths::DownloadLocation);
+    QStringList paths = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
 
     QString file = QFileDialog::getOpenFileName (0,
                                                  tr("Import Image"),

@@ -30,7 +30,9 @@ NewAddressForm {
         isInit = false
     }
 
+
     tfCity.onTextSearchChanged: {
+        console.log("search city: "+tfCity.selectedFromList+" "+isEditing)
         if(!tfCity.selectedFromList && !isEditing){
             tfCity.startWheelAnumation()
             storage.getAuthData(function(authData){

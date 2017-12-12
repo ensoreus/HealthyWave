@@ -56,7 +56,7 @@ Page {
             width: parent.width * 0.7
             height: item1.height * 0.02
             color: "#505050"
-            text: qsTr("Уведіть номер телефона")
+            text: "Введіть номер телефона"
             anchors.topMargin: 60 * ratio
             font.pointSize: 15
             font.weight: Font.Thin

@@ -82,7 +82,8 @@ Rectangle {
         onLastNotificationChanged:{
             console.log("to parse:"+PushNotificationRegistrationTokenHandler.lastNotification)
             var notification = (Qt.platform.os === "android") ? JSON.parse(PushNotificationRegistrationTokenHandler.lastNotification) : Utils.extractDataFromNotification(PushNotificationRegistrationTokenHandler.lastNotification)
-            if(notification.pushtype === "1"){
+            console.log("notification:" + notification + " pushtype:" + notification.pushtype)
+            if(notification.pushtype === 1 || notification.pushtype === "1;"){
                 console.log("ORDER ON A WAY")
                 deliveryOnAWay(notification)
             }else{
@@ -98,9 +99,9 @@ Rectangle {
     }
 
     function deliveryOnAWay(notification){
-        storage.orderOnItsWayWithCourier(notification.orderid,notification.courier, notification.courierPhone)
-        if(notification.courierPhone.length > 9){
-            mainScreen.showCallButton(notification.courierPhone)
+        storage.orderOnItsWayWithCourier(notification.orderid,notification.courier, notification.phone)
+        if(notification.phone.length > 9){
+            mainScreen.showCallButton(notification.phone)
         }
     }
 

@@ -414,6 +414,9 @@ ViewController {
             anchors.topMargin: parent.height * 0.03
             anchors.top: txBottlesTotal.bottom
             font.pointSize: 30
+            onValueChanged: {
+                stEmptyBottles.to = value
+            }
         }
 
         Text {
@@ -442,6 +445,7 @@ ViewController {
             to: 1000
             value: 1
             anchors.horizontalCenter: parent.horizontalCenter
+
         }
 
         Text {

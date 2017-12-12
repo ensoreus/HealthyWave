@@ -24,7 +24,7 @@ Page {
             width: parent.width * 0.7
             height: parent.height * 0.02
             color: "#505050"
-            text: "Уведіть ваш промо-код*"
+            text: "Введіть ваш промо-код*"
             font.pointSize: 15
             font.weight: Font.Thin
             anchors.topMargin: 60 * ratio
@@ -41,7 +41,6 @@ Page {
             anchors.rightMargin: 0
             anchors.left: text1.left
             anchors.leftMargin: 0
-
         }
 
         Text {
@@ -55,6 +54,7 @@ Page {
             anchors.topMargin: 3
             wrapMode: Text.WordWrap
             height: 25 * ratio
+            font.pointSize: 13
         }
 
         Text {
@@ -65,8 +65,8 @@ Page {
             color: "#505050"
             font.family: "NS UI Text"
             font.pointSize: 15
-            text: "*Уведіть бонусний промо-код, якщо Ви отримали його від ваших знайомих.\n\n\nЯкщо промо-коду у Вас нема - рухайтесь далі, на Вас чекає сюрприз!"
-            anchors.topMargin: 30 * ratio
+            text: "*Введіть бонусний промо-код, якщо Ви отримали його від ваших знайомих.\n\n\nЯкщо промо-коду у Вас немає - рухайтесь далі, на Вас чекає сюрприз!"
+            anchors.topMargin: 5
             font.weight: Font.Thin
             anchors.top: txMessage.bottom
             anchors.right: promoCodeField.right

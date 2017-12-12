@@ -20,7 +20,7 @@ Page {
             x: 70
             width: parent.width * 0.7
             height: parent.height * 0.02
-            text: "Уведіть Ваше і'мя"
+            text: "Введіть Ваше і'мя"
             color: "#505050"
             font.weight: Font.Thin
             font.family: "NS UI Text"
@@ -46,7 +46,7 @@ Page {
             id: text2
             height: parent.height * 0.25
             color: "#505050"
-            text: "*Якщо продовжуєте, то Ви підтверджуєте, що прочитали і приймаєте <u>Умови надання послуг і Політику конфиденціальности</u>. "
+            text: "*Якщо продовжуєте, то Ви підтверджуєте, що прочитали і приймаєте <u>Умови надання послуг і Політику конфіденціальності</u>. "
             textFormat: Text.RichText
             wrapMode: Text.WordWrap
             font.weight: Font.Thin

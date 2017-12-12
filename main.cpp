@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include "SecurityCore.hpp"
@@ -41,7 +41,7 @@ static QObject* clipboard_provider(QQmlEngine* engine, QJSEngine* scriptEngine){
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     quint8 ostype = -1;
 #ifdef Q_OS_DARWIN
   qreal m_ratio = 1;
