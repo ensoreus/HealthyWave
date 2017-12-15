@@ -371,8 +371,10 @@ ViewController {
 
             Text {
                 id: tfComments
-                height: 30
+                height: 35
                 color: "#444444"
+                text: "laborum praecipiendo quisquam dolorum natus. dolores passim quidam, placeat veniam. ad qui anim magni aperiam. et quidam cupidatat, vir asperiores. magni sequi in, nesciunt quisquam. utilitatis excepturi inmanibus, atque irure. repellat posset ea, fuga insolentiam. ab pleraque deserunt, religionis cupidatat. est sapiente qui repellat. "
+                wrapMode: Text.WordWrap
                 font.weight: Font.Normal
                 anchors.rightMargin: 2
                 clip: true
@@ -385,6 +387,7 @@ ViewController {
                 font.pointSize: 13
                 font.family: "NS UI Text"
                 maximumLineCount: 2
+                elide: Text.ElideRight
             }
 
             Text {
