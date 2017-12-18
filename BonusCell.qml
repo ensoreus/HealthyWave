@@ -16,7 +16,7 @@ Item {
         Text {
             id: lbMainTitle
             text: "Перше замовлення онлайн"
-            font.family: "NS UI Text"
+            font.family: "Arial"
             font.bold: true
             anchors.topMargin: parent.height * 0.05
             anchors.top: parent.top
@@ -24,8 +24,8 @@ Item {
             anchors.right: cbUse.left
             anchors.leftMargin: parent.width * 0.05
             anchors.left: parent.left
-            font.weight: Font.Light
-            font.pointSize: 15
+            //font.weight: Font.Light
+            font.pointSize: 13
             color: "#222222"
         }
 
@@ -40,7 +40,7 @@ Item {
             font.weight: Font.Light
             font.pointSize: 12
             color:"#9B9B9B"
-            font.family: "NS UI Text"
+            font.family: "Arial"
         }
 
         Text{
@@ -52,11 +52,11 @@ Item {
             fontSizeMode: Text.HorizontalFit
             anchors.left: lbComment.left
             anchors.leftMargin: 0
-            font.pointSize: 11
-            font.weight: Font.Bold
-            font.bold: true
+            font.pointSize: 9
+            font.bold: false
+            font.italic: true
             color: "black"
-            font.family: "NS UI Text"
+            font.family: "Arial"
         }
 
         Text {
@@ -67,11 +67,10 @@ Item {
             anchors.rightMargin: 0
             anchors.left: lbConstraint.left
             anchors.leftMargin: 0
-            font.pointSize: 12
-            font.weight: Font.Light
-            color: "#222222"
-            font.family: "NS UI Text"
+            font.pointSize: 9
             font.italic: true
+            color: "#222222"
+            font.family: "Arial"
         }
 
         HWCheckBox {

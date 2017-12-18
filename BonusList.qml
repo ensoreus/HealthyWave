@@ -112,7 +112,7 @@ ViewController {
             height: parent.height * 0.45
 
             delegate: BonusCell{
-                height: 75 * ratio
+                height: 70 * ratio
                 width: lstBonuses.width
                 lbMainTitle:BonusName
                 lbComment: Comment

@@ -428,14 +428,14 @@ ViewController {
                 orderAccepted.showWaiter()
                 storage.getAuthData(function(authdata){
                     Api.createOrder(context, authdata, function(result){
-                        console.log("success:"+result.result)
+                        console.log("success:" + result.result)
                         context.orderId = result.result
                         storage.addOrder(context)
                         orderAccepted.hideWaiter(true)
                     }, function(error){
-                        //orderAccepted.showError(error.error, error.information)
-                        context.orderId = error.ErrorCode
-                        storage.addOrder(context)
+                        orderAccepted.showError(error.error, error.information)
+                        //context.orderId = error.ErrorCode
+                        //storage.addOrder(context)
                         orderAccepted.hideWaiter(true)
                         //console.log("error:"+error.error)
                     })
@@ -446,16 +446,16 @@ ViewController {
                 orderAccepted.showWaiter()
                 storage.getAuthData(function(authdata){
                     Api.createOrder(context, authdata, function(result){
-                        console.log("success:"+result.result)
+                        console.log("success:" + result.result)
                         context.orderId = result.result
                         storage.addOrder(context)
                         orderAccepted.hideWaiter(false)
 
                     }, function(error){
-                        context.orderId = error.ErrorCode
-                        storage.addOrder(context)
+                        //context.orderId = error.ErrorCode
+                        //storage.addOrder(context)
                         orderAccepted.hideWaiter(false)
-                        //orderAccepted.showError(error.error, error.information)
+                        orderAccepted.showError(error.error, error.information)
                         //console.log("error:"+error.error)
                     })
                 })
