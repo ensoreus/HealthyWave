@@ -137,7 +137,8 @@ ViewController{
                         var emptyBottles = 0
                         var fee = 0
                         var fullBottels = 0
-
+                        var other = 0
+                        var freeWater = 0
                         for(var i in goods){
                             var gitem = goods[i]
                             if(gitem.Good === "Вода"){
@@ -146,6 +147,10 @@ ViewController{
                             }else if (gitem.Good === "Пустые бутыли"){
                                 emptyBottles += gitem.Quantity
                                 fee += gitem.Sum
+                            }else if(gitem.Good === "БесплатнаяВода"){
+                                freeWater += gitem.Sum
+                            }else{
+                                other += gitem.Quantity * gitem.Sum
                             }
                         }
                         var item = {
@@ -156,9 +161,11 @@ ViewController{
                             "waterPrice":waterPrice,
                             "emptyBottles":emptyBottles,
                             "bottlesFee": fee,
+                            "freeWater":freeWater,
                             "comment":ritem.Comment,
                             "deliveryTimeTo":ritem.DeliveryTimeTo,
-                            "fullBottles":fullBottels
+                            "fullBottles":fullBottels,
+                            "otherItems":other
                         }
                         ordersModel.append(item)
                     }
