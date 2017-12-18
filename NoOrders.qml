@@ -139,9 +139,11 @@ ViewController{
                         var fullBottels = 0
                         var other = 0
                         var freeWater = 0
-                        for(var i in goods){
+                        var waterCost = 0
+                        for (var i in goods){
                             var gitem = goods[i]
                             if(gitem.Good === "Вода"){
+                                waterCost = gitem.Sum / gitem.Quantity
                                 waterPrice += gitem.Sum
                                 fullBottels += gitem.Quantity
                             }else if (gitem.Good === "Пустые бутыли"){
@@ -149,14 +151,17 @@ ViewController{
                                 fee += gitem.Sum
                             }else if(gitem.Good === "БесплатнаяВода"){
                                 freeWater += gitem.Sum
-                            }else{
-                                other += gitem.Quantity * gitem.Sum
+                            }else if(gitem.Good === "Другие товары"){
+                                other = gitem.Sum
                             }
+
                         }
+                         //other = ritem.OrderPrice - freeWater - waterPrice
                         var item = {
                             "deliveryDay":date,
                             "address" : ritem.Address,
                             "cost": ritem.OrderPrice,
+                            "singleWaterCost":waterCost,
                             "paymentType":ritem.PaymentMethod,
                             "waterPrice":waterPrice,
                             "emptyBottles":emptyBottles,

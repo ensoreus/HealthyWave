@@ -45,7 +45,7 @@ Item {
 
         Text{
             id:lbConstraint
-            anchors.topMargin: parent.height * 0.015
+            anchors.topMargin: parent.height * 0.02
             anchors.top: lbComment.bottom
             anchors.right: cbUse.left
             anchors.rightMargin: 3
@@ -61,7 +61,7 @@ Item {
 
         Text {
             id: lbActiveTill
-            anchors.topMargin: parent.height * 0.015
+            anchors.topMargin: parent.height * 0.02
             anchors.top: lbConstraint.bottom
             anchors.right: lbConstraint.right
             anchors.rightMargin: 0

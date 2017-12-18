@@ -22,7 +22,7 @@ MyOrdersForm {
             tfPaymentType.text = order.paymentType
             tfDate.text = order.deliveryDay
             tfEmptyBottles.text = order.emptyBottles + " шт."
-            tfWater.text =  order.fullBottles + " x " + order.waterPrice + " грн."
+            tfWater.text =  order.fullBottles + " x " + order.singleWaterCost + " грн."
             tfFreeBottles.text = order.freeWater + " шт."
             tfOtherItems.text = order.otherItems + " грн."
             tfComments.text = order.comment
