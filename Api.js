@@ -2,6 +2,7 @@ var baseUrl = "https://1c.hvilya-zd.com.ua/debug/hs/GetData/"
 //var baseUrl = "http://94.130.18.75/debug/hs/GetData/"
 //var baseUrl = "http://hz.vsde.biz:50080/debug/hs/GetData/"
 
+
 function auth(phone, secKey, callback){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -169,7 +170,7 @@ function getCustomerInfo(authdata, onSuccess, onFailure){
 
 function deleteAddress(city, street, house, entrance, floor, apartment, authdata, onSuccess, onFailure){
     var params = {"city":city,
-        "street":street,
+        "street":street.replace(/\s/gi, "%20"),
         "house":house,
         "apartment":apartment,
         "phone":authdata.phone}
@@ -184,7 +185,7 @@ function deleteAddress(city, street, house, entrance, floor, apartment, authdata
 
 function sendNewAddress(city, street, house, entrance, apartment, floor, doorcode, authdata, onSuccess, onFailure){
     var params = {"city":city,
-        "street":street,
+        "street":street.replace(/\s/gi, "%20"),
         "house":house,
         "apartment":apartment,
         "phone":authdata.phone}
@@ -205,8 +206,8 @@ function updateAddress(newCity, newStreet, newHouse, newApt, newEntrance, newFlo
                        oldcity, oldstreet, oldhouse, oldapt, oldentrance, oldfloor,olddoorcode, authdata, onSuccess, onFailure){
     call("editaddresscustomer", {"city":oldcity,
              "citynew":newCity,
-             "street":oldstreet,
-             "streetnew":newStreet,
+             "street":oldstreet.replace(/\s/gi, "%20"),
+             "streetnew":newStreet.replace(/\s/gi, "%20"),
              "house":oldhouse,
              "housenew":newHouse,
              "apartment":oldapt,
@@ -222,7 +223,7 @@ function updateAddress(newCity, newStreet, newHouse, newApt, newEntrance, newFlo
 
 function searchNearestTime(address, authData, onSuccess, onFailure){
     var params = {"city":address.city,
-        "street":address.street,
+        "street":address.street.replace(/\s/gi, "%20"),
         "house":address.house,
         "apartment":address.apartment,
         "phone":authData.phone}
@@ -240,7 +241,7 @@ function searchNearestTime(address, authData, onSuccess, onFailure){
 function createOrder(orderContext, authData, onSuccess, onFailure){
     var params = {
         "city":orderContext.address.city,
-        "street":orderContext.address.street,
+        "street":orderContext.address.street.replace(/\s/gi, "%20"),
         "house":orderContext.address.house,
         "apartment":orderContext.address.apartment,
         "comment":orderContext.comment,
@@ -386,7 +387,7 @@ floor: этаж
 function getPrices(address, authdata, onSuccess, onFailure){
     var params = {
         "city":address.city,
-        "street":address.street,
+        "street":address.street.replace(/\s/gi, "%20"),
         "house":address.house,
         "apartment":address.apartment,
         "phone":authdata.phone}

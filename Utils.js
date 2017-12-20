@@ -182,6 +182,9 @@ function toUTF8Array(str) {
     return utf8.join("");
 }
 
+function escapeStreet(street){
+    return street.replace(" ", "%20")
+}
 
 function isPhoneNum(num){
     if(typeof(num) === "undefined"){

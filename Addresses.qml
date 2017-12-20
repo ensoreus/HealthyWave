@@ -107,7 +107,7 @@ AddressesForm {
                 y: 15 * ratio
                 height: parent.height * 0.35
                 color: "#444444"
-                font.pointSize: 20
+                font.pointSize: 15
                 verticalAlignment: Text.AlignVCenter
                 font.family: "NS UI Text"
                 anchors.right: image.left
@@ -118,6 +118,9 @@ AddressesForm {
                 anchors.leftMargin: parent.width * 0.062
                 anchors.left: parent.left
                 text: "Вул." + street + " " + house + ", кв." + apartment
+                elide: Text.ElideRight
+                wrapMode: Text.WordWrap
+                maximumLineCount: 2
             }
 
             Text {

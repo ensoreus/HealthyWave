@@ -25,7 +25,7 @@ Rectangle {
     Connections{
         target: PushNotificationRegistrationTokenHandler
         onLastNotificationChanged:{
-            console.log("to parse:"+PushNotificationRegistrationTokenHandler.lastNotification)
+            //console.log("to parse:"+PushNotificationRegistrationTokenHandler.lastNotification)
             var notification = (Qt.platform.os === "android") ? JSON.parse(PushNotificationRegistrationTokenHandler.lastNotification) : Utils.extractDataFromNotification(PushNotificationRegistrationTokenHandler.lastNotification)
             console.log("notification:" + notification + " pushtype:" + notification.pushtype)
             if(notification.pushtype === 1 || notification.pushtype === "1;"){
@@ -44,7 +44,7 @@ Rectangle {
     }
 
     function deliveryOnAWay(notification){
-        storage.orderOnItsWayWithCourier(notification.orderid,notification.courier, notification.phone)
+        storage.orderOnItsWayWithCourier(notification.orderid, Utils.toUTF8Array(notification.courier), notification.phone)
         if(notification.phone.length > 9){
             mainScreen.showCallButton(notification.phone)
         }
@@ -52,7 +52,7 @@ Rectangle {
 
     function deliveryArrived(notification){
         mainScreen.hideCallButton()
-        console.log("PUSH SHOWN orderID:"+notification+" "+notification.orderid)
+        //console.log("PUSH SHOWN orderID:"+notification+" "+notification.orderid)
         var orderid = (Qt.platform.os === "ios") ? notification.orderid.slice(0, -1) : notification.orderid
         storage.getOrderById(orderid, function(city, street, house, apt, time){
             storage.markAsDelivered(orderid, notification.courier /*Utils.decode_utf16(notification.courier)*/, notification.courierPhone)
