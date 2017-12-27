@@ -41,16 +41,14 @@ ViewController {
     onViewDidAppear:{
 
         hideAddressList()
+        rNoCards.visible = false
         processingRect.visible = true
         storage.getAuthData(function(authdata){
             Api.getCards(authdata, function(response){
                 storage.saveToken(authdata.token)
                 if(response.result.length > 0){
                     showAddressList()
-
-                    //cardsModel.importData(response.result)
-                    rNoCards.visible = true
-                    //RED
+                    cardsModel.importData(response.result)
                 }else{
                     hideAddressList()
                     rNoCards.visible = true
@@ -71,7 +69,7 @@ ViewController {
             id: rNoCards
             color: "#ffffff"
             anchors.fill: parent
-
+            visible: false
             Image {
                 id: image
                 x: 192
@@ -189,8 +187,8 @@ ViewController {
                 id: processInndicator
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                height: parent.width * 0.3
-                width: height
+                width: 80 * ratio
+                height: 80 * ratio
             }
             visible: false
         }

@@ -37,9 +37,7 @@ ViewController{
                 storage.saveToken(authdata.token)
                 busyIndicatior.running = false
                 if(response.result.length > 0){
-                    //RED
-                    hideOrdersList()
-                    //showOrdersList(response.result)
+                    showOrdersList(response.result)
                 }else{
                     hideOrdersList()
                 }
@@ -194,8 +192,8 @@ ViewController{
             id: busyIndicatior
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width * 0.3
-            height: width
+            width: 80 * ratio
+            height: 80 * ratio
         }
     }
 }
