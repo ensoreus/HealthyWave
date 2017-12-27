@@ -12,8 +12,10 @@ RegistrationCongratsWithFreeWaterForm {
     function getPromoGifter(promocode){
         storage.getAuthData(function(authdata){
                 Api.getPromocodeGifter(promocode, authdata, function(response){
+                    storage.saveToken(authdata.token)
                     txPromoGifter.text = "Ви використали промокод що вам його надіслав " + response.result
                 }, function(failure){
+                    storage.saveToken(authdata.token)
                     txPromoGifter.text = ""
                 })
         })

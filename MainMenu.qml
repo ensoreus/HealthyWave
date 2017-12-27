@@ -124,6 +124,7 @@ MainMenuForm {
     function syncAvatar(){
         storage.getAuthData(function(authdata){
             Api.getAvatar(authdata, function(response){
+                storage.saveToken(authdata.token)
                 if (response.Photo != null){
                     var url = SecurityCore.saveBase64(response.Photo)
                     storage.updateAvatar(url)

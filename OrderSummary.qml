@@ -118,9 +118,11 @@ ViewController {
     function getBonuses() {
         storage.getAuthData(function(authdata){
             Api.getBonus(authdata, function(response){
+                storage.saveToken(authdata.token)
                 bonusModel.clear()
                 isInit = true
                 checkIfFreeWaterBonusPresent(response.result)
+
                 for(var item in response.result){
                     var bonus = response.result[item]
                     bonusModel.importData(bonus)
@@ -130,13 +132,15 @@ ViewController {
                     if(item === "1"){
                         bonusListStyle = "Regular"
                         cbPump.style = "Regular"
+                    }else{
+                        cbPump.style = "Big"
                     }
                     bonusLst.checkIfPreselectedBonusEligible(item)
                 }
                 isInit = false
 
             },function(failure){
-
+                storage.saveToken(authdata.token)
             })
         })
     }
@@ -316,7 +320,6 @@ ViewController {
                 id: cbPump
                 x: 5
                 height: 13 * ratio
-                style: (bonusModel.count > 1) ? "Regular" : "Big"
                 text: "Механічна помпа - " + context.prices.pump + " грн."
                 anchors.topMargin: 5 * ratio
                 anchors.top: bonusLst.bottom

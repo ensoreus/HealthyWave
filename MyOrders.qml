@@ -17,7 +17,7 @@ MyOrdersForm {
     onViewWillAppear: {
         if(typeof(order) != "undefined"){
             tfAddress.text = order.address
-            tfDeliveryTime.text = order.deliveryTimeTo
+            tfDeliveryTime.text = order.deliveryTime
             tfSum.text =  order.cost + " грн."
             tfPaymentType.text = order.paymentType
             tfDate.text = order.deliveryDay

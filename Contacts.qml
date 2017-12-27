@@ -18,6 +18,7 @@ ViewController {
         content.state = "pendingContacts"
         storage.getAuthData(function(authdata){
             Api.getContacts(authdata, function(response){
+                storage.saveToken(authdata.token)
                 console.log(response.result)
                 var phControls = [
                             {"tx":txOrderOnlinePhone,"lb":lbOrderOnlinePhone},

@@ -189,6 +189,7 @@ ViewController {
                                   emailEditPage.emailField.text,
                                   authdata, function(response)
                                   {
+                                      storage.saveToken(authdata.token)
                                       if ( response.result ){
                                           console.log(response.result)
                                           storage.updateUserData(authdata.phone, nameEditPage.nameField.text, emailEditPage.emailField.text, avatarEditPage.avatarUrl)
@@ -215,6 +216,7 @@ ViewController {
                                           navigationController.pop(mainScreen)
                                       }
                                   }, function(failure){
+                                      storage.saveToken(authdata.token)
                                       stopProcessIndicator()
                                   })
             })

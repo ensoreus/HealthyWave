@@ -42,23 +42,23 @@ Rectangle{
     }
 
     Component.onCompleted: {
-        storage.getAuthData(function(authdata){
-            Api.getAppLink(authdata, function(response){
-                for(var index in response.result){
-                    var linkinfo = response.result[index]
-                    if(linkinfo.ContactInformationType === "AppStore"){
-                        //console.log("app store lnk:" + linkinfo.ContactInformation)
-                        ioslink = linkinfo.ContactInformation
-                    }
-                    if(linkinfo.ContactInformationType === "Google Play Market"){
-                        //console.log("android:" + linkinfo.ContactInformation)
-                        androidlink = linkinfo.ContactInformation
-                    }
-                }
-            },function(failure){
+//        storage.getAuthData(function(authdata){
+//            Api.getAppLink(authdata, function(response){
+//                for(var index in response.result){
+//                    var linkinfo = response.result[index]
+//                    if(linkinfo.ContactInformationType === "AppStore"){
+//                        //console.log("app store lnk:" + linkinfo.ContactInformation)
+//                        ioslink = linkinfo.ContactInformation
+//                    }
+//                    if(linkinfo.ContactInformationType === "Google Play Market"){
+//                        //console.log("android:" + linkinfo.ContactInformation)
+//                        androidlink = linkinfo.ContactInformation
+//                    }
+//                }
+//            },function(failure){
 
-            })
-        })
+//            })
+//        })
         //Qt.platform.os === "osx" ?  414 * ratio : Screen.width
 
     }

@@ -65,7 +65,7 @@ ViewController {
             id: txHint
             x: 307
             width: parent.width * 0.8
-            text: "Запросити найближчій час доставки на сьогодні за Вашою адресою"
+            text: "Запросити найближчий час доставки на сьогодні за Вашою адресою"
             wrapMode: Text.WordWrap
             font.weight: Font.DemiBold
             font.pointSize: 14
@@ -96,6 +96,7 @@ ViewController {
                 storage.getAuthData(function(authData){
                     Api.searchNearestTime(context.address, authData, function(result){
                         console.log(result)
+                        storage.saveToken(authData.token)
                         searchTimer.onTriggered.connect(function delayResponse(){
                             searchTimeWaiter.showTime(result.result)
                             txtChooseAnother.visible = true
@@ -111,6 +112,7 @@ ViewController {
                         })
                         searchTimer.start()
                     }, function(error){
+                        storage.saveToken(authData.token)
                         searchTimer.onTriggered.connect(function delayError(failure){
                             searchTimeWaiter.showError = true
                             content.stopSearchAnimation()

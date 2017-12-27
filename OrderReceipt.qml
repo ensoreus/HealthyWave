@@ -428,11 +428,13 @@ ViewController {
                 orderAccepted.showWaiter()
                 storage.getAuthData(function(authdata){
                     Api.createOrder(context, authdata, function(result){
+                        storage.saveToken(authdata.token)
                         console.log("success:" + result.result)
                         context.orderId = result.result
                         storage.addOrder(context)
                         orderAccepted.hideWaiter(true)
                     }, function(error){
+                        storage.saveToken(authdata.token)
                         orderAccepted.showError(error.error, error.information)
                         //context.orderId = error.ErrorCode
                         //storage.addOrder(context)
@@ -446,6 +448,7 @@ ViewController {
                 orderAccepted.showWaiter()
                 storage.getAuthData(function(authdata){
                     Api.createOrder(context, authdata, function(result){
+                        storage.saveToken(authdata.token)
                         console.log("success:" + result.result)
                         context.orderId = result.result
                         storage.addOrder(context)
@@ -454,6 +457,7 @@ ViewController {
                     }, function(error){
                         //context.orderId = error.ErrorCode
                         //storage.addOrder(context)
+                        storage.saveToken(authdata.token)
                         orderAccepted.hideWaiter(false)
                         orderAccepted.showError(error.error, error.information)
                         //console.log("error:"+error.error)

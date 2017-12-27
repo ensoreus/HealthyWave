@@ -37,7 +37,7 @@ Page {
             height: parent.height * 0.02
             color: "#505050"
             font.weight: Font.Thin
-            text: "Введіть электрону адресу *"
+            text: "Введіть электронну адресу *"
             font.family: "NS UI Text"
             font.pointSize: 15
             anchors.topMargin: 60 * ratio

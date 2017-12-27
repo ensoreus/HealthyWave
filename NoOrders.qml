@@ -34,14 +34,18 @@ ViewController{
         busyIndicatior.running = true
         storage.getAuthData(function(authdata){
             Api.getOrders(authdata, function(response){
+                storage.saveToken(authdata.token)
                 busyIndicatior.running = false
                 if(response.result.length > 0){
-                    showOrdersList(response.result)
+                    //RED
+                    hideOrdersList()
+                    //showOrdersList(response.result)
                 }else{
                     hideOrdersList()
                 }
                 console.log(response)
             }, function(failure){
+                storage.saveToken(authdata.token)
                 busyIndicatior.running = false
                 hideOrdersList()
                 console.log(failure)
@@ -61,7 +65,7 @@ ViewController{
                 id: image
                 x: 222
                 y: 152
-                width: parent * 0.15
+                //width: parent.width * 0.15
                 height: parent.height * 0.25
                 anchors.verticalCenterOffset: - parent.height * 0.1
                 anchors.verticalCenter: parent.verticalCenter
@@ -131,7 +135,7 @@ ViewController{
                     ordersModel.clear()
                     for(var index in data){
                         var ritem = data[index]
-                        var date = dateFormat(ritem.OrderDate)
+                        var date = ritem.DeliveredDate
                         var goods = ritem.Goods
                         var waterPrice = 0
                         var emptyBottles = 0
@@ -168,7 +172,7 @@ ViewController{
                             "bottlesFee": fee,
                             "freeWater":freeWater,
                             "comment":ritem.Comment,
-                            "deliveryTimeTo":ritem.DeliveryTimeTo,
+                            "deliveryTime":ritem.DeliveredTime,
                             "fullBottles":fullBottels,
                             "otherItems":other
                         }

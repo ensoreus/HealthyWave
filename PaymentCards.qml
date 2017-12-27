@@ -37,6 +37,7 @@ ViewController {
         pCards.clear()
         storage.getAuthData(function(authData){
             Api.getCards(authData, function(result){
+                storage.saveToken(authData.token)
                 if(result.result.length > 0 ){
                     showPaymentCardsList(result.result)
                 }else{
@@ -45,6 +46,7 @@ ViewController {
 
                 busyIndicator.running = false
             },function(error, newToken){
+                storage.saveToken(authData.token)
                 busyIndicator.running = false
             })
         })

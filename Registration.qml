@@ -215,10 +215,12 @@ Item {
             onAddPromo: {
                 storage.getAuthData(function(authdata){
                     Api.addPromoCode(promoCodeField.text, authdata, function(response){
+                        storage.saveToken(authdata.token)
                         txMessage.text = "Прмокод прийнято"
                         txMessage.color = "green"
                         congratsPage.getPromoGifter(promoCodeField.text)
                     },function(failure){
+                        storage.saveToken(authdata.token)
                         txMessage.text = failure.error
                         txMessage.color = "red"
                     })

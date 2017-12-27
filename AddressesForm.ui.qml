@@ -34,36 +34,15 @@ ViewController {
         Rectangle {
             id: emptyList
             color: "#ffffff"
-            anchors.top: parent.top
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.topMargin: 0
+            anchors.fill:parent
             visible: false
-
-            Text {
-                id: lbNoAddresses
-                x: 10
-                y: 216
-                height: 15
-                text: "Наразі у Вас немає жодної адреси"
-                anchors.topMargin: parent.height * 0.05
-                anchors.top: image.bottom
-                anchors.right: parent.right
-                anchors.rightMargin: 10
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-                horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 13
-                font.family: "NS UI Text"
-            }
 
             Image {
                 id: image
                 x: 144
                 y: 124
-                width: parent.width * 0.28
-                height: parent.height * 0.18
+                //width: parent.width * 0.15
+                height: parent.height * 0.25
                 fillMode: Image.PreserveAspectFit
                 anchors.verticalCenterOffset: -parent.height * 0.1
                 anchors.verticalCenter: parent.verticalCenter
@@ -71,12 +50,28 @@ ViewController {
                 source: "GroupCopy.png"
             }
 
+            Text {
+                id: lbNoAddresses
+                x: 10
+                y: 216
+                height: parent.height * 0.2
+                width: parent.width * 0.8
+                text: "Наразі у Вас немає жодної адреси"
+                anchors.topMargin: parent.height * 0.05
+                anchors.top: image.bottom
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pointSize: 18
+                font.family: "NS UI Text"
+            }
+
             HWRoundButton {
                 id: btnAddNew
                 x: 66
                 y: 283
-                width: parent.width * 0.67
-                height: parent.height * 0.08
+                width: parent.width * 0.6
+                height: parent.height * 0.09
                 labelText: "ДОДАТИ"
                 labelColor: "black"
                 //opacity: 0.6

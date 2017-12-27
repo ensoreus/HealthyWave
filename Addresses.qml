@@ -54,7 +54,9 @@ AddressesForm {
             Api.getCustomerAddresses(authData, function(result, newToken){
                 storage.saveToken(newToken)
                 if(result.addresses.length > 0 ){
-                    showAddressesList(result.addresses)
+                    hideAddressesList()
+                    //RED
+                    //showAddressesList(result.addresses)
                 }else{
                     hideAddressesList()
                 }

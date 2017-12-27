@@ -26,9 +26,11 @@ ViewController {
         storage.getAuthData(function(authdata){
             Api.getAvailableCustomTime(date, authdata, function(response){
                 stopWaiter()
+                storage.saveToken(authdata.token)
                 datePicker.importData(response.result)
                 console.log(response.result)
             }, function(failure){
+                storage.saveToken(authdata.token)
                 stopWaiter()
                 console.log(failure.error)
             })

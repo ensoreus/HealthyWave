@@ -44,15 +44,19 @@ ViewController {
         processingRect.visible = true
         storage.getAuthData(function(authdata){
             Api.getCards(authdata, function(response){
+                storage.saveToken(authdata.token)
                 if(response.result.length > 0){
                     showAddressList()
-                    cardsModel.importData(response.result)
 
+                    //cardsModel.importData(response.result)
+                    rNoCards.visible = true
+                    //RED
                 }else{
                     hideAddressList()
                     rNoCards.visible = true
                 }
             }, function(failure){
+                storage.saveToken(authdata.token)
                 hideAddressList()
             })
         })
@@ -72,8 +76,8 @@ ViewController {
                 id: image
                 x: 192
                 y: 144
-                width: parent.width * 0.28
-                height: parent.height * 0.18
+               // width: parent * 0.15
+                height: parent.height * 0.25
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.verticalCenterOffset: -parent.height * 0.1
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -83,8 +87,8 @@ ViewController {
 
             HWRoundButton {
                 id: btnAddNew
-                width: parent.width * 0.67
-                height: parent.height * 0.08
+                width: parent.width * 0.6
+                height: parent.height * 0.09
                 anchors.topMargin: parent.height * 0.05
                 anchors.top: text1.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -102,8 +106,9 @@ ViewController {
                 horizontalAlignment: Text.AlignHCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.topMargin: parent.height * 0.05
-                font.pointSize: 13
+                font.pointSize: 18
                 anchors.top: image.bottom
+                height: parent.height * 0.2
             }
         }
 
@@ -143,7 +148,7 @@ ViewController {
                         color: "#444444"
                         font.pointSize: 20
                         verticalAlignment: Text.AlignVCenter
-                        font.family: "SF UI Text"
+                        font.family: "NS UI Text"
                         anchors.right: image.left
                         anchors.verticalCenter: background.verticalCenter
                         anchors.leftMargin: background.width * 0.062

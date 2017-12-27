@@ -38,8 +38,10 @@ ViewController {
     function updatePushToken(){
         storage.getAuthData(function(authdata){
             Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, authdata, function(response){
+                storage.saveToken(authdata.token)
                 console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
             }, function(failure){
+                storage.saveToken(authdata.token)
                 console.log("failed to update token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
             })
         })

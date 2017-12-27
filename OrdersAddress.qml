@@ -55,6 +55,7 @@ ViewController {
         storage.getAuthData(function(authData){
             debugMsg.text = JSON.stringify(authData) + "\n"
             Api.getCustomerAddresses(authData, function(addresses) {
+                storage.saveToken(authData.token)
                 debugMsg.text = JSON.stringify(addresses)
                 pAddresses.clear()
                 orderAddressViewController.initializing = true
@@ -64,6 +65,7 @@ ViewController {
                 orderAddressViewController.initializing = false
             }, function(error) {
                 console.log(error)
+                storage.saveToken(authData.token)
                 debugMsg.text = error.error
                 busyIndicator.running = false
                 pAddresses.addNewOption()

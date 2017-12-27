@@ -30,6 +30,7 @@ ViewController {
     onViewDidAppear: {
         storage.getAuthData(function(authdata){
             Api.getFeedbackCodes(ratePanel.rate,authdata, function(response){
+                storage.saveToken(authdata.token)
                 console.log(response.result)
                 commentCodes = response.result
                 setupCodes(commentCodes)
@@ -469,11 +470,13 @@ ViewController {
                         var comment = taComment.text
                         waiterOverlay.visible = true
                         Api.sendFeedback(ratePanel.rate, comment, order.orderId, code1, code2, code3, code4, authdata, function(response){
+                            storage.saveToken(authdata.token)
                             storage.orderRated(order.orderId)
                             onRated()
                             waiterOverlay.visible = false
                             navigationController.pop()
                         }, function(response){
+                            storage.saveToken(authdata.token)
                             waiterOverlay.visible = false
                             console.log(response.error)
                             navigationController.pop()

@@ -34,6 +34,7 @@ ViewController {
         rPricesPanel.state = "pendingPrices"
         storage.getAuthData(function(authdata){
             Api.getPrices(context.address, authdata, function(response){
+                storage.saveToken(authdata.token)
                 for(var index in response.result){
                     var priceList = response.result[index]
                         context.prices.pump = priceList.pompa
@@ -48,12 +49,13 @@ ViewController {
                 }
                 console.log(response.result)
             }, function(failure){
+                storage.saveToken(authdata.token)
                 rPricesPanel.state = "error"
-                if (failure.error){
-                    rPricesPanel.errorMsg = failure.error
-                }else{
-                    rPricesPanel.errorMsg = "Помилка! \n Спробуйте пізніше"
-                }
+//                if (failure.error){
+//                   // rPricesPanel.errorMsg = failure.error
+//                }else{
+//                    rPricesPanel.errorMsg = "Помилка! \n Спробуйте пізніше"
+//                }
             })
         })
     }
@@ -422,7 +424,7 @@ ViewController {
         Text {
             id: txBottlesEmpty
             x: 317
-            text: "К-ть порожних бутлів в замовленні*"
+            text: "К-ть порожніх бутлів в замовленні*"
             anchors.topMargin: parent.height * 0.03
             font.family: "NS UI Text"
             font.weight: Font.Thin

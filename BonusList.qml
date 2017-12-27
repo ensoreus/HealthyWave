@@ -54,12 +54,14 @@ ViewController {
         storage.getAuthData(function(authdata){
             showBusyIndicator()
             Api.getBonus(authdata, function(response){
+                storage.saveToken(authdata.token)
                 console.log(response)
                 bonusModel.addItems(response.result)
                 hideBusyIndicator()
                 imgscroll.visible = bonusModel.count > 3
             }, function(failure){
-                imgscroll.visible= false
+                storage.saveToken(authdata.token)
+                imgscroll.visible = false
                 hideBusyIndicator()
                 console.log(failure)
             })

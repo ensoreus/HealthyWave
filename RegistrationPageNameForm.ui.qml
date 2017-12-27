@@ -20,7 +20,7 @@ Page {
             x: 70
             width: parent.width * 0.7
             height: parent.height * 0.02
-            text: "Введіть Ваше і'мя"
+            text: "Введіть Ваше ім'я"
             color: "#505050"
             font.weight: Font.Thin
             font.family: "NS UI Text"

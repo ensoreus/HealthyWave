@@ -455,6 +455,7 @@ function call(routine, params, authData, onSuccess, onFailure){
             var object = JSON.parse(xhr.responseText.toString());
             if(typeof(object.error) != 'undefined' ){
                 if (object.ErrorCode === "1001" || object.ErrorCode === "1027" || object.ErrorCode === "1011" || object.ErrorCode === "1002"){
+                    print("auth error:"+object)
                     onAuthError(authData, onTokenUpdated)
                 }else{
                     console.log("Failure:"+object.error)
@@ -466,9 +467,9 @@ function call(routine, params, authData, onSuccess, onFailure){
         }
     }
 
-    if(typeof(authData.key) === 'undefined'){
-        onAuthError(authData, onTokenUpdated)
-    }
+//    if(typeof(authData.key) === 'undefined'){
+//        onAuthError(authData, onTokenUpdated)
+//    }
 
     xhr.onreadystatechange = onReady
     sendRequest(authData.token)
