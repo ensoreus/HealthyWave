@@ -131,10 +131,8 @@ ViewController {
                     layoutHeight()
                     if(item === "1"){
                         bonusListStyle = "Regular"
-                        //cbPump.style = "Regular"
                     }else{
                         bonusListStyle = "Big"
-                        //cbPump.style = "Big"
                     }
                     bonusLst.checkIfPreselectedBonusEligible(item)
                 }

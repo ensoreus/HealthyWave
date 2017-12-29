@@ -30,7 +30,7 @@ CheckBox {
             text: "✓"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            font.pointSize: (style === "Regular") ? 11 : 20
+            font.pointSize: (style === "Regular") ? 11 : 17
             color: "white"
             visible: control.checked
         }
