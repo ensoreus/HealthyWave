@@ -131,9 +131,10 @@ ViewController {
                     layoutHeight()
                     if(item === "1"){
                         bonusListStyle = "Regular"
-                        cbPump.style = "Regular"
+                        //cbPump.style = "Regular"
                     }else{
-                        cbPump.style = "Big"
+                        bonusListStyle = "Big"
+                        //cbPump.style = "Big"
                     }
                     bonusLst.checkIfPreselectedBonusEligible(item)
                 }
@@ -320,6 +321,7 @@ ViewController {
                 id: cbPump
                 x: 5
                 height: 13 * ratio
+                style: bonusListStyle
                 text: "Механічна помпа - " + context.prices.pump + " грн."
                 anchors.topMargin: 5 * ratio
                 anchors.top: bonusLst.bottom
