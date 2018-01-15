@@ -110,7 +110,7 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                                                                  new IntentFilter(QuickstartPreferences.GCM_TOKEN));
-        LocalBroadcastManager.getInstance(this) .registerReceiver(mRegistrationBroadcastReceiver,new IntentFilter(QuickstartPreferences.GCM_MESSAGE));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,new IntentFilter(QuickstartPreferences.GCM_MESSAGE));
     }
 
     @Override

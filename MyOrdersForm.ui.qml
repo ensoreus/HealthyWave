@@ -126,7 +126,7 @@ ViewController {
                 id: lbEmptyBottles
                 height: 15
                 color: "#4a4a4a"
-                text: "Порожніх бутлів:"
+                text: "Порожніх бутелів:"
                 anchors.topMargin: 5
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: -8
@@ -157,7 +157,7 @@ ViewController {
                 id: lbRentedButtles
                 height: 15
                 color: "#4a4a4a"
-                text: "Застава за бутлі:"
+                text: "Застава за бутелі:"
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: -8
                 anchors.top: lbEmptyBottles.bottom
@@ -187,7 +187,7 @@ ViewController {
                 id: lbOtherItem
                 height: 15
                 color: "#4a4a4a"
-                text: "Інши товари:"
+                text: "Інші товари:"
                 anchors.right: parent.horizontalCenter
                 anchors.rightMargin: -8
                 anchors.top: lbRentedButtles.bottom
@@ -317,7 +317,7 @@ ViewController {
             Text {
                 id: lbDeliveryTime
                 width: 90
-                text: "Час достави:"
+                text: "Час доставки:"
                 font.weight: Font.DemiBold
                 font.family: "NS UI Text"
                 anchors.top: lbAddress.bottom
@@ -346,7 +346,7 @@ ViewController {
             Text {
                 id: lbComments
                 width: 83
-                text: "Коментарії:"
+                text: "Коментарі:"
                 anchors.topMargin: 5
                 font.weight: Font.DemiBold
                 anchors.top: lbPaymentType.bottom

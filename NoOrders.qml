@@ -41,7 +41,7 @@ ViewController{
                 }else{
                     hideOrdersList()
                 }
-                console.log(response)
+                //console.log(response)
             }, function(failure){
                 storage.saveToken(authdata.token)
                 busyIndicatior.running = false

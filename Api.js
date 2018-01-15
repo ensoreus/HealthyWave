@@ -259,9 +259,12 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
 
     for (var index in orderContext.bonuses){
         var bonusPromo = orderContext.bonuses[index]
-        console.log("aplying bonus:"+bonusPromo)
-        var key = "promocode" + index + 1
-        params[key] = bonusPromo
+        if(bonusPromo.length > 0 || typeof(bonusPromo) != "undefined" ){
+            console.log("applying bonus:" + bonusPromo)
+            var bindex = parseInt(index) + 1
+            var key = "promocode" + bindex
+            params[key] = bonusPromo
+        }
     }
 
     if (orderContext.address.floor > 0){
@@ -271,7 +274,7 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
         params["entrance"] = orderContext.address.entrance
     }
 
-    call("createorder", collectBonuses(orderContext, params), authData, onSuccess, onFailure)
+    call("createorder",  params, authData, onSuccess, onFailure)
 }
 
 function collectBonuses(context, params){

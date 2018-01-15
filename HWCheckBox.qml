@@ -13,8 +13,8 @@ CheckBox {
 
     indicator: Rectangle {
         id: indicatorRect
-        implicitWidth: (style === "Regular") ? 18 * ratio : 25 * ratio
-        implicitHeight: (style === "Regular") ? 18 * ratio : 25 * ratio
+        implicitWidth: (style === "Regular") ? 18 * ratio : 22 * ratio
+        implicitHeight: (style === "Regular") ? 18 * ratio : 22 * ratio
         x: control.leftPadding
         y: parent.height / 2 - height / 2
         radius: 3 * ratio
@@ -25,8 +25,8 @@ CheckBox {
             id: checkmark
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
-            width: (style === "Regular") ? 18 * ratio : 25 * ratio
-            height: (style === "Regular") ? 18 * ratio : 25 * ratio
+            width: (style === "Regular") ? 18 * ratio : 22 * ratio
+            height: (style === "Regular") ? 18 * ratio : 22 * ratio
             text: "✓"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter

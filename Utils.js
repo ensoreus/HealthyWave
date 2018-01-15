@@ -91,11 +91,17 @@ function bonusValueCalc(bonus, context){
 }
 
 function nameFromLine(line){
+    if(line.indexOf(" ") < 0){
+        return line
+    }
     var name = line.slice(0, line.indexOf(" "))
     return name
 }
 
 function surnameFromLine(line){
+     if(line.indexOf(" ") < 0){
+        return ""
+     }
     var surname = line.slice(line.indexOf(" ") + 1, line.length)
     return surname
 }

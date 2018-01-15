@@ -200,7 +200,7 @@ ViewController {
                 anchors.leftMargin: 30 * ratio
                 anchors.right: parent.right
                 visible: bonusModel.count > 0
-                height: (bonusModel.count * (18 + ((bonusListStyle === "Regular") ? 8 * ratio : 26 * ratio))) * ratio
+                height: (bonusModel.count * (18 + ((bonusListStyle === "Regular") ? 8 * ratio : 12 * ratio))) * ratio
                 model:ListModel{
                     id: bonusModel
                     function importData(bonusItem){
@@ -209,7 +209,7 @@ ViewController {
                     }
                 }
 
-                spacing: (bonusListStyle === "Regular") ? 8 * ratio : 26 * ratio
+                spacing: (bonusListStyle === "Regular") ? 8 * ratio : 12 * ratio
                 delegate: HWCheckBox {
                     id: cbBonusCheck
                     y: 52
@@ -318,10 +318,10 @@ ViewController {
             HWCheckBox {
                 id: cbPump
                 x: 5
-                height: 13 * ratio
+                height: bonusListStyle === "Regular" ? 20 * ratio : 25 * ratio
                 style: bonusListStyle
                 text: "Механічна помпа - " + context.prices.pump + " грн."
-                anchors.topMargin: 5 * ratio
+                anchors.topMargin: 10 * ratio
                 anchors.top: bonusLst.bottom
                 anchors.rightMargin: parent.width * 0.02
                 checked:false
