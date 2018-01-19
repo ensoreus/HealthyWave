@@ -52,7 +52,7 @@
                           application still try to draw after
                           "applicationStateChanged(Qt::ApplicationSuspended)"
                           signal is sent! -->
-            <meta-data android:name="android.app.background_running" android:value="false"/>
+            <meta-data android:name="android.app.background_running" android:value="true"/>
             <meta-data android:name="com.google.firebase.messaging.default_notification_channel" android:value="default_channel_id"/>
             <!-- Background running -->
 
@@ -69,17 +69,20 @@
                 <action android:name="com.google.android.gms.iid.InstanceID"/>
             </intent-filter>
         </service>
-        -->
-        <receiver android:name="com.google.android.gms.gcm.GcmReceiver" android:enabled="true" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
+-->
+        <receiver android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
                 <category android:name="com.ensoreus.hw"/>
             </intent-filter>
         </receiver>
 
-        <service android:name="com.ensoreus.hw.MyGcmListenerService" android:exported="true">
+        <service android:name=".MyGcmListenerService">
             <intent-filter>
-
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
             </intent-filter>
@@ -100,7 +103,7 @@
 <!-- %%INSERT_PERMISSIONS -->
 
 <permission android:protectionLevel="signature" android:name="com.example.permission.C2D_MESSAGE"/>
-    <uses-permission android:name="com.example.permission.C2D_MESSAGE"/>
+<uses-permission android:name="com.example.permission.C2D_MESSAGE"/>
 <uses-permission android:name="android.permission.CALL_PHONE"/>
 <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY"/>
 <uses-permission android:name="android.permission.WAKE_LOCK" />

@@ -238,7 +238,18 @@ function searchNearestTime(address, authData, onSuccess, onFailure){
     call("timedelivery", params, authData, onSuccess, onFailure)
 }
 
+function sync(authdata, onSuccess, onFailure){
+    call("synchronize", {"phone":authdata.phone}, authdata, onSuccess, onFailure);
+}
+
+
 function createOrder(orderContext, authData, onSuccess, onFailure){
+    var paymenttype = 0;
+
+    if(orderContext.card === 1){
+        paymenttype = 1;
+    }
+
     var params = {
         "city":orderContext.address.city,
         "street":orderContext.address.street.replace(/\s/gi, "%20"),
@@ -253,8 +264,8 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
         "deliverydate":orderContext.deliveryTime.day,
         "callrequires":orderContext.needToCall,
         "cardtoken":orderContext.cardToPay,
-        "paycard":typeof(orderContext.cardToPay) == "undefined" ? 0 : 1,
-                                                                  "phone":authData.phone
+        "paycard":paymenttype,
+        "phone":authData.phone
     }
 
     for (var index in orderContext.bonuses){
@@ -458,7 +469,7 @@ function call(routine, params, authData, onSuccess, onFailure){
             var object = JSON.parse(xhr.responseText.toString());
             if(typeof(object.error) != 'undefined' ){
                 if (object.ErrorCode === "1001" || object.ErrorCode === "1027" || object.ErrorCode === "1011" || object.ErrorCode === "1002"){
-                    print("auth error:"+object)
+                    //print("auth error:"+object)
                     onAuthError(authData, onTokenUpdated)
                 }else{
                     console.log("Failure:"+object.error)
@@ -469,10 +480,6 @@ function call(routine, params, authData, onSuccess, onFailure){
             }
         }
     }
-
-//    if(typeof(authData.key) === 'undefined'){
-//        onAuthError(authData, onTokenUpdated)
-//    }
 
     xhr.onreadystatechange = onReady
     sendRequest(authData.token)

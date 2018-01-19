@@ -32,9 +32,22 @@ Rectangle {
                 console.log("ORDER ON A WAY:"+notification)
                 deliveryOnAWay(notification)
             }else{
-                console.log("ORDER DELIVERED:"+PushNotificationRegistrationTokenHandler.lastNotification)
+                console.log("ORDER DELIVERED:" + PushNotificationRegistrationTokenHandler.lastNotification)
                 deliveryArrived(notification)
             }
+        }
+    }
+
+    Connections{
+        target: PushNotificationRegistrationTokenHandler
+        onSync:{
+            storage.getAuthData(function(authdata){
+                Api.sync(authdata, function(response){
+                    console.log(response.result)
+                },function(failure){
+                    console.log(failure.error)
+                })
+            })
         }
     }
 

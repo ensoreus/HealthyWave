@@ -39,7 +39,6 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
     private static final int REQUEST_WRITE_STORAGE = 112;
 
     private BroadcastReceiver mRegistrationBroadcastReceiver;
-    //private KeyStore m_keyStore;
     private FirebaseAuth mAuth;
     private Activity mContext;
 
@@ -100,17 +99,16 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
             JavaNatives.notificationArrived(msg);
         }
     }
-      
 
     @Override
     protected void onResume()
     {
         super.onResume();
         Log.i("Activity", "resumed");
-
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                                                                  new IntentFilter(QuickstartPreferences.GCM_TOKEN));
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,new IntentFilter(QuickstartPreferences.GCM_MESSAGE));
+        JavaNatives.synchronize();
     }
 
     @Override
@@ -132,6 +130,7 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
     //
     private boolean checkPlayServices()
     {
+        Log.i(TAG, "checkPlayServices");
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS)

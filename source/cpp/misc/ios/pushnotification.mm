@@ -19,6 +19,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
 
 
 @implementation QIOSApplicationDelegate (QPushNotificationDelegate)
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [FIRApp configure];
     [FIRMessaging messaging].shouldEstablishDirectChannel = YES;
@@ -27,10 +28,9 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     
     UNAuthorizationOptions authOptions =
     UNAuthorizationOptionAlert
-    | UNAuthorizationOptionSound
-    | UNAuthorizationOptionBadge;
+    | UNAuthorizationOptionSound;
     [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:authOptions completionHandler:^(BOOL granted, NSError * _Nullable error) {
-        if(error==nil){
+        if(error == nil){
             if(granted){
                 [[UIApplication sharedApplication] registerForRemoteNotifications];
             }
@@ -45,7 +45,6 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
         }
     }];
     
-
     return YES;
 }
 
@@ -117,4 +116,13 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     PushNotificationRegistrationTokenHandler::instance()->setGcmRegistrationToken(apsStr);
     // TODO: If necessary send token to application server.
 }
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+  PushNotificationRegistrationTokenHandler::instance()->synchronize();
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+  PushNotificationRegistrationTokenHandler::instance()->synchronize();
+}
+
 @end

@@ -43,10 +43,12 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
     quint8 ostype = -1;
+
 #ifdef Q_OS_DARWIN
   qreal m_ratio = 1;
   qreal m_ratioFont = 1;
   ostype = 2;
+
 #else
   ostype = 1;
   qreal refDpi = 160.;
@@ -72,6 +74,7 @@ qreal refWidth = 414.;
   qmlRegisterSingletonType<SecurityCore>("SecurityCore", 1, 0, "SecurityCore", seccore_qjsvalue_singletontype_provider);
   qmlRegisterSingletonType<PushNotificationRegistrationTokenHandler>("PushNotificationRegistrationTokenHandler", 1, 0, "PushNotificationRegistrationTokenHandler", PushNotificationRegistrationTokenHandler::pushNotificationRegistrationTokenProvider);
   qmlRegisterType<ClipboardManager>("com.ensoreus.Clipboard", 1, 0, "Clipboard");
+
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("ratio", QVariant::fromValue(m_ratio));
   engine.rootContext()->setContextProperty("fontRatio", QVariant::fromValue(m_ratioFont));

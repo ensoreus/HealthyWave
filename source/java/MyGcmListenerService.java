@@ -49,7 +49,6 @@ public class MyGcmListenerService extends FirebaseMessagingService
                     Log.d(TAG, String.format("%s %s (%s)", key,
                                              value.toString(), value.getClass().getName()));
                 }
-            
             sendNotification(message);
             JavaNatives.notificationArrived(msg);            
         }
@@ -65,10 +64,12 @@ public class MyGcmListenerService extends FirebaseMessagingService
         Map<String,String> bundle = message.getData();
         Intent intent = new Intent(this, Vibrate.class);
         intent.putExtra("message", message);
-    //                        // Starts the activity on notification click
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+// Starts the activity on notification click
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
-    //                        // Create the notification with a notification builder
+                        PendingIntent.FLAG_UPDATE_CURRENT | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+// Create the notification with a notification builder
         Notification notification = new Notification.Builder(this)
                         .setSmallIcon(R.drawable.icon)
                         .setWhen(System.currentTimeMillis())
@@ -76,7 +77,7 @@ public class MyGcmListenerService extends FirebaseMessagingService
                         .setContentText(bundle.get("body").toString())
                         .getNotification();
     //                        // Remove the notification on click
-        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+        notification.flags |= Notification.FLAG_AUTO_CANCEL | Notification.FLAG_INSISTENT;
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         manager.notify(R.string.app_name, notification);
@@ -100,8 +101,7 @@ public class MyGcmListenerService extends FirebaseMessagingService
                                     timer.schedule(task, 5000);
                             }
 
-
-/*
+        /*
         Intent intent = new Intent(this, Vibrate.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
@@ -120,20 +120,5 @@ public class MyGcmListenerService extends FirebaseMessagingService
         notificationManager.notify(0 , notificationBuilder.build());
         */
     }
-
-//    private void handleNow() {
-//        Log.d(TAG, "Short lived task is done.");
-//    }
-
-//    private void scheduleJob() {
-//        // [START dispatch_job]
-//        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
-//        Job myJob = dispatcher.newJobBuilder()
-//                .setService(MyJobService.class)
-//                .setTag("courier_unleashed")
-//                .build();
-//        dispatcher.schedule(myJob);
-//        // [END dispatch_job]
-//    }
 
 }
