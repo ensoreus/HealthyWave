@@ -84,7 +84,6 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
                        new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
                        REQUEST_WRITE_STORAGE);
         }
-        JavaNatives.synchronize();
     }
 
     @Override
@@ -111,7 +110,6 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                                                                  new IntentFilter(QuickstartPreferences.GCM_TOKEN));
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,new IntentFilter(QuickstartPreferences.GCM_MESSAGE));
-        JavaNatives.synchronize();
     }
 
     @Override

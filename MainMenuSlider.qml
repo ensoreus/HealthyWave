@@ -22,6 +22,15 @@ Rectangle {
        state = "hideAlert"
     }
 
+    Timer{
+        id: syncTimer
+        running: true
+        interval: 60000
+        onTriggered: {
+            synchronize()
+        }
+    }
+
     Connections{
         target: PushNotificationRegistrationTokenHandler
         onLastNotificationChanged:{
@@ -38,21 +47,18 @@ Rectangle {
         }
     }
 
-    Connections{
-        target: PushNotificationRegistrationTokenHandler
-        onSync:{
-            storage.getAuthData(function(authdata){
-                Api.sync(authdata, function(response){
-                    if(response.result.length > 0){
-                        orderDelivered({"orderid":response.result[0].OrderNumber,
-                                        "courier":response.result[0].CourierName,
-                                        "courierName":response.result[0].CourierPhone})
-                    }
-                },function(failure){
-                    console.log(failure.error)
-                })
+    function synchronize(){
+        storage.getAuthData(function(authdata){
+            Api.sync(authdata, function(response){
+                if(response.result.length > 0){
+                    orderDelivered({"orderid":    response.result[0].OrderNumber,
+                                    "courier":    response.result[0].CourierName,
+                                    "courierName":response.result[0].CourierPhone})
+                }
+            },function(failure){
+                console.log(failure.error)
             })
-        }
+        })
     }
 
     function updateUserData(){
@@ -89,7 +95,6 @@ Rectangle {
 
     function deliveryArrived(notification){
         mainScreen.hideCallButton()
-        //console.log("PUSH SHOWN orderID:"+notification+" "+notification.orderid)
         var orderid = (Qt.platform.os === "ios") ? notification.orderid.slice(0, -1) : notification.orderid
         orderDelivered_({"orderid":orderid,
                        "courier":notification.courier,
