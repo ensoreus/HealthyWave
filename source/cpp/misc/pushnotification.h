@@ -22,11 +22,13 @@ public:
     QString getLastNotification();
     //void setAPNSRegistrationToken(const QString& apnsToken);
     void setLastNotification(const QString& message);
+    void synchronize();
     ~PushNotificationRegistrationTokenHandler();
 signals:
     void gcmRegistrationTokenChanged();
     void lastNotificationChanged();
     void registeredChanged();
+    void sync();
 private:
     QString m_gcmToken;
     //QString m_apnsToken;

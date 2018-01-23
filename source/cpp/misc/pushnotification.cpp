@@ -59,6 +59,11 @@ void PushNotificationRegistrationTokenHandler::setLastNotification(const QString
     emit lastNotificationChanged();
 }
 
+void PushNotificationRegistrationTokenHandler::synchronize(){
+
+  //emit sync();
+}
+
 #ifdef Q_OS_ANDROID
 static void gcmTokenResult(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
 {
@@ -76,6 +81,10 @@ static void gcmTokenResult(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
     g_RegistrationTokenMutex.lock();
     g_gcmRegistrationToken = QString(nativeString);
     g_RegistrationTokenMutex.unlock();
+}
+
+static void synchronize(JNIEnv* /*env*/ env, jobject obj){
+  PushNotificationRegistrationTokenHandler::instance()->synchronize();
 }
 
 static void gcmNotification(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
@@ -97,6 +106,11 @@ static JNINativeMethod methods[] = {
       "notificationArrived",
     "(Ljava/lang/String;)V",
     (void *)gcmNotification
+    },
+    {
+      "synchronize",
+      "()V",
+      (void *)synchronize
     }
 };
 

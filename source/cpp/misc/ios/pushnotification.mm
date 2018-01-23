@@ -117,5 +117,16 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     // TODO: If necessary send token to application server.
 }
 
+- (void)applicationDidBecomeActive:(UIApplication*) application{
+  PushNotificationRegistrationTokenHandler::instance()->synchronize();
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+  PushNotificationRegistrationTokenHandler::instance()->synchronize();
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+  PushNotificationRegistrationTokenHandler::instance()->synchronize();
+}
 
 @end
