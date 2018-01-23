@@ -60,7 +60,8 @@ void PushNotificationRegistrationTokenHandler::setLastNotification(const QString
 }
 
 void PushNotificationRegistrationTokenHandler::synchronize(){
-  emit sync();
+
+  //emit sync();
 }
 
 #ifdef Q_OS_ANDROID
@@ -80,7 +81,6 @@ static void gcmTokenResult(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
     g_RegistrationTokenMutex.lock();
     g_gcmRegistrationToken = QString(nativeString);
     g_RegistrationTokenMutex.unlock();
-
 }
 
 static void synchronize(JNIEnv* /*env*/ env, jobject obj){
@@ -95,7 +95,6 @@ static void gcmNotification(JNIEnv* /*env*/ env, jobject obj, jstring gcmToken)
     PushNotificationRegistrationTokenHandler::instance()->setLastNotification(QString(nativeString));
     //g_notificationMutex.unlock();
 }
-
 
 // create a vector with all our JNINativeMethod(s)
 static JNINativeMethod methods[] = {
@@ -114,7 +113,6 @@ static JNINativeMethod methods[] = {
       (void *)synchronize
     }
 };
-
 
 // this method is called automatically by Java VM
 // after the .so file is loaded
@@ -140,4 +138,5 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/)
 
     return JNI_VERSION_1_6;
 }
+
 #endif

@@ -55,6 +55,7 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
 
         String channelId  = getString(R.string.default_notification_channel_id);
         String channelName = getString(R.string.default_notification_channel_name);
+
         NotificationManager notificationManager =
             (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -72,7 +73,6 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
 
         if (checkPlayServices())
             {
-                // Start IntentService to register this application with GCM.
                 Intent intent = new Intent(this, RegistrationIntentService.class);
                 startService(intent);
             }
@@ -84,9 +84,12 @@ public class Vibrate extends org.qtproject.qt5.android.bindings.QtActivity
                        new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
                        REQUEST_WRITE_STORAGE);
         }
+        JavaNatives.synchronize();
     }
 
+    @Override
     protected void onNewIntent(Intent intent){
+        //JavaNatives.synchronize();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             for (String key : bundle.keySet()) {

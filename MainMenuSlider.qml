@@ -43,7 +43,11 @@ Rectangle {
         onSync:{
             storage.getAuthData(function(authdata){
                 Api.sync(authdata, function(response){
-                    console.log(response.result)
+                    if(response.result.length > 0){
+                        orderDelivered({"orderid":response.result[0].OrderNumber,
+                                        "courier":response.result[0].CourierName,
+                                        "courierName":response.result[0].CourierPhone})
+                    }
                 },function(failure){
                     console.log(failure.error)
                 })
@@ -63,31 +67,39 @@ Rectangle {
         }
     }
 
+
+    function orderDelivered_(order){
+        storage.getOrderById(order.orderid, function(city, street, house, apt, time){
+            storage.markAsDelivered(order.orderid, order.courier /*Utils.decode_utf16(notification.courier)*/,"")
+            orderDelivered({
+                               "address" :{
+                                   "city":  city,
+                                   "street":street,
+                                   "house" :house,
+                                   "apartment":apt
+                               },
+                               "courierName" : order.courier, //Utils.decode_utf16(notification.courier),
+                               "courierPhone": order.courierPhone,
+                               "deliveryDate": "сьогодні",
+                               "deliveryTime": time,
+                               "orderId"     : order.orderid
+                           })
+        })
+    }
+
     function deliveryArrived(notification){
         mainScreen.hideCallButton()
         //console.log("PUSH SHOWN orderID:"+notification+" "+notification.orderid)
         var orderid = (Qt.platform.os === "ios") ? notification.orderid.slice(0, -1) : notification.orderid
-        storage.getOrderById(orderid, function(city, street, house, apt, time){
-            storage.markAsDelivered(orderid, notification.courier /*Utils.decode_utf16(notification.courier)*/, notification.courierPhone)
-            orderDelivered({
-                               "address" :{
-                                   "city":city,
-                                   "street":street,
-                                   "house":house,
-                                   "apartment":apt
-                               },
-                               "courierName" : notification.courier, //Utils.decode_utf16(notification.courier),
-                               "courierPhone": notification.courierPhone,
-                               "deliveryDate":"сьогодні",
-                               "deliveryTime":time,
-                               "orderId"     :orderid
-                           })
-        })
+        orderDelivered_({"orderid":orderid,
+                       "courier":notification.courier,
+                       "courierPhone":notification.courierPhone})
     }
 
     function orderDelivered(order){
         feedbackAlertPrompt.order = order
         state = "showAlert"
+        orderDelivered_(order)
     }
 
     MainMenu{

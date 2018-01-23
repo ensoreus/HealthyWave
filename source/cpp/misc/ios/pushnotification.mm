@@ -44,7 +44,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
             NSLog(@"APNS error:%@", [error localizedDescription]);
         }
     }];
-    
+
     return YES;
 }
 
@@ -115,6 +115,10 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     QString apsStr = QString::fromNSString(fcmToken);
     PushNotificationRegistrationTokenHandler::instance()->setGcmRegistrationToken(apsStr);
     // TODO: If necessary send token to application server.
+}
+
+- (void)applicationDidBecomeActive:(UIApplication*) application{
+  PushNotificationRegistrationTokenHandler::instance()->synchronize();
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
