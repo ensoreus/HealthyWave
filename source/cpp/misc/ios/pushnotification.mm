@@ -25,7 +25,7 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     [FIRMessaging messaging].shouldEstablishDirectChannel = YES;
     [FIRMessaging messaging].delegate = self;
     [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-    
+    application.applicationIconBadgeNumber = 0;
     UNAuthorizationOptions authOptions =
     UNAuthorizationOptionAlert
     | UNAuthorizationOptionSound;

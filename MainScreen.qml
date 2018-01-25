@@ -23,7 +23,7 @@ ViewController {
 
     Component.onCompleted: {
         PushNotificationRegistrationTokenHandler.gcmRegistrationToken
-        if(PushNotificationRegistrationTokenHandler.gcmRegistrationToken.length > 0){
+        if(PushNotificationRegistrationTokenHandler.gcmRegistrationToken.length && storage.isRegistered()> 0){
             updatePushToken()
         }
     }
@@ -41,7 +41,7 @@ ViewController {
                 storage.saveToken(authdata.token)
                 console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
             }, function(failure){
-                storage.saveToken(authdata.token)
+                //storage.saveToken(authdata.token)
                 console.log("failed to update token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
             })
         })

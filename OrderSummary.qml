@@ -129,10 +129,10 @@ ViewController {
                     lbFreeWaterHint.visible = true
                     updateSummary()
                     layoutHeight()
-                    if(item === "1"){
-                        bonusListStyle = "Regular"
-                    }else{
+                    if(item === "0"){
                         bonusListStyle = "Big"
+                    }else{
+                        bonusListStyle = "Regular"
                     }
                     bonusLst.checkIfPreselectedBonusEligible(item)
                 }
@@ -218,10 +218,6 @@ ViewController {
                     style: bonusListStyle
                     enabled: bonusLst.isBonusEnabled(PromoCode)
                     checked: preselected
-//                    anchors.rightMargin: bonusLst.width * 0.02
-//                    anchors.right: bonusLst.right
-//                    anchors.leftMargin: 15 * ratio
-//                    anchors.left: bonusLst.left
                     x:0
                     onCheckedChanged: {
                         if(!isInit){

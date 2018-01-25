@@ -60,8 +60,7 @@ void PushNotificationRegistrationTokenHandler::setLastNotification(const QString
 }
 
 void PushNotificationRegistrationTokenHandler::synchronize(){
-
-  //emit sync();
+  emit sync();
 }
 
 #ifdef Q_OS_ANDROID
