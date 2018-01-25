@@ -150,8 +150,6 @@ Item {
             var result = tx.executeSql(sqlstr);
             if(result.rows.length > 0){
                 phone = result.rows.item(0).phone
-            }else{
-                phone = ""
             }
             if(typeof callback != 'undefined'){
                 callback(phone)

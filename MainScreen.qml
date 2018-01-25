@@ -5,6 +5,7 @@ import "qrc:/"
 import "qrc:/Api.js" as Api
 import "qrc:/Utils.js" as Utils
 
+import SecurityCore 1.0
 import PushNotificationRegistrationTokenHandler 1.0
 
 ViewController {
@@ -37,6 +38,7 @@ ViewController {
 
     function updatePushToken(){
         storage.getAuthData(function(authdata){
+            authdata.secKey = SecurityCore.secKey
             Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, authdata, function(response){
                 storage.saveToken(authdata.token)
                 console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
