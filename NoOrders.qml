@@ -145,14 +145,18 @@ ViewController{
                         for (var i in goods){
                             var gitem = goods[i]
                             if(gitem.Good === "Вода"){
-                                waterCost = gitem.Sum / gitem.Quantity
-                                waterPrice += gitem.Sum
-                                fullBottels += gitem.Quantity
+                                if( gitem.Sum === 0.01){
+                                    freeWater += gitem.Quantity
+                                }else{
+                                    waterCost = gitem.Sum / gitem.Quantity
+                                    waterPrice += gitem.Sum
+                                    fullBottels += gitem.Quantity
+                                }
                             }else if (gitem.Good === "Пустые бутыли"){
                                 emptyBottles += gitem.Quantity
                                 fee += gitem.Sum
-                            }else if(gitem.Good === "БесплатнаяВода"){
-                                freeWater += gitem.Sum
+                            }else if(gitem.Good === "БесплатнаяВода" ){
+                                freeWater += gitem.Quantity
                             }else if(gitem.Good === "Другие товары"){
                                 other = gitem.Sum
                             }

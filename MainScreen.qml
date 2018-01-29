@@ -38,9 +38,6 @@ ViewController {
 
     function updatePushToken(){
         storage.getAuthData(function(authdata){
-            //authdata.secKey = SecurityCore.secKey
-
-            console.log("UPDATE TOKEN:" + SecurityCore.secKey)
             Api.updatePushToken( PushNotificationRegistrationTokenHandler.gcmRegistrationToken, authdata, function(response){
                 storage.saveToken(authdata.token)
                 console.log("updated token:" + PushNotificationRegistrationTokenHandler.gcmRegistrationToken)
