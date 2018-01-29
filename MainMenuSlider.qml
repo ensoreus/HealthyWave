@@ -39,7 +39,6 @@ Rectangle {
             console.log("notification:" + notification + " pushtype:" + notification.pushtype)
             if(notification.pushtype === 1 || notification.pushtype === "1;"){
                 console.log("ORDER ON A WAY:"+notification)
-                //deliveryOnAWay(notification)
             }else{
                 console.log("ORDER DELIVERED:" + PushNotificationRegistrationTokenHandler.lastNotification)
                 deliveryArrived(notification)

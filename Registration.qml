@@ -43,7 +43,9 @@ Item {
     }
 
     function sendPushToken(onTokenUpdted){
+        SecurityCore.generateSecKey()
         var secKey = storage.getSecKey()
+
         if(PushNotificationRegistrationTokenHandler.gcmRegistrationToken.length === 0 || (phoneEditPage.phoneField.text.length < 5)){
             onTokenUpdted()
             return
@@ -97,6 +99,7 @@ Item {
             function checkPin(){
                 Api.confirmPinCode(pinEditPage.pinField.text, phoneEditPage.phoneField.text, function(response){
                     if(response.result === true){
+
                         //Qt.inputMethod.hide()
                         //stackLayout.push(emailEditPage)
                         checkIsRegistered()

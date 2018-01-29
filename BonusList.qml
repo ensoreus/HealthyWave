@@ -269,6 +269,7 @@ ViewController {
                     Api.addPromoCode(txAddPromo.text, authdata, function(response){
                         txMessages.text = "Промокод прийнято"
                         txMessages.color = "green"
+                        txAddPromo.text = ""
                         getBonuses()
                     }, function(failure){
                         txMessages.text = failure.error

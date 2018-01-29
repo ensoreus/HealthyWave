@@ -1,5 +1,6 @@
 import QtQuick 2.4
 import QuickIOS 0.1
+import QtQuick.Window 2.3
 import "qrc:/controls" as Controls
 
 Rectangle {

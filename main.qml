@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
+import SecurityCore 1.0
 import "qrc:/greeting" as Greeting
 import "qrc:/registration" as Registration
 import "qrc:/mainScreen" as Main
@@ -26,6 +27,7 @@ ApplicationWindow {
 
     Component.onCompleted: {
         if(!storage.isRegistered()){
+            SecurityCore.generateSecKey()
             registration.visible = true
             greeting.visible = true
         }else{

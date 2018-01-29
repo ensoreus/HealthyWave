@@ -4,6 +4,7 @@ var baseUrl = "https://1c.hvilya-zd.com.ua/debug/hs/GetData/"
 
 
 function auth(phone, secKey, callback){
+
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
@@ -270,11 +271,13 @@ function createOrder(orderContext, authData, onSuccess, onFailure){
 
     for (var index in orderContext.bonuses){
         var bonusPromo = orderContext.bonuses[index]
+        console.log(bonusPromo)
         if(bonusPromo.length > 0 || typeof(bonusPromo) != "undefined" ){
-            console.log("applying bonus:" + bonusPromo)
+            var promoCode = bonusPromo//.PromoCode
+            console.log("applying bonus:" + promoCode)
             var bindex = parseInt(index) + 1
             var key = "promocode" + bindex
-            params[key] = bonusPromo
+            params[key] = promoCode
         }
     }
 
